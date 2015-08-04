@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Manipulating Strings</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Manipulating Variables" href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html"><link rel="PREVIOUS" title="Manipulating Variables" href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html"><link rel="NEXT" title="Parameter Substitution" href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 10. Manipulating Variables</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="STRING-MANIPULATION"></a>10.1. Manipulating Strings</h1><p><a name="STRINGMANIP"></a></p>
+
+
+<p>Bash에서는 놀라울 정도로 많은 문자열 조작을 할 수 있습니다. 하지만 불행히도, 이 도구들은 통일성이 부족합니다. 
+어떤 것들은 <a href="./parameter-substitution.html#PARAMSUBREF">매개 변수 대용</a>의 부분 집합이고, 다른 것들은 유닉스의 <a href="./moreadv.html#EXPRREF">expr</a> 명령 기능에서 나온 것들입니다.
+이 때문에 명령어 구문과 기능 중복이 일어나지만, not to mention confusion.</p><p></p>
+
+<div class="VARIABLELIST"><p><b>문자열의 길이</b></p>
+<dl>
+	<dt>${#string}</dt>
+	<dd><p></p></dd>
+	<dt>expr length $string</dt>
+	<dd><p><a name="STRLEN"></a>이것은 <i class="FIRSTTERM">C</i>의 <i class="FIRSTTERM">strlen()</i> 와 동일합니다.</p></dd>
+	<dt>expr "$string" : '.*'</dt>
+	<dd><p>
+		<table bgcolor="#E0E0E0" border="0" width="90%">
+			<tbody>
+				<tr>
+					<td>
+						<font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+
+echo ${#stringZ}                 # 15
+echo `expr length $stringZ`      # 15
+echo `expr "$stringZ" : '.*'`    # 15</pre></font></td></tr></tbody></table>
+	  </p></dd></dl></div><div class="EXAMPLE"><a name="PARAGRAPHSPACE"></a>
+	  <p><b>Example 10-1. 텍스트 파일에 있는 문단 사이에 빈 줄 넣기</b></p>
+	  <table bgcolor="#E0E0E0" border="0" width="100%">
+		  <tbody>
+			  <tr>
+				  <td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# paragraph-space.sh
+# Ver. 2.1, Reldate 29Jul12 [fixup]
+
+# Inserts a blank line between paragraphs of a single-spaced text file.
+# 사용방법: $0 &lt;파일명
+
+MINLEN=60        # Change this value? It's a judgment call.
+#  Assume lines shorter than $MINLEN characters ending in a period
+#+ terminate a paragraph. See exercises below.
+
+while read line  # For as many lines as the input file has ...
+do
+  echo "$line"   # Output the line itself.
+
+  len=${#line}
+  if [[ "$len" -lt "$MINLEN" &amp;&amp; "$line" =~ [*{\.}]$ ]]
+# if [[ "$len" -lt "$MINLEN" &amp;&amp; "$line" =~ \[*\.\] ]]
+# An update to Bash broke the previous version of this script. Ouch!
+# Thank you, Halim Srama, for pointing this out and suggesting a fix.
+    then echo    #  Add a blank line immediately
+  fi             #+ after a short line terminated by a period.
+done
+
+exit
+
+# Exercises:
+# ---------
+#  1) The script usually inserts a blank line at the end
+#+    of the target file. Fix this.
+#  2) Line 17 only considers periods as sentence terminators.
+#     Modify this to include other common end-of-sentence characters,
+#+    such as ?, !, and ".</pre></font></td></tr></tbody></table></div><p></p><div class="VARIABLELIST">
+	<p><b>문자열의 처음에서부터 정규표현식에 맞는 문자열 찾기</b></p>
+	<dl><dt><a name="EXPRMATCH"></a>expr match "$string" '$substring'</dt>
+	<dd><p><tt class="REPLACEABLE"><i>$substring</i></tt> 은 <a href="./regexp.html#REGEXREF">정규표현식</a> 입니다.</p></dd>
+	<dt>expr "$string" : '$substring'</dt>
+	<dd><p><tt class="REPLACEABLE"><i>$substring</i></tt> 은 정규표현식입니다.</p>
+	<p>	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       |------|
+#       12345678
+
+echo `expr match "$stringZ" 'abc[A-Z]*.2'`   # 8
+echo `expr "$stringZ" : 'abc[A-Z]*.2'`       # 8</pre></font></td></tr></tbody></table>
+          </p></dd></dl></div><p></p>
+<div class="VARIABLELIST">
+	<p><b>인덱스</b></p>
+	<dl><dt><a name="SUBSTRINGINDEX2"></a>expr index $string $substring</dt>
+	<dd><p>문자열 $string 에 있는 문자 중 $substring 에 있는 문자와 일치하는 첫번째 문자의 위치입니다.</p>
+	<p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       123456 ...
+echo `expr index "$stringZ" C12`             # 6
+                                             # C position.
+
+echo `expr index "$stringZ" 1c`              # 3
+# 'c' (in #3 position) matches before '1'.</pre></font></td></tr></tbody></table></p>
+<p>이 방법은 <i class="FIRSTTERM">C</i> 에 있는 <i class="FIRSTTERM">strchr()</i>과 같습니다.</p></dd></dl></div>
+<p></p>
+<div class="VARIABLELIST">
+	<p><b>문자열 추출</b></p>
+	<dl>
+		<dt><a name="SUBSTREXTR01"></a>${string:position}</dt>
+		<dd><p><tt class="REPLACEABLE"><i>$string</i></tt>에서 <tt class="REPLACEABLE"><i>$position</i></tt>부터의 문자열을 추출해냅니다.</p>
+		<p>만일 <tt class="VARNAME">$string</tt> 변수가 
+		<span class="QUOTE">"<span class="TOKEN">*</span>"</span>
+	    이나
+	    <span class="QUOTE">"<span class="TOKEN">@</span>"</span>
+	    이라면, <tt class="VARNAME">$position</tt> 에서부터 
+	    <a href="./internalvariables.html#POSPARAMREF">매개 변수 위치</a>,
+	     <a name="AEN5987" href="#FTN.AEN5987"><span class="footnote">[1]</span></a>
+	    를 추출해냅니다.</p></dd>
+	    <dt><a name="SUBSTREXTR02"></a>${string:position:length}</dt>
+	    <dd><p>문자열 <tt class="REPLACEABLE"><i>$string</i></tt> 에서 
+	    <tt class="REPLACEABLE"><i>$position</i></tt> 부터
+	    <tt class="REPLACEABLE"><i>$length</i></tt> 만큼의 문자열을 추출해냅니다.</p>
+	    <p>
+			<table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       0123456789.....
+#       0-based indexing.
+
+echo ${stringZ:0}                            # abcABC123ABCabc
+echo ${stringZ:1}                            # bcABC123ABCabc
+echo ${stringZ:7}                            # 23ABCabc
+
+echo ${stringZ:7:3}                          # 23A
+                                             # Three characters of substring.
+
+
+
+# Is it possible to index from the right end of the string?
+    
+echo ${stringZ:-4}                           # abcABC123ABCabc
+# Defaults to full string, as in ${parameter:-default}.
+# However . . .
+
+echo ${stringZ:(-4)}                         # Cabc 
+echo ${stringZ: -4}                          # Cabc
+# Now, it works.
+# Parentheses or added space "escape" the position parameter.
+
+# Thank you, Dan Jacobson, for pointing this out.</pre></font></td></tr></tbody></table>
+	  </p>
+<p><i class="FIRSTTERM">position</i> 과 <i class="FIRSTTERM">length</i> 는 
+<span class="QUOTE">"매개변수"</span> 로 표현될 수 있습니다.
+<p><a name="RANDSTRING0"></a></p><div class="EXAMPLE"><a name="RANDSTRING"></a><p><b>Example 10-2. Generating an 8-character <span class="QUOTE">"random"</span>
+	        string</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# rand-string.sh
+# Generating an 8-character "random" string.
+
+if [ -n "$1" ]  #  If command-line argument present,
+then            #+ then set start-string to it.
+  str0="$1"
+else            #  Else use PID of script as start-string.
+  str0="$$"
+fi
+
+POS=2  # Starting from position 2 in the string.
+LEN=8  # Extract eight characters.
+
+str1=$( echo "$str0" | md5sum | md5sum )
+#  Doubly scramble     ^^^^^^   ^^^^^^
+#+ by piping and repiping to md5sum.
+
+randstring="${str1:$POS:$LEN}"
+# Can parameterize ^^^^ ^^^^
+
+echo "$randstring"
+
+exit $?
+
+# bozo$ ./rand-string.sh my-password
+# 1bdd88c4
+
+#  No, this is is not recommended
+#+ as a method of generating hack-proof passwords.</pre></font></td></tr></tbody></table></div><p><a name="SUBSTREXTRP"></a></p>
+
+<p><tt class="VARNAME">$string</tt> 이 <span class="QUOTE">"
+<span class="TOKEN">*</span>"</span> 나 <span class="QUOTE">"
+<span class="TOKEN">@</span>"</span> 이면, 위치 매개 변수를 
+<tt class="VARNAME">$position</tt> 에서부터 <tt class="VARNAME">$length
+</tt>의 길이까지 추출해냅니다.
+	
+<p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo ${*:2}          # Echoes second and following positional parameters.
+echo ${@:2}          # Same as above.
+
+echo ${*:2:3}        # Echoes three positional parameters, starting at second.</pre></font></td></tr></tbody></table>
+	  </p></dd>
+
+<dt>expr substr $string $position $length</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 에서 
+<tt class="REPLACEABLE"><i>$position</i></tt> 부터 
+<tt class="REPLACEABLE"><i>$length</i></tt> 만큼의 길이를 추출해냅니다.
+
+<p><table bgcolor="#E0E0E0" border="0" width="90%">
+	<tbody>
+	<tr>
+		<td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       123456789......
+#       1-based indexing.
+
+echo `expr substr $stringZ 1 2`              # ab
+echo `expr substr $stringZ 4 3`              # ABC</pre></font></td></tr></tbody></table>
+          </p><p><a name="EXPRPAREN"></a></p></dd>
+ 
+<dt>expr match "$string" '\($substring\)'</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 의 처음부터 
+<a href="./regexp.html#REGEXREF">정규표현식</a> 인 <tt class="REPLACEABLE">
+<i>$substring</i></tt> 까지 추출해냅니다.</dd>
+<dt>expr "$string" : '\($substring\)'</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 의 처음부터 
+정규표현식 인 <tt class="REPLACEABLE"><i>$substring</i></tt> 까지 추출
+해냅니다.</p>
+
+<p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       =======	    
+
+echo `expr match "$stringZ" '\(.[b-c]*[A-Z]..[0-9]\)'`   # abcABC1
+echo `expr "$stringZ" : '\(.[b-c]*[A-Z]..[0-9]\)'`       # abcABC1
+echo `expr "$stringZ" : '\(.......\)'`                   # abcABC1
+# All of the above forms give an identical result.</pre></font></td></tr></tbody></table>
+	    </p></dd><dt>expr match "$string" '.*\($substring\)'</dt><dd><p>Extracts <tt class="REPLACEABLE"><i>$substring</i></tt>
+	    at <em>end</em> of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>, where
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> is a regular
+	    expression.</p></dd><dt>expr "$string" : '.*\($substring\)'</dt><dd><p>Extracts <tt class="REPLACEABLE"><i>$substring</i></tt>
+	    at <em>end</em> of <tt class="REPLACEABLE"><i>$string</i></tt>,
+	    where <tt class="REPLACEABLE"><i>$substring</i></tt> is a regular
+	    expression.</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#                ======
+
+echo `expr match "$stringZ" '.*\([A-C][A-C][A-C][a-c]*\)'`    # ABCabc
+echo `expr "$stringZ" : '.*\(......\)'`                       # ABCabc</pre></font></td></tr></tbody></table>
+
+	    </p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b>Substring Removal</b></p><dl><dt>${string#substring}</dt><dd><p>Deletes shortest match of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
+	    <em>front</em> of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p></dd><dt>${string##substring}</dt><dd><p>Deletes longest match of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
+	    <em>front</em> of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>  
+	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#       |----|          shortest
+#       |----------|    longest
+
+echo ${stringZ#a*C}      # 123ABCabc
+# Strip out shortest match between 'a' and 'C'.
+
+echo ${stringZ##a*C}     # abc
+# Strip out longest match between 'a' and 'C'.
+
+
+
+# You can parameterize the substrings.
+
+X='a*C'
+
+echo ${stringZ#$X}      # 123ABCabc
+echo ${stringZ##$X}     # abc
+                        # As above.</pre></font></td></tr></tbody></table>
+	  </p></dd><dt>${string%substring}</dt><dd><p>Deletes shortest match of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
+	    <em>back</em> of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>For example:
+	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Rename all filenames in $PWD with "TXT" suffix to a "txt" suffix.
+# For example, "file1.TXT" becomes "file1.txt" . . .
+
+SUFF=TXT
+suff=txt
+
+for i in $(ls *.$SUFF)
+do
+  mv -f $i ${i%.$SUFF}.$suff
+  #  Leave unchanged everything *except* the shortest pattern match
+  #+ starting from the right-hand-side of the variable $i . . .
+done ### This could be condensed into a "one-liner" if desired.
+
+# Thank you, Rory Winston.</pre></font></td></tr></tbody></table>
+	  </p></dd><dt>${string%%substring}</dt><dd><p>Deletes longest match of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
+	    <em>back</em> of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>  
+	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+#                    ||     shortest
+#        |------------|     longest
+
+echo ${stringZ%b*c}      # abcABC123ABCa
+# Strip out shortest match between 'b' and 'c', from back of $stringZ.
+
+echo ${stringZ%%b*c}     # a
+# Strip out longest match between 'b' and 'c', from back of $stringZ.</pre></font></td></tr></tbody></table>
+	  </p><p>This operator is useful for generating filenames.</p><div class="EXAMPLE"><a name="CVT"></a><p><b>Example 10-3. Converting graphic file formats, with filename change</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  cvt.sh:
+#  Converts all the MacPaint image files in a directory to "pbm" format.
+
+#  Uses the "macptopbm" binary from the "netpbm" package,
+#+ which is maintained by Brian Henderson (bryanh@giraffe-data.com).
+#  Netpbm is a standard part of most Linux distros.
+
+OPERATION=macptopbm
+SUFFIX=pbm          # New filename suffix. 
+
+if [ -n "$1" ]
+then
+  directory=$1      # If directory name given as a script argument...
+else
+  directory=$PWD    # Otherwise use current working directory.
+fi  
+  
+#  Assumes all files in the target directory are MacPaint image files,
+#+ with a ".mac" filename suffix.
+
+for file in $directory/*    # Filename globbing.
+do
+  filename=${file%.*c}      #  Strip ".mac" suffix off filename
+                            #+ ('.*c' matches everything
+			    #+ between '.' and 'c', inclusive).
+  $OPERATION $file &gt; "$filename.$SUFFIX"
+                            # Redirect conversion to new filename.
+  rm -f $file               # Delete original files after converting.   
+  echo "$filename.$SUFFIX"  # Log what is happening to stdout.
+done
+
+exit 0
+
+# Exercise:
+# --------
+#  As it stands, this script converts *all* the files in the current
+#+ working directory.
+#  Modify it to work *only* on files with a ".mac" suffix.
+
+
+
+# *** And here's another way to do it. *** #
+
+#!/bin/bash
+# Batch convert into different graphic formats.
+# Assumes imagemagick installed (standard in most Linux distros).
+
+INFMT=png   # Can be tif, jpg, gif, etc.
+OUTFMT=pdf  # Can be tif, jpg, gif, pdf, etc.
+
+for pic in *"$INFMT"
+do
+  p2=$(ls "$pic" | sed -e s/\.$INFMT//)
+  # echo $p2
+    convert "$pic" $p2.$OUTFMT
+    done
+
+exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="RA2OGG"></a><p><b>Example 10-4. Converting streaming audio files to
+	      <i class="FIRSTTERM">ogg</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# ra2ogg.sh: Convert streaming audio files (*.ra) to ogg.
+
+# Uses the "mplayer" media player program:
+#      http://www.mplayerhq.hu/homepage
+# Uses the "ogg" library and "oggenc":
+#      http://www.xiph.org/
+#
+# This script may need appropriate codecs installed, such as sipr.so ...
+# Possibly also the compat-libstdc++ package.
+
+
+OFILEPREF=${1%%ra}      # Strip off the "ra" suffix.
+OFILESUFF=wav           # Suffix for wav file.
+OUTFILE="$OFILEPREF""$OFILESUFF"
+E_NOARGS=85
+
+if [ -z "$1" ]          # Must specify a filename to convert.
+then
+  echo "Usage: `basename $0` [filename]"
+  exit $E_NOARGS
+fi
+
+
+##########################################################################
+mplayer "$1" -ao pcm:file=$OUTFILE
+oggenc "$OUTFILE"  # Correct file extension automatically added by oggenc.
+##########################################################################
+
+rm "$OUTFILE"      # Delete intermediate *.wav file.
+                   # If you want to keep it, comment out above line.
+
+exit $?
+
+#  Note:
+#  ----
+#  On a Website, simply clicking on a *.ram streaming audio file
+#+ usually only downloads the URL of the actual *.ra audio file.
+#  You can then use "wget" or something similar
+#+ to download the *.ra file itself.
+
+
+#  Exercises:
+#  ---------
+#  As is, this script converts only *.ra filenames.
+#  Add flexibility by permitting use of *.ram and other filenames.
+#
+#  If you're really ambitious, expand the script
+#+ to do automatic downloads and conversions of streaming audio files.
+#  Given a URL, batch download streaming audio files (using "wget")
+#+ and convert them on the fly.</pre></font></td></tr></tbody></table></div><p><a name="GETOPTSIMPLE1"></a></p><p>A simple emulation of <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#GETOPTY">getopt</a>
+	    using substring-extraction constructs.</p><div class="EXAMPLE"><a name="GETOPTSIMPLE"></a><p><b>Example 10-5. Emulating <i class="FIRSTTERM">getopt</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# getopt-simple.sh
+# Author: Chris Morgan
+# Used in the ABS Guide with permission.
+
+
+getopt_simple()
+{
+    echo "getopt_simple()"
+    echo "Parameters are '$*'"
+    until [ -z "$1" ]
+    do
+      echo "Processing parameter of: '$1'"
+      if [ ${1:0:1} = '/' ]
+      then
+          tmp=${1:1}               # Strip off leading '/' . . .
+          parameter=${tmp%%=*}     # Extract name.
+          value=${tmp##*=}         # Extract value.
+          echo "Parameter: '$parameter', value: '$value'"
+          eval $parameter=$value
+      fi
+      shift
+    done
+}
+
+# Pass all options to getopt_simple().
+getopt_simple $*
+
+echo "test is '$test'"
+echo "test2 is '$test2'"
+
+exit 0  # See also, UseGetOpt.sh, a modified version of this script.
+
+---
+
+sh getopt_example.sh /test=value1 /test2=value2
+
+Parameters are '/test=value1 /test2=value2'
+Processing parameter of: '/test=value1'
+Parameter: 'test', value: 'value1'
+Processing parameter of: '/test2=value2'
+Parameter: 'test2', value: 'value2'
+test is 'value1'
+test2 is 'value2'</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div class="VARIABLELIST"><p><b>Substring Replacement</b></p><dl><dt><a name="SUBSTRREPL00"></a>${string/substring/replacement}</dt><dd><p>	    Replace first <i class="FIRSTTERM">match</i> of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> with
+	    <tt class="REPLACEABLE"><i>$replacement</i></tt>.
+	      <a name="AEN6164" href="#FTN.AEN6164"><span class="footnote">[2]</span></a>
+	    </p></dd><dt><a name="SUBSTRREPL01"></a>${string//substring/replacement}</dt><dd><p>Replace all matches of
+	    <tt class="REPLACEABLE"><i>$substring</i></tt> with
+	    <tt class="REPLACEABLE"><i>$replacement</i></tt>.</p><p>  
+	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+
+echo ${stringZ/abc/xyz}       # xyzABC123ABCabc
+                              # Replaces first match of 'abc' with 'xyz'.
+
+echo ${stringZ//abc/xyz}      # xyzABC123ABCxyz
+                              # Replaces all matches of 'abc' with # 'xyz'.
+
+echo  ---------------
+echo "$stringZ"               # abcABC123ABCabc
+echo  ---------------
+                              # The string itself is not altered!
+
+# Can the match and replacement strings be parameterized?
+match=abc
+repl=000
+echo ${stringZ/$match/$repl}  # 000ABC123ABCabc
+#              ^      ^         ^^^
+echo ${stringZ//$match/$repl} # 000ABC123ABC000
+# Yes!          ^      ^        ^^^         ^^^
+
+echo
+
+# What happens if no $replacement string is supplied?
+echo ${stringZ/abc}           # ABC123ABCabc
+echo ${stringZ//abc}          # ABC123ABC
+# A simple deletion takes place.</pre></font></td></tr></tbody></table>
+	  </p></dd><dt><a name="SUBSTRREPL02"></a>${string/#substring/replacement}</dt><dd><p>If <tt class="REPLACEABLE"><i>$substring</i></tt> matches
+	    <em>front</em> end of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>, substitute
+	    <tt class="REPLACEABLE"><i>$replacement</i></tt> for
+	    <tt class="REPLACEABLE"><i>$substring</i></tt>.</p></dd><dt><a name="SUBSTRREPL03"></a>${string/%substring/replacement}</dt><dd><p>If <tt class="REPLACEABLE"><i>$substring</i></tt> matches
+	    <em>back</em> end of
+	    <tt class="REPLACEABLE"><i>$string</i></tt>, substitute
+	    <tt class="REPLACEABLE"><i>$replacement</i></tt> for
+	    <tt class="REPLACEABLE"><i>$substring</i></tt>.</p><p>  
+          <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+
+echo ${stringZ/#abc/XYZ}          # XYZABC123ABCabc
+                                  # Replaces front-end match of 'abc' with 'XYZ'.
+
+echo ${stringZ/%abc/XYZ}          # abcABC123ABCXYZ
+                                  # Replaces back-end match of 'abc' with 'XYZ'.</pre></font></td></tr></tbody></table>
+	  </p></dd></dl></div><div class="SECT2"><h2 class="SECT2"><a name="AWKSTRINGMANIP"></a>10.1.1. Manipulating strings using awk</h2><p><a name="AWKSTRINGMANIP2"></a></p><p>A Bash script may invoke the string manipulation facilities of
+	    <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a> as an alternative to using its
+	    built-in operations.</p><div class="EXAMPLE"><a name="SUBSTRINGEX"></a><p><b>Example 10-6. Alternate ways of extracting and locating substrings</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# substring-extraction.sh
+
+String=23skidoo1
+#      012345678    Bash
+#      123456789    awk
+# Note different string indexing system:
+# Bash numbers first character of string as 0.
+# Awk  numbers first character of string as 1.
+
+echo ${String:2:4} # position 3 (0-1-2), 4 characters long
+                                         # skid
+
+# The awk equivalent of ${string:pos:length} is substr(string,pos,length).
+echo | awk '
+{ print substr("'"${String}"'",3,4)      # skid
+}
+'
+#  Piping an empty "echo" to awk gives it dummy input,
+#+ and thus makes it unnecessary to supply a filename.
+
+echo "----"
+
+# And likewise:
+
+echo | awk '
+{ print index("'"${String}"'", "skid")      # 3
+}                                           # (skid starts at position 3)
+'   # The awk equivalent of "expr index" ...
+
+exit 0</pre></font></td></tr></tbody></table></div></div><div class="SECT2"><h2 class="SECT2"><a name="STRFDISC"></a>10.1.2. Further Reference</h2><p>For more on string manipulation in scripts, refer to <a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html">Section 10.2</a> and the
+       <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPEXTRSUB">relevant section</a> of the <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPRREF">expr</a> command listing.</p><p>Script examples:
+      </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX45">Example 16-9</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#LENGTH">Example 10-9</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#PATTMATCHING">Example 10-10</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#RFE">Example 10-11</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#VARMATCH">Example 10-13</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#INSERTIONSORT">Example A-36</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#QKY">Example A-41</a></p></li></ol>
+      <p></p></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN5987" href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#AEN5987"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This applies to either command-line
+	       arguments or parameters passed to a <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">function</a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN6164" href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#AEN6164"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Note that
+	      <tt class="REPLACEABLE"><i>$substring</i></tt> and
+	      <tt class="REPLACEABLE"><i>$replacement</i></tt> may refer to
+	      either <i class="FIRSTTERM">literal strings</i> or
+	      <i class="FIRSTTERM">variables</i>, depending on
+	      context. See the first usage example.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Manipulating Variables</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Parameter Substitution</td></tr></tbody></table></div></body></html>

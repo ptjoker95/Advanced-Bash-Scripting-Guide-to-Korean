@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>A Brief Introduction to Regular Expressions</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Regular Expressions" href="http://www.tldp.org/LDP/abs/html/regexp.html"><link rel="PREVIOUS" title="Regular Expressions" href="http://www.tldp.org/LDP/abs/html/regexp.html"><link rel="NEXT" title="Globbing" href="http://www.tldp.org/LDP/abs/html/globbingref.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/regexp.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 18. Regular Expressions</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/globbingref.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="AEN17129"></a>18.1. A Brief Introduction to Regular Expressions</h1><p>An expression is a string of characters. Those characters
+	  having an interpretation above and beyond their literal
+	  meaning are called <i class="FIRSTTERM">metacharacters</i>.
+	  A quote symbol, for example, may denote speech by a person,
+	  <i class="FIRSTTERM">ditto</i>, or a meta-meaning
+
+	    <a name="AEN17134" href="#FTN.AEN17134"><span class="footnote">[1]</span></a>
+
+	  for the symbols that follow. Regular Expressions are sets
+	  of characters and/or metacharacters that match (or specify)
+	  patterns.</p><p>A Regular Expression contains one or more of the
+	following:</p><p></p><ul><li><p><i class="FIRSTTERM">A character set</i>. These are the
+	      characters retaining their literal meaning. The
+	      simplest type of Regular Expression consists
+	      <em>only</em> of a character set, with no
+	      metacharacters.</p></li><li><p><a name="ANCHORREF"></a></p><p><i class="FIRSTTERM">An anchor</i>. These designate
+	      (<i class="FIRSTTERM">anchor</i>) the position in the line of
+	      text that the RE is to match. For example, <span class="TOKEN">^</span>,
+	      and <span class="TOKEN">$</span> are anchors.</p></li><li><p><i class="FIRSTTERM">Modifiers</i>. These expand or narrow
+	      (<i class="FIRSTTERM">modify</i>) the range of text the RE is
+	      to match. Modifiers include the asterisk, brackets, and
+	      the backslash.</p></li></ul><p>The main uses for Regular Expressions
+	  (<i class="FIRSTTERM">RE</i>s) are text searches and string
+	  manipulation. An RE <i class="FIRSTTERM">matches</i> a single
+	  character or a set of characters -- a string or a part of
+	  a string.</p><p></p><ul><li><p><a name="ASTERISKREG"></a>The asterisk --
+	    <span class="TOKEN">*</span> -- matches any number of
+	      repeats of the character string or RE preceding it,
+	      including <em>zero</em> instances.</p><p><span class="QUOTE">"1133*"</span> matches <tt class="REPLACEABLE"><i>11 +
+	      one or more 3's</i></tt>:
+	      <tt class="REPLACEABLE"><i>113</i></tt>, <tt class="REPLACEABLE"><i>1133</i></tt>,
+	      <tt class="REPLACEABLE"><i>1133333</i></tt>, and so forth.</p></li><li><p><a name="REGEXDOT"></a>The <i class="FIRSTTERM">dot</i>
+	    -- <span class="TOKEN">.</span> -- matches
+	      any one character, except a newline.
+	        <a name="AEN17189" href="#FTN.AEN17189"><span class="footnote">[2]</span></a>  
+	    </p><p><span class="QUOTE">"13."</span> matches <tt class="REPLACEABLE"><i>13 + at
+	     least one of any character (including a
+	     space)</i></tt>: <tt class="REPLACEABLE"><i>1133</i></tt>,
+	     <tt class="REPLACEABLE"><i>11333</i></tt>, but not
+	     <tt class="REPLACEABLE"><i>13</i></tt> (additional character
+	     missing).</p><p>See <a href="http://www.tldp.org/LDP/abs/html/textproc.html#CWSOLVER">Example 16-18</a> for a demonstration
+	       of <i class="FIRSTTERM">dot single-character</i>
+	       matching.</p></li><li><p><a name="CARETREF"></a>The caret -- <span class="TOKEN">^</span>
+	      -- matches the beginning of a line, but sometimes, depending
+	      on context, negates the meaning of a set of characters in
+	      an RE.</p></li><li><p><a name="DOLLARSIGNREF"></a></p><p>The dollar sign -- <span class="TOKEN">$</span> -- at the end of an
+	      RE matches the end of a line.</p><p><span class="QUOTE">"XXX$"</span> matches <span class="TOKEN">XXX</span> at the
+	      end of a line.</p><p><span class="QUOTE">"^$"</span> matches blank lines.</p></li><li><p><a name="BRACKETSREF"></a></p><p>Brackets -- <span class="TOKEN">[...]</span> -- enclose a set of characters
+	      to match in a single RE.</p><p><span class="QUOTE">"[xyz]"</span> matches any one of the characters
+	      <tt class="REPLACEABLE"><i>x</i></tt>, <tt class="REPLACEABLE"><i>y</i></tt>,
+	      or <tt class="REPLACEABLE"><i>z</i></tt>.</p><p><span class="QUOTE">"[c-n]"</span> matches any one of the
+	      characters in the range <tt class="REPLACEABLE"><i>c</i></tt>
+	      to <tt class="REPLACEABLE"><i>n</i></tt>.</p><p><span class="QUOTE">"[B-Pk-y]"</span> matches any one of the
+	      characters in the ranges <tt class="REPLACEABLE"><i>B</i></tt>
+	      to <tt class="REPLACEABLE"><i>P</i></tt>
+	      and <tt class="REPLACEABLE"><i>k</i></tt> to
+	      <tt class="REPLACEABLE"><i>y</i></tt>.</p><p><span class="QUOTE">"[a-z0-9]"</span> matches any single lowercase
+	      letter or any digit.</p><p><span class="QUOTE">"[^b-d]"</span> matches any character
+	      <em>except</em> those in
+	      the range <tt class="REPLACEABLE"><i>b</i></tt> to
+	      <tt class="REPLACEABLE"><i>d</i></tt>. This is an instance of
+	      <span class="TOKEN">^</span> negating or inverting the meaning
+	      of the following RE (taking on a role similar to
+	      <span class="TOKEN">!</span> in a different context).</p><p>Combined sequences of bracketed characters match  
+	      common word patterns. <span class="QUOTE">"[Yy][Ee][Ss]"</span> matches
+	      <tt class="REPLACEABLE"><i>yes</i></tt>, <tt class="REPLACEABLE"><i>Yes</i></tt>,
+	      <tt class="REPLACEABLE"><i>YES</i></tt>, <tt class="REPLACEABLE"><i>yEs</i></tt>,
+	      and so forth.
+	      <span class="QUOTE">"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]"</span>
+	      matches any Social Security number.</p></li><li><p><a name="REGEXBS"></a></p><p>The backslash -- <span class="TOKEN">\</span> -- <a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">escapes</a> a special character, which
+              means that character gets interpreted literally (and is
+              therefore no longer <i class="FIRSTTERM">special</i>).</p><p>A <span class="QUOTE">"\$"</span> reverts back to its
+	       literal meaning of <span class="QUOTE">"$"</span>, rather than its
+	       RE meaning of end-of-line. Likewise a <span class="QUOTE">"\\"</span>
+	       has the literal meaning of <span class="QUOTE">"\"</span>.</p></li><li><p><a name="ANGLEBRAC"></a></p><p><a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">Escaped</a> <span class="QUOTE">"angle
+	      brackets"</span> -- <span class="TOKEN">\&lt;...\&gt;</span> -- mark word
+	      boundaries.</p><p>The angle brackets must be escaped, since otherwise
+	      they have only their literal character meaning.</p><p><span class="QUOTE">"\&lt;the\&gt;"</span> matches the word
+	      <span class="QUOTE">"the,"</span> but not the words <span class="QUOTE">"them,"</span>
+	      <span class="QUOTE">"there,"</span> <span class="QUOTE">"other,"</span> etc.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat textfile</b></tt>
+<tt class="COMPUTEROUTPUT">This is line 1, of which there is only one instance.
+ This is the only instance of line 2.
+ This is line 3, another line.
+ This is line 4.</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep 'the' textfile</b></tt>
+<tt class="COMPUTEROUTPUT">This is line 1, of which there is only one instance.
+ This is the only instance of line 2.
+ This is line 3, another line.</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '\&lt;the\&gt;' textfile</b></tt>
+<tt class="COMPUTEROUTPUT">This is the only instance of line 2.</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p></li></ul><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN17316"></a><p></p><p>The only way to be certain that a particular RE works is to
+	    test it.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">TEST FILE: tstfile                          # No match.
+                                            # No match.
+Run   grep "1133*"  on this file.           # Match.
+                                            # No match.
+                                            # No match.
+This line contains the number 113.          # Match.
+This line contains the number 13.           # No match.
+This line contains the number 133.          # No match.
+This line contains the number 1133.         # Match.
+This line contains the number 113312.       # Match.
+This line contains the number 1112.         # No match.
+This line contains the number 113312312.    # Match.
+This line contains no numbers at all.       # No match.</pre></font></td></tr></tbody></table></p><table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep "1133*" tstfile</b></tt>
+<tt class="COMPUTEROUTPUT">Run   grep "1133*"  on this file.           # Match.
+ This line contains the number 113.          # Match.
+ This line contains the number 1133.         # Match.
+ This line contains the number 113312.       # Match.
+ This line contains the number 113312312.    # Match.</tt>
+	      </pre></font></td></tr></tbody></table><p></p></div></td></tr></tbody></table><p></p><ul><li style="list-style-type: square"><div class="FORMALPARA"><p><b><a name="EXTREGEX"></a>Extended REs. </b>Additional metacharacters added to the basic set. Used
+		in <a href="http://www.tldp.org/LDP/abs/html/textproc.html#EGREPREF">egrep</a>,
+		<a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>, and <a href="http://www.tldp.org/LDP/abs/html/wrapper.html#PERLREF">Perl</a>.</p></div></li><li><p><a name="QUEXREGEX"></a></p><p>The question mark -- <span class="TOKEN">?</span> -- matches zero or
+	      one of the previous RE. It is generally used for matching
+	      single characters.</p></li><li><p><a name="PLUSREF"></a></p><p>The plus -- <span class="TOKEN">+</span> -- matches one or more of the
+	    previous RE. It serves a role similar to the <span class="TOKEN">*</span>, but
+	    does <em>not</em> match zero occurrences.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># GNU versions of sed and awk can use "+",
+# but it needs to be escaped.
+
+echo a111b | sed -ne '/a1\+b/p'
+echo a111b | grep 'a1\+b'
+echo a111b | gawk '/a1+b/'
+# All of above are equivalent.
+
+# Thanks, S.C.</pre></font></td></tr></tbody></table></p><p><a name="ESCPCB"></a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">Escaped</a> <span class="QUOTE">"curly
+	      brackets"</span> -- <span class="TOKEN">\{ \}</span> -- indicate the number
+	      of occurrences of a preceding RE to match.</p><p>It is necessary to escape the curly brackets since
+	      they have only their literal character meaning
+	      otherwise. This usage is technically not part of the basic
+	      RE set.</p><p><span class="QUOTE">"[0-9]\{5\}"</span> matches exactly five digits
+	      (characters in the range of 0 to 9).</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x17129_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Curly brackets are not available as an RE in the
+	      <span class="QUOTE">"classic"</span> (non-POSIX compliant) version
+	      of <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>.
+	      <a name="GNUGAWK"></a>However, the GNU extended version
+	      of <i class="FIRSTTERM">awk</i>, <b class="COMMAND">gawk</b>,
+	      has the <tt class="OPTION">--re-interval</tt> option that permits
+	      them (without being escaped).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo 2222 | gawk --re-interval '/2{3}/'</b></tt>
+<tt class="COMPUTEROUTPUT">2222</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p><p><b class="COMMAND">Perl</b> and some
+	      <b class="COMMAND">egrep</b> versions do not require escaping
+	      the curly brackets.</p></td></tr></tbody></table></div></li><li><p><a name="PARENGRPS"></a></p><p>Parentheses -- <b class="COMMAND">( )</b> -- enclose a group of
+	      REs. They are useful with the following
+	      <span class="QUOTE">"<span class="TOKEN">|</span>"</span> operator and in <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#EXPRPAREN">substring extraction</a> using <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPRREF">expr</a>.</p></li><li><p>The -- <b class="COMMAND">|</b> -- <span class="QUOTE">"or"</span> RE operator
+	      matches any of a set of alternate characters.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>egrep 're(a|e)d' misc.txt</b></tt>
+<tt class="COMPUTEROUTPUT">People who read seem to be better informed than those who do not.
+ The clarinet produces sound by the vibration of its reed.</tt>
+	      </pre></font></td></tr></tbody></table>
+	      </p></li></ul><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x17129_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Some versions of <b class="COMMAND">sed</b>,
+	      <b class="COMMAND">ed</b>, and <b class="COMMAND">ex</b> support
+	      escaped versions of the extended Regular Expressions
+	      described above, as do the GNU utilities.</p></td></tr></tbody></table></div><p></p><ul><li style="list-style-type: square"><div class="FORMALPARA"><p><b><a name="POSIXREF"></a>POSIX Character Classes. </b><tt class="USERINPUT"><b>[:class:]</b></tt></p></div><p>This is an alternate method of specifying a range of
+	      characters to match.</p></li><li><p><tt class="USERINPUT"><b>[:alnum:]</b></tt> matches alphabetic or
+	      numeric characters. This is equivalent to
+	      <tt class="USERINPUT"><b>A-Za-z0-9</b></tt>.</p></li><li><p><tt class="USERINPUT"><b>[:alpha:]</b></tt> matches alphabetic
+	      characters. This is equivalent to
+	      <tt class="USERINPUT"><b>A-Za-z</b></tt>.</p></li><li><p><tt class="USERINPUT"><b>[:blank:]</b></tt> matches a space or a
+	      tab.</p></li><li><p><tt class="USERINPUT"><b>[:cntrl:]</b></tt> matches control
+	      characters.</p></li><li><p><tt class="USERINPUT"><b>[:digit:]</b></tt> matches (decimal)
+	      digits. This is equivalent to
+	      <tt class="USERINPUT"><b>0-9</b></tt>.</p></li><li><p><tt class="USERINPUT"><b>[:graph:]</b></tt> (graphic printable
+		    characters). Matches characters in the range of <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#ASCIIDEF">ASCII</a> 33 - 126. This is
+		    the same as <tt class="USERINPUT"><b>[:print:]</b></tt>, below,
+		    but excluding the space character.</p></li><li><p><tt class="USERINPUT"><b>[:lower:]</b></tt> matches lowercase
+	      alphabetic characters. This is equivalent to
+	      <tt class="USERINPUT"><b>a-z</b></tt>.</p></li><li><p><tt class="USERINPUT"><b>[:print:]</b></tt> (printable
+	      characters). Matches characters in the range of ASCII 32 -
+	      126. This is the same as <tt class="USERINPUT"><b>[:graph:]</b></tt>,
+	      above, but adding the space character.</p></li><li><p><a name="WSPOSIX"></a><tt class="USERINPUT"><b>[:space:]</b></tt>
+	      matches whitespace characters (space and horizontal
+	      tab).</p></li><li><p><tt class="USERINPUT"><b>[:upper:]</b></tt> matches uppercase
+	      alphabetic characters. This is equivalent to
+	      <tt class="USERINPUT"><b>A-Z</b></tt>.</p></li><li><p><tt class="USERINPUT"><b>[:xdigit:]</b></tt> matches hexadecimal
+	      digits. This is equivalent to
+	      <tt class="USERINPUT"><b>0-9A-Fa-f</b></tt>.</p><div class="IMPORTANT"><p></p><table class="IMPORTANT" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x17129_files/important.gif" alt="Important" hspace="5"></td><td align="LEFT" valign="TOP"><p>POSIX character classes generally require quoting
+	      or <a href="http://www.tldp.org/LDP/abs/html/testconstructs.html#DBLBRACKETS">double brackets</a>
+	      ([[ ]]).</p></td></tr></tbody></table></div><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep [[:digit:]] test.file</b></tt>
+<tt class="COMPUTEROUTPUT">abc=723</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># ...
+if [[ $arow =~ [[:digit:]] ]]   #  Numerical input?
+then       #  POSIX char class
+  if [[ $acol =~ [[:alpha:]] ]] # Number followed by a letter? Illegal!
+# ...
+# From ktour.sh example script.</pre></font></td></tr></tbody></table>
+	    </p><p>These character classes may even be used with <a href="http://www.tldp.org/LDP/abs/html/globbingref.html">globbing</a>, to a limited
+	      extent.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l ?[[:digit:]][[:digit:]]?</b></tt>
+<tt class="COMPUTEROUTPUT">-rw-rw-r--    1 bozo  bozo         0 Aug 21 14:47 a33b</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p><p>POSIX character classes are used in
+	      <a href="http://www.tldp.org/LDP/abs/html/textproc.html#EX49">Example 16-21</a> and <a href="http://www.tldp.org/LDP/abs/html/textproc.html#LOWERCASE">Example 16-22</a>.</p></li></ul><p><a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">Sed</a>, <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>, and <a href="http://www.tldp.org/LDP/abs/html/wrapper.html#PERLREF">Perl</a>, used as filters in scripts, take
+	  REs as arguments when "sifting" or transforming files or I/O
+	  streams. See <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#BEHEAD">Example A-12</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#TREE">Example A-16</a>
+	  for illustrations of this.</p><p>The standard reference on this complex topic is Friedl's
+	  <i class="CITETITLE">Mastering Regular
+	  Expressions</i>. <i class="CITETITLE">Sed &amp;
+	  Awk</i>, by Dougherty and Robbins, also gives a very
+	  lucid treatment of REs. See the <a href="http://www.tldp.org/LDP/abs/html/biblio.html"><i>Bibliography</i></a> for
+	  more information on these books.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17134" href="http://www.tldp.org/LDP/abs/html/x17129.html#AEN17134"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="METAMEANINGREF"></a>A
+	    <i class="FIRSTTERM">meta-meaning</i> is the meaning of a
+	    term or expression on a higher level of abstraction. For
+	    example, the <i class="FIRSTTERM">literal</i> meaning
+	    of <i class="FIRSTTERM">regular expression</i> is an
+	    ordinary expression that conforms to accepted usage. The
+	    <i class="FIRSTTERM">meta-meaning</i> is drastically different,
+	    as discussed at length in this chapter.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17189" href="http://www.tldp.org/LDP/abs/html/x17129.html#AEN17189"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Since <a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">sed</a>, <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>, and <a href="http://www.tldp.org/LDP/abs/html/textproc.html#GREPREF">grep</a> process single lines, there
+		  will usually not be a newline to match. In those cases where
+		  there is a newline in a multiple line expression, the dot
+		  will match the newline.
+	            <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+sed -e 'N;s/.*/[&amp;]/' &lt;&lt; EOF   # Here Document
+line1
+line2
+EOF
+# OUTPUT:
+# [line1
+# line2]
+
+
+
+echo
+
+awk '{ $0=$1 "\n" $2; if (/line.1/) {print}}' &lt;&lt; EOF
+line 1
+line 2
+EOF
+# OUTPUT:
+# line
+# 1
+
+
+# Thanks, S.C.
+
+exit 0</pre></font></td></tr></tbody></table></p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/regexp.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/globbingref.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Regular Expressions</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/regexp.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Globbing</td></tr></tbody></table></div></body></html>
