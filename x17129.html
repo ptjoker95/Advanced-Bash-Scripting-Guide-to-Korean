@@ -1,21 +1,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>A Brief Introduction to Regular Expressions</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Regular Expressions" href="http://www.tldp.org/LDP/abs/html/regexp.html"><link rel="PREVIOUS" title="Regular Expressions" href="http://www.tldp.org/LDP/abs/html/regexp.html"><link rel="NEXT" title="Globbing" href="http://www.tldp.org/LDP/abs/html/globbingref.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/regexp.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 18. Regular Expressions</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/globbingref.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="AEN17129"></a>18.1. A Brief Introduction to Regular Expressions</h1><p>An expression is a string of characters. Those characters
-	  having an interpretation above and beyond their literal
-	  meaning are called <i class="FIRSTTERM">metacharacters</i>.
-	  A quote symbol, for example, may denote speech by a person,
-	  <i class="FIRSTTERM">ditto</i>, or a meta-meaning
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>A Brief Introduction to Regular Expressions</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" 
+href="./index.html">
 
-	    <a name="AEN17134" href="#FTN.AEN17134"><span class="footnote">[1]</span></a>
+<link rel="UP" title="Regular Expressions" 
+href="./regexp.html">
+<link rel="PREVIOUS" title="Regular Expressions" 
+href="./regexp.html">
+<link rel="NEXT" title="Globbing" 
+href="./globbingref.html"></head>
 
-	  for the symbols that follow. Regular Expressions are sets
-	  of characters and/or metacharacters that match (or specify)
-	  patterns.</p><p>A Regular Expression contains one or more of the
-	following:</p><p></p><ul><li><p><i class="FIRSTTERM">A character set</i>. These are the
-	      characters retaining their literal meaning. The
-	      simplest type of Regular Expression consists
-	      <em>only</em> of a character set, with no
-	      metacharacters.</p></li><li><p><a name="ANCHORREF"></a></p><p><i class="FIRSTTERM">An anchor</i>. These designate
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" 
+text="#000000" vlink="#840084">
+
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" 
+style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: 
+hidden;"></div>
+
+<div class="NAVHEADER">
+
+<table summary="Header navigation table" border="0" cellpadding="0" 
+cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./regexp.html" accesskey="P">이전</a>
+</td>
+
+<td align="center" valign="bottom" width="80%">Chapter 18. Regular 
+Expressions</td>
+
+<td align="right" valign="bottom" width="10%">
+<a href="./globbingref.html" accesskey="N">다음</a>
+</td>
+</tr>
+</tbody>
+</table>
+
+<hr align="LEFT" width="100%"></div>
+
+<div class="SECT1"><h1 class="SECT1"><a name="AEN17129"></a>18.1. 정규표현식 요약</h1>
+
+<p>정규표현식은 문자열 양식을 의미합니다. 이 양식은 <i class="FIRSTTERM">메타 
+문자</i> 라는 방식으로 문자가 가진 의미와는 다른 뜻을 가지고 문자열 양식을 표현합니다. 
+예를 들어 따옴표는 사람의 대화를 언급하거나, <i class="FIRSTTERM">인용</i>, 혹은 
+메타 의미 <a name="AEN17134" href="#FTN.AEN17134"><span class="footnote">
+[1]</span></a> 를 뜻할 수 있습니다. 정규표현식은 패턴에 맞는 (혹은 특정한) 문자열을 
+찾는 메타 문자의 모음입니다.</p>
+<p>정규표현식은 다음의 사항을 하나 이상 포함합니다.:</p>
+<p></p>
+<ul>
+<li>
+<p><i class="FIRSTTERM">문자 모음</i>. 이 문자들은 자신들의 문자 그대로의 의미를 
+가지고 있습니다. 가장 단순한 정규표현식은 <em>문자열로만</em> 이루어져있으며, 메타 
+문자는 없습니다.</p>
+</li>
+<li>
+<p><a name="ANCHORREF"></a></p>
+<p><i class="FIRSTTERM">지정자r</i>. 이것은 어떤 문장에서 정규표현식에 나와있는 
+위치를 These designate
 	      (<i class="FIRSTTERM">anchor</i>) the position in the line of
 	      text that the RE is to match. For example, <span class="TOKEN">^</span>,
 	      and <span class="TOKEN">$</span> are anchors.</p></li><li><p><i class="FIRSTTERM">Modifiers</i>. These expand or narrow
