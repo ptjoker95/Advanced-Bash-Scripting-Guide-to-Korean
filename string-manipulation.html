@@ -208,28 +208,59 @@ echo `expr substr $stringZ 4 3`              # ABC</pre></font></td></tr></tbody
 echo `expr match "$stringZ" '\(.[b-c]*[A-Z]..[0-9]\)'`   # abcABC1
 echo `expr "$stringZ" : '\(.[b-c]*[A-Z]..[0-9]\)'`       # abcABC1
 echo `expr "$stringZ" : '\(.......\)'`                   # abcABC1
-# All of the above forms give an identical result.</pre></font></td></tr></tbody></table>
-	    </p></dd><dt>expr match "$string" '.*\($substring\)'</dt><dd><p>Extracts <tt class="REPLACEABLE"><i>$substring</i></tt>
-	    at <em>end</em> of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>, where
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> is a regular
-	    expression.</p></dd><dt>expr "$string" : '.*\($substring\)'</dt><dd><p>Extracts <tt class="REPLACEABLE"><i>$substring</i></tt>
-	    at <em>end</em> of <tt class="REPLACEABLE"><i>$string</i></tt>,
-	    where <tt class="REPLACEABLE"><i>$substring</i></tt> is a regular
-	    expression.</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+# All of the above forms give an identical result.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p></dd>
+<dt>expr match "$string" '.*\($substring\)'</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$string</i></tt> 문자열의 뒤에서부터 
+정규표현식인 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 추출해냅니다.
+</p>
+</dd>
+<dt>expr "$string" : '.*\($substring\)'</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$string</i></tt> 문자열의 뒤에서부터 
+정규표현식인 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 추출해냅니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td><font color="#000000">
+<pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
 #                ======
 
 echo `expr match "$stringZ" '.*\([A-C][A-C][A-C][a-c]*\)'`    # ABCabc
-echo `expr "$stringZ" : '.*\(......\)'`                       # ABCabc</pre></font></td></tr></tbody></table>
-
-	    </p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b>Substring Removal</b></p><dl><dt>${string#substring}</dt><dd><p>Deletes shortest match of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
-	    <em>front</em> of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p></dd><dt>${string##substring}</dt><dd><p>Deletes longest match of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
-	    <em>front</em> of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>  
-	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+echo `expr "$stringZ" : '.*\(......\)'`                       # ABCabc</pre></font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+</dl>
+</div>
+<p></p>
+<div class="VARIABLELIST"><p><b>문자열 부분 삭제</b></p>
+<dl>
+<dt>${string#substring}</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$string</i></tt> 문자열의 <em>앞</em>에서 
+부터 가장 짧은 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 삭제합니다.
+</p>
+</dd>
+<dt>${string##substring}</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$string</i></tt> 문자열의 <em>앞</em>에서 
+부터 가장 긴 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 삭제합니다.
+</p>
+<p>  
+<table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td>
+<font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
 #       |----|          shortest
 #       |----------|    longest
 
@@ -248,11 +279,17 @@ X='a*C'
 echo ${stringZ#$X}      # 123ABCabc
 echo ${stringZ##$X}     # abc
                         # As above.</pre></font></td></tr></tbody></table>
-	  </p></dd><dt>${string%substring}</dt><dd><p>Deletes shortest match of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
-	    <em>back</em> of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>For example:
-	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Rename all filenames in $PWD with "TXT" suffix to a "txt" suffix.
+	  </p></dd>
+
+<dt>${string%substring}</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$string</i></tt> 의 <em>뒤</em>에서부터 
+가장 짧은 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 삭제합니다.</p>
+
+<p>For example:
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody><tr><td><font color="#000000">
+<pre class="PROGRAMLISTING"># Rename all filenames in $PWD with "TXT" suffix to a "txt" suffix.
 # For example, "file1.TXT" becomes "file1.txt" . . .
 
 SUFF=TXT
@@ -266,11 +303,18 @@ do
 done ### This could be condensed into a "one-liner" if desired.
 
 # Thank you, Rory Winston.</pre></font></td></tr></tbody></table>
-	  </p></dd><dt>${string%%substring}</dt><dd><p>Deletes longest match of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> from
-	    <em>back</em> of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>.</p><p>  
-	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+	  </p></dd>
+
+<dt>${string%%substring}</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 의 <em>뒤</em>에서부터 
+가장 긴 <tt class="REPLACEABLE"><i>$substring</i></tt> 을 삭제합니다.</p>
+<p>  
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
 #                    ||     shortest
 #        |------------|     longest
 
@@ -278,8 +322,18 @@ echo ${stringZ%b*c}      # abcABC123ABCa
 # Strip out shortest match between 'b' and 'c', from back of $stringZ.
 
 echo ${stringZ%%b*c}     # a
-# Strip out longest match between 'b' and 'c', from back of $stringZ.</pre></font></td></tr></tbody></table>
-	  </p><p>This operator is useful for generating filenames.</p><div class="EXAMPLE"><a name="CVT"></a><p><b>Example 10-3. Converting graphic file formats, with filename change</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Strip out longest match between 'b' and 'c', from back of $stringZ.
+</pre></font></td></tr></tbody></table></p>
+
+<p>이 지시자는 파일명을 생성할 때 유용합니다.</p>
+<div class="EXAMPLE">
+<a name="CVT"></a>
+<p><b>예 10-3. 그래픽 파일 형식을, 파일명과 동시에 전환하기</b></p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td><font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  cvt.sh:
 #  Converts all the MacPaint image files in a directory to "pbm" format.
 
@@ -337,8 +391,17 @@ do
     convert "$pic" $p2.$OUTFMT
     done
 
-exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="RA2OGG"></a><p><b>Example 10-4. Converting streaming audio files to
-	      <i class="FIRSTTERM">ogg</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre></font></td></tr></tbody></table></div>
+
+<div class="EXAMPLE">
+<a name="RA2OGG"></a>
+<p><b>예 10-4. 스트리밍 오디오 파일을 <i class="FIRSTTERM">ogg</i></b> 
+파일로 전환하기</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td><font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ra2ogg.sh: Convert streaming audio files (*.ra) to ogg.
 
 # Uses the "mplayer" media player program:
@@ -388,8 +451,25 @@ exit $?
 #  If you're really ambitious, expand the script
 #+ to do automatic downloads and conversions of streaming audio files.
 #  Given a URL, batch download streaming audio files (using "wget")
-#+ and convert them on the fly.</pre></font></td></tr></tbody></table></div><p><a name="GETOPTSIMPLE1"></a></p><p>A simple emulation of <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#GETOPTY">getopt</a>
-	    using substring-extraction constructs.</p><div class="EXAMPLE"><a name="GETOPTSIMPLE"></a><p><b>Example 10-5. Emulating <i class="FIRSTTERM">getopt</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+ and convert them on the fly.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p><a name="GETOPTSIMPLE1"></a></p>
+<p>부분 문자열 추출을 이용한 <a href="./extmisc.html#GETOPTY">getopt</a> 
+의 간단한 에뮬레이션 구성</p>
+<div class="EXAMPLE"><a name="GETOPTSIMPLE"></a>
+<p><b>예 10-5. <i class="FIRSTTERM">getopt</i> 에뮬레이션</b></p>
+
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td><font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # getopt-simple.sh
 # Author: Chris Morgan
 # Used in the ABS Guide with permission.
@@ -432,14 +512,39 @@ Parameter: 'test', value: 'value1'
 Processing parameter of: '/test2=value2'
 Parameter: 'test2', value: 'value2'
 test is 'value1'
-test2 is 'value2'</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div class="VARIABLELIST"><p><b>Substring Replacement</b></p><dl><dt><a name="SUBSTRREPL00"></a>${string/substring/replacement}</dt><dd><p>	    Replace first <i class="FIRSTTERM">match</i> of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> with
-	    <tt class="REPLACEABLE"><i>$replacement</i></tt>.
-	      <a name="AEN6164" href="#FTN.AEN6164"><span class="footnote">[2]</span></a>
-	    </p></dd><dt><a name="SUBSTRREPL01"></a>${string//substring/replacement}</dt><dd><p>Replace all matches of
-	    <tt class="REPLACEABLE"><i>$substring</i></tt> with
-	    <tt class="REPLACEABLE"><i>$replacement</i></tt>.</p><p>  
-	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+test2 is 'value2'</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<p></p>
+<div class="VARIABLELIST">
+<p><b>문자열 부분 교체</b></p>
+<dl>
+<dt><a name="SUBSTRREPL00"></a>${string/substring/replacement}</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$substring</i></tt> 와 
+<i class="FIRSTTERM">맞는</i> 부분 중 처음만을 <tt class="REPLACEABLE"><i>
+$replacement</i></tt> 로 교체.<a name="AEN6164" href="#FTN.AEN6164">
+<span class="footnote">[2]</span></a>
+</p>
+</dd>
+<dt><a name="SUBSTRREPL01"></a>${string//substring/replacement}</dt>
+<dd><p><tt class="REPLACEABLE"><i>$substring</i></tt> 와 
+<i class="FIRSTTERM">맞는</i> 부분 모두를 <tt class="REPLACEABLE"><i>
+$replacement</i></tt> 로 교체.</p>
+<p>  
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
 
 echo ${stringZ/abc/xyz}       # xyzABC123ABCabc
                               # Replaces first match of 'abc' with 'xyz'.
@@ -465,26 +570,66 @@ echo
 # What happens if no $replacement string is supplied?
 echo ${stringZ/abc}           # ABC123ABCabc
 echo ${stringZ//abc}          # ABC123ABC
-# A simple deletion takes place.</pre></font></td></tr></tbody></table>
-	  </p></dd><dt><a name="SUBSTRREPL02"></a>${string/#substring/replacement}</dt><dd><p>If <tt class="REPLACEABLE"><i>$substring</i></tt> matches
-	    <em>front</em> end of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>, substitute
-	    <tt class="REPLACEABLE"><i>$replacement</i></tt> for
-	    <tt class="REPLACEABLE"><i>$substring</i></tt>.</p></dd><dt><a name="SUBSTRREPL03"></a>${string/%substring/replacement}</dt><dd><p>If <tt class="REPLACEABLE"><i>$substring</i></tt> matches
-	    <em>back</em> end of
-	    <tt class="REPLACEABLE"><i>$string</i></tt>, substitute
-	    <tt class="REPLACEABLE"><i>$replacement</i></tt> for
-	    <tt class="REPLACEABLE"><i>$substring</i></tt>.</p><p>  
-          <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
+# A simple deletion takes place.
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt><a name="SUBSTRREPL02"></a>${string/#substring/replacement}</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 의 <em>처음</em>에서부터 
+<tt class="REPLACEABLE"><i>$substring</i></tt> 과 일치하는 부분을 찾아, 그 
+<tt class="REPLACEABLE"><i>$substring</i></tt> 만 
+<tt class="REPLACEABLE"><i>$replacement</i></tt> 로 교체합니다.</p>
+</dd>
+<dt><a name="SUBSTRREPL03"></a>${string/%substring/replacement}</dt>
+<dd><p><tt class="REPLACEABLE"><i>$string</i></tt> 의 <em>뒤</em>에서부터 
+<tt class="REPLACEABLE"><i>$substring</i></tt> 과 일치하는 부분을 찾아, 그 
+<tt class="REPLACEABLE"><i>$substring</i></tt> 만 
+<tt class="REPLACEABLE"><i>$replacement</i></tt> 로 교체합니다.</p>
+<p>  
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">stringZ=abcABC123ABCabc
 
 echo ${stringZ/#abc/XYZ}          # XYZABC123ABCabc
                                   # Replaces front-end match of 'abc' with 'XYZ'.
 
 echo ${stringZ/%abc/XYZ}          # abcABC123ABCXYZ
-                                  # Replaces back-end match of 'abc' with 'XYZ'.</pre></font></td></tr></tbody></table>
-	  </p></dd></dl></div><div class="SECT2"><h2 class="SECT2"><a name="AWKSTRINGMANIP"></a>10.1.1. Manipulating strings using awk</h2><p><a name="AWKSTRINGMANIP2"></a></p><p>A Bash script may invoke the string manipulation facilities of
-	    <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a> as an alternative to using its
-	    built-in operations.</p><div class="EXAMPLE"><a name="SUBSTRINGEX"></a><p><b>Example 10-6. Alternate ways of extracting and locating substrings</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+                                  # Replaces back-end match of 'abc' with 'XYZ'.
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+</dl>
+</div>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="AWKSTRINGMANIP"></a>10.1.1. awk를 이용해 문자열 수정하기</h2>
+<p><a name="AWKSTRINGMANIP2"></a></p>
+<p>Bash 스크립트는 내부명령어를 이용하는 대신 
+<a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a> 
+의 문자열 조작 기능을 활용할 수도 있습니다.
+</p>
+<div class="EXAMPLE">
+<a name="SUBSTRINGEX"></a>
+<p><b>예 10-6. 문자열 추출과 위치 찾기의 또다른 방법</b></p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # substring-extraction.sh
 
 String=23skidoo1
@@ -514,10 +659,47 @@ echo | awk '
 }                                           # (skid starts at position 3)
 '   # The awk equivalent of "expr index" ...
 
-exit 0</pre></font></td></tr></tbody></table></div></div><div class="SECT2"><h2 class="SECT2"><a name="STRFDISC"></a>10.1.2. Further Reference</h2><p>For more on string manipulation in scripts, refer to <a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html">Section 10.2</a> and the
-       <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPEXTRSUB">relevant section</a> of the <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPRREF">expr</a> command listing.</p><p>Script examples:
-      </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX45">Example 16-9</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#LENGTH">Example 10-9</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#PATTMATCHING">Example 10-10</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#RFE">Example 10-11</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#VARMATCH">Example 10-13</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#INSERTIONSORT">Example A-36</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#QKY">Example A-41</a></p></li></ol>
-      <p></p></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN5987" href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#AEN5987"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This applies to either command-line
+exit 0
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="STRFDISC"></a>10.1.2. 참고 사항</h2>
+<p>스크립트에서 문자열 조작에 관해서는 
+<a href="./parameter-substitution.html">Section 10.2</a> 과 
+<a href="./moreadv.html#EXPRREF">expr</a> 명령어 리스트의 
+<a href="./moreadv.html#EXPEXTRSUB">관련 섹션</a> 을 참고하십시요.
+</p>
+<p>스크립트 예:</p>
+<p></p>
+<ol type="1">
+<li><p><a href="./moreadv.html#EX45">예 16-9</a></p></li>
+<li><p><a href="./parameter-substitution.html#LENGTH">예 10-9</a></p></li>
+<li><p><a href="./parameter-substitution.html#PATTMATCHING">예 10-10</a></p></li>
+<li><p><a href="./parameter-substitution.html#RFE">예 10-11</a></p></li>
+<li><p><a href="./parameter-substitution.html#VARMATCH">예 10-13</a></p></li>
+<li><p><a href="./contributed-scripts.html#INSERTIONSORT">예 A-36</a></p></li>
+<li><p><a href="./contributed-scripts.html#QKY">Example A-41</a></p></li>
+</ol>
+<p></p>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN5987" href="./string-manipulation.html#AEN5987">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%"><p>This applies to either command-line
 	       arguments or parameters passed to a <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">function</a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN6164" href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#AEN6164"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Note that
 	      <tt class="REPLACEABLE"><i>$substring</i></tt> and
 	      <tt class="REPLACEABLE"><i>$replacement</i></tt> may refer to
