@@ -1,16 +1,99 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Parameter Substitution</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Manipulating Variables" href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html"><link rel="PREVIOUS" title="Manipulating Strings" href="http://www.tldp.org/LDP/abs/html/string-manipulation.html"><link rel="NEXT" title="Loops and Branches" href="http://www.tldp.org/LDP/abs/html/loops.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 10. Manipulating Variables</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="PARAMETER-SUBSTITUTION"></a>10.2. Parameter Substitution</h1><p><a name="PARAMSUBREF"></a></p><p></p><div class="VARIABLELIST"><p><b><a name="PSSUB1"></a>Manipulating and/or expanding variables</b></p><dl><dt><tt class="USERINPUT"><b>${parameter}</b></tt></dt><dd><p>Same as <tt class="REPLACEABLE"><i>$parameter</i></tt>, i.e.,
-		  value of the variable
-		  <tt class="REPLACEABLE"><i>parameter</i></tt>.
-		  In certain contexts, only the less ambiguous
-		  <tt class="REPLACEABLE"><i>${parameter}</i></tt> form
-		  works.</p><p>May be used for concatenating variables with strings.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">your_id=${USER}-on-${HOSTNAME}
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Parameter Substitution</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Manipulating Variables" href="./manipulatingvars.html">
+<link rel="PREVIOUS" title="Manipulating Strings" href="./string-manipulation.html">
+<link rel="NEXT" title="Loops and Branches" href="./loops.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./string-manipulation.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 10. Manipulating Variables</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./loops.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="PARAMETER-SUBSTITUTION">
+</a>10.2. 매개변수 치환</h1>
+<p>
+<a name="PARAMSUBREF">
+</a>
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p><b><a name="PSSUB1"></a>변수의 조작과 확장</b></p>
+<dl>
+<dt>
+<tt class="USERINPUT">
+<b>${parameter}</b>
+</tt>
+</dt>
+<dd>
+<p><tt class="REPLACEABLE"><i>$parameter</i></tt> 와 동일합니다, 즉, 
+변수 <tt class="REPLACEABLE"><i>parameter</i></tt> 의 값입니다. 특정
+문맥에서는 불확실성을 줄이기 위해 <tt class="REPLACEABLE">
+<i>${parameter}</i></tt> 의 형식으로 사용합니다.</p>
+<p>문자열과 변수의 값을 합치기 위해 사용하기도 합니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">your_id=${USER}-on-${HOSTNAME}
 echo "$your_id"
 #
 echo "Old \$PATH = $PATH"
 PATH=${PATH}:/opt/bin  # Add /opt/bin to $PATH for duration of script.
-echo "New \$PATH = $PATH"</pre></font></td></tr></tbody></table></p></dd><dt><a name="DEFPARAM1"></a><tt class="USERINPUT"><b>${parameter-default}</b></tt>, <tt class="USERINPUT"><b>${parameter:-default}</b></tt></dt><dd><p>If parameter not set, use default.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">var1=1
+echo "New \$PATH = $PATH"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="DEFPARAM1">
+</a>
+<tt class="USERINPUT">
+<b>${parameter-default}</b>
+</tt>, 
+<tt class="USERINPUT"><b>${parameter:-default}
+</b>
+</tt>
+</dt>
+<dd>
+<p>변수 값이 지정되지 않으면 
+<tt class="REPLACEBLE"><i>default</i></tt> 값을 사용합니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">var1=1
 var2=2
 # var3 is unset.
 
@@ -21,11 +104,48 @@ echo ${var3-$var2}   # 2
 
 
 echo ${username-`whoami`}
-# Echoes the result of `whoami`, if variable $username is still unset.</pre></font></td></tr></tbody></table></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="parameter-substitution_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="UNDDR"></a><tt class="REPLACEABLE"><i>${parameter-default}</i></tt>
-		  and <tt class="REPLACEABLE"><i>${parameter:-default}</i></tt>
-		  are almost equivalent. The extra <span class="TOKEN">:</span> makes
-		  a difference only when <tt class="PARAMETER"><i>parameter</i></tt>
-		  has been declared, but is null.  </p></td></tr></tbody></table></div><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Echoes the result of `whoami`, if variable $username is still unset.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="parameter-substitution_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="UNDDR">
+</a>
+<tt class="REPLACEABLE">
+<i>${parameter-default}</i>
+</tt>
+ 과
+<tt class="REPLACEABLE">
+<i>${parameter:-default}</i>
+</tt> 는 거의 동일합니다. <span class="TOKEN">:</span> 는 
+<tt class="PARAMETER"><i>parameter</i></tt> 가 지정되어 있느냐, 아니면 
+null 이냐의 차이만 있습니다.
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # param-sub.sh
 
 #  Whether a variable has been declared
@@ -67,9 +187,23 @@ unset variable
 echo "${variable-2}"    # 2
 echo "${variable:-3}"   # 3
 
-exit 0</pre></font></td></tr></tbody></table></p><p>The <i class="FIRSTTERM">default parameter</i> construct
-		  finds use in providing <span class="QUOTE">"missing"</span> command-line
-		  arguments in scripts.</p><p>		  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">DEFAULT_FILENAME=generic.data
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p><i class="FIRSTTERM">default parameter</i> 는 스크립트 상에서 
+있어야 할 명령문 인수가 <span class="QUOTE">"빠져있을 때"</span> 
+사용하곤 합니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">DEFAULT_FILENAME=generic.data
 filename=${1:-$DEFAULT_FILENAME}
 #  If not otherwise specified, the following command block operates
 #+ on the file "generic.data".
@@ -84,23 +218,86 @@ filename=${1:-$DEFAULT_FILENAME}
 #  From "hanoi2.bash" example:
 DISKS=${1:-E_NOPARAM}   # Must specify how many disks.
 #  Set $DISKS to $1 command-line-parameter,
-#+ or to $E_NOPARAM if that is unset.</pre></font></td></tr></tbody></table>
-		</p><p>See also <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#EX58">Example 3-4</a>, <a href="http://www.tldp.org/LDP/abs/html/zeros.html#EX73">Example 31-2</a>, and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#COLLATZ">Example A-6</a>.</p><p>Compare this method with <a href="http://www.tldp.org/LDP/abs/html/list-cons.html#ANDDEFAULT">using an <i class="FIRSTTERM">and
-		  list</i> to supply a default command-line
-		  argument</a>.</p></dd><dt><tt class="USERINPUT"><b>${parameter=default}</b></tt>, <tt class="USERINPUT"><b>${parameter:=default}</b></tt></dt><dd><p><a name="DEFPARAM"></a></p><p>If parameter not set, set it to
-		  <i class="FIRSTTERM">default</i>.</p><p>Both forms nearly equivalent. The <span class="TOKEN">:</span>
-		  makes a difference only when <tt class="VARNAME">$parameter</tt>
-		  has been declared and is null,
-		    <a name="AEN6310" href="#FTN.AEN6310"><span class="footnote">[1]</span></a>
-		  as above.
-		    </p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo ${var=abc}   # abc
+#+ or to $E_NOPARAM if that is unset.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+<p>See also 
+<a href="./special-chars.html#EX58">Example 3-4</a>, 
+<a href="./zeros.html#EX73">Example 31-2</a>, and 
+<a href="./contributed-scripts.html#COLLATZ">Example A-6</a>.</p>
+<p><a href="./list-cons.html#ANDDEFAULT">명령어 기본 인수로 단일 
+<i class="FIRSTTERM"> 혹은 리스트</i> 를 넣기</a> 와 비교해보십시요.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${parameter=default}</b>
+</tt>, <tt class="USERINPUT">
+<b>${parameter:=default}</b>
+</tt>
+</dt>
+<dd>
+<p>
+<a name="DEFPARAM">
+</a>
+</p>
+<p>변수가 지정되어 있지 않으면, 
+<i class="FIRSTTERM">default</i> 값으로 지정합니다.</p>
+<p>두 형식은 거의 비슷합니다. 다만 위에서와 마찬가지로 
+<span class="TOKEN">:</span> 는 
+<tt class="VARNAME">$parameter</tt> 가 지정되어있지만 
+null 값 
+<a name="AEN6310" href="#FTN.AEN6310">
+<span class="footnote">[1]</span>
+</a>
+,을 가졌을 때만 다릅니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo ${var=abc}   # abc
 echo ${var=xyz}   # abc
-# $var had already been set to abc, so it did not change.</pre></font></td></tr></tbody></table></p></dd><dt><a name="PARAMALTV"></a><tt class="USERINPUT"><b>${parameter+alt_value}</b></tt>, <tt class="USERINPUT"><b>${parameter:+alt_value}</b></tt></dt><dd><p>If parameter set, use
-		    <tt class="USERINPUT"><b>alt_value</b></tt>, else use null
-		    string.</p><p>Both forms nearly equivalent. The <span class="TOKEN">:</span>
-		    makes a difference only when
-		    <tt class="PARAMETER"><i>parameter</i></tt>
-		    has been declared and is null, see below.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo "###### \${parameter+alt_value} ########"
+# $var had already been set to abc, so it did not change.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="PARAMALTV">
+</a>
+<tt class="USERINPUT">
+<b>${parameter+alt_value}</b>
+</tt>, <tt class="USERINPUT">
+<b>${parameter:+alt_value}</b>
+</tt>
+</dt>
+<dd>
+<p>변수가 지정되어 있으면, 
+<tt class="USERINPUT">
+<b>alt_value</b>
+</tt> 를, 아니면 null 문자열을 사용합니다.
+</p>
+<p>두 형식은 거의 비슷합니다. 다만, 
+<span class="TOKEN">:</span> 는 
+<tt class="PARAMETER"><i>parameter</i></tt> 
+가 지정되어 있지만 null 값을 가졌을 때 달라집니다, 
+아래를 참고하십시요.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo "###### \${parameter+alt_value} ########"
 echo
 
 a=${param1+xyz}
@@ -128,12 +325,48 @@ echo "a = $a"      # a =
 
 param6=123
 a=${param6:+xyz}
-echo "a = $a"      # a = xyz</pre></font></td></tr></tbody></table></p></dd><dt><a name="QERRMSG"></a><tt class="USERINPUT"><b>${parameter?err_msg}</b></tt>, <tt class="USERINPUT"><b>${parameter:?err_msg}</b></tt></dt><dd><p>If parameter set, use it, else print
+echo "a = $a"      # a = xyz</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="QERRMSG">
+</a>
+<tt class="USERINPUT">
+<b>${parameter?err_msg}</b>
+</tt>, <tt class="USERINPUT">
+<b>${parameter:?err_msg}</b>
+</tt>
+</dt>
+<dd>
+<p>If parameter set, use it, else print
                 <i class="FIRSTTERM">err_msg</i> and <em>abort
-                the script</em> with an <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a> of
-                <span class="ERRORCODE">1</span>.</p><p>Both forms nearly equivalent. The <span class="TOKEN">:</span>
-		  makes a difference only when <tt class="PARAMETER"><i>parameter</i></tt>
-		  has been declared and is null, as above.</p></dd></dl></div><div class="EXAMPLE"><a name="EX6"></a><p><b>Example 10-7. Using parameter substitution and error messages</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+                the script</em> with an <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of
+                <span class="ERRORCODE">1</span>.</p>
+<p>Both forms nearly equivalent. The <span class="TOKEN">:</span>
+		  makes a difference only when <tt class="PARAMETER">
+<i>parameter</i>
+</tt>
+		  has been declared and is null, as above.</p>
+</dd>
+</dl>
+</div>
+<div class="EXAMPLE">
+<a name="EX6">
+</a>
+<p>
+<b>Example 10-7. Using parameter substitution and error messages</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 #  Check some of the system's environmental variables.
 #  This is good preventative maintenance.
@@ -189,7 +422,25 @@ echo "You will not see this message, because script already terminated."
 HERE=0
 exit $HERE   # Will NOT exit here.
 
-# In fact, this script will return an exit status (echo $?) of 1.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="USAGEMESSAGE"></a><p><b>Example 10-8. Parameter substitution and <span class="QUOTE">"usage"</span> messages</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# In fact, this script will return an exit status (echo $?) of 1.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="USAGEMESSAGE">
+</a>
+<p>
+<b>Example 10-8. Parameter substitution and <span class="QUOTE">"usage"</span> messages</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # usage-message.sh
 
 : ${1?"Usage: $0 ARGUMENT"}
@@ -204,25 +455,101 @@ exit 0  # Will exit here only if command-line parameter present.
 
 # Check the exit status, both with and without command-line parameter.
 # If command-line parameter present, then "$?" is 0.
-# If not, then "$?" is 1.</pre></font></td></tr></tbody></table></div><div class="FORMALPARA"><p><b>Parameter substitution and/or expansion. </b><a name="PSUB2"></a>The following expressions are
+# If not, then "$?" is 1.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="FORMALPARA">
+<p>
+<b>Parameter substitution and/or expansion. </b>
+<a name="PSUB2">
+</a>The following expressions are
 		the complement to the <b class="COMMAND">match</b>
-		<tt class="REPLACEABLE"><i>in</i></tt> <b class="COMMAND">expr</b>
-		string operations (see <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX45">Example 16-9</a>).
+		<tt class="REPLACEABLE">
+<i>in</i>
+</tt> <b class="COMMAND">expr</b>
+		string operations (see <a href="./moreadv.html#EX45">Example 16-9</a>).
 		These particular ones are used mostly in parsing file
-		path names.</p></div><p></p><div class="VARIABLELIST"><p><b><a name="PSOREX1"></a>Variable length / Substring removal</b></p><dl><dt><tt class="USERINPUT"><b>${#var}</b></tt></dt><dd><p><tt class="USERINPUT"><b>String length</b></tt> (number
+		path names.</p>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="PSOREX1">
+</a>Variable length / Substring removal</b>
+</p>
+<dl>
+<dt>
+<tt class="USERINPUT">
+<b>${#var}</b>
+</tt>
+</dt>
+<dd>
+<p>
+<tt class="USERINPUT">
+<b>String length</b>
+</tt> (number
 		    of characters in <tt class="VARNAME">$var</tt>). For
-		    an <a href="http://www.tldp.org/LDP/abs/html/arrays.html#ARRAYREF">array</a>,
+		    an <a href="./arrays.html#ARRAYREF">array</a>,
 		    <b class="COMMAND">${#array}</b> is the length of the
-		    first element in the array.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="parameter-substitution_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>		    Exceptions:
+		    first element in the array.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="parameter-substitution_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>		    Exceptions:
 
-		  </p><p></p><ul><li><p><a name="NUMPOSPARAM"></a></p><p>		      <b class="COMMAND">${#*}</b> and
+		  </p>
+<p>
+</p>
+<ul>
+<li>
+<p>
+<a name="NUMPOSPARAM">
+</a>
+</p>
+<p>		      <b class="COMMAND">${#*}</b> and
 		      <b class="COMMAND">${#@}</b> give the <em>number
 		      of positional parameters</em>.
-		    </p></li><li><p>		      For an array, <b class="COMMAND">${#array[*]}</b> and
+		    </p>
+</li>
+<li>
+<p>		      For an array, <b class="COMMAND">${#array[*]}</b> and
 		      <b class="COMMAND">${#array[@]}</b> give the number
 		      of elements in the array.
-		    </p></li></ul>
-		  <p></p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="LENGTH"></a><p><b>Example 10-9. Length of a variable</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		    </p>
+</li>
+</ul>
+		  <p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="LENGTH">
+</a>
+<p>
+<b>Example 10-9. Length of a variable</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # length.sh
 
 E_NO_ARGS=65
@@ -244,36 +571,101 @@ echo "Length of var02 = ${#var02}"
 echo "Number of command-line arguments passed to script = ${#@}"
 echo "Number of command-line arguments passed to script = ${#*}"
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><a name="PSOREX2"></a><tt class="USERINPUT"><b>${var#Pattern}</b></tt>, <tt class="USERINPUT"><b>${var##Pattern}</b></tt></dt><dd><p><a name="PSOREXSH"></a></p><p><b class="COMMAND">${var#Pattern} </b>
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="PSOREX2">
+</a>
+<tt class="USERINPUT">
+<b>${var#Pattern}</b>
+</tt>, <tt class="USERINPUT">
+<b>${var##Pattern}</b>
+</tt>
+</dt>
+<dd>
+<p>
+<a name="PSOREXSH">
+</a>
+</p>
+<p>
+<b class="COMMAND">${var#Pattern} </b>
 		  Remove from <tt class="VARNAME">$var</tt>
 		  the <em>shortest</em> part of
 		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE"><i>front end</i></tt> of
+		  the <tt class="REPLACEABLE">
+<i>front end</i>
+</tt> of
 		  <tt class="VARNAME">$var</tt>.
-		</p><p><a name="PSOREXLO"></a></p><p><b class="COMMAND">${var##Pattern} </b>
+		</p>
+<p>
+<a name="PSOREXLO">
+</a>
+</p>
+<p>
+<b class="COMMAND">${var##Pattern} </b>
 		  Remove from <tt class="VARNAME">$var</tt>
 		  the <em>longest</em> part of
 		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE"><i>front end</i></tt> of
+		  the <tt class="REPLACEABLE">
+<i>front end</i>
+</tt> of
 		  <tt class="VARNAME">$var</tt>.
-		</p><p>A usage illustration from <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#DAYSBETWEEN">Example A-7</a>:
-		<table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Function from "days-between.sh" example.
+		</p>
+<p>A usage illustration from <a href="./contributed-scripts.html#DAYSBETWEEN">Example A-7</a>:
+		<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Function from "days-between.sh" example.
 # Strips leading zero(s) from argument passed.
 
 strip_leading_zero () #  Strip possible leading zero(s)
 {                     #+ from argument passed.
   return=${1#0}       #  The "1" refers to "$1" -- passed arg.
-}                     #  The "0" is what to remove from "$1" -- strips zeros.</pre></font></td></tr></tbody></table>
-		</p><p>Manfred Schwarb's more elaborate variation of the
-			above:</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">strip_leading_zero2 () # Strip possible leading zero(s), since otherwise
+}                     #  The "0" is what to remove from "$1" -- strips zeros.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+<p>Manfred Schwarb's more elaborate variation of the
+			above:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">strip_leading_zero2 () # Strip possible leading zero(s), since otherwise
 {                      # Bash will interpret such numbers as octal values.
   shopt -s extglob     # Turn on extended globbing.
   local val=${1##+(0)} # Use local variable, longest matching series of 0's.
   shopt -u extglob     # Turn off extended globbing.
   _strip_leading_zero2=${val:-0}
                        # If input was 0, return 0 instead of "".
-}</pre></font></td></tr></tbody></table>
-		</p><p>Another usage illustration:</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo `basename $PWD`        # Basename of current working directory.
+}</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+<p>Another usage illustration:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo `basename $PWD`        # Basename of current working directory.
 echo "${PWD##*/}"           # Basename of current working directory.
 echo
 echo `basename $0`          # Name of script.
@@ -282,19 +674,68 @@ echo "${0##*/}"             # Name of script.
 echo
 filename=test.data
 echo "${filename##*.}"      # data
-                            # Extension of filename.</pre></font></td></tr></tbody></table>
-		</p></dd><dt><a name="PCTPATREF"></a><tt class="USERINPUT"><b>${var%Pattern}</b></tt>, <tt class="USERINPUT"><b>${var%%Pattern}</b></tt></dt><dd><p><a name="PCTREP1"></a></p><p><b class="COMMAND">${var%Pattern}</b>
+                            # Extension of filename.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+</dd>
+<dt>
+<a name="PCTPATREF">
+</a>
+<tt class="USERINPUT">
+<b>${var%Pattern}</b>
+</tt>, <tt class="USERINPUT">
+<b>${var%%Pattern}</b>
+</tt>
+</dt>
+<dd>
+<p>
+<a name="PCTREP1">
+</a>
+</p>
+<p>
+<b class="COMMAND">${var%Pattern}</b>
 		  Remove from <tt class="VARNAME">$var</tt>
 		  the <em>shortest</em> part of
 		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE"><i>back end</i></tt> of
-		  <tt class="VARNAME">$var</tt>.  </p><p><a name="PCTREP2"></a></p><p><b class="COMMAND">${var%%Pattern}</b>
+		  the <tt class="REPLACEABLE">
+<i>back end</i>
+</tt> of
+		  <tt class="VARNAME">$var</tt>.  </p>
+<p>
+<a name="PCTREP2">
+</a>
+</p>
+<p>
+<b class="COMMAND">${var%%Pattern}</b>
 		  Remove from <tt class="VARNAME">$var</tt>
 		  the <em>longest</em> part of
 		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE"><i>back end</i></tt> of
-		  <tt class="VARNAME">$var</tt>.  </p></dd></dl></div><p><a href="http://www.tldp.org/LDP/abs/html/bashver2.html#BASH2REF">Version 2</a> of Bash added
-	      additional options.</p><div class="EXAMPLE"><a name="PATTMATCHING"></a><p><b>Example 10-10. Pattern matching in parameter substitution</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		  the <tt class="REPLACEABLE">
+<i>back end</i>
+</tt> of
+		  <tt class="VARNAME">$var</tt>.  </p>
+</dd>
+</dl>
+</div>
+<p>
+<a href="./bashver2.html#BASH2REF">Version 2</a> of Bash added
+	      additional options.</p>
+<div class="EXAMPLE">
+<a name="PATTMATCHING">
+</a>
+<p>
+<b>Example 10-10. Pattern matching in parameter substitution</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # patt-matching.sh
 
 # Pattern matching  using the # ## % %% parameter substitution operators.
@@ -337,7 +778,26 @@ echo '${var1%%pattern2} =' "${var1%%$pattern2}"    #     a
 
 echo
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="RFE"></a><p><b>Example 10-11. Renaming file extensions<span class="TOKEN">:</span></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="RFE">
+</a>
+<p>
+<b>Example 10-11. Renaming file extensions<span class="TOKEN">:</span>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # rfe.sh: Renaming file extensions.
 #
 #         rfe old_extension new_extension
@@ -365,26 +825,126 @@ do
   #+ then append 2nd argument.
 done
 
-exit 0</pre></font></td></tr></tbody></table></div><p></p><div class="VARIABLELIST"><p><b><a name="EXPREPL1"></a>Variable expansion / Substring
-	      replacement</b></p><dl><dt></dt><dd><p>These constructs have been adopted from
-		  <i class="FIRSTTERM">ksh</i>.</p></dd><dt><tt class="USERINPUT"><b>${var:pos}</b></tt></dt><dd><p>Variable <tt class="REPLACEABLE"><i>var</i></tt> expanded,
-		    starting from offset <tt class="REPLACEABLE"><i>pos</i></tt>.
-		  </p></dd><dt><tt class="USERINPUT"><b>${var:pos:len}</b></tt></dt><dd><p>Expansion to a max of <tt class="REPLACEABLE"><i>len</i></tt>
-		    characters of variable <tt class="REPLACEABLE"><i>var</i></tt>, from offset
-		    <tt class="REPLACEABLE"><i>pos</i></tt>. See <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#PW">Example A-13</a>
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="EXPREPL1">
+</a>Variable expansion / Substring
+	      replacement</b>
+</p>
+<dl>
+<dt>
+</dt>
+<dd>
+<p>These constructs have been adopted from
+		  <i class="FIRSTTERM">ksh</i>.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var:pos}</b>
+</tt>
+</dt>
+<dd>
+<p>Variable <tt class="REPLACEABLE">
+<i>var</i>
+</tt> expanded,
+		    starting from offset <tt class="REPLACEABLE">
+<i>pos</i>
+</tt>.
+		  </p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var:pos:len}</b>
+</tt>
+</dt>
+<dd>
+<p>Expansion to a max of <tt class="REPLACEABLE">
+<i>len</i>
+</tt>
+		    characters of variable <tt class="REPLACEABLE">
+<i>var</i>
+</tt>, from offset
+		    <tt class="REPLACEABLE">
+<i>pos</i>
+</tt>. See <a href="./contributed-scripts.html#PW">Example A-13</a>
 		    for an example of the creative use of this operator.
-		  </p></dd><dt><tt class="USERINPUT"><b>${var/Pattern/Replacement}</b></tt></dt><dd><p>First match of <tt class="REPLACEABLE"><i>Pattern</i></tt>,
-		    within <tt class="REPLACEABLE"><i>var</i></tt> replaced with
-		    <tt class="REPLACEABLE"><i>Replacement</i></tt>.</p><p>If <tt class="REPLACEABLE"><i>Replacement</i></tt> is
+		  </p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var/Pattern/Replacement}</b>
+</tt>
+</dt>
+<dd>
+<p>First match of <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>,
+		    within <tt class="REPLACEABLE">
+<i>var</i>
+</tt> replaced with
+		    <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt>.</p>
+<p>If <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt> is
 		    omitted, then the first match of
-		    <tt class="REPLACEABLE"><i>Pattern</i></tt> is replaced by
-		    <em>nothing</em>, that is, deleted.</p></dd><dt><tt class="USERINPUT"><b>${var//Pattern/Replacement}</b></tt></dt><dd><div class="FORMALPARA"><p><b>Global replacement. </b><a name="PSGLOB"></a>
-		    All matches of <tt class="REPLACEABLE"><i>Pattern</i></tt>,
-		    within <tt class="REPLACEABLE"><i>var</i></tt> replaced with
-		    <tt class="REPLACEABLE"><i>Replacement</i></tt>.</p></div><p>As above, if <tt class="REPLACEABLE"><i>Replacement</i></tt>
+		    <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt> is replaced by
+		    <em>nothing</em>, that is, deleted.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var//Pattern/Replacement}</b>
+</tt>
+</dt>
+<dd>
+<div class="FORMALPARA">
+<p>
+<b>Global replacement. </b>
+<a name="PSGLOB">
+</a>
+		    All matches of <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>,
+		    within <tt class="REPLACEABLE">
+<i>var</i>
+</tt> replaced with
+		    <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt>.</p>
+</div>
+<p>As above, if <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt>
 		    is omitted, then all occurrences of
-		    <tt class="REPLACEABLE"><i>Pattern</i></tt> are replaced by
-		    <em>nothing</em>, that is, deleted.</p><div class="EXAMPLE"><a name="EX7"></a><p><b>Example 10-12. Using pattern matching to parse arbitrary strings</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		    <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt> are replaced by
+		    <em>nothing</em>, that is, deleted.</p>
+<div class="EXAMPLE">
+<a name="EX7">
+</a>
+<p>
+<b>Example 10-12. Using pattern matching to parse arbitrary strings</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 var1=abcd-1234-defg
 echo "var1 = $var1"
@@ -444,15 +1004,65 @@ echo "$path_name with all o's capitalized = $t"
 t=${path_name//o/}
 echo "$path_name with all o's deleted = $t"
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><tt class="USERINPUT"><b>${var/#Pattern/Replacement}</b></tt></dt><dd><p>If <i class="FIRSTTERM">prefix</i> of
-		  <tt class="REPLACEABLE"><i>var</i></tt> matches
-		  <tt class="REPLACEABLE"><i>Pattern</i></tt>, then substitute
-		  <tt class="REPLACEABLE"><i>Replacement</i></tt> for
-		  <tt class="REPLACEABLE"><i>Pattern</i></tt>.</p></dd><dt><tt class="USERINPUT"><b>${var/%Pattern/Replacement}</b></tt></dt><dd><p>If <i class="FIRSTTERM">suffix</i> of
-		  <tt class="REPLACEABLE"><i>var</i></tt> matches
-		  <tt class="REPLACEABLE"><i>Pattern</i></tt>, then substitute
-		  <tt class="REPLACEABLE"><i>Replacement</i></tt> for
-		  <tt class="REPLACEABLE"><i>Pattern</i></tt>.</p><div class="EXAMPLE"><a name="VARMATCH"></a><p><b>Example 10-13. Matching patterns at prefix or suffix of string</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var/#Pattern/Replacement}</b>
+</tt>
+</dt>
+<dd>
+<p>If <i class="FIRSTTERM">prefix</i> of
+		  <tt class="REPLACEABLE">
+<i>var</i>
+</tt> matches
+		  <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>, then substitute
+		  <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt> for
+		  <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>${var/%Pattern/Replacement}</b>
+</tt>
+</dt>
+<dd>
+<p>If <i class="FIRSTTERM">suffix</i> of
+		  <tt class="REPLACEABLE">
+<i>var</i>
+</tt> matches
+		  <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>, then substitute
+		  <tt class="REPLACEABLE">
+<i>Replacement</i>
+</tt> for
+		  <tt class="REPLACEABLE">
+<i>Pattern</i>
+</tt>.</p>
+<div class="EXAMPLE">
+<a name="VARMATCH">
+</a>
+<p>
+<b>Example 10-13. Matching patterns at prefix or suffix of string</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # var-match.sh:
 # Demo of pattern replacement at prefix / suffix of string.
 
@@ -485,10 +1095,35 @@ v4=${v0/%123/000}       # Matches, but not at end.
 echo "v4 = $v4"         # abc1234zip1234abc
                         # NO REPLACEMENT.
 
-exit 0			</pre></font></td></tr></tbody></table></div></dd><dt><a name="VARPREFIXM"></a><tt class="USERINPUT"><b>${!varprefix*}</b></tt>, <tt class="USERINPUT"><b>${!varprefix@}</b></tt></dt><dd><p>Matches <em>names</em> of all
+exit 0			</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="VARPREFIXM">
+</a>
+<tt class="USERINPUT">
+<b>${!varprefix*}</b>
+</tt>, <tt class="USERINPUT">
+<b>${!varprefix@}</b>
+</tt>
+</dt>
+<dd>
+<p>Matches <em>names</em> of all
 		  previously declared variables beginning
-		    with <tt class="PARAMETER"><i>varprefix</i></tt>.
-		      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># This is a variation on indirect reference, but with a * or @.
+		    with <tt class="PARAMETER">
+<i>varprefix</i>
+</tt>.
+		      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># This is a variation on indirect reference, but with a * or @.
 # Bash, version 2.04, adds this feature.
 
 xyz23=whatever
@@ -506,8 +1141,60 @@ abc23=something_else
 b=${!abc*}
 echo "b = $b"      #  b = abc23
 c=${!b}            #  Now, the more familiar type of indirect reference.
-echo $c            #  something_else</pre></font></td></tr></tbody></table>
-                  </p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN6310" href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#AEN6310"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>If $parameter is null in a
-		      non-interactive script, it will terminate with a <a href="http://www.tldp.org/LDP/abs/html/exitcodes.html#EXITCODESREF"><span class="RETURNVALUE">127</span>
+echo $c            #  something_else</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+                  </p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN6310" href="./parameter-substitution.html#AEN6310">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>If $parameter is null in a
+		      non-interactive script, it will terminate with a <a href="./exitcodes.html#EXITCODESREF">
+<span class="RETURNVALUE">127</span>
 		      exit status</a> (the Bash error code for
-		      <span class="QUOTE">"command not found"</span>).</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Manipulating Strings</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Loops and Branches</td></tr></tbody></table></div></body></html>
+		      <span class="QUOTE">"command not found"</span>).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./string-manipulation.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Manipulating Strings</td>
+<td align="center" valign="top" width="34%">
+<a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Loops and Branches</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
