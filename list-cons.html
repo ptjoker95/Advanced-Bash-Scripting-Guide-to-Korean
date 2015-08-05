@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>List Constructs</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Advanced Topics" href="http://www.tldp.org/LDP/abs/html/part5.html"><link rel="PREVIOUS" title="Aliases" href="http://www.tldp.org/LDP/abs/html/aliases.html"><link rel="NEXT" title="Arrays" href="http://www.tldp.org/LDP/abs/html/arrays.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/aliases.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/arrays.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="LIST-CONS"></a>Chapter 26. List Constructs</h1><p><a name="LISTCONSREF"></a></p><p>The <i class="FIRSTTERM">and list</i> and <i class="FIRSTTERM">or
+	list</i> constructs provide a means of processing a
+	number of commands consecutively. These can effectively replace
+	complex nested <a href="http://www.tldp.org/LDP/abs/html/testconstructs.html#TESTCONSTRUCTS1">if/then</a>
+	or even <a href="http://www.tldp.org/LDP/abs/html/testbranch.html#CASEESAC1">case</a> statements.</p><p></p><div class="VARIABLELIST"><p><b><a name="LCONS1"></a>Chaining together commands</b></p><dl><dt>and list</dt><dd><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">command-1 &amp;&amp; command-2 &amp;&amp; command-3 &amp;&amp; ... command-n</pre></font></td></tr></tbody></table>
+	      Each command executes in turn, provided that
+	      the previous command has given a return value of
+	      <tt class="REPLACEABLE"><i>true</i></tt> (zero). At the first
+	      <tt class="REPLACEABLE"><i>false</i></tt> (non-zero) return, the
+	      command chain terminates (the first command returning
+	      <tt class="REPLACEABLE"><i>false</i></tt> is the last one to
+	      execute).</p><p>An interesting use of a two-condition <i class="FIRSTTERM">and
+	      list</i> from an early version of YongYe's <a href="http://bash.deta.in/Tetris_Game.sh" target="_top">Tetris
+	      game script</a>:</p><p>           <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">equation()
+
+{  # core algorithm used for doubling and halving the coordinates
+   [[ ${cdx} ]] &amp;&amp; ((y=cy+(ccy-cdy)${2}2))
+   eval ${1}+=\"${x} ${y} \"
+}</pre></font></td></tr></tbody></table>
+           </p><div class="EXAMPLE"><a name="EX64"></a><p><b>Example 26-1. Using an <i class="FIRSTTERM">and list</i> to test
+	      for command-line arguments</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# and list
+
+if [ ! -z "$1" ] &amp;&amp; echo "Argument #1 = $1" &amp;&amp; [ ! -z "$2" ] &amp;&amp; \
+#                ^^                         ^^               ^^
+echo "Argument #2 = $2"
+then
+  echo "At least 2 arguments passed to script."
+  # All the chained commands return true.
+else
+  echo "Fewer than 2 arguments passed to script."
+  # At least one of the chained commands returns false.
+fi  
+# Note that "if [ ! -z $1 ]" works, but its alleged equivalent,
+#   "if [ -n $1 ]" does not.
+#     However, quoting fixes this.
+#  if "[ -n "$1" ]" works.
+#           ^  ^    Careful!
+# It is always best to QUOTE the variables being tested.
+
+
+# This accomplishes the same thing, using "pure" if/then statements.
+if [ ! -z "$1" ]
+then
+  echo "Argument #1 = $1"
+fi
+if [ ! -z "$2" ]
+then
+  echo "Argument #2 = $2"
+  echo "At least 2 arguments passed to script."
+else
+  echo "Fewer than 2 arguments passed to script."
+fi
+# It's longer and more ponderous than using an "and list".
+
+
+exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="ANDLIST2"></a><p><b>Example 26-2. Another command-line arg test using an <i class="FIRSTTERM">and
+	      list</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+ARGS=1        # Number of arguments expected.
+E_BADARGS=85  # Exit value if incorrect number of args passed.
+
+test $# -ne $ARGS &amp;&amp; \
+#    ^^^^^^^^^^^^ condition #1
+echo "Usage: `basename $0` $ARGS argument(s)" &amp;&amp; exit $E_BADARGS
+#                                             ^^
+#  If condition #1 tests true (wrong number of args passed to script),
+#+ then the rest of the line executes, and script terminates.
+
+# Line below executes only if the above test fails.
+echo "Correct number of arguments passed to this script."
+
+exit 0
+
+# To check exit value, do a "echo $?" after script termination.</pre></font></td></tr></tbody></table></div><p><a name="ANDDEFAULT"></a></p><p>	      Of course, an <i class="FIRSTTERM">and list</i> can also
+	      <i class="FIRSTTERM">set</i> variables to a default value.
+	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">arg1=$@ &amp;&amp; [ -z "$arg1" ] &amp;&amp; arg1=DEFAULT
+		
+              # Set $arg1 to command-line arguments, if any.
+              # But . . . set to DEFAULT if not specified on command-line.</pre></font></td></tr></tbody></table>
+            </p></dd><dt><a name="ORLISTREF"></a>or list</dt><dd><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">command-1 || command-2 || command-3 || ... command-n</pre></font></td></tr></tbody></table>
+	      Each command executes in turn for as long as the previous
+	      command returns <span class="RETURNVALUE">false</span>. At
+	      the first <span class="RETURNVALUE">true</span> return, the
+	      command chain terminates (the first command returning
+	      <span class="RETURNVALUE">true</span> is the last one to
+	      execute). This is obviously the inverse of the <span class="QUOTE">"and
+	      list"</span>.</p><div class="EXAMPLE"><a name="EX65"></a><p><b>Example 26-3. Using <i class="FIRSTTERM">or lists</i> in combination
+	      with an <i class="FIRSTTERM">and list</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+#  delete.sh, a not-so-cunning file deletion utility.
+#  Usage: delete filename
+
+E_BADARGS=85
+
+if [ -z "$1" ]
+then
+  echo "Usage: `basename $0` filename"
+  exit $E_BADARGS  # No arg? Bail out.
+else  
+  file=$1          # Set filename.
+fi  
+
+
+[ ! -f "$file" ] &amp;&amp; echo "File \"$file\" not found. \
+Cowardly refusing to delete a nonexistent file."
+# AND LIST, to give error message if file not present.
+# Note echo message continuing on to a second line after an escape.
+
+[ ! -f "$file" ] || (rm -f $file; echo "File \"$file\" deleted.")
+# OR LIST, to delete file if present.
+
+# Note logic inversion above.
+# AND LIST executes on true, OR LIST on false.
+
+exit $?</pre></font></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="list-cons_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>If the first command in an <i class="FIRSTTERM">or
+	      list</i> returns <span class="RETURNVALUE">true</span>,
+	      it <tt class="REPLACEABLE"><i>will</i></tt> execute.</p></td></tr></tbody></table></div></dd></dl></div><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># ==&gt; The following snippets from the /etc/rc.d/init.d/single
+#+==&gt; script by Miquel van Smoorenburg
+#+==&gt; illustrate use of "and" and "or" lists.
+# ==&gt; "Arrowed" comments added by document author.
+
+[ -x /usr/bin/clear ] &amp;&amp; /usr/bin/clear
+  # ==&gt; If /usr/bin/clear exists, then invoke it.
+  # ==&gt; Checking for the existence of a command before calling it
+  #+==&gt; avoids error messages and other awkward consequences.
+
+  # ==&gt; . . .
+
+# If they want to run something in single user mode, might as well run it...
+for i in /etc/rc1.d/S[0-9][0-9]* ; do
+        # Check if the script is there.
+        [ -x "$i" ] || continue
+  # ==&gt; If corresponding file in $PWD *not* found,
+  #+==&gt; then "continue" by jumping to the top of the loop.
+
+        # Reject backup files and files generated by rpm.
+        case "$1" in
+                *.rpmsave|*.rpmorig|*.rpmnew|*~|*.orig)
+                        continue;;
+        esac
+        [ "$i" = "/etc/rc1.d/S00single" ] &amp;&amp; continue
+  # ==&gt; Set script name, but don't execute it yet.
+        $i start
+done
+
+  # ==&gt; . . .</pre></font></td></tr></tbody></table></p><div class="IMPORTANT"><p></p><table class="IMPORTANT" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="list-cons_files/important.gif" alt="Important" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit
+	  status</a> of an <tt class="USERINPUT"><b>and list</b></tt> or an
+	  <tt class="USERINPUT"><b>or list</b></tt> is the exit status of the last
+	  command executed.</p></td></tr></tbody></table></div><p>Clever combinations of <i class="FIRSTTERM">and</i> and
+	<i class="FIRSTTERM">or</i> lists are possible, but the logic may
+	easily become convoluted and require close attention to <a href="http://www.tldp.org/LDP/abs/html/opprecedence.html#OPPRECEDENCE1">operator precedence rules</a>, and
+	possibly extensive debugging.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">false &amp;&amp; true || echo false         # false
+
+# Same result as
+( false &amp;&amp; true ) || echo false     # false
+# But NOT
+false &amp;&amp; ( true || echo false )     # (nothing echoed)
+
+#  Note left-to-right grouping and evaluation of statements.
+
+#  It's usually best to avoid such complexities.
+
+#  Thanks, S.C.</pre></font></td></tr></tbody></table>
+	</p><p>See <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#DAYSBETWEEN">Example A-7</a> and <a href="http://www.tldp.org/LDP/abs/html/fto.html#BROKENLINK">Example 7-4</a> for illustrations of using <tt class="USERINPUT"><b>and
+	/ or list</b></tt> constructs to test variables.</p></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/aliases.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/arrays.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Aliases</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part5.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Arrays</td></tr></tbody></table></div></body></html>
