@@ -1,6 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Complex Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Basic Commands" href="http://www.tldp.org/LDP/abs/html/basic.html"><link rel="NEXT" title="Time / Date Commands" href="http://www.tldp.org/LDP/abs/html/timedate.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/basic.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/timedate.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="MOREADV"></a>16.2. Complex Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="CCLISTING1"></a>Commands for more advanced users</b></p><dl><dt><a name="FINDREF"></a><b class="COMMAND">find</b></dt><dd><p><a name="FINDREF0"></a></p><p>-exec <tt class="REPLACEABLE"><i>COMMAND</i></tt> \;</p><p>Carries out <tt class="REPLACEABLE"><i>COMMAND</i></tt> on
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Complex Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="PREVIOUS" title="Basic Commands" href="./basic.html">
+<link rel="NEXT" title="Time / Date Commands" href="./timedate.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: 
+</th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./basic.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./timedate.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="MOREADV"></a>16.2. Complex Commands
+</h1>
+<p></p>
+<div class="VARIABLELIST">
+<p><b><a name="CCLISTING1"></a>Commands for more advanced users</b></p>
+<dl>
+<dt>
+<a name="FINDREF"></a>
+<b class="COMMAND">find</b>
+</dt>
+<dd><p><a name="FINDREF0"></a></p>
+<p>-exec <tt class="REPLACEABLE"><i>COMMAND</i></tt> \;</p><p>Carries out <tt class="REPLACEABLE"><i>COMMAND</i></tt> on
 	      each file that <b class="COMMAND">find</b> matches.  The
 	      command sequence terminates with <span class="TOKEN">;</span> (the
 	      <span class="QUOTE">";"</span> is <a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">escaped</a> to
@@ -54,7 +99,7 @@ find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' \
 #  [:digit:] is one of the character classes
 #+ introduced with the POSIX 1003.2 standard. 
 
-# Thanks, St�phane Chazelas. </pre></font></td></tr></tbody></table></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <tt class="OPTION">-exec</tt> option to
+# Thanks, Stéphane Chazelas. </pre></font></td></tr></tbody></table></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <tt class="OPTION">-exec</tt> option to
 	      <b class="COMMAND">find</b> should not be confused with the <a href="http://www.tldp.org/LDP/abs/html/internal.html#EXECREF">exec</a> shell builtin.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX57"></a><p><b>Example 16-3. <i class="FIRSTTERM">Badname</i>, eliminate file names
 		in current directory containing bad characters and <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#WHITESPACEREF">whitespace</a>.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
 # badname.sh
@@ -374,20 +419,73 @@ sort | uniq -c | sort -nr
 #  This does the same job as the "wf.sh" example,
 #+ but a bit more ponderously, and it runs more slowly (why?).
 
-exit $?</pre></font></td></tr></tbody></table></div></dd><dt><a name="EXPRREF"></a><tt class="USERINPUT"><b>expr</b></tt></dt><dd><p>All-purpose expression evaluator:
-	      Concatenates and evaluates the arguments according
-	      to the operation given (arguments must be separated
-	      by spaces). Operations may be arithmetic, comparison,
-	      string, or logical.</p><p></p><div class="VARIABLELIST"><dl><dt><tt class="USERINPUT"><b>expr 3 + 5</b></tt></dt><dd><p>returns <tt class="LITERAL">8</tt></p></dd><dt><tt class="USERINPUT"><b>expr 5 % 3</b></tt></dt><dd><p>returns 2</p></dd><dt><tt class="USERINPUT"><b>expr 1 / 0</b></tt></dt><dd><p>returns the error message, <span class="ERRORCODE">expr: division by
-		    zero</span></p><p>Illegal arithmetic operations not allowed.</p></dd><dt><tt class="USERINPUT"><b>expr 5 \* 3</b></tt></dt><dd><p>returns 15</p><p>The multiplication operator
-		  must be escaped when used in an arithmetic expression
-		  with <b class="COMMAND">expr</b>.</p></dd><dt><tt class="USERINPUT"><b>y=`expr $y + 1`</b></tt></dt><dd><p>Increment a variable, with the same effect
-		    as <tt class="USERINPUT"><b>let y=y+1</b></tt> and
-		    <tt class="USERINPUT"><b>y=$(($y+1))</b></tt>. This is an
-		    example of <a href="http://www.tldp.org/LDP/abs/html/arithexp.html#ARITHEXPREF">arithmetic
-		    expansion</a>.</p></dd><dt><a name="EXPEXTRSUB"></a><tt class="USERINPUT"><b>z=`expr substr
-		$string $position $length`</b></tt></dt><dd><p>Extract substring of $length characters, starting
-		    at $position.</p></dd></dl></div><div class="EXAMPLE"><a name="EX45"></a><p><b>Example 16-9. Using <i class="FIRSTTERM">expr</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre></font></td></tr></tbody></table></div></dd>
+<dt><a name="EXPRREF"></a>
+<tt class="USERINPUT"><b>expr</b></tt>
+</dt>
+<dd><p>다목적 표현 연산자: 주어진 연산자로 매개변수를 
+연결하거나 계산합니다 (매개변수는 공란으로 구분되어야 함). 
+연산자는 산술연산, 비교, 문자열이나 논리연산일 수 있습니다.</p>
+<p></p>
+<div class="VARIABLELIST">
+<dl>
+<dt>
+<tt class="USERINPUT">
+<b>expr 3 + 5</b>
+</tt>
+</dt>
+<dd>
+<p><tt class="LITERAL">8</tt> 반환</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>expr 5 % 3</b>
+</tt>
+</dt>
+<dd><p>2 반환</p></dd>
+<dt>
+<tt class="USERINPUT">
+<b>expr 1 / 0</b>
+</tt>
+</dt>
+<dd>
+<p>오류 메세지 반환, 
+<span class="ERRORCODE">expr: division by zero</span></p>
+<p>Illegal arithmetic operations not allowed.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>expr 5 \* 3</b>
+</tt>
+</dt>
+<dd><p>15 반환</p>
+<p><b class="COMMAND">expr</b> 로 곱하기 연산자를 사용할 
+때에는 역슬래쉬와 함께 써야 합니다.</p>
+</dd>
+<dt>
+<tt class="USERINPUT">
+<b>y=`expr $y + 1`</b>
+</tt>
+</dt>
+<dd><p><tt class="USERINPUT"><b>let y=y+1</b></tt> 나 
+<tt class="USERINPUT"><b>y=$(($y+1))</b></tt> 와 같이 
+변수값을 증가시킵니다. 
+<a href="./arithexp.html#ARITHEXPREF">arithmetic expansion</a> 
+에서 예를 확인할 수 있습니다.
+</p>
+</dd>
+<dt>
+<a name="EXPEXTRSUB"></a>
+<tt class="USERINPUT"><b>z=`expr substr 
+$string $position $length`</b></tt>
+</dt>
+<dd>
+<p><code>$position</code> 에서 시작해서, 길이 <code>$length</code> 
+만큼의 문자열을 추출해냅니다.</p>
+</dd>
+</dl>
+</div>
+<div class="EXAMPLE"><a name="EX45"></a><p><b>Example 16-9. Using <i class="FIRSTTERM">expr</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
 
 # Demonstrating some of the uses of 'expr'
 # =======================================
