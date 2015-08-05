@@ -343,15 +343,15 @@ echo "a = $a"      # a = xyz</pre>
 </tt>
 </dt>
 <dd>
-<p>If parameter set, use it, else print
-                <i class="FIRSTTERM">err_msg</i> and <em>abort
-                the script</em> with an <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of
-                <span class="ERRORCODE">1</span>.</p>
-<p>Both forms nearly equivalent. The <span class="TOKEN">:</span>
-		  makes a difference only when <tt class="PARAMETER">
-<i>parameter</i>
-</tt>
-		  has been declared and is null, as above.</p>
+<p>변수가 정해져 있으면 그 값을 사용하고, 정해져 있지 
+않으면 <i class="FIRSTTERM">err_msg</i> 를 출력하고 
+<a href="./exit-status.html#EXITSTATUSREF">exit status</a> 
+<span class="ERRORCODE">1</span>  
+상태로 <em>스크립트를 종료</em> 합니다.</p>
+<p>두 형식 모두 거의 비슷합니다. 다만 위와 같이,
+<tt class="PARAMETER"><i>parameter</i></tt> 가 
+선언되었지만 값이 null일 때, 
+<span class="TOKEN">:</span> 은 차이를 보입니다.</p>
 </dd>
 </dl>
 </div>
