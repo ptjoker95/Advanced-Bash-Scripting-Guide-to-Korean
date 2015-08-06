@@ -359,7 +359,7 @@ echo "a = $a"      # a = xyz</pre>
 <a name="EX6">
 </a>
 <p>
-<b>Example 10-7. Using parameter substitution and error messages</b>
+<b>Example 10-7. 매개변수 치환과 에러 메세지 이용하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -433,7 +433,7 @@ exit $HERE   # Will NOT exit here.
 <a name="USAGEMESSAGE">
 </a>
 <p>
-<b>Example 10-8. Parameter substitution and <span class="QUOTE">"usage"</span> messages</b>
+<b>Example 10-8. 매개 변수 치환과 <span class="QUOTE">"사용방법"</span>을 메세지로 보여주기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -464,16 +464,14 @@ exit 0  # Will exit here only if command-line parameter present.
 </div>
 <div class="FORMALPARA">
 <p>
-<b>Parameter substitution and/or expansion. </b>
+<b>매개변수 치환과 확장. </b>
 <a name="PSUB2">
-</a>The following expressions are
-		the complement to the <b class="COMMAND">match</b>
-		<tt class="REPLACEABLE">
-<i>in</i>
-</tt> <b class="COMMAND">expr</b>
-		string operations (see <a href="./moreadv.html#EX45">Example 16-9</a>).
-		These particular ones are used mostly in parsing file
-		path names.</p>
+</a>이하의 표현식은 <b class="COMMAND">expr</b> 문자열 조작 
+<tt class="REPLACEABLE"><i>에서</i></tt>  
+<b class="COMMAND">match</b> 의 보완 기능입니다 
+(<a href="./moreadv.html#EX45">Example 16-9</a> 참조). 
+이 방법은 파일 경로명을 파싱할 때 주로 사용됩니다.
+</p>
 </div>
 <p>
 </p>
@@ -481,7 +479,7 @@ exit 0  # Will exit here only if command-line parameter present.
 <p>
 <b>
 <a name="PSOREX1">
-</a>Variable length / Substring removal</b>
+</a>변수 길이 / 문자열의 부분 삭제</b>
 </p>
 <dl>
 <dt>
@@ -492,12 +490,11 @@ exit 0  # Will exit here only if command-line parameter present.
 <dd>
 <p>
 <tt class="USERINPUT">
-<b>String length</b>
-</tt> (number
-		    of characters in <tt class="VARNAME">$var</tt>). For
-		    an <a href="./arrays.html#ARRAYREF">array</a>,
-		    <b class="COMMAND">${#array}</b> is the length of the
-		    first element in the array.</p>
+<b>문자열의 길이</b>
+</tt> (<tt class="VARNAME">$var</tt> 에 있는 문자의 갯수). 
+<a href="./arrays.html#ARRAYREF">array</a> 에 쓸 경우, 
+<b class="COMMAND">${#array}</b> 는 array에 있는 첫번째 
+요소의 길이입니다.</p>
 <div class="NOTE">
 <p>
 </p>
@@ -508,9 +505,7 @@ exit 0  # Will exit here only if command-line parameter present.
 <img src="parameter-substitution_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>		    Exceptions:
-
-		  </p>
+<p>예외:</p>
 <p>
 </p>
 <ul>
@@ -519,19 +514,20 @@ exit 0  # Will exit here only if command-line parameter present.
 <a name="NUMPOSPARAM">
 </a>
 </p>
-<p>		      <b class="COMMAND">${#*}</b> and
-		      <b class="COMMAND">${#@}</b> give the <em>number
-		      of positional parameters</em>.
-		    </p>
+<p><b class="COMMAND">${#*}</b> 과 
+<b class="COMMAND">${#@}</b> 는 
+<em>위치 매개 변수의 갯수</em> 를 알려줍니다.
+</p>
 </li>
 <li>
-<p>		      For an array, <b class="COMMAND">${#array[*]}</b> and
-		      <b class="COMMAND">${#array[@]}</b> give the number
-		      of elements in the array.
-		    </p>
+<p>array에 쓸 경우, 
+<b class="COMMAND">${#array[*]}</b> 과 
+<b class="COMMAND">${#array[@]}</b> 는 array에 있는 
+요소의 갯수입니다.
+</p>
 </li>
 </ul>
-		  <p>
+<p>
 </p>
 </td>
 </tr>
@@ -542,7 +538,7 @@ exit 0  # Will exit here only if command-line parameter present.
 <a name="LENGTH">
 </a>
 <p>
-<b>Example 10-9. Length of a variable</b>
+<b>Example 10-9. 변수의 길이</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -594,31 +590,26 @@ exit 0</pre>
 </a>
 </p>
 <p>
-<b class="COMMAND">${var#Pattern} </b>
-		  Remove from <tt class="VARNAME">$var</tt>
-		  the <em>shortest</em> part of
-		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE">
-<i>front end</i>
-</tt> of
-		  <tt class="VARNAME">$var</tt>.
-		</p>
+<b class="COMMAND">${var#Pattern} </b> 
+<tt class="VARNAME">$var</tt> 에서 
+<tt class="REPLACEABLE"><i>앞에서부터 뒤의 순서로</i></tt> 
+<tt class="VARNAME">$Pattern</tt> 과 맞는 
+<em>가장 짧은</em> 부분을 제거합니다.
+</p>
 <p>
 <a name="PSOREXLO">
 </a>
 </p>
 <p>
-<b class="COMMAND">${var##Pattern} </b>
-		  Remove from <tt class="VARNAME">$var</tt>
-		  the <em>longest</em> part of
-		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE">
-<i>front end</i>
-</tt> of
-		  <tt class="VARNAME">$var</tt>.
-		</p>
-<p>A usage illustration from <a href="./contributed-scripts.html#DAYSBETWEEN">Example A-7</a>:
-		<table bgcolor="#E0E0E0" border="0" width="90%">
+<b class="COMMAND">${var##Pattern} </b> 
+<tt class="VARNAME">$var</tt> 에서 
+<tt class="REPLACEABLE"><i>앞에서부터 뒤의 순서로</i></tt> 
+<tt class="VARNAME">$Pattern</tt> 과 맞는 
+<em>가장 긴</em> 부분을 제거합니다.
+</p>
+<p><a href="./contributed-scripts.html#DAYSBETWEEN">Example A-7</a> 
+에서 발췌:
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -635,9 +626,8 @@ strip_leading_zero () #  Strip possible leading zero(s)
 </tr>
 </tbody>
 </table>
-		</p>
-<p>Manfred Schwarb's more elaborate variation of the
-			above:</p>
+</p>
+<p>Manfred Schwarb 가 위의 예를 구체적으로 만들어줬습니다.:</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -658,7 +648,7 @@ strip_leading_zero () #  Strip possible leading zero(s)
 </tbody>
 </table>
 		</p>
-<p>Another usage illustration:</p>
+<p>또다른 사용 예:</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -698,37 +688,31 @@ echo "${filename##*.}"      # data
 </p>
 <p>
 <b class="COMMAND">${var%Pattern}</b>
-		  Remove from <tt class="VARNAME">$var</tt>
-		  the <em>shortest</em> part of
-		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE">
-<i>back end</i>
-</tt> of
-		  <tt class="VARNAME">$var</tt>.  </p>
+<tt class="VARNAME">$var</tt> 의 
+<tt class="REPLACEABLE"><i>뒤에서 부터</i></tt> 
+<tt class="VARNAME">$Pattern</tt> 과 
+일치하는 것 중 <em>가장 짧은</em> 부분을 지웁니다.</p>
 <p>
 <a name="PCTREP2">
 </a>
 </p>
 <p>
 <b class="COMMAND">${var%%Pattern}</b>
-		  Remove from <tt class="VARNAME">$var</tt>
-		  the <em>longest</em> part of
-		  <tt class="VARNAME">$Pattern</tt> that matches
-		  the <tt class="REPLACEABLE">
-<i>back end</i>
-</tt> of
-		  <tt class="VARNAME">$var</tt>.  </p>
+<tt class="VARNAME">$var</tt> 의 
+<tt class="REPLACEABLE"><i>뒤에서 부터</i></tt> 
+<tt class="VARNAME">$Pattern</tt> 과 
+일치하는 것 중 <em>가장 긴</em> 부분을 지웁니다.</p>
 </dd>
 </dl>
 </div>
 <p>
-<a href="./bashver2.html#BASH2REF">Version 2</a> of Bash added
-	      additional options.</p>
+Bash <a href="./bashver2.html#BASH2REF">버전 2</a> 
+에서는 옵션이 추가되었습니다.</p>
 <div class="EXAMPLE">
 <a name="PATTMATCHING">
 </a>
 <p>
-<b>Example 10-10. Pattern matching in parameter substitution</b>
+<b>Example 10-10. 매개변수에서 패턴 매칭하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -789,7 +773,7 @@ exit 0</pre>
 <a name="RFE">
 </a>
 <p>
-<b>Example 10-11. Renaming file extensions<span class="TOKEN">:</span>
+<b>Example 10-11. 파일 확장자 이름 수정하기<span class="TOKEN">:</span>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -837,16 +821,17 @@ exit 0</pre>
 <div class="VARIABLELIST">
 <p>
 <b>
-<a name="EXPREPL1">
-</a>Variable expansion / Substring
-	      replacement</b>
+<a name="EXPREPL1"></a>
+변수 확장 / 문자열 부분 수정 replacement
+</b>
 </p>
 <dl>
 <dt>
 </dt>
 <dd>
-<p>These constructs have been adopted from
-		  <i class="FIRSTTERM">ksh</i>.</p>
+<p>이 구성들은 
+<i class="FIRSTTERM">ksh</i> 
+에서부터 도입되었습니다.</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
@@ -854,13 +839,13 @@ exit 0</pre>
 </tt>
 </dt>
 <dd>
-<p>Variable <tt class="REPLACEABLE">
+<p>변수 <tt class="REPLACEABLE">
 <i>var</i>
-</tt> expanded,
-		    starting from offset <tt class="REPLACEABLE">
+</tt> 를 
+<tt class="REPLACEABLE">
 <i>pos</i>
-</tt>.
-		  </p>
+</tt> 에서부터 잘라냅니다.
+</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
@@ -868,17 +853,14 @@ exit 0</pre>
 </tt>
 </dt>
 <dd>
-<p>Expansion to a max of <tt class="REPLACEABLE">
-<i>len</i>
-</tt>
-		    characters of variable <tt class="REPLACEABLE">
-<i>var</i>
-</tt>, from offset
-		    <tt class="REPLACEABLE">
-<i>pos</i>
-</tt>. See <a href="./contributed-scripts.html#PW">Example A-13</a>
-		    for an example of the creative use of this operator.
-		  </p>
+<p>변수 
+<tt class="REPLACEABLE"><i>var</i></tt> 를 
+<tt class="REPLACEABLE"><i>pos</i></tt> 에서부터 
+<tt class="REPLACEABLE"><i>len</i></tt> 의 길이만큼 
+잘라냅니다. 
+<a href="./contributed-scripts.html#PW">예 A-13</a> 에서 
+이 기능의 창의적인 활용법을 볼 수 있습니다.
+</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
@@ -886,23 +868,15 @@ exit 0</pre>
 </tt>
 </dt>
 <dd>
-<p>First match of <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>,
-		    within <tt class="REPLACEABLE">
-<i>var</i>
-</tt> replaced with
-		    <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt>.</p>
-<p>If <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt> is
-		    omitted, then the first match of
-		    <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt> is replaced by
-		    <em>nothing</em>, that is, deleted.</p>
+<p>
+<tt class="REPLACEABLE"><i>var</i></tt> 에서 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 에 맞는 첫번째 부분을 
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 로 교체합니다.
+</p>
+<p>만일 
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 가 생략되면, 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 과 일치하는 부분은
+<em>nothing</em> 로 교체, 즉 삭제됩니다.</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
@@ -912,32 +886,22 @@ exit 0</pre>
 <dd>
 <div class="FORMALPARA">
 <p>
-<b>Global replacement. </b>
-<a name="PSGLOB">
-</a>
-		    All matches of <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>,
-		    within <tt class="REPLACEABLE">
-<i>var</i>
-</tt> replaced with
-		    <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt>.</p>
+<b>전역 교체.</b> 
+<a name="PSGLOB"></a>
+<tt class="REPLACEABLE"><i>var</i></tt> 에서, 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 과 일치하는 부분 전체를 
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 로 교체합니다.
+</p>
 </div>
-<p>As above, if <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt>
-		    is omitted, then all occurrences of
-		    <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt> are replaced by
-		    <em>nothing</em>, that is, deleted.</p>
+<p>위에서와 마찬가지로,만일 
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 가 생략되면, 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 과 일치하는 부분은 
+<em>nothing</em>로 교체, 즉 삭제됩니다.</p>
 <div class="EXAMPLE">
 <a name="EX7">
 </a>
 <p>
-<b>Example 10-12. Using pattern matching to parse arbitrary strings</b>
+<b>Example 10-12. 임의의 문자열을 구문으로 조작하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1018,19 +982,12 @@ exit 0</pre>
 </tt>
 </dt>
 <dd>
-<p>If <i class="FIRSTTERM">prefix</i> of
-		  <tt class="REPLACEABLE">
-<i>var</i>
-</tt> matches
-		  <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>, then substitute
-		  <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt> for
-		  <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>.</p>
+<p>
+<tt class="REPLACEABLE"><i>var</i></tt> 의 
+<i class="FIRSTTERM">맨 처음부터</i> 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 과 일치하면
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 을
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 로 교체합니다.</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
@@ -1038,24 +995,18 @@ exit 0</pre>
 </tt>
 </dt>
 <dd>
-<p>If <i class="FIRSTTERM">suffix</i> of
-		  <tt class="REPLACEABLE">
-<i>var</i>
-</tt> matches
-		  <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>, then substitute
-		  <tt class="REPLACEABLE">
-<i>Replacement</i>
-</tt> for
-		  <tt class="REPLACEABLE">
-<i>Pattern</i>
-</tt>.</p>
+<p>
+<tt class="REPLACEABLE"><i>var</i></tt> 의 
+<i class="FIRSTTERM">맨 끝부터</i> 
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 과 일치하면
+<tt class="REPLACEABLE"><i>Pattern</i></tt> 을
+<tt class="REPLACEABLE"><i>Replacement</i></tt> 로 교체합니다.
+</p>
 <div class="EXAMPLE">
 <a name="VARMATCH">
 </a>
 <p>
-<b>Example 10-13. Matching patterns at prefix or suffix of string</b>
+<b>Example 10-13. 문장의 맨 앞과 맨 끝의 패턴을 수정하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1113,12 +1064,10 @@ exit 0			</pre>
 </tt>
 </dt>
 <dd>
-<p>Matches <em>names</em> of all
-		  previously declared variables beginning
-		    with <tt class="PARAMETER">
-<i>varprefix</i>
-</tt>.
-		      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>지정된 변수 중에 
+<em>변수명</em> 이 
+<tt class="PARAMETER"><i>varprefix</i></tt> 로 시작하는 변수들을 찾아줍니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
