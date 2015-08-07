@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Loops</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Loops and Branches" href="http://www.tldp.org/LDP/abs/html/loops.html"><link rel="PREVIOUS" title="Loops and Branches" href="http://www.tldp.org/LDP/abs/html/loops.html"><link rel="NEXT" title="Nested Loops" href="http://www.tldp.org/LDP/abs/html/nestedloops.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/nestedloops.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="LOOPS1"></a>11.1. Loops</h1><p>A <i class="FIRSTTERM">loop</i> is a block of code that
+	<i class="FIRSTTERM">iterates</i>
+
+	  <a name="AEN6560" href="#FTN.AEN6560"><span class="footnote">[1]</span></a>
+
+	a list of commands
+	as long as the <i class="FIRSTTERM">loop control condition</i>
+	is true.</p><p></p><div class="VARIABLELIST"><p><b><a name="FORLOOPREF1"></a>for loops</b></p><dl><dt><b class="COMMAND">for <tt class="PARAMETER"><i>arg</i></tt> in
+	    <tt class="REPLACEABLE"><i>[list]</i></tt></b></dt><dd><p>This is the basic looping construct. It differs significantly
+	      from its <i class="FIRSTTERM">C</i> counterpart.</p><p><a name="DOINREF"></a></p><p></p><p><b class="COMMAND">for</b>   <tt class="REPLACEABLE"><i>arg</i></tt>   in  [<tt class="REPLACEABLE"><i>list</i></tt>]<br>  do <br>  <tt class="REPLACEABLE"><i>&nbsp;command(s)</i></tt>... <br>  done </p><p></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="loops1_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>During each pass through the loop,
+	      <tt class="REPLACEABLE"><i>arg</i></tt> takes on the
+	      value of each successive variable in the
+	      <tt class="REPLACEABLE"><i>list</i></tt>.</p></td></tr></tbody></table></div><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">for arg in "$var1" "$var2" "$var3" ... "$varN"  
+# In pass 1 of the loop, arg = $var1	    
+# In pass 2 of the loop, arg = $var2	    
+# In pass 3 of the loop, arg = $var3	    
+# ...
+# In pass N of the loop, arg = $varN
+
+# Arguments in [list] quoted to prevent possible word splitting.</pre></font></td></tr></tbody></table></p><p>The argument <tt class="REPLACEABLE"><i>list</i></tt> may
+	    contain <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#ASTERISKREF">wild cards</a>.</p><p><a name="NEEDSEMICOLON"></a></p><p>If <i class="FIRSTTERM">do</i> is on same line as
+	      <i class="FIRSTTERM">for</i>, there needs to be a semicolon
+	      after list.</p><p></p><p><b class="COMMAND">for</b>   <tt class="REPLACEABLE"><i>arg</i></tt>   in  [<tt class="REPLACEABLE"><i>list</i></tt>]  ;   do <br></p><p></p><div class="EXAMPLE"><a name="EX22"></a><p><b>Example 11-1. Simple <i class="FIRSTTERM">for</i> loops</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Listing the planets.
+
+for planet in Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune Pluto
+do
+  echo $planet  # Each planet on a separate line.
+done
+
+echo; echo
+
+for planet in "Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune Pluto"
+    # All planets on same line.
+    # Entire 'list' enclosed in quotes creates a single variable.
+    # Why? Whitespace incorporated into the variable.
+do
+  echo $planet
+done
+
+echo; echo "Whoops! Pluto is no longer a planet!"
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="MULTPARAML"></a></p><p>Each <tt class="USERINPUT"><b>[list]</b></tt> element
+	      may contain multiple parameters. This is useful when
+	      processing parameters in groups. In such cases,
+	      use the <a href="http://www.tldp.org/LDP/abs/html/internal.html#SETREF">set</a> command
+	      (see <a href="http://www.tldp.org/LDP/abs/html/internal.html#EX34">Example 15-16</a>) to force parsing of each
+	      <tt class="USERINPUT"><b>[list]</b></tt> element and assignment of
+	      each component to the positional parameters.</p><div class="EXAMPLE"><a name="EX22A"></a><p><b>Example 11-2. <i class="FIRSTTERM">for</i> loop with two parameters in each
+	      [list] element</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Planets revisited.
+
+# Associate the name of each planet with its distance from the sun.
+
+for planet in "Mercury 36" "Venus 67" "Earth 93"  "Mars 142" "Jupiter 483"
+do
+  set -- $planet  #  Parses variable "planet"
+                  #+ and sets positional parameters.
+  #  The "--" prevents nasty surprises if $planet is null or
+  #+ begins with a dash.
+
+  #  May need to save original positional parameters,
+  #+ since they get overwritten.
+  #  One way of doing this is to use an array,
+  #         original_params=("$@")
+
+  echo "$1		$2,000,000 miles from the sun"
+  #-------two  tabs---concatenate zeroes onto parameter $2
+done
+
+# (Thanks, S.C., for additional clarification.)
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="PARAMLI"></a></p><p>A variable may supply the <tt class="USERINPUT"><b>[list]</b></tt> in a
+	      <i class="FIRSTTERM">for loop</i>.</p><div class="EXAMPLE"><a name="FILEINFO"></a><p><b>Example 11-3. <em>Fileinfo:</em> operating on a file list
+	        contained in a variable</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# fileinfo.sh
+
+FILES="/usr/sbin/accept
+/usr/sbin/pwck
+/usr/sbin/chroot
+/usr/bin/fakefile
+/sbin/badblocks
+/sbin/ypbind"     # List of files you are curious about.
+                  # Threw in a dummy file, /usr/bin/fakefile.
+
+echo
+
+for file in $FILES
+do
+
+  if [ ! -e "$file" ]       # Check if file exists.
+  then
+    echo "$file does not exist."; echo
+    continue                # On to next.
+   fi
+
+  ls -l $file | awk '{ print $8 "         file size: " $5 }'  # Print 2 fields.
+  whatis `basename $file`   # File info.
+  # Note that the whatis database needs to have been set up for this to work.
+  # To do this, as root run /usr/bin/makewhatis.
+  echo
+done  
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="PARAMLI2"></a></p><p>The <tt class="USERINPUT"><b>[list]</b></tt> in a
+	      <i class="FIRSTTERM">for loop</i> may be parameterized.</p><div class="EXAMPLE"><a name="FILEINFO01"></a><p><b>Example 11-4. Operating on a parameterized file list</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+filename="*txt"
+
+for file in $filename
+do
+ echo "Contents of $file"
+ echo "---"
+ cat "$file"
+ echo
+done</pre></font></td></tr></tbody></table></div><p><a name="LIGLOB"></a></p><p>If the <tt class="USERINPUT"><b>[list]</b></tt> in a
+	      <i class="FIRSTTERM">for loop</i> contains wild cards
+	      (<span class="TOKEN">*</span> and <span class="TOKEN">?</span>) used in filename
+	      expansion, then <a href="http://www.tldp.org/LDP/abs/html/globbingref.html">globbing</a>
+	      takes place.</p><div class="EXAMPLE"><a name="LISTGLOB"></a><p><b>Example 11-5. Operating on files with a <i class="FIRSTTERM">for</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# list-glob.sh: Generating [list] in a for-loop, using "globbing" ...
+# Globbing = filename expansion.
+
+echo
+
+for file in *
+#           ^  Bash performs filename expansion
+#+             on expressions that globbing recognizes.
+do
+  ls -l "$file"  # Lists all files in $PWD (current directory).
+  #  Recall that the wild card character "*" matches every filename,
+  #+ however, in "globbing," it doesn't match dot-files.
+
+  #  If the pattern matches no file, it is expanded to itself.
+  #  To prevent this, set the nullglob option
+  #+   (shopt -s nullglob).
+  #  Thanks, S.C.
+done
+
+echo; echo
+
+for file in [jx]*
+do
+  rm -f $file    # Removes only files beginning with "j" or "x" in $PWD.
+  echo "Removed file \"$file\"".
+done
+
+echo
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="OMITLIST"></a></p><p>Omitting the <tt class="USERINPUT"><b>in [list]</b></tt> part of a
+	      <i class="FIRSTTERM">for loop</i> causes the loop to operate
+	      on <span class="TOKEN">$@</span> -- the <a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#POSPARAMREF">	      positional parameters</a>. A particularly clever
+	      illustration of this is <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#PRIMES">Example A-15</a>. See also <a href="http://www.tldp.org/LDP/abs/html/internal.html#REVPOSPARAMS">Example 15-17</a>.</p><div class="EXAMPLE"><a name="EX23"></a><p><b>Example 11-6. Missing <tt class="USERINPUT"><b>in [list]</b></tt> in a
+		<i class="FIRSTTERM">for</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+#  Invoke this script both with and without arguments,
+#+ and see what happens.
+
+for a
+do
+ echo -n "$a "
+done
+
+#  The 'in list' missing, therefore the loop operates on '$@'
+#+ (command-line argument list, including whitespace).
+
+echo
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="LOOPCS"></a></p><p>It is possible to use <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#COMMANDSUBREF">command substitution</a>
+	      to generate the <tt class="USERINPUT"><b>[list]</b></tt> in a
+	      <i class="FIRSTTERM">for loop</i>. See also <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#EX53">Example 16-54</a>,
+	      <a href="http://www.tldp.org/LDP/abs/html/loops1.html#SYMLINKS">Example 11-11</a> and <a href="http://www.tldp.org/LDP/abs/html/mathc.html#BASE">Example 16-48</a>.</p><div class="EXAMPLE"><a name="FORLOOPCMD"></a><p><b>Example 11-7. Generating the <tt class="USERINPUT"><b>[list]</b></tt> in
+	      a <i class="FIRSTTERM">for</i> loop with command substitution</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  for-loopcmd.sh: for-loop with [list]
+#+ generated by command substitution.
+
+NUMBERS="9 7 3 8 37.53"
+
+for number in `echo $NUMBERS`  # for number in 9 7 3 8 37.53
+do
+  echo -n "$number "
+done
+
+echo 
+exit 0</pre></font></td></tr></tbody></table></div><p>Here is a somewhat more complex example of using command
+	      substitution to create the <tt class="USERINPUT"><b>[list]</b></tt>.</p><div class="EXAMPLE"><a name="BINGREP"></a><p><b>Example 11-8. A <i class="FIRSTTERM">grep</i> replacement
+	        for binary files</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# bin-grep.sh: Locates matching strings in a binary file.
+
+# A "grep" replacement for binary files.
+# Similar effect to "grep -a"
+
+E_BADARGS=65
+E_NOFILE=66
+
+if [ $# -ne 2 ]
+then
+  echo "Usage: `basename $0` search_string filename"
+  exit $E_BADARGS
+fi
+
+if [ ! -f "$2" ]
+then
+  echo "File \"$2\" does not exist."
+  exit $E_NOFILE
+fi  
+
+
+IFS=$'\012'       # Per suggestion of Anton Filippov.
+                  # was:  IFS="\n"
+for word in $( strings "$2" | grep "$1" )
+# The "strings" command lists strings in binary files.
+# Output then piped to "grep", which tests for desired string.
+do
+  echo $word
+done
+
+# As S.C. points out, lines 23 - 30 could be replaced with the simpler
+#    strings "$2" | grep "$1" | tr -s "$IFS" '[\n*]'
+
+
+#  Try something like  "./bin-grep.sh mem /bin/ls"
+#+ to exercise this script.
+
+exit 0</pre></font></td></tr></tbody></table></div><p>More of the same.</p><div class="EXAMPLE"><a name="USERLIST"></a><p><b>Example 11-9. Listing all users on the system</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# userlist.sh
+
+PASSWORD_FILE=/etc/passwd
+n=1           # User number
+
+for name in $(awk 'BEGIN{FS=":"}{print $1}' &lt; "$PASSWORD_FILE" )
+# Field separator = :    ^^^^^^
+# Print first field              ^^^^^^^^
+# Get input from password file  /etc/passwd  ^^^^^^^^^^^^^^^^^
+do
+  echo "USER #$n = $name"
+  let "n += 1"
+done  
+
+
+# USER #1 = root
+# USER #2 = bin
+# USER #3 = daemon
+# ...
+# USER #33 = bozo
+
+exit $?
+
+#  Discussion:
+#  ----------
+#  How is it that an ordinary user, or a script run by same,
+#+ can read /etc/passwd? (Hint: Check the /etc/passwd file permissions.)
+#  Is this a security hole? Why or why not?</pre></font></td></tr></tbody></table></div><p>Yet another example of the <tt class="USERINPUT"><b>[list]</b></tt>
+	      resulting from command substitution.</p><div class="EXAMPLE"><a name="FINDSTRING"></a><p><b>Example 11-10. Checking all the binaries in a directory for
+	      authorship</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# findstring.sh:
+# Find a particular string in the binaries in a specified directory.
+
+directory=/usr/bin/
+fstring="Free Software Foundation"  # See which files come from the FSF.
+
+for file in $( find $directory -type f -name '*' | sort )
+do
+  strings -f $file | grep "$fstring" | sed -e "s%$directory%%"
+  #  In the "sed" expression,
+  #+ it is necessary to substitute for the normal "/" delimiter
+  #+ because "/" happens to be one of the characters filtered out.
+  #  Failure to do so gives an error message. (Try it.)
+done  
+
+exit $?
+
+#  Exercise (easy):
+#  ---------------
+#  Convert this script to take command-line parameters
+#+ for $directory and $fstring.</pre></font></td></tr></tbody></table></div><p>A final example of <tt class="USERINPUT"><b>[list]</b></tt>
+	       / command substitution, but this time
+	       the <span class="QUOTE">"command"</span> is a <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">function</a>.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">generate_list ()
+{
+  echo "one two three"
+}
+
+for word in $(generate_list)  # Let "word" grab output of function.
+do
+  echo "$word"
+done
+
+# one
+# two
+# three</pre></font></td></tr></tbody></table></p><p><a name="LOOPREDIR"></a></p><p>The output of a <i class="FIRSTTERM">for loop</i> may
+	      be piped to a command or commands.</p><div class="EXAMPLE"><a name="SYMLINKS"></a><p><b>Example 11-11. Listing the <i class="FIRSTTERM">symbolic
+	        links</i> in a directory</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# symlinks.sh: Lists symbolic links in a directory.
+
+
+directory=${1-`pwd`}
+#  Defaults to current working directory,
+#+ if not otherwise specified.
+#  Equivalent to code block below.
+# ----------------------------------------------------------
+# ARGS=1                 # Expect one command-line argument.
+#
+# if [ $# -ne "$ARGS" ]  # If not 1 arg...
+# then
+#   directory=`pwd`      # current working directory
+# else
+#   directory=$1
+# fi
+# ----------------------------------------------------------
+
+echo "symbolic links in directory \"$directory\""
+
+for file in "$( find $directory -type l )"   # -type l = symbolic links
+do
+  echo "$file"
+done | sort                                  # Otherwise file list is unsorted.
+#  Strictly speaking, a loop isn't really necessary here,
+#+ since the output of the "find" command is expanded into a single word.
+#  However, it's easy to understand and illustrative this way.
+
+#  As Dominik 'Aeneas' Schnitzer points out,
+#+ failing to quote  $( find $directory -type l )
+#+ will choke on filenames with embedded whitespace.
+#  containing whitespace. 
+
+exit 0
+
+
+# --------------------------------------------------------
+# Jean Helou proposes the following alternative:
+
+echo "symbolic links in directory \"$directory\""
+# Backup of the current IFS. One can never be too cautious.
+OLDIFS=$IFS
+IFS=:
+
+for file in $(find $directory -type l -printf "%p$IFS")
+do     #                              ^^^^^^^^^^^^^^^^
+       echo "$file"
+       done|sort
+
+# And, James "Mike" Conley suggests modifying Helou's code thusly:
+
+OLDIFS=$IFS
+IFS='' # Null IFS means no word breaks
+for file in $( find $directory -type l )
+do
+  echo $file
+  done | sort
+
+#  This works in the "pathological" case of a directory name having
+#+ an embedded colon.
+#  "This also fixes the pathological case of the directory name having
+#+  a colon (or space in earlier example) as well."</pre></font></td></tr></tbody></table></div><p>The <tt class="FILENAME">stdout</tt> of a loop may be <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">redirected</a> to a file, as this slight
+	      modification to the previous example shows.</p><div class="EXAMPLE"><a name="SYMLINKS2"></a><p><b>Example 11-12. Symbolic links in a directory, saved to a file</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# symlinks.sh: Lists symbolic links in a directory.
+
+OUTFILE=symlinks.list                         # save-file
+
+directory=${1-`pwd`}
+#  Defaults to current working directory,
+#+ if not otherwise specified.
+
+
+echo "symbolic links in directory \"$directory\"" &gt; "$OUTFILE"
+echo "---------------------------" &gt;&gt; "$OUTFILE"
+
+for file in "$( find $directory -type l )"    # -type l = symbolic links
+do
+  echo "$file"
+done | sort &gt;&gt; "$OUTFILE"                     # stdout of loop
+#           ^^^^^^^^^^^^^                       redirected to save file.
+
+# echo "Output file = $OUTFILE"
+
+exit $?</pre></font></td></tr></tbody></table></div><p><a name="LOOPCSTYLE"></a></p><p>There is an alternative syntax to a <i class="FIRSTTERM">for
+	      loop</i> that will look very familiar to C
+	      programmers. This requires <a href="http://www.tldp.org/LDP/abs/html/dblparens.html#DBLPARENSREF">double parentheses</a>.</p><div class="EXAMPLE"><a name="FORLOOPC"></a><p><b>Example 11-13. A C-style <i class="FIRSTTERM">for</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Multiple ways to count up to 10.
+
+echo
+
+# Standard syntax.
+for a in 1 2 3 4 5 6 7 8 9 10
+do
+  echo -n "$a "
+done  
+
+echo; echo
+
+# +==========================================+
+
+# Using "seq" ...
+for a in `seq 10`
+do
+  echo -n "$a "
+done  
+
+echo; echo
+
+# +==========================================+
+
+# Using brace expansion ...
+# Bash, version 3+.
+for a in {1..10}
+do
+  echo -n "$a "
+done  
+
+echo; echo
+
+# +==========================================+
+
+# Now, let's do the same, using C-like syntax.
+
+LIMIT=10
+
+for ((a=1; a &lt;= LIMIT ; a++))  # Double parentheses, and naked "LIMIT"
+do
+  echo -n "$a "
+done                           # A construct borrowed from ksh93.
+
+echo; echo
+
+# +=========================================================================+
+
+# Let's use the C "comma operator" to increment two variables simultaneously.
+
+for ((a=1, b=1; a &lt;= LIMIT ; a++, b++))
+do  # The comma concatenates operations.
+  echo -n "$a-$b "
+done
+
+echo; echo
+
+exit 0</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/arrays.html#QFUNCTION">Example 27-16</a>, <a href="http://www.tldp.org/LDP/abs/html/arrays.html#TWODIM">Example 27-17</a>, and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#COLLATZ">Example A-6</a>.</p><p>---</p><p>Now, a <i class="FIRSTTERM">for loop</i> used in a
+	      <span class="QUOTE">"real-life"</span> context.</p><div class="EXAMPLE"><a name="EX24"></a><p><b>Example 11-14. Using <i class="FIRSTTERM">efax</i> in batch mode</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Faxing (must have 'efax' package installed).
+
+EXPECTED_ARGS=2
+E_BADARGS=85
+MODEM_PORT="/dev/ttyS2"   # May be different on your machine.
+#                ^^^^^      PCMCIA modem card default port.
+
+if [ $# -ne $EXPECTED_ARGS ]
+# Check for proper number of command-line args.
+then
+   echo "Usage: `basename $0` phone# text-file"
+   exit $E_BADARGS
+fi
+
+
+if [ ! -f "$2" ]
+then
+  echo "File $2 is not a text file."
+  #     File is not a regular file, or does not exist.
+  exit $E_BADARGS
+fi
+  
+
+fax make $2              #  Create fax-formatted files from text files.
+
+for file in $(ls $2.0*)  #  Concatenate the converted files.
+                         #  Uses wild card (filename "globbing")
+			 #+ in variable list.
+do
+  fil="$fil $file"
+done  
+
+efax -d "$MODEM_PORT"  -t "T$1" $fil   # Finally, do the work.
+# Trying adding  -o1  if above line fails.
+
+
+#  As S.C. points out, the for-loop can be eliminated with
+#     efax -d /dev/ttyS2 -o1 -t "T$1" $2.0*
+#+ but it's not quite as instructive [grin].
+
+exit $?   # Also, efax sends diagnostic messages to stdout.</pre></font></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="loops1_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="NODODONE"></a>The
+            <a href="http://www.tldp.org/LDP/abs/html/internal.html#KEYWORDREF">keywords</a>
+            <b class="COMMAND">do</b> and <b class="COMMAND">done</b> delineate
+            the <i class="FIRSTTERM">for-loop</i> command block. However,
+            these may, in certain contexts, be omitted by framing the
+            command block within <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#CODEBLOCKREF">curly
+            brackets</a>
+
+	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">for((n=1; n&lt;=10; n++)) 
+# No do!
+{
+  echo -n "* $n *"
+}
+# No done!
+
+
+# Outputs:
+# * 1 ** 2 ** 3 ** 4 ** 5 ** 6 ** 7 ** 8 ** 9 ** 10 *
+# And, echo $? returns 0, so Bash does not register an error.
+
+
+echo
+
+
+#  But, note that in a classic for-loop:    for n in [list] ...
+#+ a terminal semicolon is required.
+
+for n in 1 2 3
+{  echo -n "$n "; }
+#               ^
+
+
+# Thank you, YongYe, for pointing this out.</pre></font></td></tr></tbody></table>
+             </p></td></tr></tbody></table></div></dd><dt><a name="WHILELOOPREF"></a><b class="COMMAND">while</b></dt><dd><p>This construct tests for a condition at the top of a
+	      loop, and keeps looping as long as that condition
+	      is true (returns a <span class="RETURNVALUE">0</span> <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a>).  In contrast
+	      to a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">for loop</a>, a
+	      <i class="FIRSTTERM">while loop</i> finds use in situations
+	      where the number of loop repetitions is not known
+	      beforehand.</p><p></p><p><b class="COMMAND">while</b>  [<tt class="REPLACEABLE"><i> condition </i></tt>]<br>  do <br>  <tt class="REPLACEABLE"><i>&nbsp;command(s)</i></tt>... <br>  done </p><p></p><p>The bracket construct in a <i class="FIRSTTERM">while
+	      loop</i> is nothing more than our old friend,
+	      the <a href="http://www.tldp.org/LDP/abs/html/testconstructs.html#TESTCONSTRUCTS1">test brackets</a>
+	      used in an <i class="FIRSTTERM">if/then</i> test. In fact,
+	      a <i class="FIRSTTERM">while loop</i> can legally use the
+	      more versatile <a href="http://www.tldp.org/LDP/abs/html/testconstructs.html#DBLBRACKETS">double-brackets
+	      construct</a> (while [[ condition ]]).</p><p><a name="WHILENEEDSEMI"></a></p><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#NEEDSEMICOLON">As is the case with
+	      <i class="FIRSTTERM">for loops</i></a>, placing the
+	      <i class="FIRSTTERM">do</i> on the same line as the condition
+	      test requires a semicolon.</p><p></p><p><b class="COMMAND">while</b>  [<tt class="REPLACEABLE"><i> condition </i></tt>]  ;   do </p><p></p><p>Note that the <i class="FIRSTTERM">test brackets</i>
+	      <a href="http://www.tldp.org/LDP/abs/html/loops1.html#WHILENOBRACKETS">are <em>not</em>
+	      mandatory</a> in a <i class="FIRSTTERM">while</i> loop.
+	      See, for example,  the <a href="http://www.tldp.org/LDP/abs/html/internal.html#GETOPTSX">getopts
+	      construct</a>.</p><div class="EXAMPLE"><a name="EX25"></a><p><b>Example 11-15. Simple <i class="FIRSTTERM">while</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+var0=0
+LIMIT=10
+
+while [ "$var0" -lt "$LIMIT" ]
+#      ^                    ^
+# Spaces, because these are "test-brackets" . . .
+do
+  echo -n "$var0 "        # -n suppresses newline.
+  #             ^           Space, to separate printed out numbers.
+
+  var0=`expr $var0 + 1`   # var0=$(($var0+1))  also works.
+                          # var0=$((var0 + 1)) also works.
+                          # let "var0 += 1"    also works.
+done                      # Various other methods also work.
+
+echo
+
+exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX26"></a><p><b>Example 11-16. Another <i class="FIRSTTERM">while</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+echo
+                               # Equivalent to:
+while [ "$var1" != "end" ]     # while test "$var1" != "end"
+do
+  echo "Input variable #1 (end to exit) "
+  read var1                    # Not 'read $var1' (why?).
+  echo "variable #1 = $var1"   # Need quotes because of "#" . . .
+  # If input is 'end', echoes it here.
+  # Does not test for termination condition until top of loop.
+  echo
+done  
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="WHMULTCOND"></a></p><p>A <i class="FIRSTTERM">while loop</i> may have multiple
+	      conditions. Only the final condition determines when the loop
+	      terminates. This necessitates a slightly different loop syntax,
+	      however.</p><div class="EXAMPLE"><a name="EX26A"></a><p><b>Example 11-17. <i class="FIRSTTERM">while</i> loop with multiple conditions</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+var1=unset
+previous=$var1
+
+while echo "previous-variable = $previous"
+      echo
+      previous=$var1
+      [ "$var1" != end ] # Keeps track of what $var1 was previously.
+      # Four conditions on *while*, but only the final one controls loop.
+      # The *last* exit status is the one that counts.
+do
+echo "Input variable #1 (end to exit) "
+  read var1
+  echo "variable #1 = $var1"
+done  
+
+# Try to figure out how this all works.
+# It's a wee bit tricky.
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="WLOOPCSTYLE"></a></p><p>As with a <i class="FIRSTTERM">for loop</i>, a
+	      <i class="FIRSTTERM">while loop</i> may employ C-style syntax
+	      by using the double-parentheses construct (see also <a href="http://www.tldp.org/LDP/abs/html/dblparens.html#CVARS">Example 8-5</a>).</p><div class="EXAMPLE"><a name="WHLOOPC"></a><p><b>Example 11-18. C-style syntax in a <i class="FIRSTTERM">while</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# wh-loopc.sh: Count to 10 in a "while" loop.
+
+LIMIT=10                 # 10 iterations.
+a=1
+
+while [ "$a" -le $LIMIT ]
+do
+  echo -n "$a "
+  let "a+=1"
+done                     # No surprises, so far.
+
+echo; echo
+
+# +=================================================================+
+
+# Now, we'll repeat with C-like syntax.
+
+((a = 1))      # a=1
+# Double parentheses permit space when setting a variable, as in C.
+
+while (( a &lt;= LIMIT ))   #  Double parentheses,
+do                       #+ and no "$" preceding variables.
+  echo -n "$a "
+  ((a += 1))             # let "a+=1"
+  # Yes, indeed.
+  # Double parentheses permit incrementing a variable with C-like syntax.
+done
+
+echo
+
+# C and Java programmers can feel right at home in Bash.
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="WHILEFUNC"></a></p><p>	      Inside its test brackets, a <i class="FIRSTTERM">while loop</i>
+	      can call a <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">function</a>.
+
+	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">t=0
+
+condition ()
+{
+  ((t++))
+
+  if [ $t -lt 5 ]
+  then
+    return 0  # true
+  else
+    return 1  # false
+  fi
+}
+
+while condition
+#     ^^^^^^^^^
+#     Function call -- four loop iterations.
+do
+  echo "Still going: t = $t"
+done
+
+# Still going: t = 1
+# Still going: t = 2
+# Still going: t = 3
+# Still going: t = 4</pre></font></td></tr></tbody></table>
+	    
+	    
+	    
+	    </p><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN6856"></a><p></p><p><a name="WHILENOBRACKETS"></a></p><p>Similar to the <a href="http://www.tldp.org/LDP/abs/html/testconstructs.html#IFGREPREF">if-test</a>
+	      construct, a <i class="FIRSTTERM">while</i> loop can omit the test
+	      brackets.
+	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">while condition
+do
+   command(s) ...
+done</pre></font></td></tr></tbody></table></p><p></p></div></td></tr></tbody></table><p><a name="WHILEREADREF2"></a></p><p>By coupling the power of the <a href="http://www.tldp.org/LDP/abs/html/internal.html#READREF">read</a> command with a
+	      <i class="FIRSTTERM">while loop</i>, we get the handy <a href="http://www.tldp.org/LDP/abs/html/internal.html#WHILEREADREF">while read</a> construct, useful
+	      for reading and parsing files.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat $filename |   # Supply input from a file.
+while read line   # As long as there is another line to read ...
+do
+  ...
+done
+
+# =========== Snippet from "sd.sh" example script ========== #
+
+  while read value   # Read one data point at a time.
+  do
+    rt=$(echo "scale=$SC; $rt + $value" | bc)
+    (( ct++ ))
+  done
+
+  am=$(echo "scale=$SC; $rt / $ct" | bc)
+
+  echo $am; return $ct   # This function "returns" TWO values!
+  #  Caution: This little trick will not work if $ct &gt; 255!
+  #  To handle a larger number of data points,
+  #+ simply comment out the "return $ct" above.
+} &lt;"$datafile"   # Feed in data file.</pre></font></td></tr></tbody></table></p><p><a name="WHREDIR"></a></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="loops1_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>A <i class="FIRSTTERM">while loop</i> may have its
+	      <tt class="FILENAME">stdin</tt> <a href="http://www.tldp.org/LDP/abs/html/redircb.html#REDIRREF">redirected to a file</a> by a
+	      <span class="TOKEN">&lt;</span> at its end.</p><p>A <i class="FIRSTTERM">while loop</i> may have its
+	      <tt class="FILENAME">stdin</tt> <a href="http://www.tldp.org/LDP/abs/html/internal.html#READPIPEREF">	      supplied by a pipe</a>.</p></td></tr></tbody></table></div></dd><dt><a name="UNTILLOOPREF"></a><b class="COMMAND">until</b></dt><dd><p>This construct tests for a condition at the top of a loop, and keeps
+	      looping as long as that condition is
+	      <em>false</em> (opposite of <i class="FIRSTTERM">while
+	      loop</i>).</p><p></p><p><b class="COMMAND">until</b>  [<tt class="REPLACEABLE"><i> condition-is-true </i></tt>]<br>  do <br>  <tt class="REPLACEABLE"><i>&nbsp;command(s)</i></tt>... <br>  done </p><p></p><p>Note that an <i class="FIRSTTERM">until loop</i> tests for the
+	      terminating condition at the <em>top</em>
+	      of the loop, differing from a similar construct in some
+	      programming languages.</p><p>As is the case with <i class="FIRSTTERM">for loops</i>,
+	      placing the <i class="FIRSTTERM">do</i> on the same line as
+	      the condition test requires a semicolon.</p><p></p><p><b class="COMMAND">until</b>  [<tt class="REPLACEABLE"><i> condition-is-true </i></tt>]  ;   do </p><p></p><div class="EXAMPLE"><a name="EX27"></a><p><b>Example 11-19. <i class="FIRSTTERM">until</i> loop</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+END_CONDITION=end
+
+until [ "$var1" = "$END_CONDITION" ]
+# Tests condition here, at top of loop.
+do
+  echo "Input variable #1 "
+  echo "($END_CONDITION to exit)"
+  read var1
+  echo "variable #1 = $var1"
+  echo
+done  
+
+#                     ---                        #
+
+#  As with "for" and "while" loops,
+#+ an "until" loop permits C-like test constructs.
+
+LIMIT=10
+var=0
+
+until (( var &gt; LIMIT ))
+do  # ^^ ^     ^     ^^   No brackets, no $ prefixing variables.
+  echo -n "$var "
+  (( var++ ))
+done    # 0 1 2 3 4 5 6 7 8 9 10 
+
+
+exit 0</pre></font></td></tr></tbody></table></div></dd></dl></div><p><a name="CHOOSELOOP"></a></p><p>How to choose between a <i class="FIRSTTERM">for</i> loop or a
+	  <i class="FIRSTTERM">while</i> loop or
+	  <i class="FIRSTTERM">until</i> loop? In <b class="COMMAND">C</b>,
+	  you would typically use a <i class="FIRSTTERM">for</i> loop
+	  when the number of loop iterations is known beforehand. With
+	  <i class="FIRSTTERM">Bash</i>, however, the situation is
+	  fuzzier. The Bash <i class="FIRSTTERM">for</i> loop is more
+	  loosely structured and more flexible than its equivalent in
+	  other languages. Therefore, feel free to use whatever type
+	  of loop gets the job done in the simplest way.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN6560" href="http://www.tldp.org/LDP/abs/html/loops1.html#AEN6560"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="ITERATIONREF"></a><i class="FIRSTTERM">Iteration</i>:
+	  Repeated execution of a command or group of commands, usually --
+	  but not always, <i class="FIRSTTERM">while</i> a given condition
+	  holds, or <i class="FIRSTTERM">until</i> a given condition is
+	  met.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/nestedloops.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Loops and Branches</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Nested Loops</td></tr></tbody></table></div></body></html>
