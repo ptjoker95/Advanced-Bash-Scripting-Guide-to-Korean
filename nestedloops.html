@@ -1,13 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Nested Loops</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Loops and Branches" href="http://www.tldp.org/LDP/abs/html/loops.html"><link rel="PREVIOUS" title="Loops" href="http://www.tldp.org/LDP/abs/html/loops1.html"><link rel="NEXT" title="Loop Control" href="http://www.tldp.org/LDP/abs/html/loopcontrol.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/loops1.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/loopcontrol.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="NESTEDLOOPS"></a>11.2. Nested Loops</h1><p>A <i class="FIRSTTERM">nested loop</i> is a loop within a
-	  loop, an inner loop within the body of an outer one. How
-	  this works is that the first pass of the outer loop triggers
-	  the inner loop, which executes to completion. Then the
-	  second pass of the outer loop triggers the inner loop
-	  again. This repeats until the outer loop finishes. Of course,
-	  a <i class="FIRSTTERM">break</i> within either the inner or outer
-	  loop would interrupt this process.</p><div class="EXAMPLE"><a name="NESTEDLOOP"></a><p><b>Example 11-20. Nested Loop</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Nested Loops</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Loops and Branches" href="./loops.html">
+<link rel="PREVIOUS" title="Loops" href="./loops1.html">
+<link rel="NEXT" title="Loop Control" href="./loopcontrol.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./loops1.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./loopcontrol.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="NESTEDLOOPS">
+</a>11.2. 중첩 반복문</h1>
+<p>
+<i class="FIRSTTERM">중첩 반복문</i> 은 바깥쪽 반복문 안에 반복문이 있는 형태입니다. 
+바깥쪽 반복문의 첫번째 패스는 안쪽 반복문을 실행시키고, 안쪽의 반복문이 종료될때까지 
+계속됩니다. 바깥쪽 반복문의 두번째 패스는 다시 안쪽 반복문을 실행시킵니다. 이것은 
+바깥쪽 반복문이 종료될 때까지 계속됩니다. 물론 안쪽 반복문이나 바깥쪽 반복문에서 
+<i class="FIRSTTERM">break</i> 가 호출되면 프로세스는 종료됩니다.
+</p>
+<div class="EXAMPLE">
+<a name="NESTEDLOOP">
+</a>
+<p>
+<b>Example 11-20. 중첩 반복문</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # nested-loop.sh: Nested "for" loops.
 
 outer=1             # Set outer loop counter.
@@ -34,5 +80,44 @@ do
 done               
 # End of outer loop.
 
-exit 0</pre></font></td></tr></tbody></table></div><p>See <a href="http://www.tldp.org/LDP/abs/html/arrays.html#BUBBLE">Example 27-11</a> for an illustration of nested
-	  <a href="http://www.tldp.org/LDP/abs/html/loops1.html#WHILELOOPREF">while loops</a>, and <a href="http://www.tldp.org/LDP/abs/html/arrays.html#EX68">Example 27-13</a> to see a while loop nested inside an <a href="http://www.tldp.org/LDP/abs/html/loops1.html#UNTILLOOPREF">until loop</a>.</p></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/loops1.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/loopcontrol.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Loops</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Loop Control</td></tr></tbody></table></div></body></html>
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>중첩된 
+<a href="./arrays.html#BUBBLE">예 27-11</a> 에 
+<a href="./loops1.html#WHILELOOPREF">while 반복문</a> 의 예가 있습니다. 
+<a href="./arrays.html#EX68">예 27-13</a> 에
+<a href="./loops1.html#UNTILLOOPREF">until 반복문</a> 안에 있는 while 
+반복문의 예를 볼 수 있습니다.</p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./loops1.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./loopcontrol.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Loops</td>
+<td align="center" valign="top" width="34%">
+<a href="./loops.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Loop Control</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
