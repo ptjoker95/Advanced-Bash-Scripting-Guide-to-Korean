@@ -1172,7 +1172,7 @@ exit 0</pre>
 <a name="WHLOOPC">
 </a>
 <p>
-<b>Example 11-18. C-style syntax in a <i class="FIRSTTERM">while</i> loop</b>
+<b>Example 11-18. C 스타일 <i class="FIRSTTERM">while</i> 반복문</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1223,10 +1223,9 @@ exit 0</pre>
 <a name="WHILEFUNC">
 </a>
 </p>
-<p>	      Inside its test brackets, a <i class="FIRSTTERM">while loop</i>
-	      can call a <a href="./functions.html#FUNCTIONREF">function</a>.
-
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p><i class="FIRSTTERM">while 반복문</i> 안에 있는 조건 괄호문에서, 
+<a href="./functions.html#FUNCTIONREF">함수</a> 를 쓸 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -1261,10 +1260,7 @@ done
 </tr>
 </tbody>
 </table>
-	    
-	    
-	    
-	    </p>
+</p>
 <table class="SIDEBAR" border="1" cellpadding="5">
 <tbody>
 <tr>
@@ -1278,10 +1274,9 @@ done
 <a name="WHILENOBRACKETS">
 </a>
 </p>
-<p>Similar to the <a href="./testconstructs.html#IFGREPREF">if-test</a>
-	      construct, a <i class="FIRSTTERM">while</i> loop can omit the test
-	      brackets.
-	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<p><a href="./testconstructs.html#IFGREPREF">if-문</a> 과 마찬가지로 
+<i class="FIRSTTERM">while</i> 반복문은 괄호를 생략할 수 있씁니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -1307,9 +1302,11 @@ done</pre>
 <a name="WHILEREADREF2">
 </a>
 </p>
-<p>By coupling the power of the <a href="./internal.html#READREF">read</a> command with a
-	      <i class="FIRSTTERM">while loop</i>, we get the handy <a href="./internal.html#WHILEREADREF">while read</a> construct, useful
-	      for reading and parsing files.</p>
+<p><a href="./internal.html#READREF">read</a> 명령어와 
+<i class="FIRSTTERM">while 반복문</i> 을 묶음으로서, 
+파일을 읽고 파싱할 때 유용한 
+<a href="./internal.html#WHILEREADREF">while read</a> 구문을 만들 수 있습니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1357,11 +1354,15 @@ done
 <img src="loops1_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>A <i class="FIRSTTERM">while loop</i> may have its
-	      <tt class="FILENAME">stdin</tt> <a href="./redircb.html#REDIRREF">redirected to a file</a> by a
-	      <span class="TOKEN">&lt;</span> at its end.</p>
-<p>A <i class="FIRSTTERM">while loop</i> may have its
-	      <tt class="FILENAME">stdin</tt> <a href="./internal.html#READPIPEREF">	      supplied by a pipe</a>.</p>
+<p><i class="FIRSTTERM">while 반복문</i> 끝에 
+<span class="TOKEN"><</span> 을 붙여 
+<tt class="FILENAME">stdin (표준입력)</tt> 을
+<a href="./redircb.html#REDIRREF">파일에서 직접 입력</a> 받을 수 있습니다.
+</p>
+<p><i class="FIRSTTERM">while 반복문</i> 은 
+<tt class="FILENAME">stdin</tt> 을 
+<a href="./internal.html#READPIPEREF">파이프로부터</a> 입력을 받을 수도 있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -1374,10 +1375,9 @@ done
 <b class="COMMAND">until</b>
 </dt>
 <dd>
-<p>This construct tests for a condition at the top of a loop, and keeps
-	      looping as long as that condition is
-	      <em>false</em> (opposite of <i class="FIRSTTERM">while
-	      loop</i>).</p>
+<p>이 구문은 반복문의 최상단에 조건을 확인하며, 조건이 
+<em>false</em> 인 동안 반복됩니다 (
+<i class="FIRSTTERM">while 반복문</i> 의 반대)</p>
 <p>
 </p>
 <p>
@@ -1388,13 +1388,13 @@ done
 </tt>... <br>  done </p>
 <p>
 </p>
-<p>Note that an <i class="FIRSTTERM">until loop</i> tests for the
-	      terminating condition at the <em>top</em>
-	      of the loop, differing from a similar construct in some
-	      programming languages.</p>
-<p>As is the case with <i class="FIRSTTERM">for loops</i>,
-	      placing the <i class="FIRSTTERM">do</i> on the same line as
-	      the condition test requires a semicolon.</p>
+<p>
+<i class="FIRSTTERM">until 반복문</i> 은 반복문의 
+<em>최상단</em> 에서 반복문을 끝낼 조건을 체크하며, 다른 프로그램 언어의 
+그것과 조금 다릅니다.</p>
+<p>
+<i class="FIRSTTERM">for 반복문</i> 의 경우처럼, 
+<i class="FIRSTTERM">do</i> 를 같은 줄에 쓰기 위해서는 세미콜론이 필요합니다.</p>
 <p>
 </p>
 <p>
@@ -1407,7 +1407,7 @@ done
 <a name="EX27">
 </a>
 <p>
-<b>Example 11-19. <i class="FIRSTTERM">until</i> loop</b>
+<b>Example 11-19. <i class="FIRSTTERM">until</i> 반복문</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1457,16 +1457,16 @@ exit 0</pre>
 <a name="CHOOSELOOP">
 </a>
 </p>
-<p>How to choose between a <i class="FIRSTTERM">for</i> loop or a
-	  <i class="FIRSTTERM">while</i> loop or
-	  <i class="FIRSTTERM">until</i> loop? In <b class="COMMAND">C</b>,
-	  you would typically use a <i class="FIRSTTERM">for</i> loop
-	  when the number of loop iterations is known beforehand. With
-	  <i class="FIRSTTERM">Bash</i>, however, the situation is
-	  fuzzier. The Bash <i class="FIRSTTERM">for</i> loop is more
-	  loosely structured and more flexible than its equivalent in
-	  other languages. Therefore, feel free to use whatever type
-	  of loop gets the job done in the simplest way.</p>
+<p>
+<i class="FIRSTTERM">for</i> 반복문과 
+<i class="FIRSTTERM">while</i> 반복문, 그리고 
+<i class="FIRSTTERM">until</i> 반복문 중에 어떤 것을 골라야 할까요?
+<b class="COMMAND">C</b> 언어에서는 사전에 반복 횟수를 알 때 보통 
+<i class="FIRSTTERM">for</i> 반복문을 사용합니다. 하지만 
+<i class="FIRSTTERM">Bash</i> 에서는 좀 더 복잡합니다. Bash 의
+<i class="FIRSTTERM">for</i> 반복문은 다른 언어의 그것에 비해 느슨하고 
+좀더 유연하게 되어 있습니다. 따라서, 작업을 가장 간단하게 처리하기 위해 어떤 
+종류의 반복문을 쓸 건지 편하게 결정하십시요.</p>
 </div>
 <h3 class="FOOTNOTES">Notes</h3>
 <table class="FOOTNOTES" border="0" width="100%">
@@ -1481,11 +1481,11 @@ exit 0</pre>
 <p>
 <a name="ITERATIONREF">
 </a>
-<i class="FIRSTTERM">Iteration</i>:
-	  Repeated execution of a command or group of commands, usually --
-	  but not always, <i class="FIRSTTERM">while</i> a given condition
-	  holds, or <i class="FIRSTTERM">until</i> a given condition is
-	  met.</p>
+<i class="FIRSTTERM">Iteration</i>: 어떤 명령어나 명령어 그룹의 반복해서 실행하는 것, 
+보통 -- 하지만 항상은 아니지만, 
+<i class="FIRSTTERM">while</i> d은 주어진 조건을 유지하는 방식으로, 
+<i class="FIRSTTERM">until</i> 은 주어진 조건에 맞을 때까지의 방식으로 이뤄집니다.
+</p>
 </td>
 </tr>
 </tbody>
