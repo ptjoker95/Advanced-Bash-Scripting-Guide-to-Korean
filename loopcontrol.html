@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Loop Control</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Loops and Branches" href="./loops.html">
+<link rel="PREVIOUS" title="Nested Loops" href="./nestedloops.html">
+<link rel="NEXT" title="Testing and Branching" href="./testbranch.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./nestedloops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./testbranch.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="LOOPCONTROL">
+</a>11.3. 반복문 제어</h1>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>Tournez cent tours, tournez mille tours,</i>
+</p>
+<p>
+<i>Tournez souvent et tournez toujours . . .</i>
+</p>
+<p>
+<i>--Verlaine, <span class="QUOTE">"Chevaux de bois"</span>
+</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="BRKCONT1">
+</a>반복문에 동작에 영향을 미치는 명령어들</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">break</b>, <b class="COMMAND">continue</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">break</b> 과
+<b class="COMMAND">continue</b> 는 
+다른 프로그래밍 언어의 반복문 제어문
+<a name="AEN6981" href="#FTN.AEN6981"><span class="footnote">[1]</span></a> 
+과 똑같이 동작합니다. 
+<b class="COMMAND">break</b> 명령어는 반복문을 종료시킵니다
+(바깥으로 <em>나갑니다</em>), 반면에  
+<b class="COMMAND">continue</b> 는, 특정한 반복문의 나머지 명령어들을 
+건너뛰고 반복문의 다음 
+<a href="./loops1.html#ITERATIONREF">단계</a> 로 넘어가게 됩니다.
+</p>
+<div class="EXAMPLE">
+<a name="EX28">
+</a>
+<p>
+<b>Example 11-21. 반복문에서 <i class="FIRSTTERM">break</i> 와 
+<b class="COMMAND">continue</b> 사용하기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+LIMIT=19  # Upper limit
+
+echo
+echo "Printing Numbers 1 through 20 (but not 3 and 11)."
+
+a=0
+
+while [ $a -le "$LIMIT" ]
+do
+ a=$(($a+1))
+
+ if [ "$a" -eq 3 ] || [ "$a" -eq 11 ]  # Excludes 3 and 11.
+ then
+   continue      # Skip rest of this particular loop iteration.
+ fi
+
+ echo -n "$a "   # This will not execute for 3 and 11.
+done 
+
+# Exercise:
+# Why does the loop print up to 20?
+
+echo; echo
+
+echo Printing Numbers 1 through 20, but something happens after 2.
+
+##################################################################
+
+# Same loop, but substituting 'break' for 'continue'.
+
+a=0
+
+while [ "$a" -le "$LIMIT" ]
+do
+ a=$(($a+1))
+
+ if [ "$a" -gt 2 ]
+ then
+   break  # Skip entire rest of loop.
+ fi
+
+ echo -n "$a "
+done
+
+echo; echo; echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="BREAKPARAM">
+</a>
+</p>
+<p><b class="COMMAND">break</b> 명령어에 매개 변수를 사용할 수 
+있습니다. 일반적인 
+<b class="COMMAND">break</b> 는 포함되어 있는 반복문만을 종료합니다, 하지만 
+<b class="COMMAND">break N</b> 는 반복문의 
+<tt class="PARAMETER"><i>N</i></tt> 레벨까지 종료할 수 있습니다.
+</p>
+<div class="EXAMPLE">
+<a name="BREAKLEVELS">
+</a>
+<p>
+<b>Example 11-22. 다수의 반복문 레벨을 종료시키기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# break-levels.sh: Breaking out of loops.
+
+# "break N" breaks out of N level loops.
+
+for outerloop in 1 2 3 4 5
+do
+  echo -n "Group $outerloop:   "
+
+  # --------------------------------------------------------
+  for innerloop in 1 2 3 4 5
+  do
+    echo -n "$innerloop "
+
+    if [ "$innerloop" -eq 3 ]
+    then
+      break  # Try   break 2   to see what happens.
+             # ("Breaks" out of both inner and outer loops.)
+    fi
+  done
+  # --------------------------------------------------------
+
+  echo
+done  
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<b class="COMMAND">continue</b> 는 
+<b class="COMMAND">break</b> 와 비슷하게 매개변수를 가질 수 있습니다. 
+일반적인 
+<b class="COMMAND">continue</b> 는 반복문의 현재 작업을 종료하고 다음 단계로 갑니다. 
+<b class="COMMAND">continue N</b> 는 자신이 속한 루프 레벨의 모든 단계를 건너 뛰고 
+<tt class="OPTION">N</tt> 레벨 위에 속하는 반복문으로 건너 뜁니다.
+</p>
+<div class="EXAMPLE">
+<a name="CONTINUELEVELS">
+</a>
+<p>
+<b>예 11-23. 상위 반복문 레벨로 건너뛰어 계속하기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# The "continue N" command, continuing at the Nth level loop.
+
+for outer in I II III IV V           # outer loop
+do
+  echo; echo -n "Group $outer: "
+
+  # --------------------------------------------------------------------
+  for inner in 1 2 3 4 5 6 7 8 9 10  # inner loop
+  do
+
+    if [[ "$inner" -eq 7 &amp;&amp; "$outer" = "III" ]]
+    then
+      continue 2  # Continue at loop on 2nd level, that is "outer loop".
+                  # Replace above line with a simple "continue"
+                  # to see normal loop behavior.
+    fi  
+
+    echo -n "$inner "  # 7 8 9 10 will not echo on "Group III."
+  done  
+  # --------------------------------------------------------------------
+
+done
+
+echo; echo
+
+# Exercise:
+# Come up with a meaningful use for "continue N" in a script.
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="CONTINUENEX">
+</a>
+<p>
+<b>예 11-24. 실제로 <i class="FIRSTTERM">continue N</i> 사용하기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Albert Reiner gives an example of how to use "continue N":
+# ---------------------------------------------------------
+
+#  Suppose I have a large number of jobs that need to be run, with
+#+ any data that is to be treated in files of a given name pattern
+#+ in a directory. There are several machines that access
+#+ this directory, and I want to distribute the work over these
+#+ different boxen.
+#  Then I usually nohup something like the following on every box:
+
+while true
+do
+  for n in .iso.*
+  do
+    [ "$n" = ".iso.opts" ] &amp;&amp; continue
+    beta=${n#.iso.}
+    [ -r .Iso.$beta ] &amp;&amp; continue
+    [ -r .lock.$beta ] &amp;&amp; sleep 10 &amp;&amp; continue
+    lockfile -r0 .lock.$beta || continue
+    echo -n "$beta: " `date`
+    run-isotherm $beta
+    date
+    ls -alF .Iso.$beta
+    [ -r .Iso.$beta ] &amp;&amp; rm -f .lock.$beta
+    continue 2
+  done
+  break
+done
+
+exit 0
+
+#  The details, in particular the sleep N, are particular to my
+#+ application, but the general pattern is:
+
+while true
+do
+  for job in {pattern}
+  do
+    {job already done or running} &amp;&amp; continue
+    {mark job as running, do job, mark job as done}
+    continue 2
+  done
+  break        # Or something like `sleep 600' to avoid termination.
+done
+
+#  This way the script will stop only when there are no more jobs to do
+#+ (including jobs that were added during runtime). Through the use
+#+ of appropriate lockfiles it can be run on several machines
+#+ concurrently without duplication of calculations [which run a couple
+#+ of hours in my case, so I really want to avoid this]. Also, as search
+#+ always starts again from the beginning, one can encode priorities in
+#+ the file names. Of course, one could also do this without `continue 2',
+#+ but then one would have to actually check whether or not some job
+#+ was done (so that we should immediately look for the next job) or not
+#+ (in which case we terminate or sleep for a long time before checking
+#+ for a new job).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="loopcontrol_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <b class="COMMAND">continue N</b> construct is
+	      difficult to understand and tricky to use in any meaningful
+	      context. It is probably best avoided.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN6981" href="./loopcontrol.html#AEN6981">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>These are shell <a href="./internal.html#BUILTINREF">builtins</a>,
+		whereas other loop commands, such as <a href="./loops1.html#WHILELOOPREF">while</a> and <a href="./testbranch.html#CASEESAC1">case</a>, are <a href="./internal.html#KEYWORDREF">keywords</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./nestedloops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./testbranch.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Nested Loops</td>
+<td align="center" valign="top" width="34%">
+<a href="./loops.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Testing and Branching</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
