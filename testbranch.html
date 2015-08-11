@@ -1,31 +1,153 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Testing and Branching</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Loops and Branches" href="http://www.tldp.org/LDP/abs/html/loops.html"><link rel="PREVIOUS" title="Loop Control" href="http://www.tldp.org/LDP/abs/html/loopcontrol.html"><link rel="NEXT" title="Command Substitution" href="http://www.tldp.org/LDP/abs/html/commandsub.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/loopcontrol.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/commandsub.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="TESTBRANCH"></a>11.4. Testing and Branching</h1><p>The <b class="COMMAND">case</b> and <b class="COMMAND">select</b>
-	  constructs are technically not loops, since they do not iterate the
-	  execution of a code block. Like loops, however, they direct
-	  program flow according to conditions at the top or bottom of
-	  the block.</p><p></p><div class="VARIABLELIST"><p><b><a name="CASEESAC1"></a>Controlling program flow in a code
-	    block</b></p><dl><dt><b class="COMMAND">case (in) / esac</b></dt><dd><p>The <b class="COMMAND">case</b> construct is the shell
-	      scripting analog to <tt class="REPLACEABLE"><i>switch</i></tt>
-	      in <b class="COMMAND">C/C++</b>.
-	      It permits branching to one of a number of code blocks,
-	      depending on condition tests. It serves as a kind of
-	      shorthand for multiple <span class="TOKEN">if/then/else</span>
-	      statements and is an appropriate tool for creating
-	      menus.</p><p></p><p><b class="COMMAND">case</b>   "$<tt class="REPLACEABLE"><i>variable</i></tt>"   in <br><br>  &nbsp;"$<tt class="REPLACEABLE"><i>condition1</i></tt>" ) <br>  &nbsp;<tt class="REPLACEABLE"><i>command</i></tt>... <br>  &nbsp;;; <br><br>  &nbsp;"$<tt class="REPLACEABLE"><i>condition2</i></tt>" ) <br>  &nbsp;<tt class="REPLACEABLE"><i>command</i></tt>... <br>  &nbsp;;; <br><br><br><b class="COMMAND">esac</b> </p><p></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="testbranch_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>	      </p><p></p><ul><li><p>Quoting the variables is not mandatory,
-		since word splitting does not take place.</p></li><li><p><a name="CASEPAREN"></a>Each test line
-                    ends with a right paren <b class="COMMAND">)</b>.
-
-  <a name="AEN7087" href="#FTN.AEN7087"><span class="footnote">[1]</span></a>
-			  </p></li><li><p>Each condition block ends
-		with a <em>double</em> semicolon
-		<span class="TOKEN">;;</span>.</p></li><li><p>If a condition tests
-                <i class="FIRSTTERM">true</i>, then the associated
-		commands execute and the <b class="COMMAND">case</b>
-		block terminates.</p></li><li><p>The entire <b class="COMMAND">case</b>
-		block ends with an <b class="COMMAND">esac</b>
-		(<i class="WORDASWORD">case</i> spelled backwards).</p></li></ul>
-	    <p></p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX29"></a><p><b>Example 11-25. Using <i class="FIRSTTERM">case</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Testing and Branching</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Loops and Branches" href="./loops.html">
+<link rel="PREVIOUS" title="Loop Control" href="./loopcontrol.html">
+<link rel="NEXT" title="Command Substitution" href="./commandsub.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./loopcontrol.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 11. Loops and Branches</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./commandsub.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="TESTBRANCH">
+</a>11.4. 테스트와 분기</h1>
+<p>
+<b class="COMMAND">case</b> 와 
+<b class="COMMAND">select</b> 구문은, 코드 블록을 반복하거나 
+하지 않기 때문에,  엄밀히 말해서는 반복문은 아닙니다. 
+하지만, 반복문과 비슷하게 이 구문들은 블록의 위나 아래에서 주어진 
+조건에 따라 프로그램 흐름을 조정해 줍니다.
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="CASEESAC1">
+</a>코드 블럭에서 프로그램 흐름을 조절하기</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">case (in) / esac</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">case</b> 는 쉘 스크립트에서의 
+<b class="COMMAND">C/C++</b> 의 
+<tt class="REPLACEABLE"><i>switch</i></tt> 라고 할 수 있습니다. 
+조건에 따라 다수의 코드 블록 중 하나로 분기할 수 있게 해줍니다. 
+이 구문은 여러 개의 
+<span class="TOKEN">if/then/else</span> 의 요약처럼 동작하기 때문에, 
+메뉴같은 것을 만들 때 적당합니다.</p>
+<p>
+</p>
+<p>
+<b class="COMMAND">case</b>   "$<tt class="REPLACEABLE">
+<i>variable</i>
+</tt>"   in <br>
+<br>  &nbsp;"$<tt class="REPLACEABLE">
+<i>condition1</i>
+</tt>" ) <br>  &nbsp;<tt class="REPLACEABLE">
+<i>command</i>
+</tt>... <br>  &nbsp;;; <br>
+<br>  &nbsp;"$<tt class="REPLACEABLE">
+<i>condition2</i>
+</tt>" ) <br>  &nbsp;<tt class="REPLACEABLE">
+<i>command</i>
+</tt>... <br>  &nbsp;;; <br>
+<br>
+<br>
+<b class="COMMAND">esac</b> </p>
+<p>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="testbranch_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>	      </p>
+<p>
+</p>
+<ul>
+<li>
+<p>단어의 분기는 일어나지 않기 때문에, 변수를 인용 부호로 묶을 필요는 없습니다.</p>
+</li>
+<li>
+<p>
+<a name="CASEPAREN">
+</a>각 조건문은 오른쪽 소괄호<b class="COMMAND">)</b>로 끝납니다.
+<a name="AEN7087" href="#FTN.AEN7087">
+<span class="footnote">[1]</span>
+</a>
+</p>
+</li>
+<li>
+<p>각 조건에 해당하는 블록은 
+<em>이중</em> 세미콜론 
+<span class="TOKEN">;;</span> 으로 끝납니다.
+</p>
+</li>
+<li>
+<p>만일 조건이 
+<i class="FIRSTTERM">true</i> 이면, 연관된 명령문들이 실행되고 
+<b class="COMMAND">case</b> 블럭은 종료됩니다.</p>
+</li>
+<li>
+<p>전체 
+<b class="COMMAND">case</b> 블럭은 
+<b class="COMMAND">esac</b> 으로 끝납니다. 
+(<i class="WORDASWORD">case</i> 을 거꾸로 쓴 것입니다.)</p>
+</li>
+</ul>
+<p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX29">
+</a>
+<p>
+<b>Example 11-25. <i class="FIRSTTERM">case</i> 사용하기
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Testing ranges of characters.
 
 echo; echo "Hit a key, then hit return."
@@ -53,7 +175,26 @@ esac      #  Allows ranges of characters in [square brackets],
 #+ reports on each keystroke, and terminates only when "X" is hit.
 #  Hint: enclose everything in a "while" loop.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX30"></a><p><b>Example 11-26. Creating menus using <i class="FIRSTTERM">case</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX30">
+</a>
+<p>
+<b>Example 11-26. <i class="FIRSTTERM">case</i> 를 이용해서 메뉴 만들기
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Crude address database
 
@@ -117,9 +258,25 @@ echo
 #  Change the script so it accepts multiple inputs,
 #+ instead of terminating after displaying just one address.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="CASECL"></a></p><p>An exceptionally clever use of <b class="COMMAND">case</b>
-	      involves testing for command-line parameters.
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CASECL">
+</a>
+</p>
+<p>
+매개변수를 이용한 <b class="COMMAND">case</b> 의 매우 좋은 예.
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 
 case "$1" in
   "") echo "Usage: ${0##*/} &lt;filename&gt;"; exit $E_PARAM;;
@@ -135,9 +292,19 @@ case "$1" in
                       #+ as an option.
 
   * ) FILENAME=$1;;     # Otherwise, $1.
-esac</pre></font></td></tr></tbody></table></p><p>Here is a more straightforward example of
-	      command-line parameter handling:
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+esac</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>매개변수를 이용한 또 다른 예:<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 
 
 while [ $# -gt 0 ]; do    # Until you run out of parameters . . .
@@ -160,8 +327,27 @@ done
 
 #  From Stefano Falsetto's "Log2Rot" script,
 #+ part of his "rottlog" package.
-#  Used with permission.</pre></font></td></tr></tbody></table></p><div class="EXAMPLE"><a name="CASECMD"></a><p><b>Example 11-27. Using <i class="FIRSTTERM">command substitution</i>
-	      to generate the <i class="FIRSTTERM">case</i> variable</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  Used with permission.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="EXAMPLE">
+<a name="CASECMD">
+</a>
+<p>
+<b>예 11-27. 
+<i class="FIRSTTERM">명령어 치환</i> 으로 <i class="FIRSTTERM">case</i> 변수만들기
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # case-cmd.sh: Using command substitution to generate a "case" variable.
 
 case $( arch ) in   # $( arch ) returns machine architecture.
@@ -173,8 +359,32 @@ case $( arch ) in   # $( arch ) returns machine architecture.
   *    ) echo "Other type of machine";;
 esac
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="CSGLOB"></a></p><p>A <b class="COMMAND">case</b> construct can filter strings for
-	      <a href="http://www.tldp.org/LDP/abs/html/globbingref.html">globbing</a> patterns.</p><div class="EXAMPLE"><a name="MATCHSTRING"></a><p><b>Example 11-28. Simple string matching</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CSGLOB">
+</a>
+</p>
+<p>
+<b class="COMMAND">case</b> 구문은 
+<a href="./globbingref.html">globbing</a> 패턴으로 문자열을 필터링할 수 있습니다.</p>
+<div class="EXAMPLE">
+<a name="MATCHSTRING">
+</a>
+<p>
+<b>예 11-28. 간단한 문자열 맞추기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # match-string.sh: Simple string matching
 #                  using a 'case' construct.
 
@@ -211,7 +421,25 @@ match_string $b $d  # match
 echo $?             # 0
 
 
-exit 0		    </pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="ISALPHA"></a><p><b>Example 11-29. Checking for alphabetic input</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0		    </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ISALPHA">
+</a>
+<p>
+<b>Example 11-29. 알파벳 입력 체크하기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # isalpha.sh: Using a "case" structure to filter a string.
 
 SUCCESS=0
@@ -316,11 +544,51 @@ exit 0        # Script improved by S.C.
 # --------
 #  Write an 'isfloat ()' function that tests for floating point numbers.
 #  Hint: The function duplicates 'isdigit ()',
-#+ but adds a test for a mandatory decimal point.</pre></font></td></tr></tbody></table></div></dd><dt><a name="SELECTREF"></a><b class="COMMAND">select</b></dt><dd><p>The <b class="COMMAND">select</b> construct, adopted from the Korn
-	      Shell, is yet another tool for building menus.</p><p></p><p><b class="COMMAND">select</b>   <tt class="REPLACEABLE"><i>variable</i></tt>  [in <tt class="REPLACEABLE"><i>list</i></tt>]<br>  do <br>  &nbsp;<tt class="REPLACEABLE"><i>command</i></tt>... <br>  &nbsp;break <br>  done </p><p></p><p>This prompts the user to enter one of the choices presented in the
-	      variable list.  Note that <b class="COMMAND">select</b> uses the
-	      <tt class="VARNAME">$PS3</tt> prompt (<tt class="PROMPT">#? </tt>) by default, 
-		but this may be changed.</p><div class="EXAMPLE"><a name="EX31"></a><p><b>Example 11-30. Creating menus using <i class="FIRSTTERM">select</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+ but adds a test for a mandatory decimal point.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SELECTREF">
+</a>
+<b class="COMMAND">select</b>
+</dt>
+<dd>
+<p>Korn 쉘으로부터 따온 
+<b class="COMMAND">select</b> 구문은 메뉴를 만들 수 있는 또다른 도구입니다.</p>
+<p>
+</p>
+<p>
+<b class="COMMAND">select</b>   <tt class="REPLACEABLE">
+<i>variable</i>
+</tt>  [in <tt class="REPLACEABLE">
+<i>list</i>
+</tt>]<br>  do <br>  &nbsp;<tt class="REPLACEABLE">
+<i>command</i>
+</tt>... <br>  &nbsp;break <br>  done </p>
+<p>
+</p>
+<p>이 프롬프트는 사용자가 리스트에 있는 것 중 하나를 고를 수 있게 해줍니다. 
+<b class="COMMAND">select</b> 는 기본값으로 
+<tt class="VARNAME">$PS3</tt> 프롬프트 (<tt class="PROMPT">#? </tt>) 를 가집니다, 
+하지만, 바꿀 수 있습니다.</p>
+<div class="EXAMPLE">
+<a name="EX31">
+</a>
+<p>
+<b>예 11-30. <i class="FIRSTTERM">select</i> 를 사용해서 메뉴 만들기
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 PS3='Choose your favorite vegetable: ' # Sets the prompt string.
                                        # Otherwise it defaults to #? .
@@ -343,16 +611,57 @@ exit
 #  Fix this script to accept user input not specified in
 #+ the "select" statement.
 #  For example, if the user inputs "peas,"
-#+ the script would respond "Sorry. That is not on the menu."</pre></font></td></tr></tbody></table></div><p><a name="INLISTOMIT"></a></p><p>If <tt class="USERINPUT"><b>in <tt class="REPLACEABLE"><i>list</i></tt></b></tt> is
+#+ the script would respond "Sorry. That is not on the menu."</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="INLISTOMIT">
+</a>
+</p>
+<p>If <tt class="USERINPUT">
+<b>in <tt class="REPLACEABLE">
+<i>list</i>
+</tt>
+</b>
+</tt> is
 	      omitted, then <b class="COMMAND">select</b> uses the list of command
 	      line arguments (<tt class="VARNAME">$@</tt>) passed to the script or
 	      the function containing the <b class="COMMAND">select</b>
-	      construct.</p><p>Compare this to the behavior of a 
-	      </p><p><b class="COMMAND">for</b>   <tt class="REPLACEABLE"><i>variable</i></tt>  [in <tt class="REPLACEABLE"><i>list</i></tt>]</p>
+	      construct.</p>
+<p>Compare this to the behavior of a 
+	      </p>
+<p>
+<b class="COMMAND">for</b>   <tt class="REPLACEABLE">
+<i>variable</i>
+</tt>  [in <tt class="REPLACEABLE">
+<i>list</i>
+</tt>]</p>
 	      construct with the 
-	      <tt class="USERINPUT"><b>in <tt class="REPLACEABLE"><i>list</i></tt></b></tt>
-	      omitted.<p></p><div class="EXAMPLE"><a name="EX32"></a><p><b>Example 11-31. Creating menus using <i class="FIRSTTERM">select</i>
-	      in a function</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      <tt class="USERINPUT">
+<b>in <tt class="REPLACEABLE">
+<i>list</i>
+</tt>
+</b>
+</tt>
+	      omitted.<p>
+</p>
+<div class="EXAMPLE">
+<a name="EX32">
+</a>
+<p>
+<b>예 11-31. 함수에서 
+<i class="FIRSTTERM">select</i> 를 사용해 메뉴만들기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 PS3='Choose your favorite vegetable: '
 
@@ -375,13 +684,79 @@ choice_of beans rice carrots radishes rutabaga spinach
 #         $1    $2   $3      $4       $5       $6
 #         passed to choice_of() function
 
-exit 0</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/bashver2.html#RESISTOR">Example 37-3</a>.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7087" href="http://www.tldp.org/LDP/abs/html/testbranch.html#AEN7087"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Pattern-match lines may also <em>start</em>
-    with a <b class="COMMAND">(</b> left paren to give the layout
-    a more structured appearance.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">case $( arch ) in   # $( arch ) returns machine architecture.
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a href="./bashver2.html#RESISTOR">예 37-3</a> 도 참고하십시요.</p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN7087" href="./testbranch.html#AEN7087">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p> 왼쪽 소괄호 
+<b class="COMMAND">(</b> 로 패턴을 <em>시작</em>하면 좀더 복잡한 형태로 사용할 수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">case $( arch ) in   # $( arch ) returns machine architecture.
   ( i386 ) echo "80386-based machine";;
 # ^      ^
   ( i486 ) echo "80486-based machine";;
   ( i586 ) echo "Pentium-based machine";;
   ( i686 ) echo "Pentium2+-based machine";;
   (    * ) echo "Other type of machine";;
-esac</pre></font></td></tr></tbody></table></p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/loopcontrol.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/commandsub.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Loop Control</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/loops.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Command Substitution</td></tr></tbody></table></div></body></html>
+esac</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./loopcontrol.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./commandsub.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Loop Control</td>
+<td align="center" valign="top" width="34%">
+<a href="./loops.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Command Substitution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
