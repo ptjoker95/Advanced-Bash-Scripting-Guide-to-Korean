@@ -1,22 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Command Substitution</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Beyond the Basics" href="http://www.tldp.org/LDP/abs/html/part3.html"><link rel="PREVIOUS" title="Testing and Branching" href="http://www.tldp.org/LDP/abs/html/testbranch.html"><link rel="NEXT" title="Arithmetic Expansion" href="http://www.tldp.org/LDP/abs/html/arithexp.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/testbranch.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/arithexp.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="COMMANDSUB"></a>Chapter 12. Command Substitution</h1><p>	     <a name="COMMANDSUBREF"></a><b class="COMMAND">Command
-	     substitution</b> reassigns the output of a command
-		<a name="AEN7205" href="#FTN.AEN7205"><span class="footnote">[1]</span></a>
-	     or even multiple commands; it literally plugs the command
-	     output into another context.
-
-	        <a name="AEN7211" href="#FTN.AEN7211"><span class="footnote">[2]</span></a>
-	     </p><p><a name="BACKQUOTESREF"></a>The classic form of command
-	      substitution uses <i class="FIRSTTERM">backquotes</i>
-	      (`...`). Commands within backquotes (backticks) generate
-	      command-line text.
-
-	      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">script_name=`basename $0`
-echo "The name of this script is $script_name."</pre></font></td></tr></tbody></table></p><div class="FORMALPARA"><p><b>The output of commands can be used as arguments to
-	      another command, to set a variable, and even for generating
-	      the argument list in a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">for</a>
-	      loop. </b></p></div><p>	      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">rm `cat filename`   # <span class="QUOTE">"filename"</span> contains a list of files to delete.
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Command Substitution</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Beyond the Basics" href="./part3.html">
+<link rel="PREVIOUS" title="Testing and Branching" href="./testbranch.html">
+<link rel="NEXT" title="Arithmetic Expansion" href="./arithexp.html">
+</head>
+<body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./testbranch.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./arithexp.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="COMMANDSUB">
+</a>Chapter 12. 명령어 치환</h1>
+<p>
+<a name="COMMANDSUBREF">
+</a>
+<b class="COMMAND">명령어 치환</b> 은 하나 이상의 명령어의 출력 
+<a name="AEN7205" href="#FTN.AEN7205"><span class="footnote">[1]</span></a> 
+을 재할당해줍니다; 말 그대로 명령어의 출력을 다른 입력으로 만들어 줍니다.
+<a name="AEN7211" href="#FTN.AEN7211"><span class="footnote">[2]</span></a>
+</p>
+<p>
+<a name="BACKQUOTESREF">
+</a>명령어 치환의 보편적인 형태는 
+<i class="FIRSTTERM">역따옴표</i>(`...`) 입니다. 
+역따옴표 안에 있는 명령어는 명령어 라인 텍스트를 만들어 냅니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">script_name=`basename $0`
+echo "The name of this script is $script_name."</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="FORMALPARA">
+<p>
+<b>명령어의 출력은 다른 명령어의 인수로 쓰이거나, 변수로 지정하거나, 
+<a href="./loops1.html#FORLOOPREF1">for</a> 반복문에서 인자 리스트로도 쓸 수 있습니다.</b>
+</p>
+</div>
+<p>	      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">rm `cat filename`   # <span class="QUOTE">"filename"</span> contains a list of files to delete.
 #
 # S. C. points out that "arg list too long" error might result.
 # Better is              xargs rm -- &lt; filename 
@@ -37,11 +94,52 @@ echo $textfile_listing2
 #      shopt -s nullglob    # If no match, filename expands to nothing.
 #      textfile_listing=( *.txt )
 #
-# Thanks, S.C.</pre></font></td></tr></tbody></table>
-            </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSSUBSH"></a>Command substitution
-              invokes a <a href="http://www.tldp.org/LDP/abs/html/subshells.html#SUBSHELLSREF">subshell</a>.</p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSWS"></a>Command substitution may
-                result in <a href="http://www.tldp.org/LDP/abs/html/quotingvar.html#WSPLITREF">word splitting</a>.
-	        <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">COMMAND `echo a b`     # 2 args: a and b
+# Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="commandsub_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="CSSUBSH">
+</a>명령어 치환은 
+<a href="./subshells.html#SUBSHELLSREF">하위 쉘</a> 을 실행시킵니다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="commandsub_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="CSWS">
+</a>명령어 치환은 
+<a href="./quotingvar.html#WSPLITREF">단어 분할</a> 을 일으킬 수 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">COMMAND `echo a b`     # 2 args: a and b
 
 COMMAND "`echo a b`"   # 1 arg: "a b"
 
@@ -50,10 +148,28 @@ COMMAND `echo`         # no arg
 COMMAND "`echo`"       # one empty arg
 
 
-# Thanks, S.C.</pre></font></td></tr></tbody></table></p><p><a name="CSTRNL"></a></p><p>Even when there is no word splitting, command
+# Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="CSTRNL">
+</a>
+</p>
+<p>단어 분할이 없더라도, 명령어 치환은 다음 칸으로 넘어가는 것을 제거할 수 있습니다.
+
+Even when there is no word splitting, command
 	        substitution can remove trailing newlines.
 
-		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># cd "`pwd`"  # This should always work.
+		<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># cd "`pwd`"  # This should always work.
 # However...
 
 mkdir 'dir with trailing newline
@@ -83,14 +199,39 @@ echo "You hit ${#key} key."  # ${#variable} = number of characters in $variable
 # Hit RETURN, and it's "You hit 0 key."
 # The newline gets eaten in the command substitution.
 
-#Code snippet by St�phane Chazelas.</pre></font></td></tr></tbody></table>
-              </p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Using <b class="COMMAND">echo</b> to output an
-		<i class="FIRSTTERM">unquoted</i> variable set with command
-		substitution removes trailing newlines characters from
-		the output of the reassigned command(s). This can cause
-		unpleasant surprises.
-
-		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">dir_listing=`ls -l`
+#Code snippet by Stéphane Chazelas.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="commandsub_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>명령어 치환으로 
+<i class="FIRSTTERM">인용문</i> 을 안 쓴 변수를 
+<b class="COMMAND">echo</b> 를 사용해서 출력하게 되면 
+재할당된 명령어의 출력에서 줄건너뛰기 문자를 삭제하게 됩니다. 
+이 것은 의도하지 않은 결과를 낼 수 있습니다. 
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">dir_listing=`ls -l`
 echo $dir_listing     # unquoted
 
 # Expecting a nicely ordered directory listing.
@@ -105,9 +246,29 @@ echo $dir_listing     # unquoted
 echo "$dir_listing"   # quoted
 # -rw-rw-r--    1 bozo       30 May 13 17:15 1.txt
 # -rw-rw-r--    1 bozo       51 May 15 20:57 t2.sh
-# -rwxr-xr-x    1 bozo      217 Mar  5 21:13 wi.sh</pre></font></td></tr></tbody></table>
-              </p></td></tr></tbody></table></div><p>Command substitution even permits setting a variable to the
-	       contents of a file, using either <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">redirection</a> or the <a href="http://www.tldp.org/LDP/abs/html/basic.html#CATREF">cat</a> command.</p><p>	         <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">variable1=`&lt;file1`      #  Set "variable1" to contents of "file1".
+# -rwxr-xr-x    1 bozo      217 Mar  5 21:13 wi.sh</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>명령어 치환은 파일의 내용을  
+<a href="./io-redirection.html#IOREDIRREF">redirection</a> 이나 
+<a href="./basic.html#CATREF">cat</a> 명령어를 이용해 변수에 지정할 수도 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">variable1=`&lt;file1`      #  Set "variable1" to contents of "file1".
 variable2=`cat file2`   #  Set "variable2" to contents of "file2".
                         #  This, however, forks a new process,
                         #+ so the line of code executes slower than the above version.
@@ -116,8 +277,20 @@ variable2=`cat file2`   #  Set "variable2" to contents of "file2".
 #+ or even (horrors), control characters.
 
 #  It is not necessary to explicitly assign a variable.
-echo "` &lt;$0`"           # Echoes the script itself to stdout.</pre></font></td></tr></tbody></table>
-             </p><p>	         <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#  Excerpts from system file, /etc/rc.d/rc.sysinit
+echo "` &lt;$0`"           # Echoes the script itself to stdout.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#  Excerpts from system file, /etc/rc.d/rc.sysinit
 #+ (on a Red Hat Linux installation)
 
 
@@ -144,12 +317,41 @@ if [ $usb = "1" ]; then
     mouseoutput=`cat /proc/bus/usb/devices 2&gt;/dev/null|grep -E "^I.*Cls=03.*Prot=02"`
     kbdoutput=`cat /proc/bus/usb/devices 2&gt;/dev/null|grep -E "^I.*Cls=03.*Prot=01"`
 ...
-fi</pre></font></td></tr></tbody></table>
-             </p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Do not set a variable to the contents of a
-	       <em>long</em> text file unless you have a very good
-	       reason for doing so. Do not set a variable to the contents of a
-	       <i class="FIRSTTERM">binary</i> file, even as a joke.</p><div class="EXAMPLE"><a name="STUPSCR"></a><p><b>Example 12-1. Stupid script tricks</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
-# stupid-script-tricks.sh: Don't try this at home, folks.
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+             </p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="commandsub_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>반드시 해야할 필요가 없으면 
+<em>긴</em> 텍스트 파일의 내용을 변수로 지정하지 마십시요. 
+장난으로라도 
+<i class="FIRSTTERM">바이너리</i> 파일의 내용을 변수로 지정하지 마십시요.
+</p>
+<div class="EXAMPLE">
+<a name="STUPSCR">
+</a>
+<p>
+<b>예 12-1. 멍청한 스크립트 트릭</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# stupid-script-tricks.sh: 집에서는 하지마세요.
 # From "Stupid Script Tricks," Volume I.
 
 exit 99  ### Comment out this line if you dare.
@@ -168,13 +370,43 @@ echo "string-length of \$dangerous_variable = ${#dangerous_variable}"
 #  The document author is aware of no useful applications for
 #+ setting a variable to the contents of a binary file.
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Notice that a <i class="FIRSTTERM">buffer overrun</i>
-	       does not occur. This is one instance where an interpreted
-	       language, such as Bash, provides more protection from
-	       programmer mistakes than a compiled language.</p></td></tr></tbody></table></div><p><a name="CSVL"></a></p><p>Command substitution permits setting a variable to the
-		output of a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">loop</a>. The
-		key to this is grabbing the output of an <a href="http://www.tldp.org/LDP/abs/html/internal.html#ECHOREF">echo</a> command within the
-		loop.</p><div class="EXAMPLE"><a name="CSUBLOOP"></a><p><b>Example 12-2. Generating a variable from a loop</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<i class="FIRSTTERM">버퍼 오버런</i> 이 일어나지 않는 것에 주목할 필요가 있습니다. 
+Bash 와 같은 인터프리터 언어는 컴파일러를 이용하는 언어보다 프로그래머로부터 더 많은 보호장치를 
+제공합니다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CSVL">
+</a>
+</p>
+<p>명령어 치환으로 
+<a href="./loops1.html#FORLOOPREF1">반복문</a> 의 출력을 변수를 지정할 수 있습니다. 
+중요한 것은 반복문 안에서의 
+<a href="./internal.html#ECHOREF">echo</a> 명령어의 출력을 grab 한다는 것입니다.
+</p>
+<div class="EXAMPLE">
+<a name="CSUBLOOP">
+</a>
+<p>
+<b>예 12-2. 반복문에서 변수 생성해내기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # csubloop.sh: Setting a variable to the output of a loop.
 
 variable1=`for i in 1 2 3 4 5
@@ -197,11 +429,37 @@ echo "variable2 = $variable2"  # variable2 = 0123456789
 #  Demonstrates that it's possible to embed a loop
 #+ inside a variable declaration.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="CSTOOLSET"></a></p><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN7273"></a><p></p><p>Command substitution makes it possible to extend the
-		toolset available to Bash. It is simply a matter
-		of writing a program or script that outputs to
-		<tt class="FILENAME">stdout</tt> (like a well-behaved UNIX
-		tool should) and assigning that output to a variable.</p><p>		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#include &lt;stdio.h&gt;
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CSTOOLSET">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN7273">
+</a>
+<p>
+</p>
+<p>명령어 치환은 Bash 에서 사용 가능한 툴을 확장해줍니다. (UNIX에서 잘 동작하는)
+<tt class="FILENAME">표준출력(stdout)</tt> 으로 결과를 출력해 주는 
+프로그램이나 스크립트를 만들고 그 결과를 변수에 지정하면 됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#include &lt;stdio.h&gt;
 
 /*  "Hello, world." C program  */		
 
@@ -209,38 +467,167 @@ int main()
 {
   printf( "Hello, world.\n" );
   return (0);
-}</pre></font></td></tr></tbody></table>
-	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>gcc -o hello hello.c</b></tt>
-	      </pre></font></td></tr></tbody></table>
-		</p><p>                <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+}</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>gcc -o hello hello.c</b>
+</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+<p>                <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # hello.sh		
 
 greeting=`./hello`
-echo $greeting</pre></font></td></tr></tbody></table>
-	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sh hello.sh</b></tt>
+echo $greeting</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>sh hello.sh</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Hello, world.</tt>
-	        </pre></font></td></tr></tbody></table>
-	        </p><p></p></div></td></tr></tbody></table><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSPARENS"></a>The <b class="COMMAND">$(...)</b>
-		form has superseded backticks for command
-		substitution.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">output=$(sed -n /"$1"/p $file)   # From "grp.sh"	example.
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="commandsub_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="CSPARENS">
+</a>
+<b class="COMMAND">$(...)</b> 형태로 명령어 치환을 대신할 수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">output=$(sed -n /"$1"/p $file)   # From "grp.sh"	example.
 	      
 # Setting a variable to the contents of a text file.
 File_contents1=$(cat $file1)      
-File_contents2=$(&lt;$file2)        # Bash permits this also.</pre></font></td></tr></tbody></table></p><p>The <b class="COMMAND">$(...)</b> form of command substitution
-	        treats a double backslash in a different way than
-		<b class="COMMAND">`...`</b>.</p><p>		
-	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo `echo \\`</b></tt>
-<tt class="COMPUTEROUTPUT"></tt>
+File_contents2=$(&lt;$file2)        # Bash permits this also.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<b class="COMMAND">$(...)</b> 의 형태로 명령어 치환을 하게 되면, 
+<b class="COMMAND">`...`</b> 의 형태와는 다른 역슬래쉬의 결과를 냅니다.</p>
+<p>		
+<table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo `echo \\`</b>
+</tt>
+<tt class="COMPUTEROUTPUT">
+</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $(echo \\)</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo $(echo \\)</b>
+</tt>
 <tt class="COMPUTEROUTPUT">\</tt>
-	      </pre></font></td></tr></tbody></table>
-              </p><p><a name="CSNEST"></a></p><p>The <b class="COMMAND">$(...)</b> form of command
-                substitution permits nesting.
-		  <a name="AEN7308" href="#FTN.AEN7308"><span class="footnote">[3]</span></a>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+<p>
+<a name="CSNEST">
+</a>
+</p>
+<p>
+<b class="COMMAND">$(...)</b> 로 명령어 치환을 하게 되면 nesting을 할 수 있습니다.
+<a name="AEN7308" href="#FTN.AEN7308">
+<span class="footnote">[3]</span>
+</a>
 		
-		</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">word_count=$( wc -w $(echo * | awk '{print $8}') )</pre></font></td></tr></tbody></table>
-              </p><p>Or, for something a bit more elaborate . . .</p><div class="EXAMPLE"><a name="AGRAM2"></a><p><b>Example 12-3. Finding anagrams</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">word_count=$( wc -w $(echo * | awk '{print $8}') )</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+<p>좀 더 자세하게 말하면 . . .</p>
+<div class="EXAMPLE">
+<a name="AGRAM2">
+</a>
+<p>
+<b>예 12-3. 아나그램 찾기</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # agram2.sh
 # Example of nested command substitution.
 
@@ -285,17 +672,188 @@ echo ${Anagrams[1]}      # Second anagram.
 
 # See also the agram.sh script for an exercise in anagram finding.
 
-exit $?</pre></font></td></tr></tbody></table></div></td></tr></tbody></table></div><p>Examples of command substitution in shell scripts:
-       </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#BINGREP">Example 11-8</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/testbranch.html#CASECMD">Example 11-27</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/randomvar.html#SEEDINGRANDOM">Example 9-16</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX57">Example 16-3</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/textproc.html#LOWERCASE">Example 16-22</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/textproc.html#GRP">Example 16-17</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/extmisc.html#EX53">Example 16-54</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#EX24">Example 11-14</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#SYMLINKS">Example 11-11</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#STRIPC">Example 16-32</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/redircb.html#REDIR4">Example 20-8</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#TREE">Example A-16</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/procref1.html#PIDID">Example 29-3</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#MONTHLYPMT">Example 16-47</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#BASE">Example 16-48</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#ALTBC">Example 16-49</a></p></li></ol>
-     <p></p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7205" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7205"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>For purposes of <i class="FIRSTTERM">command
-		substitution</i>, a <b class="COMMAND">command</b>
-		may be an external system command, an internal scripting
-		<a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtin</a>, or even <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#RVT">a script function</a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7211" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7211"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>In a more technically correct sense,
-		<i class="FIRSTTERM">command substitution</i> extracts the
-		<tt class="FILENAME">stdout</tt> of a command, then assigns
-		it to a variable using the <span class="TOKEN">=</span>
-		operator.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7308" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7308"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>		    In fact, nesting with backticks is also possible,
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>쉘 스크립트에서 명령어 치환의 예:
+</p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<a href="./loops1.html#BINGREP">예 11-8</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./testbranch.html#CASECMD">예 11-27</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./randomvar.html#SEEDINGRANDOM">예 9-16</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./moreadv.html#EX57">예 16-3</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#LOWERCASE">예 16-22</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#GRP">예 16-17</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./extmisc.html#EX53">예 16-54</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./loops1.html#EX24">예 11-14</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./loops1.html#SYMLINKS">예 11-11</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./filearchiv.html#STRIPC">예 16-32</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./redircb.html#REDIR4">예 20-8</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#TREE">예 A-16</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./procref1.html#PIDID">예 29-3</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./mathc.html#MONTHLYPMT">예 16-47</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./mathc.html#BASE">예 16-48</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./mathc.html#ALTBC">예 16-49</a>
+</p>
+</li>
+</ol>
+     <p>
+</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN7205" href="./commandsub.html#AEN7205">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p> 
+<i class="FIRSTTERM">명령어 치환</i>을 위해, 
+<b class="COMMAND">command</b> 는 외부 시스템 명령어나, 내부 스크립트 
+<a href="./internal.html#BUILTINREF">기본 명령어</a>, 또는 
+<a href="./assortedtips.html#RVT">스크립트 함수</a> 가 될 수 있습니다.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN7211" href="./commandsub.html#AEN7211">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>좀더 정확하게 말하자면, 
+<i class="FIRSTTERM">명령어 치환</i> 은 명령어의 
+<tt class="FILENAME">표준출력(stdout)</tt> 을 만든 후 
+<span class="TOKEN">=</span> 연산자로 변수에 할당하게 됩니다.
+</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN7308" href="./commandsub.html#AEN7308">
+<span class="footnote">[3]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>		    In fact, nesting with backticks is also possible,
 		    but only by escaping the inner backticks, as John
 		    Default points out.
-		      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">word_count=` wc -w \`echo * | awk '{print $8}'\` `</pre></font></td></tr></tbody></table>
-		    </p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/testbranch.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/arithexp.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Testing and Branching</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part3.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Arithmetic Expansion</td></tr></tbody></table></div></body></html>
+		      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">word_count=` wc -w \`echo * | awk '{print $8}'\` `</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./testbranch.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./arithexp.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Testing and Branching</td>
+<td align="center" valign="top" width="34%">
+<a href="./part3.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Arithmetic Expansion</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
