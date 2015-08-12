@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Command Substitution</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Beyond the Basics" href="http://www.tldp.org/LDP/abs/html/part3.html"><link rel="PREVIOUS" title="Testing and Branching" href="http://www.tldp.org/LDP/abs/html/testbranch.html"><link rel="NEXT" title="Arithmetic Expansion" href="http://www.tldp.org/LDP/abs/html/arithexp.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/testbranch.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/arithexp.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="COMMANDSUB"></a>Chapter 12. Command Substitution</h1><p>	     <a name="COMMANDSUBREF"></a><b class="COMMAND">Command
+	     substitution</b> reassigns the output of a command
+		<a name="AEN7205" href="#FTN.AEN7205"><span class="footnote">[1]</span></a>
+	     or even multiple commands; it literally plugs the command
+	     output into another context.
+
+	        <a name="AEN7211" href="#FTN.AEN7211"><span class="footnote">[2]</span></a>
+	     </p><p><a name="BACKQUOTESREF"></a>The classic form of command
+	      substitution uses <i class="FIRSTTERM">backquotes</i>
+	      (`...`). Commands within backquotes (backticks) generate
+	      command-line text.
+
+	      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">script_name=`basename $0`
+echo "The name of this script is $script_name."</pre></font></td></tr></tbody></table></p><div class="FORMALPARA"><p><b>The output of commands can be used as arguments to
+	      another command, to set a variable, and even for generating
+	      the argument list in a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">for</a>
+	      loop. </b></p></div><p>	      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">rm `cat filename`   # <span class="QUOTE">"filename"</span> contains a list of files to delete.
+#
+# S. C. points out that "arg list too long" error might result.
+# Better is              xargs rm -- &lt; filename 
+# ( -- covers those cases where <span class="QUOTE">"filename"</span> begins with a <span class="QUOTE">"-"</span> )
+
+textfile_listing=`ls *.txt`
+# Variable contains names of all *.txt files in current working directory.
+echo $textfile_listing
+
+textfile_listing2=$(ls *.txt)   # The alternative form of command substitution.
+echo $textfile_listing2
+# Same result.
+
+# A possible problem with putting a list of files into a single string
+# is that a newline may creep in.
+#
+# A safer way to assign a list of files to a parameter is with an array.
+#      shopt -s nullglob    # If no match, filename expands to nothing.
+#      textfile_listing=( *.txt )
+#
+# Thanks, S.C.</pre></font></td></tr></tbody></table>
+            </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSSUBSH"></a>Command substitution
+              invokes a <a href="http://www.tldp.org/LDP/abs/html/subshells.html#SUBSHELLSREF">subshell</a>.</p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSWS"></a>Command substitution may
+                result in <a href="http://www.tldp.org/LDP/abs/html/quotingvar.html#WSPLITREF">word splitting</a>.
+	        <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">COMMAND `echo a b`     # 2 args: a and b
+
+COMMAND "`echo a b`"   # 1 arg: "a b"
+
+COMMAND `echo`         # no arg
+
+COMMAND "`echo`"       # one empty arg
+
+
+# Thanks, S.C.</pre></font></td></tr></tbody></table></p><p><a name="CSTRNL"></a></p><p>Even when there is no word splitting, command
+	        substitution can remove trailing newlines.
+
+		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># cd "`pwd`"  # This should always work.
+# However...
+
+mkdir 'dir with trailing newline
+'
+
+cd 'dir with trailing newline
+'
+
+cd "`pwd`"  # Error message:
+# bash: cd: /tmp/file with trailing newline: No such file or directory
+
+cd "$PWD"   # Works fine.
+
+
+
+
+
+old_tty_setting=$(stty -g)   # Save old terminal setting.
+echo "Hit a key "
+stty -icanon -echo           # Disable "canonical" mode for terminal.
+                             # Also, disable *local* echo.
+key=$(dd bs=1 count=1 2&gt; /dev/null)   # Using 'dd' to get a keypress.
+stty "$old_tty_setting"      # Restore old setting. 
+echo "You hit ${#key} key."  # ${#variable} = number of characters in $variable
+#
+# Hit any key except RETURN, and the output is "You hit 1 key."
+# Hit RETURN, and it's "You hit 0 key."
+# The newline gets eaten in the command substitution.
+
+#Code snippet by Stéphane Chazelas.</pre></font></td></tr></tbody></table>
+              </p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Using <b class="COMMAND">echo</b> to output an
+		<i class="FIRSTTERM">unquoted</i> variable set with command
+		substitution removes trailing newlines characters from
+		the output of the reassigned command(s). This can cause
+		unpleasant surprises.
+
+		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">dir_listing=`ls -l`
+echo $dir_listing     # unquoted
+
+# Expecting a nicely ordered directory listing.
+
+# However, what you get is:
+# total 3 -rw-rw-r-- 1 bozo bozo 30 May 13 17:15 1.txt -rw-rw-r-- 1 bozo
+# bozo 51 May 15 20:57 t2.sh -rwxr-xr-x 1 bozo bozo 217 Mar 5 21:13 wi.sh
+
+# The newlines disappeared.
+
+
+echo "$dir_listing"   # quoted
+# -rw-rw-r--    1 bozo       30 May 13 17:15 1.txt
+# -rw-rw-r--    1 bozo       51 May 15 20:57 t2.sh
+# -rwxr-xr-x    1 bozo      217 Mar  5 21:13 wi.sh</pre></font></td></tr></tbody></table>
+              </p></td></tr></tbody></table></div><p>Command substitution even permits setting a variable to the
+	       contents of a file, using either <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">redirection</a> or the <a href="http://www.tldp.org/LDP/abs/html/basic.html#CATREF">cat</a> command.</p><p>	         <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">variable1=`&lt;file1`      #  Set "variable1" to contents of "file1".
+variable2=`cat file2`   #  Set "variable2" to contents of "file2".
+                        #  This, however, forks a new process,
+                        #+ so the line of code executes slower than the above version.
+
+#  Note that the variables may contain embedded whitespace,
+#+ or even (horrors), control characters.
+
+#  It is not necessary to explicitly assign a variable.
+echo "` &lt;$0`"           # Echoes the script itself to stdout.</pre></font></td></tr></tbody></table>
+             </p><p>	         <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#  Excerpts from system file, /etc/rc.d/rc.sysinit
+#+ (on a Red Hat Linux installation)
+
+
+if [ -f /fsckoptions ]; then
+        fsckoptions=`cat /fsckoptions`
+...
+fi
+#
+#
+if [ -e "/proc/ide/${disk[$device]}/media" ] ; then
+             hdmedia=`cat /proc/ide/${disk[$device]}/media`
+...
+fi
+#
+#
+if [ ! -n "`uname -r | grep -- "-"`" ]; then
+       ktag="`cat /proc/version`"
+...
+fi
+#
+#
+if [ $usb = "1" ]; then
+    sleep 5
+    mouseoutput=`cat /proc/bus/usb/devices 2&gt;/dev/null|grep -E "^I.*Cls=03.*Prot=02"`
+    kbdoutput=`cat /proc/bus/usb/devices 2&gt;/dev/null|grep -E "^I.*Cls=03.*Prot=01"`
+...
+fi</pre></font></td></tr></tbody></table>
+             </p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Do not set a variable to the contents of a
+	       <em>long</em> text file unless you have a very good
+	       reason for doing so. Do not set a variable to the contents of a
+	       <i class="FIRSTTERM">binary</i> file, even as a joke.</p><div class="EXAMPLE"><a name="STUPSCR"></a><p><b>Example 12-1. Stupid script tricks</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# stupid-script-tricks.sh: Don't try this at home, folks.
+# From "Stupid Script Tricks," Volume I.
+
+exit 99  ### Comment out this line if you dare.
+
+dangerous_variable=`cat /boot/vmlinuz`   # The compressed Linux kernel itself.
+
+echo "string-length of \$dangerous_variable = ${#dangerous_variable}"
+# string-length of $dangerous_variable = 794151
+# (Newer kernels are bigger.)
+# Does not give same count as 'wc -c /boot/vmlinuz'.
+
+# echo "$dangerous_variable"
+# Don't try this! It would hang the script.
+
+
+#  The document author is aware of no useful applications for
+#+ setting a variable to the contents of a binary file.
+
+exit 0</pre></font></td></tr></tbody></table></div><p>Notice that a <i class="FIRSTTERM">buffer overrun</i>
+	       does not occur. This is one instance where an interpreted
+	       language, such as Bash, provides more protection from
+	       programmer mistakes than a compiled language.</p></td></tr></tbody></table></div><p><a name="CSVL"></a></p><p>Command substitution permits setting a variable to the
+		output of a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">loop</a>. The
+		key to this is grabbing the output of an <a href="http://www.tldp.org/LDP/abs/html/internal.html#ECHOREF">echo</a> command within the
+		loop.</p><div class="EXAMPLE"><a name="CSUBLOOP"></a><p><b>Example 12-2. Generating a variable from a loop</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# csubloop.sh: Setting a variable to the output of a loop.
+
+variable1=`for i in 1 2 3 4 5
+do
+  echo -n "$i"                 #  The 'echo' command is critical
+done`                          #+ to command substitution here.
+
+echo "variable1 = $variable1"  # variable1 = 12345
+
+
+i=0
+variable2=`while [ "$i" -lt 10 ]
+do
+  echo -n "$i"                 # Again, the necessary 'echo'.
+  let "i += 1"                 # Increment.
+done`
+
+echo "variable2 = $variable2"  # variable2 = 0123456789
+
+#  Demonstrates that it's possible to embed a loop
+#+ inside a variable declaration.
+
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="CSTOOLSET"></a></p><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN7273"></a><p></p><p>Command substitution makes it possible to extend the
+		toolset available to Bash. It is simply a matter
+		of writing a program or script that outputs to
+		<tt class="FILENAME">stdout</tt> (like a well-behaved UNIX
+		tool should) and assigning that output to a variable.</p><p>		<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#include &lt;stdio.h&gt;
+
+/*  "Hello, world." C program  */		
+
+int main()
+{
+  printf( "Hello, world.\n" );
+  return (0);
+}</pre></font></td></tr></tbody></table>
+	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>gcc -o hello hello.c</b></tt>
+	      </pre></font></td></tr></tbody></table>
+		</p><p>                <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# hello.sh		
+
+greeting=`./hello`
+echo $greeting</pre></font></td></tr></tbody></table>
+	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sh hello.sh</b></tt>
+<tt class="COMPUTEROUTPUT">Hello, world.</tt>
+	        </pre></font></td></tr></tbody></table>
+	        </p><p></p></div></td></tr></tbody></table><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="commandsub_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CSPARENS"></a>The <b class="COMMAND">$(...)</b>
+		form has superseded backticks for command
+		substitution.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">output=$(sed -n /"$1"/p $file)   # From "grp.sh"	example.
+	      
+# Setting a variable to the contents of a text file.
+File_contents1=$(cat $file1)      
+File_contents2=$(&lt;$file2)        # Bash permits this also.</pre></font></td></tr></tbody></table></p><p>The <b class="COMMAND">$(...)</b> form of command substitution
+	        treats a double backslash in a different way than
+		<b class="COMMAND">`...`</b>.</p><p>		
+	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo `echo \\`</b></tt>
+<tt class="COMPUTEROUTPUT"></tt>
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $(echo \\)</b></tt>
+<tt class="COMPUTEROUTPUT">\</tt>
+	      </pre></font></td></tr></tbody></table>
+              </p><p><a name="CSNEST"></a></p><p>The <b class="COMMAND">$(...)</b> form of command
+                substitution permits nesting.
+		  <a name="AEN7308" href="#FTN.AEN7308"><span class="footnote">[3]</span></a>
+		
+		</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">word_count=$( wc -w $(echo * | awk '{print $8}') )</pre></font></td></tr></tbody></table>
+              </p><p>Or, for something a bit more elaborate . . .</p><div class="EXAMPLE"><a name="AGRAM2"></a><p><b>Example 12-3. Finding anagrams</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# agram2.sh
+# Example of nested command substitution.
+
+#  Uses "anagram" utility
+#+ that is part of the author's "yawl" word list package.
+#  http://ibiblio.org/pub/Linux/libs/yawl-0.3.2.tar.gz
+#  http://bash.deta.in/yawl-0.3.2.tar.gz
+
+E_NOARGS=86
+E_BADARG=87
+MINLEN=7
+
+if [ -z "$1" ]
+then
+  echo "Usage $0 LETTERSET"
+  exit $E_NOARGS         # Script needs a command-line argument.
+elif [ ${#1} -lt $MINLEN ]
+then
+  echo "Argument must have at least $MINLEN letters."
+  exit $E_BADARG
+fi
+
+
+
+FILTER='.......'         # Must have at least 7 letters.
+#       1234567
+Anagrams=( $(echo $(anagram $1 | grep $FILTER) ) )
+#          $(     $(  nested command sub.    ) )
+#        (              array assignment         )
+
+echo
+echo "${#Anagrams[*]}  7+ letter anagrams found"
+echo
+echo ${Anagrams[0]}      # First anagram.
+echo ${Anagrams[1]}      # Second anagram.
+                         # Etc.
+
+# echo "${Anagrams[*]}"  # To list all the anagrams in a single line . . .
+
+#  Look ahead to the Arrays chapter for enlightenment on
+#+ what's going on here.
+
+# See also the agram.sh script for an exercise in anagram finding.
+
+exit $?</pre></font></td></tr></tbody></table></div></td></tr></tbody></table></div><p>Examples of command substitution in shell scripts:
+       </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#BINGREP">Example 11-8</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/testbranch.html#CASECMD">Example 11-27</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/randomvar.html#SEEDINGRANDOM">Example 9-16</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX57">Example 16-3</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/textproc.html#LOWERCASE">Example 16-22</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/textproc.html#GRP">Example 16-17</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/extmisc.html#EX53">Example 16-54</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#EX24">Example 11-14</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#SYMLINKS">Example 11-11</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#STRIPC">Example 16-32</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/redircb.html#REDIR4">Example 20-8</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#TREE">Example A-16</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/procref1.html#PIDID">Example 29-3</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#MONTHLYPMT">Example 16-47</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#BASE">Example 16-48</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/mathc.html#ALTBC">Example 16-49</a></p></li></ol>
+     <p></p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7205" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7205"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>For purposes of <i class="FIRSTTERM">command
+		substitution</i>, a <b class="COMMAND">command</b>
+		may be an external system command, an internal scripting
+		<a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtin</a>, or even <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#RVT">a script function</a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7211" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7211"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>In a more technically correct sense,
+		<i class="FIRSTTERM">command substitution</i> extracts the
+		<tt class="FILENAME">stdout</tt> of a command, then assigns
+		it to a variable using the <span class="TOKEN">=</span>
+		operator.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN7308" href="http://www.tldp.org/LDP/abs/html/commandsub.html#AEN7308"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>		    In fact, nesting with backticks is also possible,
+		    but only by escaping the inner backticks, as John
+		    Default points out.
+		      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">word_count=` wc -w \`echo * | awk '{print $8}'\` `</pre></font></td></tr></tbody></table>
+		    </p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/testbranch.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/arithexp.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Testing and Branching</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part3.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Arithmetic Expansion</td></tr></tbody></table></div></body></html>
