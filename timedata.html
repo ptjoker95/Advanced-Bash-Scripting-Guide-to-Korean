@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Time / Date Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Complex Commands" href="http://www.tldp.org/LDP/abs/html/moreadv.html"><link rel="NEXT" title="Text Processing Commands" href="http://www.tldp.org/LDP/abs/html/textproc.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/moreadv.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/textproc.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="TIMEDATE"></a>16.3. Time / Date Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="TDLISTING1"></a>Time/date and timing</b></p><dl><dt><a name="DATEREF"></a><b class="COMMAND">date</b></dt><dd><p>Simply invoked, <b class="COMMAND">date</b> prints the date and
+	      time to <tt class="FILENAME">stdout</tt>. Where this command gets
+	      interesting is in its formatting and parsing options.</p><div class="EXAMPLE"><a name="EX51"></a><p><b>Example 16-10. Using <i class="FIRSTTERM">date</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Exercising the 'date' command
+
+echo "The number of days since the year's beginning is `date +%j`."
+# Needs a leading '+' to invoke formatting.
+# %j gives day of year.
+
+echo "The number of seconds elapsed since 01/01/1970 is `date +%s`."
+#  %s yields number of seconds since "UNIX epoch" began,
+#+ but how is this useful?
+
+prefix=temp
+suffix=$(date +%s)  # The "+%s" option to 'date' is GNU-specific.
+filename=$prefix.$suffix
+echo "Temporary filename = $filename"
+#  It's great for creating "unique and random" temp filenames,
+#+ even better than using $$.
+
+# Read the 'date' man page for more formatting options.
+
+exit 0</pre></font></td></tr></tbody></table></div><p>The <tt class="OPTION">-u</tt> option gives the UTC (Universal
+	      Coordinated Time).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>date</b></tt>
+<tt class="COMPUTEROUTPUT">Fri Mar 29 21:07:39 MST 2002</tt>
+
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>date -u</b></tt>
+<tt class="COMPUTEROUTPUT">Sat Mar 30 04:07:42 UTC 2002</tt>
+	      </pre></font></td></tr></tbody></table>
+	      </p><p>This option facilitates calculating the time between
+	      different dates.</p><div class="EXAMPLE"><a name="DATECALC"></a><p><b>Example 16-11. <i class="FIRSTTERM">Date</i> calculations</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# date-calc.sh
+# Author: Nathan Coulter
+# Used in ABS Guide with permission (thanks!).
+
+MPHR=60    # Minutes per hour.
+HPD=24     # Hours per day.
+
+diff () {
+        printf '%s' $(( $(date -u -d"$TARGET" +%s) -
+                        $(date -u -d"$CURRENT" +%s)))
+#                       %d = day of month.
+}
+
+
+CURRENT=$(date -u -d '2007-09-01 17:30:24' '+%F %T.%N %Z')
+TARGET=$(date -u -d'2007-12-25 12:30:00' '+%F %T.%N %Z')
+# %F = full date, %T = %H:%M:%S, %N = nanoseconds, %Z = time zone.
+
+printf '\nIn 2007, %s ' \
+       "$(date -d"$CURRENT +
+        $(( $(diff) /$MPHR /$MPHR /$HPD / 2 )) days" '+%d %B')" 
+#       %B = name of month                ^ halfway
+printf 'was halfway between %s ' "$(date -d"$CURRENT" '+%d %B')"
+printf 'and %s\n' "$(date -d"$TARGET" '+%d %B')"
+
+printf '\nOn %s at %s, there were\n' \
+        $(date -u -d"$CURRENT" +%F) $(date -u -d"$CURRENT" +%T)
+DAYS=$(( $(diff) / $MPHR / $MPHR / $HPD ))
+CURRENT=$(date -d"$CURRENT +$DAYS days" '+%F %T.%N %Z')
+HOURS=$(( $(diff) / $MPHR / $MPHR ))
+CURRENT=$(date -d"$CURRENT +$HOURS hours" '+%F %T.%N %Z')
+MINUTES=$(( $(diff) / $MPHR ))
+CURRENT=$(date -d"$CURRENT +$MINUTES minutes" '+%F %T.%N %Z')
+printf '%s days, %s hours, ' "$DAYS" "$HOURS"
+printf '%s minutes, and %s seconds ' "$MINUTES" "$(diff)"
+printf 'until Christmas Dinner!\n\n'
+
+#  Exercise:
+#  --------
+#  Rewrite the diff () function to accept passed parameters,
+#+ rather than using global variables.</pre></font></td></tr></tbody></table></div><p><a name="DATERANDREF"></a></p><p>The <i class="FIRSTTERM">date</i> command has quite a
+		number of <i class="FIRSTTERM">output</i> options. For
+		example <tt class="OPTION">%N</tt> gives the nanosecond portion
+		of the current time. One interesting use for this is to
+		generate random integers.
+
+	       <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">date +%N | sed -e 's/000$//' -e 's/^0//'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  Strip off leading and trailing zeroes, if present.
+#  Length of generated integer depends on
+#+ how many zeroes stripped off.
+
+# 115281032
+# 63408725
+# 394504284</pre></font></td></tr></tbody></table>
+	      </p><p>There are many more options (try <b class="COMMAND">man
+	        date</b>).</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">date +%j
+# Echoes day of the year (days elapsed since January 1).
+
+date +%k%M
+# Echoes hour and minute in 24-hour format, as a single digit string.
+
+
+
+# The 'TZ' parameter permits overriding the default time zone.
+date                 # Mon Mar 28 21:42:16 MST 2005
+TZ=EST date          # Mon Mar 28 23:42:16 EST 2005
+# Thanks, Frank Kannemann and Pete Sjoberg, for the tip.
+
+
+SixDaysAgo=$(date --date='6 days ago')
+OneMonthAgo=$(date --date='1 month ago')  # Four weeks back (not a month!)
+OneYearAgo=$(date --date='1 year ago')</pre></font></td></tr></tbody></table></p><p>See also <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#EX58">Example 3-4</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#STOPWATCH">Example A-43</a>.</p></dd><dt><a name="ZDUMPREF"></a><b class="COMMAND">zdump</b></dt><dd><p>Time zone dump: echoes the time in a specified time zone.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>zdump EST</b></tt>
+<tt class="COMPUTEROUTPUT">EST  Tue Sep 18 22:09:22 2001 EST</tt>
+	      </pre></font></td></tr></tbody></table>
+	      </p></dd><dt><a name="TIMREF"></a><b class="COMMAND">time</b></dt><dd><p>Outputs verbose timing statistics for executing a command.</p><p><tt class="USERINPUT"><b>time ls -l /</b></tt> gives something
+	    like this:</p><p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">real    0m0.067s
+ user    0m0.004s
+ sys     0m0.005s</tt></pre></font></td></tr></tbody></table>
+	  </p><p>See also the very similar <a href="http://www.tldp.org/LDP/abs/html/x9644.html#TIMESREF">times</a> command in the previous
+	    section.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>As of <a href="http://www.tldp.org/LDP/abs/html/bashver2.html#BASH2REF">version 2.0</a>
+	    of Bash, <b class="COMMAND">time</b> became a shell reserved word,
+	    with slightly altered behavior in a pipeline.</p></td></tr></tbody></table></div></dd><dt><a name="TOUCHREF"></a><b class="COMMAND">touch</b></dt><dd><p>Utility for updating access/modification times of a
+	      file to current system time or other specified time,
+	      but also useful for creating a new file. The command
+	      <tt class="USERINPUT"><b>touch zzz</b></tt> will create a new file
+	      of zero length, named <tt class="FILENAME">zzz</tt>, assuming
+	      that <tt class="FILENAME">zzz</tt> did not previously exist.
+	      Time-stamping empty files in this way is useful for
+	      storing date information, for example in keeping track of
+	      modification times on a project.
+	      </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">touch</b> command is
+	      equivalent to <tt class="USERINPUT"><b>: &gt;&gt; newfile</b></tt>
+	      or <tt class="USERINPUT"><b>&gt;&gt; newfile</b></tt> (for ordinary
+	      files).</p></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Before doing a <a href="http://www.tldp.org/LDP/abs/html/basic.html#CPREF">cp -u</a>
+	      (<i class="FIRSTTERM">copy/update</i>), use
+	      <b class="COMMAND">touch</b> to update the time stamp of files
+	      you don't wish overwritten.</p><p>As an example, if the directory <tt class="FILENAME">/home/bozo/tax_audit</tt> contains the
+	      files <tt class="FILENAME">spreadsheet-051606.data</tt>,
+	      <tt class="FILENAME">spreadsheet-051706.data</tt>, and
+	      <tt class="FILENAME">spreadsheet-051806.data</tt>, then
+	      doing a <b class="COMMAND">touch spreadsheet*.data</b>
+	      will protect these files from being overwritten
+	      by files with the same names during a
+	      <b class="COMMAND">cp -u /home/bozo/financial_info/spreadsheet*data
+	      /home/bozo/tax_audit</b>.</p></td></tr></tbody></table></div></dd><dt><a name="ATREF"></a><b class="COMMAND">at</b></dt><dd><p>The <b class="COMMAND">at</b> job control command executes
+	      a given set of commands at a specified time. Superficially,
+	      it resembles <a href="http://www.tldp.org/LDP/abs/html/system.html#CRONREF">cron</a>, however,
+	      <b class="COMMAND">at</b> is chiefly useful for one-time execution
+	      of a command set.</p><p><tt class="USERINPUT"><b>at 2pm January 15</b></tt> prompts for a set of
+	      commands to execute at that time. These commands should be
+	      shell-script compatible, since, for all practical
+	      purposes, the user is typing in an executable shell
+	      script a line at a time.	Input terminates with a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#CTLDREF">Ctl-D</a>.</p><p>Using either the <tt class="OPTION">-f</tt> option or input
+	      redirection (<span class="TOKEN">&lt;</span>), <b class="COMMAND">at</b>
+	      reads a command list from a file. This file is an
+	      executable shell script, though it should, of course,
+	      be non-interactive. Particularly clever is including the
+	      <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#RUNPARTSREF">run-parts</a> command in
+	      the file to execute a different set of scripts.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>at 2:30 am Friday &lt; at-jobs.list</b></tt>
+<tt class="COMPUTEROUTPUT">job 2 at 2000-10-27 02:30</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p></dd><dt><a name="BATCHREF"></a><b class="COMMAND">batch</b></dt><dd><p>The <b class="COMMAND">batch</b> job control command is similar to
+	      <b class="COMMAND">at</b>, but it runs a command list when the system
+	      load drops below <tt class="LITERAL">.8</tt>. Like
+	      <b class="COMMAND">at</b>, it can read commands from a file with the
+	      <tt class="OPTION">-f</tt> option.</p><p><a name="BATCHPROCREF"></a></p><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN10811"></a><p></p><p>The concept of <i class="FIRSTTERM">batch processing</i>
+              dates back to the era of mainframe computers. It means
+              running a set of commands without user intervention.</p><p></p></div></td></tr></tbody></table></dd><dt><a name="CALREF"></a><b class="COMMAND">cal</b></dt><dd><p>Prints a neatly formatted monthly calendar to
+	      <tt class="FILENAME">stdout</tt>. Will do current year or a large
+	      range of past and future years.</p></dd><dt><a name="SLEEPREF"></a><b class="COMMAND">sleep</b></dt><dd><p>This is the shell equivalent of a <i class="FIRSTTERM">wait
+	      loop</i>. It pauses for a specified number of
+	      seconds, doing nothing. It can be useful for timing or
+	      in processes running in the background, checking for
+	      a specific event every so often (polling), as in <a href="http://www.tldp.org/LDP/abs/html/debugging.html#ONLINE">Example 32-6</a>.  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">sleep 3     # Pauses 3 seconds.</pre></font></td></tr></tbody></table>
+	    </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">sleep</b> command defaults to
+	      seconds, but minute, hours, or days may also be specified.
+	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">sleep 3 h   # Pauses 3 hours!</pre></font></td></tr></tbody></table>
+            </p></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <a href="http://www.tldp.org/LDP/abs/html/system.html#WATCHREF">watch</a> command may
+	      be a better choice than <b class="COMMAND">sleep</b> for running
+	      commands at timed intervals.</p></td></tr></tbody></table></div></dd><dt><a name="USLEEPREF"></a><b class="COMMAND">usleep</b></dt><dd><p><i class="FIRSTTERM">Microsleep</i> (the
+	      <i class="FIRSTTERM">u</i> may be read as the Greek
+	      <i class="FIRSTTERM">mu</i>, or <i class="FIRSTTERM">micro-</i>
+	      prefix). This is the same as <b class="COMMAND">sleep</b>,
+	      above, but <span class="QUOTE">"sleeps"</span> in microsecond
+	      intervals. It can be used for fine-grained timing,
+	      or for polling an ongoing process at very frequent
+	      intervals.</p><p>  
+	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">usleep 30     # Pauses 30 microseconds.</pre></font></td></tr></tbody></table>
+	    </p><p>This command is part of the Red Hat
+	    <i class="FIRSTTERM">initscripts / rc-scripts</i> package.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="timedata_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">usleep</b> command does not
+	      provide particularly accurate timing, and is therefore
+	      unsuitable for critical timing loops.</p></td></tr></tbody></table></div></dd><dt><a name="HWCLOCKREF"></a><b class="COMMAND">hwclock</b>, <a name="CLOCKREF"></a><b class="COMMAND">clock</b></dt><dd><p>The <b class="COMMAND">hwclock</b> command accesses or
+	      adjusts the machine's hardware clock. Some options
+	      require <i class="FIRSTTERM">root</i> privileges. The
+	      <tt class="FILENAME">/etc/rc.d/rc.sysinit</tt> startup file
+	      uses <b class="COMMAND">hwclock</b> to set the system time
+	      from the hardware clock at bootup.</p><p>The <b class="COMMAND">clock</b> command is a synonym for
+	      <b class="COMMAND">hwclock</b>.</p></dd></dl></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/moreadv.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/textproc.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Complex Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Text Processing Commands</td></tr></tbody></table></div></body></html>
