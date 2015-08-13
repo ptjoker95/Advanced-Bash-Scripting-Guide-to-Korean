@@ -1,28 +1,120 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Text Processing Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Time / Date Commands" href="http://www.tldp.org/LDP/abs/html/timedate.html"><link rel="NEXT" title="File and Archiving Commands" href="http://www.tldp.org/LDP/abs/html/filearchiv.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/timedate.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="TEXTPROC"></a>16.4. Text Processing Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="TPCOMMANDLISTING1"></a>Commands affecting text and
-	   text files</b></p><dl><dt><a name="SORTREF"></a><b class="COMMAND">sort</b></dt><dd><p>File sort utility, often used as a filter in a pipe. This
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Text Processing Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="PREVIOUS" title="Time / Date Commands" href="./timedate.html">
+<link rel="NEXT" title="File and Archiving Commands" href="./filearchiv.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./timedate.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./filearchiv.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="TEXTPROC">
+</a>16.4. Text Processing Commands</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="TPCOMMANDLISTING1">
+</a>Commands affecting text and
+	   text files</b>
+</p>
+<dl>
+<dt>
+<a name="SORTREF">
+</a>
+<b class="COMMAND">sort</b>
+</dt>
+<dd>
+<p>File sort utility, often used as a filter in a pipe. This
 	      command sorts a <i class="FIRSTTERM">text stream</i>
 	      or file forwards or backwards, or according to various
 	      keys or character positions. Using the <tt class="OPTION">-m</tt>
 	      option, it merges presorted input files.	The <i class="FIRSTTERM">info
 	      page</i> lists its many capabilities and options. See
-	      <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FINDSTRING">Example 11-10</a>, <a href="http://www.tldp.org/LDP/abs/html/loops1.html#SYMLINKS">Example 11-11</a>,
-	      and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#MAKEDICT">Example A-8</a>.</p></dd><dt><a name="TSORTREF"></a><b class="COMMAND">tsort</b></dt><dd><p><i class="FIRSTTERM">Topological sort</i>, reading in
+	      <a href="./loops1.html#FINDSTRING">Example 11-10</a>, <a href="./loops1.html#SYMLINKS">Example 11-11</a>,
+	      and <a href="./contributed-scripts.html#MAKEDICT">Example A-8</a>.</p>
+</dd>
+<dt>
+<a name="TSORTREF">
+</a>
+<b class="COMMAND">tsort</b>
+</dt>
+<dd>
+<p>
+<i class="FIRSTTERM">Topological sort</i>, reading in
 	      pairs of whitespace-separated strings and sorting
 	      according to input patterns. The original purpose of
 	      <b class="COMMAND">tsort</b> was to sort a list of dependencies
 	      for an obsolete version of the <i class="FIRSTTERM">ld</i>
-	      linker in an <span class="QUOTE">"ancient"</span> version of UNIX.</p><p>The results of a <i class="FIRSTTERM">tsort</i> will usually
+	      linker in an <span class="QUOTE">"ancient"</span> version of UNIX.</p>
+<p>The results of a <i class="FIRSTTERM">tsort</i> will usually
 	      differ markedly from those of the standard
-	      <b class="COMMAND">sort</b> command, above.</p></dd><dt><a name="UNIQREF"></a><b class="COMMAND">uniq</b></dt><dd><p>This filter removes duplicate lines from a sorted
+	      <b class="COMMAND">sort</b> command, above.</p>
+</dd>
+<dt>
+<a name="UNIQREF">
+</a>
+<b class="COMMAND">uniq</b>
+</dt>
+<dd>
+<p>This filter removes duplicate lines from a sorted
 	      file. It is often seen in a pipe coupled with
-	      <a href="http://www.tldp.org/LDP/abs/html/textproc.html#SORTREF">sort</a>.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat list-1 list-2 list-3 | sort | uniq &gt; final.list
+	      <a href="./textproc.html#SORTREF">sort</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cat list-1 list-2 list-3 | sort | uniq &gt; final.list
 # Concatenates the list files,
 # sorts them,
 # removes duplicate lines,
-# and finally writes the result to an output file.</pre></font></td></tr></tbody></table></p><p>The useful <tt class="OPTION">-c</tt> option prefixes each line of
-	       the input file with its number of occurrences.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat testfile</b></tt>
+# and finally writes the result to an output file.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The useful <tt class="OPTION">-c</tt> option prefixes each line of
+	       the input file with its number of occurrences.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This line occurs only once.
  This line occurs twice.
  This line occurs twice.
@@ -31,18 +123,32 @@
  This line occurs three times.</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>uniq -c testfile</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>uniq -c testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">      1 This line occurs only once.
        2 This line occurs twice.
        3 This line occurs three times.</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sort testfile | uniq -c | sort -nr</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>sort testfile | uniq -c | sort -nr</b>
+</tt>
 <tt class="COMPUTEROUTPUT">      3 This line occurs three times.
        2 This line occurs twice.
        1 This line occurs only once.</tt>
-	      </pre></font></td></tr></tbody></table>
-	     </p><p>The <tt class="USERINPUT"><b>sort INPUTFILE | uniq -c | sort -nr</b></tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	     </p>
+<p>The <tt class="USERINPUT">
+<b>sort INPUTFILE | uniq -c | sort -nr</b>
+</tt>
 	       command string produces a <i class="FIRSTTERM">frequency
 	       of occurrence</i> listing on the
 	       <tt class="FILENAME">INPUTFILE</tt> file (the
@@ -50,7 +156,19 @@
 	       cause a reverse numerical sort). This template finds
 	       use in analysis of log files and dictionary lists, and
 	       wherever the lexical structure of a document needs to
-	       be examined.</p><div class="EXAMPLE"><a name="WF"></a><p><b>Example 16-12. Word Frequency Analysis</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	       be examined.</p>
+<div class="EXAMPLE">
+<a name="WF">
+</a>
+<p>
+<b>Example 16-12. Word Frequency Analysis</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # wf.sh: Crude word frequency analysis on a text file.
 # This is a more efficient version of the "wf2.sh" script.
 
@@ -109,7 +227,23 @@ exit 0
 # 1) Add 'sed' commands to filter out other punctuation,
 #+   such as semicolons.
 # 2) Modify the script to also filter out multiple spaces and
-#+   other whitespace.</pre></font></td></tr></tbody></table></div><p>	       <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat testfile</b></tt>
+#+   other whitespace.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>	       <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This line occurs only once.
  This line occurs twice.
  This line occurs twice.
@@ -118,7 +252,10 @@ exit 0
  This line occurs three times.</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./wf.sh testfile</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>./wf.sh testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">      6 this
        6 occurs
        6 line
@@ -127,28 +264,98 @@ exit 0
        2 twice
        1 only
        1 once</tt>
-	       </pre></font></td></tr></tbody></table>
-	     </p></dd><dt><a name="EXPANDREF"></a><b class="COMMAND">expand</b>, <b class="COMMAND">unexpand</b></dt><dd><p>The <b class="COMMAND">expand</b> filter converts tabs to
-	      spaces. It is often used in a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a>.</p><p>The <b class="COMMAND">unexpand</b> filter
+	       </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	     </p>
+</dd>
+<dt>
+<a name="EXPANDREF">
+</a>
+<b class="COMMAND">expand</b>, <b class="COMMAND">unexpand</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">expand</b> filter converts tabs to
+	      spaces. It is often used in a <a href="./special-chars.html#PIPEREF">pipe</a>.</p>
+<p>The <b class="COMMAND">unexpand</b> filter
 	      converts spaces to tabs. This reverses the effect of
-	      <b class="COMMAND">expand</b>.</p></dd><dt><a name="CUTREF"></a><b class="COMMAND">cut</b></dt><dd><p>A tool for extracting <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#FIELDREF">fields</a> from files. It is similar
-	      to the <tt class="USERINPUT"><b>print $N</b></tt> command set in <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>, but more limited. It may be
+	      <b class="COMMAND">expand</b>.</p>
+</dd>
+<dt>
+<a name="CUTREF">
+</a>
+<b class="COMMAND">cut</b>
+</dt>
+<dd>
+<p>A tool for extracting <a href="./special-chars.html#FIELDREF">fields</a> from files. It is similar
+	      to the <tt class="USERINPUT">
+<b>print $N</b>
+</tt> command set in <a href="./awk.html#AWKREF">awk</a>, but more limited. It may be
 	      simpler to use <i class="FIRSTTERM">cut</i> in a script than
 	      <i class="FIRSTTERM">awk</i>. Particularly important are the
 	      <tt class="OPTION">-d</tt> (delimiter) and <tt class="OPTION">-f</tt>
-	      (field specifier) options.</p><p>Using <b class="COMMAND">cut</b> to obtain a listing of the
+	      (field specifier) options.</p>
+<p>Using <b class="COMMAND">cut</b> to obtain a listing of the
 	      mounted filesystems: 
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cut -d ' ' -f1,2 /etc/mtab</pre></font></td></tr></tbody></table></p><p>Using <b class="COMMAND">cut</b> to list the OS and kernel version:
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">uname -a | cut -d" " -f1,3,11,12</pre></font></td></tr></tbody></table></p><p>Using <b class="COMMAND">cut</b> to extract message headers from
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cut -d ' ' -f1,2 /etc/mtab</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Using <b class="COMMAND">cut</b> to list the OS and kernel version:
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">uname -a | cut -d" " -f1,3,11,12</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Using <b class="COMMAND">cut</b> to extract message headers from
 	      an e-mail folder:
 
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '^Subject:' read-messages | cut -c10-80</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep '^Subject:' read-messages | cut -c10-80</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Re: Linux suitable for mission-critical apps?
  MAKE MILLIONS WORKING AT HOME!!!
  Spam complaint
- Re: Spam complaint</tt></pre></font></td></tr></tbody></table>
-	    </p><p>Using <b class="COMMAND">cut</b> to parse a file:
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># List all the users in /etc/passwd.
+ Re: Spam complaint</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>Using <b class="COMMAND">cut</b> to parse a file:
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># List all the users in /etc/passwd.
 
 FILENAME=/etc/passwd
 
@@ -157,64 +364,226 @@ do
   echo $user
 done
 
-# Thanks, Oleg Philon for suggesting this.</pre></font></td></tr></tbody></table></p><p><tt class="USERINPUT"><b>cut -d ' ' -f2,3 filename</b></tt> is equivalent to
-	      <tt class="USERINPUT"><b>awk -F'[ ]' '{ print $2, $3 }' filename</b></tt></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>It is even possible to specify a linefeed as a
+# Thanks, Oleg Philon for suggesting this.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>cut -d ' ' -f2,3 filename</b>
+</tt> is equivalent to
+	      <tt class="USERINPUT">
+<b>awk -F'[ ]' '{ print $2, $3 }' filename</b>
+</tt>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>It is even possible to specify a linefeed as a
 	      delimiter. The trick is to actually embed a linefeed
-	      (<b class="KEYCAP">RETURN</b>) in the command sequence.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cut -d'
- ' -f3,7,19 testfile</b></tt>
+	      (<b class="KEYCAP">RETURN</b>) in the command sequence.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cut -d'
+ ' -f3,7,19 testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This is line 3 of testfile.
  This is line 7 of testfile.
  This is line 19 of testfile.</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p><p>Thank you, Jaka Kranjc, for pointing this out.</p></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/mathc.html#BASE">Example 16-48</a>.</p></dd><dt><a name="PASTEREF"></a><b class="COMMAND">paste</b></dt><dd><p>Tool for merging together different files into a single,
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>Thank you, Jaka Kranjc, for pointing this out.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./mathc.html#BASE">Example 16-48</a>.</p>
+</dd>
+<dt>
+<a name="PASTEREF">
+</a>
+<b class="COMMAND">paste</b>
+</dt>
+<dd>
+<p>Tool for merging together different files into a single,
 	      multi-column file.  In combination with
-	      <a href="http://www.tldp.org/LDP/abs/html/textproc.html#CUTREF">cut</a>, useful for creating system log
+	      <a href="./textproc.html#CUTREF">cut</a>, useful for creating system log
 	      files.
-	    </p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat items</b></tt>
+	    </p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat items</b>
+</tt>
 <tt class="COMPUTEROUTPUT">alphabet blocks
  building blocks
  cables</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat prices</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat prices</b>
+</tt>
 <tt class="COMPUTEROUTPUT">$1.00/dozen
  $2.50 ea.
  $3.75</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>paste items prices</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>paste items prices</b>
+</tt>
 <tt class="COMPUTEROUTPUT">alphabet blocks $1.00/dozen
  building blocks $2.50 ea.
- cables  $3.75</tt></pre></font></td></tr></tbody></table>
-	  </p></dd><dt><a name="JOINREF"></a><b class="COMMAND">join</b></dt><dd><p>Consider this a special-purpose cousin of
+ cables  $3.75</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+</dd>
+<dt>
+<a name="JOINREF">
+</a>
+<b class="COMMAND">join</b>
+</dt>
+<dd>
+<p>Consider this a special-purpose cousin of
 	      <b class="COMMAND">paste</b>. This powerful utility allows
 	      merging two files in a meaningful fashion, which essentially
-	      creates a simple version of a relational database.</p><p>The <b class="COMMAND">join</b> command operates on
+	      creates a simple version of a relational database.</p>
+<p>The <b class="COMMAND">join</b> command operates on
 	      exactly two files, but pastes together only those lines
-	      with a common tagged <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#FIELDREF">field</a>
+	      with a common tagged <a href="./special-chars.html#FIELDREF">field</a>
 	      (usually a numerical label), and writes the result to
 	      <tt class="FILENAME">stdout</tt>.  The files to be joined should
 	      be sorted according to the tagged field for the matchups
-	      to work properly.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">File: 1.data
+	      to work properly.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">File: 1.data
 
 100 Shoes
 200 Laces
-300 Socks</pre></font></td></tr></tbody></table></p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">File: 2.data
+300 Socks</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">File: 2.data
 
 100 $40.00
 200 $1.00
-300 $2.00</pre></font></td></tr></tbody></table></p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>join 1.data 2.data</b></tt>
+300 $2.00</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>join 1.data 2.data</b>
+</tt>
 <tt class="COMPUTEROUTPUT">File: 1.data 2.data
 
  100 Shoes $40.00
  200 Laces $1.00
  300 Socks $2.00</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The tagged field appears only once in the
-	      output.</p></td></tr></tbody></table></div></dd><dt><a name="HEADREF"></a><b class="COMMAND">head</b></dt><dd><p>lists the beginning of a file to <tt class="FILENAME">stdout</tt>.
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The tagged field appears only once in the
+	      output.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="HEADREF">
+</a>
+<b class="COMMAND">head</b>
+</dt>
+<dd>
+<p>lists the beginning of a file to <tt class="FILENAME">stdout</tt>.
 	      The default is <tt class="LITERAL">10</tt> lines, but a different
 	      number can be specified. The command has a number of
 	      interesting options.
 
-	    </p><div class="EXAMPLE"><a name="SCRIPTDETECTOR"></a><p><b>Example 16-13. Which files are scripts?</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	    </p>
+<div class="EXAMPLE">
+<a name="SCRIPTDETECTOR">
+</a>
+<p>
+<b>Example 16-13. Which files are scripts?</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # script-detector.sh: Detects scripts within a directory.
 
 TESTCHARS=2    # Test first 2 characters.
@@ -243,9 +612,26 @@ exit 0
 #
 #  2) As it stands, this script gives "false positives" for
 #+    Perl, awk, and other scripting language scripts.
-#     Correct this.</pre></font></td></tr></tbody></table></div>	    
+#     Correct this.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>	    
 
-	    <div class="EXAMPLE"><a name="RND"></a><p><b>Example 16-14. Generating 10-digit random numbers</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	    <div class="EXAMPLE">
+<a name="RND">
+</a>
+<p>
+<b>Example 16-14. Generating 10-digit random numbers</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # rnd.sh: Outputs a 10-digit random number
 
 # Script by Stephane Chazelas.
@@ -326,14 +712,41 @@ head -c4 /dev/urandom | od -N4 -tu4 | sed -ne '1s/.* //p'
 # An even simpler altenative to the above one-line script would be:
 #           head -c4 /dev/urandom| od -An -tu4
 
-exit</pre></font></td></tr></tbody></table></div>	    
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>	    
 
-	      See also <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#EX52">Example 16-39</a>.<p></p></dd><dt><a name="TAILREF"></a><b class="COMMAND">tail</b></dt><dd><p>lists the (tail) end of a file to <tt class="FILENAME">stdout</tt>.
+	      See also <a href="./filearchiv.html#EX52">Example 16-39</a>.<p>
+</p>
+</dd>
+<dt>
+<a name="TAILREF">
+</a>
+<b class="COMMAND">tail</b>
+</dt>
+<dd>
+<p>lists the (tail) end of a file to <tt class="FILENAME">stdout</tt>.
 	      The default is <tt class="LITERAL">10</tt> lines, but this can
 	      be changed with the <tt class="OPTION">-n</tt> option.
 	      Commonly used to keep track of
 	      changes to a system logfile, using the <tt class="OPTION">-f</tt>
-	      option, which outputs lines appended to the file.</p><div class="EXAMPLE"><a name="EX12"></a><p><b>Example 16-15. Using <i class="FIRSTTERM">tail</i> to monitor the system log</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      option, which outputs lines appended to the file.</p>
+<div class="EXAMPLE">
+<a name="EX12">
+</a>
+<p>
+<b>Example 16-15. Using <i class="FIRSTTERM">tail</i> to monitor the system log</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 filename=sys.log
 
@@ -347,57 +760,202 @@ tail /var/log/messages &gt; $filename
 
 echo "$filename contains tail end of system log."
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>To list a specific line of a text file,
-	        <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a> the output of
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>To list a specific line of a text file,
+	        <a href="./special-chars.html#PIPEREF">pipe</a> the output of
 	        <b class="COMMAND">head</b> to <b class="COMMAND">tail -n 1</b>.
-		For example <tt class="USERINPUT"><b>head -n 8 database.txt | tail
-		-n 1</b></tt> lists the 8th line of the file
-		<tt class="FILENAME">database.txt</tt>.</p><p>To set a variable to a given block of a text file:
-	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">var=$(head -n $m $filename | tail -n $n)
+		For example <tt class="USERINPUT">
+<b>head -n 8 database.txt | tail
+		-n 1</b>
+</tt> lists the 8th line of the file
+		<tt class="FILENAME">database.txt</tt>.</p>
+<p>To set a variable to a given block of a text file:
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">var=$(head -n $m $filename | tail -n $n)
 
 # filename = name of file
 # m = from beginning of file, number of lines to end of block
-# n = number of lines to set variable to (trim from end of block)</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Newer implementations of <b class="COMMAND">tail</b>
+# n = number of lines to set variable to (trim from end of block)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Newer implementations of <b class="COMMAND">tail</b>
 	        deprecate the older <b class="COMMAND">tail -$LINES
 	        filename</b> usage. The standard <b class="COMMAND">tail -n $LINES
-	        filename</b> is correct.</p></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX41">Example 16-5</a>, <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#EX52">Example 16-39</a> and
-		<a href="http://www.tldp.org/LDP/abs/html/debugging.html#ONLINE">Example 32-6</a>.</p></dd><dt><a name="GREPREF"></a><b class="COMMAND">grep</b></dt><dd><p>A multi-purpose file search tool that uses
-	      <a href="http://www.tldp.org/LDP/abs/html/regexp.html#REGEXREF">Regular Expressions</a>.
+	        filename</b> is correct.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./moreadv.html#EX41">Example 16-5</a>, <a href="./filearchiv.html#EX52">Example 16-39</a> and
+		<a href="./debugging.html#ONLINE">Example 32-6</a>.</p>
+</dd>
+<dt>
+<a name="GREPREF">
+</a>
+<b class="COMMAND">grep</b>
+</dt>
+<dd>
+<p>A multi-purpose file search tool that uses
+	      <a href="./regexp.html#REGEXREF">Regular Expressions</a>.
 	      It was originally a command/filter in the
 	      venerable <b class="COMMAND">ed</b> line editor:
-	      <tt class="USERINPUT"><b>g/re/p</b></tt> -- <i class="FIRSTTERM">global -
-	      regular expression - print</i>.</p><p></p><p><b class="COMMAND">grep</b>   <tt class="REPLACEABLE"><i>pattern</i></tt>  [<tt class="REPLACEABLE"><i>file</i></tt>...]</p>Search the target file(s) for
-	      occurrences of <tt class="REPLACEABLE"><i>pattern</i></tt>, where
-	      <tt class="REPLACEABLE"><i>pattern</i></tt> may be literal text
-	      or a Regular Expression.<p></p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '[rst]ystem.$' osinfo.txt</b></tt>
+	      <tt class="USERINPUT">
+<b>g/re/p</b>
+</tt> -- <i class="FIRSTTERM">global -
+	      regular expression - print</i>.</p>
+<p>
+</p>
+<p>
+<b class="COMMAND">grep</b>   <tt class="REPLACEABLE">
+<i>pattern</i>
+</tt>  [<tt class="REPLACEABLE">
+<i>file</i>
+</tt>...]</p>Search the target file(s) for
+	      occurrences of <tt class="REPLACEABLE">
+<i>pattern</i>
+</tt>, where
+	      <tt class="REPLACEABLE">
+<i>pattern</i>
+</tt> may be literal text
+	      or a Regular Expression.<p>
+</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep '[rst]ystem.$' osinfo.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p>If no target file(s) specified, <b class="COMMAND">grep</b>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>If no target file(s) specified, <b class="COMMAND">grep</b>
 	      works as a filter on <tt class="FILENAME">stdout</tt>, as in
-	      a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ps ax | grep clock</b></tt>
+	      a <a href="./special-chars.html#PIPEREF">pipe</a>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ps ax | grep clock</b>
+</tt>
 <tt class="COMPUTEROUTPUT">765 tty1     S      0:00 xclock
  901 pts/1    S      0:00 grep clock</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p>The <tt class="OPTION">-i</tt> option causes a case-insensitive
-	      search.</p><p>The <tt class="OPTION">-w</tt> option matches only whole
-	      words.</p><p>The <tt class="OPTION">-l</tt> option lists only the files in which
-	      matches were found, but not the matching lines.</p><p>The <tt class="OPTION">-r</tt> (recursive) option searches files in
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>The <tt class="OPTION">-i</tt> option causes a case-insensitive
+	      search.</p>
+<p>The <tt class="OPTION">-w</tt> option matches only whole
+	      words.</p>
+<p>The <tt class="OPTION">-l</tt> option lists only the files in which
+	      matches were found, but not the matching lines.</p>
+<p>The <tt class="OPTION">-r</tt> (recursive) option searches files in
 	      the current working directory and all subdirectories below
-	      it.</p><p>The <tt class="OPTION">-n</tt> option lists the matching lines,
-	      together with line numbers.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep -n Linux osinfo.txt</b></tt>
+	      it.</p>
+<p>The <tt class="OPTION">-n</tt> option lists the matching lines,
+	      together with line numbers.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep -n Linux osinfo.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">2:This is a file containing information about Linux.
  6:The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p>The <tt class="OPTION">-v</tt> (or <tt class="OPTION">--invert-match</tt>)
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>The <tt class="OPTION">-v</tt> (or <tt class="OPTION">--invert-match</tt>)
 	      option <i class="FIRSTTERM">filters out</i> matches.
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">grep pattern1 *.txt | grep -v pattern2
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">grep pattern1 *.txt | grep -v pattern2
 
 # Matches all lines in "*.txt" files containing "pattern1",
-# but ***not*** "pattern2".	      </pre></font></td></tr></tbody></table></p><p>The <tt class="OPTION">-c</tt> (<tt class="OPTION">--count</tt>)
+# but ***not*** "pattern2".	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The <tt class="OPTION">-c</tt> (<tt class="OPTION">--count</tt>)
 	      option gives a numerical count of matches, rather than
 	      actually listing the matches.
 
-	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">grep -c txt *.sgml   # (number of occurrences of "txt" in "*.sgml" files)
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">grep -c txt *.sgml   # (number of occurrences of "txt" in "*.sgml" files)
 
 
 #   grep -cz .
@@ -415,16 +973,34 @@ printf 'a b\nc  d\n\n\n\n\n\000\n\000e\000\000\nf' | grep -c '$'    # 9
 # Note that the -z option is GNU "grep" specific.
 
 
-# Thanks, S.C.</pre></font></td></tr></tbody></table>
-            </p><p>The <tt class="OPTION">--color</tt> (or <tt class="OPTION">--colour</tt>)
+# Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>The <tt class="OPTION">--color</tt> (or <tt class="OPTION">--colour</tt>)
 	      option marks the matching string in color (on the console
 	      or in an <i class="FIRSTTERM">xterm</i> window). Since
 	      <i class="FIRSTTERM">grep</i> prints out each entire line
 	      containing the matching pattern, this lets you see exactly
 	      <em>what</em> is being matched. See also
 	      the <tt class="OPTION">-o</tt> option, which shows only the
-	      matching portion of the line(s).</p><div class="EXAMPLE"><a name="FROMSH"></a><p><b>Example 16-16. Printing out the <i class="FIRSTTERM">From</i> lines in
-	        stored e-mail messages</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      matching portion of the line(s).</p>
+<div class="EXAMPLE">
+<a name="FROMSH">
+</a>
+<p>
+<b>Example 16-16. Printing out the <i class="FIRSTTERM">From</i> lines in
+	        stored e-mail messages</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # from.sh
 
 #  Emulates the useful 'from' utility in Solaris, BSD, etc.
@@ -448,25 +1024,84 @@ done
 exit $?
 
 #  You might wish to pipe the output of this script to 'more'
-#+ or redirect it to a file . . .</pre></font></td></tr></tbody></table></div><p>When invoked with more than one target file given,
+#+ or redirect it to a file . . .</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When invoked with more than one target file given,
 	      <b class="COMMAND">grep</b> specifies which file contains
-	      matches.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep Linux osinfo.txt misc.txt</b></tt>
+	      matches.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep Linux osinfo.txt misc.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">osinfo.txt:This is a file containing information about Linux.
  osinfo.txt:The GPL governs the distribution of the Linux operating system.
  misc.txt:The Linux operating system is steadily gaining in popularity.</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>To force <b class="COMMAND">grep</b> to show the filename
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>To force <b class="COMMAND">grep</b> to show the filename
 	      when searching only one target file, simply give
-	      <tt class="FILENAME">/dev/null</tt> as the second file.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep Linux osinfo.txt /dev/null</b></tt>
+	      <tt class="FILENAME">/dev/null</tt> as the second file.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep Linux osinfo.txt /dev/null</b>
+</tt>
 <tt class="COMPUTEROUTPUT">osinfo.txt:This is a file containing information about Linux.
  osinfo.txt:The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div><p>If there is a successful match, <b class="COMMAND">grep</b>
-	      returns an <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If there is a successful match, <b class="COMMAND">grep</b>
+	      returns an <a href="./exit-status.html#EXITSTATUSREF">exit status</a>
 	      of 0, which makes it useful in a condition test in a
 	      script, especially in combination with the <tt class="OPTION">-q</tt>
 	      option to suppress output.
-	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">SUCCESS=0                      # if grep lookup succeeds
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">SUCCESS=0                      # if grep lookup succeeds
 word=Linux
 filename=data.file
 
@@ -478,10 +1113,29 @@ then
   echo "$word found in $filename"
 else
   echo "$word not found in $filename"
-fi</pre></font></td></tr></tbody></table>
-            </p><p><a href="http://www.tldp.org/LDP/abs/html/debugging.html#ONLINE">Example 32-6</a> demonstrates how to use
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>
+<a href="./debugging.html#ONLINE">Example 32-6</a> demonstrates how to use
 	      <b class="COMMAND">grep</b> to search for a word pattern in
-	      a system logfile.</p><div class="EXAMPLE"><a name="GRP"></a><p><b>Example 16-17. Emulating <i class="FIRSTTERM">grep</i> in a script</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      a system logfile.</p>
+<div class="EXAMPLE">
+<a name="GRP">
+</a>
+<p>
+<b>Example 16-17. Emulating <i class="FIRSTTERM">grep</i> in a script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # grp.sh: Rudimentary reimplementation of grep.
 
 E_BADARGS=85
@@ -514,31 +1168,84 @@ exit 0
 # Exercises:
 # ---------
 # 1) Add newlines to output, if more than one match in any given file.
-# 2) Add features.</pre></font></td></tr></tbody></table></div><p>How can <b class="COMMAND">grep</b> search for two (or
+# 2) Add features.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>How can <b class="COMMAND">grep</b> search for two (or
 	      more) separate patterns? What if you want
 	      <b class="COMMAND">grep</b> to display all lines in a file
 	      or files that contain both <span class="QUOTE">"pattern1"</span>
-	      <em>and</em> <span class="QUOTE">"pattern2"</span>?</p><p>One method is to <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a> the result of <b class="COMMAND">grep
-	      pattern1</b> to <b class="COMMAND">grep pattern2</b>.</p><p>For example, given the following file:</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Filename: tstfile
+	      <em>and</em> <span class="QUOTE">"pattern2"</span>?</p>
+<p>One method is to <a href="./special-chars.html#PIPEREF">pipe</a> the result of <b class="COMMAND">grep
+	      pattern1</b> to <b class="COMMAND">grep pattern2</b>.</p>
+<p>For example, given the following file:</p>
+<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Filename: tstfile
 
 This is a sample file.
 This is an ordinary text file.
 This file does not contain any unusual text.
 This file is not unusual.
-Here is some text.</pre></font></td></tr></tbody></table>
-            </p><p>Now, let's search this file for lines containing
+Here is some text.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>Now, let's search this file for lines containing
 	      <em>both</em> <span class="QUOTE">"file"</span> and
-	      <span class="QUOTE">"text"</span> . . . </p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep file tstfile</b></tt>
+	      <span class="QUOTE">"text"</span> . . . </p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep file tstfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT"># Filename: tstfile
  This is a sample file.
  This is an ordinary text file.
  This file does not contain any unusual text.
  This file is not unusual.</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep file tstfile | grep text</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep file tstfile | grep text</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This is an ordinary text file.
- This file does not contain any unusual text.</tt></pre></font></td></tr></tbody></table><p>Now, for an interesting recreational use
-	      of <i class="FIRSTTERM">grep</i> . . .</p><div class="EXAMPLE"><a name="CWSOLVER"></a><p><b>Example 16-18. Crossword puzzle solver</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+ This file does not contain any unusual text.</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Now, for an interesting recreational use
+	      of <i class="FIRSTTERM">grep</i> . . .</p>
+<div class="EXAMPLE">
+<a name="CWSOLVER">
+</a>
+<p>
+<b>Example 16-18. Crossword puzzle solver</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # cw-solver.sh
 # This is actually a wrapper around a one-liner (line 46).
 
@@ -603,27 +1310,84 @@ $ sh cw-solver.sh w...i....n
 
 wellington
 workingman
-workingmen</pre></font></td></tr></tbody></table></div><p><a name="EGREPREF"></a><b class="COMMAND">egrep</b>
+workingmen</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="EGREPREF">
+</a>
+<b class="COMMAND">egrep</b>
 	      -- <i class="FIRSTTERM">extended grep</i> -- is the same
 	      as <b class="COMMAND">grep -E</b>. This uses a somewhat
-	      different, extended set of <a href="http://www.tldp.org/LDP/abs/html/regexp.html#REGEXREF">Regular
+	      different, extended set of <a href="./regexp.html#REGEXREF">Regular
 	      Expressions</a>, which can make the search a bit more
 	      flexible. It also allows the boolean |
 	      (<i class="FIRSTTERM">or</i>) operator.
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash $ </tt><tt class="USERINPUT"><b>egrep 'matches|Matches' file.txt</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash $ </tt>
+<tt class="USERINPUT">
+<b>egrep 'matches|Matches' file.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Line 1 matches.
  Line 3 Matches.
  Line 4 contains matches, but also Matches</tt>
-              </pre></font></td></tr></tbody></table>
-	      </p><p><a name="FGREPREF"></a><b class="COMMAND">fgrep</b> --
+              </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>
+<a name="FGREPREF">
+</a>
+<b class="COMMAND">fgrep</b> --
 	      <i class="FIRSTTERM">fast grep</i> -- is the same as
 	      <b class="COMMAND">grep -F</b>. It does a literal string search
-	      (no <a href="http://www.tldp.org/LDP/abs/html/regexp.html#REGEXREF">Regular Expressions</a>),
-	      which generally speeds things up a bit.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>On some Linux distros, <b class="COMMAND">egrep</b> and
+	      (no <a href="./regexp.html#REGEXREF">Regular Expressions</a>),
+	      which generally speeds things up a bit.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>On some Linux distros, <b class="COMMAND">egrep</b> and
 	      <b class="COMMAND">fgrep</b> are symbolic links to, or aliases for
 	      <b class="COMMAND">grep</b>, but invoked with the
 	      <tt class="OPTION">-E</tt> and <tt class="OPTION">-F</tt> options,
-	      respectively.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="DICTLOOKUP"></a><p><b>Example 16-19. Looking up definitions in <i class="CITETITLE">Webster's 1913 Dictionary</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      respectively.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="DICTLOOKUP">
+</a>
+<p>
+<b>Example 16-19. Looking up definitions in <i class="CITETITLE">Webster's 1913 Dictionary</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # dict-lookup.sh
 
 #  This script looks up definitions in the 1913 Webster's Dictionary.
@@ -707,26 +1471,99 @@ exit $?
 #   + from the command-line.
 #
 # 3)  Modify the script to parse one of the other available
-#   + Public Domain Dictionaries, such as the U.S. Census Bureau Gazetteer.</pre></font></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#QKY">Example A-41</a> for an example
+#   + Public Domain Dictionaries, such as the U.S. Census Bureau Gazetteer.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>See also <a href="./contributed-scripts.html#QKY">Example A-41</a> for an example
 	      of speedy <i class="FIRSTTERM">fgrep</i> lookup on a large
-	      text file.</p></td></tr></tbody></table></div><p><a name="AGREPREF"></a></p><p><b class="COMMAND">agrep</b> (<i class="FIRSTTERM">approximate
+	      text file.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="AGREPREF">
+</a>
+</p>
+<p>
+<b class="COMMAND">agrep</b> (<i class="FIRSTTERM">approximate
 	      grep</i>) extends the capabilities of
 	      <b class="COMMAND">grep</b> to approximate matching. The search
 	      string may differ by a specified number of characters
 	      from the resulting matches. This utility is not part of
-	      the core Linux distribution.</p><p><a name="ZEGREPREF"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>To search compressed files, use
+	      the core Linux distribution.</p>
+<p>
+<a name="ZEGREPREF">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>To search compressed files, use
 	      <b class="COMMAND">zgrep</b>, <b class="COMMAND">zegrep</b>, or
 	      <b class="COMMAND">zfgrep</b>. These also work on non-compressed
 	      files, though slower than plain <b class="COMMAND">grep</b>,
 	      <b class="COMMAND">egrep</b>, <b class="COMMAND">fgrep</b>.
 	      They are handy for searching through a mixed set of files,
-	      some compressed, some not.</p><p><a name="BZGREPREF"></a></p><p>To search <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#BZIPREF">bzipped</a>
-	      files, use <b class="COMMAND">bzgrep</b>.</p></td></tr></tbody></table></div></dd><dt><a name="LOOKREF"></a><b class="COMMAND">look</b></dt><dd><p>The command <b class="COMMAND">look</b> works like
+	      some compressed, some not.</p>
+<p>
+<a name="BZGREPREF">
+</a>
+</p>
+<p>To search <a href="./filearchiv.html#BZIPREF">bzipped</a>
+	      files, use <b class="COMMAND">bzgrep</b>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="LOOKREF">
+</a>
+<b class="COMMAND">look</b>
+</dt>
+<dd>
+<p>The command <b class="COMMAND">look</b> works like
 	      <b class="COMMAND">grep</b>, but does a lookup on
 	      a <span class="QUOTE">"dictionary,"</span> a sorted word list.
 	      By default, <b class="COMMAND">look</b> searches for a match
 	      in <tt class="FILENAME">/usr/dict/words</tt>, but a different
-	      dictionary file may be specified.</p><div class="EXAMPLE"><a name="LOOKUP"></a><p><b>Example 16-20. Checking words in a list for validity</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      dictionary file may be specified.</p>
+<div class="EXAMPLE">
+<a name="LOOKUP">
+</a>
+<p>
+<b>Example 16-20. Checking words in a list for validity</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # lookup: Does a dictionary lookup on each word in a data file.
 
 file=words.data  # Data file from which to read words to test.
@@ -769,20 +1606,98 @@ do if look "$word" &gt; /dev/null
    fi
 done &lt;"$file"
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><b class="COMMAND">sed</b>, <b class="COMMAND">awk</b></dt><dd><p>Scripting languages especially suited for parsing text
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<b class="COMMAND">sed</b>, <b class="COMMAND">awk</b>
+</dt>
+<dd>
+<p>Scripting languages especially suited for parsing text
 	      files and command output. May be embedded singly or in
-	      combination in pipes and shell scripts.</p></dd><dt><b class="COMMAND"><a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">sed</a></b></dt><dd><p>Non-interactive <span class="QUOTE">"stream editor"</span>, permits using
-	      many <b class="COMMAND">ex</b> commands in <a href="http://www.tldp.org/LDP/abs/html/timedate.html#BATCHPROCREF">batch</a> mode. It finds many
-	      uses in shell scripts.</p></dd><dt><b class="COMMAND"><a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a></b></dt><dd><p>Programmable file extractor and formatter, good for
-	      manipulating and/or extracting <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#FIELDREF">fields</a> (columns) in structured
-	      text files. Its syntax is similar to C.</p></dd><dt><a name="WCREF"></a><b class="COMMAND">wc</b></dt><dd><p><i class="FIRSTTERM">wc</i> gives a <span class="QUOTE">"word
+	      combination in pipes and shell scripts.</p>
+</dd>
+<dt>
+<b class="COMMAND">
+<a href="./sedawk.html#SEDREF">sed</a>
+</b>
+</dt>
+<dd>
+<p>Non-interactive <span class="QUOTE">"stream editor"</span>, permits using
+	      many <b class="COMMAND">ex</b> commands in <a href="./timedate.html#BATCHPROCREF">batch</a> mode. It finds many
+	      uses in shell scripts.</p>
+</dd>
+<dt>
+<b class="COMMAND">
+<a href="./awk.html#AWKREF">awk</a>
+</b>
+</dt>
+<dd>
+<p>Programmable file extractor and formatter, good for
+	      manipulating and/or extracting <a href="./special-chars.html#FIELDREF">fields</a> (columns) in structured
+	      text files. Its syntax is similar to C.</p>
+</dd>
+<dt>
+<a name="WCREF">
+</a>
+<b class="COMMAND">wc</b>
+</dt>
+<dd>
+<p>
+<i class="FIRSTTERM">wc</i> gives a <span class="QUOTE">"word
 	      count"</span> on a file or I/O stream:
 
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash $ </tt><tt class="USERINPUT"><b>wc /usr/share/doc/sed-4.1.2/README</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash $ </tt>
+<tt class="USERINPUT">
+<b>wc /usr/share/doc/sed-4.1.2/README</b>
+</tt>
 <tt class="COMPUTEROUTPUT">13  70  447 README</tt>
-[13 lines  70 words  447 characters]</pre></font></td></tr></tbody></table></p><p><tt class="USERINPUT"><b>wc -w</b></tt> gives only the word count.</p><p><tt class="USERINPUT"><b>wc -l</b></tt> gives only the line count.</p><p><tt class="USERINPUT"><b>wc -c</b></tt> gives only the byte count.</p><p><tt class="USERINPUT"><b>wc -m</b></tt> gives only the character count.</p><p><tt class="USERINPUT"><b>wc -L</b></tt> gives only the length of the longest line.</p><p>Using <b class="COMMAND">wc</b> to count how many
+[13 lines  70 words  447 characters]</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>wc -w</b>
+</tt> gives only the word count.</p>
+<p>
+<tt class="USERINPUT">
+<b>wc -l</b>
+</tt> gives only the line count.</p>
+<p>
+<tt class="USERINPUT">
+<b>wc -c</b>
+</tt> gives only the byte count.</p>
+<p>
+<tt class="USERINPUT">
+<b>wc -m</b>
+</tt> gives only the character count.</p>
+<p>
+<tt class="USERINPUT">
+<b>wc -L</b>
+</tt> gives only the length of the longest line.</p>
+<p>Using <b class="COMMAND">wc</b> to count how many
 	    <tt class="FILENAME">.txt</tt> files are in current working directory:
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">$ ls *.txt | wc -l
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">$ ls *.txt | wc -l
 #  Will work as long as none of the "*.txt" files
 #+ have a linefeed embedded in their name.
 
@@ -790,64 +1705,224 @@ exit 0</pre></font></td></tr></tbody></table></div></dd><dt><b class="COMMAND">s
 #      find . -maxdepth 1 -name \*.txt -print0 | grep -cz .
 #      (shopt -s nullglob; set -- *.txt; echo $#)
 
-#  Thanks, S.C.</pre></font></td></tr></tbody></table>
-	    </p><p>Using <b class="COMMAND">wc</b> to total up the size of all the
+#  Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>Using <b class="COMMAND">wc</b> to total up the size of all the
 	      files whose names begin with letters in the range d - h
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>wc [d-h]* | grep total | awk '{print $3}'</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>wc [d-h]* | grep total | awk '{print $3}'</b>
+</tt>
 <tt class="COMPUTEROUTPUT">71832</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>Using <b class="COMMAND">wc</b> to count the instances of the
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>Using <b class="COMMAND">wc</b> to count the instances of the
 	      word <span class="QUOTE">"Linux"</span> in the main source file for
 	      this book.
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep Linux abs-book.sgml | wc -l</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep Linux abs-book.sgml | wc -l</b>
+</tt>
 <tt class="COMPUTEROUTPUT">138</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>See also <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#EX52">Example 16-39</a> and <a href="http://www.tldp.org/LDP/abs/html/redircb.html#REDIR4">Example 20-8</a>.</p><p>Certain commands include some of the
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>See also <a href="./filearchiv.html#EX52">Example 16-39</a> and <a href="./redircb.html#REDIR4">Example 20-8</a>.</p>
+<p>Certain commands include some of the
 	      functionality of <b class="COMMAND">wc</b> as options.
 	      
-	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">... | grep foo | wc -l
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">... | grep foo | wc -l
 # This frequently used construct can be more concisely rendered.
 
 ... | grep -c foo
 # Just use the "-c" (or "--count") option of grep.
 
-# Thanks, S.C.</pre></font></td></tr></tbody></table></p></dd><dt><a name="TRREF"></a><b class="COMMAND">tr</b></dt><dd><p>character translation filter.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p><a href="http://www.tldp.org/LDP/abs/html/special-chars.html#UCREF">Must use quoting and/or
+# Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="TRREF">
+</a>
+<b class="COMMAND">tr</b>
+</dt>
+<dd>
+<p>character translation filter.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a href="./special-chars.html#UCREF">Must use quoting and/or
 	      brackets</a>, as appropriate. Quotes prevent the
 	      shell from reinterpreting the special characters in
 	      <b class="COMMAND">tr</b> command sequences. Brackets should be
-	      quoted to prevent expansion by the shell.  </p></td></tr></tbody></table></div><p>Either <tt class="USERINPUT"><b>tr "A-Z" "*" &lt;filename</b></tt>
-	      or <tt class="USERINPUT"><b>tr A-Z \* &lt;filename</b></tt> changes
+	      quoted to prevent expansion by the shell.  </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Either <tt class="USERINPUT">
+<b>tr "A-Z" "*" &lt;filename</b>
+</tt>
+	      or <tt class="USERINPUT">
+<b>tr A-Z \* &lt;filename</b>
+</tt> changes
 	      all the uppercase letters in <tt class="FILENAME">filename</tt>
 	      to asterisks (writes to <tt class="FILENAME">stdout</tt>).
-	      On some systems this may not work, but <tt class="USERINPUT"><b>tr A-Z
-	      '[**]'</b></tt> will.</p><p><a name="TROPTIONS"></a></p><p>The <tt class="OPTION">-d</tt> option deletes a range of
+	      On some systems this may not work, but <tt class="USERINPUT">
+<b>tr A-Z
+	      '[**]'</b>
+</tt> will.</p>
+<p>
+<a name="TROPTIONS">
+</a>
+</p>
+<p>The <tt class="OPTION">-d</tt> option deletes a range of
 	      characters.
-	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo "abcdef"                 # abcdef
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo "abcdef"                 # abcdef
 echo "abcdef" | tr -d b-d     # aef
 
 
 tr -d 0-9 &lt;filename
-# Deletes all digits from the file "filename".</pre></font></td></tr></tbody></table></p><p>The <tt class="OPTION">--squeeze-repeats</tt> (or
+# Deletes all digits from the file "filename".</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The <tt class="OPTION">--squeeze-repeats</tt> (or
               <tt class="OPTION">-s</tt>) option deletes all but the
               first instance of a string of consecutive characters.
-              This option is useful for removing excess <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#WHITESPACEREF">whitespace</a>.
+              This option is useful for removing excess <a href="./special-chars.html#WHITESPACEREF">whitespace</a>.
 
 
 
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "XXXXX" | tr --squeeze-repeats 'X'</b></tt>
-<tt class="COMPUTEROUTPUT">X</tt></pre></font></td></tr></tbody></table></p><p>The <tt class="OPTION">-c</tt> <span class="QUOTE">"complement"</span>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "XXXXX" | tr --squeeze-repeats 'X'</b>
+</tt>
+<tt class="COMPUTEROUTPUT">X</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The <tt class="OPTION">-c</tt> <span class="QUOTE">"complement"</span>
 	      option <i class="FIRSTTERM">inverts</i> the character set to
 	      match. With this option, <b class="COMMAND">tr</b> acts only
 	      upon those characters <em>not</em> matching
-	      the specified set.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "acfdeb123" | tr -c b-d +</b></tt>
-<tt class="COMPUTEROUTPUT">+c+d+b++++</tt></pre></font></td></tr></tbody></table>
-            </p><p>Note that <b class="COMMAND">tr</b> recognizes <a href="http://www.tldp.org/LDP/abs/html/x17129.html#POSIXREF">POSIX character classes</a>.
-	         <a name="AEN11502" href="#FTN.AEN11502"><span class="footnote">[1]</span></a>
-	      </p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "abcd2ef1" | tr '[:alpha:]' -</b></tt>
+	      the specified set.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "acfdeb123" | tr -c b-d +</b>
+</tt>
+<tt class="COMPUTEROUTPUT">+c+d+b++++</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>Note that <b class="COMMAND">tr</b> recognizes <a href="./x17129.html#POSIXREF">POSIX character classes</a>.
+	         <a name="AEN11502" href="#FTN.AEN11502">
+<span class="footnote">[1]</span>
+</a>
+	      </p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "abcd2ef1" | tr '[:alpha:]' -</b>
+</tt>
 <tt class="COMPUTEROUTPUT">----2--1</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><div class="EXAMPLE"><a name="EX49"></a><p><b>Example 16-21. <i class="FIRSTTERM">toupper</i>: Transforms a file
-	      to all uppercase.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="EXAMPLE">
+<a name="EX49">
+</a>
+<p>
+<b>Example 16-21. <i class="FIRSTTERM">toupper</i>: Transforms a file
+	      to all uppercase.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Changes a file to all uppercase.
 
 E_BADARGS=85
@@ -873,8 +1948,26 @@ exit 0
 #  Exercise:
 #  Rewrite this script to give the option of changing a file
 #+ to *either* upper or lowercase.
-#  Hint: Use either the "case" or "select" command.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="LOWERCASE"></a><p><b>Example 16-22. <i class="FIRSTTERM">lowercase</i>: Changes all
-	      filenames in working directory to lowercase.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  Hint: Use either the "case" or "select" command.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="LOWERCASE">
+</a>
+<p>
+<b>Example 16-22. <i class="FIRSTTERM">lowercase</i>: Changes all
+	      filenames in working directory to lowercase.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #
 #  Changes every filename in working directory to all lowercase.
 #
@@ -916,7 +2009,29 @@ do n=`echo "$filename/" | tr '[:upper:]' '[:lower:]'`
                      # Checks if filename already lowercase.
 done
 
-exit $?</pre></font></td></tr></tbody></table></div><p><a name="TRD2U"></a></p><div class="EXAMPLE"><a name="DU"></a><p><b>Example 16-23. <i class="FIRSTTERM">du</i>: DOS to UNIX text file conversion.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="TRD2U">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="DU">
+</a>
+<p>
+<b>Example 16-23. <i class="FIRSTTERM">du</i>: DOS to UNIX text file conversion.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Du.sh: DOS to UNIX text file converter.
 
 E_WRONGARGS=85
@@ -944,7 +2059,25 @@ exit 0
 
 # Exercise:
 # --------
-# Change the above script to convert from UNIX to DOS.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="ROT13"></a><p><b>Example 16-24. <i class="FIRSTTERM">rot13</i>: ultra-weak encryption.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Change the above script to convert from UNIX to DOS.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ROT13">
+</a>
+<p>
+<b>Example 16-24. <i class="FIRSTTERM">rot13</i>: ultra-weak encryption.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # rot13.sh: Classic rot13 algorithm,
 #           encryption that might fool a 3-year old
 #           for about 10 minutes.
@@ -957,7 +2090,25 @@ cat "$@" | tr 'a-zA-Z' 'n-za-mN-ZA-M'   # "a" goes to "n", "b" to "o" ...
 #  The   cat "$@"   construct
 #+ permits input either from stdin or from files.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="CRYPTOQUOTE"></a><p><b>Example 16-25. Generating <span class="QUOTE">"Crypto-Quote"</span> Puzzles</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="CRYPTOQUOTE">
+</a>
+<p>
+<b>Example 16-25. Generating <span class="QUOTE">"Crypto-Quote"</span> Puzzles</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # crypto-quote.sh: Encrypt quotes
 
 #  Will encrypt famous quotes in a simple monoalphabetic substitution.
@@ -999,24 +2150,99 @@ exit 0
 #  Exercise:
 #  --------
 #  Modify the script so that it will either encrypt or decrypt,
-#+ depending on command-line argument(s).</pre></font></td></tr></tbody></table></div><p><a name="JABH"></a>Of course, <i class="FIRSTTERM">tr</i>
+#+ depending on command-line argument(s).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="JABH">
+</a>Of course, <i class="FIRSTTERM">tr</i>
               lends itself to <i class="FIRSTTERM">code
-              obfuscation</i>.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+              obfuscation</i>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # jabh.sh
 
 x="wftedskaebjgdBstbdbsmnjgz"
 echo $x | tr "a-z" 'oh, turtleneck Phrase Jar!'
 
-# Based on the Wikipedia "Just another Perl hacker" article.</pre></font></td></tr></tbody></table></p><p><a name="TRVARIANTS"></a></p><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN11540"></a><p><b><i class="FIRSTTERM">tr</i> variants</b></p><p>	    The <b class="COMMAND">tr</b> utility has two historic
+# Based on the Wikipedia "Just another Perl hacker" article.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="TRVARIANTS">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN11540">
+</a>
+<p>
+<b>
+<i class="FIRSTTERM">tr</i> variants</b>
+</p>
+<p>	    The <b class="COMMAND">tr</b> utility has two historic
 	    variants. The BSD version does not use brackets
-	    (<tt class="USERINPUT"><b>tr a-z A-Z</b></tt>), but the SysV one does
-	    (<tt class="USERINPUT"><b>tr '[a-z]' '[A-Z]'</b></tt>). The GNU version
+	    (<tt class="USERINPUT">
+<b>tr a-z A-Z</b>
+</tt>), but the SysV one does
+	    (<tt class="USERINPUT">
+<b>tr '[a-z]' '[A-Z]'</b>
+</tt>). The GNU version
 	    of <b class="COMMAND">tr</b> resembles the BSD one.
-	    </p></div></td></tr></tbody></table></dd><dt><a name="FOLDREF"></a><b class="COMMAND">fold</b></dt><dd><p>A filter that wraps lines of input to a specified width.
+	    </p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>
+<a name="FOLDREF">
+</a>
+<b class="COMMAND">fold</b>
+</dt>
+<dd>
+<p>A filter that wraps lines of input to a specified width.
 	      This is especially useful with the <tt class="OPTION">-s</tt>
-	      option, which breaks lines at word spaces (see <a href="http://www.tldp.org/LDP/abs/html/textproc.html#EX50">Example 16-26</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#MAILFORMAT">Example A-1</a>).</p></dd><dt><a name="FMTREF"></a><b class="COMMAND">fmt</b></dt><dd><p>Simple-minded file formatter, used as a filter in a
+	      option, which breaks lines at word spaces (see <a href="./textproc.html#EX50">Example 16-26</a> and <a href="./contributed-scripts.html#MAILFORMAT">Example A-1</a>).</p>
+</dd>
+<dt>
+<a name="FMTREF">
+</a>
+<b class="COMMAND">fmt</b>
+</dt>
+<dd>
+<p>Simple-minded file formatter, used as a filter in a
 	      pipe to <span class="QUOTE">"wrap"</span> long lines of text
-	      output.</p><div class="EXAMPLE"><a name="EX50"></a><p><b>Example 16-26. Formatted file listing.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      output.</p>
+<div class="EXAMPLE">
+<a name="EX50">
+</a>
+<p>
+<b>Example 16-26. Formatted file listing.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 WIDTH=40                    # 40 columns wide.
 
@@ -1027,18 +2253,69 @@ echo $b | fmt -w $WIDTH
 # Could also have been done by
 #    echo $b | fold - -s -w $WIDTH
  
-exit 0</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX41">Example 16-5</a>.</p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>A powerful alternative to <b class="COMMAND">fmt</b> is
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./moreadv.html#EX41">Example 16-5</a>.</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>A powerful alternative to <b class="COMMAND">fmt</b> is
 	      Kamil Toman's <b class="COMMAND">par</b>
 	      utility, available from <a href="http://www.cs.berkeley.edu/%7Eamc/Par/" target="_top">http://www.cs.berkeley.edu/~amc/Par/</a>.
-	      </p></td></tr></tbody></table></div></dd><dt><a name="COLREF"></a><b class="COMMAND">col</b></dt><dd><p>This deceptively named filter removes reverse line feeds
+	      </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="COLREF">
+</a>
+<b class="COMMAND">col</b>
+</dt>
+<dd>
+<p>This deceptively named filter removes reverse line feeds
 	      from an input stream. It also attempts to replace
 	      whitespace with equivalent tabs. The chief use of
 	      <b class="COMMAND">col</b> is in filtering the output
 	      from certain text processing utilities, such as
-	      <b class="COMMAND">groff</b> and <b class="COMMAND">tbl</b>.</p></dd><dt><a name="COLUMNREF"></a><b class="COMMAND">column</b></dt><dd><p>Column formatter. This filter transforms list-type
+	      <b class="COMMAND">groff</b> and <b class="COMMAND">tbl</b>.</p>
+</dd>
+<dt>
+<a name="COLUMNREF">
+</a>
+<b class="COMMAND">column</b>
+</dt>
+<dd>
+<p>Column formatter. This filter transforms list-type
 	      text output into a <span class="QUOTE">"pretty-printed"</span> table
-	      by inserting tabs at appropriate places.</p><div class="EXAMPLE"><a name="COL"></a><p><b>Example 16-27. Using <i class="FIRSTTERM">column</i> to format a directory
-	        listing</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      by inserting tabs at appropriate places.</p>
+<div class="EXAMPLE">
+<a name="COL">
+</a>
+<p>
+<b>Example 16-27. Using <i class="FIRSTTERM">column</i> to format a directory
+	        listing</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # colms.sh
 # A minor modification of the example file in the "column" man page.
 
@@ -1053,24 +2330,82 @@ exit 0</pre></font></td></tr></tbody></table></div><p>See also <a href="http://w
 
 # The -t option to "column" pretty-prints a table.
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><a name="COLRMREF"></a><b class="COMMAND">colrm</b></dt><dd><p>Column removal filter. This removes columns (characters)
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="COLRMREF">
+</a>
+<b class="COMMAND">colrm</b>
+</dt>
+<dd>
+<p>Column removal filter. This removes columns (characters)
 	      from a file and writes the file, lacking the range of
 	      specified columns, back to <tt class="FILENAME">stdout</tt>.
-	      <tt class="USERINPUT"><b>colrm 2 4 &lt;filename</b></tt> removes the
+	      <tt class="USERINPUT">
+<b>colrm 2 4 &lt;filename</b>
+</tt> removes the
 	      second through fourth characters from each line of the
-	      text file <tt class="FILENAME">filename</tt>.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="textproc_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>If the file contains tabs or nonprintable
+	      text file <tt class="FILENAME">filename</tt>.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="textproc_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>If the file contains tabs or nonprintable
 	      characters, this may cause unpredictable
 	      behavior. In such cases, consider using
-	      <a href="http://www.tldp.org/LDP/abs/html/textproc.html#EXPANDREF">expand</a> and
+	      <a href="./textproc.html#EXPANDREF">expand</a> and
 	      <b class="COMMAND">unexpand</b> in a pipe preceding
-	      <b class="COMMAND">colrm</b>.</p></td></tr></tbody></table></div></dd><dt><a name="NLREF"></a><b class="COMMAND">nl</b></dt><dd><p>Line numbering filter: <tt class="USERINPUT"><b>nl filename</b></tt>
+	      <b class="COMMAND">colrm</b>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="NLREF">
+</a>
+<b class="COMMAND">nl</b>
+</dt>
+<dd>
+<p>Line numbering filter: <tt class="USERINPUT">
+<b>nl filename</b>
+</tt>
 	    lists <tt class="FILENAME">filename</tt> to
 	    <tt class="FILENAME">stdout</tt>, but inserts consecutive
 	    numbers at the beginning of each non-blank line. If
 	    <tt class="FILENAME">filename</tt> omitted, operates on
-	    <tt class="FILENAME">stdin.</tt></p><p>The output of <b class="COMMAND">nl</b> is very similar to
-	      <tt class="USERINPUT"><b>cat -b</b></tt>, since, by default
-	      <b class="COMMAND">nl</b> does not list blank lines.</p><div class="EXAMPLE"><a name="LNUM"></a><p><b>Example 16-28. <i class="FIRSTTERM">nl</i>: A self-numbering script.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	    <tt class="FILENAME">stdin.</tt>
+</p>
+<p>The output of <b class="COMMAND">nl</b> is very similar to
+	      <tt class="USERINPUT">
+<b>cat -b</b>
+</tt>, since, by default
+	      <b class="COMMAND">nl</b> does not list blank lines.</p>
+<div class="EXAMPLE">
+<a name="LNUM">
+</a>
+<p>
+<b>Example 16-28. <i class="FIRSTTERM">nl</i>: A self-numbering script.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # line-number.sh
 
 # This script echoes itself twice to stdout with its lines numbered.
@@ -1088,7 +2423,21 @@ cat -n `basename $0`
 # Note that 'nl -ba' will also do so.
 
 exit 0
-# -----------------------------------------------------------------</pre></font></td></tr></tbody></table></div></dd><dt><a name="PRREF"></a><b class="COMMAND">pr</b></dt><dd><p>Print formatting filter. This will paginate files
+# -----------------------------------------------------------------</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="PRREF">
+</a>
+<b class="COMMAND">pr</b>
+</dt>
+<dd>
+<p>Print formatting filter. This will paginate files
 	      (or <tt class="FILENAME">stdout</tt>) into sections suitable for
 	      hard copy printing or viewing on screen.	Various options
 	      permit row and column manipulation, joining lines, setting
@@ -1097,21 +2446,59 @@ exit 0
 	      command combines much of the functionality of
 	      <b class="COMMAND">nl</b>, <b class="COMMAND">paste</b>,
 	      <b class="COMMAND">fold</b>, <b class="COMMAND">column</b>, and
-	      <b class="COMMAND">expand</b>.</p><p><tt class="USERINPUT"><b>pr -o 5 --width=65 fileZZZ | more</b></tt>
+	      <b class="COMMAND">expand</b>.</p>
+<p>
+<tt class="USERINPUT">
+<b>pr -o 5 --width=65 fileZZZ | more</b>
+</tt>
 	     gives a nice paginated listing to screen of
 	     <tt class="FILENAME">fileZZZ</tt> with margins set at 5 and
-	     65.</p><p>A particularly useful option is <tt class="OPTION">-d</tt>,
+	     65.</p>
+<p>A particularly useful option is <tt class="OPTION">-d</tt>,
 	      forcing double-spacing (same effect as <b class="COMMAND">sed
-	      -G</b>).</p></dd><dt><a name="GETTEXTREF"></a><b class="COMMAND">gettext</b></dt><dd><p>The GNU <b class="COMMAND">gettext</b> package is a set of
-	      utilities for <a href="http://www.tldp.org/LDP/abs/html/localization.html">localizing</a>
+	      -G</b>).</p>
+</dd>
+<dt>
+<a name="GETTEXTREF">
+</a>
+<b class="COMMAND">gettext</b>
+</dt>
+<dd>
+<p>The GNU <b class="COMMAND">gettext</b> package is a set of
+	      utilities for <a href="./localization.html">localizing</a>
 	      and translating the text output of programs into foreign
 	      languages. While originally intended for C programs, it
 	      now supports quite a number of programming and scripting
-	      languages.</p><p>The  <b class="COMMAND">gettext</b>
+	      languages.</p>
+<p>The  <b class="COMMAND">gettext</b>
 	      <em>program</em> works on shell scripts. See
-	      the <tt class="REPLACEABLE"><i>info page</i></tt>.</p></dd><dt><a name="MSGFMTREF"></a><b class="COMMAND">msgfmt</b></dt><dd><p>A program for generating binary
-	      message catalogs. It is used for <a href="http://www.tldp.org/LDP/abs/html/localization.html">localization</a>.</p></dd><dt><a name="ICONVREF"></a><b class="COMMAND">iconv</b></dt><dd><p>A utility for converting file(s) to a different encoding
-	      (character set). Its chief use is for <a href="http://www.tldp.org/LDP/abs/html/localization.html">localization</a>.</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Convert a string from UTF-8 to UTF-16 and print to the BookList
+	      the <tt class="REPLACEABLE">
+<i>info page</i>
+</tt>.</p>
+</dd>
+<dt>
+<a name="MSGFMTREF">
+</a>
+<b class="COMMAND">msgfmt</b>
+</dt>
+<dd>
+<p>A program for generating binary
+	      message catalogs. It is used for <a href="./localization.html">localization</a>.</p>
+</dd>
+<dt>
+<a name="ICONVREF">
+</a>
+<b class="COMMAND">iconv</b>
+</dt>
+<dd>
+<p>A utility for converting file(s) to a different encoding
+	      (character set). Its chief use is for <a href="./localization.html">localization</a>.</p>
+<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Convert a string from UTF-8 to UTF-16 and print to the BookList
 function write_utf8_string {
     STRING=$1
     BOOKLIST=$2
@@ -1121,42 +2508,124 @@ function write_utf8_string {
 
 #  From Peter Knowles' "booklistgen.sh" script
 #+ for converting files to Sony Librie/PRS-50X format.
-#  (http://booklistgensh.peterknowles.com)</pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="RECODEREF"></a><b class="COMMAND">recode</b></dt><dd><p>Consider this a fancier version of
+#  (http://booklistgensh.peterknowles.com)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="RECODEREF">
+</a>
+<b class="COMMAND">recode</b>
+</dt>
+<dd>
+<p>Consider this a fancier version of
 	      <b class="COMMAND">iconv</b>, above. This very versatile utility
 	      for converting a file to a different encoding scheme.
 	      Note that <i class="FIRSTTERM">recode</i> is not part of the
-	      standard Linux installation.</p></dd><dt><a name="TEXREF"></a><b class="COMMAND">TeX</b>, <a name="GSREF"></a><b class="COMMAND">gs</b></dt><dd><p><b class="COMMAND">TeX</b> and <b class="COMMAND">Postscript</b>
+	      standard Linux installation.</p>
+</dd>
+<dt>
+<a name="TEXREF">
+</a>
+<b class="COMMAND">TeX</b>, <a name="GSREF">
+</a>
+<b class="COMMAND">gs</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">TeX</b> and <b class="COMMAND">Postscript</b>
 	      are text markup languages used for preparing copy for
-	      printing or formatted video display.</p><p><b class="COMMAND">TeX</b> is Donald Knuth's elaborate
+	      printing or formatted video display.</p>
+<p>
+<b class="COMMAND">TeX</b> is Donald Knuth's elaborate
 		typsetting system. It is often convenient to write a
 		shell script encapsulating all the options and arguments
-		passed to one of these markup languages.</p><p><i class="FIRSTTERM">Ghostscript</i>
+		passed to one of these markup languages.</p>
+<p>
+<i class="FIRSTTERM">Ghostscript</i>
 		(<b class="COMMAND">gs</b>) is a GPL-ed Postscript
-		interpreter.</p></dd><dt><a name="TEXEXECREF"></a><b class="COMMAND">texexec</b></dt><dd><p>Utility for processing <i class="FIRSTTERM">TeX</i> and
+		interpreter.</p>
+</dd>
+<dt>
+<a name="TEXEXECREF">
+</a>
+<b class="COMMAND">texexec</b>
+</dt>
+<dd>
+<p>Utility for processing <i class="FIRSTTERM">TeX</i> and
 	      <i class="FIRSTTERM">pdf</i> files. Found in
 	      <tt class="FILENAME">/usr/bin</tt>
-	      on many Linux distros, it is actually a <a href="http://www.tldp.org/LDP/abs/html/wrapper.html#SHWRAPPER">shell wrapper</a> that
-	      calls <a href="http://www.tldp.org/LDP/abs/html/wrapper.html#PERLREF">Perl</a> to invoke
-	      <i class="FIRSTTERM">Tex</i>.</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">texexec --pdfarrange --result=Concatenated.pdf *pdf
+	      on many Linux distros, it is actually a <a href="./wrapper.html#SHWRAPPER">shell wrapper</a> that
+	      calls <a href="./wrapper.html#PERLREF">Perl</a> to invoke
+	      <i class="FIRSTTERM">Tex</i>.</p>
+<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">texexec --pdfarrange --result=Concatenated.pdf *pdf
 
 #  Concatenates all the pdf files in the current working directory
 #+ into the merged file, Concatenated.pdf . . .
 #  (The --pdfarrange option repaginates a pdf file. See also --pdfcombine.)
-#  The above command-line could be parameterized and put into a shell script.</pre></font></td></tr></tbody></table> 
-            </p></dd><dt><a name="ENSCRIPTREF"></a><b class="COMMAND">enscript</b></dt><dd><p>Utility for converting plain text file to PostScript</p><p>For example, <b class="COMMAND">enscript filename.txt -p filename.ps</b>
+#  The above command-line could be parameterized and put into a shell script.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table> 
+            </p>
+</dd>
+<dt>
+<a name="ENSCRIPTREF">
+</a>
+<b class="COMMAND">enscript</b>
+</dt>
+<dd>
+<p>Utility for converting plain text file to PostScript</p>
+<p>For example, <b class="COMMAND">enscript filename.txt -p filename.ps</b>
 	      produces the PostScript output file
-	      <tt class="FILENAME">filename.ps</tt>.</p></dd><dt><a name="GROFFREF"></a><b class="COMMAND">groff</b>, <a name="TBLREF"></a><b class="COMMAND">tbl</b>, <a name="EQNREF"></a><b class="COMMAND">eqn</b></dt><dd><p>Yet another text markup and display formatting language
+	      <tt class="FILENAME">filename.ps</tt>.</p>
+</dd>
+<dt>
+<a name="GROFFREF">
+</a>
+<b class="COMMAND">groff</b>, <a name="TBLREF">
+</a>
+<b class="COMMAND">tbl</b>, <a name="EQNREF">
+</a>
+<b class="COMMAND">eqn</b>
+</dt>
+<dd>
+<p>Yet another text markup and display formatting language
 	      is <b class="COMMAND">groff</b>. This is the enhanced GNU version
 	      of the venerable UNIX <b class="COMMAND">roff/troff</b> display
-	      and typesetting package. <a href="http://www.tldp.org/LDP/abs/html/basic.html#MANREF">Manpages</a>
-	      use <b class="COMMAND">groff</b>.</p><p>The <b class="COMMAND">tbl</b> table processing utility
+	      and typesetting package. <a href="./basic.html#MANREF">Manpages</a>
+	      use <b class="COMMAND">groff</b>.</p>
+<p>The <b class="COMMAND">tbl</b> table processing utility
 	      is considered part of <b class="COMMAND">groff</b>, as its
 	      function is to convert table markup into
-	      <b class="COMMAND">groff</b> commands.</p><p>The <b class="COMMAND">eqn</b> equation processing utility
+	      <b class="COMMAND">groff</b> commands.</p>
+<p>The <b class="COMMAND">eqn</b> equation processing utility
 	      is likewise part of <b class="COMMAND">groff</b>, and
 	      its function is to convert equation markup into
-	      <b class="COMMAND">groff</b> commands.</p><div class="EXAMPLE"><a name="MANVIEW"></a><p><b>Example 16-29. <i class="FIRSTTERM">manview</i>: Viewing formatted manpages</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      <b class="COMMAND">groff</b> commands.</p>
+<div class="EXAMPLE">
+<a name="MANVIEW">
+</a>
+<p>
+<b>Example 16-29. <i class="FIRSTTERM">manview</i>: Viewing formatted manpages</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # manview.sh: Formats the source of a man page for viewing.
 
 #  This script is useful when writing man page source.
@@ -1184,12 +2653,84 @@ groff -Tascii -man $1 | less
 #
 #   Thanks, S.C.
 
-exit $?   # See also the "maned.sh" script.</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#MANED">Example A-39</a>.</p></dd><dt><a name="LEXREF"></a><b class="COMMAND">lex</b>, <a name="YACCREF"></a><b class="COMMAND">yacc</b></dt><dd><p><a name="FLEXREF"></a></p><p>The <b class="COMMAND">lex</b> lexical analyzer produces
+exit $?   # See also the "maned.sh" script.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./contributed-scripts.html#MANED">Example A-39</a>.</p>
+</dd>
+<dt>
+<a name="LEXREF">
+</a>
+<b class="COMMAND">lex</b>, <a name="YACCREF">
+</a>
+<b class="COMMAND">yacc</b>
+</dt>
+<dd>
+<p>
+<a name="FLEXREF">
+</a>
+</p>
+<p>The <b class="COMMAND">lex</b> lexical analyzer produces
 	      programs for pattern matching. This has been replaced
 	      by the nonproprietary <b class="COMMAND">flex</b> on Linux
-	      systems.</p><p><a name="BISONREF"></a></p><p>The <b class="COMMAND">yacc</b> utility creates a
+	      systems.</p>
+<p>
+<a name="BISONREF">
+</a>
+</p>
+<p>The <b class="COMMAND">yacc</b> utility creates a
 	      parser based on a set of specifications. This has been
 	      replaced by the nonproprietary <b class="COMMAND">bison</b>
-	      on Linux systems.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN11502" href="http://www.tldp.org/LDP/abs/html/textproc.html#AEN11502"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This is only true of the GNU version of
+	      on Linux systems.</p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN11502" href="./textproc.html#AEN11502">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>This is only true of the GNU version of
 		 <b class="COMMAND">tr</b>, not the generic version often found on
-		 commercial UNIX systems.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/timedate.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Time / Date Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">File and Archiving Commands</td></tr></tbody></table></div></body></html>
+		 commercial UNIX systems.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./timedate.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./filearchiv.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Time / Date Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">File and Archiving Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
