@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Time / Date Commands</title>
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
@@ -396,38 +396,35 @@ OneYearAgo=$(date --date='1 year ago')</pre>
 <b class="COMMAND">at</b>
 </dt>
 <dd>
-<p>The <b class="COMMAND">at</b> job control command executes
-	      a given set of commands at a specified time. Superficially,
-	      it resembles <a href="./system.html#CRONREF">cron</a>, however,
-	      <b class="COMMAND">at</b> is chiefly useful for one-time execution
-	      of a command set.</p>
+<p><b class="COMMAND">at</b> 작업 컨트롤 명령어는 특정한 시간에 주어진 명령어들을 
+실행합니다. 보기에는 
+<a href="./system.html#CRONREF">cron</a> 과 비슷하지만, 
+<b class="COMMAND">at</b> 은 주로 명령어 집합을 한번 사용할 때 유용합니다.</p>
 <p>
 <tt class="USERINPUT">
 <b>at 2pm January 15</b>
-</tt> prompts for a set of
-	      commands to execute at that time. These commands should be
-	      shell-script compatible, since, for all practical
-	      purposes, the user is typing in an executable shell
-	      script a line at a time.	Input terminates with a <a href="./special-chars.html#CTLDREF">Ctl-D</a>.</p>
-<p>Using either the <tt class="OPTION">-f</tt> option or input
-	      redirection (<span class="TOKEN">&lt;</span>), <b class="COMMAND">at</b>
-	      reads a command list from a file. This file is an
-	      executable shell script, though it should, of course,
-	      be non-interactive. Particularly clever is including the
-	      <a href="./extmisc.html#RUNPARTSREF">run-parts</a> command in
-	      the file to execute a different set of scripts.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</tt> 는 그 시간에 명령어들이 실행되도록합니다. 
+이 명령어들은 쉘 스크립트에서 실행할 수 있어야 합니다. 즉, 실질적으로 사용자가 
+한번에 한 줄씩 실행가능한 쉘 스크립트를 타이핑하는 것과 같습니다. 
+입력은 
+<a href="./special-chars.html#CTLDREF">Ctl-D</a> 로 종료할 수 있습니다.</p>
+<p>
+<tt class="OPTION">-f</tt> 이나 입력 리디렉션 
+(<span class="TOKEN">&lt;</span>) 을 사용하면, 
+<b class="COMMAND">at</b> 명령어는 파일로부터 명령어 리스트를 읽어들입니다. 
+이 파일은 실행 가능한 쉘 스크립트이며, 물론 대화 처리 식이어서는 안 됩니다. 
+파일 안에 스크립트의 다른 부분을 실행할 수 있는 
+<a href="./extmisc.html#RUNPARTSREF">실행</a> 명령어를 포함하는 것도 좋습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>at 2:30 am Friday &lt; at-jobs.list</b>
-</tt>
-<tt class="COMPUTEROUTPUT">job 2 at 2000-10-27 02:30</tt>
-	      </pre>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>at 2:30 am Friday &lt; at-jobs.list</b></tt>
+<tt class="COMPUTEROUTPUT">job 2 at 2000-10-27 02:30</tt></pre>
 </font>
 </td>
 </tr>
