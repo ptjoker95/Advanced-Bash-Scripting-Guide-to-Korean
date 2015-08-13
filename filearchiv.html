@@ -1,44 +1,190 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>File and Archiving Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Text Processing Commands" href="http://www.tldp.org/LDP/abs/html/textproc.html"><link rel="NEXT" title="Communications Commands" href="http://www.tldp.org/LDP/abs/html/communications.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/textproc.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/communications.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="FILEARCHIV"></a>16.5. File and Archiving Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="FAARCHIVING1"></a>Archiving</b></p><dl><dt><a name="TARREF"></a><b class="COMMAND">tar</b></dt><dd><p>The standard UNIX archiving utility.
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>File and Archiving Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href=",/index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href=",/external.html">
+<link rel="PREVIOUS" title="Text Processing Commands" href=",/textproc.html">
+<link rel="NEXT" title="Communications Commands" href=",/communications.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href=",/textproc.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href=",/communications.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="FILEARCHIV">
+</a>16.5. File and Archiving Commands</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FAARCHIVING1">
+</a>Archiving</b>
+</p>
+<dl>
+<dt>
+<a name="TARREF">
+</a>
+<b class="COMMAND">tar</b>
+</dt>
+<dd>
+<p>The standard UNIX archiving utility.
 
-	        <a name="AEN11885" href="#FTN.AEN11885"><span class="footnote">[1]</span></a>
+	        <a name="AEN11885" href="#FTN.AEN11885">
+<span class="footnote">[1]</span>
+</a>
 
 	      Originally a
 	      <i class="WORDASWORD">Tape ARchiving</i> program, it has
 	      developed into a general purpose package that can handle
 	      all manner of archiving with all types of destination
 	      devices, ranging from tape drives to regular files to even
-	      <tt class="FILENAME">stdout</tt> (see <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#EX58">Example 3-4</a>). GNU
+	      <tt class="FILENAME">stdout</tt> (see <a href=",/special-chars.html#EX58">Example 3-4</a>). GNU
 	      <i class="FIRSTTERM">tar</i> has been patched to accept
 	      various compression filters, for example: <b class="COMMAND">tar
 	      czvf archive_name.tar.gz *</b>, which recursively
-	      archives and <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#GZIPREF">gzips</a>
-	      all files in a directory tree except <a href="http://www.tldp.org/LDP/abs/html/basic.html#DOTFILESREF">dotfiles</a> in the current
-	      working directory (<a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#PWDREF">$PWD</a>).
+	      archives and <a href=",/filearchiv.html#GZIPREF">gzips</a>
+	      all files in a directory tree except <a href=",/basic.html#DOTFILESREF">dotfiles</a> in the current
+	      working directory (<a href=",/internalvariables.html#PWDREF">$PWD</a>).
 
-		<a name="AEN11896" href="#FTN.AEN11896"><span class="footnote">[2]</span></a>
-            </p><p>Some useful <b class="COMMAND">tar</b> options:  
-	      </p><p></p><ol type="1"><li><p><tt class="OPTION">-c</tt> create (a new
-		  archive)</p></li><li><p><tt class="OPTION">-x</tt> extract (files from
-		  existing archive)</p></li><li><p><tt class="OPTION">--delete</tt> delete (files
-		  from existing archive)</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>This option will not work on magnetic tape
-		  devices.</p></td></tr></tbody></table></div></li><li><p><tt class="OPTION">-r</tt> append (files to
-		  existing archive)</p></li><li><p><tt class="OPTION">-A</tt> append
+		<a name="AEN11896" href="#FTN.AEN11896">
+<span class="footnote">[2]</span>
+</a>
+            </p>
+<p>Some useful <b class="COMMAND">tar</b> options:  
+	      </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<tt class="OPTION">-c</tt> create (a new
+		  archive)</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-x</tt> extract (files from
+		  existing archive)</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">--delete</tt> delete (files
+		  from existing archive)</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>This option will not work on magnetic tape
+		  devices.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+<tt class="OPTION">-r</tt> append (files to
+		  existing archive)</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-A</tt> append
 		  (<i class="FIRSTTERM">tar</i> files to
-		  existing archive)</p></li><li><p><tt class="OPTION">-t</tt> list (contents of
-                  existing archive)</p></li><li><p><tt class="OPTION">-u</tt> update archive</p></li><li><p><tt class="OPTION">-d</tt> compare archive with
-		  specified filesystem</p></li><li><p><tt class="OPTION">--after-date</tt> only process
+		  existing archive)</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-t</tt> list (contents of
+                  existing archive)</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-u</tt> update archive</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-d</tt> compare archive with
+		  specified filesystem</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">--after-date</tt> only process
 		  files with a date stamp <em>after</em>
-		  specified date</p></li><li><p><tt class="OPTION">-z</tt> <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#GZIPREF">gzip</a> the archive</p><p>(compress or uncompress, depending on whether
+		  specified date</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-z</tt> <a href=",/filearchiv.html#GZIPREF">gzip</a> the archive</p>
+<p>(compress or uncompress, depending on whether
 		combined with the <tt class="OPTION">-c</tt> or
-		<tt class="OPTION">-x</tt>) option</p></li><li><p><tt class="OPTION">-j</tt>
-		  <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#BZIPREF">bzip2</a> the
-		  archive</p></li></ol>
-	      <p></p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>It may be difficult to recover data from a
+		<tt class="OPTION">-x</tt>) option</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-j</tt>
+		  <a href=",/filearchiv.html#BZIPREF">bzip2</a> the
+		  archive</p>
+</li>
+</ol>
+	      <p>
+</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>It may be difficult to recover data from a
 	      corrupted <i class="FIRSTTERM">gzipped</i> tar
 	      archive. When archiving important files, make multiple
-	      backups.</p></td></tr></tbody></table></div></dd><dt><a name="SHARREF"></a><b class="COMMAND">shar</b></dt><dd><p><i class="FIRSTTERM">Shell archiving</i> utility.
+	      backups.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SHARREF">
+</a>
+<b class="COMMAND">shar</b>
+</dt>
+<dd>
+<p>
+<i class="FIRSTTERM">Shell archiving</i> utility.
               The text and/or binary files in a shell archive are
               concatenated without compression, and the resultant
               archive is essentially a shell script, complete with
@@ -51,26 +197,99 @@
               but otherwise <b class="COMMAND">shar</b> has been replaced
               by <b class="COMMAND">tar</b>/<b class="COMMAND">gzip</b>.
               The <b class="COMMAND">unshar</b> command unpacks
-              <i class="FIRSTTERM">shar</i> archives.</p><p>The
+              <i class="FIRSTTERM">shar</i> archives.</p>
+<p>The
               <b class="COMMAND">mailshar</b> command is a Bash script that
               uses <b class="COMMAND">shar</b> to concatenate multiple files
               into a single one for e-mailing.
-              This script supports compression and <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#UUENCODEREF">uuencoding</a>.</p></dd><dt><a name="ARREF"></a><b class="COMMAND">ar</b></dt><dd><p>Creation and manipulation utility for archives, mainly
-	      used for binary object file libraries.</p></dd><dt><a name="RPMREF"></a><b class="COMMAND">rpm</b></dt><dd><p>The <i class="FIRSTTERM">Red Hat Package Manager</i>, or
+              This script supports compression and <a href=",/filearchiv.html#UUENCODEREF">uuencoding</a>.</p>
+</dd>
+<dt>
+<a name="ARREF">
+</a>
+<b class="COMMAND">ar</b>
+</dt>
+<dd>
+<p>아카이브를 만들고 조작함, 주로 바이너리 오브젝트 파일 라이브러리를 만드는 데 쓰임.</p>
+</dd>
+<dt>
+<a name="RPMREF">
+</a>
+<b class="COMMAND">rpm</b>
+</dt>
+<dd>
+<p>The <i class="FIRSTTERM">Red Hat Package Manager</i>, or
 	      <b class="COMMAND">rpm</b> utility provides a wrapper for
 	      source or binary archives. It includes commands for
 	      installing and checking the integrity of packages, among
-	      other things.</p><p>A simple <b class="COMMAND">rpm -i package_name.rpm</b>
+	      other things.</p>
+<p>A simple <b class="COMMAND">rpm -i package_name.rpm</b>
 	      usually suffices to install a package, though there are many
-	      more options available.</p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><tt class="USERINPUT"><b>rpm -qf</b></tt> identifies which package a
-	      file originates from.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rpm -qf /bin/ls</b></tt>
-<tt class="COMPUTEROUTPUT">coreutils-5.2.1-31</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><tt class="USERINPUT"><b>rpm -qa</b></tt> gives a
+	      more options available.</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<tt class="USERINPUT">
+<b>rpm -qf</b>
+</tt> identifies which package a
+	      file originates from.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rpm -qf /bin/ls</b></tt>
+<tt class="COMPUTEROUTPUT">coreutils-5.2.1-31</tt></pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<tt class="USERINPUT">
+<b>rpm -qa</b>
+</tt> gives a
 	      complete list of all installed <i class="FIRSTTERM">rpm</i> packages
-	      on a given system. An <tt class="USERINPUT"><b>rpm -qa package_name</b></tt>
+	      on a given system. An <tt class="USERINPUT">
+<b>rpm -qa package_name</b>
+</tt>
 	      lists only the package(s) corresponding to
-	      <tt class="FILENAME">package_name</tt>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rpm -qa</b></tt>
+	      <tt class="FILENAME">package_name</tt>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rpm -qa</b>
+</tt>
 <tt class="COMPUTEROUTPUT">redhat-logos-1.1.3-1
  glibc-2.2.4-13
  cracklib-2.7-12
@@ -83,11 +302,17 @@
  ...</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rpm -qa docbook-utils</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rpm -qa docbook-utils</b>
+</tt>
 <tt class="COMPUTEROUTPUT">docbook-utils-0.6.9-2</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rpm -qa docbook | grep docbook</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rpm -qa docbook | grep docbook</b>
+</tt>
 <tt class="COMPUTEROUTPUT">docbook-dtd31-sgml-1.0-10
  docbook-style-dsssl-1.64-3
  docbook-dtd30-sgml-1.0-10
@@ -95,15 +320,45 @@
  docbook-utils-pdf-0.6.9-2
  docbook-dtd41-sgml-1.0-10
  docbook-utils-0.6.9-2</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div></dd><dt><a name="CPIOREF"></a><b class="COMMAND">cpio</b></dt><dd><p>This specialized archiving copy command
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="CPIOREF">
+</a>
+<b class="COMMAND">cpio</b>
+</dt>
+<dd>
+<p>This specialized archiving copy command
 	      (<b class="COMMAND">c</b>o<b class="COMMAND">p</b>y
 	      <b class="COMMAND">i</b>nput and <b class="COMMAND">o</b>utput)
 	      is rarely seen any more, having been supplanted by
 	      <b class="COMMAND">tar</b>/<b class="COMMAND">gzip</b>. It still
 	      has its uses, such as moving a directory tree. With an
 	      appropriate block size (for copying) specified, it
-	      can be appreciably faster than <b class="COMMAND">tar</b>.</p><div class="EXAMPLE"><a name="EX48"></a><p><b>Example 16-30. Using <i class="FIRSTTERM">cpio</i> to move a directory tree</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      can be appreciably faster than <b class="COMMAND">tar</b>.</p>
+<div class="EXAMPLE">
+<a name="EX48">
+</a>
+<p>
+<b>Example 16-30. Using <i class="FIRSTTERM">cpio</i> to move a directory tree</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Copying a directory tree using cpio.
 
@@ -139,8 +394,34 @@ find "$source" -depth | cpio -admvp "$destination"
 #  Add code to check the exit status ($?) of the 'find | cpio' pipe
 #+ and output appropriate error messages if anything went wrong.
 
-exit $?</pre></font></td></tr></tbody></table></div></dd><dt><a name="RPM2CPIOREF"></a><b class="COMMAND">rpm2cpio</b></dt><dd><p>This command extracts a
-	      <b class="COMMAND">cpio</b> archive from an <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#RPMREF">rpm</a> one.</p><div class="EXAMPLE"><a name="DERPM"></a><p><b>Example 16-31. Unpacking an <i class="FIRSTTERM">rpm</i> archive</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="RPM2CPIOREF">
+</a>
+<b class="COMMAND">rpm2cpio</b>
+</dt>
+<dd>
+<p>This command extracts a
+	      <b class="COMMAND">cpio</b> archive from an <a href=",/filearchiv.html#RPMREF">rpm</a> one.</p>
+<div class="EXAMPLE">
+<a name="DERPM">
+</a>
+<p>
+<b>Example 16-31. Unpacking an <i class="FIRSTTERM">rpm</i> archive</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # de-rpm.sh: Unpack an 'rpm' archive
 
 : ${1?"Usage: `basename $0` target-file"}
@@ -160,12 +441,32 @@ exit 0
 #  Exercise:
 #  Add check for whether 1) "target-file" exists and
 #+                       2) it is an rpm archive.
-#  Hint:                    Parse output of 'file' command.</pre></font></td></tr></tbody></table></div></dd><dt><a name="PAXREF"></a><b class="COMMAND">pax</b></dt><dd><p>The <i class="FIRSTTERM">pax</i>
+#  Hint:                    Parse output of 'file' command.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="PAXREF">
+</a>
+<b class="COMMAND">pax</b>
+</dt>
+<dd>
+<p>The <i class="FIRSTTERM">pax</i>
             <b class="COMMAND">p</b>ortable <b class="COMMAND">a</b>rchive
             e<b class="COMMAND">x</b>change toolkit facilitates periodic
             file backups and is designed to be cross-compatible
             between various flavors of UNIX. It was designed
-	    to replace <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#TARREF">tar</a> and <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#CPIOREF">cpio</a>.</p><p>	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">pax -wf daily_backup.pax ~/linux-server/files 
+	    to replace <a href=",/filearchiv.html#TARREF">tar</a> and <a href=",/filearchiv.html#CPIOREF">cpio</a>.</p>
+<p>	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">pax -wf daily_backup.pax ~/linux-server/files 
 #  Creates a tar archive of all files in the target directory.
 #  Note that the options to pax must be in the correct order --
 #+ pax -fw     has an entirely different effect.
@@ -175,86 +476,303 @@ pax -f daily_backup.pax
 
 pax -rf daily_backup.pax ~/bsd-server/files
 #  Restores the backed-up files from the Linux machine
-#+ onto a BSD one.</pre></font></td></tr></tbody></table>
-	  </p><p>Note that <i class="FIRSTTERM">pax</i> handles many of
-            the standard archiving and compression commands.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="FACOMPRESSION1"></a>Compression</b></p><dl><dt><a name="GZIPREF"></a><b class="COMMAND">gzip</b></dt><dd><p>The standard GNU/UNIX compression utility, replacing
+#+ onto a BSD one.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>Note that <i class="FIRSTTERM">pax</i> handles many of
+            the standard archiving and compression commands.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FACOMPRESSION1">
+</a>Compression</b>
+</p>
+<dl>
+<dt>
+<a name="GZIPREF">
+</a>
+<b class="COMMAND">gzip</b>
+</dt>
+<dd>
+<p>The standard GNU/UNIX compression utility, replacing
 	      the inferior and proprietary
 	      <b class="COMMAND">compress</b>. The corresponding decompression
 	      command is <b class="COMMAND">gunzip</b>, which is the equivalent of
-	      <b class="COMMAND">gzip -d</b>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <tt class="OPTION">-c</tt> option sends the output of
+	      <b class="COMMAND">gzip -d</b>.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <tt class="OPTION">-c</tt> option sends the output of
 	      <b class="COMMAND">gzip</b> to <tt class="FILENAME">stdout</tt>. This
-	      is useful when <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">piping</a> to other
-	      commands.</p></td></tr></tbody></table></div><p><a name="ZCATREF"></a></p><p>The <b class="COMMAND">zcat</b> filter decompresses a
+	      is useful when <a href=",/special-chars.html#PIPEREF">piping</a> to other
+	      commands.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="ZCATREF">
+</a>
+</p>
+<p>The <b class="COMMAND">zcat</b> filter decompresses a
 	      <i class="FIRSTTERM">gzipped</i> file to
 	      <tt class="FILENAME">stdout</tt>, as possible input to a pipe or
 	      redirection. This is, in effect, a <b class="COMMAND">cat</b>
 	      command that works on compressed files (including files
-	      processed with the older <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#COMPRESSREF">compress</a>
+	      processed with the older <a href=",/filearchiv.html#COMPRESSREF">compress</a>
 	      utility). The <b class="COMMAND">zcat</b> command is equivalent to
-	      <b class="COMMAND">gzip -dc</b>.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>On some commercial UNIX systems, <b class="COMMAND">zcat</b>
+	      <b class="COMMAND">gzip -dc</b>.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>On some commercial UNIX systems, <b class="COMMAND">zcat</b>
 	      is a synonym for <b class="COMMAND">uncompress -c</b>,
 	      and will not work on <i class="FIRSTTERM">gzipped</i>
-	      files.</p></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/comparison-ops.html#EX14">Example 7-7</a>.</p></dd><dt><a name="BZIPREF"></a><b class="COMMAND">bzip2</b></dt><dd><p>An alternate compression utility, usually more efficient
+	      files.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href=",/comparison-ops.html#EX14">Example 7-7</a>.</p>
+</dd>
+<dt>
+<a name="BZIPREF">
+</a>
+<b class="COMMAND">bzip2</b>
+</dt>
+<dd>
+<p>An alternate compression utility, usually more efficient
 	      (but slower) than <b class="COMMAND">gzip</b>, especially on
 	      large files. The corresponding decompression command is
-	      <b class="COMMAND">bunzip2</b>.</p><p>Similar to the <b class="COMMAND">zcat</b> command,
+	      <b class="COMMAND">bunzip2</b>.</p>
+<p>Similar to the <b class="COMMAND">zcat</b> command,
 	      <b class="COMMAND">bzcat</b> decompresses a
 	      <i class="FIRSTTERM">bzipped2-ed</i> file to
-	      <tt class="FILENAME">stdout</tt>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Newer versions of <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#TARREF">tar</a> have been patched with
-	      <b class="COMMAND">bzip2</b> support.</p></td></tr></tbody></table></div></dd><dt><a name="COMPRESSREF"></a><b class="COMMAND">compress</b>, <a name="UNCOMPRESSREF"></a><b class="COMMAND">uncompress</b></dt><dd><p>This is an older, proprietary compression
+	      <tt class="FILENAME">stdout</tt>.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Newer versions of <a href=",/filearchiv.html#TARREF">tar</a> have been patched with
+	      <b class="COMMAND">bzip2</b> support.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="COMPRESSREF">
+</a>
+<b class="COMMAND">compress</b>, <a name="UNCOMPRESSREF">
+</a>
+<b class="COMMAND">uncompress</b>
+</dt>
+<dd>
+<p>This is an older, proprietary compression
 	      utility found in commercial UNIX distributions. The
 	      more efficient <b class="COMMAND">gzip</b> has largely
 	      replaced it. Linux distributions generally include a
 	      <b class="COMMAND">compress</b> workalike for compatibility,
 	      although <b class="COMMAND">gunzip</b> can unarchive files
-	      treated with <b class="COMMAND">compress</b>.</p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">znew</b> command transforms
+	      treated with <b class="COMMAND">compress</b>.</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <b class="COMMAND">znew</b> command transforms
 	      <i class="FIRSTTERM">compressed</i> files into
-	      <i class="FIRSTTERM">gzipped</i> ones.</p></td></tr></tbody></table></div></dd><dt><a name="SQREF"></a><b class="COMMAND">sq</b></dt><dd><p>Yet another compression (<b class="COMMAND">sq</b>ueeze)
+	      <i class="FIRSTTERM">gzipped</i> ones.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SQREF">
+</a>
+<b class="COMMAND">sq</b>
+</dt>
+<dd>
+<p>Yet another compression (<b class="COMMAND">sq</b>ueeze)
 	      utility, a filter that works only on sorted
-	      <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#ASCIIDEF">ASCII</a> word lists. It
+	      <a href=",/special-chars.html#ASCIIDEF">ASCII</a> word lists. It
 	      uses the standard invocation syntax for a filter,
 	      <b class="COMMAND">sq &lt; input-file &gt; output-file</b>.
-	      Fast, but not nearly as efficient as <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#GZIPREF">gzip</a>.  The corresponding
+	      Fast, but not nearly as efficient as <a href=",/filearchiv.html#GZIPREF">gzip</a>.  The corresponding
 	      uncompression filter is <b class="COMMAND">unsq</b>, invoked
-	      like <b class="COMMAND">sq</b>.</p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>The output of <b class="COMMAND">sq</b> may be
+	      like <b class="COMMAND">sq</b>.</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The output of <b class="COMMAND">sq</b> may be
 	        piped to <b class="COMMAND">gzip</b> for further
-		compression.</p></td></tr></tbody></table></div></dd><dt><a name="ZIPREF"></a><b class="COMMAND">zip</b>, <b class="COMMAND">unzip</b></dt><dd><p>Cross-platform file archiving and compression utility
+		compression.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="ZIPREF">
+</a>
+<b class="COMMAND">zip</b>, <b class="COMMAND">unzip</b>
+</dt>
+<dd>
+<p>Cross-platform file archiving and compression utility
 	      compatible with DOS <i class="FIRSTTERM">pkzip.exe</i>.
 	      <span class="QUOTE">"Zipped"</span> archives seem to be a more
 	      common medium of file exchange on the Internet than
-	      <span class="QUOTE">"tarballs."</span></p></dd><dt><a name="UNARCREF"></a><b class="COMMAND">unarc</b>, <b class="COMMAND">unarj</b>, <b class="COMMAND">unrar</b></dt><dd><p>These Linux utilities permit unpacking archives
+	      <span class="QUOTE">"tarballs."</span>
+</p>
+</dd>
+<dt>
+<a name="UNARCREF">
+</a>
+<b class="COMMAND">unarc</b>, <b class="COMMAND">unarj</b>, <b class="COMMAND">unrar</b>
+</dt>
+<dd>
+<p>These Linux utilities permit unpacking archives
 	      compressed with the DOS <i class="FIRSTTERM">arc.exe</i>,
 	      <i class="FIRSTTERM">arj.exe</i>, and
-	      <i class="FIRSTTERM">rar.exe</i> programs.</p></dd><dt><a name="LZMAREF"></a><b class="COMMAND">lzma</b>, <b class="COMMAND">unlzma</b>, <b class="COMMAND">lzcat</b></dt><dd><p>Highly efficient Lempel-Ziv-Markov compression.
+	      <i class="FIRSTTERM">rar.exe</i> programs.</p>
+</dd>
+<dt>
+<a name="LZMAREF">
+</a>
+<b class="COMMAND">lzma</b>, <b class="COMMAND">unlzma</b>, <b class="COMMAND">lzcat</b>
+</dt>
+<dd>
+<p>Highly efficient Lempel-Ziv-Markov compression.
 	      The syntax of <i class="FIRSTTERM">lzma</i> is similar to
               that of <i class="FIRSTTERM">gzip</i>. The <a href="http://www.7-zip.org/sdk.html" target="_top">7-zip Website</a>
-              has more information.</p></dd><dt><a name="XZREF"></a><b class="COMMAND">xz</b>, <b class="COMMAND">unxz</b>, <b class="COMMAND">xzcat</b></dt><dd><p>A new high-efficiency compression tool, backward compatible
+              has more information.</p>
+</dd>
+<dt>
+<a name="XZREF">
+</a>
+<b class="COMMAND">xz</b>, <b class="COMMAND">unxz</b>, <b class="COMMAND">xzcat</b>
+</dt>
+<dd>
+<p>A new high-efficiency compression tool, backward compatible
 	      with <i class="FIRSTTERM">lzma</i>, and with an invocation
 	      syntax similar to <i class="FIRSTTERM">gzip</i>. For
 	      more information, see the <a href="http://en.wikipedia.org/wiki/Xz" target="_top">Wikipedia
-	      entry</a>.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="FAINFORMATION1"></a>File Information</b></p><dl><dt><a name="FILEREF"></a><b class="COMMAND">file</b></dt><dd><p>A utility for identifying file types. The command
-	      <tt class="USERINPUT"><b>file file-name</b></tt> will return a
+	      entry</a>.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FAINFORMATION1">
+</a>File Information</b>
+</p>
+<dl>
+<dt>
+<a name="FILEREF">
+</a>
+<b class="COMMAND">file</b>
+</dt>
+<dd>
+<p>A utility for identifying file types. The command
+	      <tt class="USERINPUT">
+<b>file file-name</b>
+</tt> will return a
 	      file specification for <tt class="FILENAME">file-name</tt>,
 	      such as <tt class="COMPUTEROUTPUT">ascii text</tt> or
 	      <tt class="COMPUTEROUTPUT">data</tt>. It references
-	      the <a href="http://www.tldp.org/LDP/abs/html/sha-bang.html#MAGNUMREF">magic numbers</a>
+	      the <a href=",/sha-bang.html#MAGNUMREF">magic numbers</a>
 	      found in <tt class="FILENAME">/usr/share/magic</tt>,
 	      <tt class="FILENAME">/etc/magic</tt>, or
 	      <tt class="FILENAME">/usr/lib/magic</tt>, depending on the
-	      Linux/UNIX distribution.</p><p>The <tt class="OPTION">-f</tt> option causes
-	      <b class="COMMAND">file</b> to run in <a href="http://www.tldp.org/LDP/abs/html/timedate.html#BATCHPROCREF">batch</a> mode, to read from
+	      Linux/UNIX distribution.</p>
+<p>The <tt class="OPTION">-f</tt> option causes
+	      <b class="COMMAND">file</b> to run in <a href=",/timedate.html#BATCHPROCREF">batch</a> mode, to read from
 	      a designated file a list of filenames to analyze. The
 	      <tt class="OPTION">-z</tt> option, when used on a compressed
 	      target file, forces an attempt to analyze the uncompressed
-	      file type.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>file test.tar.gz</b></tt>
+	      file type.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>file test.tar.gz</b>
+</tt>
 <tt class="COMPUTEROUTPUT">test.tar.gz: gzip compressed data, deflated,
  last modified: Sun Sep 16 13:34:51 2001, os: Unix</tt>
 
-<tt class="PROMPT">bash </tt><tt class="USERINPUT"><b>file -z test.tar.gz</b></tt>
+<tt class="PROMPT">bash </tt>
+<tt class="USERINPUT">
+<b>file -z test.tar.gz</b>
+</tt>
 <tt class="COMPUTEROUTPUT">test.tar.gz: GNU tar archive (gzip compressed data, deflated,
  last modified: Sun Sep 16 13:34:51 2001, os: Unix)</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Find sh and Bash scripts in a given directory:
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Find sh and Bash scripts in a given directory:
 
 DIRECTORY=/usr/local/bin
 KEYWORD=Bourne
@@ -268,8 +786,25 @@ file $DIRECTORY/* | fgrep $KEYWORD
 # /usr/local/bin/burnit:           Bourne-Again shell script text executable
 # /usr/local/bin/cassette.sh:      Bourne shell script text executable
 # /usr/local/bin/copy-cd:          Bourne-Again shell script text executable
-# . . .</pre></font></td></tr></tbody></table>
-	    </p><div class="EXAMPLE"><a name="STRIPC"></a><p><b>Example 16-32. Stripping comments from C program files</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# . . .</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="EXAMPLE">
+<a name="STRIPC">
+</a>
+<p>
+<b>Example 16-32. Stripping comments from C program files</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # strip-comment.sh: Strips out the comments (/* COMMENT */) in a C program.
 
 E_NOARGS=0
@@ -347,24 +882,120 @@ esac
 #+ where there is a \", \\" ...),
 #+ the only way is to write a C parser (using lex or yacc perhaps?).
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><a name="WHICHREF"></a><b class="COMMAND">which</b></dt><dd><p><b class="COMMAND">which command</b> gives the full path
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="WHICHREF">
+</a>
+<b class="COMMAND">which</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">which command</b> gives the full path
 	      to <span class="QUOTE">"command."</span> This is useful for finding
 	      out whether a particular command or utility is installed
-	      on the system.</p><p><tt class="USERINPUT"><b>$bash which rm</b></tt>
-<table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">/usr/bin/rm</tt></pre></font></td></tr></tbody></table>
-	  </p><p>For an interesting use of this command, see <a href="http://www.tldp.org/LDP/abs/html/colorizing.html#HORSERACE">Example 36-16</a>.</p></dd><dt><a name="WHEREISREF"></a><b class="COMMAND">whereis</b></dt><dd><p>Similar to <b class="COMMAND">which</b>, above,
+	      on the system.</p>
+<p>
+<tt class="USERINPUT">
+<b>$bash which rm</b>
+</tt>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">/usr/bin/rm</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>For an interesting use of this command, see <a href=",/colorizing.html#HORSERACE">Example 36-16</a>.</p>
+</dd>
+<dt>
+<a name="WHEREISREF">
+</a>
+<b class="COMMAND">whereis</b>
+</dt>
+<dd>
+<p>Similar to <b class="COMMAND">which</b>, above,
 	      <b class="COMMAND">whereis command</b> gives the
 	      full path to <span class="QUOTE">"command,"</span> but also to its
-	      <a href="http://www.tldp.org/LDP/abs/html/basic.html#MANREF">manpage</a>.</p><p><tt class="USERINPUT"><b>$bash whereis rm</b></tt>
-<table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">rm: /bin/rm /usr/share/man/man1/rm.1.bz2</tt></pre></font></td></tr></tbody></table>
-	  </p></dd><dt><a name="WHATISREF"></a><b class="COMMAND">whatis</b></dt><dd><p><b class="COMMAND">whatis command</b> looks up
+	      <a href=",/basic.html#MANREF">manpage</a>.</p>
+<p>
+<tt class="USERINPUT">
+<b>$bash whereis rm</b>
+</tt>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">rm: /bin/rm /usr/share/man/man1/rm.1.bz2</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+</dd>
+<dt>
+<a name="WHATISREF">
+</a>
+<b class="COMMAND">whatis</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">whatis command</b> looks up
 	      <span class="QUOTE">"command"</span> in the
-	      <tt class="REPLACEABLE"><i>whatis</i></tt> database. This is useful
+	      <tt class="REPLACEABLE">
+<i>whatis</i>
+</tt> database. This is useful
 	      for identifying system commands and important configuration
 	      files. Consider it a simplified <b class="COMMAND">man</b>
-	      command.</p><p><tt class="USERINPUT"><b>$bash whatis whatis</b></tt>
-<table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">whatis               (1)  - search the whatis database for complete words</tt></pre></font></td></tr></tbody></table>
-	  </p><div class="EXAMPLE"><a name="WHAT"></a><p><b>Example 16-33. Exploring <tt class="FILENAME">/usr/X11R6/bin</tt></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      command.</p>
+<p>
+<tt class="USERINPUT">
+<b>$bash whatis whatis</b>
+</tt>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">whatis               (1)  - search the whatis database for complete words</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<div class="EXAMPLE">
+<a name="WHAT">
+</a>
+<p>
+<b>Example 16-33. Exploring <tt class="FILENAME">/usr/X11R6/bin</tt>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # What are all those mysterious binaries in /usr/X11R6/bin?
 
@@ -383,30 +1014,111 @@ exit 0
 #  You may wish to redirect output of this script, like so:
 #    ./what.sh &gt;&gt;whatis.db
 #  or view it a page at a time on stdout,
-#    ./what.sh | less</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FILEINFO">Example 11-3</a>.</p></dd><dt><a name="VDIRREF"></a><b class="COMMAND">vdir</b></dt><dd><p>Show a detailed directory listing. The effect is similar to
-	      <a href="http://www.tldp.org/LDP/abs/html/basic.html#LSREF">ls -lb</a>.</p><p>This is one of the GNU
-	    <i class="FIRSTTERM">fileutils</i>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>vdir</b></tt>
+#    ./what.sh | less</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href=",/loops1.html#FILEINFO">Example 11-3</a>.</p>
+</dd>
+<dt>
+<a name="VDIRREF">
+</a>
+<b class="COMMAND">vdir</b>
+</dt>
+<dd>
+<p>Show a detailed directory listing. The effect is similar to
+	      <a href=",/basic.html#LSREF">ls -lb</a>.</p>
+<p>This is one of the GNU
+	    <i class="FIRSTTERM">fileutils</i>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>vdir</b>
+</tt>
 <tt class="COMPUTEROUTPUT">total 10
  -rw-r--r--    1 bozo  bozo      4034 Jul 18 22:04 data1.xrolo
  -rw-r--r--    1 bozo  bozo      4602 May 25 13:58 data1.xrolo.bak
  -rw-r--r--    1 bozo  bozo       877 Dec 17  2000 employment.xrolo</tt>
 
-<tt class="PROMPT">bash </tt><tt class="USERINPUT"><b>ls -l</b></tt>
+<tt class="PROMPT">bash </tt>
+<tt class="USERINPUT">
+<b>ls -l</b>
+</tt>
 <tt class="COMPUTEROUTPUT">total 10
  -rw-r--r--    1 bozo  bozo      4034 Jul 18 22:04 data1.xrolo
  -rw-r--r--    1 bozo  bozo      4602 May 25 13:58 data1.xrolo.bak
  -rw-r--r--    1 bozo  bozo       877 Dec 17  2000 employment.xrolo</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p></dd><dt><a name="LOCATEREF"></a><b class="COMMAND">locate</b>, <a name="SLOCATEREF"></a><b class="COMMAND">slocate</b></dt><dd><p>The <b class="COMMAND">locate</b> command searches for
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</dd>
+<dt>
+<a name="LOCATEREF">
+</a>
+<b class="COMMAND">locate</b>, <a name="SLOCATEREF">
+</a>
+<b class="COMMAND">slocate</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">locate</b> command searches for
 	      files using a database stored for just that purpose. The
 	      <b class="COMMAND">slocate</b> command is the secure version of
 	      <b class="COMMAND">locate</b> (which may be aliased to
-	      <b class="COMMAND">slocate</b>).</p><p><tt class="USERINPUT"><b>$bash locate hickson</b></tt>
-<table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">/usr/lib/xephem/catalogs/hickson.edb</tt></pre></font></td></tr></tbody></table></p></dd><dt><a name="GETFACLREF"></a><b class="COMMAND">getfacl</b>, <a name="SETFACLREF"></a><b class="COMMAND">setfacl</b></dt><dd><p>These commands <i class="FIRSTTERM">retrieve</i> or
+	      <b class="COMMAND">slocate</b>).</p>
+<p>
+<tt class="USERINPUT">
+<b>$bash locate hickson</b>
+</tt>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">/usr/lib/xephem/catalogs/hickson.edb</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="GETFACLREF">
+</a>
+<b class="COMMAND">getfacl</b>, <a name="SETFACLREF">
+</a>
+<b class="COMMAND">setfacl</b>
+</dt>
+<dd>
+<p>These commands <i class="FIRSTTERM">retrieve</i> or
               <i class="FIRSTTERM">set</i> the <b class="COMMAND">f</b>ile
               <b class="COMMAND">a</b>ccess <b class="COMMAND">c</b>ontrol
               <b class="COMMAND">l</b>ist -- the <i class="FIRSTTERM">owner</i>,
-	      <i class="FIRSTTERM">group</i>, and file permissions.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>getfacl *</b></tt>
+	      <i class="FIRSTTERM">group</i>, and file permissions.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>getfacl *</b>
+</tt>
 <tt class="COMPUTEROUTPUT"># file: test1.txt
  # owner: bozo
  # group: bozgrp
@@ -423,8 +1135,14 @@ exit 0
  
 
  
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>setfacl -m u:bozo:rw yearly_budget.csv</b></tt>
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>getfacl yearly_budget.csv</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>setfacl -m u:bozo:rw yearly_budget.csv</b>
+</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>getfacl yearly_budget.csv</b>
+</tt>
 <tt class="COMPUTEROUTPUT"># file: yearly_budget.csv
  # owner: accountant
  # group: budgetgrp
@@ -434,23 +1152,73 @@ exit 0
  group::rw-
  mask::rw-
  other::r--</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="READLINKREF"></a><b class="COMMAND">readlink</b></dt><dd><p>Disclose the file that a symbolic link points to.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>readlink /usr/bin/awk</b></tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="READLINKREF">
+</a>
+<b class="COMMAND">readlink</b>
+</dt>
+<dd>
+<p>Disclose the file that a symbolic link points to.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>readlink /usr/bin/awk</b>
+</tt>
 <tt class="COMPUTEROUTPUT">../../bin/gawk</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="STRINGSREF"></a><b class="COMMAND">strings</b></dt><dd><p>Use the <b class="COMMAND">strings</b> command to find
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="STRINGSREF">
+</a>
+<b class="COMMAND">strings</b>
+</dt>
+<dd>
+<p>Use the <b class="COMMAND">strings</b> command to find
 	      printable strings in a binary or data file. It will list
 	      sequences of printable characters found in the target
 	      file. This might be handy for a quick 'n dirty examination
 	      of a core dump or for looking at an unknown graphic image
-	      file (<tt class="USERINPUT"><b>strings image-file | more</b></tt> might
+	      file (<tt class="USERINPUT">
+<b>strings image-file | more</b>
+</tt> might
 	      show something like <i class="FIRSTTERM">JFIF</i>,
 	      which would identify the file as a <i class="FIRSTTERM">jpeg</i>
 	      graphic). In a script, you would probably
 	      parse the output of <b class="COMMAND">strings</b>
-	      with <a href="http://www.tldp.org/LDP/abs/html/textproc.html#GREPREF">grep</a> or <a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">sed</a>. See <a href="http://www.tldp.org/LDP/abs/html/loops1.html#BINGREP">Example 11-8</a>
-	      and <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FINDSTRING">Example 11-10</a>.</p><div class="EXAMPLE"><a name="WSTRINGS"></a><p><b>Example 16-34. An <span class="QUOTE">"improved"</span>
-	      <i class="FIRSTTERM">strings</i> command</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      with <a href=",/textproc.html#GREPREF">grep</a> or <a href=",/sedawk.html#SEDREF">sed</a>. See <a href=",/loops1.html#BINGREP">Example 11-8</a>
+	      and <a href=",/loops1.html#FINDSTRING">Example 11-10</a>.</p>
+<div class="EXAMPLE">
+<a name="WSTRINGS">
+</a>
+<p>
+<b>Example 16-34. An <span class="QUOTE">"improved"</span>
+	      <i class="FIRSTTERM">strings</i> command</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # wstrings.sh: "word-strings" (enhanced "strings" command)
 #
 #  This script filters the output of "strings" by checking it
@@ -523,34 +1291,89 @@ do
                                       #+ "whole words" options. 
 done  
 
-exit $?</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="COMPARISONN1"></a>Comparison</b></p><dl><dt><a name="DIFFREF"></a><b class="COMMAND">diff</b>, <b class="COMMAND">patch</b></dt><dd><p><b class="COMMAND">diff</b>: flexible file comparison
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="COMPARISONN1">
+</a>Comparison</b>
+</p>
+<dl>
+<dt>
+<a name="DIFFREF">
+</a>
+<b class="COMMAND">diff</b>, <b class="COMMAND">patch</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">diff</b>: flexible file comparison
 	      utility. It compares the target files line-by-line
 	      sequentially.  In some applications, such as comparing
 	      word dictionaries, it may be helpful to filter the
-	      files through <a href="http://www.tldp.org/LDP/abs/html/textproc.html#SORTREF">sort</a>
+	      files through <a href=",/textproc.html#SORTREF">sort</a>
 	      and <b class="COMMAND">uniq</b> before piping them
-	      to <b class="COMMAND">diff</b>. <tt class="USERINPUT"><b>diff file-1
-	      file-2</b></tt> outputs the lines in the files that
+	      to <b class="COMMAND">diff</b>. <tt class="USERINPUT">
+<b>diff file-1
+	      file-2</b>
+</tt> outputs the lines in the files that
 	      differ, with carets showing which file each particular
-	      line belongs to.</p><p>The <tt class="OPTION">--side-by-side</tt> option to
+	      line belongs to.</p>
+<p>The <tt class="OPTION">--side-by-side</tt> option to
 	    <b class="COMMAND">diff</b> outputs each compared file, line by
 	    line, in separate columns, with non-matching lines marked. The
 	    <tt class="OPTION">-c</tt> and <tt class="OPTION">-u</tt> options likewise
-	    make the output of the command easier to interpret.</p><p>There are available various fancy frontends for
+	    make the output of the command easier to interpret.</p>
+<p>There are available various fancy frontends for
 	    <b class="COMMAND">diff</b>, such as <b class="COMMAND">sdiff</b>,
 	    <b class="COMMAND">wdiff</b>, <b class="COMMAND">xdiff</b>, and
-	    <b class="COMMAND">mgdiff</b>. </p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="DIFFERR2"></a>The <b class="COMMAND">diff</b>
+	    <b class="COMMAND">mgdiff</b>. </p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="DIFFERR2">
+</a>The <b class="COMMAND">diff</b>
               command returns an exit status of <span class="ERRORCODE">0</span>
               if the compared files are identical, and
               <span class="ERRORCODE">1</span> if they differ (or
               <span class="ERRORCODE">2</span> when <i class="FIRSTTERM">binary</i>
               files are being compared).  This permits use of
               <b class="COMMAND">diff</b> in a test construct within a shell
-              script (see below).</p></td></tr></tbody></table></div><p>A common use for <b class="COMMAND">diff</b> is generating
+              script (see below).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A common use for <b class="COMMAND">diff</b> is generating
 	      difference files to be used with <b class="COMMAND">patch</b>
 	      The <tt class="OPTION">-e</tt> option outputs files suitable
 	      for <b class="COMMAND">ed</b> or <b class="COMMAND">ex</b>
-	      scripts.</p><p><a name="PATCHREF"></a></p><p><b class="COMMAND">patch</b>: flexible versioning
+	      scripts.</p>
+<p>
+<a name="PATCHREF">
+</a>
+</p>
+<p>
+<b class="COMMAND">patch</b>: flexible versioning
 	      utility. Given a difference file generated by
 	      <b class="COMMAND">diff</b>, <b class="COMMAND">patch</b> can
 	      upgrade a previous version of a package to a newer version.
@@ -558,27 +1381,143 @@ exit $?</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div 
 	      small <span class="QUOTE">"diff"</span> file than the entire body of a
 	      newly revised package. Kernel <span class="QUOTE">"patches"</span> have
 	      become the preferred method of distributing the frequent
-	      releases of the Linux kernel.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">patch -p1 &lt;patch-file
+	      releases of the Linux kernel.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">patch -p1 &lt;patch-file
 # Takes all the changes listed in 'patch-file'
 # and applies them to the files referenced therein.
-# This upgrades to a newer version of the package.</pre></font></td></tr></tbody></table></p><p>Patching the kernel:</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cd /usr/src
+# This upgrades to a newer version of the package.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Patching the kernel:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cd /usr/src
 gzip -cd patchXX.gz | patch -p0
 # Upgrading kernel source using 'patch'.
 # From the Linux kernel docs "README",
-# by anonymous author (Alan Cox?).</pre></font></td></tr></tbody></table></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">diff</b> command can also
+# by anonymous author (Alan Cox?).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <b class="COMMAND">diff</b> command can also
 	      recursively compare directories (for the filenames
-	      present).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>diff -r ~/notes1 ~/notes2</b></tt>
+	      present).</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>diff -r ~/notes1 ~/notes2</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Only in /home/bozo/notes1: file02
  Only in /home/bozo/notes1: file03
  Only in /home/bozo/notes2: file04</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="ZDIFFREF"></a></p><p>Use <b class="COMMAND">zdiff</b> to compare
-	       <i class="FIRSTTERM">gzipped</i> files.</p></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="DIFFSTATREF"></a></p><p>Use <b class="COMMAND">diffstat</b> to create
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="ZDIFFREF">
+</a>
+</p>
+<p>Use <b class="COMMAND">zdiff</b> to compare
+	       <i class="FIRSTTERM">gzipped</i> files.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="DIFFSTATREF">
+</a>
+</p>
+<p>Use <b class="COMMAND">diffstat</b> to create
 	       a histogram (point-distribution graph) of output from
-	       <b class="COMMAND">diff</b>.</p></td></tr></tbody></table></div></dd><dt><a name="DIFF3REF"></a><b class="COMMAND">diff3</b>, <b class="COMMAND">merge</b></dt><dd><p>An extended version of <b class="COMMAND">diff</b> that compares
+	       <b class="COMMAND">diff</b>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="DIFF3REF">
+</a>
+<b class="COMMAND">diff3</b>, <b class="COMMAND">merge</b>
+</dt>
+<dd>
+<p>An extended version of <b class="COMMAND">diff</b> that compares
 	      three files at a time. This command returns an exit value
 	      of 0 upon successful execution, but unfortunately this gives
-	      no information about the results of the comparison.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>diff3 file-1 file-2 file-3</b></tt>
+	      no information about the results of the comparison.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>diff3 file-1 file-2 file-3</b>
+</tt>
 <tt class="COMPUTEROUTPUT">====
  1:1c
    This is line 1 of "file-1".
@@ -586,25 +1525,79 @@ gzip -cd patchXX.gz | patch -p0
    This is line 1 of "file-2".
  3:1c
    This is line 1 of "file-3"</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p><a name="MERGEREF"></a>The <b class="COMMAND">merge</b>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>
+<a name="MERGEREF">
+</a>The <b class="COMMAND">merge</b>
 	      (3-way file merge) command is an interesting adjunct to
 	      <i class="FIRSTTERM">diff3</i>. Its syntax is
-	      <tt class="USERINPUT"><b>merge Mergefile file1 file2</b></tt>.
+	      <tt class="USERINPUT">
+<b>merge Mergefile file1 file2</b>
+</tt>.
 	      The result is to output to <tt class="FILENAME">Mergefile</tt>
 	      the changes that lead from <tt class="FILENAME">file1</tt>
 	      to <tt class="FILENAME">file2</tt>. Consider this command
-	      a stripped-down version of <i class="FIRSTTERM">patch</i>.</p></dd><dt><a name="SDIFFREF"></a><b class="COMMAND">sdiff</b></dt><dd><p>Compare and/or edit two files in order to merge
+	      a stripped-down version of <i class="FIRSTTERM">patch</i>.</p>
+</dd>
+<dt>
+<a name="SDIFFREF">
+</a>
+<b class="COMMAND">sdiff</b>
+</dt>
+<dd>
+<p>Compare and/or edit two files in order to merge
 	      them into an output file. Because of its interactive nature,
-	      this command would find little use in a script.</p></dd><dt><a name="CMPREF"></a><b class="COMMAND">cmp</b></dt><dd><p>The <b class="COMMAND">cmp</b> command is a simpler version of
+	      this command would find little use in a script.</p>
+</dd>
+<dt>
+<a name="CMPREF">
+</a>
+<b class="COMMAND">cmp</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">cmp</b> command is a simpler version of
 	      <b class="COMMAND">diff</b>, above. Whereas <b class="COMMAND">diff</b>
 	      reports the differences between two files,
 	      <b class="COMMAND">cmp</b> merely shows at what point they
-	      differ.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Like <b class="COMMAND">diff</b>, <b class="COMMAND">cmp</b>
+	      differ.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Like <b class="COMMAND">diff</b>, <b class="COMMAND">cmp</b>
 	    returns an exit status of 0 if the compared files are
 	    identical, and 1 if they differ. This permits use in a test
-	    construct within a shell script.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="FILECOMP"></a><p><b>Example 16-35. Using <i class="FIRSTTERM">cmp</i> to compare two files
-	        within a script.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	    construct within a shell script.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="FILECOMP">
+</a>
+<p>
+<b>Example 16-35. Using <i class="FIRSTTERM">cmp</i> to compare two files
+	        within a script.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # file-comparison.sh
 
 ARGS=2  # Two args to script expected.
@@ -638,33 +1631,189 @@ else
   echo "File \"$1\" differs from file \"$2\"."
 fi
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Use <b class="COMMAND">zcmp</b> on
-	      <i class="FIRSTTERM">gzipped</i> files.</p></td></tr></tbody></table></div></dd><dt><a name="COMMREF"></a><b class="COMMAND">comm</b></dt><dd><p>Versatile file comparison utility. The files must be
-	      sorted for this to be useful.</p><p><b class="COMMAND">comm
-		<tt class="REPLACEABLE"><i>-options</i></tt>
-		<tt class="REPLACEABLE"><i>first-file</i></tt>
-		<tt class="REPLACEABLE"><i>second-file</i></tt></b></p><p><tt class="USERINPUT"><b>comm file-1 file-2</b></tt> outputs three columns:
-	      </p><p></p><ul><li><p>column 1 = lines unique to <tt class="FILENAME">file-1</tt></p></li><li><p>column 2 = lines unique to <tt class="FILENAME">file-2</tt></p></li><li><p>column 3 = lines common to both.</p></li></ul><p></p><p>The options allow suppressing output of one or more columns.
-	      </p><p></p><ul><li><p><tt class="OPTION">-1</tt> suppresses column
-		    <tt class="LITERAL">1</tt></p></li><li><p><tt class="OPTION">-2</tt> suppresses column
-		    <tt class="LITERAL">2</tt></p></li><li><p><tt class="OPTION">-3</tt> suppresses column
-		    <tt class="LITERAL">3</tt></p></li><li><p><tt class="OPTION">-12</tt> suppresses both columns
-		    <tt class="LITERAL">1</tt> and <tt class="LITERAL">2</tt>, etc.</p></li></ul>
-	    <p></p><p>This command is useful for comparing
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Use <b class="COMMAND">zcmp</b> on
+	      <i class="FIRSTTERM">gzipped</i> files.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="COMMREF">
+</a>
+<b class="COMMAND">comm</b>
+</dt>
+<dd>
+<p>Versatile file comparison utility. The files must be
+	      sorted for this to be useful.</p>
+<p>
+<b class="COMMAND">comm
+		<tt class="REPLACEABLE">
+<i>-options</i>
+</tt>
+		<tt class="REPLACEABLE">
+<i>first-file</i>
+</tt>
+		<tt class="REPLACEABLE">
+<i>second-file</i>
+</tt>
+</b>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>comm file-1 file-2</b>
+</tt> outputs three columns:
+	      </p>
+<p>
+</p>
+<ul>
+<li>
+<p>column 1 = lines unique to <tt class="FILENAME">file-1</tt>
+</p>
+</li>
+<li>
+<p>column 2 = lines unique to <tt class="FILENAME">file-2</tt>
+</p>
+</li>
+<li>
+<p>column 3 = lines common to both.</p>
+</li>
+</ul>
+<p>
+</p>
+<p>The options allow suppressing output of one or more columns.
+	      </p>
+<p>
+</p>
+<ul>
+<li>
+<p>
+<tt class="OPTION">-1</tt> suppresses column
+		    <tt class="LITERAL">1</tt>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-2</tt> suppresses column
+		    <tt class="LITERAL">2</tt>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-3</tt> suppresses column
+		    <tt class="LITERAL">3</tt>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-12</tt> suppresses both columns
+		    <tt class="LITERAL">1</tt> and <tt class="LITERAL">2</tt>, etc.</p>
+</li>
+</ul>
+	    <p>
+</p>
+<p>This command is useful for comparing
 	      <span class="QUOTE">"dictionaries"</span> or <i class="FIRSTTERM">word
 	      lists</i> -- sorted text files with one word per
-	      line.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="FAUTILS1"></a>Utilities</b></p><dl><dt><a name="BASENAMEREF"></a><b class="COMMAND">basename</b></dt><dd><p>Strips the path information from a file name, printing
-	      only the file name. The construction  <tt class="USERINPUT"><b>basename
-		$0</b></tt> lets the script know its name, that is, the name it
+	      line.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FAUTILS1">
+</a>Utilities</b>
+</p>
+<dl>
+<dt>
+<a name="BASENAMEREF">
+</a>
+<b class="COMMAND">basename</b>
+</dt>
+<dd>
+<p>Strips the path information from a file name, printing
+	      only the file name. The construction  <tt class="USERINPUT">
+<b>basename
+		$0</b>
+</tt> lets the script know its name, that is, the name it
 	      was invoked by. This can be used for <span class="QUOTE">"usage"</span> messages if, 
 	      for example a script is called with missing arguments:
-              <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo "Usage: `basename $0` arg1 arg2 ... argn"</pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="DIRNAMEREF"></a><b class="COMMAND">dirname</b></dt><dd><p>Strips the <b class="COMMAND">basename</b> from
-	    a filename, printing only the path information.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><b class="COMMAND">basename</b> and <b class="COMMAND">dirname</b>
+              <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo "Usage: `basename $0` arg1 arg2 ... argn"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="DIRNAMEREF">
+</a>
+<b class="COMMAND">dirname</b>
+</dt>
+<dd>
+<p>Strips the <b class="COMMAND">basename</b> from
+	    a filename, printing only the path information.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<b class="COMMAND">basename</b> and <b class="COMMAND">dirname</b>
 		can operate on any arbitrary string. The argument
 		does not need to refer to an existing file, or
-		even be a filename for that matter (see <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#DAYSBETWEEN">Example A-7</a>).</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX35"></a><p><b>Example 16-36. <i class="FIRSTTERM">basename</i> and
-	      <i class="FIRSTTERM">dirname</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		even be a filename for that matter (see <a href=",/contributed-scripts.html#DAYSBETWEEN">Example A-7</a>).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX35">
+</a>
+<p>
+<b>Example 16-36. <i class="FIRSTTERM">basename</i> and
+	      <i class="FIRSTTERM">dirname</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 address=/home/bozo/daily-journal.txt
 
@@ -674,12 +1823,41 @@ echo
 echo "My own home is `basename ~/`."         # `basename ~` also works.
 echo "The home of my home is `dirname ~/`."  # `dirname ~`  also works.
 
-exit 0</pre></font></td></tr></tbody></table></div></dd><dt><a name="SPLITREF"></a><b class="COMMAND">split</b>, <a name="CSPLITREF"></a><b class="COMMAND">csplit</b></dt><dd><p>These are utilities for splitting a file into smaller
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SPLITREF">
+</a>
+<b class="COMMAND">split</b>, <a name="CSPLITREF">
+</a>
+<b class="COMMAND">csplit</b>
+</dt>
+<dd>
+<p>These are utilities for splitting a file into smaller
 	      chunks. Their usual use is for splitting up large files
 	      in order to back them up on floppies or preparatory to
-	      e-mailing or uploading them.</p><p>The <b class="COMMAND">csplit</b> command splits a file
+	      e-mailing or uploading them.</p>
+<p>The <b class="COMMAND">csplit</b> command splits a file
 	      according to <i class="FIRSTTERM">context</i>, the split occuring
-	      where patterns are matched.</p><div class="EXAMPLE"><a name="SPLITCOPY"></a><p><b>Example 16-37. A script that copies itself in sections</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      where patterns are matched.</p>
+<div class="EXAMPLE">
+<a name="SPLITCOPY">
+</a>
+<p>
+<b>Example 16-37. A script that copies itself in sections</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # splitcopy.sh
 
 #  A script that splits itself into chunks,
@@ -703,11 +1881,46 @@ csplit "$0" "$CHUNKSIZE"
 cat "$OUTPREFIX"* &gt; "$0.copy"  # Concatenate the chunks.
 rm "$OUTPREFIX"*               # Get rid of the chunks.
 
-exit $?</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="FAENCENCR1"></a>Encoding and Encryption</b></p><dl><dt><a name="SUMREF"></a><b class="COMMAND">sum</b>, <a name="CKSUMREF"></a><b class="COMMAND">cksum</b>, <a name="MD5SUMREF"></a><b class="COMMAND">md5sum</b>, <a name="SHA1SUMREF"></a><b class="COMMAND">sha1sum</b></dt><dd><p><a name="CHECKSUMREF"></a>These are utilities for
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FAENCENCR1">
+</a>Encoding and Encryption</b>
+</p>
+<dl>
+<dt>
+<a name="SUMREF">
+</a>
+<b class="COMMAND">sum</b>, <a name="CKSUMREF">
+</a>
+<b class="COMMAND">cksum</b>, <a name="MD5SUMREF">
+</a>
+<b class="COMMAND">md5sum</b>, <a name="SHA1SUMREF">
+</a>
+<b class="COMMAND">sha1sum</b>
+</dt>
+<dd>
+<p>
+<a name="CHECKSUMREF">
+</a>These are utilities for
               generating <i class="FIRSTTERM">checksums</i>. A
 	      <i class="FIRSTTERM">checksum</i> is a number
 
-		<a name="AEN12840" href="#FTN.AEN12840"><span class="footnote">[3]</span></a>
+		<a name="AEN12840" href="#FTN.AEN12840">
+<span class="footnote">[3]</span>
+</a>
 
               mathematically calculated from the contents of a file,
               for the purpose of checking its integrity. A script might
@@ -719,27 +1932,82 @@ exit $?</pre></font></td></tr></tbody></table></div></dd></dl></div><p></p><div 
               check<b class="COMMAND">sum</b>) command, or better yet, the
               newer <b class="COMMAND">sha1sum</b> (Secure Hash Algorithm).
 
-	        <a name="AEN12849" href="#FTN.AEN12849"><span class="footnote">[4]</span></a>
-            </p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cksum /boot/vmlinuz</b></tt>
+	        <a name="AEN12849" href="#FTN.AEN12849">
+<span class="footnote">[4]</span>
+</a>
+            </p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cksum /boot/vmlinuz</b>
+</tt>
 <tt class="COMPUTEROUTPUT">1670054224 804083 /boot/vmlinuz</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo -n "Top Secret" | cksum</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo -n "Top Secret" | cksum</b>
+</tt>
 <tt class="COMPUTEROUTPUT">3391003827 10</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>md5sum /boot/vmlinuz</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>md5sum /boot/vmlinuz</b>
+</tt>
 <tt class="COMPUTEROUTPUT">0f43eccea8f09e0a0b2b5cf1dcf333ba  /boot/vmlinuz</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo -n "Top Secret" | md5sum</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo -n "Top Secret" | md5sum</b>
+</tt>
 <tt class="COMPUTEROUTPUT">8babc97a6f62a4649716f4df8d61728f  -</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <b class="COMMAND">cksum</b> command shows the size,
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <b class="COMMAND">cksum</b> command shows the size,
 	    in bytes, of its target, whether file or
-	    <tt class="FILENAME">stdout</tt>.</p><p>The <b class="COMMAND">md5sum</b> and
+	    <tt class="FILENAME">stdout</tt>.</p>
+<p>The <b class="COMMAND">md5sum</b> and
 	    <b class="COMMAND">sha1sum</b> commands display a
-	    <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#DASHREF2">dash</a> when they receive their input from
-	    <tt class="FILENAME">stdout</tt>.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="FILEINTEGRITY"></a><p><b>Example 16-38. Checking file integrity</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	    <a href=",/special-chars.html#DASHREF2">dash</a> when they receive their input from
+	    <tt class="FILENAME">stdout</tt>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="FILEINTEGRITY">
+</a>
+<p>
+<b>Example 16-38. Checking file integrity</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # file-integrity.sh: Checking whether files in a given directory
 #                    have been tampered with.
 
@@ -853,31 +2121,101 @@ exit 0
 
 #  For a much more thorough file integrity check,
 #+ consider the "Tripwire" package,
-#+ http://sourceforge.net/projects/tripwire/.</pre></font></td></tr></tbody></table></div><p>Also see <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#DIRECTORYINFO">Example A-19</a>, <a href="http://www.tldp.org/LDP/abs/html/colorizing.html#HORSERACE">Example 36-16</a>, and <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#RANDSTRING">Example 10-2</a> for
-	    creative uses of the <b class="COMMAND">md5sum</b> command.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>	    There have been reports that the 128-bit
+#+ http://sourceforge.net/projects/tripwire/.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Also see <a href=",/contributed-scripts.html#DIRECTORYINFO">Example A-19</a>, <a href=",/colorizing.html#HORSERACE">Example 36-16</a>, and <a href=",/string-manipulation.html#RANDSTRING">Example 10-2</a> for
+	    creative uses of the <b class="COMMAND">md5sum</b> command.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>	    There have been reports that the 128-bit
 	    <b class="COMMAND">md5sum</b> can be cracked, so the more secure
 	    160-bit <b class="COMMAND">sha1sum</b> is a welcome new addition
 	    to the checksum toolkit.
-          </p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>md5sum testfile</b></tt>
+          </p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>md5sum testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">e181e2c8720c60522c4c4c981108e367  testfile</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sha1sum testfile</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>sha1sum testfile</b>
+</tt>
 <tt class="COMPUTEROUTPUT">5d7425a9c08a66c3177f1e31286fa40986ffc996  testfile</tt>
-	      </pre></font></td></tr></tbody></table></td></tr></tbody></table></div><p>Security consultants have demonstrated that even
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Security consultants have demonstrated that even
 	      <b class="COMMAND">sha1sum</b> can be compromised. Fortunately,
 	      newer Linux distros include longer bit-length
 	      <b class="COMMAND">sha224sum</b>,
 	      <b class="COMMAND">sha256sum</b>,
 	      <b class="COMMAND">sha384sum</b>, and
-	      <b class="COMMAND">sha512sum</b> commands.</p></dd><dt><a name="UUENCODEREF"></a><b class="COMMAND">uuencode</b></dt><dd><p>This utility encodes binary files (images, sound files,
-		    compressed files, etc.) into <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#ASCIIDEF">ASCII</a> characters, making
+	      <b class="COMMAND">sha512sum</b> commands.</p>
+</dd>
+<dt>
+<a name="UUENCODEREF">
+</a>
+<b class="COMMAND">uuencode</b>
+</dt>
+<dd>
+<p>This utility encodes binary files (images, sound files,
+		    compressed files, etc.) into <a href=",/special-chars.html#ASCIIDEF">ASCII</a> characters, making
 		    them suitable for transmission in the body of an
 		    e-mail message or in a newsgroup posting. This is
 		    especially useful where MIME (multimedia) encoding
-		    is not available.</p></dd><dt><a name="UUDECODEREF"></a><b class="COMMAND">uudecode</b></dt><dd><p>This reverses the encoding, decoding
+		    is not available.</p>
+</dd>
+<dt>
+<a name="UUDECODEREF">
+</a>
+<b class="COMMAND">uudecode</b>
+</dt>
+<dd>
+<p>This reverses the encoding, decoding
 	      <i class="FIRSTTERM">uuencoded</i> files back into the
-	      original binaries.</p><div class="EXAMPLE"><a name="EX52"></a><p><b>Example 16-39. Uudecoding encoded files</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      original binaries.</p>
+<div class="EXAMPLE">
+<a name="EX52">
+</a>
+<p>
+<b>Example 16-39. Uudecoding encoded files</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Uudecodes all uuencoded files in current working directory.
 
 lines=35        # Allow 35 lines for the header (very generous).
@@ -907,20 +2245,62 @@ done
 #  Modify this script to check each file for a newsgroup header,
 #+ and skip to next if not found.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <a href="http://www.tldp.org/LDP/abs/html/textproc.html#FOLDREF">fold -s</a> command
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <a href=",/textproc.html#FOLDREF">fold -s</a> command
 	    may be useful (possibly in a pipe) to process long uudecoded
-	    text messages downloaded from Usenet newsgroups.</p></td></tr></tbody></table></div></dd><dt><a name="MIMENCODEREF"></a><b class="COMMAND">mimencode</b>, <a name="MMENCODEREF"></a><b class="COMMAND">mmencode</b></dt><dd><p>The <b class="COMMAND">mimencode</b> and
+	    text messages downloaded from Usenet newsgroups.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="MIMENCODEREF">
+</a>
+<b class="COMMAND">mimencode</b>, <a name="MMENCODEREF">
+</a>
+<b class="COMMAND">mmencode</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">mimencode</b> and
 	      <b class="COMMAND">mmencode</b> commands process
 	      multimedia-encoded e-mail attachments. Although
 	      <i class="FIRSTTERM">mail user agents</i> (such as
 	      <i class="FIRSTTERM">pine</i> or <i class="FIRSTTERM">kmail</i>)
 	      normally handle this automatically, these particular
 	      utilities permit manipulating such attachments manually from
-	      the command-line or in <a href="http://www.tldp.org/LDP/abs/html/timedate.html#BATCHPROCREF">batch
-	      processing mode</a> by means of a shell script.</p></dd><dt><a name="CRYPTREF"></a><b class="COMMAND">crypt</b></dt><dd><p>At one time, this was the standard UNIX file encryption
+	      the command-line or in <a href=",/timedate.html#BATCHPROCREF">batch
+	      processing mode</a> by means of a shell script.</p>
+</dd>
+<dt>
+<a name="CRYPTREF">
+</a>
+<b class="COMMAND">crypt</b>
+</dt>
+<dd>
+<p>At one time, this was the standard UNIX file encryption
 	      utility.
 
-              <a name="AEN12969" href="#FTN.AEN12969"><span class="footnote">[5]</span></a>
+              <a name="AEN12969" href="#FTN.AEN12969">
+<span class="footnote">[5]</span>
+</a>
 
 	      Politically-motivated government regulations
 	      prohibiting the export of encryption software resulted
@@ -929,10 +2309,23 @@ exit 0</pre></font></td></tr></tbody></table></div><div class="TIP"><p></p><tabl
 	      missing from most Linux distributions. Fortunately,
 	      programmers have come up with a number of decent
 	      alternatives to it, among them the author's very own <a href="ftp://metalab.unc.edu/pub/Linux/utils/file/cruft-0.2.tar.gz" target="_top">cruft</a>
-	      (see <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#ENCRYPTEDPW">Example A-4</a>).  </p></dd><dt><a name="OPENSSLREF"></a><b class="COMMAND">openssl</b></dt><dd><p>This is an Open Source implementation of
+	      (see <a href=",/contributed-scripts.html#ENCRYPTEDPW">Example A-4</a>).  </p>
+</dd>
+<dt>
+<a name="OPENSSLREF">
+</a>
+<b class="COMMAND">openssl</b>
+</dt>
+<dd>
+<p>This is an Open Source implementation of
              <i class="FIRSTTERM">Secure Sockets Layer</i> encryption.
 
-	     <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># To encrypt a file:
+	     <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># To encrypt a file:
 openssl aes-128-ecb -salt -in file.txt -out file.encrypted \
 -pass pass:my_password
 #          ^^^^^^^^^^^   User-selected password.
@@ -941,11 +2334,24 @@ openssl aes-128-ecb -salt -in file.txt -out file.encrypted \
 # To decrypt an openssl-encrypted file:
 openssl aes-128-ecb -d -salt -in file.encrypted -out file.txt \
 -pass pass:my_password
-#          ^^^^^^^^^^^   User-selected password.</pre></font></td></tr></tbody></table></p><p><a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">Piping</a>
-             <i class="FIRSTTERM">openssl</i> to/from <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#TARREF">tar</a> makes it possible to encrypt
+#          ^^^^^^^^^^^   User-selected password.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a href=",/special-chars.html#PIPEREF">Piping</a>
+             <i class="FIRSTTERM">openssl</i> to/from <a href=",/filearchiv.html#TARREF">tar</a> makes it possible to encrypt
              an entire directory tree.
      
-            <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># To encrypt a directory:
+            <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># To encrypt a directory:
 
 sourcedir="/home/bozo/testfiles"
 encrfile="encr-dir.tar.gz"
@@ -959,27 +2365,101 @@ openssl des3 -salt -out "$encrfile" -pass pass:"$password"
 # To decrypt the resulting tarball:
 openssl des3 -d -salt -in "$encrfile" -pass pass:"$password" |
 tar -xzv
-# Decrypts and unpacks into current working directory.</pre></font></td></tr></tbody></table>
+# Decrypts and unpacks into current working directory.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
 
-           </p><p>Of course, <i class="FIRSTTERM">openssl</i> has many other uses,
+           </p>
+<p>Of course, <i class="FIRSTTERM">openssl</i> has many other uses,
              such as obtaining signed <i class="FIRSTTERM">certificates</i>
-	     for Web sites. See the <a href="http://www.tldp.org/LDP/abs/html/basic.html#INFOREF">info</a>
-	     page.</p></dd><dt><a name="SHREDREF"></a><b class="COMMAND">shred</b></dt><dd><p>Securely erase a file by overwriting it multiple times with
+	     for Web sites. See the <a href=",/basic.html#INFOREF">info</a>
+	     page.</p>
+</dd>
+<dt>
+<a name="SHREDREF">
+</a>
+<b class="COMMAND">shred</b>
+</dt>
+<dd>
+<p>Securely erase a file by overwriting it multiple times with
 	      random bit patterns before deleting it. This command has
-	      the same effect as <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#BLOTOUT">Example 16-61</a>, but does it
-	      in a more thorough and elegant manner.</p><p>This is one of the GNU
-	    <i class="FIRSTTERM">fileutils</i>.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="filearchiv_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Advanced forensic technology may still be able to
+	      the same effect as <a href=",/extmisc.html#BLOTOUT">Example 16-61</a>, but does it
+	      in a more thorough and elegant manner.</p>
+<p>This is one of the GNU
+	    <i class="FIRSTTERM">fileutils</i>.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="filearchiv_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Advanced forensic technology may still be able to
 	      recover the contents of a file, even after application of
-	      <b class="COMMAND">shred</b>.</p></td></tr></tbody></table></div></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="FAMISC1"></a>Miscellaneous</b></p><dl><dt><a name="MKTEMPREF"></a><b class="COMMAND">mktemp</b></dt><dd><p>Create a <i class="FIRSTTERM">temporary file</i>
+	      <b class="COMMAND">shred</b>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="FAMISC1">
+</a>Miscellaneous</b>
+</p>
+<dl>
+<dt>
+<a name="MKTEMPREF">
+</a>
+<b class="COMMAND">mktemp</b>
+</dt>
+<dd>
+<p>Create a <i class="FIRSTTERM">temporary file</i>
 
-	       <a name="AEN13030" href="#FTN.AEN13030"><span class="footnote">[6]</span></a>
+	       <a name="AEN13030" href="#FTN.AEN13030">
+<span class="footnote">[6]</span>
+</a>
 
 	      with a <span class="QUOTE">"unique"</span> filename. When invoked
 	      from the command-line without additional arguments,
-	      it creates a zero-length file in the <tt class="FILENAME">/tmp</tt> directory.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>mktemp</b></tt>
+	      it creates a zero-length file in the <tt class="FILENAME">/tmp</tt> directory.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>mktemp</b>
+</tt>
 <tt class="COMPUTEROUTPUT">/tmp/tmp.zzsvql3154</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">PREFIX=filename
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">PREFIX=filename
 tempfile=`mktemp $PREFIX.XXXXXX`
 #                        ^^^^^^ Need at least 6 placeholders
 #+                              in the filename template.
@@ -993,59 +2473,225 @@ echo "tempfile name = $tempfile"
 #  Creates a file of that name in the current working directory
 #+ with 600 file permissions.
 #  A "umask 177" is therefore unnecessary,
-#+ but it's good programming practice nevertheless.</pre></font></td></tr></tbody></table></p></dd><dt><a name="MAKEREF"></a><b class="COMMAND">make</b></dt><dd><p><a name="MAKEFILEREF"></a></p><p>Utility for building and compiling binary packages. 
+#+ but it's good programming practice nevertheless.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="MAKEREF">
+</a>
+<b class="COMMAND">make</b>
+</dt>
+<dd>
+<p>
+<a name="MAKEFILEREF">
+</a>
+</p>
+<p>Utility for building and compiling binary packages. 
 	      This can also be used for any set of operations triggered
-	      by incremental changes in source files.</p><p>The <i class="FIRSTTERM">make</i> command checks a
+	      by incremental changes in source files.</p>
+<p>The <i class="FIRSTTERM">make</i> command checks a
 	    <tt class="FILENAME">Makefile</tt>, a list of file dependencies and
-	      operations to be carried out.</p><p>The <i class="FIRSTTERM">make</i> utility is, in effect,
+	      operations to be carried out.</p>
+<p>The <i class="FIRSTTERM">make</i> utility is, in effect,
 	      a powerful scripting language similar in many ways to
 	      <i class="FIRSTTERM">Bash</i>, but with the capability of
 	      recognizing <i class="FIRSTTERM">dependencies</i>. For in-depth
 	      coverage of this useful tool set, see the <a href="http://www.gnu.org/manual/manual.html" target="_top">GNU software
-	      documentation site</a>.</p></dd><dt><a name="INSTALLREF"></a><b class="COMMAND">install</b></dt><dd><p>Special purpose file copying command, similar to
-	      <a href="http://www.tldp.org/LDP/abs/html/basic.html#CPREF">cp</a>, but capable of
+	      documentation site</a>.</p>
+</dd>
+<dt>
+<a name="INSTALLREF">
+</a>
+<b class="COMMAND">install</b>
+</dt>
+<dd>
+<p>Special purpose file copying command, similar to
+	      <a href=",/basic.html#CPREF">cp</a>, but capable of
 	      setting permissions and attributes of the copied
 	      files. This command seems tailormade for installing
 	      software packages, and as such it shows up frequently in
-	      <tt class="FILENAME">Makefiles</tt> (in the <tt class="REPLACEABLE"><i>make
-	      install :</i></tt> section). It could likewise prove
-	      useful in installation scripts.</p></dd><dt><a name="DOS2UNIXREF"></a><b class="COMMAND">dos2unix</b></dt><dd><p>This utility, written by Benjamin Lin and collaborators,
+	      <tt class="FILENAME">Makefiles</tt> (in the <tt class="REPLACEABLE">
+<i>make
+	      install :</i>
+</tt> section). It could likewise prove
+	      useful in installation scripts.</p>
+</dd>
+<dt>
+<a name="DOS2UNIXREF">
+</a>
+<b class="COMMAND">dos2unix</b>
+</dt>
+<dd>
+<p>This utility, written by Benjamin Lin and collaborators,
 	      converts DOS-formatted text files (lines terminated by
 	      CR-LF) to UNIX format (lines terminated by LF only),
-	      and <a href="http://www.tldp.org/LDP/abs/html/gotchas.html#DOSNEWLINES">vice-versa</a>.</p></dd><dt><a name="PTXREF"></a><b class="COMMAND">ptx</b></dt><dd><p>The <b class="COMMAND">ptx [targetfile]</b> command
+	      and <a href=",/gotchas.html#DOSNEWLINES">vice-versa</a>.</p>
+</dd>
+<dt>
+<a name="PTXREF">
+</a>
+<b class="COMMAND">ptx</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">ptx [targetfile]</b> command
 	      outputs a permuted index (cross-reference list) of the
 	      targetfile. This may be further filtered and formatted in a
-	      pipe, if necessary.</p></dd><dt><a name="MOREREF"></a><b class="COMMAND">more</b>, <a name="LESSREF"></a><b class="COMMAND">less</b></dt><dd><p>Pagers that display a text file or stream to
+	      pipe, if necessary.</p>
+</dd>
+<dt>
+<a name="MOREREF">
+</a>
+<b class="COMMAND">more</b>, <a name="LESSREF">
+</a>
+<b class="COMMAND">less</b>
+</dt>
+<dd>
+<p>Pagers that display a text file or stream to
 	      <tt class="FILENAME">stdout</tt>, one screenful at a time.
 	      These may be used to filter the output of
-	      <tt class="FILENAME">stdout</tt> . . . or of a script.</p><p>	       An interesting application of <i class="FIRSTTERM">more</i>
+	      <tt class="FILENAME">stdout</tt> . . . or of a script.</p>
+<p>	       An interesting application of <i class="FIRSTTERM">more</i>
 	       is to <span class="QUOTE">"test drive"</span> a command sequence,
 	       to forestall potentially unpleasant consequences.
-                 <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">ls /home/bozo | awk '{print "rm -rf " $1}' | more
+                 <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">ls /home/bozo | awk '{print "rm -rf " $1}' | more
 #                                            ^^^^
 		 
 # Testing the effect of the following (disastrous) command-line:
 #      ls /home/bozo | awk '{print "rm -rf " $1}' | sh
-#      Hand off to the shell to execute . . .       ^^</pre></font></td></tr></tbody></table>
-            </p><p>The <i class="FIRSTTERM">less</i> pager has the
+#      Hand off to the shell to execute . . .       ^^</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>The <i class="FIRSTTERM">less</i> pager has the
 	      interesting property of doing a formatted display of
-	      <i class="FIRSTTERM">man page</i> source. See <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#MANED">Example A-39</a>.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN11885" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN11885"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>An <i class="FIRSTTERM">archive</i>,
+	      <i class="FIRSTTERM">man page</i> source. See <a href=",/contributed-scripts.html#MANED">Example A-39</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN11885" href=",/filearchiv.html#AEN11885">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>An <i class="FIRSTTERM">archive</i>,
 	        in the sense discussed here, is simply a set of related
-	        files stored in a single location.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN11896" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN11896"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>		    A <tt class="REPLACEABLE"><i>tar czvf ArchiveName.tar.gz *</i></tt>
+	        files stored in a single location.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN11896" href=",/filearchiv.html#AEN11896">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>		    A <tt class="REPLACEABLE">
+<i>tar czvf ArchiveName.tar.gz *</i>
+</tt>
 		    <em>will</em> include dotfiles in
 		    subdirectories <em>below</em> the current
 		    working directory. This is an undocumented GNU
 		    <b class="COMMAND">tar</b> <span class="QUOTE">"feature."</span>
-		  </p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN12840" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN12840"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The checksum may be expressed as a
+		  </p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN12840" href=",/filearchiv.html#AEN12840">
+<span class="footnote">[3]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>The checksum may be expressed as a
 		<i class="FIRSTTERM">hexadecimal</i> number, or to some
-		other base.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN12849" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN12849"><span class="footnote">[4]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>For even <em>better</em>
+		other base.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN12849" href=",/filearchiv.html#AEN12849">
+<span class="footnote">[4]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>For even <em>better</em>
 		  security, use the <i class="FIRSTTERM">sha256sum</i>,
 		  <i class="FIRSTTERM">sha512</i>, and
                   <i class="FIRSTTERM">sha1pass</i>
-                  commands.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN12969" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN12969"><span class="footnote">[5]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This is a symmetric block cipher, used to
+                  commands.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN12969" href=",/filearchiv.html#AEN12969">
+<span class="footnote">[5]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>This is a symmetric block cipher, used to
 		encrypt files on a single system or local network,
 		as opposed to the <i class="FIRSTTERM">public key</i>
 		cipher class, of which <i class="FIRSTTERM">pgp</i> is a
-		well-known example.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN13030" href="http://www.tldp.org/LDP/abs/html/filearchiv.html#AEN13030"><span class="footnote">[6]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Creates a temporary
+		well-known example.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN13030" href=",/filearchiv.html#AEN13030">
+<span class="footnote">[6]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Creates a temporary
 	       <i class="FIRSTTERM">directory</i> when invoked with the
-	       <tt class="OPTION">-d</tt> option.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/textproc.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/communications.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Text Processing Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Communications Commands</td></tr></tbody></table></div></body></html>
+	       <tt class="OPTION">-d</tt> option.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href=",/textproc.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href=",/index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href=",/communications.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Text Processing Commands</td>
+<td align="center" valign="top" width="34%">
+<a href=",/external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Communications Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
