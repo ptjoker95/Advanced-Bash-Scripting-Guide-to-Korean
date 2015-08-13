@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Arithmetic Expansion</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Beyond the Basics" href="http://www.tldp.org/LDP/abs/html/part3.html"><link rel="PREVIOUS" title="Command Substitution" href="http://www.tldp.org/LDP/abs/html/commandsub.html"><link rel="NEXT" title="Recess Time" href="http://www.tldp.org/LDP/abs/html/recess-time.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/commandsub.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/recess-time.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="ARITHEXP"></a>Chapter 13. Arithmetic Expansion</h1><p><a name="ARITHEXPREF"></a>Arithmetic expansion provides a
+	powerful tool for performing (integer) arithmetic
+	operations in scripts. Translating a string into a
+	numerical expression is relatively straightforward using
+	<i class="FIRSTTERM">backticks</i>, <i class="FIRSTTERM">double
+	parentheses</i>, or <i class="FIRSTTERM">let</i>.</p><p></p><div class="VARIABLELIST"><p><b><a name="ARITHEXPVAR1"></a>Variations</b></p><dl><dt>Arithmetic expansion with <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#BACKQUOTESREF">backticks</a> (often used in
+	  conjunction with <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EXPRREF">expr</a>)</dt><dd><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">z=`expr $z + 3`          # The 'expr' command performs the expansion.</pre></font></td></tr></tbody></table></p></dd><dt>Arithmetic expansion with <a href="http://www.tldp.org/LDP/abs/html/dblparens.html">double
+	  parentheses</a>, and using <a href="http://www.tldp.org/LDP/abs/html/internal.html#LETREF">let</a></dt><dd><p>The use of <i class="FIRSTTERM">backticks</i>
+	      (<i class="FIRSTTERM">backquotes</i>) in arithmetic
+	      expansion has been superseded by <i class="FIRSTTERM">double
+	      parentheses</i> --
+	      <tt class="USERINPUT"><b>((...))</b></tt> and
+	      <tt class="USERINPUT"><b>$((...))</b></tt> -- and also by the very
+	      convenient <a href="http://www.tldp.org/LDP/abs/html/internal.html#LETREF">let</a> construction.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">z=$(($z+3))
+z=$((z+3))                                  #  Also correct.
+                                            #  Within double parentheses,
+                                            #+ parameter dereferencing
+                                            #+ is optional.
+
+# $((EXPRESSION)) is arithmetic expansion.  #  Not to be confused with
+                                            #+ command substitution.
+
+
+
+# You may also use operations within double parentheses without assignment.
+
+  n=0
+  echo "n = $n"                             # n = 0
+
+  (( n += 1 ))                              # Increment.
+# (( $n += 1 )) is incorrect!
+  echo "n = $n"                             # n = 1
+
+
+let z=z+3
+let "z += 3"  #  Quotes permit the use of spaces in variable assignment.
+              #  The 'let' operator actually performs arithmetic evaluation,
+              #+ rather than expansion.</pre></font></td></tr></tbody></table>
+	    </p><p>Examples of arithmetic expansion in scripts:
+       </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX45">Example 16-9</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/loops1.html#EX25">Example 11-15</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/arrays.html#EX66">Example 27-1</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/arrays.html#BUBBLE">Example 27-11</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#TREE">Example A-16</a></p></li></ol>
+     <p></p></dd></dl></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/commandsub.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/recess-time.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Command Substitution</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part3.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Recess Time</td></tr></tbody></table></div></body></html>
