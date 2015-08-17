@@ -3697,21 +3697,17 @@ exit</pre>
 <b class="COMMAND">badblocks</b>
 </dt>
 <dd>
-<p>Checks for bad blocks (physical media flaws) on a
-	      storage device.  This command finds use when formatting
-	      a newly installed hard drive or testing the integrity
-	      of backup media.
-	        <a name="AEN16504" href="#FTN.AEN16504">
-<span class="footnote">[4]</span>
-</a>
-	      As an example, <b class="COMMAND">badblocks /dev/fd0</b>
-	      tests a floppy disk.</p>
-<p>The <b class="COMMAND">badblocks</b> command
-	      may be invoked destructively (overwrite all data) or
-	      in non-destructive read-only mode. If <i class="FIRSTTERM">root
-	      user</i> owns the device to be tested, as is
-	      generally the case, then <i class="FIRSTTERM">root</i>
-	      must invoke this command.</p>
+<p>저장 장치에서 배드 블럭을 체크합니다. 이 명령어는 하드 드라이브를 
+포맷할 때나 백업 장치의 무결성을 시험해볼 때 사용합니다. 
+<a name="AEN16504" href="#FTN.AEN16504"><span class="footnote">[4]</span></a> 
+예를 들면, 
+<b class="COMMAND">badblocks /dev/fd0</b> 는 플로피 디스크를 체크합니다.
+(역주: 플로피 디스크를 알까?)</p>
+<p>
+<b class="COMMAND">badblocks</b> 명령어는 삭제 동작을 하거나 (모든 자료를 덮어씀), 
+읽기 전용 모드로 사용될 수 있습니다. 만일 
+<i class="FIRSTTERM">관리자</i> 가 테스트를 할 디바이스의 소유자라면, 보통, 
+<i class="FIRSTTERM">root</i> 명령어로 실행해야 합니다.</p>
 </dd>
 <dt>
 <a name="LSUSBREF">
