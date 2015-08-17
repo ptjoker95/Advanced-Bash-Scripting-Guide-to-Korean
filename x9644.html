@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Job Control Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Internal Commands and Builtins" href="http://www.tldp.org/LDP/abs/html/internal.html"><link rel="PREVIOUS" title="Internal Commands and Builtins" href="http://www.tldp.org/LDP/abs/html/internal.html"><link rel="NEXT" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/internal.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 15. Internal Commands and Builtins</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="AEN9644"></a>15.1. Job Control Commands</h1><p>Certain of the following job control commands take a
+	  <i class="FIRSTTERM">job identifier</i> as an argument. See
+	  the <a href="http://www.tldp.org/LDP/abs/html/x9644.html#JOBIDTABLE">table</a> at end of the
+	  chapter.</p><p></p><div class="VARIABLELIST"><dl><dt><a name="JOBSREF"></a><b class="COMMAND">jobs</b></dt><dd><p>Lists the jobs running in the background, giving
+	        the <i class="FIRSTTERM">job number</i>.
+		Not as useful as <a href="http://www.tldp.org/LDP/abs/html/system.html#PPSSREF">ps</a>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x9644_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>It is all too easy to confuse
+		<i class="FIRSTTERM">jobs</i> and
+		<i class="FIRSTTERM">processes</i>.  Certain <a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtins</a>, such as
+		<b class="COMMAND">kill</b>, <b class="COMMAND">disown</b>, and
+		<b class="COMMAND">wait</b> accept either a job number or a
+		process number as an argument. The <a href="http://www.tldp.org/LDP/abs/html/x9644.html#FGREF">fg</a>,
+		<a href="http://www.tldp.org/LDP/abs/html/x9644.html#BGREF">bg</a> and <b class="COMMAND">jobs</b>
+		commands accept only a job number.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sleep 100 &amp;</b></tt>
+<tt class="COMPUTEROUTPUT">[1] 1384</tt>
+
+<tt class="PROMPT">bash $ </tt><tt class="USERINPUT"><b>jobs</b></tt>
+<tt class="COMPUTEROUTPUT">[1]+  Running                 sleep 100 &amp;</tt></pre></font></td></tr></tbody></table>
+	      </p><p><span class="QUOTE">"1"</span> is the job number (jobs are
+		maintained by the current shell). <span class="QUOTE">"1384"</span>
+		is the <a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#PPIDREF">PID</a> or <i class="FIRSTTERM">process ID
+		number</i> (processes are maintained by the system). To kill
+		this job/process, either a <b class="COMMAND">kill %1</b>
+		or a <b class="COMMAND">kill 1384</b> works.</p><p><em>Thanks, S.C.</em></p></td></tr></tbody></table></div></dd><dt><a name="DISOWNREF"></a><b class="COMMAND">disown</b></dt><dd><p>Remove job(s) from the shell's table of active jobs.</p></dd><dt><a name="FGREF"></a><b class="COMMAND">fg</b>, <a name="BGREF"></a><b class="COMMAND">bg</b></dt><dd><p>The <b class="COMMAND">fg</b> command switches a job
+	      running in the background into the foreground.  The
+	      <b class="COMMAND">bg</b> command restarts a suspended job, and
+	      runs it in the background. If no job number is specified,
+	      then the <b class="COMMAND">fg</b> or <b class="COMMAND">bg</b>
+	      command acts upon the currently running job.</p></dd><dt><a name="WAITREF"></a><b class="COMMAND">wait</b></dt><dd><p>Suspend script execution until all jobs running in
+	        background have terminated, or until the job number or
+	        process ID specified as an option terminates. Returns the <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a> of waited-for
+	        command.</p><p>You may use the <b class="COMMAND">wait</b> command
+		to prevent a script from exiting before a background
+		job finishes executing (this would create a dreaded
+		<a href="http://www.tldp.org/LDP/abs/html/x9644.html#ZOMBIEREF">orphan process</a>).</p><div class="EXAMPLE"><a name="EX39"></a><p><b>Example 15-26. Waiting for a process to finish before proceeding</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+ROOT_UID=0   # Only users with $UID 0 have root privileges.
+E_NOTROOT=65
+E_NOPARAMS=66
+
+if [ "$UID" -ne "$ROOT_UID" ]
+then
+  echo "Must be root to run this script."
+  # "Run along kid, it's past your bedtime."
+  exit $E_NOTROOT
+fi  
+
+if [ -z "$1" ]
+then
+  echo "Usage: `basename $0` find-string"
+  exit $E_NOPARAMS
+fi
+
+
+echo "Updating 'locate' database..."
+echo "This may take a while."
+updatedb /usr &amp;     # Must be run as root.
+
+wait
+# Don't run the rest of the script until 'updatedb' finished.
+# You want the the database updated before looking up the file name.
+
+locate $1
+
+#  Without the 'wait' command, in the worse case scenario,
+#+ the script would exit while 'updatedb' was still running,
+#+ leaving it as an orphan process.
+
+exit 0</pre></font></td></tr></tbody></table></div><p>Optionally, <b class="COMMAND">wait</b> can take a <i class="FIRSTTERM">job
+		identifier</i> as an argument, for example,
+		<tt class="REPLACEABLE"><i>wait%1</i></tt> or <tt class="REPLACEABLE"><i>wait
+                $PPID</i></tt>.
+
+	<a name="AEN9753" href="#FTN.AEN9753"><span class="footnote">[1]</span></a>
+		
+		See the <a href="http://www.tldp.org/LDP/abs/html/x9644.html#JOBIDTABLE">job id table</a>.</p><p><a name="WAITHANG"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x9644_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Within a script, running a command in the background
+		with an ampersand (&amp;) may cause the script
+		to hang until <b class="KEYCAP">ENTER</b> is hit. This
+		seems to occur with commands that write to
+		<tt class="FILENAME">stdout</tt>. It can be a major annoyance.
+		  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# test.sh		  
+
+ls -l &amp;
+echo "Done."</pre></font></td></tr></tbody></table>
+	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./test.sh</b></tt>
+<tt class="COMPUTEROUTPUT">Done.
+ [bozo@localhost test-scripts]$ total 1
+ -rwxr-xr-x    1 bozo     bozo           34 Oct 11 15:09 test.sh
+ _</tt>
+               </pre></font></td></tr></tbody></table>
+	       </p><a name="AEN9768"></a><blockquote class="BLOCKQUOTE"><p class="LITERALLAYOUT">&nbsp;&nbsp;&nbsp;&nbsp;As&nbsp;Walter&nbsp;Brameld&nbsp;IV&nbsp;explains&nbsp;it:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;As&nbsp;far&nbsp;as&nbsp;I&nbsp;can&nbsp;tell,&nbsp;such&nbsp;scripts&nbsp;don't&nbsp;actually&nbsp;hang.&nbsp;It&nbsp;just<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seems&nbsp;that&nbsp;they&nbsp;do&nbsp;because&nbsp;the&nbsp;background&nbsp;command&nbsp;writes&nbsp;text&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;console&nbsp;after&nbsp;the&nbsp;prompt.&nbsp;The&nbsp;user&nbsp;gets&nbsp;the&nbsp;impression&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;prompt&nbsp;was&nbsp;never&nbsp;displayed.&nbsp;Here's&nbsp;the&nbsp;sequence&nbsp;of&nbsp;events:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;Script&nbsp;launches&nbsp;background&nbsp;command.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;Script&nbsp;exits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;Shell&nbsp;displays&nbsp;the&nbsp;prompt.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;Background&nbsp;command&nbsp;continues&nbsp;running&nbsp;and&nbsp;writing&nbsp;text&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5.&nbsp;Background&nbsp;command&nbsp;finishes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;6.&nbsp;User&nbsp;doesn't&nbsp;see&nbsp;a&nbsp;prompt&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;output,&nbsp;thinks&nbsp;script<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hanging.<br>
+	</p></blockquote><p>Placing a <b class="COMMAND">wait</b> after the background
+                command seems to remedy this.
+		  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# test.sh		  
+
+ls -l &amp;
+echo "Done."
+wait</pre></font></td></tr></tbody></table>
+	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./test.sh</b></tt>
+<tt class="COMPUTEROUTPUT">Done.
+ [bozo@localhost test-scripts]$ total 1
+ -rwxr-xr-x    1 bozo     bozo           34 Oct 11 15:09 test.sh</tt>
+               </pre></font></td></tr></tbody></table>
+	        <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">Redirecting</a> the
+                output of the command to a file or even to
+		<tt class="FILENAME">/dev/null</tt> also takes care of this
+		problem.
+              </p></td></tr></tbody></table></div></dd><dt><a name="SUSPENDREF"></a><b class="COMMAND">suspend</b></dt><dd><p>This has a similar effect to
+		<b class="KEYCAP">Control</b>-<b class="KEYCAP">Z</b>, 
+		but it suspends the shell (the shell's parent process should
+		resume it at an appropriate time).</p></dd><dt><a name="LOGOUTREF"></a><b class="COMMAND">logout</b></dt><dd><p>Exit a login shell, optionally specifying an <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a>.</p></dd><dt><a name="TIMESREF"></a><b class="COMMAND">times</b></dt><dd><p>Gives statistics on the system time elapsed when
+	        executing commands, in the following form:
+		<table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="COMPUTEROUTPUT">0m0.020s 0m0.020s</tt></pre></font></td></tr></tbody></table></p><p>This capability is of relatively limited value, since it is not common to
+		profile and benchmark shell scripts.</p></dd><dt><a name="KILLREF"></a><b class="COMMAND">kill</b></dt><dd><p>Forcibly terminate a process by sending it an
+		appropriate <i class="FIRSTTERM">terminate</i> signal
+		(see <a href="http://www.tldp.org/LDP/abs/html/system.html#KILLPROCESS">Example 17-6</a>).</p><div class="EXAMPLE"><a name="SELFDESTRUCT"></a><p><b>Example 15-27. A script that kills itself</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# self-destruct.sh
+
+kill $$  # Script kills its own process here.
+         # Recall that "$$" is the script's PID.
+
+echo "This line will not echo."
+# Instead, the shell sends a "Terminated" message to stdout.
+
+exit 0   # Normal exit? No!
+
+#  After this script terminates prematurely,
+#+ what exit status does it return?
+#
+# sh self-destruct.sh
+# echo $?
+# 143
+#
+# 143 = 128 + 15
+#             TERM signal</pre></font></td></tr></tbody></table></div><p><a name="ZOMBIEREF"></a></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x9644_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><tt class="USERINPUT"><b>kill -l</b></tt> lists all the
+		<a href="http://www.tldp.org/LDP/abs/html/debugging.html#SIGNALD">signals</a> (as does the
+		file <tt class="FILENAME">/usr/include/asm/signal.h</tt>).
+		A <tt class="USERINPUT"><b>kill -9</b></tt> is a <i class="FIRSTTERM">sure
+		kill</i>, which will usually terminate a
+		process that stubbornly refuses to die with a plain
+		<b class="COMMAND">kill</b>. Sometimes, a <tt class="USERINPUT"><b>kill
+		-15</b></tt> works. A <i class="FIRSTTERM">zombie</i> process,
+		that is, a child process that has terminated, but that
+		the <a href="http://www.tldp.org/LDP/abs/html/internal.html#FORKREF">parent process</a>
+		has not (yet) killed, cannot be killed by a logged-on
+		user -- you can't kill something that is already dead --
+		but <b class="COMMAND">init</b> will generally clean it up
+		sooner or later.</p></td></tr></tbody></table></div></dd><dt><a name="KILLALLREF"></a><b class="COMMAND">killall</b></dt><dd><p>The <b class="COMMAND">killall</b> command
+	    kills a running process by <i class="FIRSTTERM">name</i>,
+            rather than by <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PROCESSIDREF">process ID</a>.
+	    If there are multiple instances of a particular command running,
+	    then doing a <i class="FIRSTTERM">killall</i> on that command will
+	    terminate them <em>all</em>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x9644_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>This refers to the <b class="COMMAND">killall</b>
+	      command in <tt class="FILENAME">/usr/bin</tt>,
+	      <em>not</em> the <a href="http://www.tldp.org/LDP/abs/html/sysscripts.html#KILLALL2REF">killall script</a> in <tt class="FILENAME">/etc/rc.d/init.d</tt>.</p></td></tr></tbody></table></div></dd><dt><a name="COMMANDREF"></a><b class="COMMAND">command</b></dt><dd><p>The <b class="COMMAND">command</b> directive
+	    disables aliases and functions for the command immediately
+	    following it.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>command ls</b></tt>
+              </pre></font></td></tr></tbody></table>
+	    </p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="x9644_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>This is one of three shell directives that
+	      effect script command processing. The others are
+	      <a href="http://www.tldp.org/LDP/abs/html/x9644.html#BLTREF">builtin</a> and <a href="http://www.tldp.org/LDP/abs/html/x9644.html#ENABLEREF">enable</a>.</p></td></tr></tbody></table></div></dd><dt><a name="BLTREF"></a><b class="COMMAND">builtin</b></dt><dd><p>Invoking <b class="COMMAND">builtin
+	      BUILTIN_COMMAND</b> runs the command
+	      <tt class="REPLACEABLE"><i>BUILTIN_COMMAND</i></tt> as a shell <a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtin</a>, temporarily disabling
+	      both functions and external system commands with the
+	      same name.</p></dd><dt><a name="ENABLEREF"></a><b class="COMMAND">enable</b></dt><dd><p>This either enables or disables a shell
+	      builtin command. As an example, <tt class="REPLACEABLE"><i>enable -n
+	      kill</i></tt> disables the shell builtin <a href="http://www.tldp.org/LDP/abs/html/x9644.html#KILLREF">kill</a>, so that when Bash
+	      subsequently encounters <i class="FIRSTTERM">kill</i>, it invokes
+	      the external command <tt class="FILENAME">/bin/kill</tt>.</p><p><a name="ENABLEREF1"></a>The <tt class="OPTION">-a</tt>
+	      option to <i class="FIRSTTERM">enable</i> lists all the
+	      shell builtins, indicating whether or not they
+	      are enabled. The <tt class="OPTION">-f filename</tt>
+	      option lets <i class="FIRSTTERM">enable</i> load a <a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtin</a> as a shared library
+	      (DLL) module from a properly compiled object file.
+	        <a name="AEN9928" href="#FTN.AEN9928"><span class="footnote">[2]</span></a>.
+	     </p></dd><dt><a name="AUTOLOADREF"></a><b class="COMMAND">autoload</b></dt><dd><p>This is a port to Bash of the
+	    <i class="FIRSTTERM">ksh</i> autoloader. With
+	    <b class="COMMAND">autoload</b> in place, a function with
+	    an <i class="FIRSTTERM">autoload</i> declaration will load from an
+	    external file at its first invocation.
+	      <a name="AEN9949" href="#FTN.AEN9949"><span class="footnote">[3]</span></a>
+	    This saves system resources.</p><p>Note that <i class="FIRSTTERM">autoload</i> is not a part of the
+	    core Bash installation. It needs to be loaded in with
+	    <tt class="REPLACEABLE"><i>enable -f</i></tt> (see above).</p></dd></dl></div><p><a name="JOBIDTABLE0"></a></p><div class="TABLE"><a name="JOBIDTABLE"></a><p><b>Table 15-1. Job identifiers</b></p><table class="CALSTABLE" border="1"><thead><tr><th align="LEFT" valign="TOP">Notation</th><th align="LEFT" valign="TOP">Meaning</th></tr></thead><tbody><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%N</tt></td><td align="LEFT" valign="TOP">Job number [N]</td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%S</tt></td><td align="LEFT" valign="TOP">Invocation (command-line) of job begins with string <em>S</em></td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%?S</tt></td><td align="LEFT" valign="TOP">Invocation (command-line) of job contains within it string <em>S</em></td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%%</tt></td><td align="LEFT" valign="TOP"><span class="QUOTE">"current"</span> job (last job stopped in
+	      foreground or started in background)</td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%+</tt></td><td align="LEFT" valign="TOP"><span class="QUOTE">"current"</span> job (last job stopped in
+	      foreground or started in background)</td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">%-</tt></td><td align="LEFT" valign="TOP">Last job</td></tr><tr><td align="LEFT" valign="TOP"><tt class="OPTION">$!</tt></td><td align="LEFT" valign="TOP">Last background process</td></tr></tbody></table></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN9753" href="http://www.tldp.org/LDP/abs/html/x9644.html#AEN9753"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This only applies to <i class="FIRSTTERM">child
+         processes</i>, of course.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN9928" href="http://www.tldp.org/LDP/abs/html/x9644.html#AEN9928"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The C source for a number of loadable builtins is
+		    typically found in the <tt class="FILENAME">/usr/share/doc/bash-?.??/functions</tt>
+		    directory.</p><p>Note that the <tt class="OPTION">-f</tt> option to
+                    <b class="COMMAND">enable</b> is not <a href="http://www.tldp.org/LDP/abs/html/portabilityissues.html">portable</a> to all
+                    systems.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN9949" href="http://www.tldp.org/LDP/abs/html/x9644.html#AEN9949"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The same effect as
+	      <b class="COMMAND">autoload</b> can be achieved with <a href="http://www.tldp.org/LDP/abs/html/declareref.html">typeset -fu</a>.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/internal.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Internal Commands and Builtins</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/internal.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">External Filters, Programs and Commands</td></tr></tbody></table></div></body></html>
