@@ -1,10 +1,89 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Math Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Terminal Control Commands" href="http://www.tldp.org/LDP/abs/html/terminalccmds.html"><link rel="NEXT" title="Miscellaneous Commands" href="http://www.tldp.org/LDP/abs/html/extmisc.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/extmisc.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="MATHC"></a>16.8. Math Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="MATHCOMMANDLISTING1"></a><span class="QUOTE">"Doing the
-	   numbers"</span></b></p><dl><dt><a name="FACTORREF"></a><b class="COMMAND">factor</b></dt><dd><p>Decompose an integer into prime factors.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>factor 27417</b></tt>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Math Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="PREVIOUS" title="Terminal Control Commands" href="./terminalccmds.html">
+<link rel="NEXT" title="Miscellaneous Commands" href="./extmisc.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./terminalccmds.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./extmisc.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="MATHC">
+</a>16.8. Math Commands</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="MATHCOMMANDLISTING1">
+</a>
+<span class="QUOTE">"Doing the
+	   numbers"</span>
+</b>
+</p>
+<dl>
+<dt>
+<a name="FACTORREF">
+</a>
+<b class="COMMAND">factor</b>
+</dt>
+<dd>
+<p>Decompose an integer into prime factors.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>factor 27417</b>
+</tt>
 <tt class="COMPUTEROUTPUT">27417: 3 13 19 37</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><div class="EXAMPLE"><a name="PRIMES2"></a><p><b>Example 16-46. Generating prime numbers</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="EXAMPLE">
+<a name="PRIMES2">
+</a>
+<p>
+<b>Example 16-46. Generating prime numbers</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # primes2.sh
 
 #  Generating prime numbers the quick-and-easy way,
@@ -42,20 +121,70 @@ done   #       For a higher $CEILING, adjust upward, as necessary.
 
 echo
 
-exit</pre></font></td></tr></tbody></table></div></dd><dt><a name="BCREF"></a><b class="COMMAND">bc</b></dt><dd><p>Bash can't handle floating point calculations, and
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="BCREF">
+</a>
+<b class="COMMAND">bc</b>
+</dt>
+<dd>
+<p>Bash can't handle floating point calculations, and
 	      it lacks operators for certain important mathematical
 	      functions. Fortunately, <b class="COMMAND">bc</b> gallops to
-	      the rescue.</p><p>Not just a versatile, arbitrary precision calculation
+	      the rescue.</p>
+<p>Not just a versatile, arbitrary precision calculation
 	      utility, <b class="COMMAND">bc</b> offers many of the facilities of
 	      a programming language. It has a syntax vaguely resembling
-	      <b class="COMMAND">C</b>.</p><p>Since it is a fairly well-behaved UNIX utility, and may
-	       therefore be used in a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a>,
-	       <b class="COMMAND">bc</b> comes in handy in scripts.</p><p><a name="BCTEMPLATE"></a></p><p>Here is a simple template for using
+	      <b class="COMMAND">C</b>.</p>
+<p>Since it is a fairly well-behaved UNIX utility, and may
+	       therefore be used in a <a href="./special-chars.html#PIPEREF">pipe</a>,
+	       <b class="COMMAND">bc</b> comes in handy in scripts.</p>
+<p>
+<a name="BCTEMPLATE">
+</a>
+</p>
+<p>Here is a simple template for using
 	      <b class="COMMAND">bc</b> to calculate a script
-	      variable. This uses <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#COMMANDSUBREF">command
-	      substitution</a>.</p><p>              <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN">	      <tt class="USERINPUT"><b>variable=$(echo "OPTIONS; OPERATIONS" | bc)</b></tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p><a name="MONTHLYPMT0"></a></p><div class="EXAMPLE"><a name="MONTHLYPMT"></a><p><b>Example 16-47. Monthly Payment on a Mortgage</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      variable. This uses <a href="./commandsub.html#COMMANDSUBREF">command
+	      substitution</a>.</p>
+<p>              <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">	      <tt class="USERINPUT">
+<b>variable=$(echo "OPTIONS; OPERATIONS" | bc)</b>
+</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>
+<a name="MONTHLYPMT0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="MONTHLYPMT">
+</a>
+<p>
+<b>Example 16-47. Monthly Payment on a Mortgage</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # monthlypmt.sh: Calculates monthly payment on a mortgage.
 
 
@@ -154,7 +283,29 @@ read term
  #   1) Filter input to permit commas in principal amount.
  #   2) Filter input to permit interest to be entered as percent or decimal.
  #   3) If you are really ambitious,
- #+     expand this script to print complete amortization tables.</pre></font></td></tr></tbody></table></div><p><a name="BASE0"></a></p><div class="EXAMPLE"><a name="BASE"></a><p><b>Example 16-48. Base Conversion</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+ #+     expand this script to print complete amortization tables.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="BASE0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="BASE">
+</a>
+<p>
+<b>Example 16-48. Base Conversion</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 ###########################################################################
 # Shellscript:	base.sh - print number to different bases (Bourne Shell)
 # Author     :	Heiner Steven (heiner.steven@odn.de)
@@ -261,12 +412,29 @@ else					# Read from stdin.
 fi
 
 
-exit</pre></font></td></tr></tbody></table></div><p><a name="BCHEREDOC"></a></p><p>An alternate method of invoking <b class="COMMAND">bc</b>
-		involves using a <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#HEREDOCREF">here
-		document</a> embedded within a <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#COMMANDSUBREF">command substitution</a>
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="BCHEREDOC">
+</a>
+</p>
+<p>An alternate method of invoking <b class="COMMAND">bc</b>
+		involves using a <a href="./here-docs.html#HEREDOCREF">here
+		document</a> embedded within a <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>
 		block. This is especially appropriate when a script
 		needs to pass a list of options and commands to
-		<b class="COMMAND">bc</b>.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">variable=`bc &lt;&lt; LIMIT_STRING
+		<b class="COMMAND">bc</b>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">variable=`bc &lt;&lt; LIMIT_STRING
 options
 statements
 operations
@@ -281,9 +449,27 @@ options
 statements
 operations
 LIMIT_STRING
-)</pre></font></td></tr></tbody></table>
-              </p><div class="EXAMPLE"><a name="ALTBC"></a><p><b>Example 16-49. Invoking <i class="FIRSTTERM">bc</i> using a <i class="FIRSTTERM">here
-	        document</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+<div class="EXAMPLE">
+<a name="ALTBC">
+</a>
+<p>
+<b>Example 16-49. Invoking <i class="FIRSTTERM">bc</i> using a <i class="FIRSTTERM">here
+	        document</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Invoking 'bc' using command substitution
 # in combination with a 'here document'.
 
@@ -338,7 +524,29 @@ hyp=$(hypotenuse 3.68 7.31)
 echo "hypotenuse = $hyp"    # 8.184039344
 
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="CANNONREF"></a></p><div class="EXAMPLE"><a name="CANNON"></a><p><b>Example 16-50. Calculating PI</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CANNONREF">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="CANNON">
+</a>
+<p>
+<b>Example 16-50. Calculating PI</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # cannon.sh: Approximating PI by firing cannonballs.
 
 # Author: Mendel Cooper
@@ -480,22 +688,62 @@ exit 0
 #  There are at least two justifications.
 #  1) As a proof of concept: to show it can be done.
 #  2) To prototype and test the algorithms before rewriting
-#+    it in a compiled high-level language.</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#STDDEV">Example A-37</a>.</p></dd><dt><a name="DCREF"></a><b class="COMMAND">dc</b></dt><dd><p>The <b class="COMMAND">dc</b> (<b class="COMMAND">d</b>esk
-              <b class="COMMAND">c</b>alculator) utility is <a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#STACKDEFREF">stack-oriented</a>
+#+    it in a compiled high-level language.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./contributed-scripts.html#STDDEV">Example A-37</a>.</p>
+</dd>
+<dt>
+<a name="DCREF">
+</a>
+<b class="COMMAND">dc</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">dc</b> (<b class="COMMAND">d</b>esk
+              <b class="COMMAND">c</b>alculator) utility is <a href="./internalvariables.html#STACKDEFREF">stack-oriented</a>
               and uses RPN (<i class="FIRSTTERM">Reverse Polish Notation</i>).
               Like <b class="COMMAND">bc</b>, it has much of the power of
-              a programming language.</p><p>Similar to the procedure with <b class="COMMAND">bc</b>,
-	      <a href="http://www.tldp.org/LDP/abs/html/internal.html#ECHOREF">echo</a> a command-string
-	      to <b class="COMMAND">dc</b>.</p><p>		     <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo "[Printing a string ... ]P" | dc
+              a programming language.</p>
+<p>Similar to the procedure with <b class="COMMAND">bc</b>,
+	      <a href="./internal.html#ECHOREF">echo</a> a command-string
+	      to <b class="COMMAND">dc</b>.</p>
+<p>		     <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo "[Printing a string ... ]P" | dc
 # The P command prints the string between the preceding brackets.
 
 # And now for some simple arithmetic.
 echo "7 8 * p" | dc     # 56
 #  Pushes 7, then 8 onto the stack,
-#+ multiplies ("*" operator), then prints the result ("p" operator).</pre></font></td></tr></tbody></table>
-             </p><p>Most persons avoid <b class="COMMAND">dc</b>, because
+#+ multiplies ("*" operator), then prints the result ("p" operator).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+             </p>
+<p>Most persons avoid <b class="COMMAND">dc</b>, because
                 of its non-intuitive input and rather cryptic
-		operators. Yet, it has its uses.</p><div class="EXAMPLE"><a name="HEXCONVERT"></a><p><b>Example 16-51. Converting a decimal number to hexadecimal</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		operators. Yet, it has its uses.</p>
+<div class="EXAMPLE">
+<a name="HEXCONVERT">
+</a>
+<p>
+<b>Example 16-51. Converting a decimal number to hexadecimal</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # hexconvert.sh: Convert a decimal number to hexadecimal.
 
 E_NOARGS=85 # Command-line arg missing.
@@ -525,15 +773,45 @@ return
 
 hexcvt "$1"
 
-exit</pre></font></td></tr></tbody></table></div><p>Studying the <a href="http://www.tldp.org/LDP/abs/html/basic.html#INFOREF">info</a> page for
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Studying the <a href="./basic.html#INFOREF">info</a> page for
 		<b class="COMMAND">dc</b> is a painful path to understanding its
 		intricacies. There seems to be a small, select group of
 		<em>dc wizards</em> who delight in showing off
-		their mastery of this powerful, but arcane utility.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D68736142snlbxq" | dc</b></tt>
+		their mastery of this powerful, but arcane utility.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D68736142snlbxq" | dc</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Bash</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p><p><a name="GOLDENRATIO"></a>
-          <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">dc &lt;&lt;&lt; 10k5v1+2/p # 1.6180339887
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>
+<a name="GOLDENRATIO">
+</a>
+          <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">dc &lt;&lt;&lt; 10k5v1+2/p # 1.6180339887
 #  ^^^            Feed operations to dc using a Here String.
 #      ^^^        Pushes 10 and sets that as the precision (10k).
 #         ^^      Pushes 5 and takes its square root
@@ -542,8 +820,25 @@ exit</pre></font></td></tr></tbody></table></div><p>Studying the <a href="http:/
 #             ^^  Pushes 2 and divides the running total by that (2/).
 #               ^ Pops and prints the result (p)
 #  The result is  1.6180339887 ...
-#  ... which happens to be the Pythagorean Golden Ratio, to 10 places.</pre></font></td></tr></tbody></table>
-	  </p><div class="EXAMPLE"><a name="FACTR"></a><p><b>Example 16-52. Factoring</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  ... which happens to be the Pythagorean Golden Ratio, to 10 places.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<div class="EXAMPLE">
+<a name="FACTR">
+</a>
+<p>
+<b>Example 16-52. Factoring</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # factr.sh: Factor a number
 
 MIN=2       # Will not work for number smaller than this.
@@ -579,10 +874,35 @@ echo  "$1[p]s2[lip/dli%0=1dvsr]s12sid2%0=13sidvsr[dli%0=\
  # 2
  # 3
  # 11
- # 4093</pre></font></td></tr></tbody></table></div></dd><dt><a name="AWKMATH"></a><b class="COMMAND">awk</b></dt><dd><p>Yet another way of doing floating point math in
-	      a script is using <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk's</a>
-	      built-in math functions in a <a href="http://www.tldp.org/LDP/abs/html/wrapper.html#SHWRAPPER">shell
-	      wrapper</a>.</p><div class="EXAMPLE"><a name="HYPOT"></a><p><b>Example 16-53. Calculating the hypotenuse of a triangle</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+ # 4093</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="AWKMATH">
+</a>
+<b class="COMMAND">awk</b>
+</dt>
+<dd>
+<p>스크립트에서 소수점 계산의 또다른 방법은 
+<a href="./wrapper.html#SHWRAPPER">shell wrapper</a> 에서 
+<a href="./awk.html#AWKREF">awk</a> 의 기본 수학 함수를 이용하는 것입니다.</p>
+<div class="EXAMPLE">
+<a name="HYPOT">
+</a>
+<p>
+<b>Example 16-53. Calculating the hypotenuse of a triangle</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # hypotenuse.sh: Returns the "hypotenuse" of a right triangle.
 #                (square root of sum of squares of the "legs")
 
@@ -609,4 +929,41 @@ AWKSCRIPT=' { printf( "%3.7f\n", sqrt($1*$1 + $2*$2) ) } '
 exit
 
 # Exercise: Rewrite this script using 'bc' rather than awk.
-#           Which method is more intuitive?</pre></font></td></tr></tbody></table></div></dd></dl></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/extmisc.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Terminal Control Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Miscellaneous Commands</td></tr></tbody></table></div></body></html>
+#           Which method is more intuitive?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./terminalccmds.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./extmisc.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Terminal Control Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Miscellaneous Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
