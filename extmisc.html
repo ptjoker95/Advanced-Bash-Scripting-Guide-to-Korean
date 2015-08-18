@@ -1,0 +1,801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Miscellaneous Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Math Commands" href="http://www.tldp.org/LDP/abs/html/mathc.html"><link rel="NEXT" title="System and Administrative Commands" href="http://www.tldp.org/LDP/abs/html/system.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/mathc.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/system.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="EXTMISC"></a>16.9. Miscellaneous Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="MISCCOMMANDLISTING1"></a>Command that fit in no
+	   special category</b></p><dl><dt><a name="JOTREF"></a><b class="COMMAND">jot</b>, <a name="SEQREF"></a><b class="COMMAND">seq</b></dt><dd><p>These utilities emit a sequence of integers, with a
+	      user-selectable increment.</p><p>The default separator character between each integer is a
+	      newline, but this can be changed with the <tt class="OPTION">-s</tt>
+	      option.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>seq 5</b></tt>
+<tt class="COMPUTEROUTPUT">1
+ 2
+ 3
+ 4
+ 5</tt>
+
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>seq -s : 5</b></tt>
+<tt class="COMPUTEROUTPUT">1:2:3:4:5</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p><p>Both <b class="COMMAND">jot</b> and <b class="COMMAND">seq</b>
+	      come in handy in a <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FORLOOPREF1">for
+	      loop</a>.</p><div class="EXAMPLE"><a name="EX53"></a><p><b>Example 16-54. Using <i class="FIRSTTERM">seq</i> to generate loop
+	      arguments</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Using "seq"
+
+echo
+
+for a in `seq 80`  # or   for a in $( seq 80 )
+# Same as   for a in 1 2 3 4 5 ... 80   (saves much typing!).
+# May also use 'jot' (if present on system).
+do
+  echo -n "$a "
+done      # 1 2 3 4 5 ... 80
+# Example of using the output of a command to generate 
+# the [list] in a "for" loop.
+
+echo; echo
+
+
+COUNT=80  # Yes, 'seq' also accepts a replaceable parameter.
+
+for a in `seq $COUNT`  # or   for a in $( seq $COUNT )
+do
+  echo -n "$a "
+done      # 1 2 3 4 5 ... 80
+
+echo; echo
+
+BEGIN=75
+END=80
+
+for a in `seq $BEGIN $END`
+#  Giving "seq" two arguments starts the count at the first one,
+#+ and continues until it reaches the second.
+do
+  echo -n "$a "
+done      # 75 76 77 78 79 80
+
+echo; echo
+
+BEGIN=45
+INTERVAL=5
+END=80
+
+for a in `seq $BEGIN $INTERVAL $END`
+#  Giving "seq" three arguments starts the count at the first one,
+#+ uses the second for a step interval,
+#+ and continues until it reaches the third.
+do
+  echo -n "$a "
+done      # 45 50 55 60 65 70 75 80
+
+echo; echo
+
+exit 0</pre></font></td></tr></tbody></table></div><p>A simpler example:</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#  Create a set of 10 files,
+#+ named file.1, file.2 . . . file.10.
+COUNT=10
+PREFIX=file
+
+for filename in `seq $COUNT`
+do
+  touch $PREFIX.$filename
+  #  Or, can do other operations,
+  #+ such as rm, grep, etc.
+done</pre></font></td></tr></tbody></table></p><div class="EXAMPLE"><a name="LETTERCOUNT"></a><p><b>Example 16-55. Letter Count"</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# letter-count.sh: Counting letter occurrences in a text file.
+# Written by Stefano Palmeri.
+# Used in ABS Guide with permission.
+# Slightly modified by document author.
+
+MINARGS=2          # Script requires at least two arguments.
+E_BADARGS=65
+FILE=$1
+
+let LETTERS=$#-1   # How many letters specified (as command-line args).
+                   # (Subtract 1 from number of command-line args.)
+
+
+show_help(){
+	   echo
+           echo Usage: `basename $0` file letters  
+           echo Note: `basename $0` arguments are case sensitive.
+           echo Example: `basename $0` foobar.txt G n U L i N U x.
+	   echo
+}
+
+# Checks number of arguments.
+if [ $# -lt $MINARGS ]; then
+   echo
+   echo "Not enough arguments."
+   echo
+   show_help
+   exit $E_BADARGS
+fi  
+
+
+# Checks if file exists.
+if [ ! -f $FILE ]; then
+    echo "File \"$FILE\" does not exist."
+    exit $E_BADARGS
+fi
+
+
+
+# Counts letter occurrences .
+for n in `seq $LETTERS`; do
+      shift
+      if [[ `echo -n "$1" | wc -c` -eq 1 ]]; then             #  Checks arg.
+             echo "$1" -\&gt; `cat $FILE | tr -cd  "$1" | wc -c` #  Counting.
+      else
+             echo "$1 is not a  single char."
+      fi  
+done
+
+exit $?
+
+#  This script has exactly the same functionality as letter-count2.sh,
+#+ but executes faster.
+#  Why?</pre></font></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="extmisc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Somewhat more capable than <i class="FIRSTTERM">seq</i>,
+	<b class="COMMAND">jot</b> is a classic UNIX
+	utility that is not normally included in a standard Linux
+	distro. However, the source <i class="FIRSTTERM">rpm</i>
+	is available for download from the <a href="http://www.mit.edu/afs/athena/system/rhlinux/athena-9.0/free/SRPMS/athena-jot-9.0-3.src.rpm" target="_top">	MIT repository</a>.</p><p><a name="JOTRANDOM"></a></p><p>Unlike <i class="FIRSTTERM">seq</i>, <b class="COMMAND">jot</b> can
+        generate a sequence of random numbers, using the <tt class="OPTION">-r</tt>
+	option.</p><p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>jot -r 3 999</b></tt>
+<tt class="COMPUTEROUTPUT">1069
+ 1272
+ 1428</tt></pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div></dd><dt><a name="GETOPTY"></a><b class="COMMAND">getopt</b></dt><dd><p>The <b class="COMMAND">getopt</b> command
+	      parses command-line options preceded by a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#DASHREF">dash</a>. This external command
+	      corresponds to the <a href="http://www.tldp.org/LDP/abs/html/internal.html#GETOPTSX">getopts</a>
+	      Bash builtin. Using <b class="COMMAND">getopt</b> permits
+	      handling long options by means of the <tt class="OPTION">-l</tt>
+	      flag, and this also allows parameter reshuffling.</p><div class="EXAMPLE"><a name="EX33A"></a><p><b>Example 16-56. Using <i class="FIRSTTERM">getopt</i> to parse command-line
+	        options</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Using getopt
+
+# Try the following when invoking this script:
+#   sh ex33a.sh -a
+#   sh ex33a.sh -abc
+#   sh ex33a.sh -a -b -c
+#   sh ex33a.sh -d
+#   sh ex33a.sh -dXYZ
+#   sh ex33a.sh -d XYZ
+#   sh ex33a.sh -abcd
+#   sh ex33a.sh -abcdZ
+#   sh ex33a.sh -z
+#   sh ex33a.sh a
+# Explain the results of each of the above.
+
+E_OPTERR=65
+
+if [ "$#" -eq 0 ]
+then   # Script needs at least one command-line argument.
+  echo "Usage $0 -[options a,b,c]"
+  exit $E_OPTERR
+fi  
+
+set -- `getopt "abcd:" "$@"`
+# Sets positional parameters to command-line arguments.
+# What happens if you use "$*" instead of "$@"?
+
+while [ ! -z "$1" ]
+do
+  case "$1" in
+    -a) echo "Option \"a\"";;
+    -b) echo "Option \"b\"";;
+    -c) echo "Option \"c\"";;
+    -d) echo "Option \"d\" $2";;
+     *) break;;
+  esac
+
+  shift
+done
+
+#  It is usually better to use the 'getopts' builtin in a script.
+#  See "ex33.sh."
+
+exit 0</pre></font></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="extmisc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>As <em>Peggy Russell</em> points out:</p><p>It is often necessary to include an <a href="http://www.tldp.org/LDP/abs/html/internal.html#EVALREF">eval</a> to correctly process
+              <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#WHITESPACEREF">whitespace</a> and
+	      <i class="FIRSTTERM">quotes</i>.
+	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">args=$(getopt -o a:bc:d -- "$@")
+eval set -- "$args"</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div><p>See <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#GETOPTSIMPLE">Example 10-5</a> for a simplified emulation
+	      of <b class="COMMAND">getopt</b>.</p></dd><dt><a name="RUNPARTSREF"></a><b class="COMMAND">run-parts</b></dt><dd><p>The <b class="COMMAND">run-parts</b> command
+
+		<a name="AEN14105" href="#FTN.AEN14105"><span class="footnote">[1]</span></a>
+	      
+	      executes all the scripts in a target directory, sequentially
+	      in ASCII-sorted filename order. Of course, the scripts
+	      need to have execute permission.</p><p>The <a href="http://www.tldp.org/LDP/abs/html/system.html#CRONREF">cron</a> <a href="http://www.tldp.org/LDP/abs/html/communications.html#DAEMONREF">daemon</a> invokes
+	      <b class="COMMAND">run-parts</b> to run the scripts in
+	      the <tt class="FILENAME">/etc/cron.*</tt>
+	      directories.</p></dd><dt><a name="YESREF"></a><b class="COMMAND">yes</b></dt><dd><p>In its default behavior the <b class="COMMAND">yes</b>
+	      command feeds a continuous string of the character
+	      <tt class="COMPUTEROUTPUT">y</tt> followed
+	      by a line feed to <tt class="FILENAME">stdout</tt>. A
+	      <b class="KEYCAP">control</b>-<b class="KEYCAP">C</b>
+	      terminates the run. A different output string
+	      may be specified, as in <tt class="USERINPUT"><b>yes different
+	      string</b></tt>, which would continually output
+	      <tt class="COMPUTEROUTPUT">different string</tt> to
+	      <tt class="FILENAME">stdout</tt>.</p><p>One might well ask the purpose of this. From the
+	      command-line or in a script, the output of
+	      <b class="COMMAND">yes</b> can be redirected or piped into a
+	      program expecting user input. In effect, this becomes a sort
+	      of poor man's version of <i class="FIRSTTERM">expect</i>.</p><p><tt class="USERINPUT"><b>yes | fsck /dev/hda1</b></tt> runs
+	      <b class="COMMAND">fsck</b> non-interactively (careful!).</p><p><tt class="USERINPUT"><b>yes | rm -r dirname</b></tt> has same effect as
+	     <tt class="USERINPUT"><b>rm -rf dirname</b></tt> (careful!).</p><div class="WARNING"><p></p><table class="WARNING" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="extmisc_files/warning.gif" alt="Warning" hspace="5"></td><td align="LEFT" valign="TOP"><p>Caution advised when piping
+	     <i class="FIRSTTERM">yes</i> to a potentially dangerous
+	     system command, such as <a href="http://www.tldp.org/LDP/abs/html/system.html#FSCKREF">fsck</a>
+	     or <a href="http://www.tldp.org/LDP/abs/html/system.html#FDISKREF">fdisk</a>. It might have
+	     unintended consequences.</p></td></tr></tbody></table></div><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="extmisc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <i class="FIRSTTERM">yes</i> command parses variables,
+	       or more accurately, it echoes parsed variables.
+	       For example:</p><p>	        <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>yes $BASH_VERSION</b></tt>
+<tt class="COMPUTEROUTPUT">3.1.17(1)-release
+ 3.1.17(1)-release
+ 3.1.17(1)-release
+ 3.1.17(1)-release
+ 3.1.17(1)-release
+ . . .</tt>
+	      </pre></font></td></tr></tbody></table>
+	        </p><p>	       This particular <span class="QUOTE">"feature"</span> may be used
+	       to create a <em>very large</em> ASCII file on the fly:
+	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>yes $PATH &gt; huge_file.txt</b></tt>
+<tt class="USERINPUT"><b>Ctl-C</b></tt>	      
+	      </pre></font></td></tr></tbody></table>
+	      Hit <tt class="USERINPUT"><b>Ctl-C</b></tt> <em>very
+	      quickly</em>, or you just might get more than you
+	      bargained for. . . .
+	      </p></td></tr></tbody></table></div><p><a name="YESEMU"></a>The <i class="FIRSTTERM">yes</i>
+	     command may be emulated in a very simple script <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">function</a>.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">yes ()
+{ # Trivial emulation of "yes" ...
+  local DEFAULT_TEXT="y"
+  while [ true ]   # Endless loop.
+  do
+    if [ -z "$1" ]
+    then
+      echo "$DEFAULT_TEXT"
+    else           # If argument ...
+      echo "$1"    # ... expand and echo it.
+    fi
+  done             #  The only things missing are the
+}                  #+ --help and --version options.</pre></font></td></tr></tbody></table></p></dd><dt><a name="BANNERREF"></a><b class="COMMAND">banner</b></dt><dd><p>Prints arguments as a large vertical banner to
+	      <tt class="FILENAME">stdout</tt>, using an <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#ASCIIDEF">ASCII</a> character (default
+	      '#'). This may be redirected to a printer for
+	      hardcopy.</p><p>Note that <i class="FIRSTTERM">banner</i> has been
+               dropped from many Linux distros, presumably because it
+               is no longer considered useful.</p></dd><dt><a name="PRINTENVREF"></a><b class="COMMAND">printenv</b></dt><dd><p>Show all the <a href="http://www.tldp.org/LDP/abs/html/othertypesv.html#ENVREF">environmental
+	      variables</a> set for a particular user.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>printenv | grep HOME</b></tt>
+<tt class="COMPUTEROUTPUT">HOME=/home/bozo</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p></dd><dt><a name="LPREF"></a><b class="COMMAND">lp</b></dt><dd><p>The <b class="COMMAND">lp</b> and <b class="COMMAND">lpr</b>
+	      commands send file(s) to the print queue, to be printed as
+	      hard copy.
+
+	      <a name="AEN14214" href="#FTN.AEN14214"><span class="footnote">[2]</span></a>
+
+	      These commands trace the origin of their names to the
+	      line printers of another era.
+		<a name="AEN14218" href="#FTN.AEN14218"><span class="footnote">[3]</span></a>
+      
+      </p><p><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>lp file1.txt</b></tt>
+	        or <tt class="PROMPT">bash </tt><tt class="USERINPUT"><b>lp
+		&lt;file1.txt</b></tt></p><p>It is often useful to pipe the formatted output from
+	        <b class="COMMAND">pr</b> to <b class="COMMAND">lp</b>.</p><p><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>pr -options file1.txt | lp</b></tt>
+	        </p><p>Formatting packages, such as <a href="http://www.tldp.org/LDP/abs/html/textproc.html#GROFFREF">groff</a> and
+		<i class="FIRSTTERM">Ghostscript</i> may send their output
+		directly to <b class="COMMAND">lp</b>.</p><p><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>groff -Tascii file.tr | lp</b></tt>
+	        </p><p><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>gs -options | lp file.ps</b></tt>
+	        </p><p>Related commands are <b class="COMMAND">lpq</b>, for viewing
+	        the print queue, and <b class="COMMAND">lprm</b>, for removing
+		jobs from the print queue.</p></dd><dt><a name="TEEREF"></a><b class="COMMAND">tee</b></dt><dd><p>[UNIX borrows an idea from the plumbing trade.]</p><p>This is a redirection operator, but with a difference. Like the
+	      plumber's <i class="FIRSTTERM">tee,</i> it permits <span class="QUOTE">"siphoning
+              off"</span> <em>to a file </em>the output of a command 
+	      or commands within a pipe, but without affecting the result. This is
+	      useful for printing an ongoing process to a file or paper, perhaps to
+	      keep track of it for debugging purposes.</p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN">                             (redirection)
+                            |----&gt; to file
+                            |
+  ==========================|====================
+  command ---&gt; command ---&gt; |tee ---&gt; command ---&gt; ---&gt; output of pipe
+  ===============================================
+	      </pre></font></td></tr></tbody></table><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat listfile* | sort | tee check.file | uniq &gt; result.file
+#                      ^^^^^^^^^^^^^^   ^^^^    
+
+#  The file "check.file" contains the concatenated sorted "listfiles,"
+#+ before the duplicate lines are removed by 'uniq.'</pre></font></td></tr></tbody></table></p></dd><dt><a name="MKFIFOREF"></a><b class="COMMAND">mkfifo</b></dt><dd><p><a name="NAMEDPIPEREF"></a>This obscure command
+	      creates a <i class="FIRSTTERM">named pipe</i>, a temporary
+	      <i class="FIRSTTERM">first-in-first-out buffer</i> for
+	      transferring data between processes.
+
+		<a name="AEN14280" href="#FTN.AEN14280"><span class="footnote">[4]</span></a>
+
+	      Typically, one process writes to the FIFO, and the other
+	      reads from it. See <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#FIFO">Example A-14</a>.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# This short script by Omair Eshkenazi.
+# Used in ABS Guide with permission (thanks!).
+
+mkfifo pipe1   # Yes, pipes can be given names.
+mkfifo pipe2   # Hence the designation "named pipe."
+
+(cut -d' ' -f1 | tr "a-z" "A-Z") &gt;pipe2 &lt;pipe1 &amp;
+ls -l | tr -s ' ' | cut -d' ' -f3,9- | tee pipe1 |
+cut -d' ' -f2 | paste - pipe2
+
+rm -f pipe1
+rm -f pipe2
+
+# No need to kill background processes when script terminates (why not?).
+
+exit $?
+
+Now, invoke the script and explain the output:
+sh mkfifo-example.sh
+
+4830.tar.gz          BOZO
+pipe1   BOZO
+pipe2   BOZO
+mkfifo-example.sh    BOZO
+Mixed.msg BOZO</pre></font></td></tr></tbody></table>
+            </p></dd><dt><a name="PATHCHKREF"></a><b class="COMMAND">pathchk</b></dt><dd><p>This command checks the validity of a filename. If the
+	      filename exceeds the maximum allowable length (255
+	      characters) or one or more of the directories in
+	      its path is not searchable, then an error message
+	      results.</p><p>Unfortunately, <b class="COMMAND">pathchk</b> does
+	      not return a recognizable error code, and it is therefore
+	      pretty much useless in a script. Consider instead the
+	      <a href="http://www.tldp.org/LDP/abs/html/fto.html#RTIF">file test operators</a>.</p></dd><dt><a name="DDREF"></a><b class="COMMAND">dd</b></dt><dd><p>Though this somewhat obscure and much feared
+              <b class="COMMAND">d</b>ata <b class="COMMAND">d</b>uplicator
+              command originated as a utility for exchanging
+              data on magnetic tapes between UNIX minicomputers
+              and IBM mainframes, it still has its uses.
+              The <b class="COMMAND">dd</b> command simply copies a
+              file (or <tt class="FILENAME">stdin/stdout</tt>), but with
+              conversions. <a name="DDCONVERSIONS"></a>Possible conversions
+              include ASCII/EBCDIC,
+	        
+		<a name="AEN14318" href="#FTN.AEN14318"><span class="footnote">[5]</span></a>
+
+	      upper/lower case, swapping of byte pairs between input
+	      and output, and skipping and/or truncating the head or
+	      tail of the input file.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Converting a file to all uppercase:
+
+dd if=$filename conv=ucase &gt; $filename.uppercase
+#                    lcase   # For lower case conversion</pre></font></td></tr></tbody></table>
+            </p><p><a name="DDOPTIONS"></a></p><p>Some basic options to <b class="COMMAND">dd</b> are:
+                </p><p></p><ul><li><p>if=INFILE</p><p>INFILE is the <i class="FIRSTTERM">source</i>
+		        file.</p></li><li><p>of=OUTFILE</p><p>OUTFILE is the <i class="FIRSTTERM">target</i>
+		        file, the file that will have the data written to it.</p></li><li><p>bs=BLOCKSIZE</p><p>This is the size of each block of data being read
+		        and written, usually a power of 2.</p></li><li><p>skip=BLOCKS</p><p>How many blocks of data to skip in INFILE before
+		        starting to copy. This is useful when the INFILE has
+			<span class="QUOTE">"garbage"</span> or garbled data in its
+			header or when it is desirable to copy only a portion
+			of the INFILE.</p></li><li><p>seek=BLOCKS</p><p>How many blocks of data to skip in OUTFILE before
+		        starting to copy, leaving blank data at beginning
+			of OUTFILE.</p></li><li><p>count=BLOCKS</p><p>Copy only this many blocks of data, rather than the
+		        entire INFILE.</p></li><li><p>conv=CONVERSION</p><p>Type of conversion to be applied to INFILE data
+                        before copying operation.</p></li></ul>
+            <p></p><p>A <tt class="USERINPUT"><b>dd --help</b></tt> lists all the
+	      options this powerful utility takes.</p><div class="EXAMPLE"><a name="SELFCOPY"></a><p><b>Example 16-57. A script that copies itself</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# self-copy.sh
+
+# This script copies itself.
+
+file_subscript=copy
+
+dd if=$0 of=$0.$file_subscript 2&gt;/dev/null
+# Suppress messages from dd:   ^^^^^^^^^^^
+
+exit $?
+
+#  A program whose only output is its own source code
+#+ is called a "quine" per Willard Quine.
+#  Does this script qualify as a quine?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EXERCISINGDD"></a><p><b>Example 16-58. Exercising <i class="FIRSTTERM">dd</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# exercising-dd.sh
+
+# Script by Stephane Chazelas.
+# Somewhat modified by ABS Guide author.
+
+infile=$0           # This script.
+outfile=log.txt     # Output file left behind.
+n=8
+p=11
+
+dd if=$infile of=$outfile bs=1 skip=$((n-1)) count=$((p-n+1)) 2&gt; /dev/null
+# Extracts characters n to p (8 to 11) from this script ("bash").
+
+# ----------------------------------------------------------------
+
+echo -n "hello vertical world" | dd cbs=1 conv=unblock 2&gt; /dev/null
+# Echoes "hello vertical world" vertically downward.
+# Why? A newline follows each character dd emits.
+
+exit $?</pre></font></td></tr></tbody></table></div><p><a name="DDKEYSTROKES"></a></p><p>To demonstrate just how versatile <b class="COMMAND">dd</b> is,
+	     let's use it to capture keystrokes.</p><div class="EXAMPLE"><a name="DDKEYPRESS"></a><p><b>Example 16-59. Capturing Keystrokes</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# dd-keypress.sh: Capture keystrokes without needing to press ENTER.
+
+
+keypresses=4                      # Number of keypresses to capture.
+
+
+old_tty_setting=$(stty -g)        # Save old terminal settings.
+
+echo "Press $keypresses keys."
+stty -icanon -echo                # Disable canonical mode.
+                                  # Disable local echo.
+keys=$(dd bs=1 count=$keypresses 2&gt; /dev/null)
+# 'dd' uses stdin, if "if" (input file) not specified.
+
+stty "$old_tty_setting"           # Restore old terminal settings.
+
+echo "You pressed the \"$keys\" keys."
+
+# Thanks, Stephane Chazelas, for showing the way.
+exit 0</pre></font></td></tr></tbody></table></div><p><a name="DDRANDOM"></a></p><p>The <b class="COMMAND">dd</b> command can do random access on a
+	      data stream.
+
+	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">echo -n . | dd bs=1 seek=4 of=file conv=notrunc
+#  The "conv=notrunc" option means that the output file
+#+ will not be truncated.
+
+# Thanks, S.C.</pre></font></td></tr></tbody></table>
+            </p><p><a name="DDCOPY"></a></p><p>The <b class="COMMAND">dd</b> command can copy raw data
+	      and disk images to and from devices, such as floppies and
+	      tape drives (<a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#COPYCD">Example A-5</a>). A common use is
+	      creating boot floppies.</p><p>		<tt class="USERINPUT"><b>dd if=kernel-image of=/dev/fd0H1440</b></tt>
+             </p><p>Similarly, <b class="COMMAND">dd</b> can copy the entire
+	       contents of a floppy, even one formatted with a
+	       <span class="QUOTE">"foreign"</span> OS, to the hard drive as an
+	       image file.</p><p>		<tt class="USERINPUT"><b>dd if=/dev/fd0 of=/home/bozo/projects/floppy.img</b></tt>
+             </p><p><a name="BFS"></a>Likewise, <b class="COMMAND">dd</b>
+             can create bootable flash drives and SD cards.</p><p><tt class="USERINPUT"><b>dd if=image.iso of=/dev/sdb</b></tt></p><p><a name="RPSDCARD01"></a></p><div class="EXAMPLE"><a name="RPSDCARD"></a><p><b>Example 16-60. Preparing a bootable SD card for the
+		    <em>Raspberry Pi</em></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# rp.sdcard.sh
+# Preparing an SD card with a bootable image for the Raspberry Pi.
+
+# $1 = imagefile name
+# $2 = sdcard (device file)
+# Otherwise defaults to the defaults, see below.
+
+DEFAULTbs=4M                                 # Block size, 4 mb default.
+DEFAULTif="2013-07-26-wheezy-raspbian.img"   # Commonly used distro.
+DEFAULTsdcard="/dev/mmcblk0"                 # May be different. Check!
+ROOTUSER_NAME=root                           # Must run as root!
+E_NOTROOT=81
+E_NOIMAGE=82
+
+username=$(id -nu)                           # Who is running this script?
+if [ "$username" != "$ROOTUSER_NAME" ]
+then
+  echo "This script must run as root or with root privileges."
+  exit $E_NOTROOT
+fi
+
+if [ -n "$1" ]
+then
+  imagefile="$1"
+else
+  imagefile="$DEFAULTif"
+fi
+
+if [ -n "$2" ]
+then
+  sdcard="$2"
+else
+  sdcard="$DEFAULTsdcard"
+fi
+
+if [ ! -e $imagefile ]
+then
+  echo "Image file \"$imagefile\" not found!"
+  exit $E_NOIMAGE
+fi
+
+echo "Last chance to change your mind!"; echo
+read -s -n1 -p "Hit a key to write $imagefile to $sdcard [Ctl-c to exit]."
+echo; echo
+
+echo "Writing $imagefile to $sdcard ..."
+dd bs=$DEFAULTbs if=$imagefile of=$sdcard
+
+exit $?
+
+# Exercises:
+# ---------
+# 1) Provide additional error checking.
+# 2) Have script autodetect device file for SD card (difficult!).
+# 3) Have script sutodetect image file (*img) in $PWD.</pre></font></td></tr></tbody></table></div><p><a name="DDSWAP"></a></p><p>	      Other applications of <b class="COMMAND">dd</b> include
+	      initializing temporary swap files (<a href="http://www.tldp.org/LDP/abs/html/zeros.html#EX73">Example 31-2</a>)
+	      and ramdisks (<a href="http://www.tldp.org/LDP/abs/html/zeros.html#RAMDISK">Example 31-3</a>). It can even do a
+	      low-level copy of an entire hard drive partition, although
+	      this is not necessarily recommended.</p><p>People (with presumably nothing better to do with
+	      their time) are constantly thinking of interesting
+	      applications of <b class="COMMAND">dd</b>.</p><p><a name="DDFDEL"></a></p><div class="EXAMPLE"><a name="BLOTOUT"></a><p><b>Example 16-61. Securely deleting a file</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# blot-out.sh: Erase "all" traces of a file.
+
+#  This script overwrites a target file alternately
+#+ with random bytes, then zeros before finally deleting it.
+#  After that, even examining the raw disk sectors by conventional methods
+#+ will not reveal the original file data.
+
+PASSES=7         #  Number of file-shredding passes.
+                 #  Increasing this slows script execution,
+                 #+ especially on large target files.
+BLOCKSIZE=1      #  I/O with /dev/urandom requires unit block size,
+                 #+ otherwise you get weird results.
+E_BADARGS=70     #  Various error exit codes.
+E_NOT_FOUND=71
+E_CHANGED_MIND=72
+
+if [ -z "$1" ]   # No filename specified.
+then
+  echo "Usage: `basename $0` filename"
+  exit $E_BADARGS
+fi
+
+file=$1
+
+if [ ! -e "$file" ]
+then
+  echo "File \"$file\" not found."
+  exit $E_NOT_FOUND
+fi  
+
+echo; echo -n "Are you absolutely sure you want to blot out \"$file\" (y/n)? "
+read answer
+case "$answer" in
+[nN]) echo "Changed your mind, huh?"
+      exit $E_CHANGED_MIND
+      ;;
+*)    echo "Blotting out file \"$file\".";;
+esac
+
+
+flength=$(ls -l "$file" | awk '{print $5}')  # Field 5 is file length.
+pass_count=1
+
+chmod u+w "$file"   # Allow overwriting/deleting the file.
+
+echo
+
+while [ "$pass_count" -le "$PASSES" ]
+do
+  echo "Pass #$pass_count"
+  sync         # Flush buffers.
+  dd if=/dev/urandom of=$file bs=$BLOCKSIZE count=$flength
+               # Fill with random bytes.
+  sync         # Flush buffers again.
+  dd if=/dev/zero of=$file bs=$BLOCKSIZE count=$flength
+               # Fill with zeros.
+  sync         # Flush buffers yet again.
+  let "pass_count += 1"
+  echo
+done  
+
+
+rm -f $file    # Finally, delete scrambled and shredded file.
+sync           # Flush buffers a final time.
+
+echo "File \"$file\" blotted out and deleted."; echo
+
+
+exit 0
+
+#  This is a fairly secure, if inefficient and slow method
+#+ of thoroughly "shredding" a file.
+#  The "shred" command, part of the GNU "fileutils" package,
+#+ does the same thing, although more efficiently.
+
+#  The file cannot not be "undeleted" or retrieved by normal methods.
+#  However . . .
+#+ this simple method would *not* likely withstand
+#+ sophisticated forensic analysis.
+
+#  This script may not play well with a journaled file system.
+#  Exercise (difficult): Fix it so it does.
+
+
+
+#  Tom Vier's "wipe" file-deletion package does a much more thorough job
+#+ of file shredding than this simple script.
+#     http://www.ibiblio.org/pub/Linux/utils/file/wipe-2.0.0.tar.bz2
+
+#  For an in-depth analysis on the topic of file deletion and security,
+#+ see Peter Gutmann's paper,
+#+     "Secure Deletion of Data From Magnetic and Solid-State Memory".
+#       http://www.cs.auckland.ac.nz/~pgut001/pubs/secure_del.html</pre></font></td></tr></tbody></table></div><p>See also the <a href="http://www.tldp.org/LDP/abs/html/biblio.html#DDLINK">dd
+	      thread</a> entry in the <a href="http://www.tldp.org/LDP/abs/html/biblio.html#BIBLIOREF">bibliography</a>.</p></dd><dt><a name="ODREF"></a><b class="COMMAND">od</b></dt><dd><p>The <b class="COMMAND">od</b>, or <i class="FIRSTTERM">octal
+	      dump</i> filter converts input (or files) to octal
+	      (base-8) or other bases. This is useful for viewing or
+	      processing binary data files or otherwise unreadable system
+	      <a href="http://www.tldp.org/LDP/abs/html/devref1.html#DEVFILEREF">device files</a>, such as
+	      <tt class="FILENAME">/dev/urandom</tt>, and as a filter for
+	      binary data.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">head -c4 /dev/urandom | od -N4 -tu4 | sed -ne '1s/.* //p'
+# Sample output: 1324725719, 3918166450, 2989231420, etc.
+
+# From rnd.sh example script, by Stéphane Chazelas</pre></font></td></tr></tbody></table>
+	  </p><p>See also <a href="http://www.tldp.org/LDP/abs/html/randomvar.html#SEEDINGRANDOM">Example 9-16</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#INSERTIONSORT">Example A-36</a>.</p></dd><dt><a name="HEXDUMPREF"></a><b class="COMMAND">hexdump</b></dt><dd><p>Performs a hexadecimal, octal, decimal, or ASCII
+	      dump of a binary file. This command is the rough equivalent
+	      of <b class="COMMAND">od</b>, above, but not nearly as
+	      useful. May be used to view the contents of a binary file,
+	      in combination with <a href="http://www.tldp.org/LDP/abs/html/extmisc.html#DDREF">dd</a> and <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#LESSREF">less</a>.</p><p>	  <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">dd if=/bin/ls | hexdump -C | less
+# The -C option nicely formats the output in tabular form.</pre></font></td></tr></tbody></table>
+	    </p></dd><dt><a name="OBJDUMPREF"></a><b class="COMMAND">objdump</b></dt><dd><p>Displays information about an object file or binary
+	      executable in either hexadecimal form or as a disassembled
+	      listing (with the <tt class="OPTION">-d</tt> option).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>objdump -d /bin/ls</b></tt>
+<tt class="COMPUTEROUTPUT">/bin/ls:     file format elf32-i386
+
+ Disassembly of section .init:
+
+ 080490bc &lt;.init&gt;:
+  80490bc:       55                      push   %ebp
+  80490bd:       89 e5                   mov    %esp,%ebp
+  . . .</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p></dd><dt><a name="MCOOKIEREF"></a><b class="COMMAND">mcookie</b></dt><dd><p>This command generates a <span class="QUOTE">"magic cookie,"</span> a
+	      128-bit (32-character) pseudorandom hexadecimal number,
+	      normally used as an authorization <span class="QUOTE">"signature"</span>
+	      by the X server. This also available for use in a script
+	      as a <span class="QUOTE">"quick 'n dirty"</span> random number.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">random000=$(mcookie)</pre></font></td></tr></tbody></table></p><p>Of course, a script could use <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#MD5SUMREF">md5sum</a> for the same purpose.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Generate md5 checksum on the script itself.
+random001=`md5sum $0 | awk '{print $1}'`
+# Uses 'awk' to strip off the filename.</pre></font></td></tr></tbody></table></p><p>The <b class="COMMAND">mcookie</b> command gives yet another way
+	      to generate a <span class="QUOTE">"unique"</span> filename.</p><div class="EXAMPLE"><a name="TEMPFILENAME"></a><p><b>Example 16-62. Filename generator</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# tempfile-name.sh:  temp filename generator
+
+BASE_STR=`mcookie`   # 32-character magic cookie.
+POS=11               # Arbitrary position in magic cookie string.
+LEN=5                # Get $LEN consecutive characters.
+
+prefix=temp          #  This is, after all, a "temp" file.
+                     #  For more "uniqueness," generate the
+                     #+ filename prefix using the same method
+                     #+ as the suffix, below.
+
+suffix=${BASE_STR:POS:LEN}
+                     #  Extract a 5-character string,
+                     #+ starting at position 11.
+
+temp_filename=$prefix.$suffix
+                     # Construct the filename.
+
+echo "Temp filename = "$temp_filename""
+
+# sh tempfile-name.sh
+# Temp filename = temp.e19ea
+
+#  Compare this method of generating "unique" filenames
+#+ with the 'date' method in ex51.sh.
+
+exit 0</pre></font></td></tr></tbody></table></div></dd><dt><a name="UNITSREF"></a><b class="COMMAND">units</b></dt><dd><p>This utility converts between different <i class="FIRSTTERM">units
+	      of measure</i>. While normally invoked in interactive
+	      mode, <b class="COMMAND">units</b> may find use in a
+	      script.</p><div class="EXAMPLE"><a name="UNITCONVERSION"></a><p><b>Example 16-63. Converting meters to miles</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# unit-conversion.sh
+# Must have 'units' utility installed.
+
+
+convert_units ()  # Takes as arguments the units to convert.
+{
+  cf=$(units "$1" "$2" | sed --silent -e '1p' | awk '{print $2}')
+  # Strip off everything except the actual conversion factor.
+  echo "$cf"
+}  
+
+Unit1=miles
+Unit2=meters
+cfactor=`convert_units $Unit1 $Unit2`
+quantity=3.73
+
+result=$(echo $quantity*$cfactor | bc)
+
+echo "There are $result $Unit2 in $quantity $Unit1."
+
+#  What happens if you pass incompatible units,
+#+ such as "acres" and "miles" to the function?
+
+exit 0
+
+# Exercise: Edit this script to accept command-line parameters,
+#           with appropriate error checking, of course.</pre></font></td></tr></tbody></table></div></dd><dt><a name="M4REF"></a><b class="COMMAND">m4</b></dt><dd><p>A hidden treasure, <b class="COMMAND">m4</b> is a
+	      powerful macro
+		 <a name="AEN14523" href="#FTN.AEN14523"><span class="footnote">[6]</span></a>
+	      processing filter, virtually a complete language.
+	      Although originally written as a pre-processor
+	      for <i class="FIRSTTERM">RatFor</i>, <b class="COMMAND">m4</b>
+	      turned out to be useful as a stand-alone utility. In
+	      fact, <b class="COMMAND">m4</b> combines some of the
+	      functionality of <a href="http://www.tldp.org/LDP/abs/html/internal.html#EVALREF">eval</a>,
+	      <a href="http://www.tldp.org/LDP/abs/html/textproc.html#TRREF">tr</a>, and <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a>, in addition to its extensive
+	      macro expansion facilities.</p><p>The April, 2002 issue of <a href="http://www.linuxjournal.com/" target="_top"><i class="CITETITLE">Linux Journal</i></a>
+	      has a very nice article on <b class="COMMAND">m4</b> and
+	      its uses.</p><div class="EXAMPLE"><a name="M4"></a><p><b>Example 16-64. Using <i class="FIRSTTERM">m4</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# m4.sh: Using the m4 macro processor
+
+# Strings
+string=abcdA01
+echo "len($string)" | m4                            #   7
+echo "substr($string,4)" | m4                       # A01
+echo "regexp($string,[0-1][0-1],\&amp;Z)" | m4      # 01Z
+
+# Arithmetic
+var=99
+echo "incr($var)" | m4                              #  100
+echo "eval($var / 3)" | m4                          #   33
+
+exit</pre></font></td></tr></tbody></table></div></dd><dt><a name="XMESSAGEREF"></a><b class="COMMAND">xmessage</b></dt><dd><p>This X-based variant of
+              <a href="http://www.tldp.org/LDP/abs/html/internal.html#ECHOREF">echo</a> pops up a message/query
+	      window on the desktop.</p><p>	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">xmessage Left click to continue -button okay</pre></font></td></tr></tbody></table>
+	      </p></dd><dt><a name="ZENITYREF"></a><b class="COMMAND">zenity</b></dt><dd><p>The
+	      <a href="http://freshmeat.net/projects/zenity" target="_top">zenity</a>
+	      utility is adept at displaying
+	      <i class="FIRSTTERM">GTK+</i> dialog <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#WIDGETREF">widgets</a> and <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#ZENITYREF2">very suitable for scripting
+	      purposes</a>.</p></dd><dt><a name="DOEXECREF"></a><b class="COMMAND">doexec</b></dt><dd><p>The <b class="COMMAND">doexec</b> command enables passing
+	      an arbitrary list of arguments to a <i class="FIRSTTERM">binary
+	      executable</i>. In particular, passing
+	      <tt class="PARAMETER"><i>argv[0]</i></tt> (which corresponds to <a href="http://www.tldp.org/LDP/abs/html/othertypesv.html#POSPARAMREF1">$0</a> in a script) lets the
+	      executable be invoked by various names, and it can then
+	      carry out different sets of actions, according to the name
+	      by which it was called. What this amounts to is roundabout
+	      way of passing options to an executable.</p><p>For example, the <tt class="FILENAME">/usr/local/bin</tt> directory might
+	      contain a binary called <span class="QUOTE">"aaa"</span>.  Invoking
+	      <b class="COMMAND">doexec /usr/local/bin/aaa list</b>
+	      would <em>list</em> all those files
+	      in the current working directory beginning with an
+	      <span class="QUOTE">"a"</span>, while invoking (the same executable
+	      with) <b class="COMMAND">doexec /usr/local/bin/aaa delete </b>
+	      would <em>delete</em> those files.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="extmisc_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The various behaviors of the executable
+              must be defined within the code of the executable itself,
+              analogous to something like the following in a shell script:
+                <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">case `basename $0` in
+"name1" ) do_something;;
+"name2" ) do_something_else;;
+"name3" ) do_yet_another_thing;;
+*       ) bail_out;;
+esac</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div></dd><dt><b class="COMMAND">dialog</b></dt><dd><p>The <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#DIALOGREF">dialog</a> family of tools
+	      provide a method of calling interactive
+	      <span class="QUOTE">"dialog"</span> boxes from a script. The more
+	      elaborate variations of <b class="COMMAND">dialog</b> --
+	      <b class="COMMAND">gdialog</b>, <b class="COMMAND">Xdialog</b>,
+	      and <b class="COMMAND">kdialog</b> -- actually invoke X-Windows
+	      <a href="http://www.tldp.org/LDP/abs/html/assortedtips.html#WIDGETREF">widgets</a>.</p></dd><dt><a name="SOXREF"></a><b class="COMMAND">sox</b></dt><dd><p>The <b class="COMMAND">sox</b>, or
+	      <span class="QUOTE">"<b class="COMMAND">so</b>und
+	      e<b class="COMMAND">x</b>change"</span> command plays and
+	      performs transformations on sound files. In fact,
+	      the <tt class="FILENAME">/usr/bin/play</tt> executable
+	      (now deprecated) is nothing but a shell wrapper for
+	      <i class="FIRSTTERM">sox</i>.</p><p>For example, <b class="COMMAND">sox soundfile.wav
+	      soundfile.au</b> changes a WAV sound file into a
+	      (Sun audio format) AU sound file.</p><p>Shell scripts are ideally suited for batch-processing
+	      <b class="COMMAND">sox</b> operations on
+	      sound files. For examples, see the <a href="http://osl.iu.edu/%7Etveldhui/radio/" target="_top"> Linux Radio
+	      Timeshift HOWTO</a> and the <a href="http://savannah.nongnu.org/projects/audiodo" target="_top">MP3do
+	      Project</a>.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14105" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14105"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This is actually a script adapted from
+		the Debian Linux distribution.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14214" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14214"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The <i class="FIRSTTERM">print queue</i> is
+	      the group of jobs <span class="QUOTE">"waiting in line"</span> to be
+	      printed.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14218" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14218"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Large mechanical <i class="FIRSTTERM">line
+		printers</i> printed a single
+		line of type at a time onto joined
+		sheets of <i class="FIRSTTERM">greenbar</i>
+		paper, to the accompaniment of <a href="http://www.columbia.edu/cu/computinghistory/1403.html" target="_top">a
+		great deal of noise</a>. The hardcopy
+		thusly printed was referred to as a
+		<i class="FIRSTTERM">printout</i>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14280" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14280"><span class="footnote">[4]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>For an excellent overview of this
+		  topic, see Andy Vaught's article, <a href="http://www2.linuxjournal.com/lj-issues/issue41/2156.html" target="_top">Introduction
+		  to Named Pipes</a>, in the September, 1997 issue of
+		  <a href="http://www.linuxjournal.com/" target="_top"><i class="CITETITLE">Linux
+		  Journal</i></a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14318" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14318"><span class="footnote">[5]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><span class="ACRONYM">EBCDIC</span> (pronounced
+		  <span class="QUOTE">"ebb-sid-ick"</span>) is an acronym for Extended
+		  Binary Coded Decimal Interchange Code, an obsolete
+                  IBM data format. A bizarre application of
+                  the <tt class="OPTION">conv=ebcdic</tt> option of
+                  <b class="COMMAND">dd</b> is as a quick 'n easy, but not
+                  very secure text file encoder.
+		    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat $file | dd conv=swab,ebcdic &gt; $file_encrypted
+# Encode (looks like gibberish).		    
+# Might as well switch bytes (swab), too, for a little extra obscurity.
+
+cat $file_encrypted | dd conv=swab,ascii &gt; $file_plaintext
+# Decode.</pre></font></td></tr></tbody></table>
+                </p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN14523" href="http://www.tldp.org/LDP/abs/html/extmisc.html#AEN14523"><span class="footnote">[6]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>A <i class="FIRSTTERM">macro</i> is a
+		 symbolic constant that expands into a command string
+		 or a set of operations on parameters. Simply put,
+		 it's a shortcut or abbreviation.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/mathc.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/system.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Math Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">System and Administrative Commands</td></tr></tbody></table></div></body></html>
