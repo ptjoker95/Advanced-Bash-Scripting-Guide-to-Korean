@@ -1,36 +1,152 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Here Documents</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Advanced Topics" href="http://www.tldp.org/LDP/abs/html/part5.html"><link rel="PREVIOUS" title="Globbing" href="http://www.tldp.org/LDP/abs/html/globbingref.html"><link rel="NEXT" title="Here Strings" href="http://www.tldp.org/LDP/abs/html/x17837.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/globbingref.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/x17837.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="HERE-DOCS"></a>Chapter 19. Here Documents</h1><table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="45%">&nbsp;</td><td align="LEFT" valign="TOP" width="45%"><i><p><i>Here and now, boys.</i></p><p><i>--Aldous Huxley, <i class="FIRSTTERM">Island</i></i></p></i></td></tr></tbody></table><p><a name="HEREDOCREF"></a></p><p>A <i class="FIRSTTERM">here document</i> is a special-purpose
-	code block. It uses a form of <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">I/O
-	redirection</a> to feed a command list to
-	an interactive program or a command, such as <a href="http://www.tldp.org/LDP/abs/html/communications.html#FTPREF">ftp</a>, <a href="http://www.tldp.org/LDP/abs/html/basic.html#CATREF">cat</a>,
-	or the <i class="FIRSTTERM">ex</i> text editor.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">COMMAND &lt;&lt;InputComesFromHERE
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Here Documents</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="Globbing" href="./globbingref.html">
+<link rel="NEXT" title="Here Strings" href="./x17837.html">
+</head>
+<body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./globbingref.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./x17837.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="HERE-DOCS">
+</a>Chapter 19. Here Documents</h1>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>Here and now, boys.</i>
+</p>
+<p>
+<i>--Aldous Huxley, <i class="FIRSTTERM">Island</i>
+</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="HEREDOCREF">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">here document</i> 는 매우 특별한 코드 블럭입니다. 
+<a href="./communications.html#FTPREF">ftp</a>, 
+<a href="./basic.html#CATREF">cat</a>, 또는 
+<i class="FIRSTTERM">ex</i> 텍스트 에디터와 같이 상호 호환적인 프로그램이나 
+명령어에 명령어 리스트를 보내듯이 
+<a href="./io-redirection.html#IOREDIRREF">I/O 재지향</a> 형태로 사용됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">COMMAND &lt;&lt;InputComesFromHERE
 ...
 ...
 ...
-InputComesFromHERE</pre></font></td></tr></tbody></table></p><p><a name="LIMITSTRINGREF"></a></p><p>A <i class="FIRSTTERM">limit string</i> delineates (frames)
-	the command list.  The special symbol <span class="TOKEN">&lt;&lt;</span> precedes
-	the limit string.  This has the effect of redirecting the output
-	of a command block into the <tt class="FILENAME">stdin</tt> of the program
-	or command. It is similar to <tt class="USERINPUT"><b>interactive-program &lt;
-	command-file</b></tt>, where <tt class="FILENAME">command-file</tt>
-	contains
-
-	  <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">command #1
+InputComesFromHERE</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="LIMITSTRINGREF">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">제한 문자 (limit string)</i> 는 명령어 리스트를 감쌉니다. 
+특수 기호 <span class="TOKEN">&lt;&lt;</span> 는 제한 문자 앞에 위치합니다. 
+이럼으로써 명령어 블럭의 출력은 프로그램이나 명령어의 
+<tt class="FILENAME">stdin</tt> 로 보내집니다. 
+이 방법은 
+<tt class="FILENAME">command-file</tt> 이 다음과 같을 때, 
+<tt class="USERINPUT"><b>interactive-program &lt; command-file</b></tt> 과 유사합니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">command #1
 command #2
-...</pre></font></td></tr></tbody></table></p><p>The <i class="FIRSTTERM">here document</i> equivalent looks
-        like this:
-
-      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">interactive-program &lt;&lt;LimitString
+...</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<i class="FIRSTTERM">here document</i> 는 다음의 모양이 될 것입니다:
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">interactive-program &lt;&lt;LimitString
 command #1
 command #2
 ...
-LimitString</pre></font></td></tr></tbody></table></p><p>Choose a <i class="FIRSTTERM">limit string</i> sufficiently
+LimitString</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<i class="FIRSTTERM">제한 문자 (limit string)</i> 로는 명령어 리스트 sufficiently
 	unusual that it will not occur anywhere in the command list and
-	confuse matters.</p><p>Note that <i class="FIRSTTERM">here documents</i> may sometimes
+	confuse matters.</p>
+<p>Note that <i class="FIRSTTERM">here documents</i> may sometimes
 	be used to good effect with non-interactive utilities and commands,
-	such as, for example, <a href="http://www.tldp.org/LDP/abs/html/system.html#WALLREF">wall</a>.</p><div class="EXAMPLE"><a name="EX70"></a><p><b>Example 19-1. <i class="FIRSTTERM">broadcast</i>: Sends message to everyone
-	logged in</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	such as, for example, <a href="./system.html#WALLREF">wall</a>.</p>
+<div class="EXAMPLE">
+<a name="EX70">
+</a>
+<p>
+<b>Example 19-1. <i class="FIRSTTERM">broadcast</i>: Sends message to everyone
+	logged in</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 wall &lt;&lt;zzz23EndOfMessagezzz23
 E-mail your noontime orders for pizza to the system administrator.
@@ -44,10 +160,33 @@ zzz23EndOfMessagezzz23
 #  However, embedding the message template in a script
 #+ is a quick-and-dirty one-off solution.
 
-exit</pre></font></td></tr></tbody></table></div><p><a name="VIHERE"></a></p><p>Even such unlikely candidates as the <i class="FIRSTTERM">vi</i>
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="VIHERE">
+</a>
+</p>
+<p>Even such unlikely candidates as the <i class="FIRSTTERM">vi</i>
         text editor lend themselves to <i class="FIRSTTERM">here
-        documents</i>.</p><div class="EXAMPLE"><a name="EX69"></a><p><b>Example 19-2. <i class="FIRSTTERM">dummyfile</i>: Creates a 2-line dummy
-	file</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+        documents</i>.</p>
+<div class="EXAMPLE">
+<a name="EX69">
+</a>
+<p>
+<b>Example 19-2. <i class="FIRSTTERM">dummyfile</i>: Creates a 2-line dummy
+	file</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Noninteractive use of 'vi' to edit a file.
 # Emulates 'sed'.
@@ -79,14 +218,28 @@ x23LimitStringx23
 #  Bram Moolenaar points out that this may not work with 'vim'
 #+ because of possible problems with terminal interaction.
 
-exit</pre></font></td></tr></tbody></table></div><p>        The above script could just as effectively have been implemented with
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>        The above script could just as effectively have been implemented with
 	<b class="COMMAND">ex</b>, rather than
-	<b class="COMMAND">vi</b>. <a name="EXSCRIPTREF"></a><i class="FIRSTTERM">Here
+	<b class="COMMAND">vi</b>. <a name="EXSCRIPTREF">
+</a>
+<i class="FIRSTTERM">Here
 	documents</i> containing a list of <b class="COMMAND">ex</b>
 	commands are common enough to form their own category, known as
 	<i class="FIRSTTERM">ex scripts</i>.
 
-	  <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	  <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  Replace all instances of "Smith" with "Jones"
 #+ in files with a ".txt" filename suffix. 
 
@@ -103,9 +256,32 @@ EOF
   # :%s is the "ex" substitution command.
   # :wq is write-and-quit.
   # -------------------------------------
-done</pre></font></td></tr></tbody></table>
-	</p><p><a name="CATSCRIPTREF"></a></p><p>Analogous to <span class="QUOTE">"ex scripts"</span> are <i class="FIRSTTERM">cat
-        scripts</i>.</p><div class="EXAMPLE"><a name="EX71"></a><p><b>Example 19-3. Multi-line message using <i class="FIRSTTERM">cat</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+done</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	</p>
+<p>
+<a name="CATSCRIPTREF">
+</a>
+</p>
+<p>Analogous to <span class="QUOTE">"ex scripts"</span> are <i class="FIRSTTERM">cat
+        scripts</i>.</p>
+<div class="EXAMPLE">
+<a name="EX71">
+</a>
+<p>
+<b>Example 19-3. Multi-line message using <i class="FIRSTTERM">cat</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 #  'echo' is fine for printing single line messages,
 #+  but somewhat problematic for for message blocks.
@@ -140,10 +316,35 @@ This is line 3 of the message.
 This is line 4 of the message.
 This is the last line of the message.
 -------------------------------------"
-# However, text may not include double quotes unless they are escaped.</pre></font></td></tr></tbody></table></div><p><a name="LIMITSTRDASH"></a></p><p>The <tt class="OPTION">-</tt> option to mark a here document limit string
-	(<tt class="USERINPUT"><b>&lt;&lt;-LimitString</b></tt>) suppresses leading
+# However, text may not include double quotes unless they are escaped.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="LIMITSTRDASH">
+</a>
+</p>
+<p>The <tt class="OPTION">-</tt> option to mark a here document limit string
+	(<tt class="USERINPUT">
+<b>&lt;&lt;-LimitString</b>
+</tt>) suppresses leading
 	tabs (but not spaces) in the output. This may be useful in making
-	a script more readable.</p><div class="EXAMPLE"><a name="EX71A"></a><p><b>Example 19-4. Multi-line message, with tabs suppressed</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	a script more readable.</p>
+<div class="EXAMPLE">
+<a name="EX71A">
+</a>
+<p>
+<b>Example 19-4. Multi-line message, with tabs suppressed</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Same as previous example, but...
 
 #  The - option to a here document &lt;&lt;-
@@ -165,10 +366,33 @@ ENDOFMESSAGE
 
 # Note that this option has no effect on *embedded* tabs.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="HEREPASSP"></a></p><p>A <i class="FIRSTTERM">here document</i> supports parameter and
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HEREPASSP">
+</a>
+</p>
+<p>A <i class="FIRSTTERM">here document</i> supports parameter and
 	command substitution.  It is therefore possible to pass different
 	parameters to the body of the here document, changing its output
-	accordingly.</p><div class="EXAMPLE"><a name="EX71B"></a><p><b>Example 19-5. Here document with replaceable parameters</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	accordingly.</p>
+<div class="EXAMPLE">
+<a name="EX71B">
+</a>
+<p>
+<b>Example 19-5. Here document with replaceable parameters</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Another 'cat' here document, using parameter substitution.
 
 # Try it with no command-line parameters,   ./scriptname
@@ -201,9 +425,32 @@ Endofmessage
 # Note that the blank lines show up in the output.
 # So does the comment.
 
-exit</pre></font></td></tr></tbody></table></div><p><a name="HEREPARAMSUB"></a></p><p>This is a useful script containing a <i class="FIRSTTERM">here
-        document</i> with parameter substitution.</p><div class="EXAMPLE"><a name="EX72"></a><p><b>Example 19-6. Upload a file pair to <i class="FIRSTTERM">Sunsite</i> incoming
-	  directory</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HEREPARAMSUB">
+</a>
+</p>
+<p>This is a useful script containing a <i class="FIRSTTERM">here
+        document</i> with parameter substitution.</p>
+<div class="EXAMPLE">
+<a name="EX72">
+</a>
+<p>
+<b>Example 19-6. Upload a file pair to <i class="FIRSTTERM">Sunsite</i> incoming
+	  directory</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # upload.sh
 
 #  Upload file pair (Filename.lsm, Filename.tar.gz)
@@ -244,13 +491,36 @@ put "$Filename.tar.gz"
 bye
 End-Of-Session
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="HEREESC"></a></p><p>Quoting or escaping the <span class="QUOTE">"limit string"</span> at the
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HEREESC">
+</a>
+</p>
+<p>Quoting or escaping the <span class="QUOTE">"limit string"</span> at the
         head of a here document disables parameter substitution within its
 	body. The reason for this is that <i class="FIRSTTERM">quoting/escaping the
-	limit string</i> effectively <a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">escapes</a> the <span class="TOKEN">$</span>,
-	<span class="TOKEN">`</span>, and <span class="TOKEN">\</span> <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#SCHARLIST">special characters</a>, and causes them to
+	limit string</i> effectively <a href="./escapingsection.html#ESCP">escapes</a> the <span class="TOKEN">$</span>,
+	<span class="TOKEN">`</span>, and <span class="TOKEN">\</span> <a href="./special-chars.html#SCHARLIST">special characters</a>, and causes them to
 	be interpreted literally. (Thank you, Allen Halsey, for pointing
-	this out.)</p><div class="EXAMPLE"><a name="EX71C"></a><p><b>Example 19-7. Parameter substitution turned off</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	this out.)</p>
+<div class="EXAMPLE">
+<a name="EX71C">
+</a>
+<p>
+<b>Example 19-7. Parameter substitution turned off</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  A 'cat' here-document, but with parameter substitution disabled.
 
 NAME="John Doe"
@@ -290,8 +560,31 @@ if limit string were not quoted.
 SpecialCharTest
 
 
-exit</pre></font></td></tr></tbody></table></div><p><a name="HERELIT"></a></p><p>Disabling parameter substitution permits outputting literal text.
-        Generating scripts or even program code is one use for this.</p><div class="EXAMPLE"><a name="GENERATESCRIPT"></a><p><b>Example 19-8. A script that generates another script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HERELIT">
+</a>
+</p>
+<p>Disabling parameter substitution permits outputting literal text.
+        Generating scripts or even program code is one use for this.</p>
+<div class="EXAMPLE">
+<a name="GENERATESCRIPT">
+</a>
+<p>
+<b>Example 19-8. A script that generates another script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # generate-script.sh
 # Based on an idea by Albert Reiner.
 
@@ -340,17 +633,55 @@ fi
 #+ C programs, Perl programs, Python programs, Makefiles,
 #+ and the like.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="HERECS"></a></p><p>        It is possible to set a variable from the output of a here document.
-	This is actually a devious form of <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#COMMANDSUBREF">command substitution</a>.
-	<table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">variable=$(cat &lt;&lt;SETVAR
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HERECS">
+</a>
+</p>
+<p>        It is possible to set a variable from the output of a here document.
+	This is actually a devious form of <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>.
+	<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">variable=$(cat &lt;&lt;SETVAR
 This variable
 runs over multiple lines.
 SETVAR
 )
 
-echo "$variable"</pre></font></td></tr></tbody></table>
-      </p><p><a name="HEREFUNC"></a></p><p>A here document can supply input to a function in the same
-        script.</p><div class="EXAMPLE"><a name="HF"></a><p><b>Example 19-9. Here documents and functions</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+echo "$variable"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>
+<a name="HEREFUNC">
+</a>
+</p>
+<p>A here document can supply input to a function in the same
+        script.</p>
+<div class="EXAMPLE">
+<a name="HF">
+</a>
+<p>
+<b>Example 19-9. Here documents and functions</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # here-function.sh
 
 GetPersonalData ()
@@ -381,16 +712,77 @@ echo "$address"
 echo "$city, $state $zipcode"
 echo
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="ANONHEREDOC0"></a></p><p>It is possible to use <span class="TOKEN">:</span> as a dummy command
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="ANONHEREDOC0">
+</a>
+</p>
+<p>It is possible to use <span class="TOKEN">:</span> as a dummy command
         accepting output from a here document. This, in effect, creates an
-	<span class="QUOTE">"anonymous"</span> here document.</p><div class="EXAMPLE"><a name="ANONHEREDOC"></a><p><b>Example 19-10. <span class="QUOTE">"Anonymous"</span> Here Document</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	<span class="QUOTE">"anonymous"</span> here document.</p>
+<div class="EXAMPLE">
+<a name="ANONHEREDOC">
+</a>
+<p>
+<b>Example 19-10. <span class="QUOTE">"Anonymous"</span> Here Document</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 : &lt;&lt;TESTVARIABLES
 ${HOSTNAME?}${USER?}${MAIL?}  # Print error message if one of the variables not set.
 TESTVARIABLES
 
-exit $?</pre></font></td></tr></tbody></table></div><p><a name="CBLOCK1"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>A variation of the above technique permits <span class="QUOTE">"commenting
-        out"</span> blocks of code.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="COMMENTBLOCK"></a><p><b>Example 19-11. Commenting out a block of code</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="CBLOCK1">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>A variation of the above technique permits <span class="QUOTE">"commenting
+        out"</span> blocks of code.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="COMMENTBLOCK">
+</a>
+<p>
+<b>Example 19-11. Commenting out a block of code</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # commentblock.sh
 
 : &lt;&lt;COMMENTBLOCK
@@ -455,8 +847,46 @@ commented-bad.sh: line 3: foo_bar_bazz: parameter null or not set
 
   : &lt;&lt;'COMMENTBLOCK'
 
-# Thank you, Kurt Pfeifle, for pointing this out.</pre></font></td></tr></tbody></table></div><p><a name="HSELFDOC"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Yet another twist of this nifty trick makes
-        <span class="QUOTE">"self-documenting"</span> scripts possible.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="SELFDOCUMENT"></a><p><b>Example 19-12. A self-documenting script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Thank you, Kurt Pfeifle, for pointing this out.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HSELFDOC">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Yet another twist of this nifty trick makes
+        <span class="QUOTE">"self-documenting"</span> scripts possible.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="SELFDOCUMENT">
+</a>
+<p>
+<b>Example 19-12. A self-documenting script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # self-document.sh: self-documenting script
 # Modification of "colm.sh".
 
@@ -489,8 +919,21 @@ echo "Listing of "$directory":"; echo
 (printf "PERMISSIONS LINKS OWNER GROUP SIZE MONTH DAY HH:MM PROG-NAME\n" \
 ; ls -l "$directory" | sed 1d) | column -t
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Using a <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#CATSCRIPTREF">cat script</a> is an
-        alternate way of accomplishing this.</p><p>      <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">DOC_REQUEST=70
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Using a <a href="./here-docs.html#CATSCRIPTREF">cat script</a> is an
+        alternate way of accomplishing this.</p>
+<p>      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">DOC_REQUEST=70
 
 if [ "$1" = "-h"  -o "$1" = "--help" ]     # Request help.
 then                                       # Use a "cat script" . . .
@@ -503,17 +946,92 @@ then list the current working directory.
 
 DOCUMENTATIONXX
 exit $DOC_REQUEST
-fi</pre></font></td></tr></tbody></table>
-      </p><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#ISSPAMMER2">Example A-28</a>, <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#PETALS">Example A-40</a>,
-        <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#QKY">Example A-41</a>, and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#NIM">Example A-42</a> for more examples
-        of self-documenting scripts.</p><p><a name="HERETEMP"></a></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Here documents create temporary files, but these
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>See also <a href="./contributed-scripts.html#ISSPAMMER2">Example A-28</a>, <a href="./contributed-scripts.html#PETALS">Example A-40</a>,
+        <a href="./contributed-scripts.html#QKY">Example A-41</a>, and <a href="./contributed-scripts.html#NIM">Example A-42</a> for more examples
+        of self-documenting scripts.</p>
+<p>
+<a name="HERETEMP">
+</a>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Here documents create temporary files, but these
 	    files are deleted after opening and are not accessible to
-	    any other process.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>bash -c 'lsof -a -p $$ -d0' &lt;&lt; EOF</b></tt>
-<tt class="PROMPT">&gt; </tt><tt class="USERINPUT"><b>EOF</b></tt>
+	    any other process.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>bash -c 'lsof -a -p $$ -d0' &lt;&lt; EOF</b>
+</tt>
+<tt class="PROMPT">&gt; </tt>
+<tt class="USERINPUT">
+<b>EOF</b>
+</tt>
 <tt class="COMPUTEROUTPUT">lsof    1213 bozo    0r   REG    3,5    0 30386 /tmp/t1213-0-sh (deleted)</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Some utilities will not work inside a
-	  <i class="FIRSTTERM">here document</i>.</p></td></tr></tbody></table></div><p><a name="INDENTEDLS"></a></p><div class="WARNING"><p></p><table class="WARNING" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/warning.gif" alt="Warning" hspace="5"></td><td align="LEFT" valign="TOP"><p>The closing <i class="FIRSTTERM">limit string</i>,
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Some utilities will not work inside a
+	  <i class="FIRSTTERM">here document</i>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="INDENTEDLS">
+</a>
+</p>
+<div class="WARNING">
+<p>
+</p>
+<table class="WARNING" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/warning.gif" alt="Warning" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The closing <i class="FIRSTTERM">limit string</i>,
 	  on the final line of a here document, must start in the
 	  <em>first</em> character position. There can
 	  be <em>no leading whitespace</em>. Trailing
@@ -521,9 +1039,17 @@ fi</pre></font></td></tr></tbody></table>
 	  behavior. The whitespace prevents the limit string from being
 	  recognized.
   
-          <a name="AEN17822" href="#FTN.AEN17822"><span class="footnote">[1]</span></a>
+          <a name="AEN17822" href="#FTN.AEN17822">
+<span class="footnote">[1]</span>
+</a>
 	  
-	  </p><p>	 <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	  </p>
+<p>	 <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 echo "----------------------------------------------------------------------"
 
@@ -543,10 +1069,40 @@ echo "Outside the here document."
 
 exit 0
 
-echo "This line had better not echo."  # Follows an 'exit' command.</pre></font></td></tr></tbody></table>
-	 </p></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="here-docs_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="EXCLLS"></a>Some people very cleverly use a
+echo "This line had better not echo."  # Follows an 'exit' command.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	 </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="here-docs_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="EXCLLS">
+</a>Some people very cleverly use a
           single <span class="TOKEN">!</span> as a limit string. But, that's not
-          necessarily a good idea.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># This works.
+          necessarily a good idea.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># This works.
 cat &lt;&lt;!
 Hello!
 ! Three more exclamations !!!
@@ -568,11 +1124,68 @@ Hello!
 Single exclamation point follows!
 !
 EOF
-# It's safer to use a multi-character limit string.</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div><p>For those tasks too complex for a <i class="FIRSTTERM">here
+# It's safer to use a multi-character limit string.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For those tasks too complex for a <i class="FIRSTTERM">here
 	  document</i>, consider using the
-	  <tt class="REPLACEABLE"><i>expect</i></tt> scripting language, which
+	  <tt class="REPLACEABLE">
+<i>expect</i>
+</tt> scripting language, which
 	  was specifically designed for feeding input into interactive
-	  programs.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17822" href="http://www.tldp.org/LDP/abs/html/here-docs.html#AEN17822"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Except, as Dennis Benzinger points out,
-          if <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#LIMITSTRDASH">using
+	  programs.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN17822" href="./here-docs.html#AEN17822">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Except, as Dennis Benzinger points out,
+          if <a href="./here-docs.html#LIMITSTRDASH">using
           <b class="COMMAND">&lt;&lt;-</b> to suppress
-          tabs</a>.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/globbingref.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/x17837.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Globbing</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part5.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Here Strings</td></tr></tbody></table></div></body></html>
+          tabs</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./globbingref.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./x17837.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Globbing</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Here Strings</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
