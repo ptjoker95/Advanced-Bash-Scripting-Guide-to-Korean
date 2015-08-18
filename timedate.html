@@ -438,11 +438,14 @@ OneYearAgo=$(date --date='1 year ago')</pre>
 <b class="COMMAND">batch</b>
 </dt>
 <dd>
-<p>The <b class="COMMAND">batch</b> job control command is similar to
-	      <b class="COMMAND">at</b>, but it runs a command list when the system
-	      load drops below <tt class="LITERAL">.8</tt>. Like
-	      <b class="COMMAND">at</b>, it can read commands from a file with the
-	      <tt class="OPTION">-f</tt> option.</p>
+<p>
+<b class="COMMAND">batch</b> 는 
+<b class="COMMAND">at</b> 와 유사하지만, 시스템의 로드가 
+<tt class="LITERAL">.8</tt> 이하로 내려갈 때만 명령어를 실행합니다. 
+(역자 주: 매뉴얼에 따르면 로드 평균이 1.5이하라고 합니다. 그리고 이 수치는 
+atd 를 이용해서 지정할 수 있다고 합니다.)
+<b class="COMMAND">at</b> 와 같이 
+<tt class="OPTION">-f</tt> 옵션을 이용해 파일로부터 명령어들을 읽어올 수 있습니다.</p>
 <p>
 <a name="BATCHPROCREF">
 </a>
@@ -456,9 +459,10 @@ OneYearAgo=$(date --date='1 year ago')</pre>
 </a>
 <p>
 </p>
-<p>The concept of <i class="FIRSTTERM">batch processing</i>
-              dates back to the era of mainframe computers. It means
-              running a set of commands without user intervention.</p>
+<p>
+<i class="FIRSTTERM">batch 프로세스</i> 의 개념은 메인프레임 컴퓨터로 
+거슬러 올라갑니다. 즉 사용자의 간섭없는 명령어의 집합을 실행한다는 것을 의미합니다.
+</p>
 <p>
 </p>
 </div>
