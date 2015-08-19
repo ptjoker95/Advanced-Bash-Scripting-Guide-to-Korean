@@ -3109,10 +3109,12 @@ pwd       # /home
 </a>
 </dt>
 <dd>
-<p>Putting a <b class="COMMAND">caller</b> command
-	       inside a <a href="./functions.html#FUNCTIONREF">function</a>
-	       echoes to <tt class="FILENAME">stdout</tt> information about
-	       the <i class="FIRSTTERM">caller</i> of that function.</p>
+<p>
+<a href="./functions.html#FUNCTIONREF">함수</a> 안에 
+<b class="COMMAND">caller</b> 명령어를 넣으면 
+그 함수의 
+<i class="FIRSTTERM">호출자</i> 에 관한 정보를 
+<tt class="FILENAME">표준 출력</tt> 해줍니다.</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -3141,12 +3143,14 @@ caller 0     # Has no effect because it's not inside a function.</pre>
 </tbody>
 </table>
 </p>
-<p>A <b class="COMMAND">caller</b> command can also return
-	      <i class="FIRSTTERM">caller</i> information from a script <a href="./internal.html#SOURCEREF">sourced</a> within another
-	      script. Analogous to a function, this is a <span class="QUOTE">"subroutine
-	      call."</span>
+<p>
+<b class="COMMAND">caller</b> 명령어는 다른 스크립트 안에서 
+<a href="./internal.html#SOURCEREF">sourced</a> 된 스크립트에서 
+<i class="FIRSTTERM">호출자</i> 정보를 리턴할 수 있습니다. 함수와 비슷하게, 
+이것은 
+<span class="QUOTE">"서브루틴 콜."</span> 입니다.
 </p>
-<p>You may find this command useful in debugging.</p>
+<p>디버깅 때 유용하다는 것을 알게 될 것입니다.</p>
 </dd>
 </dl>
 </div>
