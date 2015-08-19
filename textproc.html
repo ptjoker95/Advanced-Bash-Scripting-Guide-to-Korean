@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Text Processing Commands</title>
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
@@ -1501,12 +1501,11 @@ exit $?
 </a>
 </p>
 <p>
-<b class="COMMAND">agrep</b> (<i class="FIRSTTERM">approximate
-	      grep</i>) extends the capabilities of
-	      <b class="COMMAND">grep</b> to approximate matching. The search
-	      string may differ by a specified number of characters
-	      from the resulting matches. This utility is not part of
-	      the core Linux distribution.</p>
+<b class="COMMAND">agrep</b> (<i class="FIRSTTERM">grep 과 거의 유사</i>) 
+<b class="COMMAND">grep</b> 에 유사(approximate) 매칭을 할 수 있게 확장해줍니다. 
+찾을 문자열과 찾은 문자열은 주어진 숫자 만큼의 문자가 다를 수도 있습니다. 
+이 유틸리티는 리눅스 배포판에 기본으로 포함되어 있지 않습니다.
+</p>
 <p>
 <a name="ZEGREPREF">
 </a>
@@ -1521,13 +1520,16 @@ exit $?
 <img src="textproc_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>To search compressed files, use
-	      <b class="COMMAND">zgrep</b>, <b class="COMMAND">zegrep</b>, or
-	      <b class="COMMAND">zfgrep</b>. These also work on non-compressed
-	      files, though slower than plain <b class="COMMAND">grep</b>,
-	      <b class="COMMAND">egrep</b>, <b class="COMMAND">fgrep</b>.
-	      They are handy for searching through a mixed set of files,
-	      some compressed, some not.</p>
+<p>압축 파일에서 찾기 위해서는, 
+<b class="COMMAND">zgrep</b>, 
+<b class="COMMAND">zegrep</b>, 또는 
+<b class="COMMAND">zfgrep</b> 를 사용하십시요. 
+이 명령어들은 압축되지 않은 파일에서도 작동하지만, 
+<b class="COMMAND">grep</b>, 
+<b class="COMMAND">egrep</b>, 
+<b class="COMMAND">fgrep</b> 보다는 느려집니다. 
+이것들은 압축된 파일과 그렇지 않은 파일이 섞여 있을 때 유용합니다.
+</p>
 <p>
 <a name="BZGREPREF">
 </a>
@@ -2674,18 +2676,18 @@ exit $?   # See also the "maned.sh" script.</pre>
 <a name="FLEXREF">
 </a>
 </p>
-<p>The <b class="COMMAND">lex</b> lexical analyzer produces
-	      programs for pattern matching. This has been replaced
-	      by the nonproprietary <b class="COMMAND">flex</b> on Linux
-	      systems.</p>
+<p>
+<b class="COMMAND">lex</b> 구문 분석기는 패턴 매칭을 위한 프로그램을 만들어 냅니다. 
+리눅스 시스템에서는 비특허 버전인 
+<b class="COMMAND">flex</b> 로 바뀌었습니다.</p>
 <p>
 <a name="BISONREF">
 </a>
 </p>
-<p>The <b class="COMMAND">yacc</b> utility creates a
-	      parser based on a set of specifications. This has been
-	      replaced by the nonproprietary <b class="COMMAND">bison</b>
-	      on Linux systems.</p>
+<p>
+<b class="COMMAND">yacc</b> 유틸리티는 명세 집합에 의거한 파서를 만듭니다. 
+리눅스 시스템에서는 비특허 버전인 
+<b class="COMMAND">bison</b> 으로 바뀌었습니다.</p>
 </dd>
 </dl>
 </div>
