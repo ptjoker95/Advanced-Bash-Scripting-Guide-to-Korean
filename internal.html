@@ -1199,11 +1199,11 @@ while read f; do
 <b class="COMMAND">cd</b>
 </dt>
 <dd>
-<p>The familiar <b class="COMMAND">cd</b> change directory
-	      command finds use in scripts where execution of a command
-	      requires being in a specified directory.</p>
+<p>
+<b class="COMMAND">cd</b> 는 스크립트 내에서 어떤 특정한 디렉토리에서 
+명령어가 실행되어야 할 때 사용합니다.</p>
 <p>  
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -1214,14 +1214,15 @@ while read f; do
 </tr>
 </tbody>
 </table>
-	      [from the <a href="./special-chars.html#COXEX">previously cited</a>
-	      example by Alan Cox]</p>
-<p>The <tt class="OPTION">-P</tt> (physical) option to
-	      <b class="COMMAND">cd</b> causes it to ignore symbolic
-	      links.</p>
+[from the <a href="./special-chars.html#COXEX">previously cited</a> 
+example by Alan Cox]</p>
 <p>
-<b class="COMMAND">cd -</b> changes to <a href="./internalvariables.html#OLDPWD">$OLDPWD</a>, the previous working
-	    directory.</p>
+<tt class="OPTION">-P</tt> (physical) 옵션은 
+<b class="COMMAND">cd</b> 가 심볼릭 링크를 무시하도록 해줍니다.
+</p>
+<p>
+<b class="COMMAND">cd -</b> 는 이전에 작업했던 디렉토리, 
+<a href="./internalvariables.html#OLDPWD">$OLDPWD</a> 로 바꿉니다.</p>
 <p>
 <a name="DOUBLESLASHREF">
 </a>
@@ -1236,32 +1237,28 @@ while read f; do
 <img src="internal_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The <b class="COMMAND">cd</b> command does not function
-	      as expected when presented with two forward slashes.
-
-	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<b class="COMMAND">cd</b> 에 두개의 슬래쉬가 붙는다면 제대로 작동하지 
+않습니다.
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cd //</b>
-</tt>
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>pwd</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cd //</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>pwd</b></tt>
 <tt class="COMPUTEROUTPUT">//</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	      The output should, of course, be <tt class="COMPUTEROUTPUT">/</tt>.
-	      This is a problem both from the command-line and in a script.</p>
+출력은 물론 
+<tt class="COMPUTEROUTPUT">/</tt> 가 되어야 합니다. 이 문제는 명령어 라인과 
+스크립트 모두에서 일어납니다.</p>
 </td>
 </tr>
 </tbody>
