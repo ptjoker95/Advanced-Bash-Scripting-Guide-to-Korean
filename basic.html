@@ -1,6 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Basic Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="NEXT" title="Complex Commands" href="http://www.tldp.org/LDP/abs/html/moreadv.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/moreadv.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="BASIC"></a>16.1. Basic Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="BASICCOMMANDS1"></a>The first commands a novice learns</b></p><dl><dt><a name="LSREF"></a><b class="COMMAND">ls</b></dt><dd><p>The basic file <span class="QUOTE">"list"</span> command. It is all too easy
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Basic Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="PREVIOUS" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="NEXT" title="Complex Commands" href="./moreadv.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./external.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./moreadv.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="BASIC">
+</a>16.1. Basic Commands</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="BASICCOMMANDS1">
+</a>The first commands a novice learns</b>
+</p>
+<dl>
+<dt>
+<a name="LSREF">
+</a>
+<b class="COMMAND">ls</b>
+</dt>
+<dd>
+<p>The basic file <span class="QUOTE">"list"</span> command. It is all too easy
 	      to underestimate the power of this humble command. For
 	      example, using the <tt class="OPTION">-R</tt>, recursive option,
 	      <b class="COMMAND">ls</b> provides a tree-like listing of
@@ -9,9 +59,21 @@
 	      <tt class="OPTION">-t</tt>, sort by file modification time,
 	      <tt class="OPTION">-v</tt>, sort by (numerical) version numbers
 	      embedded in the filenames,
-                <a name="AEN10025" href="#FTN.AEN10025"><span class="footnote">[1]</span></a>
+                <a name="AEN10025" href="#FTN.AEN10025">
+<span class="footnote">[1]</span>
+</a>
 	      <tt class="OPTION">-b</tt>, show escape characters, and
-	      <tt class="OPTION">-i</tt>, show file inodes (see <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#IDELETE">Example 16-4</a>).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l</b></tt>
+	      <tt class="OPTION">-i</tt>, show file inodes (see <a href="./moreadv.html#IDELETE">Example 16-4</a>).</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -l</b>
+</tt>
 <tt class="COMPUTEROUTPUT">-rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter10.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter11.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter12.txt
@@ -22,7 +84,10 @@
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Preface.txt</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -lv</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -lv</b>
+</tt>
 <tt class="COMPUTEROUTPUT"> total 0
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Chapter_headings.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Preface.txt
@@ -31,17 +96,70 @@
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter3.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter10.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter11.txt
- -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter12.txt</tt></pre></font></td></tr></tbody></table></p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>	      The <i class="FIRSTTERM">ls</i> command returns a
-	      non-zero <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a> when
+ -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter12.txt</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>	      The <i class="FIRSTTERM">ls</i> command returns a
+	      non-zero <a href="./exit-status.html#EXITSTATUSREF">exit status</a> when
 	      attempting to list a non-existent file.
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls abc</b></tt>
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls abc</b>
+</tt>
 <tt class="COMPUTEROUTPUT">ls: abc: No such file or directory</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $?</b></tt>
-<tt class="COMPUTEROUTPUT">2</tt></pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX40"></a><p><b>Example 16-1. Using <i class="FIRSTTERM">ls</i> to create a table of contents
-		for burning a <span class="ABBREV">CDR</span> disk</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo $?</b>
+</tt>
+<tt class="COMPUTEROUTPUT">2</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX40">
+</a>
+<p>
+<b>Example 16-1. Using <i class="FIRSTTERM">ls</i> to create a table of contents
+		for burning a <span class="ABBREV">CDR</span> disk</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ex40.sh (burn-cd.sh)
 # Script to automate burning a CDR.
 
@@ -90,117 +208,430 @@ wodim -v -isosize dev=$DEVICE $IMAGEFILE
 exitcode=$?
 echo "Exit code = $exitcode"
 
-exit $exitcode</pre></font></td></tr></tbody></table></div></dd><dt><a name="CATREF"></a><b class="COMMAND">cat</b>, <b class="COMMAND">tac</b></dt><dd><p><b class="COMMAND">cat</b>, an acronym for
-	    <i class="WORDASWORD">concatenate</i>,
-	      lists a file to <tt class="FILENAME">stdout</tt>. When
-	      combined with redirection (<span class="TOKEN">&gt;</span> or
-	      <span class="TOKEN">&gt;&gt;</span>), it is commonly used to concatenate
-	      files.
-
-		<a name="CATUSES"></a>
-	        <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Uses of 'cat'
+exit $exitcode</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="CATREF">
+</a>
+<b class="COMMAND">cat</b>, <b class="COMMAND">tac</b>
+</dt>
+<dd>
+<p>
+<i class="WORDASWORD">concatenate</i> 의 약자인 
+<b class="COMMAND">cat</b> 은 파일 내용을 
+<tt class="FILENAME">표준 출력</tt> 합니다. 재지향 
+(<span class="TOKEN">&gt;</span> 이나 <span class="TOKEN">&gt;&gt;</span>) 과 
+함께 쓰이면, 파일을 연결하는 데 쓰일 수 있습니다.
+<a name="CATUSES">
+</a>
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Uses of 'cat'
 cat filename                          # Lists the file.
 
-cat file.1 file.2 file.3 &gt; file.123   # Combines three files into one.</pre></font></td></tr></tbody></table>
-
-	      The <tt class="OPTION">-n</tt> option to <b class="COMMAND">cat</b>
-	      inserts consecutive numbers before all lines of the
-	      target file(s). The <tt class="OPTION">-b</tt> option numbers
-	      only the non-blank lines. The <tt class="OPTION">-v</tt> option
-	      echoes nonprintable characters, using <span class="TOKEN">^</span>
-	      notation. The <tt class="OPTION">-s</tt> option squeezes multiple
-	      consecutive blank lines into a single blank line.</p><p>See also <a href="http://www.tldp.org/LDP/abs/html/textproc.html#LNUM">Example 16-28</a> and <a href="http://www.tldp.org/LDP/abs/html/textproc.html#ROT13">Example 16-24</a>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="CATLESSEFF"></a>
-	    In a <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#PIPEREF">pipe</a>, it may be
-	    more efficient to <a href="http://www.tldp.org/LDP/abs/html/io-redirection.html#IOREDIRREF">redirect</a>
-	    the <tt class="FILENAME">stdin</tt> to a file, rather than to
-            <b class="COMMAND">cat</b> the file.
-            </p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat filename | tr a-z A-Z
+cat file.1 file.2 file.3 &gt; file.123   # Combines three files into one.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<b class="COMMAND">cat</b> 의 
+<tt class="OPTION">-n</tt> 옵션은 파일(들)의 모든 줄 앞에 연속된 숫자를 넣습니다. 
+<tt class="OPTION">-b</tt> 옵션은 비어있지 않은 줄에만 숫자를 넣습니다. 
+<tt class="OPTION">-v</tt> 옵션은 출력불가능한 문자들을 
+<span class="TOKEN">^</span> 을 이용해 보여줍니다. 
+<tt class="OPTION">-s</tt> 옵션은 연속된 빈 줄을 하나의 빈 줄로 줄여줍니다.
+</p>
+<p><a href="./textproc.html#LNUM">Example 16-28</a> 과 
+<a href="./textproc.html#ROT13">Example 16-24</a> 를 참고하십시요.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="CATLESSEFF">
+</a>
+<a href="./special-chars.html#PIPEREF">pipe</a> 를 사용해서 파일을 
+<b class="COMMAND">cat</b> 하는 것보다, 
+<a href="./io-redirection.html#IOREDIRREF">재지향</a> 으로 파일에 직접 
+<tt class="FILENAME">표준입력(stdin)</tt> 하는 것이 좀더 효율적일 것입니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cat filename | tr a-z A-Z
 
 tr a-z A-Z &lt; filename   #  Same effect, but starts one less process,
-                        #+ and also dispenses with the pipe.</pre></font></td></tr></tbody></table>
-            </p></td></tr></tbody></table></div><p><b class="COMMAND">tac</b>, is the inverse of
-	      <i class="WORDASWORD">cat</i>, listing a file backwards from its end.</p></dd><dt><a name="REVREF"></a><b class="COMMAND">rev</b></dt><dd><p>reverses each line of a file, and outputs to
+                        #+ and also dispenses with the pipe.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<i class="WORDASWORD">cat</i> 을 거꾸로 쓴, 
+<b class="COMMAND">tac</b> 은 파일 끝에서부터 거꾸로 보여줍니다.
+</p>
+</dd>
+<dt>
+<a name="REVREF">
+</a>
+<b class="COMMAND">rev</b>
+</dt>
+<dd>
+<p>reverses each line of a file, and outputs to
 	      <tt class="FILENAME">stdout</tt>.  This does not have the same effect
 	      as <b class="COMMAND">tac</b>, as it preserves the order of
-	      the lines, but flips each one around (mirror image).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat file1.txt</b></tt>
+	      the lines, but flips each one around (mirror image).</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat file1.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This is line 1.
  This is line 2.</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>tac file1.txt</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>tac file1.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">This is line 2.
  This is line 1.</tt>
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rev file1.txt</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rev file1.txt</b>
+</tt>
 <tt class="COMPUTEROUTPUT">.1 enil si sihT
  .2 enil si sihT</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="CPREF"></a><b class="COMMAND">cp</b></dt><dd><p>This is the file copy command. <tt class="USERINPUT"><b>cp file1
-	      file2</b></tt> copies <tt class="FILENAME">file1</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="CPREF">
+</a>
+<b class="COMMAND">cp</b>
+</dt>
+<dd>
+<p>This is the file copy command. <tt class="USERINPUT">
+<b>cp file1
+	      file2</b>
+</tt> copies <tt class="FILENAME">file1</tt>
 	      to <tt class="FILENAME">file2</tt>, overwriting
-	      <tt class="FILENAME">file2</tt> if it already exists (see <a href="http://www.tldp.org/LDP/abs/html/moreadv.html#EX42">Example 16-6</a>).</p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Particularly useful are the <tt class="OPTION">-a</tt>
+	      <tt class="FILENAME">file2</tt> if it already exists (see <a href="./moreadv.html#EX42">Example 16-6</a>).</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Particularly useful are the <tt class="OPTION">-a</tt>
 	       archive flag (for copying an entire directory tree),
 	       the <tt class="OPTION">-u</tt> update flag (which prevents
 	       overwriting identically-named newer files), and the
 	       <tt class="OPTION">-r</tt> and <tt class="OPTION">-R</tt> recursive
-	       flags.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cp -u source_dir/* dest_dir
+	       flags.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cp -u source_dir/* dest_dir
 #  "Synchronize" dest_dir to source_dir
-#+  by copying over all newer and not previously existing files.</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div></dd><dt><a name="MVREF"></a><b class="COMMAND">mv</b></dt><dd><p>This is the file <i class="FIRSTTERM">move</i> command.
+#+  by copying over all newer and not previously existing files.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="MVREF">
+</a>
+<b class="COMMAND">mv</b>
+</dt>
+<dd>
+<p>This is the file <i class="FIRSTTERM">move</i> command.
 	      It is equivalent to a combination of <b class="COMMAND">cp</b>
 	      and <b class="COMMAND">rm</b>. It may be used to move multiple
 	      files to a directory, or even to rename a directory. For
 	      some examples of using <b class="COMMAND">mv</b> in a script,
-	      see <a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html#RFE">Example 10-11</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#RN">Example A-2</a>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>When used in a non-interactive script,
+	      see <a href="./parameter-substitution.html#RFE">Example 10-11</a> and <a href="./contributed-scripts.html#RN">Example A-2</a>.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>When used in a non-interactive script,
 	      <b class="COMMAND">mv</b> takes the <tt class="OPTION">-f</tt>
 	      (<i class="FIRSTTERM">force</i>) option to bypass user
-	      input.</p><p>When a directory is moved to a preexisting directory,
-	      it becomes a subdirectory of the destination directory.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>mv source_directory target_directory</b></tt>
+	      input.</p>
+<p>When a directory is moved to a preexisting directory,
+	      it becomes a subdirectory of the destination directory.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>mv source_directory target_directory</b>
+</tt>
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -lF target_directory</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -lF target_directory</b>
+</tt>
 <tt class="COMPUTEROUTPUT">total 1
  drwxrwxr-x    2 bozo  bozo      1024 May 28 19:20 source_directory/</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></td></tr></tbody></table></div></dd><dt><a name="RMREF"></a><b class="COMMAND">rm</b></dt><dd><p>Delete (remove) a file or files. The <tt class="OPTION">-f</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="RMREF">
+</a>
+<b class="COMMAND">rm</b>
+</dt>
+<dd>
+<p>Delete (remove) a file or files. The <tt class="OPTION">-f</tt>
 	      option forces removal of even readonly files, and is useful
-	      for bypassing user input in a script.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="DASHREM"></a></p><p>The <i class="FIRSTTERM">rm</i> command will, by
+	      for bypassing user input in a script.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="DASHREM">
+</a>
+</p>
+<p>The <i class="FIRSTTERM">rm</i> command will, by
 		itself,  fail to remove filenames beginning with
 		a dash. Why? Because <i class="FIRSTTERM">rm</i>
 		sees a dash-prefixed filename as an
-		<i class="FIRSTTERM">option</i>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rm -badname</b></tt>
+		<i class="FIRSTTERM">option</i>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rm -badname</b>
+</tt>
 <tt class="COMPUTEROUTPUT">rm: invalid option -- b
- Try `rm --help' for more information.</tt></pre></font></td></tr></tbody></table>
-	      </p><p>		One clever workaround is to precede
+ Try `rm --help' for more information.</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>		One clever workaround is to precede
 		the filename with a <span class="QUOTE">" -- "</span> (the
 		<i class="FIRSTTERM">end-of-options</i> flag).
 
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rm -- -badname</b></tt></pre></font></td></tr></tbody></table>
-		</p><p>	      Another method to is to preface the filename to be removed
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rm -- -badname</b>
+</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+		</p>
+<p>	      Another method to is to preface the filename to be removed
 	      with a <tt class="FILENAME">dot-slash</tt> .
 
-	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rm ./-badname</b></tt></pre></font></td></tr></tbody></table>
-	      </p></td></tr></tbody></table></div><div class="WARNING"><p></p><table class="WARNING" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/warning.gif" alt="Warning" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="RMRECURS"></a>When used with the
+	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rm ./-badname</b>
+</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="WARNING">
+<p>
+</p>
+<table class="WARNING" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/warning.gif" alt="Warning" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="RMRECURS">
+</a>When used with the
 	      recursive flag <tt class="OPTION">-r</tt>, this command removes
 	      files all the way down the directory tree from the current
 	      directory.  A careless <b class="COMMAND">rm -rf *</b> can wipe
-	      out a big chunk of a directory structure.</p></td></tr></tbody></table></div></dd><dt><a name="RMDIRREF"></a><b class="COMMAND">rmdir</b></dt><dd><p>Remove directory. The directory must be empty of
+	      out a big chunk of a directory structure.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="RMDIRREF">
+</a>
+<b class="COMMAND">rmdir</b>
+</dt>
+<dd>
+<p>Remove directory. The directory must be empty of
 	      all files -- including <span class="QUOTE">"invisible"</span>
 	      <i class="FIRSTTERM">dotfiles</i>
 
-		<a name="AEN10228" href="#FTN.AEN10228"><span class="footnote">[2]</span></a>
+		<a name="AEN10228" href="#FTN.AEN10228">
+<span class="footnote">[2]</span>
+</a>
 
-	      -- for this command to succeed.</p></dd><dt><a name="MKDIRREF"></a><b class="COMMAND">mkdir</b></dt><dd><p>Make directory, creates a new directory. For example,
-	      <tt class="USERINPUT"><b>mkdir -p project/programs/December</b></tt>
+	      -- for this command to succeed.</p>
+</dd>
+<dt>
+<a name="MKDIRREF">
+</a>
+<b class="COMMAND">mkdir</b>
+</dt>
+<dd>
+<p>Make directory, creates a new directory. For example,
+	      <tt class="USERINPUT">
+<b>mkdir -p project/programs/December</b>
+</tt>
 	      creates the named directory. The
-	      <tt class="REPLACEABLE"><i>-p</i></tt> option automatically creates
-	      any necessary parent directories.</p></dd><dt><a name="CHMODREF"></a><b class="COMMAND">chmod</b></dt><dd><p>Changes the attributes of an existing file or directory
-	      (see <a href="http://www.tldp.org/LDP/abs/html/internal.html#EX44">Example 15-14</a>).</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">chmod +x filename
+	      <tt class="REPLACEABLE">
+<i>-p</i>
+</tt> option automatically creates
+	      any necessary parent directories.</p>
+</dd>
+<dt>
+<a name="CHMODREF">
+</a>
+<b class="COMMAND">chmod</b>
+</dt>
+<dd>
+<p>Changes the attributes of an existing file or directory
+	      (see <a href="./internal.html#EX44">Example 15-14</a>).</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">chmod +x filename
 # Makes "filename" executable for all users.
 
 chmod u+s filename
 # Sets "suid" bit on "filename" permissions.
 # An ordinary user may execute "filename" with same privileges as the file's owner.
-# (This does not apply to shell scripts.)</pre></font></td></tr></tbody></table></p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">chmod 644 filename
+# (This does not apply to shell scripts.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">chmod 644 filename
 #  Makes "filename" readable/writable to owner, readable to others
 #+ (octal mode).
 
@@ -210,7 +641,20 @@ chmod 444 filename
 #+ not allowed for a user who does not own the file (except for root),
 #+ and even the file owner must force a file-save
 #+ if she modifies the file.
-#  Same restrictions apply for deleting the file.</pre></font></td></tr></tbody></table></p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">chmod 1777 directory-name
+#  Same restrictions apply for deleting the file.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">chmod 1777 directory-name
 #  Gives everyone read, write, and execute permission in directory,
 #+ however also sets the "sticky bit".
 #  This means that only the owner of the directory,
@@ -233,51 +677,152 @@ chmod 000 directory-name
 #+ or delete it (rmdir) if it is empty.
 #  You can even symlink to files in the directory,
 #+ but you can't read, write, or execute the symlinks.
-#  These restrictions do not apply to root.</pre></font></td></tr></tbody></table></p></dd><dt><a name="CHATTRREF"></a><b class="COMMAND">chattr</b></dt><dd><p><b class="COMMAND">Ch</b>ange file
+#  These restrictions do not apply to root.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="CHATTRREF">
+</a>
+<b class="COMMAND">chattr</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">Ch</b>ange file
 	      <b class="COMMAND">attr</b>ibutes. This is analogous to
 	      <b class="COMMAND">chmod</b> above, but with different options
 	      and a different invocation syntax, and it works only on
-	       <i class="FIRSTTERM">ext2/ext3</i> filesystems.</p><p>One particularly interesting <b class="COMMAND">chattr</b>
+	       <i class="FIRSTTERM">ext2/ext3</i> filesystems.</p>
+<p>One particularly interesting <b class="COMMAND">chattr</b>
 	      option is <tt class="OPTION">i</tt>. A <b class="COMMAND">chattr +i
-	      <tt class="FILENAME">filename</tt></b> marks the file
+	      <tt class="FILENAME">filename</tt>
+</b> marks the file
 	      as immutable. The file cannot be modified, linked to, or
 	      deleted, <em>not even by root</em>. This
 	      file attribute can be set or removed only by
 	      <i class="FIRSTTERM">root</i>. In a similar fashion,
 	      the <tt class="OPTION">a</tt> option marks the file as append
-	      only.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>chattr +i file1.txt</b></tt>
+	      only.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">root# </tt>
+<tt class="USERINPUT">
+<b>chattr +i file1.txt</b>
+</tt>
 
 
-<tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>rm file1.txt</b></tt>
+<tt class="PROMPT">root# </tt>
+<tt class="USERINPUT">
+<b>rm file1.txt</b>
+</tt>
 
 <tt class="COMPUTEROUTPUT">rm: remove write-protected regular file `file1.txt'? y
  rm: cannot remove `file1.txt': Operation not permitted</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>If a file has the <tt class="OPTION">s</tt> (secure)
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>If a file has the <tt class="OPTION">s</tt> (secure)
               attribute set, then when it is deleted its block is 
 	      overwritten with binary zeroes.
-		<a name="AEN10301" href="#FTN.AEN10301"><span class="footnote">[3]</span></a>
-	      </p><p>If a file has the <tt class="OPTION">u</tt> (undelete)
+		<a name="AEN10301" href="#FTN.AEN10301">
+<span class="footnote">[3]</span>
+</a>
+	      </p>
+<p>If a file has the <tt class="OPTION">u</tt> (undelete)
               attribute set, then when it is deleted, its contents can still
-	      be retrieved (undeleted).</p><p>If a file has the <tt class="OPTION">c</tt> (compress)
+	      be retrieved (undeleted).</p>
+<p>If a file has the <tt class="OPTION">c</tt> (compress)
               attribute set, then it will automatically be compressed
-	      on writes to disk, and uncompressed on reads.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The file attributes set with
+	      on writes to disk, and uncompressed on reads.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The file attributes set with
 	      <b class="COMMAND">chattr</b> do not show in a file listing
-	      (<b class="COMMAND">ls -l</b>).</p></td></tr></tbody></table></div></dd><dt><a name="LINKREF"></a><b class="COMMAND">ln</b></dt><dd><p>Creates links to pre-existings files. A <span class="QUOTE">"link"</span>
+	      (<b class="COMMAND">ls -l</b>).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="LINKREF">
+</a>
+<b class="COMMAND">ln</b>
+</dt>
+<dd>
+<p>Creates links to pre-existings files. A <span class="QUOTE">"link"</span>
 	      is a reference to a file, an alternate name for it.
 	      The <b class="COMMAND">ln</b> command permits referencing
 	      the linked file by more than one name and is a superior
-	      alternative to aliasing (see <a href="http://www.tldp.org/LDP/abs/html/othertypesv.html#EX18">Example 4-6</a>).</p><p>The <b class="COMMAND">ln</b> creates only a reference, a
-	       pointer to the file only a few bytes in size.</p><p><a name="SYMLINKREF"></a></p><p>The <b class="COMMAND">ln</b> command is most often used
+	      alternative to aliasing (see <a href="./othertypesv.html#EX18">Example 4-6</a>).</p>
+<p>The <b class="COMMAND">ln</b> creates only a reference, a
+	       pointer to the file only a few bytes in size.</p>
+<p>
+<a name="SYMLINKREF">
+</a>
+</p>
+<p>The <b class="COMMAND">ln</b> command is most often used
 	      with the <tt class="OPTION">-s</tt>, symbolic or
 	      <span class="QUOTE">"soft"</span> link flag. Advantages of using the
 	      <tt class="OPTION">-s</tt> flag are that it permits linking across
-	      file systems or to directories.</p><p>The syntax of the command is a bit tricky. For example:
-	      <tt class="USERINPUT"><b>ln -s oldfile newfile</b></tt> links the
+	      file systems or to directories.</p>
+<p>The syntax of the command is a bit tricky. For example:
+	      <tt class="USERINPUT">
+<b>ln -s oldfile newfile</b>
+</tt> links the
 	      previously existing <tt class="FILENAME">oldfile</tt> to the
-	      newly created link, <tt class="FILENAME">newfile</tt>.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="basic_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>If a file named <tt class="FILENAME">newfile</tt> has
+	      newly created link, <tt class="FILENAME">newfile</tt>.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="basic_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>If a file named <tt class="FILENAME">newfile</tt> has
 	      previously existed, an error message will
-	      result.</p></td></tr></tbody></table></div><table class="SIDEBAR" border="1" cellpadding="5"><tbody><tr><td><div class="SIDEBAR"><a name="AEN10336"></a><p><b>Which type of link to use?</b></p><p>As John Macdonald explains it:</p><p>Both of these [types of links] provide a certain measure of dual reference
+	      result.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN10336">
+</a>
+<p>
+<b>Which type of link to use?</b>
+</p>
+<p>As John Macdonald explains it:</p>
+<p>Both of these [types of links] provide a certain measure of dual reference
 		-- if you edit the contents of the file using any name,
 		your changes will affect both the original name and either
 		a hard or soft new name.  The differences between them
@@ -290,9 +835,31 @@ chmod 000 directory-name
 		there. The advantage of a soft link is that it can refer
 		to a different file system (since it is just a reference
 		to a file name, not to actual data). And, unlike a hard
-		link, a symbolic link can refer to a directory.</p></div></td></tr></tbody></table><p><a name="LINKMINVOK"></a></p><p>Links give the ability to invoke a script (or any other type
+		link, a symbolic link can refer to a directory.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="LINKMINVOK">
+</a>
+</p>
+<p>Links give the ability to invoke a script (or any other type
 	      of executable) with multiple names, and having that script
-	      behave according to how it was invoked.</p><div class="EXAMPLE"><a name="HELLOL"></a><p><b>Example 16-2. Hello or Good-bye</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      behave according to how it was invoked.</p>
+<div class="EXAMPLE">
+<a name="HELLOL">
+</a>
+<p>
+<b>Example 16-2. Hello or Good-bye</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # hello.sh: Saying "hello" or "goodbye"
 #+          depending on how script is invoked.
 
@@ -315,15 +882,62 @@ fi
 
 echo "Hello!"
 # Some other hello-type commands, as appropriate.
-exit $HELLO_CALL</pre></font></td></tr></tbody></table></div></dd><dt><a name="MANREF"></a><b class="COMMAND">man</b>, <a name="INFOREF"></a><b class="COMMAND">info</b></dt><dd><p>These commands access the manual and information pages on
+exit $HELLO_CALL</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="MANREF">
+</a>
+<b class="COMMAND">man</b>, <a name="INFOREF">
+</a>
+<b class="COMMAND">info</b>
+</dt>
+<dd>
+<p>These commands access the manual and information pages on
 	      system commands and installed utilities. When available, the
 	      <i class="FIRSTTERM">info</i> pages usually contain more detailed
-	      descriptions than do the <i class="FIRSTTERM">man</i> pages.</p><p>There have been various attempts at
+	      descriptions than do the <i class="FIRSTTERM">man</i> pages.</p>
+<p>There have been various attempts at
 	      <span class="QUOTE">"automating"</span> the writing of <i class="FIRSTTERM">man
 	      pages</i>. For a script that makes a tentative first
-	      step in that direction, see <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#MANED">Example A-39</a>.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN10025" href="http://www.tldp.org/LDP/abs/html/basic.html#AEN10025"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The <tt class="OPTION">-v</tt> option also orders the
+	      step in that direction, see <a href="./contributed-scripts.html#MANED">Example A-39</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN10025" href="./basic.html#AEN10025">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>The <tt class="OPTION">-v</tt> option also orders the
                 sort by <em>upper- and lowercase prefixed</em>
-                filenames.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN10228" href="http://www.tldp.org/LDP/abs/html/basic.html#AEN10228"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="DOTFILESREF"></a></p><p><i class="FIRSTTERM">Dotfiles</i> are files whose
+                filenames.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN10228" href="./basic.html#AEN10228">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="DOTFILESREF">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">Dotfiles</i> are files whose
 		    names begin with a <i class="FIRSTTERM">dot</i>, such as
 		    <tt class="FILENAME">~/.Xdefaults</tt>. Such filenames do
 		    not appear in a normal <b class="COMMAND">ls</b> listing
@@ -331,7 +945,48 @@ exit $HELLO_CALL</pre></font></td></tr></tbody></table></div></dd><dt><a name="M
 		    them), and they cannot be deleted by an accidental
 		    <b class="COMMAND">rm -rf *</b>. Dotfiles are generally
 		    used as setup and configuration files in a user's
-		    home directory.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN10301" href="http://www.tldp.org/LDP/abs/html/basic.html#AEN10301"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This particular feature may not yet be
+		    home directory.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN10301" href="./basic.html#AEN10301">
+<span class="footnote">[3]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>This particular feature may not yet be
 		implemented in the version of the ext2/ext3 filesystem
 		installed on your system. Check the documentation for
-		your Linux distro.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/moreadv.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">External Filters, Programs and Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Complex Commands</td></tr></tbody></table></div></body></html>
+		your Linux distro.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./external.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./moreadv.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">External Filters, Programs and Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Complex Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
