@@ -1,41 +1,177 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Communications Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="File and Archiving Commands" href="http://www.tldp.org/LDP/abs/html/filearchiv.html"><link rel="NEXT" title="Terminal Control Commands" href="http://www.tldp.org/LDP/abs/html/terminalccmds.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="COMMUNICATIONS"></a>16.6. Communications Commands</h1><p>Certain of the following commands find use in
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Communications Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="External Filters, Programs and Commands" href="./external.html">
+<link rel="PREVIOUS" title="File and Archiving Commands" href="./filearchiv.html">
+<link rel="NEXT" title="Terminal Control Commands" href="./terminalccmds.html">
+</head>
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./filearchiv.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./terminalccmds.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="COMMUNICATIONS">
+</a>16.6. Communications Commands</h1>
+<p>Certain of the following commands find use in
 	  network data transfer and analysis, as well as in
-	  <a href="http://www.tldp.org/LDP/abs/html/writingscripts.html#CSPAMMERS">chasing spammers</a>.</p><p></p><div class="VARIABLELIST"><p><b><a name="COMMUNINFO1"></a>Information and Statistics</b></p><dl><dt><a name="HOSTREF"></a><b class="COMMAND">host</b></dt><dd><p>Searches for information about an Internet host by name or
-	      IP address, using DNS.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>host surfacemail.com</b></tt>
+	  <a href="./writingscripts.html#CSPAMMERS">chasing spammers</a>.</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="COMMUNINFO1">
+</a>Information and Statistics</b>
+</p>
+<dl>
+<dt>
+<a name="HOSTREF">
+</a>
+<b class="COMMAND">host</b>
+</dt>
+<dd>
+<p>Searches for information about an Internet host by name or
+	      IP address, using DNS.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>host surfacemail.com</b>
+</tt>
 <tt class="COMPUTEROUTPUT">surfacemail.com. has address 202.92.42.236</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="IPCALCREF"></a><b class="COMMAND">ipcalc</b></dt><dd><p>Displays IP information for a host.
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="IPCALCREF">
+</a>
+<b class="COMMAND">ipcalc</b>
+</dt>
+<dd>
+<p>Displays IP information for a host.
 	      With the <tt class="OPTION">-h</tt> option,
 	      <b class="COMMAND">ipcalc</b> does a reverse DNS lookup, finding
-	      the name of the host (server) from the IP address.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ipcalc -h 202.92.42.236</b></tt>
+	      the name of the host (server) from the IP address.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ipcalc -h 202.92.42.236</b>
+</tt>
 <tt class="COMPUTEROUTPUT">HOSTNAME=surfacemail.com</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="NSLOOKUPREF"></a><b class="COMMAND">nslookup</b></dt><dd><p>Do an Internet <span class="QUOTE">"name server lookup"</span>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="NSLOOKUPREF">
+</a>
+<b class="COMMAND">nslookup</b>
+</dt>
+<dd>
+<p>Do an Internet <span class="QUOTE">"name server lookup"</span>
 	      on a host by IP address. This is essentially equivalent
 	      to <b class="COMMAND">ipcalc -h</b> or <b class="COMMAND">dig -x
 	      </b>. The command may be run either interactively
-	      or noninteractively, i.e., from within a script.</p><p>The <b class="COMMAND">nslookup</b> command has allegedly
-	      been <span class="QUOTE">"deprecated,"</span> but it is still useful.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>nslookup -sil 66.97.104.180</b></tt>
+	      or noninteractively, i.e., from within a script.</p>
+<p>The <b class="COMMAND">nslookup</b> command has allegedly
+	      been <span class="QUOTE">"deprecated,"</span> but it is still useful.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>nslookup -sil 66.97.104.180</b>
+</tt>
 <tt class="COMPUTEROUTPUT">nslookup kuhleersparnis.ch
  Server:         135.116.137.2
  Address:        135.116.137.2#53
 
  Non-authoritative answer:
  Name:   kuhleersparnis.ch</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p></dd><dt><a name="DIGREF"></a><b class="COMMAND">dig</b></dt><dd><p><b class="COMMAND">D</b>omain <b class="COMMAND">I</b>nformation
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+</dd>
+<dt>
+<a name="DIGREF">
+</a>
+<b class="COMMAND">dig</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">D</b>omain <b class="COMMAND">I</b>nformation
 	      <b class="COMMAND">G</b>roper. Similar to
 	      <b class="COMMAND">nslookup</b>, <i class="FIRSTTERM">dig</i> does
 	      an Internet <i class="FIRSTTERM">name server lookup</i> on a host.
-	      May be run from the command-line or from within a script.</p><p>Some interesting options to <i class="FIRSTTERM">dig</i> are
+	      May be run from the command-line or from within a script.</p>
+<p>Some interesting options to <i class="FIRSTTERM">dig</i> are
 	      <tt class="OPTION">+time=N</tt> for setting a query timeout to
-	      <tt class="PARAMETER"><i>N</i></tt> seconds, <tt class="OPTION">+nofail</tt> for
+	      <tt class="PARAMETER">
+<i>N</i>
+</tt> seconds, <tt class="OPTION">+nofail</tt> for
 	      continuing to query servers until a reply is received, and
-	      <tt class="OPTION">-x</tt> for doing a reverse address lookup.</p><p>Compare the output of <b class="COMMAND">dig -x</b> with
+	      <tt class="OPTION">-x</tt> for doing a reverse address lookup.</p>
+<p>Compare the output of <b class="COMMAND">dig -x</b> with
 	      <b class="COMMAND">ipcalc -h</b> and
-	      <b class="COMMAND">nslookup</b>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>dig -x 81.9.6.2</b></tt>
+	      <b class="COMMAND">nslookup</b>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>dig -x 81.9.6.2</b>
+</tt>
 <tt class="COMPUTEROUTPUT">;; Got answer:
  ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 11649
  ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
@@ -51,8 +187,29 @@
  ;; SERVER: 135.116.137.2#53(135.116.137.2)
  ;; WHEN: Wed Jun 26 08:35:24 2002
  ;; MSG SIZE  rcvd: 91</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p><p><a name="SPAMLOOKUP_0"></a></p><div class="EXAMPLE"><a name="SPAMLOOKUP"></a><p><b>Example 16-40. Finding out where to report a spammer</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>
+<a name="SPAMLOOKUP_0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="SPAMLOOKUP">
+</a>
+<p>
+<b>Example 16-40. Finding out where to report a spammer</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # spam-lookup.sh: Look up abuse contact to report a spammer.
 # Thanks, Michael Zick.
 
@@ -96,7 +253,29 @@ exit $?
 
 
 #  For a more elaborate version of this script,
-#+ see the SpamViz home page, http://www.spamviz.net/index.html.</pre></font></td></tr></tbody></table></div><p><a name="ISSPAMMER_0"></a></p><div class="EXAMPLE"><a name="ISSPAMMER"></a><p><b>Example 16-41. Analyzing a spam domain</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+#+ see the SpamViz home page, http://www.spamviz.net/index.html.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="ISSPAMMER_0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="ISSPAMMER">
+</a>
+<p>
+<b>Example 16-41. Analyzing a spam domain</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # is-spammer.sh: Identifying spam domains
 
 # $Id: is-spammer, v 1.4 2004/09/01 19:37:52 mszick Exp $
@@ -241,23 +420,73 @@ exit 0
 # 3) Substitute generic variables for "hard-coded" BHL domains.
 
 # 4) Set a time-out for the script using the "+time=" option
-     to the 'dig' command.</pre></font></td></tr></tbody></table></div><p>For a much more elaborate version of the above script, see 
-	    <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#ISSPAMMER2">Example A-28</a>.</p></dd><dt><a name="TRACEROUTEREF"></a><b class="COMMAND">traceroute</b></dt><dd><p>Trace the route taken by packets sent to a remote host. This
+     to the 'dig' command.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For a much more elaborate version of the above script, see 
+	    <a href="./contributed-scripts.html#ISSPAMMER2">Example A-28</a>.</p>
+</dd>
+<dt>
+<a name="TRACEROUTEREF">
+</a>
+<b class="COMMAND">traceroute</b>
+</dt>
+<dd>
+<p>Trace the route taken by packets sent to a remote host. This
 	      command works within a LAN, WAN, or over the
 	      Internet. The remote host may be specified by an IP
 	      address. The output of this command may be filtered
-	      by <a href="http://www.tldp.org/LDP/abs/html/textproc.html#GREPREF">grep</a> or <a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">sed</a> in a pipe.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>traceroute 81.9.6.2</b></tt>
+	      by <a href="./textproc.html#GREPREF">grep</a> or <a href="./sedawk.html#SEDREF">sed</a> in a pipe.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>traceroute 81.9.6.2</b>
+</tt>
 <tt class="COMPUTEROUTPUT">traceroute to 81.9.6.2 (81.9.6.2), 30 hops max, 38 byte packets
  1  tc43.xjbnnbrb.com (136.30.178.8)  191.303 ms  179.400 ms  179.767 ms
  2  or0.xjbnnbrb.com (136.30.178.1)  179.536 ms  179.534 ms  169.685 ms
  3  192.168.11.101 (192.168.11.101)  189.471 ms  189.556 ms *
  ...</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p></dd><dt><a name="PINGREF"></a><b class="COMMAND">ping</b></dt><dd><p>Broadcast an <tt class="REPLACEABLE"><i>ICMP
-	      ECHO_REQUEST</i></tt> packet to another machine,
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+</dd>
+<dt>
+<a name="PINGREF">
+</a>
+<b class="COMMAND">ping</b>
+</dt>
+<dd>
+<p>Broadcast an <tt class="REPLACEABLE">
+<i>ICMP
+	      ECHO_REQUEST</i>
+</tt> packet to another machine,
               either on a local or remote network. This is a
               diagnostic tool for testing network connections,
-              and it should be used with caution.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ping localhost</b></tt>
+              and it should be used with caution.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ping localhost</b>
+</tt>
 <tt class="COMPUTEROUTPUT">PING localhost.localdomain (127.0.0.1) from 127.0.0.1 : 56(84) bytes of data.
  64 bytes from localhost.localdomain (127.0.0.1): icmp_seq=0 ttl=255 time=709 usec
  64 bytes from localhost.localdomain (127.0.0.1): icmp_seq=1 ttl=255 time=286 usec
@@ -265,11 +494,28 @@ exit 0
  --- localhost.localdomain ping statistics ---
  2 packets transmitted, 2 packets received, 0% packet loss
  round-trip min/avg/max/mdev = 0.286/0.497/0.709/0.212 ms</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>A successful <i class="FIRSTTERM">ping</i> returns
-	      an <a href="http://www.tldp.org/LDP/abs/html/exit-status.html#EXITSTATUSREF">exit status</a> of
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>A successful <i class="FIRSTTERM">ping</i> returns
+	      an <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of
 	      <span class="ERRORCODE">0</span>. This can be tested for in a
-	      script.</p><p><a name="PING0"></a></p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">  HNAME=news-15.net  # Notorious spammer.
+	      script.</p>
+<p>
+<a name="PING0">
+</a>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">  HNAME=news-15.net  # Notorious spammer.
 # HNAME=$HOST     # Debug: test for localhost.
   count=2  # Send only two pings.
 
@@ -278,14 +524,46 @@ then
   echo ""$HNAME" still up and broadcasting spam your way."
 else
   echo ""$HNAME" seems to be down. Pity."
-fi</pre></font></td></tr></tbody></table></p></dd><dt><a name="WHOISREF"></a><b class="COMMAND">whois</b></dt><dd><p>Perform a DNS (Domain Name System) lookup.
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="WHOISREF">
+</a>
+<b class="COMMAND">whois</b>
+</dt>
+<dd>
+<p>Perform a DNS (Domain Name System) lookup.
 	      The <tt class="OPTION">-h</tt> option permits specifying which
 	      particular <i class="FIRSTTERM">whois</i> server to query. See
-	      <a href="http://www.tldp.org/LDP/abs/html/othertypesv.html#EX18">Example 4-6</a> and <a href="http://www.tldp.org/LDP/abs/html/communications.html#SPAMLOOKUP">Example 16-40</a>.</p></dd><dt><a name="FINGERREF"></a><b class="COMMAND">finger</b></dt><dd><p>Retrieve information about users on a
+	      <a href="./othertypesv.html#EX18">Example 4-6</a> and <a href="./communications.html#SPAMLOOKUP">Example 16-40</a>.</p>
+</dd>
+<dt>
+<a name="FINGERREF">
+</a>
+<b class="COMMAND">finger</b>
+</dt>
+<dd>
+<p>Retrieve information about users on a
 	      network. Optionally, this command can display
 	      a user's <tt class="FILENAME">~/.plan</tt>,
 	      <tt class="FILENAME">~/.project</tt>, and
-	      <tt class="FILENAME">~/.forward</tt> files, if present.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>finger</b></tt>
+	      <tt class="FILENAME">~/.forward</tt> files, if present.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>finger</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Login  Name           Tty      Idle  Login Time   Office     Office Phone
  bozo   Bozo Bozeman   tty1        8  Jun 25 16:59                (:0)
  bozo   Bozo Bozeman   ttyp0          Jun 25 16:59                (:0.0)
@@ -293,7 +571,10 @@ fi</pre></font></td></tr></tbody></table></p></dd><dt><a name="WHOISREF"></a><b 
 
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>finger bozo</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>finger bozo</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Login: bozo                             Name: Bozo Bozeman
  Directory: /home/bozo                   Shell: /bin/bash
  Office: 2355 Clown St., 543-1234
@@ -303,50 +584,169 @@ fi</pre></font></td></tr></tbody></table></p></dd><dt><a name="WHOISREF"></a><b 
  On since Fri Aug 31 20:31 (MST) on pts/2   1 hour 16 minutes idle
  Mail last read Tue Jul  3 10:08 2007 (MST) 
  No Plan.</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><p>Out of security considerations, many networks disable
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>Out of security considerations, many networks disable
 	      <b class="COMMAND">finger</b> and its associated daemon.
-	          <a name="AEN13320" href="#FTN.AEN13320"><span class="footnote">[1]</span></a>
-	      </p></dd><dt><a name="CHFNREF"></a><b class="COMMAND">chfn</b></dt><dd><p>Change information disclosed by the
-	      <b class="COMMAND">finger</b> command.</p></dd><dt><a name="VRFYREF"></a><b class="COMMAND">vrfy</b></dt><dd><p>Verify an Internet e-mail address.</p><p>This command seems to be missing from newer Linux
-	      distros.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="COMMREMOTE1"></a>Remote Host Access</b></p><dl><dt><a name="RXREF"></a><b class="COMMAND">sx</b>, <b class="COMMAND">rx</b></dt><dd><p>The <b class="COMMAND">sx</b> and <b class="COMMAND">rx</b>
+	          <a name="AEN13320" href="#FTN.AEN13320">
+<span class="footnote">[1]</span>
+</a>
+	      </p>
+</dd>
+<dt>
+<a name="CHFNREF">
+</a>
+<b class="COMMAND">chfn</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">finger</b> 명령어로 보여지는 정보를 바꿈.</p>
+</dd>
+<dt>
+<a name="VRFYREF">
+</a>
+<b class="COMMAND">vrfy</b>
+</dt>
+<dd>
+<p>Verify an Internet e-mail address.</p>
+<p>This command seems to be missing from newer Linux
+	      distros.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="COMMREMOTE1">
+</a>Remote Host Access</b>
+</p>
+<dl>
+<dt>
+<a name="RXREF">
+</a>
+<b class="COMMAND">sx</b>, <b class="COMMAND">rx</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">sx</b> and <b class="COMMAND">rx</b>
 	      command set serves to transfer files to and from a remote
 	      host using the <i class="FIRSTTERM">xmodem</i> protocol. These
 	      are generally part of a communications package, such as
-	      <b class="COMMAND">minicom</b>.</p></dd><dt><a name="RZREF"></a><b class="COMMAND">sz</b>, <b class="COMMAND">rz</b></dt><dd><p>The <b class="COMMAND">sz</b> and <b class="COMMAND">rz</b>
+	      <b class="COMMAND">minicom</b>.</p>
+</dd>
+<dt>
+<a name="RZREF">
+</a>
+<b class="COMMAND">sz</b>, <b class="COMMAND">rz</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">sz</b> and <b class="COMMAND">rz</b>
 	      command set serves to transfer files to and from a remote
 	      host using the <i class="FIRSTTERM">zmodem</i> protocol.
 	      <i class="FIRSTTERM">Zmodem</i> has certain advantages over
 	      <i class="FIRSTTERM">xmodem</i>, such as faster transmission
 	      rate and resumption of interrupted file transfers.
 	      Like <b class="COMMAND">sx</b> and <b class="COMMAND">rx</b>,
-	      these are generally part of a communications package.</p></dd><dt><a name="FTPREF"></a><b class="COMMAND">ftp</b></dt><dd><p>Utility and protocol for uploading / downloading
+	      these are generally part of a communications package.</p>
+</dd>
+<dt>
+<a name="FTPREF">
+</a>
+<b class="COMMAND">ftp</b>
+</dt>
+<dd>
+<p>Utility and protocol for uploading / downloading
 	      files to or from a remote host. An ftp session can be automated
-	      in a script (see <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#EX72">Example 19-6</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#ENCRYPTEDPW">Example A-4</a>).</p></dd><dt><a name="UUCPREF"></a><b class="COMMAND">uucp</b>, <a name="UUXREF"></a><b class="COMMAND">uux</b>, <a name="CUREF"></a><b class="COMMAND">cu</b></dt><dd><p><b class="COMMAND">uucp</b>: <i class="FIRSTTERM">UNIX to UNIX
+	      in a script (see <a href="./here-docs.html#EX72">Example 19-6</a> and <a href="./contributed-scripts.html#ENCRYPTEDPW">Example A-4</a>).</p>
+</dd>
+<dt>
+<a name="UUCPREF">
+</a>
+<b class="COMMAND">uucp</b>, <a name="UUXREF">
+</a>
+<b class="COMMAND">uux</b>, <a name="CUREF">
+</a>
+<b class="COMMAND">cu</b>
+</dt>
+<dd>
+<p>
+<b class="COMMAND">uucp</b>: <i class="FIRSTTERM">UNIX to UNIX
 	      copy</i>. This is a communications package for
 	      transferring files between UNIX servers. A shell script
 	      is an effective way to handle a <b class="COMMAND">uucp</b>
-	      command sequence.</p><p>Since the advent of the Internet and e-mail,
+	      command sequence.</p>
+<p>Since the advent of the Internet and e-mail,
 	      <b class="COMMAND">uucp</b> seems to have faded into obscurity,
 	      but it still exists and remains perfectly workable in
 	      situations where an Internet connection is not available
 	      or appropriate. The advantage of <b class="COMMAND">uucp</b>
 	      is that it is fault-tolerant, so even if there is a service
 	      interruption the copy operation will resume where it left
-	      off when the connection is restored.</p><p>---</p><p><b class="COMMAND">uux</b>: <i class="FIRSTTERM">UNIX to UNIX
+	      off when the connection is restored.</p>
+<p>---</p>
+<p>
+<b class="COMMAND">uux</b>: <i class="FIRSTTERM">UNIX to UNIX
 	      execute</i>. Execute a command on a remote system.
 	      This command is part of the <b class="COMMAND">uucp</b>
-	      package.</p><p>---</p><p><b class="COMMAND">cu</b>: <b class="COMMAND">C</b>all
+	      package.</p>
+<p>---</p>
+<p>
+<b class="COMMAND">cu</b>: <b class="COMMAND">C</b>all
 	      <b class="COMMAND">U</b>p a remote system and connect as a
 	      simple terminal. It is a sort of dumbed-down version of
-	      <a href="http://www.tldp.org/LDP/abs/html/communications.html#TELNETREF">telnet</a>. This command is
-	      part of the <b class="COMMAND">uucp</b> package.</p></dd><dt><a name="TELNETREF"></a><b class="COMMAND">telnet</b></dt><dd><p>Utility and protocol for connecting to a remote host.</p><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="communications_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <i class="FIRSTTERM">telnet</i> protocol
+	      <a href="./communications.html#TELNETREF">telnet</a>. This command is
+	      part of the <b class="COMMAND">uucp</b> package.</p>
+</dd>
+<dt>
+<a name="TELNETREF">
+</a>
+<b class="COMMAND">telnet</b>
+</dt>
+<dd>
+<p>Utility and protocol for connecting to a remote host.</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="communications_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <i class="FIRSTTERM">telnet</i> protocol
 	    contains security holes and should therefore probably be
 	    avoided. Its use within a shell script is
-	    <em>not</em> recommended.</p></td></tr></tbody></table></div></dd><dt><a name="WGETREF"></a><b class="COMMAND">wget</b></dt><dd><p>The <b class="COMMAND">wget</b> utility
+	    <em>not</em> recommended.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="WGETREF">
+</a>
+<b class="COMMAND">wget</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">wget</b> utility
 	      <i class="FIRSTTERM">noninteractively</i> retrieves or
 	      downloads files from a Web or ftp site. It works well in a
-	      script.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">wget -p http://www.xyz23.com/file01.html
+	      script.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">wget -p http://www.xyz23.com/file01.html
 #  The -p or --page-requisite option causes wget to fetch all files
 #+ required to display the specified page.
 
@@ -356,7 +756,25 @@ wget -r ftp://ftp.xyz24.net/~bozo/project_files/ -O $SAVEFILE
 
 wget -c ftp://ftp.xyz25.net/bozofiles/filename.tar.bz2
 #  The -c option lets wget resume an interrupted download.
-#  This works with ftp servers and many HTTP sites.</pre></font></td></tr></tbody></table></p><div class="EXAMPLE"><a name="QUOTEFETCH"></a><p><b>Example 16-42. Getting a stock quote</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  This works with ftp servers and many HTTP sites.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="EXAMPLE">
+<a name="QUOTEFETCH">
+</a>
+<p>
+<b>Example 16-42. Getting a stock quote</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # quote-fetch.sh: Download a stock quote.
 
 
@@ -395,25 +813,123 @@ exit $?
 #    (Hint: parse the output of 'ps -ax' for "ppp" or "connect."
 #
 # 2) Modify this script to fetch the local weather report,
-#+   taking the user's zip code as an argument.</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#WGETTER2">Example A-30</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#BASHPODDER">Example A-31</a>.</p></dd><dt><a name="LYNXREF"></a><b class="COMMAND">lynx</b></dt><dd><p>The <b class="COMMAND">lynx</b> Web and file browser
+#+   taking the user's zip code as an argument.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./contributed-scripts.html#WGETTER2">Example A-30</a> and <a href="./contributed-scripts.html#BASHPODDER">Example A-31</a>.</p>
+</dd>
+<dt>
+<a name="LYNXREF">
+</a>
+<b class="COMMAND">lynx</b>
+</dt>
+<dd>
+<p>The <b class="COMMAND">lynx</b> Web and file browser
 	      can be used inside a script (with the
 	      <tt class="OPTION">-dump</tt> option) to retrieve a file from a Web or 
-	      ftp site noninteractively.</p><p>	   <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">lynx -dump http://www.xyz23.com/file01.html &gt;$SAVEFILE</pre></font></td></tr></tbody></table>
-            </p><p>With the <tt class="OPTION">-traversal</tt> option,
+	      ftp site noninteractively.</p>
+<p>	   <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">lynx -dump http://www.xyz23.com/file01.html &gt;$SAVEFILE</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>With the <tt class="OPTION">-traversal</tt> option,
 	      <b class="COMMAND">lynx</b> starts at the HTTP URL specified
 	      as an argument, then <span class="QUOTE">"crawls"</span> through all
 	      links located on that particular server. Used together
 	      with the <tt class="OPTION">-crawl</tt> option, outputs page text
-	      to a log file.</p></dd><dt><a name="RLOGINREF"></a><b class="COMMAND">rlogin</b></dt><dd><p><tt class="REPLACEABLE"><i>Remote login</i></tt>, initates a
+	      to a log file.</p>
+</dd>
+<dt>
+<a name="RLOGINREF">
+</a>
+<b class="COMMAND">rlogin</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Remote login</i>
+</tt>, initates a
 	      session on a remote host. This command has security issues,
-	      so use <a href="http://www.tldp.org/LDP/abs/html/communications.html#SSHREF">ssh</a> instead.</p></dd><dt><a name="RSHREF"></a><b class="COMMAND">rsh</b></dt><dd><p><tt class="REPLACEABLE"><i>Remote shell</i></tt>, executes
+	      so use <a href="./communications.html#SSHREF">ssh</a> instead.</p>
+</dd>
+<dt>
+<a name="RSHREF">
+</a>
+<b class="COMMAND">rsh</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Remote shell</i>
+</tt>, executes
 	      command(s) on a remote host. This has security issues,
-	      so use <b class="COMMAND">ssh</b> instead.</p></dd><dt><a name="RCPREF"></a><b class="COMMAND">rcp</b></dt><dd><p><tt class="REPLACEABLE"><i>Remote copy</i></tt>, copies files
-	      between two different networked machines.</p></dd><dt><a name="RSYNCREF"></a><b class="COMMAND">rsync</b></dt><dd><p><tt class="REPLACEABLE"><i>Remote synchronize</i></tt>, updates
+	      so use <b class="COMMAND">ssh</b> instead.</p>
+</dd>
+<dt>
+<a name="RCPREF">
+</a>
+<b class="COMMAND">rcp</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Remote copy</i>
+</tt>, copies files
+	      between two different networked machines.</p>
+</dd>
+<dt>
+<a name="RSYNCREF">
+</a>
+<b class="COMMAND">rsync</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Remote synchronize</i>
+</tt>, updates
 	    (synchronizes) files
-	      between two different networked machines.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rsync -a ~/sourcedir/*txt /node1/subdirectory/</b></tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p><div class="EXAMPLE"><a name="FC4UPD"></a><p><b>Example 16-43. Updating FC4</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      between two different networked machines.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>rsync -a ~/sourcedir/*txt /node1/subdirectory/</b>
+</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<div class="EXAMPLE">
+<a name="FC4UPD">
+</a>
+<p>
+<b>Example 16-43. Updating FC4</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # fc4upd.sh
 
 # Script author: Frank Wang.
@@ -629,17 +1145,64 @@ else
     "Fedora update mirrored with failure code: $RET"
 fi
 
-exit $RET</pre></font></td></tr></tbody></table></div><p>See also <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#NIGHTLYBACKUP">Example A-32</a>.</p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="communications_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Using <a href="http://www.tldp.org/LDP/abs/html/communications.html#RCPREF">rcp</a>, <a href="http://www.tldp.org/LDP/abs/html/communications.html#RSYNCREF">rsync</a>, and similar
+exit $RET</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./contributed-scripts.html#NIGHTLYBACKUP">Example A-32</a>.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="communications_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Using <a href="./communications.html#RCPREF">rcp</a>, <a href="./communications.html#RSYNCREF">rsync</a>, and similar
 	      utilities with security implications in a shell
 	      script may not be advisable. Consider, instead, using
-	      <b class="COMMAND">ssh</b>, <a href="http://www.tldp.org/LDP/abs/html/communications.html#SCPREF">scp</a>,
-	      or an <b class="COMMAND">expect</b> script.</p></td></tr></tbody></table></div></dd><dt><a name="SSHREF"></a><b class="COMMAND">ssh</b></dt><dd><p><tt class="REPLACEABLE"><i>Secure shell</i></tt>, logs onto
+	      <b class="COMMAND">ssh</b>, <a href="./communications.html#SCPREF">scp</a>,
+	      or an <b class="COMMAND">expect</b> script.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SSHREF">
+</a>
+<b class="COMMAND">ssh</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Secure shell</i>
+</tt>, logs onto
 	      a remote host and executes commands there. This
 	      secure replacement for <b class="COMMAND">telnet</b>,
 	      <b class="COMMAND">rlogin</b>, <b class="COMMAND">rcp</b>, and
 	      <b class="COMMAND">rsh</b> uses identity authentication
-	      and encryption. See its <a href="http://www.tldp.org/LDP/abs/html/basic.html#MANREF">manpage</a>
-	      for details.</p><div class="EXAMPLE"><a name="REMOTE"></a><p><b>Example 16-44. Using <i class="FIRSTTERM">ssh</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      and encryption. See its <a href="./basic.html#MANREF">manpage</a>
+	      for details.</p>
+<div class="EXAMPLE">
+<a name="REMOTE">
+</a>
+<p>
+<b>Example 16-44. Using <i class="FIRSTTERM">ssh</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # remote.bash: Using ssh.
 
 # This example by Michael Zick.
@@ -707,24 +1270,116 @@ ssh -l ${USER} ${HOST} " ls -l "
 #+    man ssh-keygen
 #+    man sshd_config.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="CAUTION"><p></p><table class="CAUTION" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="communications_files/caution.gif" alt="Caution" hspace="5"></td><td align="LEFT" valign="TOP"><p>Within a loop, <b class="COMMAND">ssh</b> may cause
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="communications_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Within a loop, <b class="COMMAND">ssh</b> may cause
 		unexpected behavior. According to a <a href="http://groups-beta.google.com/group/comp.unix.shell/msg/dcb446b5fff7d230" target="_top">		Usenet post</a> in the comp.unix shell archives,
 		<b class="COMMAND">ssh</b> inherits the loop's
 		<tt class="FILENAME">stdin</tt>. To remedy this, pass
 		<b class="COMMAND">ssh</b> either the <tt class="OPTION">-n</tt>
-		or <tt class="OPTION">-f</tt> option.</p><p>Thanks, Jason Bechtel, for pointing this out.</p></td></tr></tbody></table></div></dd><dt><a name="SCPREF"></a><b class="COMMAND">scp</b></dt><dd><p><tt class="REPLACEABLE"><i>Secure copy</i></tt>, similar in
+		or <tt class="OPTION">-f</tt> option.</p>
+<p>Thanks, Jason Bechtel, for pointing this out.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SCPREF">
+</a>
+<b class="COMMAND">scp</b>
+</dt>
+<dd>
+<p>
+<tt class="REPLACEABLE">
+<i>Secure copy</i>
+</tt>, similar in
 	      function to <b class="COMMAND">rcp</b>, copies files between
 	      two different networked machines, but does so using
 	      authentication, and with a security level similar to
-	      <b class="COMMAND">ssh</b>.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="COMMLOCAL1"></a>Local Network</b></p><dl><dt><a name="WRITEREF"></a><b class="COMMAND">write</b></dt><dd><p>This is a utility for terminal-to-terminal communication.
+	      <b class="COMMAND">ssh</b>.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="COMMLOCAL1">
+</a>Local Network</b>
+</p>
+<dl>
+<dt>
+<a name="WRITEREF">
+</a>
+<b class="COMMAND">write</b>
+</dt>
+<dd>
+<p>This is a utility for terminal-to-terminal communication.
 	      It allows sending lines from your terminal (console or
 	      <i class="FIRSTTERM">xterm</i>) to that of another user. The
-	      <a href="http://www.tldp.org/LDP/abs/html/system.html#MESGREF">mesg</a> command may, of course,
-	      be used to disable write access to a terminal</p><p>Since <b class="COMMAND">write</b> is interactive, it
-	      would not normally find use in a script.</p></dd><dt><a name="NETCONFIGREF"></a><b class="COMMAND">netconfig</b></dt><dd><p>A command-line utility for configuring a network adapter
+	      <a href="./system.html#MESGREF">mesg</a> command may, of course,
+	      be used to disable write access to a terminal</p>
+<p>Since <b class="COMMAND">write</b> is interactive, it
+	      would not normally find use in a script.</p>
+</dd>
+<dt>
+<a name="NETCONFIGREF">
+</a>
+<b class="COMMAND">netconfig</b>
+</dt>
+<dd>
+<p>A command-line utility for configuring a network adapter
 	      (using <i class="FIRSTTERM">DHCP</i>). This command is native
-	      to Red Hat centric Linux distros.</p></dd></dl></div><p></p><div class="VARIABLELIST"><p><b><a name="COMMMAIL1"></a>Mail</b></p><dl><dt><b class="COMMAND">mail</b></dt><dd><p>Send or read e-mail messages.</p><p>This stripped-down command-line mail client
-	      works fine as a command embedded in a script.</p><div class="EXAMPLE"><a name="SELFMAILER"></a><p><b>Example 16-45. A script that mails itself</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/sh
+	      to Red Hat centric Linux distros.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="COMMMAIL1">
+</a>Mail</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">mail</b>
+</dt>
+<dd>
+<p>Send or read e-mail messages.</p>
+<p>This stripped-down command-line mail client
+	      works fine as a command embedded in a script.</p>
+<div class="EXAMPLE">
+<a name="SELFMAILER">
+</a>
+<p>
+<b>Example 16-45. A script that mails itself</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/sh
 # self-mailer.sh: Self-mailing script
 
 adr=${1:-`whoami`}     # Default to current user, if not specified.
@@ -754,12 +1409,44 @@ echo "At `date`, script \"`basename $0`\" mailed to "$adr"."
 exit 0
 
 #  Note that the "mailx" command (in "send" mode) may be substituted
-#+ for "mail" ... but with somewhat different options.</pre></font></td></tr></tbody></table></div></dd><dt><a name="MAILTOREF"></a><b class="COMMAND">mailto</b></dt><dd><p>Similar to the <b class="COMMAND">mail</b> command,
+#+ for "mail" ... but with somewhat different options.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="MAILTOREF">
+</a>
+<b class="COMMAND">mailto</b>
+</dt>
+<dd>
+<p>Similar to the <b class="COMMAND">mail</b> command,
 	      <b class="COMMAND">mailto</b> sends e-mail messages
 	      from the command-line or in a script. However,
 	      <b class="COMMAND">mailto</b> also permits sending MIME
-	      (multimedia) messages.</p></dd><dt><a name="MAILSTATSREF"></a><b class="COMMAND">mailstats</b></dt><dd><p>Show <i class="FIRSTTERM">mail statistics</i>. This command
-	      may be invoked only by <i class="FIRSTTERM">root</i>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>mailstats</b></tt>
+	      (multimedia) messages.</p>
+</dd>
+<dt>
+<a name="MAILSTATSREF">
+</a>
+<b class="COMMAND">mailstats</b>
+</dt>
+<dd>
+<p>Show <i class="FIRSTTERM">mail statistics</i>. This command
+	      may be invoked only by <i class="FIRSTTERM">root</i>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">root# </tt>
+<tt class="USERINPUT">
+<b>mailstats</b>
+</tt>
 <tt class="COMPUTEROUTPUT">Statistics from Tue Jan  1 20:32:08 2008
   M   msgsfr  bytes_from   msgsto    bytes_to  msgsrej msgsdis msgsqur  Mailer
   4     1682      24118K        0          0K        0       0       0  esmtp
@@ -767,16 +1454,80 @@ exit 0
  =====================================================================
   T     1894      24758K     1894      25131K        0       0       0
   C      414                    0</tt>
-	      </pre></font></td></tr></tbody></table>
-	    </p></dd><dt><a name="VACATIONREF"></a><b class="COMMAND">vacation</b></dt><dd><p>This utility automatically replies to e-mails that
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+</dd>
+<dt>
+<a name="VACATIONREF">
+</a>
+<b class="COMMAND">vacation</b>
+</dt>
+<dd>
+<p>This utility automatically replies to e-mails that
 	      the intended recipient is on vacation and temporarily
 	      unavailable. It runs on a network, in conjunction with
 	      <b class="COMMAND">sendmail</b>, and is not applicable to a
-	      dial-up POPmail account.</p></dd></dl></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN13320" href="http://www.tldp.org/LDP/abs/html/communications.html#AEN13320"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="DAEMONREF"></a></p><p>A <i class="FIRSTTERM">daemon</i> is a background
+	      dial-up POPmail account.</p>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN13320" href="./communications.html#AEN13320">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="DAEMONREF">
+</a>
+</p>
+<p>A <i class="FIRSTTERM">daemon</i> is a background
 		    process not attached to a terminal session. Daemons
 		    perform designated services either at specified times
-		    or explicitly triggered by certain events.</p><p>The word <span class="QUOTE">"daemon"</span> means ghost in
+		    or explicitly triggered by certain events.</p>
+<p>The word <span class="QUOTE">"daemon"</span> means ghost in
 		    Greek, and there is certainly something mysterious,
 		    almost supernatural, about the way UNIX daemons
 		    wander about behind the scenes, silently carrying
-		    out their appointed tasks.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/filearchiv.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">File and Archiving Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Terminal Control Commands</td></tr></tbody></table></div></body></html>
+		    out their appointed tasks.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./filearchiv.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./terminalccmds.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">File and Archiving Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Terminal Control Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
