@@ -1914,60 +1914,46 @@ exit $?</pre>
 <dd>
 <p>
 <a name="CHECKSUMREF">
-</a>These are utilities for
-              generating <i class="FIRSTTERM">checksums</i>. A
-	      <i class="FIRSTTERM">checksum</i> is a number
-
-		<a name="AEN12840" href="#FTN.AEN12840">
-<span class="footnote">[3]</span>
-</a>
-
-              mathematically calculated from the contents of a file,
-              for the purpose of checking its integrity. A script might
-              refer to a list of checksums for security purposes, such
-              as ensuring that the contents of key system files have not
-              been altered or corrupted. For security applications, use
-              the <b class="COMMAND">md5sum</b> (<b class="COMMAND">m</b>essage
-              <b class="COMMAND">d</b>igest <b class="COMMAND">5</b>
-              check<b class="COMMAND">sum</b>) command, or better yet, the
-              newer <b class="COMMAND">sha1sum</b> (Secure Hash Algorithm).
-
-	        <a name="AEN12849" href="#FTN.AEN12849">
+</a>이 유틸리티들은 <i class="FIRSTTERM">Checksums</i> 을 만들어 줍니다. 
+<i class="FIRSTTERM">Checksum</i> 은 파일의 내용을 수학적으로 계산한 숫자
+<a name="AEN12840" href="#FTN.AEN12840">
+<span class="footnote">[3]
+</span>
+</a> 이며, 이를 이용해서 파일의 무결성을 확인할 수 있습니다. 중요한 시스템 파일의 
+내용이 변경 혹은 손상되었는 지 확인하기 위한 보안 목적을 위해 Checksum 의 목록을 
+만들어 이를 참조하는 스크립트를 만들어 쓸 수도 있습니다. 보안 어플리케이션을 위해선 
+<b class="COMMAND">md5sum</b> (
+<b class="COMMAND">m</b>essage 
+<b class="COMMAND">d</b>igest 
+<b class="COMMAND">5</b> check
+<b class="COMMAND">sum</b>) 명령어나, 새로운 
+<b class="COMMAND">sha1sum</b> (Secure Hash Algorithm) 을 사용하는 것이 좋습니다. 
+<a name="AEN12849" href="#FTN.AEN12849">
 <span class="footnote">[4]</span>
 </a>
-            </p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cksum /boot/vmlinuz</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cksum /boot/vmlinuz</b></tt>
 <tt class="COMPUTEROUTPUT">1670054224 804083 /boot/vmlinuz</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo -n "Top Secret" | cksum</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo -n "Top Secret" | cksum</b></tt>
 <tt class="COMPUTEROUTPUT">3391003827 10</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>md5sum /boot/vmlinuz</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>md5sum /boot/vmlinuz</b></tt>
 <tt class="COMPUTEROUTPUT">0f43eccea8f09e0a0b2b5cf1dcf333ba  /boot/vmlinuz</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo -n "Top Secret" | md5sum</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo -n "Top Secret" | md5sum</b></tt>
 <tt class="COMPUTEROUTPUT">8babc97a6f62a4649716f4df8d61728f  -</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
@@ -1984,13 +1970,16 @@ exit $?</pre>
 <img src="filearchiv_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The <b class="COMMAND">cksum</b> command shows the size,
-	    in bytes, of its target, whether file or
-	    <tt class="FILENAME">stdout</tt>.</p>
-<p>The <b class="COMMAND">md5sum</b> and
-	    <b class="COMMAND">sha1sum</b> commands display a
-	    <a href=",/special-chars.html#DASHREF2">dash</a> when they receive their input from
-	    <tt class="FILENAME">stdout</tt>.</p>
+<p>
+<b class="COMMAND">cksum</b> 명령어는 파일이건
+<tt class="FILENAME">stdout</tt> 이건, 크기, 바이트, 타겟을 보여줍니다.
+</p>
+<p>
+<b class="COMMAND">md5sum</b> 과 
+<b class="COMMAND">sha1sum</b> 명령어는 
+<tt class="FILENAME">stdout</tt> 에서 입력을 받게 되면, 
+<a href=",/special-chars.html#DASHREF2">dash</a> 로 출력하게 됩니다.
+</p>
 </td>
 </tr>
 </tbody>
