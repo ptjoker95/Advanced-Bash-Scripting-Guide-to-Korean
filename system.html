@@ -3809,47 +3809,45 @@ exit</pre>
 <b class="COMMAND">chroot</b>
 </dt>
 <dd>
-<p>CHange ROOT directory. Normally commands are fetched
-	      from <a href="./internalvariables.html#PATHREF">$PATH</a>, relative to
-	      <tt class="FILENAME">/</tt>, the default
-	      <i class="FIRSTTERM">root
-	      directory</i>. This changes the
-	      <i class="FIRSTTERM">root</i> directory to a different one
-	      (and also changes the working directory to there).  This is
-	      useful for security purposes, for instance when the system
-	      administrator wishes to restrict certain users, such as
-	      those <a href="./communications.html#TELNETREF">telnetting</a> in,
-	      to a secured portion of the filesystem (this is sometimes
-	      referred to as confining a guest user to a <span class="QUOTE">"chroot
-	      jail"</span>). Note that after a <b class="COMMAND">chroot</b>,
-	      the execution path for system binaries is no longer
-	      valid.</p>
+<p>루트 디렉토리를 바꿔줍니다 ( CHange ROOT directory). 명령어들은 보통 
+기본 
+<i class="FIRSTTERM">루트 디렉토리</i> 인  
+<tt class="FILENAME">/</tt> 를 기준으로 
+<a href="./internalvariables.html#PATHREF">$PATH</a> 에 따라 해석됩니다. 이 명령어는 
+<i class="FIRSTTERM">root</i> 를 다른 곳으로 바꿉니다 ( 그리고 물론 작업 디렉토리도 
+그 쪽으로 바꿉니다). 이 것은 보안용으로 아주 유용한데, 예를 들어 시스템 관리자가 
+<a href="./communications.html#TELNETREF">telnetting</a> 와 같은 것으로 접속해 있는 
+특정 사용자가 보안과 관련된 파일 시스템에 접근하지 못하도록 할 때 ( 이것은 때때로 
+<span class="QUOTE">"chroot 감옥"</span> 에 가둔다라고도 합니다. ) 사용합니다. 
+<b class="COMMAND">chroot</b> 를 사용한 후에는, 시스템 바이너리의 실행 경로가 더 이상
+유용하지 않음에 주의하십시요.</p>
 <p>A <tt class="USERINPUT">
 <b>chroot /opt</b>
-</tt> would cause
-		references to <tt class="FILENAME">/usr/bin</tt>
-		to be translated to <tt class="FILENAME">/opt/usr/bin</tt>. Likewise,
-		<tt class="USERINPUT">
+</tt> 는 
+<tt class="FILENAME">/usr/bin</tt> 을 
+<tt class="FILENAME">/opt/usr/bin</tt> 로 해석합니다. 비슷하게, 보통의 상황에서는 
+<tt class="FILENAME">/</tt> 을 기본 디렉토리로 삼지만, 
+<tt class="USERINPUT">
 <b>chroot /aaa/bbb /bin/ls</b>
-</tt> would
-		redirect future instances of <b class="COMMAND">ls</b>
-		to <tt class="FILENAME">/aaa/bbb</tt> as the base directory,
-		rather than <tt class="FILENAME">/</tt> as is
-		normally the case. An <b class="COMMAND">alias XX 'chroot /aaa/bbb
-		ls'</b> in a user's <a href="./sample-bashrc.html">
+</tt> 는 이후에 실행되는 
+<b class="COMMAND">ls</b> 는 
+<tt class="FILENAME">/aaa/bbb</tt> 를 기본 디렉토리로 인식합니다. 
+사용자의 
+<a href="./sample-bashrc.html">
 <tt class="FILENAME">~/.bashrc</tt>
-</a>
-		effectively restricts which portion of the filesystem
-		she may run command <span class="QUOTE">"XX"</span> on.</p>
-<p>The <b class="COMMAND">chroot</b> command is also handy
-	      when running from an emergency boot floppy 
-	      (<b class="COMMAND">chroot</b> to <tt class="FILENAME">/dev/fd0</tt>),
-	      or as an option to <b class="COMMAND">lilo</b> when recovering
-	      from a system crash. Other uses include installation from a
-	      different filesystem (an <a href="./filearchiv.html#RPMREF">rpm</a>
-	      option) or running a readonly filesystem from a CD ROM.
-	      Invoke only as <i class="FIRSTTERM">root</i>, and use with
-	      care.</p>
+</a> 에 
+<b class="COMMAND">alias XX 'chroot /aaa/bbb ls'</b> 라는 줄을 넣으면 그 사용자가 
+<span class="QUOTE">"XX"</span> 를 실행시키는 파일 시스템을 효과적으로 제한할 수 
+있습니다.</p>
+<p>
+<b class="COMMAND">chroot</b> 명령어는 비상용 부트 플로피로 부팅했을 때(
+<tt class="FILENAME">/dev/fd0</tt>를 <b class="COMMAND">chroot</b> 로 )나 
+시스템 충돌로 고치려고 할 때 
+<b class="COMMAND">lilo</b> 에 옵션으로 줄 때 유용합니다. 다른 파일 시스템을 통해서 
+설치를 할 경우 (
+<a href="./filearchiv.html#RPMREF">rpm</a> 옵션) 나 CD ROM 같은 읽기 전용 파일 시스템에서 
+실행할 때 쓸 수 있습니다. 오직 <i class="FIRSTTERM">관리자</i> 로만 실행할 수 있으며, 
+조심해서 써야 합니다.</p>
 <div class="CAUTION">
 <p>
 </p>
@@ -3860,10 +3858,11 @@ exit</pre>
 <img src="system_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>It might be necessary to copy certain system
-	      files to a <i class="FIRSTTERM">chrooted</i> directory,
-	      since the normal <tt class="VARNAME">$PATH</tt> can no longer
-	      be relied upon.</p>
+<p>어떤 시스템 파일들은 
+<i class="FIRSTTERM">chroot</i> 한 디렉토리에 복사해야할 수도 있습니다, 
+왜냐하면 일반적인 
+<tt class="VARNAME">$PATH</tt> 는 더 이상 신뢰할 수 없기 때문입니다.
+</p>
 </td>
 </tr>
 </tbody>
