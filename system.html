@@ -101,43 +101,39 @@
 <b class="COMMAND">chgrp</b>
 </dt>
 <dd>
-<p>The <b class="COMMAND">chown</b> command changes the
-	      ownership of a file or files. This command is a useful
-	      method that <i class="FIRSTTERM">root</i> can use to
-	      shift file ownership from one user to another. An ordinary
-	      user may not change the ownership of files, not even her
-	      own files.
-	         <a name="AEN14695" href="#FTN.AEN14695">
+<p>
+<b class="COMMAND">chown</b> 명령어는 파일들의 소유자를 바꿉니다. 이 명령어는 
+<i class="FIRSTTERM">관리자</i> 가 파일 소유주를 한 사용자로부터 다른 사용자로 
+바꿀 때 유용합니다. 일반 사용자는 파일의 사용자를 바꿀 수 없습니다, 비록 자신의 
+파일이라도 말입니다.
+<a name="AEN14695" href="#FTN.AEN14695">
 <span class="footnote">[1]</span>
 </a>
-	      </p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">root# </tt>
-<tt class="USERINPUT">
-<b>chown bozo *.txt</b>
-</tt>
+<tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>chown bozo *.txt</b></tt>
 <tt class="COMPUTEROUTPUT">
 </tt>
-	      </pre>
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>The <b class="COMMAND">chgrp</b> command changes the
-	      <tt class="REPLACEABLE">
+</p>
+<p>
+<b class="COMMAND">chgrp</b> 명령어는 파일들의 
+<tt class="REPLACEABLE">
 <i>group</i>
-</tt> ownership of a file or
-	      files. You must be owner of the file(s) as well as a member
-	      of the destination group (or <i class="FIRSTTERM">root</i>)
-	      to use this operation.
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+</tt> 소유자를 바꿉니다. 이 동작을 하기 위해선 사용자는 파일들의 소유자이거나 
+목표 그룹의 한명 ( 또는 <i class="FIRSTTERM">관리자</i>) 이어야 합니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
