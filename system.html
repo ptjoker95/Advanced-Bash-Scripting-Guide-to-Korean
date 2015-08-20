@@ -3159,24 +3159,20 @@ exit 0</pre>
 <b class="COMMAND">chkconfig</b>
 </dt>
 <dd>
-<p>Check network and system configuration. This command
-	      lists and
-	      manages the network and system services started at bootup in
-	      the <tt class="FILENAME">/etc/rc?.d</tt>
-	      directory.</p>
-<p>Originally a port from IRIX to Red Hat Linux,
-	      <b class="COMMAND">chkconfig</b> may not be part of the core
-	      installation of some Linux flavors.</p>
+<p>네트웍과 시스템 설정을 확인합니다. 이 명령어는 부팅할 때
+<tt class="FILENAME">/etc/rc?.d</tt> 디렉토리에 있는 네트웍과 시스템 서비스의 
+리스트를 보여주고 관리합니다.</p>
+<p>원래는 IRIX 에 있던 것을 Red Hat Linux 가 포팅한 것으로 다른 리눅스 배포판에는 
+<b class="COMMAND">chkconfig</b> 가 기본 설치에 속하지 않을 수도 있습니다. (역자주: 
+우분투에서는 chkconfig 대신 sysv-rc-conf 를 사용합니다.)
+</p>
 <p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>chkconfig --list</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>chkconfig --list</b></tt>
 <tt class="COMPUTEROUTPUT">atd             0:off   1:off   2:off   3:on    4:on    5:on    6:off
  rwhod           0:off   1:off   2:off   3:off   4:off   5:off   6:off
  ...</tt>
