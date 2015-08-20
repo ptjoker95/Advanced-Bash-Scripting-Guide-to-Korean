@@ -2117,8 +2117,12 @@ exit 0
 </tbody>
 </table>
 </div>
-<p>Also see <a href="./contributed-scripts.html#DIRECTORYINFO">Example A-19</a>, <a href="./colorizing.html#HORSERACE">Example 36-16</a>, and <a href="./string-manipulation.html#RANDSTRING">Example 10-2</a> for
-	    creative uses of the <b class="COMMAND">md5sum</b> command.</p>
+<p>
+<a href="./contributed-scripts.html#DIRECTORYINFO">예 A-19</a>, 
+<a href="./colorizing.html#HORSERACE">예 36-16</a>, 그리고 
+<a href="./string-manipulation.html#RANDSTRING">예 10-2</a> 에 있는 
+<b class="COMMAND">md5sum</b> 명령어의 독창적인 사용법을 참고하십시요.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -2129,30 +2133,23 @@ exit 0
 <img src="filearchiv_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>	    There have been reports that the 128-bit
-	    <b class="COMMAND">md5sum</b> can be cracked, so the more secure
-	    160-bit <b class="COMMAND">sha1sum</b> is a welcome new addition
-	    to the checksum toolkit.
-          </p>
+<p>128-bit 
+<b class="COMMAND">md5sum</b> 이 크랙될 수 있다는 보고가 있었습니다, 그래서 160-bit 
+<b class="COMMAND">sha1sum</b> 이 새로운 Checksum 툴로 각광받고 있습니다.</p>
 <table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>md5sum testfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>md5sum testfile</b></tt>
 <tt class="COMPUTEROUTPUT">e181e2c8720c60522c4c4c981108e367  testfile</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>sha1sum testfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>sha1sum testfile</b></tt>
 <tt class="COMPUTEROUTPUT">5d7425a9c08a66c3177f1e31286fa40986ffc996  testfile</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
