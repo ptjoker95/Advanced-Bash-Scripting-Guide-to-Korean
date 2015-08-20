@@ -692,60 +692,54 @@ chmod 000 directory-name
 </dt>
 <dd>
 <p>
+파일의 속성을 바꿉니다.
 <b class="COMMAND">Ch</b>ange file
-	      <b class="COMMAND">attr</b>ibutes. This is analogous to
-	      <b class="COMMAND">chmod</b> above, but with different options
-	      and a different invocation syntax, and it works only on
-	       <i class="FIRSTTERM">ext2/ext3</i> filesystems.</p>
-<p>One particularly interesting <b class="COMMAND">chattr</b>
-	      option is <tt class="OPTION">i</tt>. A <b class="COMMAND">chattr +i
-	      <tt class="FILENAME">filename</tt>
-</b> marks the file
-	      as immutable. The file cannot be modified, linked to, or
-	      deleted, <em>not even by root</em>. This
-	      file attribute can be set or removed only by
-	      <i class="FIRSTTERM">root</i>. In a similar fashion,
-	      the <tt class="OPTION">a</tt> option marks the file as append
-	      only.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<b class="COMMAND">attr</b>ibutes. 이 방법은 
+<b class="COMMAND">chmod</b> 와 유사하지만, 다른 옵션과 다른 호출 문법을 
+가지고 있고, 
+<i class="FIRSTTERM">ext2/ext3</i> 파일 시스템에서만 작동합니다.</p>
+<p>
+<b class="COMMAND">chattr</b> 의 옵션 중에서 
+<tt class="OPTION">i</tt> 옵션은 매우 재미있습니다.
+<b class="COMMAND">chattr +i 
+<tt class="FILENAME">파일명</tt>
+</b> 은 파일을 변경할 수 없도록 합니다. 그 파일은 수정, 링크 혹은 삭제될 수 없습니다, 
+<em>심지어 관리자조차도 할 수 없습니다</em>. 이 파일 속성은 
+<i class="FIRSTTERM">관리자</i> 에 의해서만 지정, 삭제될 수 있습니다. 비슷하게 
+<tt class="OPTION">a</tt> 옵션은 파일에 덧붙이기만 가능하게 만듭니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">root# </tt>
-<tt class="USERINPUT">
-<b>chattr +i file1.txt</b>
+<tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>chattr +i file1.txt</b>
 </tt>
 
-
-<tt class="PROMPT">root# </tt>
-<tt class="USERINPUT">
-<b>rm file1.txt</b>
-</tt>
+<tt class="PROMPT">root# </tt><tt class="USERINPUT"><b>rm file1.txt</b></tt>
 
 <tt class="COMPUTEROUTPUT">rm: remove write-protected regular file `file1.txt'? y
  rm: cannot remove `file1.txt': Operation not permitted</tt>
-	      </pre>
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>If a file has the <tt class="OPTION">s</tt> (secure)
-              attribute set, then when it is deleted its block is 
-	      overwritten with binary zeroes.
-		<a name="AEN10301" href="#FTN.AEN10301">
+</p>
+<p>파일이 <tt class="OPTION">s</tt> (secure) 속성을 가지고 있으면, 
+그 파일이 지워질 때 그 블럭은 바이너리 0으로 채워지게 됩니다.
+<a name="AEN10301" href="#FTN.AEN10301">
 <span class="footnote">[3]</span>
 </a>
-	      </p>
-<p>If a file has the <tt class="OPTION">u</tt> (undelete)
-              attribute set, then when it is deleted, its contents can still
-	      be retrieved (undeleted).</p>
-<p>If a file has the <tt class="OPTION">c</tt> (compress)
-              attribute set, then it will automatically be compressed
-	      on writes to disk, and uncompressed on reads.</p>
+</p>
+<p>파일이 <tt class="OPTION">u</tt> (undelete) 속성을 가지고 있으면, 
+그 파일이 지워지더라도 내용은 되살릴 수 있습니다 (undeleted).
+</p>
+<p>파일이 <tt class="OPTION">c</tt> (compress) 속성을 가지고 있으면, 
+디스크에 쓰여질 때 자동으로 압축되고, 읽어들일 때 자동으로 압축해제하게 됩니다.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -756,9 +750,9 @@ chmod 000 directory-name
 <img src="basic_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The file attributes set with
-	      <b class="COMMAND">chattr</b> do not show in a file listing
-	      (<b class="COMMAND">ls -l</b>).</p>
+<p>
+<b class="COMMAND">chattr</b> 로 지정된 파일 속성은 파일 리스팅
+(<b class="COMMAND">ls -l</b>) 으로 보이지 않습니다.</p>
 </td>
 </tr>
 </tbody>
