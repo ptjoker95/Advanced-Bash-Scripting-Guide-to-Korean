@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Terminal Control Commands</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="External Filters, Programs and Commands" href="http://www.tldp.org/LDP/abs/html/external.html"><link rel="PREVIOUS" title="Communications Commands" href="http://www.tldp.org/LDP/abs/html/communications.html"><link rel="NEXT" title="Math Commands" href="http://www.tldp.org/LDP/abs/html/mathc.html"></head><body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/communications.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/mathc.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="TERMINALCCMDS"></a>16.7. Terminal Control Commands</h1><p></p><div class="VARIABLELIST"><p><b><a name="TERMCOMMANDLISTING1"></a>Command affecting the console
+	   or terminal</b></p><dl><dt><a name="TPUTREF"></a><b class="COMMAND">tput</b></dt><dd><p>Initialize terminal and/or fetch information about it from
+	      <span class="DATABASE">terminfo</span> data. Various options permit
+	      certain terminal operations:  <b class="COMMAND">tput clear</b>
+	      is the equivalent of <a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html#CLEARREF">clear</a>;
+	      <b class="COMMAND">tput reset</b> is the equivalent
+	      of <a href="http://www.tldp.org/LDP/abs/html/terminalccmds.html#RESETREF">reset</a>.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>tput longname</b></tt>
+<tt class="COMPUTEROUTPUT">xterm terminal emulator (X Window System)</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p><p>Issuing a <b class="COMMAND">tput cup X Y</b> moves
+	      the cursor to the (X,Y) coordinates in the current
+	      terminal. A <b class="COMMAND">clear</b> to erase the terminal
+	      screen would normally precede this.</p><p>	      Some interesting options to <i class="FIRSTTERM">tput</i> are:
+
+	  </p><p></p><ul><li><p><tt class="OPTION">bold</tt>, for high-intensity
+	      text</p></li><li><p><tt class="OPTION">smul</tt>, to underline text
+	      in the terminal</p></li><li><p><tt class="OPTION">smso</tt>, to render text in
+	      reverse</p></li><li><p><tt class="OPTION">sgr0</tt>, to reset the terminal
+	      parameters (to normal), without clearing the
+	      screen</p></li></ul>
+
+	    <p></p><p>Example scripts using <i class="FIRSTTERM">tput</i>:
+            </p><p></p><ol type="1"><li><p><a href="http://www.tldp.org/LDP/abs/html/colorizing.html#COLORECHO">Example 36-15</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/colorizing.html#EX30A">Example 36-13</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#HOMEWORK">Example A-44</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#NIM">Example A-42</a></p></li><li><p><a href="http://www.tldp.org/LDP/abs/html/arrays.html#POEM">Example 27-2</a></p></li></ol>
+	    <p></p><p>Note that <a href="http://www.tldp.org/LDP/abs/html/system.html#STTYREF">stty</a> offers
+	      a more powerful command set for controlling a terminal.</p></dd><dt><a name="INFOCMPREF"></a><b class="COMMAND">infocmp</b></dt><dd><p>This command prints out extensive information about the
+	      current terminal. It references the
+	      <i class="FIRSTTERM">terminfo</i> database.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>infocmp</b></tt>
+<tt class="COMPUTEROUTPUT">#       Reconstructed via infocmp from file:
+ /usr/share/terminfo/r/rxvt
+ rxvt|rxvt terminal emulator (X Window System), 
+         am, bce, eo, km, mir, msgr, xenl, xon, 
+         colors#8, cols#80, it#8, lines#24, pairs#64, 
+         acsc=``aaffggjjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~, 
+         bel=^G, blink=\E[5m, bold=\E[1m,
+         civis=\E[?25l, 
+         clear=\E[H\E[2J, cnorm=\E[?25h, cr=^M, 
+         ...</tt>
+	      </pre></font></td></tr></tbody></table>
+	    </p></dd><dt><a name="RESETREF"></a><b class="COMMAND">reset</b></dt><dd><p>Reset terminal parameters and clear text screen. As with
+	    <b class="COMMAND">clear</b>, the cursor and prompt reappear in the
+	    upper lefthand corner of the terminal.</p></dd><dt><a name="CLEARREF"></a><b class="COMMAND">clear</b></dt><dd><p>The <b class="COMMAND">clear</b> command simply clears
+	      the text screen at the console or in an
+	      <i class="FIRSTTERM">xterm</i>. The prompt and cursor
+	      reappear at the upper lefthand corner of the screen or
+	      xterm window. This command may be used either at the command
+	      line or in a script. See <a href="http://www.tldp.org/LDP/abs/html/testbranch.html#EX30">Example 11-26</a>.</p></dd><dt><a name="RESIZEREF"></a><b class="COMMAND">resize</b></dt><dd><p>Echoes commands necessary to set <tt class="VARNAME">$TERM</tt>
+	      and <tt class="VARNAME">$TERMCAP</tt> to duplicate the
+	      <i class="FIRSTTERM">size</i> (dimensions) of the current
+	      terminal.</p><p>	        <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>resize</b></tt>
+<tt class="COMPUTEROUTPUT">set noglob;
+ setenv COLUMNS '80';
+ setenv LINES '24';
+ unset noglob;</tt>
+	        </pre></font></td></tr></tbody></table>
+	      </p></dd><dt><a name="SCRIPTREF"></a><b class="COMMAND">script</b></dt><dd><p>This utility records (saves to a file) all the user keystrokes at
+	      the command-line in a console or an xterm window. This, in effect,
+	      creates a record of a session.</p></dd></dl></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/communications.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/mathc.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Communications Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Math Commands</td></tr></tbody></table></div></body></html>
