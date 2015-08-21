@@ -1564,11 +1564,11 @@ gzip -cd patchXX.gz | patch -p0
 <b class="COMMAND">cmp</b>
 </dt>
 <dd>
-<p>The <b class="COMMAND">cmp</b> command is a simpler version of
-	      <b class="COMMAND">diff</b>, above. Whereas <b class="COMMAND">diff</b>
-	      reports the differences between two files,
-	      <b class="COMMAND">cmp</b> merely shows at what point they
-	      differ.</p>
+<p>
+<b class="COMMAND">cmp</b> 명령어는, 위의 
+<b class="COMMAND">diff</b> 의 간단한 버전입니다. 
+<b class="COMMAND">diff</b> 가 두 파일간의 차이를 알려주는 반면, 
+<b class="COMMAND">cmp</b> 는 단순히 어디가 다른 지만 보여줍니다.</p>
 <div class="NOTE">
 <p>
 </p>
@@ -1579,10 +1579,11 @@ gzip -cd patchXX.gz | patch -p0
 <img src="filearchiv_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Like <b class="COMMAND">diff</b>, <b class="COMMAND">cmp</b>
-	    returns an exit status of 0 if the compared files are
-	    identical, and 1 if they differ. This permits use in a test
-	    construct within a shell script.</p>
+<p>
+<b class="COMMAND">diff</b> 처럼, 
+<b class="COMMAND">cmp</b> 는 두 파일이 같다면 0 을 반환합니다. 그리고 만일 
+다르다면 1 을 반환합니다. 쉘 스크립트에서는 이 방법으로 비교 구문을 사용할 수 
+있습니다.</p>
 </td>
 </tr>
 </tbody>
@@ -1592,8 +1593,7 @@ gzip -cd patchXX.gz | patch -p0
 <a name="FILECOMP">
 </a>
 <p>
-<b>Example 16-35. Using <i class="FIRSTTERM">cmp</i> to compare two files
-	        within a script.</b>
+<b>예 16-35. 스크립트에서 <i class="FIRSTTERM">cmp</i> 을 이용해서 두개의 파일을 비교하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1651,8 +1651,9 @@ exit 0</pre>
 <img src="filearchiv_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Use <b class="COMMAND">zcmp</b> on
-	      <i class="FIRSTTERM">gzipped</i> files.</p>
+<p>
+<i class="FIRSTTERM">gzipped</i> 된 파일은 
+<b class="COMMAND">zcmp</b> 을 사용하십시요.</p>
 </td>
 </tr>
 </tbody>
