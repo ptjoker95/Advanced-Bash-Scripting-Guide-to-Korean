@@ -1666,17 +1666,17 @@ exit 0</pre>
 <b class="COMMAND">comm</b>
 </dt>
 <dd>
-<p>Versatile file comparison utility. The files must be
-	      sorted for this to be useful.</p>
+<p>다목적 파일 비교 유틸리티. 제대로 된 결과를 얻으려면 파일 내용이 정렬되어 
+있어야 합니다.</p>
 <p>
 <b class="COMMAND">comm
-		<tt class="REPLACEABLE">
+<tt class="REPLACEABLE">
 <i>-options</i>
 </tt>
-		<tt class="REPLACEABLE">
+<tt class="REPLACEABLE">
 <i>first-file</i>
 </tt>
-		<tt class="REPLACEABLE">
+<tt class="REPLACEABLE">
 <i>second-file</i>
 </tt>
 </b>
@@ -1684,60 +1684,61 @@ exit 0</pre>
 <p>
 <tt class="USERINPUT">
 <b>comm file-1 file-2</b>
-</tt> outputs three columns:
-	      </p>
+</tt> 은 3개의 열을 출력합니다:
+</p>
 <p>
 </p>
 <ul>
 <li>
-<p>column 1 = lines unique to <tt class="FILENAME">file-1</tt>
+<p>column 1 = <tt class="FILENAME">file-1</tt> 에서 유일한 줄
 </p>
 </li>
 <li>
-<p>column 2 = lines unique to <tt class="FILENAME">file-2</tt>
+<p>column 2 = <tt class="FILENAME">file-2</tt> 에서 유일한 줄
 </p>
 </li>
 <li>
-<p>column 3 = lines common to both.</p>
+<p>column 3 = 두 파일에서 공통의 줄</p>
 </li>
 </ul>
 <p>
 </p>
-<p>The options allow suppressing output of one or more columns.
-	      </p>
+<p>다음 옵션은 하나 이상의 출력 칸을 제거해 줍니다.
+</p>
 <p>
 </p>
 <ul>
 <li>
 <p>
-<tt class="OPTION">-1</tt> suppresses column
-		    <tt class="LITERAL">1</tt>
+<tt class="OPTION">-1</tt> 은 
+<tt class="LITERAL">1</tt> 번 칸을 제거
 </p>
 </li>
 <li>
 <p>
-<tt class="OPTION">-2</tt> suppresses column
-		    <tt class="LITERAL">2</tt>
+<tt class="OPTION">-2</tt> 는 
+<tt class="LITERAL">2</tt> 번 칸을 제거
 </p>
 </li>
 <li>
 <p>
-<tt class="OPTION">-3</tt> suppresses column
-		    <tt class="LITERAL">3</tt>
+<tt class="OPTION">-3</tt> 은 
+<tt class="LITERAL">3</tt> 번 칸을 제거
 </p>
 </li>
 <li>
 <p>
-<tt class="OPTION">-12</tt> suppresses both columns
-		    <tt class="LITERAL">1</tt> and <tt class="LITERAL">2</tt>, etc.</p>
+<tt class="OPTION">-12</tt> 는 
+<tt class="LITERAL">1</tt> 번과 
+<tt class="LITERAL">2</tt> 번 칸을 제거, 등등.</p>
 </li>
 </ul>
-	    <p>
+<p>
 </p>
-<p>This command is useful for comparing
-	      <span class="QUOTE">"dictionaries"</span> or <i class="FIRSTTERM">word
-	      lists</i> -- sorted text files with one word per
-	      line.</p>
+<p>이 명령어는 
+<span class="QUOTE">"사전 형식"</span> 이나 
+<i class="FIRSTTERM">단어 리스트</i> -- 한 줄에 한 단어씩 정렬되어 있는 텍스트 
+파일들 -- 을 비교할 때 유용합니다.</p>
 </dd>
 </dl>
 </div>
