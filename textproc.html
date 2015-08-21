@@ -2346,14 +2346,11 @@ exit 0</pre>
 <b class="COMMAND">colrm</b>
 </dt>
 <dd>
-<p>Column removal filter. This removes columns (characters)
-	      from a file and writes the file, lacking the range of
-	      specified columns, back to <tt class="FILENAME">stdout</tt>.
-	      <tt class="USERINPUT">
-<b>colrm 2 4 &lt;filename</b>
-</tt> removes the
-	      second through fourth characters from each line of the
-	      text file <tt class="FILENAME">filename</tt>.</p>
+<p>열 제거 필터. 이 명령어는 파일의 열들 (열의 문자들) 을 제거하고, 파일에 
+씁니다, 열의 범위가 정해지지 않으면, 
+<tt class="FILENAME">표준출력(stdout)</tt> 으로 다시 내보냅니다. 
+<tt class="USERINPUT"><b>colrm 2 4 &lt;filename</b></tt> 은 텍스트 파일 
+<tt class="FILENAME">filename</tt> 각 줄의 두번째 칸에서 4번째 칸의 글자를 지웁니다.</p>
 <div class="CAUTION">
 <p>
 </p>
@@ -2364,12 +2361,12 @@ exit 0</pre>
 <img src="textproc_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>If the file contains tabs or nonprintable
-	      characters, this may cause unpredictable
-	      behavior. In such cases, consider using
-	      <a href="./textproc.html#EXPANDREF">expand</a> and
-	      <b class="COMMAND">unexpand</b> in a pipe preceding
-	      <b class="COMMAND">colrm</b>.</p>
+<p>파일에 탭이나 출력할 수 없는 문자가 있을 경우에는 예측하지 못한 
+동작을 할 수 있습니다. 그런 경우에는 
+<b class="COMMAND">colrm</b> 앞에 
+<a href="./textproc.html#EXPANDREF">expand</a> 와 
+<b class="COMMAND">unexpand</b> 를 파이프로 걸어서 써 보기 바랍니다.
+</p>
 </td>
 </tr>
 </tbody>
