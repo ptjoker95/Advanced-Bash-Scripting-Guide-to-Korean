@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>An Introduction to Programmable Completion</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="PREVIOUS" title="Important System Directories" href="http://www.tldp.org/LDP/abs/html/systemdirs.html"><link rel="NEXT" title="Localization" href="http://www.tldp.org/LDP/abs/html/localization.html"></head><body class="APPENDIX" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/systemdirs.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/localization.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="APPENDIX"><h1><a name="TABEXPANSION"></a>Appendix J. An Introduction to Programmable Completion</h1><p>The <i class="FIRSTTERM">programmable completion</i> feature in
+      Bash permits typing a partial command, then pressing the
+      <b class="KEYCAP">[Tab]</b> key to auto-complete the command sequence.
+
+      <a name="AEN24082" href="#FTN.AEN24082"><span class="footnote">[1]</span></a>
+
+      If multiple completions are possible, then <b class="KEYCAP">[Tab]</b>
+      lists them all. Let's see how it works.</p><p>      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>xtra[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">xtraceroute       xtrapin           xtrapproto
+ xtraceroute.real  xtrapinfo         xtrapreset
+ xtrapchar         xtrapout          xtrapstats</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>xtrac[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">xtraceroute       xtraceroute.real</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>xtraceroute.r[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">xtraceroute.real</tt>
+      </pre></font></td></tr></tbody></table>
+      </p><p>Tab completion also works for variables and path names.</p><p>      <table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $BASH[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">$BASH                 $BASH_COMPLETION      $BASH_SUBSHELL
+ $BASH_ARGC            $BASH_COMPLETION_DIR  $BASH_VERSINFO
+ $BASH_ARGV            $BASH_LINENO          $BASH_VERSION
+ $BASH_COMMAND         $BASH_SOURCE</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo /usr/local/[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">bin/     etc/     include/ libexec/ sbin/    src/     
+ doc/     games/   lib/     man/     share/</tt>
+      </pre></font></td></tr></tbody></table>
+      </p><p><a name="COMPLETEREF"></a></p><p>The Bash <b class="COMMAND">complete</b> and
+      <b class="COMMAND">compgen</b> <a href="http://www.tldp.org/LDP/abs/html/internal.html#BUILTINREF">builtins</a> make it
+      possible for <i class="FIRSTTERM">tab completion</i> to
+      recognize partial <i class="FIRSTTERM">parameters</i> and
+      <i class="FIRSTTERM">options</i> to commands. In a very simple case,
+      we can use <b class="COMMAND">complete</b> from the command-line to
+      specify a short list of acceptable parameters.</p><table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>touch sample_command</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>touch file1.txt file2.txt file2.doc file30.txt file4.zzz</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>chmod +x sample_command</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>complete -f -X '!*.txt' sample_command</b></tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./sample[Tab][Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">sample_command</tt>
+<tt class="COMPUTEROUTPUT">file1.txt   file2.txt   file30.txt</tt>
+  </pre></font></td></tr></tbody></table><p>The <tt class="OPTION">-f</tt> option to
+      <i class="FIRSTTERM">complete</i> specifies filenames,
+      and <tt class="OPTION">-X</tt> the filter pattern.</p><p><a name="COMPGENREF"></a></p><p>For anything more complex, we could write a script that
+      specifies a list of acceptable command-line parameters.
+      The <b class="COMMAND">compgen</b> builtin expands a list of
+      <i class="FIRSTTERM">arguments</i> to <i class="FIRSTTERM">generate</i>
+      completion matches. </p><p>Let us take a <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#USEGETOPT2">modified version</a>
+      of the <em>UseGetOpt.sh</em> script as an example
+      command. This script accepts a number of command-line parameters,
+      preceded by either a single or double dash. And here is the
+      corresponding <i class="FIRSTTERM">completion script</i>, by
+      convention given a filename corresponding to its associated
+      command.</p><div class="EXAMPLE"><a name="USEGETOPTEX"></a><p><b>Example J-1. Completion script for
+      <i class="FIRSTTERM">UseGetOpt.sh</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># file: UseGetOpt-2
+# UseGetOpt-2.sh parameter-completion
+
+_UseGetOpt-2 ()   #  By convention, the function name
+{                 #+ starts with an underscore.
+  local cur
+  # Pointer to current completion word.
+  # By convention, it's named "cur" but this isn't strictly necessary.
+
+  COMPREPLY=()   # Array variable storing the possible completions.
+  cur=${COMP_WORDS[COMP_CWORD]}
+
+  case "$cur" in
+    -*)
+    COMPREPLY=( $( compgen -W '-a -d -f -l -t -h --aoption --debug \
+                               --file --log --test --help --' -- $cur ) );;
+#   Generate the completion matches and load them into $COMPREPLY array.
+#   xx) May add more cases here.
+#   yy)
+#   zz)
+  esac
+
+  return 0
+}
+
+complete -F _UseGetOpt-2 -o filenames ./UseGetOpt-2.sh
+#        ^^ ^^^^^^^^^^^^  Invokes the function _UseGetOpt-2.</pre></font></td></tr></tbody></table></div><p>Now, let's try it.</p><table bgcolor="#E0E0E0" border="1" width="100%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>source UseGetOpt-2</b></tt>
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./UseGetOpt-2.sh -[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">--         --aoption  --debug    --file     --help     --log     --test
+ -a         -d         -f         -h         -l         -t</tt>
+
+
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./UseGetOpt-2.sh --[Tab]</b></tt>
+<tt class="COMPUTEROUTPUT">--         --aoption  --debug    --file     --help     --log     --test</tt>
+  </pre></font></td></tr></tbody></table><p>      We begin by <a href="http://www.tldp.org/LDP/abs/html/internal.html#SOURCEREF">sourcing</a> the <span class="QUOTE">"completion
+      script."</span> This sets the command-line parameters.
+        <a name="AEN24160" href="#FTN.AEN24160"><span class="footnote">[2]</span></a>
+    </p><p>In the first instance, hitting <b class="KEYCAP">[Tab]</b> after
+      a single dash, the output is all the possible parameters preceded by
+      <em>one or more</em> dashes. Hitting <b class="KEYCAP">[Tab]</b>
+      after <em>two</em> dashes gives the possible parameters
+      preceded by <em>two or more</em> dashes.</p><p>Now, just what is the point of having to jump through flaming
+      hoops to enable command-line tab completion? <em>It saves
+      keystrokes.</em>
+         <a name="AEN24173" href="#FTN.AEN24173"><span class="footnote">[3]</span></a>
+      </p><p>--</p><p><em>Resources:</em></p><p>Bash <a href="http://freshmeat.net/projects/bashcompletion" target="_top">      programmable completion</a> project</p><p>Mitch Frazier's <a href="http://www.linuxjournal.com/" target="_top"><i class="CITETITLE">Linux Journal</i></a> article, <a href="http://www.linuxjournal.com/content/more-using-bash-complete-command" target="_top"><em>More
+    on Using the Bash Complete Command</em></a></p><p>Steve's excellent two-part article, <span class="QUOTE">"An Introduction to Bash
+      Completion"</span>:
+
+    <a href="http://www.debian-administration.org/article/An_introduction_to_bash_completion_part_1" target="_top">Part
+    1</a> and
+
+    <a href="http://www.debian-administration.org/article/An_introduction_to_bash_completion_part_2" target="_top">Part 2</a></p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN24082" href="http://www.tldp.org/LDP/abs/html/tabexpansion.html#AEN24082"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This works only from the <i class="FIRSTTERM">command
+        line</i>, of course, and not within a
+        script.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN24160" href="http://www.tldp.org/LDP/abs/html/tabexpansion.html#AEN24160"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Normally the default parameter completion files reside
+        in either the <tt class="FILENAME">/etc/profile.d</tt>
+	directory or in <tt class="FILENAME">/etc/bash_completion</tt>. These autoload on
+	system startup. So, after writing a useful completion script, you
+	might wish to move it (as <i class="FIRSTTERM">root</i>, of course)
+	to one of these directories.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN24173" href="http://www.tldp.org/LDP/abs/html/tabexpansion.html#AEN24173"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>It has been extensively documented that
+         programmers are willing to put in long hours of effort in
+         order to save ten minutes of <span class="QUOTE">"unnecessary"</span>
+         labor. This is known as
+         <i class="FIRSTTERM">optimization</i>.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/systemdirs.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/localization.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Important System Directories</td><td align="center" valign="top" width="34%">&nbsp;</td><td align="right" valign="top" width="33%">Localization</td></tr></tbody></table></div></body></html>
