@@ -1849,18 +1849,19 @@ exit 0</pre>
 <b class="COMMAND">csplit</b>
 </dt>
 <dd>
-<p>These are utilities for splitting a file into smaller
-	      chunks. Their usual use is for splitting up large files
-	      in order to back them up on floppies or preparatory to
-	      e-mailing or uploading them.</p>
-<p>The <b class="COMMAND">csplit</b> command splits a file
-	      according to <i class="FIRSTTERM">context</i>, the split occuring
-	      where patterns are matched.</p>
+<p>이 유틸리티들은 파일을 더 작은 조각으로 나눕니다. 주된 사용처는 큰 파일을 
+플로피 디스크 (역자주: 요즘엔 안 씀) 에 백업할 때나 이메일에 쓰기 위한 준비 단계, 혹은 
+업로딩할 때입니다.
+</p>
+<p>
+<b class="COMMAND">csplit</b> 명령어는 파일을 
+<i class="FIRSTTERM">context</i>, 즉, 주어진 패턴에 맞는 상태로 나눕니다.
+</p>
 <div class="EXAMPLE">
 <a name="SPLITCOPY">
 </a>
 <p>
-<b>Example 16-37. A script that copies itself in sections</b>
+<b>예제 16-37. 파일을 섹션으로 나누어서 복사하는 스크립트</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
