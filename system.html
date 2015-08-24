@@ -96,7 +96,8 @@
 <dt>
 <a name="CHOWNREF">
 </a>
-<b class="COMMAND">chown</b>, <a name="CHGRPREF">
+<b class="COMMAND">chown</b>, 
+<a name="CHGRPREF">
 </a>
 <b class="COMMAND">chgrp</b>
 </dt>
@@ -2682,15 +2683,15 @@ exit 0</pre>
 <b class="COMMAND">cron</b>
 </dt>
 <dd>
-<p>Administrative program scheduler, performing such
-	      duties as cleaning up and deleting system log files and
-	      updating the <span class="DATABASE">slocate</span> database. This
-	      is the <i class="FIRSTTERM">superuser</i> version of <a href="./timedate.html#ATREF">at</a> (although each user may have
-	      their own <tt class="FILENAME">crontab</tt> file which can be
-	      changed with the <b class="COMMAND">crontab</b> command).
-	      It runs as a <a href="./communications.html#DAEMONREF">daemon</a>
-	      and executes scheduled entries from
-	      <tt class="FILENAME">/etc/crontab</tt>.</p>
+<p>시스템 로그 파일들을 정리 그리고 지우고 
+<span class="DATABASE">지정된</span> 데이터베이스를 업데이트 하거나 하는 작업을 지정하는, 
+관리자 프로그램 스케쥴러. 이 명령어는 
+<a href="./timedate.html#ATREF">at</a> 의 
+<i class="FIRSTTERM">슈퍼유저</i> 버전입니다 (비록 다른 사용자들이 자신의 
+<b class="COMMAND">crontab</b> 명령어로 
+<tt class="FILENAME">crontab</tt> 파일을 가질 수 있지만).
+<a href="./communications.html#DAEMONREF">daemon</a> 처럼 작동하고 
+<tt class="FILENAME">/etc/crontab</tt> 에 스케쥴되어 있는 내용들을 실행합니다.</p>
 <div class="NOTE">
 <p>
 </p>
@@ -2701,9 +2702,10 @@ exit 0</pre>
 <img src="system_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Some flavors of Linux run
-	      <b class="COMMAND">crond</b>, Matthew Dillon's version of
-	      <b class="COMMAND">cron</b>.</p>
+<p>어떤 리눅스는 
+<b class="COMMAND">cron</b> 의 Mattew Dillon 버전인 
+<b class="COMMAND">crond</b> 을 사용합니다.
+</p>
 </td>
 </tr>
 </tbody>
