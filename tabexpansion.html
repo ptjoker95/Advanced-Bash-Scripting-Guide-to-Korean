@@ -97,13 +97,16 @@
 <a name="COMPLETEREF">
 </a>
 </p>
-<p>The Bash <b class="COMMAND">complete</b> and
-      <b class="COMMAND">compgen</b> <a href="./internal.html#BUILTINREF">builtins</a> make it
-      possible for <i class="FIRSTTERM">tab completion</i> to
-      recognize partial <i class="FIRSTTERM">parameters</i> and
-      <i class="FIRSTTERM">options</i> to commands. In a very simple case,
-      we can use <b class="COMMAND">complete</b> from the command-line to
-      specify a short list of acceptable parameters.</p>
+<p>Basj의 
+<b class="COMMAND">complete</b> 와 
+<b class="COMMAND">compgen</b> 
+<a href="./internal.html#BUILTINREF">내부 명령어</a> 는 명령어에 
+<i class="FIRSTTERM">변수</i> 와 
+<i class="FIRSTTERM">옵션</i> 의 일부만으로도 
+<i class="FIRSTTERM">tab 완성</i> 이 가능하도록 해줍니다. 사용자는  
+<b class="COMMAND">complete</b> 를 이용해서 명령어 라인에서 사용가능한 
+변수들의 짧은 리스트를 나타나게 할 수 있습니다.
+</p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
@@ -125,31 +128,33 @@
 </tr>
 </tbody>
 </table>
-<p>The <tt class="OPTION">-f</tt> option to
-      <i class="FIRSTTERM">complete</i> specifies filenames,
-      and <tt class="OPTION">-X</tt> the filter pattern.</p>
+<p>
+<i class="FIRSTTERM">complete</i> 에서 
+<tt class="OPTION">-f</tt> 옵션은 파일을 특정하고, 
+<tt class="OPTION">-X</tt> 옵션은 필터 패턴을 특정합니다.
+</p>
 <p>
 <a name="COMPGENREF">
 </a>
 </p>
-<p>For anything more complex, we could write a script that
-      specifies a list of acceptable command-line parameters.
-      The <b class="COMMAND">compgen</b> builtin expands a list of
-      <i class="FIRSTTERM">arguments</i> to <i class="FIRSTTERM">generate</i>
-      completion matches. </p>
-<p>Let us take a <a href="./contributed-scripts.html#USEGETOPT2">modified version</a>
-      of the <em>UseGetOpt.sh</em> script as an example
-      command. This script accepts a number of command-line parameters,
-      preceded by either a single or double dash. And here is the
-      corresponding <i class="FIRSTTERM">completion script</i>, by
-      convention given a filename corresponding to its associated
-      command.</p>
+<p>복잡하겠지만, 명령어 라인에서 사용할 변수들의 리스트를 특정할 스크립트를 작성할 
+수도 있습니다. 
+<b class="COMMAND">compgen</b> 내부명령어는 자동완성에 
+ <i class="FIRSTTERM">쓰일</i> 
+<i class="FIRSTTERM">인수</i> 리스트를 확장합니다.</p>
+<p>밑의 예제인 
+<em>UseGetOpt.sh</em> 의 
+<a href="./contributed-scripts.html#USEGETOPT2">변형된 버전</a> 을 보십시요. 이 스크립트는 
+하나 혹은 두개의 대쉬 앞에 명령어 라인 변수의 개수를 받습니다. 그리고 
+주어진 파일명에 연결된 명령어를 제시하는 
+<i class="FIRSTTERM">completion script</i> 에 대응하게 됩니다. (역자주: 부족함을 절실하게 느낍니다. 추후에 이 명령어를 잘 이해하게 되면 다시 번역해야겠습니다.)
+</p>
 <div class="EXAMPLE">
 <a name="USEGETOPTEX">
 </a>
 <p>
-<b>Example J-1. Completion script for
-      <i class="FIRSTTERM">UseGetOpt.sh</i>
+<b>예제 J-1. 
+<i class="FIRSTTERM">UseGetOpt.sh</i> 를 위한 자동완성 스크립트
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -190,55 +195,50 @@ complete -F _UseGetOpt-2 -o filenames ./UseGetOpt-2.sh
 </tbody>
 </table>
 </div>
-<p>Now, let's try it.</p>
+<p>위의 예제를 사용해 봅시다.</p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>source UseGetOpt-2</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>source UseGetOpt-2</b></tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>./UseGetOpt-2.sh -[Tab]</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./UseGetOpt-2.sh -[Tab]</b></tt>
 <tt class="COMPUTEROUTPUT">--         --aoption  --debug    --file     --help     --log     --test
  -a         -d         -f         -h         -l         -t</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>./UseGetOpt-2.sh --[Tab]</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>./UseGetOpt-2.sh --[Tab]</b></tt>
 <tt class="COMPUTEROUTPUT">--         --aoption  --debug    --file     --help     --log     --test</tt>
-  </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-<p>      We begin by <a href="./internal.html#SOURCEREF">sourcing</a> the <span class="QUOTE">"completion
-      script."</span> This sets the command-line parameters.
-        <a name="AEN24160" href="#FTN.AEN24160">
+<p>예제는 
+<span class="QUOTE">"completion script."</span> 를 
+<a href="./internal.html#SOURCEREF">sourcing</a> 하면서 시작합니다. 이 명령어는 명령어 
+라인 변수를 지정하게 됩니다.
+<a name="AEN24160" href="#FTN.AEN24160">
 <span class="footnote">[2]</span>
 </a>
-    </p>
-<p>In the first instance, hitting <b class="KEYCAP">[Tab]</b> after
-      a single dash, the output is all the possible parameters preceded by
-      <em>one or more</em> dashes. Hitting <b class="KEYCAP">[Tab]</b>
-      after <em>two</em> dashes gives the possible parameters
-      preceded by <em>two or more</em> dashes.</p>
-<p>Now, just what is the point of having to jump through flaming
-      hoops to enable command-line tab completion? <em>It saves
-      keystrokes.</em>
-         <a name="AEN24173" href="#FTN.AEN24173">
+</p>
+<p>첫번째 시도는, 하나의 대쉬 후에 
+<b class="KEYCAP">[Tab]</b> 을 치면, 
+<em>하나 혹은 그 이상</em> 의 대쉬로 가능한 변수가 출력됩니다. 
+<em>두개</em>의 대쉬 후에 
+<b class="KEYCAP">[Tab]</b> 을 치면 
+<em>두개 혹은 그 이상</em> 의 대쉬로 가능한 변수가 출력됩니다.</p>
+<p>그럼 왜 이런 고단한 명령어 라인 탭 자동완성을 해야할까요? 
+<em>키보드를 덜 치게 해주기 때문이죠.
+</em>
+<a name="AEN24173" href="#FTN.AEN24173">
 <span class="footnote">[3]</span>
 </a>
-      </p>
+</p>
 <p>--</p>
 <p>
 <em>Resources:</em>
