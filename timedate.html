@@ -50,14 +50,17 @@
 <b class="COMMAND">date</b>
 </dt>
 <dd>
-<p>Simply invoked, <b class="COMMAND">date</b> prints the date and
-	      time to <tt class="FILENAME">stdout</tt>. Where this command gets
-	      interesting is in its formatting and parsing options.</p>
+<p>
+<b class="COMMAND">date</b> 는 날짜와 시간을 
+<tt class="FILENAME">표준 출력(stdout)</tt> 합니다. 이 명령어의 재미있는 부분은 
+형식과 파싱 옵션입니다.
+</p>
 <div class="EXAMPLE">
 <a name="EX51">
 </a>
 <p>
-<b>Example 16-10. Using <i class="FIRSTTERM">date</i>
+<b>예제 16-10. 
+<i class="FIRSTTERM">date</i> 사용하기
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -92,36 +95,32 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>The <tt class="OPTION">-u</tt> option gives the UTC (Universal
-	      Coordinated Time).</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<tt class="OPTION">-u</tt> 옵션은 UTC (Universal Coordinated Time)
+을 사용할 수 있게 합니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>date</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>date</b></tt>
 <tt class="COMPUTEROUTPUT">Fri Mar 29 21:07:39 MST 2002</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>date -u</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>date -u</b></tt>
 <tt class="COMPUTEROUTPUT">Sat Mar 30 04:07:42 UTC 2002</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>This option facilitates calculating the time between
-	      different dates.</p>
+</p>
+<p>이 옵션은 다른 날짜 사이의 시간을 계산할 때도 편리합니다.</p>
 <div class="EXAMPLE">
 <a name="DATECALC">
 </a>
@@ -185,13 +184,12 @@ printf 'until Christmas Dinner!\n\n'
 <a name="DATERANDREF">
 </a>
 </p>
-<p>The <i class="FIRSTTERM">date</i> command has quite a
-		number of <i class="FIRSTTERM">output</i> options. For
-		example <tt class="OPTION">%N</tt> gives the nanosecond portion
-		of the current time. One interesting use for this is to
-		generate random integers.
-
-	       <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<i class="FIRSTTERM">date</i> 명령어는 굉장히 많은 
+<i class="FIRSTTERM">출력</i> 옵션을 가지고 있습니다. 예를 들어 
+<tt class="OPTION">%N</tt> 옵션은 현재 시간을 초를 나노로 표현해줍니다. 
+이 것을 이용해서 무작위 자연수를 만들어 낼 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -210,9 +208,10 @@ printf 'until Christmas Dinner!\n\n'
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>There are many more options (try <b class="COMMAND">man
-	        date</b>).</p>
+</p>
+<p>그 밖에도 많은 옵션들이 있습니다 (
+<b class="COMMAND">man date</b> 를 해보십시요).
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -242,7 +241,9 @@ OneYearAgo=$(date --date='1 year ago')</pre>
 </tbody>
 </table>
 </p>
-<p>See also <a href="./special-chars.html#EX58">Example 3-4</a> and <a href="./contributed-scripts.html#STOPWATCH">Example A-43</a>.</p>
+<p>
+<a href="./special-chars.html#EX58">예제 3-4</a> 와 
+<a href="./contributed-scripts.html#STOPWATCH">예제 A-43</a> 를 참고하십시요.</p>
 </dd>
 <dt>
 <a name="ZDUMPREF">
