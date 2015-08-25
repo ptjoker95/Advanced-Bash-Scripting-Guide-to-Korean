@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Invoking the script</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Starting Off With a Sha-Bang" href="http://www.tldp.org/LDP/abs/html/sha-bang.html"><link rel="PREVIOUS" title="Starting Off With a Sha-Bang" href="http://www.tldp.org/LDP/abs/html/sha-bang.html"><link rel="NEXT" title="Preliminary Exercises" href="http://www.tldp.org/LDP/abs/html/prelimexer.html"></head><body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/sha-bang.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%">Chapter 2. Starting Off With a Sha-Bang</td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/prelimexer.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="SECT1"><h1 class="SECT1"><a name="INVOKING"></a>2.1. Invoking the script</h1><p>Having written the script, you can invoke it by <tt class="USERINPUT"><b>sh
+	scriptname</b></tt>,
+
+	  <a name="AEN300" href="#FTN.AEN300"><span class="footnote">[1]</span></a>
+
+	or alternatively <tt class="USERINPUT"><b>bash scriptname</b></tt>. (Not
+	recommended is using <tt class="USERINPUT"><b>sh &lt;scriptname</b></tt>,
+	since this effectively disables reading from
+	<a href="http://www.tldp.org/LDP/abs/html/ioredirintro.html#STDINOUTDEF"><tt class="FILENAME">stdin</tt></a>
+	within the script.) Much more convenient is to make
+	the script itself directly executable with a <a href="http://www.tldp.org/LDP/abs/html/basic.html#CHMODREF">chmod</a>.
+
+	</p><p></p><div class="VARIABLELIST"><dl><dt>Either:</dt><dd><p><tt class="USERINPUT"><b>chmod 555 scriptname</b></tt> (gives
+	      everyone read/execute permission)
+	        <a name="AEN315" href="#FTN.AEN315"><span class="footnote">[2]</span></a>
+	      </p></dd><dt>or</dt><dd><p><tt class="USERINPUT"><b>chmod +rx scriptname</b></tt> (gives
+	      everyone read/execute permission)</p><p><tt class="USERINPUT"><b>chmod
+	      u+rx scriptname</b></tt> (gives only the
+		script owner read/execute permission)</p></dd></dl></div>
+      <p></p><p>Having made the script executable, you may now test it by
+	<tt class="USERINPUT"><b>./scriptname</b></tt>.
+	
+	  <a name="AEN327" href="#FTN.AEN327"><span class="footnote">[3]</span></a>
+
+	If it begins with a <span class="QUOTE">"sha-bang"</span> line, invoking the
+	script calls the correct command interpreter to run it.</p><p>As a final step, after testing and debugging,
+	you would likely want to move it to <tt class="FILENAME">/usr/local/bin</tt> (as
+	<i class="FIRSTTERM">root</i>, of course), to make the script
+	available to yourself and all other users as a systemwide
+	executable.  The script could then be invoked by simply typing
+	<b class="COMMAND">scriptname</b> <b class="KEYCAP">[ENTER]</b> from the
+	command-line.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN300" href="http://www.tldp.org/LDP/abs/html/invoking.html#AEN300"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Caution: invoking a <i class="FIRSTTERM">Bash</i>
+	  script by <tt class="USERINPUT"><b>sh scriptname</b></tt> turns off
+	  Bash-specific extensions, and the script may therefore fail
+	  to execute.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN315" href="http://www.tldp.org/LDP/abs/html/invoking.html#AEN315"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>A script needs <i class="FIRSTTERM">read</i>, as
+		well as execute permission for it to run, since the shell
+		needs to be able to read it.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN327" href="http://www.tldp.org/LDP/abs/html/invoking.html#AEN327"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Why not simply invoke the script with
+	  <tt class="USERINPUT"><b>scriptname</b></tt>? If the directory you
+	  are in (<a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#PWDREF">$PWD</a>) is where
+	  <tt class="FILENAME">scriptname</tt> is located, why doesn't
+	  this work? This fails because, for security reasons, the
+	  current directory (<tt class="FILENAME">./</tt>)
+	  is not by default included in a user's <a href="http://www.tldp.org/LDP/abs/html/internalvariables.html#PATHREF">$PATH</a>. It is therefore necessary to
+	  explicitly invoke the script in the current directory with
+	  a <tt class="USERINPUT"><b>./scriptname</b></tt>.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/sha-bang.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/prelimexer.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Starting Off With a Sha-Bang</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/sha-bang.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Preliminary Exercises</td></tr></tbody></table></div></body></html>
