@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Variable Substitution</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Introduction to Variables and Parameters" href="./variables.html">
+<link rel="PREVIOUS" title="Introduction to Variables and Parameters" href="./variables.html">
+<link rel="NEXT" title="Variable Assignment" href="./varassignment.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./variables.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 4. Introduction to Variables and Parameters</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./varassignment.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="VARSUBN">
+</a>4.1. Variable Substitution</h1>
+<p>The <i class="FIRSTTERM">name</i> of a variable is a placeholder
+	for its <i class="FIRSTTERM">value</i>, the data it holds.
+	Referencing (retrieving) its value is called
+	<i class="FIRSTTERM">variable substitution</i>.</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<dl>
+<dt>
+<span class="TOKEN">$</span>
+</dt>
+<dd>
+<p>
+<a name="VARNAMEVAL">
+</a>
+</p>
+<p>Let us carefully distinguish between the
+		<i class="FIRSTTERM">name</i> of a variable
+		and its <i class="FIRSTTERM">value</i>. If
+		<tt class="USERINPUT">
+<b>variable1</b>
+</tt> is the name of a
+		variable, then <tt class="USERINPUT">
+<b>$variable1</b>
+</tt>
+		is a reference to its <i class="FIRSTTERM">value</i>,
+		the data item it contains.
+		
+		  <a name="AEN2258" href="#FTN.AEN2258">
+<span class="footnote">[1]</span>
+</a>
+
+
+		</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>variable1=23</b>
+</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo variable1</b>
+</tt>
+<tt class="COMPUTEROUTPUT">variable1</tt>
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo $variable1</b>
+</tt>
+<tt class="COMPUTEROUTPUT">23</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>	      
+	      </p>
+<p>The only times a variable appears <span class="QUOTE">"naked"</span>
+		-- without the <span class="TOKEN">$</span> prefix	-- is when
+		declared or assigned, when <i class="FIRSTTERM">unset</i>,
+		when <a href="./internal.html#EXPORTREF">exported</a>,
+		in an arithmetic expression within <a href="./dblparens.html">double parentheses 
+                (( ... ))</a>, or in the special case of a variable
+                representing a <a href="./debugging.html#SIGNALD">signal</a>
+                (see <a href="./debugging.html#EX76">Example 32-5</a>). Assignment may be with an
+                <span class="TOKEN">=</span> (as in <tt class="PARAMETER">
+<i>var1=27</i>
+</tt>),
+                in a <a href="./internal.html#READREF">read</a> statement,
+                and at the head of a loop (<tt class="PARAMETER">
+<i>for var2 in 1
+                2 3</i>
+</tt>).</p>
+<p>
+<a name="DBLQUO">
+</a>Enclosing a referenced value in
+	      <i class="FIRSTTERM">double quotes</i> (<span class="TOKEN">" ... "</span>)
+	      does not interfere with variable substitution. This is
+	      called <i class="FIRSTTERM">partial quoting</i>, sometimes
+	      referred to as <span class="QUOTE">"weak quoting."</span> <a name="SNGLQUO">
+</a>Using single quotes (<span class="TOKEN">' ... '</span>)
+	      causes the variable name to be used literally, and no
+	      substitution will take place. This is <i class="FIRSTTERM">full
+	      quoting</i>, sometimes referred to as 'strong
+	      quoting.' See <a href="./quoting.html">Chapter 5</a> for a
+	      detailed discussion.</p>
+<p>Note that <tt class="USERINPUT">
+<b>$variable</b>
+</tt> is actually a
+	      simplified form of
+	      <tt class="USERINPUT">
+<b>${variable}</b>
+</tt>. In contexts
+	      where the <tt class="USERINPUT">
+<b>$variable</b>
+</tt> syntax
+	      causes an error, the longer form may work (see <a href="./parameter-substitution.html">Section 10.2</a>, below).</p>
+<p>
+<a name="VARUNSETTING">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="EX9">
+</a>
+<p>
+<b>Example 4-1. Variable assignment and substitution</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# ex9.sh
+
+# Variables: assignment and substitution
+
+a=375
+hello=$a
+#   ^ ^
+
+#-------------------------------------------------------------------------
+# No space permitted on either side of = sign when initializing variables.
+# What happens if there is a space?
+
+#  "VARIABLE =value"
+#           ^
+#% Script tries to run "VARIABLE" command with one argument, "=value".
+
+#  "VARIABLE= value"
+#            ^
+#% Script tries to run "value" command with
+#+ the environmental variable "VARIABLE" set to "".
+#-------------------------------------------------------------------------
+
+
+echo hello    # hello
+# Not a variable reference, just the string "hello" ...
+
+echo $hello   # 375
+#    ^          This *is* a variable reference.
+echo ${hello} # 375
+#               Likewise a variable reference, as above.
+
+# Quoting . . .
+echo "$hello"    # 375
+echo "${hello}"  # 375
+
+echo
+
+hello="A B  C   D"
+echo $hello   # A B C D
+echo "$hello" # A B  C   D
+# As we see, echo $hello   and   echo "$hello"   give different results.
+# =======================================
+# Quoting a variable preserves whitespace.
+# =======================================
+
+echo
+
+echo '$hello'  # $hello
+#    ^      ^
+#  Variable referencing disabled (escaped) by single quotes,
+#+ which causes the "$" to be interpreted literally.
+
+# Notice the effect of different types of quoting.
+
+
+hello=    # Setting it to a null value.
+echo "\$hello (null value) = $hello"      # $hello (null value) =
+#  Note that setting a variable to a null value is not the same as
+#+ unsetting it, although the end result is the same (see below).
+
+# --------------------------------------------------------------
+
+#  It is permissible to set multiple variables on the same line,
+#+ if separated by white space.
+#  Caution, this may reduce legibility, and may not be portable.
+
+var1=21  var2=22  var3=$V3
+echo
+echo "var1=$var1   var2=$var2   var3=$var3"
+
+# May cause problems with legacy versions of "sh" . . .
+
+# --------------------------------------------------------------
+
+echo; echo
+
+numbers="one two three"
+#           ^   ^
+other_numbers="1 2 3"
+#               ^ ^
+#  If there is whitespace embedded within a variable,
+#+ then quotes are necessary.
+#  other_numbers=1 2 3                  # Gives an error message.
+echo "numbers = $numbers"
+echo "other_numbers = $other_numbers"   # other_numbers = 1 2 3
+#  Escaping the whitespace also works.
+mixed_bag=2\ ---\ Whatever
+#           ^    ^ Space after escape (\).
+
+echo "$mixed_bag"         # 2 --- Whatever
+
+echo; echo
+
+echo "uninitialized_variable = $uninitialized_variable"
+# Uninitialized variable has null value (no value at all!).
+uninitialized_variable=   #  Declaring, but not initializing it --
+                          #+ same as setting it to a null value, as above.
+echo "uninitialized_variable = $uninitialized_variable"
+                          # It still has a null value.
+
+uninitialized_variable=23       # Set it.
+unset uninitialized_variable    # Unset it.
+echo "uninitialized_variable = $uninitialized_variable"
+                                # uninitialized_variable =
+                                # It still has a null value.
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="varsubn_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="UNINITVAR1">
+</a>
+</p>
+<p>An uninitialized variable has a
+	      <span class="QUOTE">"null"</span> value -- no assigned value at all
+	      (<em>not</em> zero!).
+
+              <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ -z "$unassigned" ]
+then
+  echo "\$unassigned is NULL."
+fi     # $unassigned is NULL.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Using a variable before
+	      assigning a value to it may cause problems.
+	      It is nevertheless possible to perform arithmetic operations
+	      on an uninitialized variable.
+
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">echo "$uninitialized"                                # (blank line)
+let "uninitialized += 5"                             # Add 5 to it.
+echo "$uninitialized"                                # 5
+
+#  Conclusion:
+#  An uninitialized variable has no value,
+#+ however it evaluates as 0 in an arithmetic operation.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+
+              See also <a href="./internal.html#SELFSOURCE">Example 15-23</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN2258" href="./varsubn.html#AEN2258">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="LVALUEREF">
+</a>Technically, the
+		      <i class="FIRSTTERM">name</i> of a variable is called an
+		      <i class="FIRSTTERM">lvalue</i>, meaning that it appears
+		      on the <em>left</em> side of an assignment
+		      statment, as in <tt class="USERINPUT">
+<b>VARIABLE=23</b>
+</tt>.
+		      A variable's <i class="FIRSTTERM">value</i> is
+		      an <i class="FIRSTTERM">rvalue</i>, meaning that
+		      it appears on the <em>right</em>
+		      side of an assignment statement, as in
+		      <tt class="USERINPUT">
+<b>VAR2=$VARIABLE</b>
+</tt>.</p>
+<p>
+<a name="POINTERREF">
+</a>A variable's
+		      <i class="FIRSTTERM">name</i> is, in fact,
+		      a <i class="FIRSTTERM">reference</i>, a
+		      <i class="FIRSTTERM">pointer</i> to the memory
+		      location(s) where the actual data associated with
+		      that variable is kept.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./variables.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./varassignment.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Introduction to Variables and Parameters</td>
+<td align="center" valign="top" width="34%">
+<a href="./variables.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Variable Assignment</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
