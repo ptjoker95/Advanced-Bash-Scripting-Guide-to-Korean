@@ -817,25 +817,23 @@ Mixed.msg BOZO</pre>
 <b class="COMMAND">dd</b>
 </dt>
 <dd>
-<p>Though this somewhat obscure and much feared
-              <b class="COMMAND">d</b>ata <b class="COMMAND">d</b>uplicator
-              command originated as a utility for exchanging
-              data on magnetic tapes between UNIX minicomputers
-              and IBM mainframes, it still has its uses.
-              The <b class="COMMAND">dd</b> command simply copies a
-              file (or <tt class="FILENAME">stdin/stdout</tt>), but with
-              conversions. <a name="DDCONVERSIONS">
-</a>Possible conversions
-              include ASCII/EBCDIC,
-	        
-		<a name="AEN14318" href="#FTN.AEN14318">
-<span class="footnote">[5]</span>
-</a>
-
-	      upper/lower case, swapping of byte pairs between input
-	      and output, and skipping and/or truncating the head or
-	      tail of the input file.</p>
-<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>불분명하고 뭔가 꺼림칙한 이 명령어 (
+<b class="COMMAND">d</b>ata 
+<b class="COMMAND">d</b>uplicator) 는 UNIX 미니컴퓨터와 IBM 메인프레임 간에 
+마그네틱 테이프에서 자료를 주고받기 위해 만들어진 유틸리지이지만, 여전히 사용되고 
+있습니다. 
+<b class="COMMAND">dd</b> 명령어는 파일을 단순히 복사 (혹은 
+<tt class="FILENAME">표준입출력</tt>) 하지만, 반전이 있습니다. 
+<a name="DDCONVERSIONS"></a>ASCII/EBCDIC, 
+<a name="AEN14318" href="#FTN.AEN14318">
+<span class="footnote">[5]
+</span>
+</a> 대문자/소문자, 입력과 출력 사이에 바이트 쌍 바꾸기, 그리고 입력 파일의 
+앞부분이나 뒷부분을 건너뛰거나 잘라내서 출력 파일을 만들어 내는 등의 변환이 
+가능합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -854,62 +852,61 @@ dd if=$filename conv=ucase &gt; $filename.uppercase
 <a name="DDOPTIONS">
 </a>
 </p>
-<p>Some basic options to <b class="COMMAND">dd</b> are:
+<p>
+<b class="COMMAND">dd</b> 의 기본 옵션들은:
                 </p>
 <p>
 </p>
 <ul>
 <li>
 <p>if=INFILE</p>
-<p>INFILE is the <i class="FIRSTTERM">source</i>
-		        file.</p>
+<p>INFILE 은 
+<i class="FIRSTTERM">본</i> 파일입니다.
+</p>
 </li>
 <li>
 <p>of=OUTFILE</p>
-<p>OUTFILE is the <i class="FIRSTTERM">target</i>
-		        file, the file that will have the data written to it.</p>
+<p>OUTFILE 은 
+<i class="FIRSTTERM">목표</i> 파일이며, 그 파일은 본 파일의 자료가 쓰여지게 될 것입니다.
+</p>
 </li>
 <li>
 <p>bs=BLOCKSIZE</p>
-<p>This is the size of each block of data being read
-		        and written, usually a power of 2.</p>
+<p>이 옵션은 읽혀지거나 쓰여질 자료의 각 블럭의 크기입니다, 보통 2의 배수입니다.
+</p>
 </li>
 <li>
 <p>skip=BLOCKS</p>
-<p>How many blocks of data to skip in INFILE before
-		        starting to copy. This is useful when the INFILE has
-			<span class="QUOTE">"garbage"</span> or garbled data in its
-			header or when it is desirable to copy only a portion
-			of the INFILE.</p>
+<p>복사를 하기 전에 INFILE 에서 얼마나 많은 블럭을 건너뛸 것인지 지정합니다. 
+이 옵션은 INFILE의 앞 부분에  
+<span class="QUOTE">"쓰레기"</span> 나 왜곡된 자료를 가지고 있을 때, 혹은 
+INFILE 의 일부반 복사하고 싶을 때 유용합니다.</p>
 </li>
 <li>
 <p>seek=BLOCKS</p>
-<p>How many blocks of data to skip in OUTFILE before
-		        starting to copy, leaving blank data at beginning
-			of OUTFILE.</p>
+<p>복사를 시작하기 전에 OUTFILE 에서 얼마나 많은 블럭을 건너뛸 것인지 지정합니다, OUTFILE 
+앞부분을 그대로 놔둡니다.</p>
 </li>
 <li>
 <p>count=BLOCKS</p>
-<p>Copy only this many blocks of data, rather than the
-		        entire INFILE.</p>
+<p>자료에서 지정된 블럭만 복사합니다, 즉 INFILE 의 전체를 복사하진 않습니다.</p>
 </li>
 <li>
 <p>conv=CONVERSION</p>
-<p>Type of conversion to be applied to INFILE data
-                        before copying operation.</p>
+<p>특정 변환을 복사가 이루어지기 전에 INFILE 의 자료에 적용합니다.</p>
 </li>
 </ul>
-            <p>
+<p>
 </p>
-<p>A <tt class="USERINPUT">
+<p>
+<tt class="USERINPUT">
 <b>dd --help</b>
-</tt> lists all the
-	      options this powerful utility takes.</p>
+</tt> 는 강력한 유틸리가 될 수 있는 옵션 모두를 보여줍니다.</p>
 <div class="EXAMPLE">
 <a name="SELFCOPY">
 </a>
 <p>
-<b>Example 16-57. A script that copies itself</b>
+<b>예제 16-57. 자신을 복사하는 스크립트</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -941,7 +938,8 @@ exit $?
 <a name="EXERCISINGDD">
 </a>
 <p>
-<b>Example 16-58. Exercising <i class="FIRSTTERM">dd</i>
+<b>예제 16-58. 
+<i class="FIRSTTERM">dd</i> 연습하기
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -980,8 +978,10 @@ exit $?</pre>
 <a name="DDKEYSTROKES">
 </a>
 </p>
-<p>To demonstrate just how versatile <b class="COMMAND">dd</b> is,
-	     let's use it to capture keystrokes.</p>
+<p>
+<b class="COMMAND">dd</b> 가 얼마나 다재다능한 지 보여주기 위해,
+키입력을 출력해봅시다.
+</p>
 <div class="EXAMPLE">
 <a name="DDKEYPRESS">
 </a>
@@ -1024,10 +1024,9 @@ exit 0</pre>
 <a name="DDRANDOM">
 </a>
 </p>
-<p>The <b class="COMMAND">dd</b> command can do random access on a
-	      data stream.
-
-	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<b class="COMMAND">dd</b> 명령어는 자료 흐름에 임의로 접근할 수 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -1047,26 +1046,31 @@ exit 0</pre>
 <a name="DDCOPY">
 </a>
 </p>
-<p>The <b class="COMMAND">dd</b> command can copy raw data
-	      and disk images to and from devices, such as floppies and
-	      tape drives (<a href="./contributed-scripts.html#COPYCD">Example A-5</a>). A common use is
-	      creating boot floppies.</p>
-<p>		<tt class="USERINPUT">
+<p>
+<b class="COMMAND">dd</b> 명령어는 플로피 디스크와 테이프 드라이브와 같은 
+디바이스에서 자료와 디스크 이미지를 복사할 수도, 디바이스로 복사할 수도 
+있습니다. (<a href="./contributed-scripts.html#COPYCD">예제 A-5</a>). 일반적인 용도는 
+부팅 플로피 디스크를 만드는 것입니다.</p>
+<p>
+<tt class="USERINPUT">
 <b>dd if=kernel-image of=/dev/fd0H1440</b>
 </tt>
-             </p>
-<p>Similarly, <b class="COMMAND">dd</b> can copy the entire
-	       contents of a floppy, even one formatted with a
-	       <span class="QUOTE">"foreign"</span> OS, to the hard drive as an
-	       image file.</p>
-<p>		<tt class="USERINPUT">
+</p>
+<p>비슷하게, 
+<b class="COMMAND">dd</b> 는 플로피가 
+<span class="QUOTE">"다른"</span> OS에서 포맷되었다고 하더라도 플로피의 내용을 
+이미지 파일로서 하드 드라이브에 복사할 수 있습니다.
+</p>
+<p>
+<tt class="USERINPUT">
 <b>dd if=/dev/fd0 of=/home/bozo/projects/floppy.img</b>
 </tt>
-             </p>
+</p>
 <p>
 <a name="BFS">
-</a>Likewise, <b class="COMMAND">dd</b>
-             can create bootable flash drives and SD cards.</p>
+</a>마찬가지로, 
+<b class="COMMAND">dd</b> 는 부팅가능한 플래쉬 드라이브나 SD 카드를 만들 수도 있습니다.
+</p>
 <p>
 <tt class="USERINPUT">
 <b>dd if=image.iso of=/dev/sdb</b>
@@ -1155,14 +1159,15 @@ exit $?
 <a name="DDSWAP">
 </a>
 </p>
-<p>	      Other applications of <b class="COMMAND">dd</b> include
-	      initializing temporary swap files (<a href="./zeros.html#EX73">Example 31-2</a>)
-	      and ramdisks (<a href="./zeros.html#RAMDISK">Example 31-3</a>). It can even do a
-	      low-level copy of an entire hard drive partition, although
-	      this is not necessarily recommended.</p>
-<p>People (with presumably nothing better to do with
-	      their time) are constantly thinking of interesting
-	      applications of <b class="COMMAND">dd</b>.</p>
+<p>
+<b class="COMMAND">dd</b> 로 임시 스왑 파일 초기화 (
+<a href="./zeros.html#EX73">예제 31-2</a>) 와 램디스크(
+<a href="./zeros.html#RAMDISK">Example 31-3</a>) 초기화 어플리케이션을 
+만들 수도 있습니다. 권장하지는 않지만, 전체 하드디스크 파티션의 하위 레벨 복사도 
+할 수 있습니다.
+</p>
+<p>(그다지 할 일 없는) 사람들이 계속해서 
+<b class="COMMAND">dd</b> 의 재미있는 어플리케이션에 관해서 고민하고 있습니다.</p>
 <p>
 <a name="DDFDEL">
 </a>
@@ -1278,8 +1283,9 @@ exit 0
 </tbody>
 </table>
 </div>
-<p>See also the <a href="./biblio.html#DDLINK">dd
-	      thread</a> entry in the <a href="./biblio.html#BIBLIOREF">bibliography</a>.</p>
+<p>
+<a href="./biblio.html#BIBLIOREF">bibliography</a> 에 있는 
+<a href="./biblio.html#DDLINK">dd thread</a> 부분도 참고하십시요.</p>
 </dd>
 <dt>
 <a name="ODREF">
