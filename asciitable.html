@@ -1,104 +1,55 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML
-><HEAD
-><TITLE
->ASCII Table</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
-REL="HOME"
-TITLE="Advanced Bash-Scripting Guide"
-HREF="index.html"><LINK
-REL="PREVIOUS"
-TITLE="Copyright"
-HREF="copyright.html"><LINK
-REL="NEXT"
-TITLE="Index"
-HREF="xrefindex.html"></HEAD
-><BODY
-CLASS="APPENDIX"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Advanced Bash-Scripting Guide: </TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="copyright.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
-></TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="xrefindex.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="APPENDIX"
-><H1
-><A
-NAME="ASCIITABLE"
-></A
->Appendix T. ASCII Table</H1
-><P
->Traditionally, a book of this sort has an <A
-HREF="special-chars.html#ASCIIDEF"
->ASCII</A
-> Table appendix.
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>ASCII Table</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Copyright" href="./copyright.html">
+<link rel="NEXT" title="Index" href="./xrefindex.html">
+</head>
+<body class="APPENDIX" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./copyright.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./xrefindex.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="APPENDIX">
+<h1>
+<a name="ASCIITABLE">
+</a>Appendix T. ASCII Table</h1>
+<p>Traditionally, a book of this sort has an <a href="./special-chars.html#ASCIIDEF">ASCII</a> Table appendix.
       This book does not. Instead, here are several short
-      scripts, each of which generates a complete ASCII table.</P
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="ASCIISH"
-></A
-><P
-><B
->Example T-1. A script that generates an ASCII table</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><FONT
-COLOR="#000000"
-><PRE
-CLASS="PROGRAMLISTING"
->#!/bin/bash
+      scripts, each of which generates a complete ASCII table.</p>
+<div class="EXAMPLE">
+<a name="ASCIISH">
+</a>
+<p>
+<b>Example T-1. A script that generates an ASCII table</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ascii.sh
 # ver. 0.2, reldate 26 Aug 2008
 # Patched by ABS Guide author.
@@ -106,7 +57,7 @@ CLASS="PROGRAMLISTING"
 # Original script by Sebastian Arming.
 # Used with permission (thanks!).
 
-exec &#62;ASCII.txt         #  Save stdout to file,
+exec &gt;ASCII.txt         #  Save stdout to file,
                         #+ as in the example scripts
                         #+ reassign-stdout.sh and upperconv.sh.
 
@@ -133,8 +84,8 @@ while [ "$i" -lt "$MAXNUM" ]; do  # We don't have to count past 400 octal.
         fi
         ((i++, o++))
         # The octal notation for 8 is 10, and 64 decimal is 100 octal.
-        (( i % $OCT == 0))    &#38;&#38; ((o+=2))
-        (( i % $OCTSQU == 0)) &#38;&#38; ((o+=20))
+        (( i % $OCT == 0))    &amp;&amp; ((o+=2))
+        (( i % $OCTSQU == 0)) &amp;&amp; ((o+=20))
 done
 
 exit $?
@@ -143,32 +94,25 @@ exit $?
 # This one handles "unprintable" characters.
 
 # Exercise:
-# Rewrite this script to use decimal numbers, rather than octal.</PRE
-></FONT
-></TD
-></TR
-></TABLE
-></DIV
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="ASCII2SH"
-></A
-><P
-><B
->Example T-2. Another ASCII table script</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><FONT
-COLOR="#000000"
-><PRE
-CLASS="PROGRAMLISTING"
->#!/bin/bash
+# Rewrite this script to use decimal numbers, rather than octal.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ASCII2SH">
+</a>
+<p>
+<b>Example T-2. Another ASCII table script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # Script author: Joseph Steinhauser
 # Lightly edited by ABS Guide author, but not commented.
 # Used in ABS Guide with permission.
@@ -185,7 +129,7 @@ CLASS="PROGRAMLISTING"
 #-- For more detail, man ascii . . .
 #-------------------------------------------------------------------------
 
-[ -n "$BASH_VERSION" ] &#38;&#38; shopt -s extglob
+[ -n "$BASH_VERSION" ] &amp;&amp; shopt -s extglob
 
 case "$1" in
    oct|[Oo]?([Cc][Tt])|8)       Obase=Octal;  Numy=3o;;
@@ -204,41 +148,32 @@ for TOK in $AB $AD; do ABR[$((LD+=1))]=$TOK; done;
 ABR[127]=del
 
 IDX=0
-while [ $IDX -le 127 ] &#38;&#38; CHR="${ABR[$IDX]}"
-   do ((${#CHR}))&#38;&#38; FM2='%-3s'|| FM2=`printf '\\\\%o  ' $IDX`
+while [ $IDX -le 127 ] &amp;&amp; CHR="${ABR[$IDX]}"
+   do ((${#CHR}))&amp;&amp; FM2='%-3s'|| FM2=`printf '\\\\%o  ' $IDX`
       printf "$FM1 $FM2" "$IDX" $CHR; (( (IDX+=1)%8))||echo '|'
    done
 
-exit $?</PRE
-></FONT
-></TD
-></TR
-></TABLE
-></DIV
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="ASCII3SH"
-></A
-><P
-><B
->Example T-3. A third ASCII table script, using
-                   <I
-CLASS="FIRSTTERM"
->awk</I
-></B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><FONT
-COLOR="#000000"
-><PRE
-CLASS="PROGRAMLISTING"
->#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ASCII3SH">
+</a>
+<p>
+<b>Example T-3. A third ASCII table script, using
+                   <i class="FIRSTTERM">awk</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ASCII table script, using awk.
 # Author: Joseph Steinhauser
 # Used in ABS Guide with permission.
@@ -256,7 +191,7 @@ CLASS="PROGRAMLISTING"
 #-- For more detail, man ascii
 #-------------------------------------------------------------------------
 
-[ -n "$BASH_VERSION" ] &#38;&#38; shopt -s extglob
+[ -n "$BASH_VERSION" ] &amp;&amp; shopt -s extglob
 
 case "$1" in
    oct|[Oo]?([Cc][Tt])|8)       Obase=Octal;  Numy=3o;;
@@ -272,74 +207,39 @@ awk 'BEGIN{print "\n\t\t## "ENVIRON["Obase"]" ASCII Chart ##\n"
            ad="dc1,dc2,dc3,dc4,nak,syn,etb,can,em,sub,esc,fs,gs,rs,us,sp"
            split(ab ad,abr,",");abr[0]="nul";abr[127]="del";
            fm1="|%0'"${Numy:- 4d}"' %-3s"
-           for(idx=0;idx&#60;128;idx++){fmt=fm1 (++colz%8?"":"|\n")
+           for(idx=0;idx&lt;128;idx++){fmt=fm1 (++colz%8?"":"|\n")
            printf(fmt,idx,(idx in abr)?abr[idx]:sprintf("%c",idx))} }'
 
-exit $?</PRE
-></FONT
-></TD
-></TR
-></TABLE
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="copyright.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="index.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="xrefindex.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Copyright</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
->&nbsp;</TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Index</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./copyright.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./xrefindex.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Copyright</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Index</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
