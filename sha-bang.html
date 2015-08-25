@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Starting Off With a Sha-Bang</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Introduction" href="http://www.tldp.org/LDP/abs/html/part1.html"><link rel="PREVIOUS" title="Shell Programming!" href="http://www.tldp.org/LDP/abs/html/why-shell.html"><link rel="NEXT" title="Invoking the script" href="http://www.tldp.org/LDP/abs/html/invoking.html"></head><body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/why-shell.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/invoking.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="SHA-BANG"></a>Chapter 2. Starting Off With a Sha-Bang</h1><table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td width="45%">&nbsp;</td><td align="LEFT" valign="TOP" width="45%"><i><p><i>Shell programming is a 1950s juke box . . .</i></p><p><i>--Larry Wall</i></p></i></td></tr></tbody></table><div class="TOC"><dl><dt><b>Table of Contents</b></dt><dt>2.1. <a href="http://www.tldp.org/LDP/abs/html/invoking.html">Invoking the script</a></dt><dt>2.2. <a href="http://www.tldp.org/LDP/abs/html/prelimexer.html">Preliminary Exercises</a></dt></dl></div><p>In the simplest case, a script is nothing more than a list
+      of system commands stored in a file. At the very least, this saves
+      the effort of retyping that particular sequence of commands each
+      time it is invoked.</p><div class="EXAMPLE"><a name="EX1"></a><p><b>Example 2-1. <i class="FIRSTTERM">cleanup</i>: A script to clean up log
+      files in /var/log </b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Cleanup
+# Run as root, of course.
+
+cd /var/log
+cat /dev/null &gt; messages
+cat /dev/null &gt; wtmp
+echo "Log files cleaned up."</pre></font></td></tr></tbody></table></div><p>There is nothing unusual here, only a set of commands that
+      could just as easily have been invoked one by one from the
+      command-line on the console or in a terminal window.
+      The advantages of placing the commands in a script go far beyond
+      not having to retype them time and again. The script becomes a
+      <i class="FIRSTTERM">program</i> -- a <em>tool</em> --
+      and it can easily be modified or customized for a particular
+      application.</p><div class="EXAMPLE"><a name="EX1A"></a><p><b>Example 2-2. <i class="FIRSTTERM">cleanup</i>: An improved clean-up
+      script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Proper header for a Bash script.
+
+# Cleanup, version 2
+
+# Run as root, of course.
+# Insert code here to print error message and exit if not root.
+
+LOG_DIR=/var/log
+# Variables are better than hard-coded values.
+cd $LOG_DIR
+
+cat /dev/null &gt; messages
+cat /dev/null &gt; wtmp
+
+
+echo "Logs cleaned up."
+
+exit #  The right and proper method of "exiting" from a script.
+     #  A bare "exit" (no parameter) returns the exit status
+     #+ of the preceding command. </pre></font></td></tr></tbody></table></div><p>Now <em>that's</em> beginning to look like a real
+      script. But we can go even farther . . .</p><div class="EXAMPLE"><a name="EX2"></a><p><b>Example 2-3. <i class="FIRSTTERM">cleanup</i>: An enhanced
+      and generalized version of above scripts.</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Cleanup, version 3
+
+#  Warning:
+#  -------
+#  This script uses quite a number of features that will be explained
+#+ later on.
+#  By the time you've finished the first half of the book,
+#+ there should be nothing mysterious about it.
+
+
+
+LOG_DIR=/var/log
+ROOT_UID=0     # Only users with $UID 0 have root privileges.
+LINES=50       # Default number of lines saved.
+E_XCD=86       # Can't change directory?
+E_NOTROOT=87   # Non-root exit error.
+
+
+# Run as root, of course.
+if [ "$UID" -ne "$ROOT_UID" ]
+then
+  echo "Must be root to run this script."
+  exit $E_NOTROOT
+fi  
+
+if [ -n "$1" ]
+# Test whether command-line argument is present (non-empty).
+then
+  lines=$1
+else  
+  lines=$LINES # Default, if not specified on command-line.
+fi  
+
+
+#  Stephane Chazelas suggests the following,
+#+ as a better way of checking command-line arguments,
+#+ but this is still a bit advanced for this stage of the tutorial.
+#
+#    E_WRONGARGS=85  # Non-numerical argument (bad argument format).
+#
+#    case "$1" in
+#    ""      ) lines=50;;
+#    *[!0-9]*) echo "Usage: `basename $0` lines-to-cleanup";
+#     exit $E_WRONGARGS;;
+#    *       ) lines=$1;;
+#    esac
+#
+#* Skip ahead to "Loops" chapter to decipher all this.
+
+
+cd $LOG_DIR
+
+if [ `pwd` != "$LOG_DIR" ]  # or   if [ "$PWD" != "$LOG_DIR" ]
+                            # Not in /var/log?
+then
+  echo "Can't change to $LOG_DIR."
+  exit $E_XCD
+fi  # Doublecheck if in right directory before messing with log file.
+
+# Far more efficient is:
+#
+# cd /var/log || {
+#   echo "Cannot change to necessary directory." &gt;&amp;2
+#   exit $E_XCD;
+# }
+
+
+
+
+tail -n $lines messages &gt; mesg.temp # Save last section of message log file.
+mv mesg.temp messages               # Rename it as system log file.
+
+
+#  cat /dev/null &gt; messages
+#* No longer needed, as the above method is safer.
+
+cat /dev/null &gt; wtmp  #  ': &gt; wtmp' and '&gt; wtmp'  have the same effect.
+echo "Log files cleaned up."
+#  Note that there are other log files in /var/log not affected
+#+ by this script.
+
+exit 0
+#  A zero return value from the script upon exit indicates success
+#+ to the shell.</pre></font></td></tr></tbody></table></div><p>Since you may not wish to wipe out the entire system log,
+      this version of the script keeps the last section of the message
+      log intact. You will constantly discover ways of fine-tuning
+      previously written scripts for increased effectiveness.</p><p><a name="SHABANGREF"></a>* * *</p><p><a name="MAGNUMREF"></a>The
+      <i class="FIRSTTERM"> sha-bang</i>
+      (<span class="TOKEN">	 #!</span>)
+
+	  <a name="AEN205" href="#FTN.AEN205"><span class="footnote">[1]</span></a>
+
+      at the head of a script tells your system that this file is a set
+      of commands to be fed to the command interpreter indicated. The
+      <span class="TOKEN">#!</span> is actually a two-byte
+
+        <a name="AEN214" href="#FTN.AEN214"><span class="footnote">[2]</span></a>
+
+	
+	<i class="FIRSTTERM">magic number</i>, a special marker that
+	designates a file type, or in this case an executable shell
+	script (type <tt class="USERINPUT"><b>man magic</b></tt> for more
+	details on this fascinating topic). Immediately following
+	the <i class="FIRSTTERM">sha-bang</i> is a <i class="FIRSTTERM">path
+	name</i>. This is the path to the program that interprets
+	the commands in the script, whether it be a shell, a programming
+	language, or a utility. This command interpreter then executes
+	the commands in the script, starting at the top (the line
+	following the <i class="FIRSTTERM">sha-bang</i> line), and ignoring
+	comments.
+
+	  <a name="AEN226" href="#FTN.AEN226"><span class="footnote">[3]</span></a>
+
+	</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/sh
+#!/bin/bash
+#!/usr/bin/perl
+#!/usr/bin/tcl
+#!/bin/sed -f
+#!/bin/awk -f</pre></font></td></tr></tbody></table></p><p>Each of the above script header lines calls a different command
+      interpreter, be it <tt class="FILENAME">/bin/sh</tt>, the default shell
+      (<b class="COMMAND">bash</b> in a Linux system) or otherwise.
+
+        <a name="AEN242" href="#FTN.AEN242"><span class="footnote">[4]</span></a>
+
+      Using <tt class="USERINPUT"><b>#!/bin/sh</b></tt>, the default Bourne shell
+      in most commercial variants of UNIX, makes the script <a href="http://www.tldp.org/LDP/abs/html/portabilityissues.html">portable</a> to non-Linux machines,
+      though you <a href="http://www.tldp.org/LDP/abs/html/gotchas.html#BINSH">sacrifice Bash-specific
+      features</a>.  The script will, however, conform to the
+      <span class="ACRONYM">POSIX</span>
+
+	 <a name="AEN256" href="#FTN.AEN256"><span class="footnote">[5]</span></a>
+
+      <b class="COMMAND">sh</b> standard.</p><p>Note that the path given at the <span class="QUOTE">"sha-bang"</span> must
+      be correct, otherwise an error message -- usually <span class="QUOTE">"Command
+      not found."</span> -- will be the only result of running the
+      script.
+        <a name="AEN269" href="#FTN.AEN269"><span class="footnote">[6]</span></a>
+      
+      </p><p><span class="TOKEN">#!</span> can be omitted if the script consists only
+      of a set of generic system commands, using no internal
+      shell directives.  The second example, above, requires the
+      initial <span class="TOKEN">#!</span>, since the variable assignment line,
+      <tt class="USERINPUT"><b>lines=50</b></tt>, uses a shell-specific construct.
+	<a name="AEN279" href="#FTN.AEN279"><span class="footnote">[7]</span></a>
+      Note again that <tt class="USERINPUT"><b>#!/bin/sh</b></tt> invokes the default
+      shell interpreter, which defaults to <tt class="FILENAME">/bin/bash</tt>
+      on a Linux machine.</p><div class="TIP"><p></p><table class="TIP" border="0" width="100%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="sha-bang_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>This tutorial encourages a modular approach
+	to constructing a script. Make note of and collect
+	<span class="QUOTE">"boilerplate"</span> code snippets that might be useful
+	in future scripts. Eventually you will build quite an extensive
+	library of nifty routines. As an example, the following script
+	prolog tests whether the script has been invoked with the correct
+	number of parameters.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">E_WRONG_ARGS=85
+script_parameters="-a -h -m -z"
+#                  -a = all, -h = help, etc.
+
+if [ $# -ne $Number_of_expected_args ]
+then
+  echo "Usage: `basename $0` $script_parameters"
+  # `basename $0` is the script's filename.
+  exit $E_WRONG_ARGS
+fi</pre></font></td></tr></tbody></table>
+      </p><p>Many times, you will write a script that carries out one
+        particular task. The first script in this chapter is an
+        example. Later, it might occur to you to generalize
+        the script to do other, similar tasks. Replacing the literal
+        (<span class="QUOTE">"hard-wired"</span>) constants by variables is a step in
+        that direction, as is replacing repetitive code blocks by <a href="http://www.tldp.org/LDP/abs/html/functions.html#FUNCTIONREF">functions</a>.</p></td></tr></tbody></table></div></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN205" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN205"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>More commonly seen in the literature as
+	  <i class="FIRSTTERM">she-bang</i> or <i class="FIRSTTERM">sh-bang</i>.
+	  This derives from the concatenation of the tokens
+	  <i class="FIRSTTERM">sharp</i> (<span class="TOKEN">#</span>) and
+	  <i class="FIRSTTERM">bang</i> (<span class="TOKEN">!</span>).</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN214" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN214"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Some flavors of UNIX (those based on 4.2 BSD)
+          allegedly take a four-byte magic number, requiring
+          a blank after the <span class="TOKEN">!</span> --
+	  <tt class="USERINPUT"><b>#! /bin/sh</b></tt>. <a href="http://www.in-ulm.de/%7Emascheck/various/shebang/#details" target="_top">	  According to Sven Mascheck</a> this is probably a myth.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN226" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN226"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>The <span class="TOKEN">#!</span> line in a shell script
+	      will be the first thing the command interpreter
+	      (<b class="COMMAND">sh</b> or <b class="COMMAND">bash</b>)
+	      sees. Since this line begins with a <span class="TOKEN">#</span>,
+	      it will be correctly interpreted as a comment when the
+	      command interpreter finally executes the script. The
+	      line has already served its purpose - calling the command
+	      interpreter.</p><p>If, in fact, the script includes an
+	      <em>extra</em> <span class="TOKEN">#!</span> line, then
+	      <b class="COMMAND">bash</b> will interpret it as a comment.
+	        <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+
+echo "Part 1 of script."
+a=1
+
+#!/bin/bash
+# This does *not* launch a new script.
+
+echo "Part 2 of script."
+echo $a  # Value of $a stays at 1.</pre></font></td></tr></tbody></table></p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN242" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN242"><span class="footnote">[4]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>This allows some cute tricks.</p><p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/rm
+# Self-deleting script.
+
+# Nothing much seems to happen when you run this... except that the file disappears.
+
+WHATEVER=85
+
+echo "This line will never print (betcha!)."
+
+exit $WHATEVER  # Doesn't matter. The script will not exit here.
+                # Try an echo $? after script termination.
+                # You'll get a 0, not a 85.</pre></font></td></tr></tbody></table></p><p>Also, try starting a <tt class="FILENAME">README</tt> file with a
+        <tt class="USERINPUT"><b>#!/bin/more</b></tt>, and making it executable.
+        The result is a self-listing documentation file. (A <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#HEREDOCREF">here document</a> using
+	<a href="http://www.tldp.org/LDP/abs/html/basic.html#CATREF">cat</a> is possibly a better alternative
+	-- see <a href="http://www.tldp.org/LDP/abs/html/here-docs.html#EX71">Example 19-3</a>).</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN256" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN256"><span class="footnote">[5]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="POSIX2REF"></a><strong>P</strong>ortable
+	 <strong>O</strong>perating
+	 <strong>S</strong>ystem <em>I</em>nterface, an attempt to
+	 standardize UNI<strong>X</strong>-like
+	 OSes. The POSIX specifications are listed on the <a href="http://www.opengroup.org/onlinepubs/007904975/toc.htm" target="_top">Open
+	 Group site</a>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN269" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN269"><span class="footnote">[6]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>To avoid this possibility, a script may begin
+	  with a <a href="http://www.tldp.org/LDP/abs/html/system.html#ENVV2REF">#!/bin/env bash</a>
+	  <i class="FIRSTTERM">sha-bang</i> line. This may be
+	  useful on UNIX machines where <i class="FIRSTTERM">bash</i>
+	  is not located in <tt class="FILENAME">/bin</tt></p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN279" href="http://www.tldp.org/LDP/abs/html/sha-bang.html#AEN279"><span class="footnote">[7]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>If <i class="FIRSTTERM">Bash</i> is your default
+	shell, then the <span class="TOKEN">#!</span> isn't necessary at the
+	beginning of a script.	However, if launching a script from
+	a different shell, such as <i class="FIRSTTERM">tcsh</i>,
+	then you <em>will</em> need the
+	<span class="TOKEN">#!</span>.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/why-shell.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/invoking.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Shell Programming!</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part1.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Invoking the script</td></tr></tbody></table></div></body></html>
