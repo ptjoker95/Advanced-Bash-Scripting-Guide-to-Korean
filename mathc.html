@@ -135,34 +135,32 @@ exit</pre>
 <b class="COMMAND">bc</b>
 </dt>
 <dd>
-<p>Bash can't handle floating point calculations, and
-	      it lacks operators for certain important mathematical
-	      functions. Fortunately, <b class="COMMAND">bc</b> gallops to
-	      the rescue.</p>
-<p>Not just a versatile, arbitrary precision calculation
-	      utility, <b class="COMMAND">bc</b> offers many of the facilities of
-	      a programming language. It has a syntax vaguely resembling
-	      <b class="COMMAND">C</b>.</p>
-<p>Since it is a fairly well-behaved UNIX utility, and may
-	       therefore be used in a <a href="./special-chars.html#PIPEREF">pipe</a>,
-	       <b class="COMMAND">bc</b> comes in handy in scripts.</p>
+<p>Bash 는 소수점 계산을 할 수 없습니다, 그리고 그 때문에 중요한 수학적 함수를 
+쓸 수 없습니다. 하지만, 
+<b class="COMMAND">bc</b> 로 대신할 수 있습니다.
+</p>
+<p>다양한 능력과 매우 정확한 계산 유틸리티일 뿐만 아니라, 
+<b class="COMMAND">bc</b> 는 프로그래밍 언어로서 많은 편이를 제공합니다. 
+문법은 <b class="COMMAND">C</b> 와 대강 유사합니다.</p>
+<p>UNIX 유틸리티로서 잘 작동하지만, 
+<a href="./special-chars.html#PIPEREF">pipe</a> 로 연동해서 사용하게 되면 
+<b class="COMMAND">bc</b> 는 스크립트에서 더욱 유용해집니다.</p>
 <p>
 <a name="BCTEMPLATE">
 </a>
 </p>
-<p>Here is a simple template for using
-	      <b class="COMMAND">bc</b> to calculate a script
-	      variable. This uses <a href="./commandsub.html#COMMANDSUBREF">command
-	      substitution</a>.</p>
-<p>              <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>간단한 스크립트 계산을 위한 
+<b class="COMMAND">bc</b> 의 사용법은 다음과 같습니다. 이 방법은 
+<a href="./commandsub.html#COMMANDSUBREF">명령어 치환</a> 을 이용합니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">	      <tt class="USERINPUT">
 <b>variable=$(echo "OPTIONS; OPERATIONS" | bc)</b>
-</tt>
-	      </pre>
+</tt></pre>
 </font>
 </td>
 </tr>
@@ -177,7 +175,7 @@ exit</pre>
 <a name="MONTHLYPMT">
 </a>
 <p>
-<b>Example 16-47. Monthly Payment on a Mortgage</b>
+<b>Example 16-47. 월별 주택 대출 상환 계산하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -423,13 +421,15 @@ exit</pre>
 <a name="BCHEREDOC">
 </a>
 </p>
-<p>An alternate method of invoking <b class="COMMAND">bc</b>
-		involves using a <a href="./here-docs.html#HEREDOCREF">here
-		document</a> embedded within a <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>
-		block. This is especially appropriate when a script
-		needs to pass a list of options and commands to
-		<b class="COMMAND">bc</b>.</p>
-<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<b class="COMMAND">bc</b> 를 실행하는 또다른 방법으로는 
+<a href="./commandsub.html#COMMANDSUBREF">명령어 치환</a> 블럭 안에 포함된 
+<a href="./here-docs.html#HEREDOCREF">here document</a> 를 사용하는 방법이 있습니다. 
+이 방법은 스크립트에서 
+<b class="COMMAND">bc</b> 에 옵션과 명령어 리스트를 넘겨야할 때 적합합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -703,15 +703,21 @@ exit 0
 <b class="COMMAND">dc</b>
 </dt>
 <dd>
-<p>The <b class="COMMAND">dc</b> (<b class="COMMAND">d</b>esk
-              <b class="COMMAND">c</b>alculator) utility is <a href="./internalvariables.html#STACKDEFREF">stack-oriented</a>
-              and uses RPN (<i class="FIRSTTERM">Reverse Polish Notation</i>).
-              Like <b class="COMMAND">bc</b>, it has much of the power of
-              a programming language.</p>
-<p>Similar to the procedure with <b class="COMMAND">bc</b>,
-	      <a href="./internal.html#ECHOREF">echo</a> a command-string
-	      to <b class="COMMAND">dc</b>.</p>
-<p>		     <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<b class="COMMAND">dc</b> (
+<b class="COMMAND">d</b>esk 
+<b class="COMMAND">c</b>alculator) 유틸리티는 
+<a href="./internalvariables.html#STACKDEFREF">스택</a> 방식이고 RPN (
+<i class="FIRSTTERM">역폴란드 표기법, Reverse Polish Notation</i>) 을 사용합니다. 
+<b class="COMMAND">bc</b> 와 같이, 프로그래밍 언어로서 작동하게 해줍니다.
+</p>
+<p>
+<b class="COMMAND">bc</b> 방식과 마찬가지로, 
+<b class="COMMAND">dc</b> 에 명령어 문자열을 
+<a href="./internal.html#ECHOREF">echo</a> 하면 됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -729,14 +735,14 @@ echo "7 8 * p" | dc     # 56
 </tbody>
 </table>
              </p>
-<p>Most persons avoid <b class="COMMAND">dc</b>, because
-                of its non-intuitive input and rather cryptic
-		operators. Yet, it has its uses.</p>
+<p>대부분의 사용자는 <b class="COMMAND">dc</b>가 직관적이기보다는, 비밀문서와 같이 
+보이기 때문에 사용하기를 꺼려합니다. 그렇지만, 나름대로 유용합니다.
+</p>
 <div class="EXAMPLE">
 <a name="HEXCONVERT">
 </a>
 <p>
-<b>Example 16-51. Converting a decimal number to hexadecimal</b>
+<b>예제 16-51. 10진수를 16진수로 바꾸기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -780,21 +786,21 @@ exit</pre>
 </tbody>
 </table>
 </div>
-<p>Studying the <a href="./basic.html#INFOREF">info</a> page for
-		<b class="COMMAND">dc</b> is a painful path to understanding its
-		intricacies. There seems to be a small, select group of
-		<em>dc wizards</em> who delight in showing off
-		their mastery of this powerful, but arcane utility.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<b class="COMMAND">dc</b> 의 
+<a href="./basic.html#INFOREF">info</a> 페이지를 공부하는 것은 그 복잡성 때문에 
+매우 고통스러운 일입니다. 이 명령어의 강력하고도 불가사의한 기능성을 마스터한 것을 
+보여주고 싶어하는 작고, 선택된
+<em>dc 마법사</em> 들이 있는 것 같습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo "16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D68736142snlbxq" | dc</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D68736142snlbxq" | dc</b></tt>
 <tt class="COMPUTEROUTPUT">Bash</tt>
 	      </pre>
 </font>
@@ -831,7 +837,7 @@ exit</pre>
 <a name="FACTR">
 </a>
 <p>
-<b>Example 16-52. Factoring</b>
+<b>Example 16-52. 팩토링</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
