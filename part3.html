@@ -1,4 +1,116 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Beyond the Basics</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="PREVIOUS" title="Operator Precedence" href="http://www.tldp.org/LDP/abs/html/opprecedence.html"><link rel="NEXT" title="Another Look at Variables" href="http://www.tldp.org/LDP/abs/html/variables2.html"></head><body class="PART" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/opprecedence.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/variables2.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="PART"><a name="PART3"></a><div class="TITLEPAGE"><h1 class="TITLE">Part 3. Beyond the Basics</h1><div class="TOC"><dl><dt><b>Table of Contents</b></dt><dt>9. <a href="http://www.tldp.org/LDP/abs/html/variables2.html">Another Look at Variables</a></dt><dd><dl><dt>9.1. <a href="http://www.tldp.org/LDP/abs/html/internalvariables.html">Internal Variables</a></dt><dt>9.2. <a href="http://www.tldp.org/LDP/abs/html/declareref.html">Typing variables: <b class="COMMAND">declare</b> or
-	  <b class="COMMAND">typeset</b></a></dt><dt>9.3. <a href="http://www.tldp.org/LDP/abs/html/randomvar.html">$RANDOM: generate random integer</a></dt></dl></dd><dt>10. <a href="http://www.tldp.org/LDP/abs/html/manipulatingvars.html">Manipulating Variables</a></dt><dd><dl><dt>10.1. <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html">Manipulating Strings</a></dt><dt>10.2. <a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html">Parameter Substitution</a></dt></dl></dd><dt>11. <a href="http://www.tldp.org/LDP/abs/html/loops.html">Loops and Branches</a></dt><dd><dl><dt>11.1. <a href="http://www.tldp.org/LDP/abs/html/loops1.html">Loops</a></dt><dt>11.2. <a href="http://www.tldp.org/LDP/abs/html/nestedloops.html">Nested Loops</a></dt><dt>11.3. <a href="http://www.tldp.org/LDP/abs/html/loopcontrol.html">Loop Control</a></dt><dt>11.4. <a href="http://www.tldp.org/LDP/abs/html/testbranch.html">Testing and Branching</a></dt></dl></dd><dt>12. <a href="http://www.tldp.org/LDP/abs/html/commandsub.html">Command Substitution</a></dt><dt>13. <a href="http://www.tldp.org/LDP/abs/html/arithexp.html">Arithmetic Expansion</a></dt><dt>14. <a href="http://www.tldp.org/LDP/abs/html/recess-time.html">Recess Time</a></dt></dl></div></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/opprecedence.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/variables2.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Operator Precedence</td><td align="center" valign="top" width="34%">&nbsp;</td><td align="right" valign="top" width="33%">Another Look at Variables</td></tr></tbody></table></div></body></html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Beyond the Basics</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Operator Precedence" href="./opprecedence.html">
+<link rel="NEXT" title="Another Look at Variables" href="./variables2.html">
+</head>
+<body class="PART" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./opprecedence.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./variables2.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="PART">
+<a name="PART3">
+</a>
+<div class="TITLEPAGE">
+<h1 class="TITLE">Part 3. Beyond the Basics</h1>
+<div class="TOC">
+<dl>
+<dt>
+<b>Table of Contents</b>
+</dt>
+<dt>9. <a href="./variables2.html">Another Look at Variables</a>
+</dt>
+<dd>
+<dl>
+<dt>9.1. <a href="./internalvariables.html">Internal Variables</a>
+</dt>
+<dt>9.2. <a href="./declareref.html">Typing variables: <b class="COMMAND">declare</b> or
+	  <b class="COMMAND">typeset</b>
+</a>
+</dt>
+<dt>9.3. <a href="./randomvar.html">$RANDOM: generate random integer</a>
+</dt>
+</dl>
+</dd>
+<dt>10. <a href="./manipulatingvars.html">Manipulating Variables</a>
+</dt>
+<dd>
+<dl>
+<dt>10.1. <a href="./string-manipulation.html">Manipulating Strings</a>
+</dt>
+<dt>10.2. <a href="./parameter-substitution.html">Parameter Substitution</a>
+</dt>
+</dl>
+</dd>
+<dt>11. <a href="./loops.html">Loops and Branches</a>
+</dt>
+<dd>
+<dl>
+<dt>11.1. <a href="./loops1.html">Loops</a>
+</dt>
+<dt>11.2. <a href="./nestedloops.html">Nested Loops</a>
+</dt>
+<dt>11.3. <a href="./loopcontrol.html">Loop Control</a>
+</dt>
+<dt>11.4. <a href="./testbranch.html">Testing and Branching</a>
+</dt>
+</dl>
+</dd>
+<dt>12. <a href="./commandsub.html">Command Substitution</a>
+</dt>
+<dt>13. <a href="./arithexp.html">Arithmetic Expansion</a>
+</dt>
+<dt>14. <a href="./recess-time.html">Recess Time</a>
+</dt>
+</dl>
+</div>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./opprecedence.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./variables2.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Operator Precedence</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Another Look at Variables</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
