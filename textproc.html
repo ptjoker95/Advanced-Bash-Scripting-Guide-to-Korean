@@ -290,17 +290,18 @@ exit 0
 <b class="COMMAND">cut</b>
 </dt>
 <dd>
-<p>A tool for extracting <a href="./special-chars.html#FIELDREF">fields</a> from files. It is similar
-	      to the <tt class="USERINPUT">
-<b>print $N</b>
-</tt> command set in <a href="./awk.html#AWKREF">awk</a>, but more limited. It may be
-	      simpler to use <i class="FIRSTTERM">cut</i> in a script than
-	      <i class="FIRSTTERM">awk</i>. Particularly important are the
-	      <tt class="OPTION">-d</tt> (delimiter) and <tt class="OPTION">-f</tt>
-	      (field specifier) options.</p>
-<p>Using <b class="COMMAND">cut</b> to obtain a listing of the
-	      mounted filesystems: 
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>파일에서 
+<a href="./special-chars.html#FIELDREF">필드</a> 를 뽑아내는데 사용되는 도구. 
+<a href="./awk.html#AWKREF">awk</a> 의 
+<tt class="USERINPUT"><b>print $N</b></tt> 명령어 셋과 비슷하지만, 제한 사항이 
+더 있습니다. 스크립트에서는 
+<i class="FIRSTTERM">awk</i> 를 쓰는 것보다 
+<i class="FIRSTTERM">cut</i> 을 쓰는 게 더 간단합니다. 특히 
+<tt class="OPTION">-d</tt> (분리자) 와 
+<tt class="OPTION">-f</tt> (필드 지시자) 옵션은 중요합니다.</p>
+<p>마운트 된 파일시스템의 리스트를 
+<b class="COMMAND">cut</b> 을 이용해서 뽑아내기:
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -312,8 +313,9 @@ exit 0
 </tbody>
 </table>
 </p>
-<p>Using <b class="COMMAND">cut</b> to list the OS and kernel version:
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<b class="COMMAND">cut</b> 을 사용해서 OS 와 커널 버전 리스트 뽑아내기:
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -325,20 +327,16 @@ exit 0
 </tbody>
 </table>
 </p>
-<p>Using <b class="COMMAND">cut</b> to extract message headers from
-	      an e-mail folder:
-
-	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<b class="COMMAND">cut</b> 을 사용해서 이메일 폴더에서 메세지 헤더만 뽑아내기
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep '^Subject:' read-messages | cut -c10-80</b>
-</tt>
-<tt class="COMPUTEROUTPUT">Re: Linux suitable for mission-critical apps?
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '^Subject:' read-messages | cut -c10-80</b>
+</tt><tt class="COMPUTEROUTPUT">Re: Linux suitable for mission-critical apps?
  MAKE MILLIONS WORKING AT HOME!!!
  Spam complaint
  Re: Spam complaint</tt>
@@ -348,8 +346,9 @@ exit 0
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>Using <b class="COMMAND">cut</b> to parse a file:
+</p>
+<p>
+<b class="COMMAND">cut</b> 을 사용해서 파일을 나누기:
 	      <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
@@ -374,10 +373,10 @@ done
 <p>
 <tt class="USERINPUT">
 <b>cut -d ' ' -f2,3 filename</b>
-</tt> is equivalent to
-	      <tt class="USERINPUT">
-<b>awk -F'[ ]' '{ print $2, $3 }' filename</b>
-</tt>
+</tt> 은  
+<tt class="USERINPUT">
+<b>awk -F'[ ]' '{ print $2, $3 }' filename</b> 
+</tt>와 동일합니다.
 </p>
 <div class="NOTE">
 <p>
@@ -389,20 +388,19 @@ done
 <img src="textproc_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>It is even possible to specify a linefeed as a
-	      delimiter. The trick is to actually embed a linefeed
-	      (<b class="KEYCAP">RETURN</b>) in the command sequence.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>줄바꿈 문자를 분리자로 쓸 수 있습니다. 이 트릭으로 명령어 배열에서 
+줄바꿈 문자 (
+<b class="KEYCAP">RETURN</b>) 을 끼워넣을 수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cut -d'
- ' -f3,7,19 testfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cut -d' 
+ ' -f3,7,19 testfile</b></tt>
 <tt class="COMPUTEROUTPUT">This is line 3 of testfile.
  This is line 7 of testfile.
  This is line 19 of testfile.</tt>
@@ -419,7 +417,8 @@ done
 </tbody>
 </table>
 </div>
-<p>See also <a href="./mathc.html#BASE">Example 16-48</a>.</p>
+<p>
+<a href="./mathc.html#BASE">예제 16-48</a> 를 참고하세요.</p>
 </dd>
 <dt>
 <a name="PASTEREF">
