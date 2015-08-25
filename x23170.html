@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Sed</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="A Sed and Awk Micro-Primer" href="./sedawk.html">
+<link rel="PREVIOUS" title="A Sed and Awk Micro-Primer" href="./sedawk.html">
+<link rel="NEXT" title="Awk" href="./awk.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./sedawk.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Appendix C. A Sed and Awk Micro-Primer</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./awk.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="AEN23170">
+</a>C.1. Sed</h1>
+<p>
+<i class="FIRSTTERM">Sed</i> is a non-interactive
+          <a name="AEN23174" href="#FTN.AEN23174">
+<span class="footnote">[1]</span>
+</a>
+	<b class="COMMAND">s</b>tream <b class="COMMAND">ed</b>itor. It
+	receives text input, whether from <tt class="FILENAME">stdin</tt>
+	or from a file, performs certain operations on specified lines
+	of the input, one line at a time, then outputs the result to
+	<tt class="FILENAME">stdout</tt> or to a file.  Within a shell script,
+	<i class="FIRSTTERM">sed</i> is usually one of several tool
+	components in a pipe.</p>
+<p>
+<i class="FIRSTTERM">Sed</i> determines which lines of
+        its input that it will operate on from the <i class="FIRSTTERM">address
+        range</i> passed to it.
+	  <a name="AEN23185" href="#FTN.AEN23185">
+<span class="footnote">[2]</span>
+</a>
+	Specify this address range either by line number or by a
+	pattern to match. For example, <tt class="REPLACEABLE">
+<i>3d</i>
+</tt>
+	signals <i class="FIRSTTERM">sed</i> to delete line 3 of the
+	input, and <tt class="REPLACEABLE">
+<i>/Windows/d</i>
+</tt> tells sed
+	that you want every line of the input containing a match to
+	<span class="QUOTE">"Windows"</span> deleted.</p>
+<p>Of all the operations in the <i class="FIRSTTERM">sed</i>
+	toolkit, we will focus primarily on the three most commonly
+	used ones. These are <b class="COMMAND">p</b>rinting (to
+	<tt class="FILENAME">stdout</tt>), <b class="COMMAND">d</b>eletion,
+	and <b class="COMMAND">s</b>ubstitution.</p>
+<p>
+<a name="SEDBASICTABLE">
+</a>
+</p>
+<div class="TABLE">
+<a name="AEN23200">
+</a>
+<p>
+<b>Table C-1. Basic sed operators</b>
+</p>
+<table class="CALSTABLE" border="1">
+<thead>
+<tr>
+<th align="LEFT" valign="TOP">Operator</th>
+<th align="LEFT" valign="TOP">Name</th>
+<th align="LEFT" valign="TOP">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">[address-range]/p</tt>
+</td>
+<td align="LEFT" valign="TOP">print</td>
+<td align="LEFT" valign="TOP">Print [specified address range]</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">[address-range]/d</tt>
+</td>
+<td align="LEFT" valign="TOP">delete</td>
+<td align="LEFT" valign="TOP">Delete [specified address range]</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/pattern1/pattern2/</tt>
+</td>
+<td align="LEFT" valign="TOP">substitute</td>
+<td align="LEFT" valign="TOP">Substitute pattern2 for first instance of pattern1 in a line</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">[address-range]/s/pattern1/pattern2/</tt>
+</td>
+<td align="LEFT" valign="TOP">substitute</td>
+<td align="LEFT" valign="TOP">Substitute pattern2 for first instance of pattern1 in a
+	      line, over <tt class="REPLACEABLE">
+<i>address-range</i>
+</tt>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">[address-range]/y/pattern1/pattern2/</tt>
+</td>
+<td align="LEFT" valign="TOP">transform</td>
+<td align="LEFT" valign="TOP">replace any character in pattern1 with the
+	        corresponding character in pattern2, over
+	      <tt class="REPLACEABLE">
+<i>address-range</i>
+</tt> (equivalent of
+	        <b class="COMMAND">tr</b>)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">[address] i pattern Filename</tt>
+</td>
+<td align="LEFT" valign="TOP">insert</td>
+<td align="LEFT" valign="TOP">Insert pattern at address indicated in file Filename.
+                     Usually used with <tt class="OPTION">-i</tt>
+                     <tt class="REPLACEABLE">
+<i>in-place</i>
+</tt> option.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">g</tt>
+</td>
+<td align="LEFT" valign="TOP">global</td>
+<td align="LEFT" valign="TOP">Operate on <em>every</em> pattern match
+	        within each matched line of input</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="x23170_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Unless the <tt class="OPTION">g</tt>
+	(<i class="FIRSTTERM">global</i>) operator is appended to a
+	<i class="FIRSTTERM">substitute</i> command, the substitution
+	operates only on the <em>first</em> instance of a
+	pattern match within each line.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>From the command-line and in a shell script, a sed operation may
+       require quoting and certain options.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">sed -e '/^$/d' $filename
+# The -e option causes the next string to be interpreted as an editing instruction.
+#  (If passing only a single instruction to sed, the "-e" is optional.)
+#  The "strong" quotes ('') protect the RE characters in the instruction
+#+ from reinterpretation as special characters by the body of the script.
+# (This reserves RE expansion of the instruction for sed.)
+#
+# Operates on the text contained in file $filename.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>In certain cases, a <i class="FIRSTTERM">sed</i> editing command will
+         not work with single quotes.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">filename=file1.txt
+pattern=BEGIN
+
+  sed "/^$pattern/d" "$filename"  # Works as specified.
+# sed '/^$pattern/d' "$filename"    has unexpected results.
+#        In this instance, with strong quoting (' ... '),
+#+      "$pattern" will not expand to "BEGIN".</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="x23170_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<i class="FIRSTTERM">Sed</i> uses the <tt class="OPTION">-e</tt>
+	 option to specify that the following string is an instruction
+	 or set of instructions. If there is only a single instruction
+	 contained in the string, then this may be omitted.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">sed -n '/xzy/p' $filename
+# The -n option tells sed to print only those lines matching the pattern.
+# Otherwise all input lines would print.
+# The -e option not necessary here since there is only a single editing instruction.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="SEDOPTABLE">
+</a>
+</p>
+<div class="TABLE">
+<a name="AEN23271">
+</a>
+<p>
+<b>Table C-2. Examples of sed operators</b>
+</p>
+<table class="CALSTABLE" border="1">
+<thead>
+<tr>
+<th align="LEFT" valign="TOP">Notation</th>
+<th align="LEFT" valign="TOP">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">8d</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete 8th line of input.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">/^$/d</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete all blank lines.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">1,/^$/d</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete from beginning of input up to, and including
+	        first blank line.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">/Jones/p</tt>
+</td>
+<td align="LEFT" valign="TOP">Print only lines containing <span class="QUOTE">"Jones"</span> (with
+	        <span class="TOKEN">-n</span> option).</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/Windows/Linux/</tt>
+</td>
+<td align="LEFT" valign="TOP">Substitute <span class="QUOTE">"Linux"</span> for first instance
+	        of <span class="QUOTE">"Windows"</span> found in each input line.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/BSOD/stability/g</tt>
+</td>
+<td align="LEFT" valign="TOP">Substitute <span class="QUOTE">"stability"</span> for every instance
+	        of <span class="QUOTE">"BSOD"</span> found in each input line.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/ *$//</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete all spaces at the end of every line.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/00*/0/g</tt>
+</td>
+<td align="LEFT" valign="TOP">Compress all consecutive sequences of zeroes into
+	        a single zero.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">echo "Working on it." | sed -e '1i How far are you along?'</tt>
+</td>
+<td align="LEFT" valign="TOP">Prints "How far are you along?" as first line,
+                    "Working on it" as second.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">5i 'Linux is great.' file.txt</tt>
+</td>
+<td align="LEFT" valign="TOP">Inserts 'Linux is great.' at line 5 of the file
+	      file.txt.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">/GUI/d</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete all lines containing <span class="QUOTE">"GUI"</span>.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">s/GUI//g</tt>
+</td>
+<td align="LEFT" valign="TOP">Delete all instances of <span class="QUOTE">"GUI"</span>, leaving the 
+	        remainder of each line intact.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Substituting a zero-length string for another is equivalent
+       to deleting that string within a line of input. This leaves the
+       remainder of the line intact. Applying <tt class="USERINPUT">
+<b>s/GUI//</b>
+</tt>   
+       to the line
+       <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="USERINPUT">
+<b>The most important parts of any application are its GUI and sound effects</b>
+</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+       results in
+       <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">The most important parts of any application are its  and sound effects</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>A backslash forces the <b class="COMMAND">sed</b> replacement
+       command to continue on to the next line. This has the effect of
+       using the <i class="FIRSTTERM">newline</i> at the end of the first
+       line as the <i class="FIRSTTERM">replacement string</i>.
+
+       <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">s/^  */\
+/g</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+
+       This substitution replaces line-beginning spaces with a
+       newline. The net result is to replace paragraph indents with a
+       blank line between paragraphs.</p>
+<p>An address range followed by one or more operations may require
+       open and closed curly brackets, with appropriate newlines. 
+       <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">/[0-9A-Za-z]/,/^$/{
+/^$/d
+}</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+       This deletes only the first of each set of consecutive blank
+       lines. That might be useful for single-spacing a text file,
+       but retaining the blank line(s) between paragraphs.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="x23170_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The usual delimiter that <i class="FIRSTTERM">sed</i> uses is
+      <span class="TOKEN">/</span>. However, <em>sed</em> allows other
+      delimiters, such as <span class="TOKEN">%</span>. This is useful when
+      <span class="TOKEN">/</span> is part of a replacement string, as in a file pathname.
+      See <a href="./loops1.html#FINDSTRING">Example 11-10</a> and <a href="./filearchiv.html#STRIPC">Example 16-32</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="DOUBLESPACE">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="x23170_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>A quick way to double-space a text file is <tt class="USERINPUT">
+<b>sed G
+       filename</b>
+</tt>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For illustrative examples of sed within shell scripts, see:
+       </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<a href="./wrapper.html#EX3">Example 36-1</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./wrapper.html#EX4">Example 36-2</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./moreadv.html#EX57">Example 16-3</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#RN">Example A-2</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#GRP">Example 16-17</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#COL">Example 16-27</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#BEHEAD">Example A-12</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#TREE">Example A-16</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#TREE2">Example A-17</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./filearchiv.html#STRIPC">Example 16-32</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./loops1.html#FINDSTRING">Example 11-10</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./mathc.html#BASE">Example 16-48</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#MAILFORMAT">Example A-1</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#RND">Example 16-14</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#WF">Example 16-12</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#LIFESLOW">Example A-10</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./here-docs.html#SELFDOCUMENT">Example 19-12</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./textproc.html#DICTLOOKUP">Example 16-19</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#WHX">Example A-29</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#BASHPODDER">Example A-31</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#TOHTML">Example A-24</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#STOPWATCH">Example A-43</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#SEDAPPEND">Example A-55</a>
+</p>
+</li>
+</ol>
+     <p>
+</p>
+<p>For a more extensive treatment of <i class="FIRSTTERM">sed</i>,
+        refer to the <a href="./biblio.html#DGSEDREF">pertinent references</a>
+        in the <a href="./biblio.html">
+<i>Bibliography</i>
+</a>.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN23174" href="./x23170.html#AEN23174">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<i class="FIRSTTERM">Sed</i> executes without
+          user intervention.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN23185" href="./x23170.html#AEN23185">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>If no address range is specified, the default
+	  is <em>all</em> lines.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./sedawk.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./awk.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">A Sed and Awk Micro-Primer</td>
+<td align="center" valign="top" width="34%">
+<a href="./sedawk.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Awk</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

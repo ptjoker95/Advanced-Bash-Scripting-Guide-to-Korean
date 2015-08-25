@@ -1,0 +1,1315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Assorted Tips</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Miscellany" href="./miscellany.html">
+<link rel="PREVIOUS" title="Optimizations" href="./optimizations.html">
+<link rel="NEXT" title="Security Issues" href="./securityissues.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./optimizations.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 36. Miscellany</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./securityissues.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="ASSORTEDTIPS">
+</a>36.7. Assorted Tips</h1>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="AEN20460">
+</a>36.7.1. Ideas for more powerful scripts</h2>
+<p>
+</p>
+<ul>
+<li>
+<p>
+<a name="PSEUDOCODEREF">
+</a>
+</p>
+<p>You have a problem that you want to solve by writing a Bash
+	     script. Unfortunately, you don't know quite where to start.
+	     One method is to plunge right in and code those parts
+	     of the script that come easily, and write the hard parts as
+	     <i class="FIRSTTERM">pseudo-code</i>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+ARGCOUNT=1                     # Need name as argument.
+E_WRONGARGS=65
+
+if [ number-of-arguments is-not-equal-to "$ARGCOUNT" ]
+#    ^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^
+#  Can't figure out how to code this . . .
+#+ . . . so write it in pseudo-code.
+
+then
+  echo "Usage: name-of-script name"
+  #            ^^^^^^^^^^^^^^     More pseudo-code.
+  exit $E_WRONGARGS
+fi 
+
+. . .
+
+exit 0
+
+
+# Later on, substitute working code for the pseudo-code.
+
+# Line 6 becomes:
+if [ $# -ne "$ARGCOUNT" ]
+
+# Line 12 becomes:
+  echo "Usage: `basename $0` name"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>For an example of using pseudo-code, see the <a href="./writingscripts.html#NEWTONSQRT">Square Root</a> exercise.</p>
+</li>
+<li>
+<p>
+<a name="TRACKINGSCR">
+</a>
+</p>
+<p>To keep a record of which user scripts have run
+	    during a particular session or over a number of sessions,
+	    add the following lines to each script you want to keep track
+	    of. This will keep a continuing file record of the script
+	    names and invocation times. </p>
+<p>	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Append (&gt;&gt;) following to end of each script tracked.
+
+whoami&gt;&gt; $SAVE_FILE    # User invoking the script.
+echo $0&gt;&gt; $SAVE_FILE   # Script name.
+date&gt;&gt; $SAVE_FILE      # Date and time.
+echo&gt;&gt; $SAVE_FILE      # Blank line as separator.
+
+#  Of course, SAVE_FILE defined and exported as environmental variable in ~/.bashrc
+#+ (something like ~/.scripts-run)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>
+<a name="PREPENDREF">
+</a>
+</p>
+<p>The <span class="TOKEN">&gt;&gt;</span> operator
+	    <i class="FIRSTTERM">appends</i> lines to a file.
+	    What if you wish to <i class="FIRSTTERM">prepend</i> a
+	    line to an existing file, that is, to paste it in at the
+	    beginning?</p>
+<p>	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">file=data.txt
+title="***This is the title line of data text file***"
+
+echo $title | cat - $file &gt;$file.new
+# "cat -" concatenates stdout to $file.
+#  End result is
+#+ to write a new file with $title appended at *beginning*.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>This is a simplified variant of the <a href="./x17837.html#PREPENDEX">Example 19-13</a> script given earlier.	And, of course,
+	    <a href="./sedawk.html#SEDREF">sed</a> can also do this.</p>
+</li>
+<li>
+<p>
+<a name="SCRIPTASEMB">
+</a>
+</p>
+<p>A shell script may act as an embedded command inside
+	    another shell script, a <i class="FIRSTTERM">Tcl</i> or
+	    <i class="FIRSTTERM">wish</i> script, or even a <a href="./filearchiv.html#MAKEFILEREF">Makefile</a>. It can be invoked
+	    as an external shell command in a C program using the
+	    <tt class="REPLACEABLE">
+<i>system()</i>
+</tt> call, i.e.,
+	   <tt class="REPLACEABLE">
+<i>system("script_name");</i>
+</tt>.</p>
+</li>
+<li>
+<p>
+<a name="SETVAREMB">
+</a>
+</p>
+<p>Setting a variable to the contents of an embedded
+	    <i class="FIRSTTERM">sed</i> or <i class="FIRSTTERM">awk</i>
+	    script increases the readability of the surrounding <a href="./wrapper.html#SHWRAPPER">shell wrapper</a>. See <a href="./contributed-scripts.html#MAILFORMAT">Example A-1</a> and <a href="./internal.html#COLTOTALER3">Example 15-20</a>.</p>
+</li>
+<li>
+<p>
+<a name="LIBROUTINES">
+</a>
+</p>
+<p>Put together files containing your favorite and most useful
+	    definitions and functions.	As necessary,
+	    <span class="QUOTE">"include"</span> one or more of these
+	    <span class="QUOTE">"library files"</span> in scripts with either the
+	    <a href="./special-chars.html#DOTREF">dot</a> (<b class="COMMAND">.</b>)
+	    or <a href="./internal.html#SOURCEREF">source</a> command.</p>
+<p>  
+            <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># SCRIPT LIBRARY
+# ------ -------
+
+# Note:
+# No "#!" here.
+# No "live code" either.
+
+
+# Useful variable definitions
+
+ROOT_UID=0             # Root has $UID 0.
+E_NOTROOT=101          # Not root user error. 
+MAXRETVAL=255          # Maximum (positive) return value of a function.
+SUCCESS=0
+FAILURE=-1
+
+
+
+# Functions
+
+Usage ()               # "Usage:" message.
+{
+  if [ -z "$1" ]       # No arg passed.
+  then
+    msg=filename
+  else
+    msg=$@
+  fi
+
+  echo "Usage: `basename $0` "$msg""
+}  
+
+
+Check_if_root ()       # Check if root running script.
+{                      # From "ex39.sh" example.
+  if [ "$UID" -ne "$ROOT_UID" ]
+  then
+    echo "Must be root to run this script."
+    exit $E_NOTROOT
+  fi
+}  
+
+
+CreateTempfileName ()  # Creates a "unique" temp filename.
+{                      # From "ex51.sh" example.
+  prefix=temp
+  suffix=`eval date +%s`
+  Tempfilename=$prefix.$suffix
+}
+
+
+isalpha2 ()            # Tests whether *entire string* is alphabetic.
+{                      # From "isalpha.sh" example.
+  [ $# -eq 1 ] || return $FAILURE
+
+  case $1 in
+  *[!a-zA-Z]*|"") return $FAILURE;;
+  *) return $SUCCESS;;
+  esac                 # Thanks, S.C.
+}
+
+
+abs ()                           # Absolute value.
+{                                # Caution: Max return value = 255.
+  E_ARGERR=-999999
+
+  if [ -z "$1" ]                 # Need arg passed.
+  then
+    return $E_ARGERR             # Obvious error value returned.
+  fi
+
+  if [ "$1" -ge 0 ]              # If non-negative,
+  then                           #
+    absval=$1                    # stays as-is.
+  else                           # Otherwise,
+    let "absval = (( 0 - $1 ))"  # change sign.
+  fi  
+
+  return $absval
+}
+
+
+tolower ()             #  Converts string(s) passed as argument(s)
+{                      #+ to lowercase.
+
+  if [ -z "$1" ]       #  If no argument(s) passed,
+  then                 #+ send error message
+    echo "(null)"      #+ (C-style void-pointer error message)
+    return             #+ and return from function.
+  fi  
+
+  echo "$@" | tr A-Z a-z
+  # Translate all passed arguments ($@).
+
+  return
+
+# Use command substitution to set a variable to function output.
+# For example:
+#    oldvar="A seT of miXed-caSe LEtTerS"
+#    newvar=`tolower "$oldvar"`
+#    echo "$newvar"    # a set of mixed-case letters
+#
+# Exercise: Rewrite this function to change lowercase passed argument(s)
+#           to uppercase ... toupper()  [easy].
+}</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>
+<a name="COMMENTH">
+</a>
+</p>
+<p>Use special-purpose comment headers to increase clarity
+	    and legibility in scripts.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">## Caution.
+rm -rf *.zzy   ##  The "-rf" options to "rm" are very dangerous,
+               ##+ especially with wild cards.
+
+#+ Line continuation.
+#  This is line 1
+#+ of a multi-line comment,
+#+ and this is the final line.
+
+#* Note.
+
+#o List item.
+
+#&gt; Another point of view.
+while [ "$var1" != "end" ]    #&gt; while test "$var1" != "end"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+<li>
+<p>
+<a name="PROGBAR">
+</a>
+</p>
+<p>Dotan Barak contributes template code for a
+	  <i class="FIRSTTERM">progress bar</i> in a script.</p>
+<div class="EXAMPLE">
+<a name="PROGRESSBAR">
+</a>
+<p>
+<b>Example 36-17. A Progress Bar</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# progress-bar.sh
+
+# Author: Dotan Barak (very minor revisions by ABS Guide author).
+# Used in ABS Guide with permission (thanks!).
+
+
+BAR_WIDTH=50
+BAR_CHAR_START="["
+BAR_CHAR_END="]"
+BAR_CHAR_EMPTY="."
+BAR_CHAR_FULL="="
+BRACKET_CHARS=2
+LIMIT=100
+
+print_progress_bar()
+{
+        # Calculate how many characters will be full.
+        let "full_limit = ((($1 - $BRACKET_CHARS) * $2) / $LIMIT)"
+
+        # Calculate how many characters will be empty.
+        let "empty_limit = ($1 - $BRACKET_CHARS) - ${full_limit}"
+
+        # Prepare the bar.
+        bar_line="${BAR_CHAR_START}"
+        for ((j=0; j&lt;full_limit; j++)); do
+                bar_line="${bar_line}${BAR_CHAR_FULL}"
+        done
+
+        for ((j=0; j&lt;empty_limit; j++)); do
+                bar_line="${bar_line}${BAR_CHAR_EMPTY}"
+        done
+
+        bar_line="${bar_line}${BAR_CHAR_END}"
+
+        printf "%3d%% %s" $2 ${bar_line}
+}
+
+# Here is a sample of code that uses it.
+MAX_PERCENT=100
+for ((i=0; i&lt;=MAX_PERCENT; i++)); do
+        #
+        usleep 10000
+        # ... Or run some other commands ...
+        #
+        print_progress_bar ${BAR_WIDTH} ${i}
+        echo -en "\r"
+done
+
+echo ""
+
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+<a name="COMOUTBL">
+</a>
+</p>
+<p>A particularly clever use of <a href="./testconstructs.html#TESTCONSTRUCTS1">if-test</a> constructs
+	    is for comment blocks.</p>
+<p>    
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+COMMENT_BLOCK=
+#  Try setting the above variable to some value
+#+ for an unpleasant surprise.
+
+if [ $COMMENT_BLOCK ]; then
+
+Comment block --
+=================================
+This is a comment line.
+This is another comment line.
+This is yet another comment line.
+=================================
+
+echo "This will not echo."
+
+Comment blocks are error-free! Whee!
+
+fi
+
+echo "No more comments, please."
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>Compare this with <a href="./here-docs.html#CBLOCK1">using  
+	    here documents to comment out code blocks</a>.</p>
+</li>
+<li>
+<p>
+<a name="INTPARAM">
+</a>
+</p>
+<p>Using the <a href="./internalvariables.html#XSTATVARREF">$? exit status
+	    variable</a>, a script may test if a parameter contains
+	    only digits, so it can be treated as an integer.</p>
+<p>  
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+SUCCESS=0
+E_BADINPUT=85
+
+test "$1" -ne 0 -o "$1" -eq 0 2&gt;/dev/null
+# An integer is either equal to 0 or not equal to 0.
+# 2&gt;/dev/null suppresses error message.
+
+if [ $? -ne "$SUCCESS" ]
+then
+  echo "Usage: `basename $0` integer-input"
+  exit $E_BADINPUT
+fi
+
+let "sum = $1 + 25"             # Would give error if $1 not integer.
+echo "Sum = $sum"
+
+# Any variable, not just a command-line parameter, can be tested this way.
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>
+<a name="RVT">
+</a>The 0 - 255 range for function return
+	    values is a severe limitation. Global variables and
+	    other workarounds are often problematic. An alternative
+	    method for a function to communicate a value back to
+	    the main body of the script is to have the function
+	    write to <tt class="FILENAME">stdout</tt> (usually with
+	    <a href="./internal.html#ECHOREF">echo</a>) the <span class="QUOTE">"return
+	    value,"</span> and assign this to a variable. This is
+	    actually a variant of <a href="./commandsub.html#COMMANDSUBREF">command
+	    substitution.</a>
+</p>
+<div class="EXAMPLE">
+<a name="MULTIPLICATION">
+</a>
+<p>
+<b>Example 36-18. Return value trickery</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# multiplication.sh
+
+multiply ()                     # Multiplies params passed.
+{                               # Will accept a variable number of args.
+
+  local product=1
+
+  until [ -z "$1" ]             # Until uses up arguments passed...
+  do
+    let "product *= $1"
+    shift
+  done
+
+  echo $product                 #  Will not echo to stdout,
+}                               #+ since this will be assigned to a variable.
+
+mult1=15383; mult2=25211
+val1=`multiply $mult1 $mult2`
+# Assigns stdout (echo) of function to the variable val1.
+echo "$mult1 X $mult2 = $val1"                   # 387820813
+
+mult1=25; mult2=5; mult3=20
+val2=`multiply $mult1 $mult2 $mult3`
+echo "$mult1 X $mult2 X $mult3 = $val2"          # 2500
+
+mult1=188; mult2=37; mult3=25; mult4=47
+val3=`multiply $mult1 $mult2 $mult3 $mult4`
+echo "$mult1 X $mult2 X $mult3 X $mult4 = $val3" # 8173300
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The same technique also works for alphanumeric
+	    strings. This means that a function can <span class="QUOTE">"return"</span>
+	    a non-numeric value.</p>
+<p>	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">capitalize_ichar ()          #  Capitalizes initial character
+{                            #+ of argument string(s) passed.
+
+  string0="$@"               # Accepts multiple arguments.
+
+  firstchar=${string0:0:1}   # First character.
+  string1=${string0:1}       # Rest of string(s).
+
+  FirstChar=`echo "$firstchar" | tr a-z A-Z`
+                             # Capitalize first character.
+
+  echo "$FirstChar$string1"  # Output to stdout.
+
+}  
+
+newstring=`capitalize_ichar "every sentence should start with a capital letter."`
+echo "$newstring"          # Every sentence should start with a capital letter.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table> 
+	  </p>
+<p>It is even possible for a function to <span class="QUOTE">"return"</span>
+	    multiple values with this method.</p>
+<div class="EXAMPLE">
+<a name="SUMPRODUCT">
+</a>
+<p>
+<b>Example 36-19. Even more return value trickery</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# sum-product.sh
+# A function may "return" more than one value.
+
+sum_and_product ()   # Calculates both sum and product of passed args.
+{
+  echo $(( $1 + $2 )) $(( $1 * $2 ))
+# Echoes to stdout each calculated value, separated by space.
+}
+
+echo
+echo "Enter first number "
+read first
+
+echo
+echo "Enter second number "
+read second
+echo
+
+retval=`sum_and_product $first $second`      # Assigns output of function.
+sum=`echo "$retval" | awk '{print $1}'`      # Assigns first field.
+product=`echo "$retval" | awk '{print $2}'`  # Assigns second field.
+
+echo "$first + $second = $sum"
+echo "$first * $second = $product"
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="assortedtips_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="RVTCAUTION">
+</a>There can be only
+	    <b class="COMMAND">one</b> <i class="FIRSTTERM">echo</i> statement
+	    in the function for this to work. If you alter the previous
+	    example:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">sum_and_product ()
+{
+  echo "This is the sum_and_product function." # This messes things up!
+  echo $(( $1 + $2 )) $(( $1 * $2 ))
+}
+...
+retval=`sum_and_product $first $second`      # Assigns output of function.
+# Now, this will not work correctly.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+<a name="PASSARRAY">
+</a>
+</p>
+<p>Next in our bag of tricks are techniques for passing
+	    an <a href="./arrays.html#ARRAYREF">array</a> to a
+	    <a href="./functions.html#FUNCTIONREF">function</a>, then
+	    <span class="QUOTE">"returning"</span> an array back to the main body of
+	    the script.</p>
+<p>Passing an array involves loading the space-separated
+	    elements of the array into a variable with <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>. <a name="RETARRAY">
+</a>Getting an array back as the <span class="QUOTE">"return
+	    value"</span> from a function uses the previously mentioned
+	    strategem of <a href="./internal.html#ECHOREF">echoing</a> the
+	    array in the function, then invoking command substitution
+	    and the <b class="COMMAND">( ... )</b> operator to assign it to
+	    an array.</p>
+<div class="EXAMPLE">
+<a name="ARRFUNC">
+</a>
+<p>
+<b>Example 36-20. Passing and returning arrays</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# array-function.sh: Passing an array to a function and ...
+#                   "returning" an array from a function
+
+
+Pass_Array ()
+{
+  local passed_array   # Local variable!
+  passed_array=( `echo "$1"` )
+  echo "${passed_array[@]}"
+  #  List all the elements of the new array
+  #+ declared and set within the function.
+}
+
+
+original_array=( element1 element2 element3 element4 element5 )
+
+echo
+echo "original_array = ${original_array[@]}"
+#                      List all elements of original array.
+
+
+# This is the trick that permits passing an array to a function.
+# **********************************
+argument=`echo ${original_array[@]}`
+# **********************************
+#  Pack a variable
+#+ with all the space-separated elements of the original array.
+#
+# Attempting to just pass the array itself will not work.
+
+
+# This is the trick that allows grabbing an array as a "return value".
+# *****************************************
+returned_array=( `Pass_Array "$argument"` )
+# *****************************************
+# Assign 'echoed' output of function to array variable.
+
+echo "returned_array = ${returned_array[@]}"
+
+echo "============================================================="
+
+#  Now, try it again,
+#+ attempting to access (list) the array from outside the function.
+Pass_Array "$argument"
+
+# The function itself lists the array, but ...
+#+ accessing the array from outside the function is forbidden.
+echo "Passed array (within function) = ${passed_array[@]}"
+# NULL VALUE since the array is a variable local to the function.
+
+echo
+
+############################################
+
+# And here is an even more explicit example:
+
+ret_array ()
+{
+  for element in {11..20}
+  do
+    echo "$element "   #  Echo individual elements
+  done                 #+ of what will be assembled into an array.
+}
+
+arr=( $(ret_array) )   #  Assemble into array.
+
+echo "Capturing array \"arr\" from function ret_array () ..."
+echo "Third element of array \"arr\" is ${arr[2]}."   # 13  (zero-indexed)
+echo -n "Entire array is: "
+echo ${arr[@]}                # 11 12 13 14 15 16 17 18 19 20
+
+echo
+
+exit 0
+
+#  Nathan Coulter points out that passing arrays with elements containing
+#+ whitespace breaks this example.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For a more elaborate example of passing arrays to
+	    functions, see <a href="./contributed-scripts.html#LIFESLOW">Example A-10</a>.</p>
+</li>
+<li>
+<p>
+<a name="CSTYLE">
+</a>
+</p>
+<p>Using the <a href="./dblparens.html">double-parentheses
+	    construct</a>, it is possible to use C-style syntax
+	    for setting and incrementing/decrementing variables
+	    and in <a href="./loops1.html#FORLOOPREF1">for</a> and <a href="./loops1.html#WHILELOOPREF">while</a> loops.	See <a href="./loops1.html#FORLOOPC">Example 11-13</a> and <a href="./loops1.html#WHLOOPC">Example 11-18</a>.</p>
+</li>
+<li>
+<p>
+<a name="SETPUM">
+</a>
+</p>
+<p>Setting the <a href="./internalvariables.html#PATHREF">path</a> and <a href="./system.html#UMASKREF">umask</a> at the beginning of a script makes
+	    it more <a href="./portabilityissues.html">portable</a>
+	    -- more likely to run on a <span class="QUOTE">"foreign"</span> machine
+	    whose user may have bollixed up the <tt class="VARNAME">$PATH</tt>
+	    and <b class="COMMAND">umask</b>.
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+PATH=/bin:/usr/bin:/usr/local/bin ; export PATH
+umask 022   # Files that the script creates will have 755 permission.
+
+# Thanks to Ian D. Allen, for this tip.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+<li>
+<p>
+<a name="FILTEROUTP">
+</a>
+</p>
+<p>A useful scripting technique is to
+	    <em>repeatedly</em> feed the output of a filter
+	    (by piping) back to the <em>same filter</em>, but
+	    with a different set of arguments and/or options. Especially
+	    suitable for this are <a href="./textproc.html#TRREF">tr</a> and
+	    <a href="./textproc.html#GREPREF">grep</a>.</p>
+<p>	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># From "wstrings.sh" example.
+
+wlist=`strings "$1" | tr A-Z a-z | tr '[:space:]' Z | \
+tr -cs '[:alpha:]' Z | tr -s '\173-\377' Z | tr Z ' '`</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<div class="EXAMPLE">
+<a name="AGRAM">
+</a>
+<p>
+<b>Example 36-21. Fun with anagrams</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# agram.sh: Playing games with anagrams.
+
+# Find anagrams of...
+LETTERSET=etaoinshrdlu
+FILTER='.......'       # How many letters minimum?
+#       1234567
+
+anagram "$LETTERSET" | # Find all anagrams of the letterset...
+grep "$FILTER" |       # With at least 7 letters,
+grep '^is' |           # starting with 'is'
+grep -v 's$' |         # no plurals
+grep -v 'ed$'          # no past tense verbs
+# Possible to add many combinations of conditions and filters.
+
+#  Uses "anagram" utility
+#+ that is part of the author's "yawl" word list package.
+#  http://ibiblio.org/pub/Linux/libs/yawl-0.3.2.tar.gz
+#  http://bash.deta.in/yawl-0.3.2.tar.gz
+
+exit 0                 # End of code.
+
+
+bash$ sh agram.sh
+islander
+isolate
+isolead
+isotheral
+
+
+
+#  Exercises:
+#  ---------
+#  Modify this script to take the LETTERSET as a command-line parameter.
+#  Parameterize the filters in lines 11 - 13 (as with $FILTER),
+#+ so that they can be specified by passing arguments to a function.
+
+#  For a slightly different approach to anagramming,
+#+ see the agram2.sh script.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>See also <a href="./procref1.html#CONSTAT">Example 29-4</a>, <a href="./textproc.html#CRYPTOQUOTE">Example 16-25</a>, and <a href="./contributed-scripts.html#SOUNDEX">Example A-9</a>.</p>
+</li>
+<li>
+<p>
+<a name="COMMBLAHD">
+</a>
+</p>
+<p>Use <span class="QUOTE">"<a href="./here-docs.html#ANONHEREDOC0">anonymous here
+	    documents</a>"</span> to comment out blocks of code,
+	    to save having to individually comment out each line with
+	    a <span class="TOKEN">#</span>.  See <a href="./here-docs.html#COMMENTBLOCK">Example 19-11</a>.</p>
+</li>
+<li>
+<p>
+<a name="WHATISREF3">
+</a>
+</p>
+<p>Running a script on a machine that relies on a command
+	    that might not be installed is dangerous. Use <a href="./filearchiv.html#WHATISREF">whatis</a> to avoid potential problems
+	    with this.</p>
+<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">CMD=command1                 # First choice.
+PlanB=command2               # Fallback option.
+
+command_test=$(whatis "$CMD" | grep 'nothing appropriate')
+#  If 'command1' not found on system , 'whatis' will return
+#+ "command1: nothing appropriate."
+#
+#  A safer alternative is:
+#     command_test=$(whereis "$CMD" | grep \/)
+#  But then the sense of the following test would have to be reversed,
+#+ since the $command_test variable holds content only if
+#+ the $CMD exists on the system.
+#     (Thanks, bojster.)
+
+
+if [[ -z "$command_test" ]]  # Check whether command present.
+then
+  $CMD option1 option2       #  Run command1 with options.
+else                         #  Otherwise,
+  $PlanB                     #+ run command2. 
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>
+<a name="IFGREPFIX">
+</a>
+</p>
+<p>An <a href="./testconstructs.html#IFGREPREF">if-grep test</a> may not
+	    return expected results in an error case, when text is output to
+	    <tt class="FILENAME">stderr</tt>, rather that
+	    <tt class="FILENAME">stdout</tt>.
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if ls -l nonexistent_filename | grep -q 'No such file or directory'
+  then echo "File \"nonexistent_filename\" does not exist."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a href="./io-redirection.html#IOREDIRREF">Redirecting</a>
+	    <tt class="FILENAME">stderr</tt> to <tt class="FILENAME">stdout</tt> fixes
+	    this.
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if ls -l nonexistent_filename 2&gt;&amp;1 | grep -q 'No such file or directory'
+#                             ^^^^
+  then echo "File \"nonexistent_filename\" does not exist."
+fi
+
+# Thanks, Chris Martin, for pointing this out.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+<li>
+<p>
+<a name="SUBSHTMP">
+</a>
+        If you absolutely must access a subshell variable outside the
+	subshell, here's a way to do it.
+	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">TMPFILE=tmpfile                  # Create a temp file to store the variable.
+
+(   # Inside the subshell ...
+inner_variable=Inner
+echo $inner_variable
+echo $inner_variable &gt;&gt;$TMPFILE  # Append to temp file.
+)
+
+    # Outside the subshell ...
+
+echo; echo "-----"; echo
+echo $inner_variable             # Null, as expected.
+echo "-----"; echo
+
+# Now ...
+read inner_variable &lt;$TMPFILE    # Read back shell variable.
+rm -f "$TMPFILE"                 # Get rid of temp file.
+echo "$inner_variable"           # It's an ugly kludge, but it works.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	</p>
+</li>
+<li>
+<p>
+<a name="RUNPARTSREF2">
+</a>
+</p>
+<p>The <a href="./extmisc.html#RUNPARTSREF">run-parts</a>
+	    command is handy for running a set of command
+	    scripts in a particular sequence, especially in
+	    combination with <a href="./system.html#CRONREF">cron</a> or
+	    <a href="./timedate.html#ATREF">at</a>.</p>
+</li>
+<li>
+<p>
+<a name="RCSREF">
+</a>
+</p>
+<p>For doing multiple revisions on a complex script, use the
+	    <i class="FIRSTTERM">rcs</i> Revision Control System package.</p>
+<p> Among other benefits of this is automatically updated ID
+	    header tags. The <b class="COMMAND">co</b> command in
+	    <i class="FIRSTTERM">rcs</i> does a parameter replacement of
+	    certain reserved key words, for example, replacing
+	    <tt class="PARAMETER">
+<i># $Id$</i>
+</tt> in a script with something like:
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># $Id: hello-world.sh,v 1.1 2004/10/16 02:43:05 bozo Exp $</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+</ul>
+</div>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="AEN20679">
+</a>36.7.2. Widgets</h2>
+<p>
+<a name="WIDGETREF">
+</a>
+</p>
+<p>It would be nice to be able to invoke X-Windows widgets
+	    from a shell script. There happen to exist several packages
+	    that purport to do so, namely <i class="FIRSTTERM">Xscript</i>,
+	    <i class="FIRSTTERM">Xmenu</i>, and <i class="FIRSTTERM">widtools</i>.
+	    The first two of these no longer seem
+	    to be maintained.  Fortunately, it is still
+	    possible to obtain <i class="FIRSTTERM">widtools</i> <a href="http://www.batse.msfc.nasa.gov/%7Emallozzi/home/software/xforms/src/widtools-2.0.tgz" target="_top">here</a>.
+	    </p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="assortedtips_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <i class="FIRSTTERM">widtools</i> (widget tools)
+	    package requires the <i class="FIRSTTERM">XForms</i> library to
+	    be installed. Additionally, the <a href="./filearchiv.html#MAKEFILEREF">Makefile</a> needs some judicious
+	    editing before the package will build on a typical Linux
+	    system. Finally, three of the six widgets offered do not work
+	    (and, in fact, segfault).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="DIALOGREF">
+</a>
+</p>
+<p>The <i class="FIRSTTERM">dialog</i> family of tools offers a method
+	    of calling <span class="QUOTE">"dialog"</span> widgets from a shell script. The
+	    original <i class="FIRSTTERM">dialog</i> utility works in a text
+	    console, but its successors, <i class="FIRSTTERM">gdialog</i>,
+	    <i class="FIRSTTERM">Xdialog</i>, and <i class="FIRSTTERM">kdialog</i>
+	    use X-Windows-based widget sets.</p>
+<div class="EXAMPLE">
+<a name="DIALOG">
+</a>
+<p>
+<b>Example 36-22. Widgets invoked from a shell script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# dialog.sh: Using 'gdialog' widgets.
+
+# Must have 'gdialog' installed on your system to run this script.
+# Or, you can replace all instance of 'gdialog' below with 'kdialog' ...
+# Version 1.1 (corrected 04/05/05)
+
+# This script was inspired by the following article.
+#     "Scripting for X Productivity," by Marco Fioretti,
+#      LINUX JOURNAL, Issue 113, September 2003, pp. 86-9.
+# Thank you, all you good people at LJ.
+
+
+# Input error in dialog box.
+E_INPUT=85
+# Dimensions of display, input widgets.
+HEIGHT=50
+WIDTH=60
+
+# Output file name (constructed out of script name).
+OUTFILE=$0.output
+
+# Display this script in a text widget.
+gdialog --title "Displaying: $0" --textbox $0 $HEIGHT $WIDTH
+
+
+
+# Now, we'll try saving input in a file.
+echo -n "VARIABLE=" &gt; $OUTFILE
+gdialog --title "User Input" --inputbox "Enter variable, please:" \
+$HEIGHT $WIDTH 2&gt;&gt; $OUTFILE
+
+
+if [ "$?" -eq 0 ]
+# It's good practice to check exit status.
+then
+  echo "Executed \"dialog box\" without errors."
+else
+  echo "Error(s) in \"dialog box\" execution."
+        # Or, clicked on "Cancel", instead of "OK" button.
+  rm $OUTFILE
+  exit $E_INPUT
+fi
+
+
+
+# Now, we'll retrieve and display the saved variable.
+. $OUTFILE   # 'Source' the saved file.
+echo "The variable input in the \"input box\" was: "$VARIABLE""
+
+
+rm $OUTFILE  # Clean up by removing the temp file.
+             # Some applications may need to retain this file.
+
+exit $?
+
+# Exercise: Rewrite this script using the 'zenity' widget set.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="XMESSAGEREF2">
+</a>
+	    The <a href="./extmisc.html#XMESSAGEREF">xmessage</a> command is
+	    a simple method of popping up a message/query window. For
+	    example:
+	      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">xmessage Fatal error in script! -button exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>
+<a name="ZENITYREF2">
+</a>
+	    The latest entry in the widget sweepstakes is
+	    <a href="./extmisc.html#ZENITYREF">zenity</a>.
+	    This utility pops up
+	    <i class="FIRSTTERM">GTK+</i> dialog widgets-and-windows,
+	    and it works very nicely within a script.
+	      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">get_info ()
+{
+  zenity --entry       #  Pops up query window . . .
+                       #+ and prints user entry to stdout.
+
+                       #  Also try the --calendar and --scale options.
+}
+
+answer=$( get_info )   #  Capture stdout in $answer variable.
+
+echo "User entered: "$answer""</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>For other methods of scripting with widgets, try
+	    <i class="FIRSTTERM">Tk</i> or <i class="FIRSTTERM">wish</i>
+	    (<i class="FIRSTTERM">Tcl</i> derivatives),
+	    <i class="FIRSTTERM">PerlTk</i> (<i class="FIRSTTERM">Perl</i>
+	    with <i class="FIRSTTERM">Tk</i> extensions),
+	    <i class="FIRSTTERM">tksh</i> (<i class="FIRSTTERM">ksh</i>
+	    with <i class="FIRSTTERM">Tk</i> extensions),
+	    <i class="FIRSTTERM">XForms4Perl</i>
+	    (<i class="FIRSTTERM">Perl</i> with
+	    <i class="FIRSTTERM">XForms</i> extensions),
+	    <i class="FIRSTTERM">Gtk-Perl</i> (<i class="FIRSTTERM">Perl</i>
+	    with <i class="FIRSTTERM">Gtk</i> extensions), or
+	    <i class="FIRSTTERM">PyQt</i> (<i class="FIRSTTERM">Python</i>
+	    with <i class="FIRSTTERM">Qt</i> extensions).</p>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./optimizations.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./securityissues.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Optimizations</td>
+<td align="center" valign="top" width="34%">
+<a href="./miscellany.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Security Issues</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

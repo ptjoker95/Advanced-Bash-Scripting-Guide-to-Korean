@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Network Programming</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="/proc" href="./procref1.html">
+<link rel="NEXT" title="Of Zeros and Nulls" href="./zeros.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./procref1.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./zeros.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="NETWORKPROGRAMMING">
+</a>Chapter 30. Network Programming</h1>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>The Net's a cross between an elephant and a white
+	      elephant sale: it never forgets, and it's always crap.</i>
+</p>
+<p>
+<i>--Nemo</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A Linux system has quite a number of tools for accessing,
+      manipulating, and troubleshooting network connections. We can
+      incorporate some of these tools into scripts -- scripts that
+      expand our knowledge of networking, useful scripts that can
+      facilitate the administration of a network.</p>
+<p>
+<a name="CGISCRIPT">
+</a>Here is a simple CGI
+      script that demonstrates connecting to a remote server.</p>
+<div class="EXAMPLE">
+<a name="TESTCGI">
+</a>
+<p>
+<b>Example 30-1. Print the server environment</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# test-cgi.sh
+# by Michael Zick
+# Used with permission
+
+# May have to change the location for your site.
+# (At the ISP's servers, Bash may not be in the usual place.)
+# Other places: /usr/bin or /usr/local/bin
+# Might even try it without any path in sha-bang.
+
+# Disable filename globbing.
+set -f
+
+# Header tells browser what to expect.
+echo Content-type: text/plain
+echo
+
+echo CGI/1.0 test script report:
+echo
+
+echo environment settings:
+set
+echo
+
+echo whereis bash?
+whereis bash
+echo
+
+
+echo who are we?
+echo ${BASH_VERSINFO[*]}
+echo
+
+echo argc is $#. argv is "$*".
+echo
+
+# CGI/1.0 expected environment variables.
+
+echo SERVER_SOFTWARE = $SERVER_SOFTWARE
+echo SERVER_NAME = $SERVER_NAME
+echo GATEWAY_INTERFACE = $GATEWAY_INTERFACE
+echo SERVER_PROTOCOL = $SERVER_PROTOCOL
+echo SERVER_PORT = $SERVER_PORT
+echo REQUEST_METHOD = $REQUEST_METHOD
+echo HTTP_ACCEPT = "$HTTP_ACCEPT"
+echo PATH_INFO = "$PATH_INFO"
+echo PATH_TRANSLATED = "$PATH_TRANSLATED"
+echo SCRIPT_NAME = "$SCRIPT_NAME"
+echo QUERY_STRING = "$QUERY_STRING"
+echo REMOTE_HOST = $REMOTE_HOST
+echo REMOTE_ADDR = $REMOTE_ADDR
+echo REMOTE_USER = $REMOTE_USER
+echo AUTH_TYPE = $AUTH_TYPE
+echo CONTENT_TYPE = $CONTENT_TYPE
+echo CONTENT_LENGTH = $CONTENT_LENGTH
+
+exit 0
+
+# Here document to give short instructions.
+:&lt;&lt;-'_test_CGI_'
+
+1) Drop this in your http://domain.name/cgi-bin directory.
+2) Then, open http://domain.name/cgi-bin/test-cgi.sh.
+
+_test_CGI_</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For security purposes, it may be helpful to identify the IP
+      addresses a computer is accessing.</p>
+<p>
+<a name="IPTABLES02">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="IPADDRESSES">
+</a>
+<p>
+<b>Example 30-2. IP addresses</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# ip-addresses.sh
+# List the IP addresses your computer is connected to.
+
+#  Inspired by Greg Bledsoe's ddos.sh script,
+#  Linux Journal, 09 March 2011.
+#    URL:
+#  http://www.linuxjournal.com/content/back-dead-simple-bash-complex-ddos
+#  Greg licensed his script under the GPL2,
+#+ and as a derivative, this script is likewise GPL2.
+
+connection_type=TCP      # Also try UDP.
+field=2           # Which field of the output we're interested in.
+no_match=LISTEN   # Filter out records containing this. Why?
+lsof_args=-ni     # -i lists Internet-associated files.
+                  # -n preserves numerical IP addresses.
+		  # What happens without the -n option? Try it.
+router="[0-9][0-9][0-9][0-9][0-9]-&gt;"
+#       Delete the router info.
+
+lsof "$lsof_args" | grep $connection_type | grep -v "$no_match" |
+      awk '{print $9}' | cut -d : -f $field | sort | uniq |
+      sed s/"^$router"//
+
+#  Bledsoe's script assigns the output of a filtered IP list,
+#  (similar to lines 19-22, above) to a variable.
+#  He checks for multiple connections to a single IP address,
+#  then uses:
+#
+#    iptables -I INPUT -s $ip -p tcp -j REJECT --reject-with tcp-reset
+#
+#  ... within a 60-second delay loop to bounce packets from DDOS attacks.
+
+
+#  Exercise:
+#  --------
+#  Use the 'iptables' command to extend this script
+#+ to reject connection attempts from well-known spammer IP domains.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>More examples of network programming:
+       </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<a href="./devref1.html#NPREF">Getting the time from
+           <i class="FIRSTTERM">nist.gov</i>
+</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./devref1.html#NW001">Downloading a
+           URL</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./system.html#IPSCRIPT0">A GRE
+	   tunnel</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./communications.html#PING0">Checking
+	   if an Internet server is up</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./communications.html#ISSPAMMER">Example 16-41</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#ISSPAMMER2">Example A-28</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./contributed-scripts.html#WHX">Example A-29</a>
+</p>
+</li>
+<li>
+<p>
+<a href="./devref1.html#DEVTCP">Example 29-1</a>
+</p>
+</li>
+</ol>
+     <p>
+</p>
+<p>See also the <a href="./system.html#NETWORKSYS1">networking commands</a>
+       in the <a href="./system.html">System and
+       Administrative Commands</a> chapter and the <a href="./communications.html">communications commands</a> in
+       the <a href="./external.html">External Filters, Programs and
+       Commands</a> chapter.</p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./procref1.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./zeros.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">
+<tt class="FILENAME">/proc</tt>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Of Zeros and Nulls</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

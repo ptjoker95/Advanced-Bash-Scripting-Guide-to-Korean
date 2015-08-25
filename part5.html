@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Advanced Topics</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Analyzing a System Script" href="./sysscripts.html">
+<link rel="NEXT" title="Regular Expressions" href="./regexp.html">
+</head>
+<body class="PART" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./sysscripts.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./regexp.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="PART">
+<a name="PART5">
+</a>
+<div class="TITLEPAGE">
+<h1 class="TITLE">Part 5. Advanced Topics</h1>
+<div class="PARTINTRO">
+<a name="AEN17110">
+</a>
+<p>At this point, we are ready to delve into certain of the
+	difficult and unusual aspects of scripting. Along the way, we
+	will attempt to <span class="QUOTE">"push the envelope"</span> in various
+	ways and examine <i class="FIRSTTERM">boundary conditions</i>
+	(what happens when we move into uncharted territory?).</p>
+</div>
+<div class="TOC">
+<dl>
+<dt>
+<b>Table of Contents</b>
+</dt>
+<dt>18. <a href="./regexp.html">Regular Expressions</a>
+</dt>
+<dd>
+<dl>
+<dt>18.1. <a href="./x17129.html">A Brief Introduction to Regular Expressions</a>
+</dt>
+<dt>18.2. <a href="./globbingref.html">Globbing</a>
+</dt>
+</dl>
+</dd>
+<dt>19. <a href="./here-docs.html">Here Documents</a>
+</dt>
+<dd>
+<dl>
+<dt>19.1. <a href="./x17837.html">Here Strings</a>
+</dt>
+</dl>
+</dd>
+<dt>20. <a href="./io-redirection.html">I/O Redirection</a>
+</dt>
+<dd>
+<dl>
+<dt>20.1. <a href="./x17974.html">Using <i class="FIRSTTERM">exec</i>
+</a>
+</dt>
+<dt>20.2. <a href="./redircb.html">Redirecting Code Blocks</a>
+</dt>
+<dt>20.3. <a href="./redirapps.html">Applications</a>
+</dt>
+</dl>
+</dd>
+<dt>21. <a href="./subshells.html">Subshells</a>
+</dt>
+<dt>22. <a href="./restricted-sh.html">Restricted Shells</a>
+</dt>
+<dt>23. <a href="./process-sub.html">Process Substitution</a>
+</dt>
+<dt>24. <a href="./functions.html">Functions</a>
+</dt>
+<dd>
+<dl>
+<dt>24.1. <a href="./complexfunct.html">Complex Functions and Function Complexities</a>
+</dt>
+<dt>24.2. <a href="./localvar.html">Local Variables</a>
+</dt>
+<dt>24.3. <a href="./recurnolocvar.html">Recursion Without Local Variables</a>
+</dt>
+</dl>
+</dd>
+<dt>25. <a href="./aliases.html">Aliases</a>
+</dt>
+<dt>26. <a href="./list-cons.html">List Constructs</a>
+</dt>
+<dt>27. <a href="./arrays.html">Arrays</a>
+</dt>
+<dt>28. <a href="./ivr.html">Indirect References</a>
+</dt>
+<dt>29. <a href="./devproc.html">
+<tt class="FILENAME">/dev</tt> and <tt class="FILENAME">/proc</tt>
+</a>
+</dt>
+<dd>
+<dl>
+<dt>29.1. <a href="./devref1.html">
+<tt class="FILENAME">/dev</tt>
+</a>
+</dt>
+<dt>29.2. <a href="./procref1.html">
+<tt class="FILENAME">/proc</tt>
+</a>
+</dt>
+</dl>
+</dd>
+<dt>30. <a href="./networkprogramming.html">Network Programming</a>
+</dt>
+<dt>31. <a href="./zeros.html">Of Zeros and Nulls</a>
+</dt>
+<dt>32. <a href="./debugging.html">Debugging</a>
+</dt>
+<dt>33. <a href="./options.html">Options</a>
+</dt>
+<dt>34. <a href="./gotchas.html">Gotchas</a>
+</dt>
+<dt>35. <a href="./scrstyle.html">Scripting With Style</a>
+</dt>
+<dd>
+<dl>
+<dt>35.1. <a href="./unofficialst.html">Unofficial Shell Scripting Stylesheet</a>
+</dt>
+</dl>
+</dd>
+<dt>36. <a href="./miscellany.html">Miscellany</a>
+</dt>
+<dd>
+<dl>
+<dt>36.1. <a href="./intandnonint.html">Interactive and non-interactive shells and scripts</a>
+</dt>
+<dt>36.2. <a href="./wrapper.html">Shell Wrappers</a>
+</dt>
+<dt>36.3. <a href="./testsandcomparisons.html">Tests and Comparisons: Alternatives</a>
+</dt>
+<dt>36.4. <a href="./recursionsct.html">Recursion: a script calling itself</a>
+</dt>
+<dt>36.5. <a href="./colorizing.html">
+<span class="QUOTE">"Colorizing"</span> Scripts</a>
+</dt>
+<dt>36.6. <a href="./optimizations.html">Optimizations</a>
+</dt>
+<dt>36.7. <a href="./assortedtips.html">Assorted Tips</a>
+</dt>
+<dt>36.8. <a href="./securityissues.html">Security Issues</a>
+</dt>
+<dt>36.9. <a href="./portabilityissues.html">Portability Issues</a>
+</dt>
+<dt>36.10. <a href="./winscript.html">Shell Scripting Under Windows</a>
+</dt>
+</dl>
+</dd>
+<dt>37. <a href="./bash2.html">Bash, versions 2, 3, and 4</a>
+</dt>
+<dd>
+<dl>
+<dt>37.1. <a href="./bashver2.html">Bash, version 2</a>
+</dt>
+<dt>37.2. <a href="./bashver3.html">Bash, version 3</a>
+</dt>
+<dt>37.3. <a href="./bashver4.html">Bash, version 4</a>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./sysscripts.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./regexp.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Analyzing a System Script</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Regular Expressions</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

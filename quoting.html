@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Quoting</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Basics" href="./part2.html">
+<link rel="PREVIOUS" title="Special Variable Types" href="./othertypesv.html">
+<link rel="NEXT" title="Quoting Variables" href="./quotingvar.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./othertypesv.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./quotingvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="QUOTING">
+</a>Chapter 5. Quoting</h1>
+<div class="TOC">
+<dl>
+<dt>
+<b>Table of Contents</b>
+</dt>
+<dt>5.1. <a href="./quotingvar.html">Quoting Variables</a>
+</dt>
+<dt>5.2. <a href="./escapingsection.html">Escaping</a>
+</dt>
+</dl>
+</div>
+<p>
+<a name="QUOTINGREF">
+</a>
+</p>
+<p>Quoting means just that, bracketing a string in quotes. This
+	has the effect of protecting <a href="./special-chars.html#SCHARLIST1">special
+	characters</a> in the string from reinterpretation
+	or expansion by the shell or shell script. (A character
+	is <span class="QUOTE">"special"</span> if it has an interpretation
+	other than its literal meaning. For example, the <a href="./special-chars.html#ASTERISKREF">asterisk *</a> represents
+	a <i class="FIRSTTERM">wild card</i> character in 
+	<a href="./globbingref.html">globbing</a> and <a href="./regexp.html#REGEXREF">Regular Expressions</a>).</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -l [Vv]*</b>
+</tt>
+<tt class="COMPUTEROUTPUT">-rw-rw-r--    1 bozo  bozo       324 Apr  2 15:05 VIEWDATA.BAT
+ -rw-rw-r--    1 bozo  bozo       507 May  4 14:25 vartrace.sh
+ -rw-rw-r--    1 bozo  bozo       539 Apr 14 17:11 viewdata.sh</tt>
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -l '[Vv]*'</b>
+</tt>
+<tt class="COMPUTEROUTPUT">ls: [Vv]*: No such file or directory</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>	      
+	      </p>
+<p>
+<a name="QUOTINGDEF">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN2596">
+</a>
+<p>
+</p>
+<p>In everyday speech or writing, when we
+      <span class="QUOTE">"quote"</span> a phrase, we set it apart and give it special
+      meaning. In a Bash script, when we <i class="FIRSTTERM">quote</i> a
+      string, we set it apart and protect its <i class="FIRSTTERM">literal</i>
+      meaning.</p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Certain programs and utilities reinterpret or expand
+	special characters in a quoted string. An important use of
+	quoting is protecting a command-line parameter from the shell,
+	but still letting the calling program expand it.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>grep '[Ff]irst' *.txt</b>
+</tt>
+<tt class="COMPUTEROUTPUT">file1.txt:This is the first line of file1.txt.
+ file2.txt:This is the First line of file2.txt.</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>Note that the unquoted <tt class="USERINPUT">
+<b>grep [Ff]irst *.txt</b>
+</tt>
+	  works under the Bash shell.
+	    <a name="AEN2609" href="#FTN.AEN2609">
+<span class="footnote">[1]</span>
+</a>
+	  </p>
+<p>Quoting can also suppress <a href="./internal.html#ECHOREF">echo's</a>
+        <span class="QUOTE">"appetite"</span> for newlines.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo $(ls -l)</b>
+</tt>
+<tt class="COMPUTEROUTPUT">total 8 -rw-rw-r-- 1 bo bo 13 Aug 21 12:57 t.sh -rw-rw-r-- 1 bo bo 78 Aug 21 12:57 u.sh</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "$(ls -l)"</b>
+</tt>
+<tt class="COMPUTEROUTPUT">total 8
+ -rw-rw-r--  1 bo bo  13 Aug 21 12:57 t.sh
+ -rw-rw-r--  1 bo bo  78 Aug 21 12:57 u.sh</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN2609" href="./quoting.html#AEN2609">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Unless there is a file named
+	    <tt class="FILENAME">first</tt> in the current working directory. Yet
+	    another reason to <i class="FIRSTTERM">quote</i>. (Thank you, Harald
+	    Koenig, for pointing this out.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./othertypesv.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./quotingvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Special Variable Types</td>
+<td align="center" valign="top" width="34%">
+<a href="./part2.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Quoting Variables</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

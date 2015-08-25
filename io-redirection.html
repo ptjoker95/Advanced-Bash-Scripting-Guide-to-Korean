@@ -1,16 +1,77 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>I/O Redirection</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="UP" title="Advanced Topics" href="http://www.tldp.org/LDP/abs/html/part5.html"><link rel="PREVIOUS" title="Here Strings" href="http://www.tldp.org/LDP/abs/html/x17837.html"><link rel="NEXT" title="Using exec" href="http://www.tldp.org/LDP/abs/html/x17974.html"></head><body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/x17837.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/x17974.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="CHAPTER"><h1><a name="IO-REDIRECTION"></a>Chapter 20. I/O Redirection</h1><div class="TOC"><dl><dt><b>Table of Contents</b></dt><dt>20.1. <a href="http://www.tldp.org/LDP/abs/html/x17974.html">Using <i class="FIRSTTERM">exec</i></a></dt><dt>20.2. <a href="http://www.tldp.org/LDP/abs/html/redircb.html">Redirecting Code Blocks</a></dt><dt>20.3. <a href="http://www.tldp.org/LDP/abs/html/redirapps.html">Applications</a></dt></dl></div><p><a name="IOREDIRREF"></a></p><p>There are always three default <i class="FIRSTTERM">files</i>
-         <a name="AEN17884" href="#FTN.AEN17884"><span class="footnote">[1]</span></a>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>I/O Redirection</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="Here Strings" href="./x17837.html">
+<link rel="NEXT" title="Using exec" href="./x17974.html">
+</head>
+<body class="CHAPTER" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./x17837.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./x17974.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="IO-REDIRECTION">
+</a>Chapter 20. I/O Redirection</h1>
+<div class="TOC">
+<dl>
+<dt>
+<b>Table of Contents</b>
+</dt>
+<dt>20.1. <a href="./x17974.html">Using <i class="FIRSTTERM">exec</i>
+</a>
+</dt>
+<dt>20.2. <a href="./redircb.html">Redirecting Code Blocks</a>
+</dt>
+<dt>20.3. <a href="./redirapps.html">Applications</a>
+</dt>
+</dl>
+</div>
+<p>
+<a name="IOREDIRREF">
+</a>
+</p>
+<p>There are always three default <i class="FIRSTTERM">files</i>
+         <a name="AEN17884" href="#FTN.AEN17884">
+<span class="footnote">[1]</span>
+</a>
 	open, <tt class="FILENAME">stdin</tt> (the keyboard),
 	<tt class="FILENAME">stdout</tt> (the screen), and
 	<tt class="FILENAME">stderr</tt> (error messages output to the
 	screen).  These, and any other open files, can be redirected.
 	Redirection simply means capturing output from a file, command,
-	program, script, or even code block within a script (see <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#EX8">Example 3-1</a> and <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#RPMCHECK">Example 3-2</a>) and sending it as
-	input to another file, command, program, or script.</p><p><a name="FDREF"></a>Each open file gets assigned a file descriptor.	
+	program, script, or even code block within a script (see <a href="./special-chars.html#EX8">Example 3-1</a> and <a href="./special-chars.html#RPMCHECK">Example 3-2</a>) and sending it as
+	input to another file, command, program, or script.</p>
+<p>
+<a name="FDREF">
+</a>Each open file gets assigned a file descriptor.	
 
-               <a name="AEN17894" href="#FTN.AEN17894"><span class="footnote">[2]</span></a>
+               <a name="AEN17894" href="#FTN.AEN17894">
+<span class="footnote">[2]</span>
+</a>
 
 	The file descriptors for <tt class="FILENAME">stdin</tt>,
 	<tt class="FILENAME">stdout</tt>, and <tt class="FILENAME">stderr</tt> are
@@ -19,9 +80,21 @@
 	these additional file descriptors to <tt class="FILENAME">stdin</tt>,
 	<tt class="FILENAME">stdout</tt>, or <tt class="FILENAME">stderr</tt>
 	as a temporary duplicate link.
-	       <a name="AEN17906" href="#FTN.AEN17906"><span class="footnote">[3]</span></a>
+	       <a name="AEN17906" href="#FTN.AEN17906">
+<span class="footnote">[3]</span>
+</a>
 	This simplifies restoration to normal after complex redirection
-	and reshuffling (see <a href="http://www.tldp.org/LDP/abs/html/x17974.html#REDIR1">Example 20-1</a>).</p><p><a name="IOREDIRECTIONREF"></a></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">   COMMAND_OUTPUT &gt;
+	and reshuffling (see <a href="./x17974.html#REDIR1">Example 20-1</a>).</p>
+<p>
+<a name="IOREDIRECTIONREF">
+</a>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   COMMAND_OUTPUT &gt;
       # Redirect stdout to a file.
       # Creates the file if not present, otherwise overwrites it.
 
@@ -87,7 +160,22 @@
       bad_command3                    #  Error message echoed to stderr,
                                       #+ and does not appear in $ERRORFILE.
       # These redirection commands also automatically "reset" after each line.
-      #=======================================================================</pre></font></td></tr></tbody></table><p><a name="IOREDIRECTIONREF1"></a></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">   2&gt;&amp;1
+      #=======================================================================</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="IOREDIRECTIONREF1">
+</a>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   2&gt;&amp;1
       # Redirects stderr to stdout.
       # Error messages get sent to same place as standard output.
         &gt;&gt;filename 2&gt;&amp;1
@@ -104,7 +192,22 @@
 
    &gt;&amp;j
       # Redirects, by default, file descriptor <em>1</em> (stdout) to <em>j</em>.
-      # All stdout gets sent to file pointed to by <em>j</em>.</pre></font></td></tr></tbody></table><p><a name="IOREDIRECTIONREF2"></a></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">   0&lt; FILENAME
+      # All stdout gets sent to file pointed to by <em>j</em>.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="IOREDIRECTIONREF2">
+</a>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   0&lt; FILENAME
     &lt; FILENAME
       # Accept input from a file.
       # Companion command to <span class="QUOTE">"&gt;"</span>, and often used in combination with it.
@@ -136,18 +239,40 @@
       # Useful for chaining commands, scripts, files, and programs together.
       cat *.txt | sort | uniq &gt; result-file
       # Sorts the output of all the .txt files and deletes duplicate lines,
-      # finally saves results to <span class="QUOTE">"result-file"</span>.</pre></font></td></tr></tbody></table><p>Multiple instances of input and output redirection
+      # finally saves results to <span class="QUOTE">"result-file"</span>.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Multiple instances of input and output redirection
         and/or pipes can be combined in a single command
         line.
 
-       <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">command &lt; input-file &gt; output-file
+       <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">command &lt; input-file &gt; output-file
 # Or the equivalent:
 &lt; input-file command &gt; output-file   # Although this is non-standard.
 
-command1 | command2 | command3 &gt; output-file</pre></font></td></tr></tbody></table>
-        See <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#DERPM">Example 16-31</a> and <a href="http://www.tldp.org/LDP/abs/html/contributed-scripts.html#FIFO">Example A-14</a>.</p><p>Multiple output streams may be redirected to one file.
+command1 | command2 | command3 &gt; output-file</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+        See <a href="./filearchiv.html#DERPM">Example 16-31</a> and <a href="./contributed-scripts.html#FIFO">Example A-14</a>.</p>
+<p>Multiple output streams may be redirected to one file.
 
-         <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">ls -yz &gt;&gt; command.log 2&gt;&amp;1
+         <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">ls -yz &gt;&gt; command.log 2&gt;&amp;1
 #  Capture result of illegal options "yz" in file "command.log."
 #  Because stderr is redirected to the file,
 #+ any error messages will also be there.
@@ -159,29 +284,158 @@ ls -yz 2&gt;&amp;1 &gt;&gt; command.log
 #+ writes to the file, but the error message goes only to stdout.
 
 #  If redirecting both stdout and stderr,
-#+ the order of the commands makes a difference.</pre></font></td></tr></tbody></table></p><p></p><div class="VARIABLELIST"><p><b><a name="CFD"></a>Closing File Descriptors</b></p><dl><dt><span class="TOKEN">n&lt;&amp;-</span></dt><dd><p>Close input file descriptor
-	    <tt class="REPLACEABLE"><i>n</i></tt>.</p></dd><dt><span class="TOKEN">0&lt;&amp;-</span>, <span class="TOKEN">&lt;&amp;-</span></dt><dd><p>Close <tt class="FILENAME">stdin</tt>.</p></dd><dt><span class="TOKEN">n&gt;&amp;-</span></dt><dd><p>Close output file descriptor <tt class="REPLACEABLE"><i>n</i></tt>.</p></dd><dt><span class="TOKEN">1&gt;&amp;-</span>, <span class="TOKEN">&gt;&amp;-</span></dt><dd><p>Close <tt class="FILENAME">stdout</tt>.</p></dd></dl></div><p><a name="FDREF2"></a></p><p>Child processes inherit open file descriptors. This is
+#+ the order of the commands makes a difference.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="CFD">
+</a>Closing File Descriptors</b>
+</p>
+<dl>
+<dt>
+<span class="TOKEN">n&lt;&amp;-</span>
+</dt>
+<dd>
+<p>Close input file descriptor
+	    <tt class="REPLACEABLE">
+<i>n</i>
+</tt>.</p>
+</dd>
+<dt>
+<span class="TOKEN">0&lt;&amp;-</span>, <span class="TOKEN">&lt;&amp;-</span>
+</dt>
+<dd>
+<p>Close <tt class="FILENAME">stdin</tt>.</p>
+</dd>
+<dt>
+<span class="TOKEN">n&gt;&amp;-</span>
+</dt>
+<dd>
+<p>Close output file descriptor <tt class="REPLACEABLE">
+<i>n</i>
+</tt>.</p>
+</dd>
+<dt>
+<span class="TOKEN">1&gt;&amp;-</span>, <span class="TOKEN">&gt;&amp;-</span>
+</dt>
+<dd>
+<p>Close <tt class="FILENAME">stdout</tt>.</p>
+</dd>
+</dl>
+</div>
+<p>
+<a name="FDREF2">
+</a>
+</p>
+<p>Child processes inherit open file descriptors. This is
           why pipes work. To prevent an fd from being inherited, close it.
-	    <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Redirecting only stderr to a pipe.
+	    <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Redirecting only stderr to a pipe.
 
 exec 3&gt;&amp;1                              # Save current "value" of stdout.
 ls -l 2&gt;&amp;1 &gt;&amp;3 3&gt;&amp;- | grep bad 3&gt;&amp;-    # Close fd 3 for 'grep' (but not 'ls').
 #              ^^^^   ^^^^
 exec 3&gt;&amp;-                              # Now close it for the remainder of the script.
 
-# Thanks, S.C.</pre></font></td></tr></tbody></table>
-        </p><p>For a more detailed introduction to I/O redirection see
-	  <a href="http://www.tldp.org/LDP/abs/html/ioredirintro.html">Appendix F</a>.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17884" href="http://www.tldp.org/LDP/abs/html/io-redirection.html#AEN17884"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>By convention in UNIX and Linux, data streams
-	 and peripherals (<a href="http://www.tldp.org/LDP/abs/html/devref1.html#DEVFILEREF">device files</a>)
+# Thanks, S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+        </p>
+<p>For a more detailed introduction to I/O redirection see
+	  <a href="./ioredirintro.html">Appendix F</a>.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN17884" href="./io-redirection.html#AEN17884">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>By convention in UNIX and Linux, data streams
+	 and peripherals (<a href="./devref1.html#DEVFILEREF">device files</a>)
 	 are treated as files, in a fashion analogous to ordinary
-	 files.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17894" href="http://www.tldp.org/LDP/abs/html/io-redirection.html#AEN17894"><span class="footnote">[2]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p><a name="FDREF1"></a>A <i class="FIRSTTERM">file
+	 files.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN17894" href="./io-redirection.html#AEN17894">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="FDREF1">
+</a>A <i class="FIRSTTERM">file
 		 descriptor</i> is simply a number that
 		 the operating system assigns to an open file
 		 to keep track of it.  Consider it a simplified
 		 type of file pointer. It is analogous
 		 to a <i class="FIRSTTERM">file handle</i> in
-		 <b class="COMMAND">C</b>.</p></td></tr><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN17906" href="http://www.tldp.org/LDP/abs/html/io-redirection.html#AEN17906"><span class="footnote">[3]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>Using <tt class="REPLACEABLE"><i>file
-	       descriptor 5</i></tt> might cause problems.
-	       When Bash creates a child process, as with <a href="http://www.tldp.org/LDP/abs/html/internal.html#EXECREF">exec</a>, the child inherits
+		 <b class="COMMAND">C</b>.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN17906" href="./io-redirection.html#AEN17906">
+<span class="footnote">[3]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Using <tt class="REPLACEABLE">
+<i>file
+	       descriptor 5</i>
+</tt> might cause problems.
+	       When Bash creates a child process, as with <a href="./internal.html#EXECREF">exec</a>, the child inherits
 	       fd 5 (see Chet Ramey's archived e-mail, <a href="http://groups.google.com/group/gnu.bash.bug/browse_thread/thread/13955daafded3b5c/18c17050087f9f37" target="_top">	       SUBJECT: RE:  File descriptor 5 is held open</a>).
-	       Best leave this particular fd alone.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/x17837.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/x17974.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Here Strings</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/part5.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Using <i class="FIRSTTERM">exec</i></td></tr></tbody></table></div></body></html>
+	       Best leave this particular fd alone.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./x17837.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./x17974.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Here Strings</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Using <i class="FIRSTTERM">exec</i>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

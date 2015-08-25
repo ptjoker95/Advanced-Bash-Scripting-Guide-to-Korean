@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Restricted Shells</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="Subshells" href="./subshells.html">
+<link rel="NEXT" title="Process Substitution" href="./process-sub.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./subshells.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./process-sub.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="RESTRICTED-SH">
+</a>Chapter 22. Restricted Shells</h1>
+<p>
+<a name="RESTRICTEDSHREF">
+</a>
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="DISABLEDCOMMREF">
+</a>Disabled commands in restricted
+	  shells</b>
+</p>
+<dl>
+<dt>
+</dt>
+<dd>
+<div class="FORMALPARA">
+<p>
+<b> . </b>Running a script or portion of a script in
+        <i class="FIRSTTERM">restricted mode</i> disables certain commands
+        that would otherwise be available. This is a security measure
+        intended to limit the privileges of the script user and to
+        minimize possible damage from running the script.</p>
+</div>
+</dd>
+</dl>
+</div>
+<p>The following commands and actions are disabled:</p>
+<p>
+</p>
+<ul>
+<li>
+<p>Using <tt class="REPLACEABLE">
+<i>cd</i>
+</tt> to change the working
+	  directory.</p>
+</li>
+<li>
+<p>Changing the values of the
+	  <tt class="REPLACEABLE">
+<i>$PATH</i>
+</tt>,
+	  <tt class="REPLACEABLE">
+<i>$SHELL</i>
+</tt>,
+	  <tt class="REPLACEABLE">
+<i>$BASH_ENV</i>
+</tt>,
+	  or <tt class="REPLACEABLE">
+<i>$ENV</i>
+</tt> <a href="./othertypesv.html#ENVREF">environmental variables</a>.</p>
+</li>
+<li>
+<p>Reading or changing the <tt class="REPLACEABLE">
+<i>$SHELLOPTS</i>
+</tt>,
+	  shell environmental options.</p>
+</li>
+<li>
+<p>Output redirection.</p>
+</li>
+<li>
+<p>Invoking commands containing one or more
+	  <span class="TOKEN">/</span>'s.</p>
+</li>
+<li>
+<p>Invoking <a href="./internal.html#EXECREF">exec</a> to substitute
+	  a different process for the shell.</p>
+</li>
+<li>
+<p>Various other commands that would enable monkeying
+	  with or attempting to subvert the script for an unintended
+	  purpose.</p>
+</li>
+<li>
+<p>Getting out of restricted mode within the script.</p>
+</li>
+</ul>
+<div class="EXAMPLE">
+<a name="RESTRICTED">
+</a>
+<p>
+<b>Example 22-1. Running a script in restricted mode</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#  Starting the script with "#!/bin/bash -r"
+#+ runs entire script in restricted mode.
+
+echo
+
+echo "Changing directory."
+cd /usr/local
+echo "Now in `pwd`"
+echo "Coming back home."
+cd
+echo "Now in `pwd`"
+echo
+
+# Everything up to here in normal, unrestricted mode.
+
+set -r
+# set --restricted    has same effect.
+echo "==&gt; Now in restricted mode. &lt;=="
+
+echo
+echo
+
+echo "Attempting directory change in restricted mode."
+cd ..
+echo "Still in `pwd`"
+
+echo
+echo
+
+echo "\$SHELL = $SHELL"
+echo "Attempting to change shell in restricted mode."
+SHELL="/bin/ash"
+echo
+echo "\$SHELL= $SHELL"
+
+echo
+echo
+
+echo "Attempting to redirect output in restricted mode."
+ls -l /usr/bin &gt; bin.files
+ls -l bin.files    # Try to list attempted file creation effort.
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./subshells.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./process-sub.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Subshells</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Process Substitution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

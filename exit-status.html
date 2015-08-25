@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Exit and Exit Status</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Basics" href="./part2.html">
+<link rel="PREVIOUS" title="Escaping" href="./escapingsection.html">
+<link rel="NEXT" title="Tests" href="./tests.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./escapingsection.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./tests.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="EXIT-STATUS">
+</a>Chapter 6. Exit and Exit Status</h1>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>... there are dark corners in the Bourne shell, and people use all
+      of them.</i>
+</p>
+<p>
+<i>--Chet Ramey</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="EXITCOMMANDREF">
+</a>The 
+	<b class="COMMAND">	  
+	  
+	  exit
+	</b> 
+	command terminates a script, just as in a <b class="COMMAND">C</b>
+	program. It can also return a value, which is available to the
+	script's parent process.</p>
+<p>
+<a name="EXITSTATUSREF">
+</a>Every command returns an 
+	<i class="FIRSTTERM">	  
+	  exit status
+	</i> 
+	(sometimes referred to as a 
+	<i class="FIRSTTERM">	  
+	  return status
+	</i> or <i class="FIRSTTERM">exit code</i>).
+	<a name="EXITSUCCESS">
+</a>
+	A successful command returns a <span class="RETURNVALUE">0</span>, while
+	an unsuccessful one returns a <span class="RETURNVALUE">non-zero</span>
+	value that usually can be interpreted as an <i class="FIRSTTERM">error
+	code</i>. Well-behaved UNIX commands, programs, and
+	utilities return a <span class="RETURNVALUE">0</span> exit code upon
+	successful completion, though there are some exceptions.</p>
+<p>
+<a name="FUNCTXSTR">
+</a>
+</p>
+<p>Likewise, <a href="./functions.html#FUNCTIONREF">functions</a>
+	within a script and the script itself return an exit
+	status. The last command executed in the function or
+	script determines the exit status. Within a script, an
+	<tt class="USERINPUT">
+<b>exit <tt class="REPLACEABLE">
+<i>nnn</i>
+</tt>
+</b>
+</tt>
+	command may be used to deliver an
+	<span class="RETURNVALUE">
+<tt class="REPLACEABLE">
+<i>nnn</i>
+</tt>
+</span>
+	exit status to the shell
+	(<span class="RETURNVALUE">
+<tt class="REPLACEABLE">
+<i>nnn</i>
+</tt>
+</span>
+	must be an integer in the <span class="RETURNVALUE">0</span> -
+	<span class="RETURNVALUE">255</span> range).</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="exit-status_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>When a script ends with an <b class="COMMAND">exit</b> that has
+	no parameter, the exit status of the script is the exit status
+	of the last command executed in the script (previous to the
+	<b class="COMMAND">exit</b>).</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+COMMAND_1
+
+. . .
+
+COMMAND_LAST
+
+# Will exit with status of last command.
+
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The equivalent of a bare <b class="COMMAND">exit</b> is
+        <b class="COMMAND">exit $?</b> or even just omitting the
+	<b class="COMMAND">exit</b>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+COMMAND_1
+
+. . .
+
+COMMAND_LAST
+
+# Will exit with status of last command.
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+COMMAND1
+
+. . . 
+
+COMMAND_LAST
+
+# Will exit with status of last command.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="EXSREF">
+</a>
+</p>
+<p>	<tt class="VARNAME">	    $?</tt> reads the exit status of the last
+	    command executed. After a function returns,
+	    <tt class="VARNAME">$?</tt> gives the exit status of the last
+	    command executed in the function. This is Bash's way of giving
+	    functions a <span class="QUOTE">"return value."</span>
+	    
+	      <a name="AEN2981" href="#FTN.AEN2981">
+<span class="footnote">[1]</span>
+</a>
+      </p>
+<p>
+<a name="PIPEEX">
+</a>Following the execution of a <a href="./special-chars.html#PIPEREF">pipe</a>, a <tt class="VARNAME">$?</tt>
+        gives the exit status of the last command executed.</p>
+<p>After a script terminates, a <tt class="VARNAME">$?</tt> from the
+	    command-line gives the exit status of the script, that is, the
+	    last command executed in the script, which is, by convention,
+	    <tt class="USERINPUT">
+<b>0</b>
+</tt> on success or an integer in the
+	    range <span class="RETURNVALUE">1 - 255</span> on error.</p>
+<div class="EXAMPLE">
+<a name="EX5">
+</a>
+<p>
+<b>Example 6-1. exit / exit status</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+echo hello
+echo $?    # Exit status 0 returned because command executed successfully.
+
+lskdf      # Unrecognized command.
+echo $?    # Non-zero exit status returned -- command failed to execute.
+
+echo
+
+exit 113   # Will return 113 to shell.
+           # To verify this, type "echo $?" after script terminates.
+
+#  By convention, an 'exit 0' indicates success,
+#+ while a non-zero exit value means an error or anomalous condition.
+#  See the "Exit Codes With Special Meanings" appendix.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a href="./internalvariables.html#XSTATVARREF">$?</a> is especially useful
+        for testing the result of a command in a script (see <a href="./filearchiv.html#FILECOMP">Example 16-35</a> and <a href="./textproc.html#LOOKUP">Example 16-20</a>).</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="exit-status_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <a href="./special-chars.html#NOTREF">!</a>, the <i class="FIRSTTERM">logical
+	not</i> qualifier, reverses the outcome of a test or
+	command, and this affects its <a href="./exit-status.html#EXITSTATUSREF">exit
+	status</a>.
+
+	</p>
+<div class="EXAMPLE">
+<a name="NEGCOND">
+</a>
+<p>
+<b>Example 6-2. Negating a condition using <span class="TOKEN">!</span>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">true    # The "true" builtin.
+echo "exit status of \"true\" = $?"     # 0
+
+! true
+echo "exit status of \"! true\" = $?"   # 1
+# Note that the "!" needs a space between it and the command.
+#    !true   leads to a "command not found" error
+#
+# The '!' operator prefixing a command invokes the Bash history mechanism.
+
+true
+!true
+# No error this time, but no negation either.
+# It just repeats the previous command (true).
+
+
+# =========================================================== #
+# Preceding a _pipe_ with ! inverts the exit status returned.
+ls | bogus_command     # bash: bogus_command: command not found
+echo $?                # 127
+
+! ls | bogus_command   # bash: bogus_command: command not found
+echo $?                # 0
+# Note that the ! does not change the execution of the pipe.
+# Only the exit status changes.
+# =========================================================== #
+
+# Thanks, Stéphane Chazelas and Kristopher Newsome.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      <p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="exit-status_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Certain exit status codes have <a href="./exitcodes.html#EXITCODESREF">reserved meanings</a> and should not
+	be user-specified in a script.	</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN2981" href="./exit-status.html#AEN2981">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>In those instances when there is no <a href="./complexfunct.html#RETURNREF">return</a>
+	      terminating the function.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./escapingsection.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./tests.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Escaping</td>
+<td align="center" valign="top" width="34%">
+<a href="./part2.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

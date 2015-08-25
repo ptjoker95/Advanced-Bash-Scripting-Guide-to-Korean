@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Unofficial Shell Scripting Stylesheet</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Scripting With Style" href="./scrstyle.html">
+<link rel="PREVIOUS" title="Scripting With Style" href="./scrstyle.html">
+<link rel="NEXT" title="Miscellany" href="./miscellany.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./scrstyle.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 35. Scripting With Style</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./miscellany.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="UNOFFICIALST">
+</a>35.1. Unofficial Shell Scripting Stylesheet</h1>
+<p>
+</p>
+<ul>
+<li>
+<p>Comment your code. This makes it easier for others to
+	    understand (and appreciate), and easier for you to maintain.
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">PASS="$PASS${MATRIX:$(($RANDOM%${#MATRIX})):1}"
+#  It made perfect sense when you wrote it last year,
+#+ but now it's a complete mystery.
+#  (From Antek Sawicki's "pw.sh" script.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>Add descriptive headers to your scripts and functions.
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#************************************************#
+#                   xyz.sh                       #
+#           written by Bozo Bozeman              #
+#                July 05, 2001                   #
+#                                                #
+#           Clean up project files.              #
+#************************************************#
+
+E_BADDIR=85                       # No such directory.
+projectdir=/home/bozo/projects    # Directory to clean up.
+
+# --------------------------------------------------------- #
+# cleanup_pfiles ()                                         #
+# Removes all files in designated directory.                #
+# Parameter: $target_directory                              #
+# Returns: 0 on success, $E_BADDIR if something went wrong. #
+# --------------------------------------------------------- #
+cleanup_pfiles ()
+{
+  if [ ! -d "$1" ]  # Test if target directory exists.
+  then
+    echo "$1 is not a directory."
+    return $E_BADDIR
+  fi
+
+  rm -f "$1"/*
+  return 0   # Success.
+}  
+
+cleanup_pfiles $projectdir
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+<li>
+<p>Avoid using <span class="QUOTE">"magic numbers,"</span>
+
+	     <a name="AEN20041" href="#FTN.AEN20041">
+<span class="footnote">[1]</span>
+</a>
+
+	    that is, <span class="QUOTE">"hard-wired"</span> literal constants. Use
+	    meaningful variable names instead. This makes the script
+	    easier to understand and permits making changes and updates
+	    without breaking the application.
+
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ -f /var/log/messages ]
+then
+  ...
+fi
+#  A year later, you decide to change the script to check /var/log/syslog.
+#  It is now necessary to manually change the script, instance by instance,
+#+ and hope nothing breaks.
+
+# A better way:
+LOGFILE=/var/log/messages  # Only line that needs to be changed.
+if [ -f "$LOGFILE" ]
+then
+  ...
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>Choose descriptive names for variables and functions.
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">fl=`ls -al $dirname`                 # Cryptic.
+file_listing=`ls -al $dirname`       # Better.
+
+
+MAXVAL=10   # All caps used for a script constant.
+while [ "$index" -le "$MAXVAL" ]
+...
+
+
+E_NOTFOUND=95                        #  Uppercase for an errorcode,
+                                     #+ and name prefixed with E_.
+if [ ! -e "$filename" ]
+then
+  echo "File $filename not found."
+  exit $E_NOTFOUND
+fi  
+
+
+MAIL_DIRECTORY=/var/spool/mail/bozo  #  Uppercase for an environmental
+export MAIL_DIRECTORY                #+ variable.
+
+
+GetAnswer ()                         #  Mixed case works well for a
+{                                    #+ function name, especially
+  prompt=$1                          #+ when it improves legibility.
+  echo -n $prompt
+  read answer
+  return $answer
+}  
+
+GetAnswer "What is your favorite number? "
+favorite_number=$?
+echo $favorite_number
+
+
+_uservariable=23                     # Permissible, but not recommended.
+# It's better for user-defined variables not to start with an underscore.
+# Leave that for system variables.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>Use <a href="./exit-status.html#EXITCOMMANDREF">exit codes</a>
+	    in a systematic and meaningful way.
+
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">E_WRONG_ARGS=95
+...
+...
+exit $E_WRONG_ARGS</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            See also <a href="./exitcodes.html">Appendix E</a>.</p>
+<p>
+<em>Ender</em> suggests using the <a href="./exitcodes.html#SYSEXITSREF">exit codes
+	    in <tt class="FILENAME">/usr/include/sysexits.h</tt>
+</a> in shell
+	    scripts, though these are primarily intended for C and C++
+	    programming.</p>
+</li>
+<li>
+<p>Use standardized parameter flags for script invocation.
+	     <em>Ender</em> proposes the following set
+	     of flags.</p>
+<p>             <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">-a      All: Return all information (including hidden file info).
+-b      Brief: Short version, usually for other scripts.
+-c      Copy, concatenate, etc.
+-d      Daily: Use information from the whole day, and not merely
+        information for a specific instance/user.
+-e      Extended/Elaborate: (often does not include hidden file info).
+-h      Help: Verbose usage w/descs, aux info, discussion, help.
+        See also -V.
+-l      Log output of script.
+-m      Manual: Launch man-page for base command.
+-n      Numbers: Numerical data only.
+-r      Recursive: All files in a directory (and/or all sub-dirs).
+-s      Setup &amp; File Maintenance: Config files for this script.
+-u      Usage: List of invocation flags for the script.
+-v      Verbose: Human readable output, more or less formatted.
+-V      Version / License / Copy(right|left) / Contribs (email too).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+           </p>
+<p>See also <a href="./standard-options.html">Section G.1</a>.</p>
+</li>
+<li>
+<p>Break complex scripts into simpler modules. Use functions
+	    where appropriate. See <a href="./bashver2.html#CARDS">Example 37-4</a>.</p>
+</li>
+<li>
+<p>Don't use a complex construct where a simpler one will do.
+
+	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">COMMAND
+if [ $? -eq 0 ]
+...
+# Redundant and non-intuitive.
+
+if COMMAND
+...
+# More concise (if perhaps not quite as legible).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+</ul>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>... reading the UNIX source code to the Bourne shell (/bin/sh). I
+        was shocked at how much simple algorithms could be made cryptic, and
+	therefore useless, by a poor choice of code style. I asked myself,
+	<span class="QUOTE">"Could someone be proud of this code?"</span>
+</i>
+</p>
+<p>
+<i>--Landon Noll</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN20041" href="./unofficialst.html#AEN20041">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>In this context, <span class="QUOTE">"magic
+	       numbers"</span> have an entirely different meaning than
+	       the <a href="./sha-bang.html#MAGNUMREF">magic numbers</a> used
+	       to designate file types.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./scrstyle.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./miscellany.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Scripting With Style</td>
+<td align="center" valign="top" width="34%">
+<a href="./scrstyle.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Miscellany</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

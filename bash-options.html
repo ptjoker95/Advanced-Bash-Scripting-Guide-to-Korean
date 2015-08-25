@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Bash Command-Line Options</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Command-Line Options" href="./command-line-options.html">
+<link rel="PREVIOUS" title="Standard Command-Line Options" href="./standard-options.html">
+<link rel="NEXT" title=" Important Files" href="./files.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./standard-options.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Appendix G. Command-Line Options</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./files.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="BASH-OPTIONS">
+</a>G.2. Bash Command-Line Options</h1>
+<p>
+<a name="CLOPTS">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">Bash</i> itself has a number of command-line
+       options. Here are some of the more useful ones.</p>
+<p>
+</p>
+<ul>
+<li>
+<p>
+<tt class="OPTION">-c</tt>
+</p>
+<p>
+<em>Read commands from the following string and assign any
+        arguments to the <a href="./internalvariables.html#POSPARAMREF">positional
+        parameters</a>.</em>
+</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>bash -c 'set a b c d; IFS="+-;"; echo "$*"'</b>
+</tt>
+<tt class="COMPUTEROUTPUT">a+b+c+d</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+       </p>
+</li>
+<li>
+<p>
+<tt class="OPTION">-r</tt>
+</p>
+<p>
+<tt class="OPTION">--restricted</tt>
+</p>
+<p>
+<em>Runs the shell, or a script, in <a href="./restricted-sh.html#RESTRICTEDSHREF">restricted mode</a>.</em>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">--posix</tt>
+</p>
+<p>
+<em>Forces Bash to conform to <a href="./sha-bang.html#POSIX2REF">POSIX</a> mode.</em>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">--version</tt>
+</p>
+<p>
+<em>Display Bash version information and
+        exit.</em>
+</p>
+</li>
+<li>
+<p>
+<tt class="OPTION">--</tt>
+</p>
+<p>
+<em>End of options. Anything further on the command
+      line is an argument, not an option.</em>
+</p>
+</li>
+</ul>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./standard-options.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./files.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Standard Command-Line Options</td>
+<td align="center" valign="top" width="34%">
+<a href="./command-line-options.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Important Files</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

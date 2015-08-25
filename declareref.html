@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Typing variables: declare or
+	  typeset</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Another Look at Variables" href="./variables2.html">
+<link rel="PREVIOUS" title="Internal Variables" href="./internalvariables.html">
+<link rel="NEXT" title="$RANDOM: generate random integer" href="./randomvar.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./internalvariables.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 9. Another Look at Variables</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./randomvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="DECLAREREF">
+</a>9.2. Typing variables: <b class="COMMAND">declare</b> or
+	  <b class="COMMAND">typeset</b>
+</h1>
+<p>
+<a name="DECLARE1REF">
+</a>
+</p>
+<p>The <i class="FIRSTTERM">declare</i> or
+	  <i class="FIRSTTERM">typeset</i> <a href="./internal.html#BUILTINREF">builtins</a>, which are exact synonyms,
+	  permit modifying the properties of variables. This is
+	  a very weak form of the <i class="FIRSTTERM">typing</i>
+
+	    <a name="AEN5685" href="#FTN.AEN5685">
+<span class="footnote">[1]</span>
+</a>
+
+	  available in certain programming languages. The
+	  <i class="FIRSTTERM">declare</i> command is specific to version
+	  2 or later of Bash. The <i class="FIRSTTERM">typeset</i> command
+	  also works in ksh scripts.</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="DECLAREOPSREF1">
+</a>declare/typeset options</b>
+</p>
+<dl>
+<dt>
+<span class="TOKEN">-r</span>
+	    <tt class="REPLACEABLE">
+<i>readonly</i>
+</tt>
+</dt>
+<dd>
+<p>(<tt class="USERINPUT">
+<b>declare -r var1</b>
+</tt> works the same as
+		<tt class="USERINPUT">
+<b>readonly var1</b>
+</tt>)</p>
+<p>This is the rough equivalent of the <b class="COMMAND">C</b>
+		<i class="FIRSTTERM">const</i> type qualifier. An attempt
+		to change the value of a <i class="FIRSTTERM">readonly</i>
+		variable fails with an error message.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -r var1=1
+echo "var1 = $var1"   # var1 = 1
+
+(( var1++ ))          # x.sh: line 4: var1: readonly variable</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+</dd>
+<dt>
+<span class="TOKEN">-i</span> <tt class="REPLACEABLE">
+<i>integer</i>
+</tt>
+</dt>
+<dd>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -i number
+# The script will treat subsequent occurrences of "number" as an integer.		
+
+number=3
+echo "Number = $number"     # Number = 3
+
+number=three
+echo "Number = $number"     # Number = 0
+# Tries to evaluate the string "three" as an integer.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Certain arithmetic operations are permitted
+		for declared integer variables without the need
+		for <a href="./moreadv.html#EXPRREF">expr</a> or <a href="./internal.html#LETREF">let</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">n=6/3
+echo "n = $n"       # n = 6/3
+
+declare -i n
+n=6/3
+echo "n = $n"       # n = 2</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="ARRAYDECLARE">
+</a>
+<span class="TOKEN">-a</span>
+	    <tt class="REPLACEABLE">
+<i>array</i>
+</tt>
+</dt>
+<dd>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -a indices</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The variable <tt class="PARAMETER">
+<i>indices</i>
+</tt> will be treated as
+		an <a href="./arrays.html#ARRAYREF">array</a>.</p>
+</dd>
+<dt>
+<span class="TOKEN">-f</span> <tt class="REPLACEABLE">
+<i>function(s)</i>
+</tt>
+</dt>
+<dd>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -f</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>A <tt class="USERINPUT">
+<b>declare -f</b>
+</tt> line with no
+		arguments in a script causes a listing of all the
+		<a href="./functions.html#FUNCTIONREF">functions</a> previously
+		defined in that script.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -f function_name</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>A <tt class="USERINPUT">
+<b>declare -f function_name</b>
+</tt>
+		in a script lists just the function named.</p>
+</dd>
+<dt>
+<span class="TOKEN">-x</span> <a href="./internal.html#EXPORTREF">export</a>
+</dt>
+<dd>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -x var3</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>This declares a variable as available for exporting outside the
+		environment of the script itself.</p>
+</dd>
+<dt>-x var=$value</dt>
+<dd>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -x var3=373</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The <b class="COMMAND">declare</b> command permits
+		  assigning a value to a variable in the same statement
+		  as setting its properties.</p>
+</dd>
+</dl>
+</div>
+<div class="EXAMPLE">
+<a name="EX20">
+</a>
+<p>
+<b>Example 9-10. Using <i class="FIRSTTERM">declare</i> to type variables</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+func1 ()
+{
+  echo This is a function.
+}
+
+declare -f        # Lists the function above.
+
+echo
+
+declare -i var1   # var1 is an integer.
+var1=2367
+echo "var1 declared as $var1"
+var1=var1+1       # Integer declaration eliminates the need for 'let'.
+echo "var1 incremented by 1 is $var1."
+# Attempt to change variable declared as integer.
+echo "Attempting to change var1 to floating point value, 2367.1."
+var1=2367.1       # Results in error message, with no change to variable.
+echo "var1 is still $var1"
+
+echo
+
+declare -r var2=13.36         # 'declare' permits setting a variable property
+                              #+ and simultaneously assigning it a value.
+echo "var2 declared as $var2" # Attempt to change readonly variable.
+var2=13.37                    # Generates error message, and exit from script.
+
+echo "var2 is still $var2"    # This line will not execute.
+
+exit 0                        # Script will not exit here.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="declareref_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Using the <i class="FIRSTTERM">declare</i> builtin
+	  restricts the <a href="./subshells.html#SCOPEREF">scope</a>
+	  of a variable.
+
+
+	  <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">foo ()
+{
+FOO="bar"
+}
+
+bar ()
+{
+foo
+echo $FOO
+}
+
+bar   # Prints bar.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>However . . .
+
+	  <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">foo (){
+declare FOO="bar"
+}
+
+bar ()
+{
+foo
+echo $FOO
+}
+
+bar  # Prints nothing.
+
+
+# Thank you, Michael Iatrou, for pointing this out.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="DECLARE2X">
+</a>9.2.1. Another use for <i class="FIRSTTERM">declare</i>
+</h2>
+<p>The <i class="FIRSTTERM">declare</i> command can be
+	     helpful in identifying variables, <a href="./othertypesv.html#ENVREF">environmental</a> or otherwise.
+	     This can be especially useful with <a href="./arrays.html#ARRAYREF">arrays</a>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>declare | grep HOME</b>
+</tt>
+<tt class="COMPUTEROUTPUT">HOME=/home/bozo</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>zzy=68</b>
+</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>declare | grep zzy</b>
+</tt>
+<tt class="COMPUTEROUTPUT">zzy=68</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>Colors=([0]="purple" [1]="reddish-orange" [2]="light green")</b>
+</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo ${Colors[@]}</b>
+</tt>
+<tt class="COMPUTEROUTPUT">purple reddish-orange light green</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>declare | grep Colors</b>
+</tt>
+<tt class="COMPUTEROUTPUT">Colors=([0]="purple" [1]="reddish-orange" [2]="light green")</tt>
+	     </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	   </p>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN5685" href="./declareref.html#AEN5685">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="TYPINGREF">
+</a>In this context,
+	    <i class="FIRSTTERM">typing</i>
+	    a variable means to classify it and restrict its properties.
+	    For example, a variable <i class="FIRSTTERM">declared</i>
+	    or <i class="FIRSTTERM">typed</i> as an integer
+	    is no longer available for <a href="./refcards.html#STRINGOPSTAB">string
+	    operations</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">declare -i intvar
+
+intvar=23
+echo "$intvar"   # 23
+intvar=stringval
+echo "$intvar"   # 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./internalvariables.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./randomvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Internal Variables</td>
+<td align="center" valign="top" width="34%">
+<a href="./variables2.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">$RANDOM: generate random integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

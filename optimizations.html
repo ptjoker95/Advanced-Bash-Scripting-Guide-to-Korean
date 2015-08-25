@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Optimizations</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Miscellany" href="./miscellany.html">
+<link rel="PREVIOUS" title="Colorizing Scripts" href="./colorizing.html">
+<link rel="NEXT" title="Assorted Tips" href="./assortedtips.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./colorizing.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 36. Miscellany</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./assortedtips.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="OPTIMIZATIONS">
+</a>36.6. Optimizations</h1>
+<p>Most shell scripts are quick 'n dirty solutions to non-complex
+	  problems. As such, optimizing them for speed is not much of an
+	  issue.  Consider the case, though, where a script carries out
+	  an important task, does it well, but runs too slowly. Rewriting
+	  it in a compiled language may not be a palatable option. The
+	  simplest fix would be to rewrite the parts of the script
+	  that slow it down. Is it possible to apply principles of code
+	  optimization even to a lowly shell script?</p>
+<p>Check the loops in the script. Time consumed by repetitive
+	  operations adds up quickly. If at all possible, remove
+	  time-consuming operations from within loops.</p>
+<p>Use <a href="./internal.html#BUILTINREF">builtin</a> commands in
+	  preference to system commands. Builtins execute faster and
+	  usually do not launch a subshell when invoked.</p>
+<p>
+<a name="CATABUSE">
+</a>
+</p>
+<p>Avoid unnecessary commands, particularly in a <a href="./special-chars.html#PIPEREF">pipe</a>.
+	    <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cat "$file" | grep "$word"
+
+grep "$word" "$file"
+
+#  The above command-lines have an identical effect,
+#+ but the second runs faster since it launches one fewer subprocess.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  The <a href="./basic.html#CATREF">cat</a> command seems especially
+	  prone to overuse in scripts.</p>
+<p>
+<a name="LCALL">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN20414">
+</a>
+<p>
+</p>
+<p>Disabling certain Bash options can speed up scripts.</p>
+<p>As Erik Brandsberg points out:</p>
+<p>If you don't need <a href="./bashver4.html#UNICODEREF">Unicode</a> support, you can
+                 get potentially a 2x or more improvement in speed by
+		 simply setting the <tt class="USERINPUT">
+<b>LC_ALL</b>
+</tt> variable.
+
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   export LC_ALL=C
+
+   [specifies the locale as ANSI C,
+   thereby disabling Unicode support]
+
+[In an example script ...]
+
+Without [Unicode support]:
+erik@erik-desktop:~/capture$ time ./cap-ngrep.sh
+live2.pcap &gt; out.txt
+
+  real        0m20.483s
+  user        1m34.470s
+  sys         0m12.869s
+
+With [Unicode support]:
+erik@erik-desktop:~/capture$ time ./cap-ngrep.sh
+live2.pcap &gt; out.txt
+
+  real        0m50.232s
+  user        3m51.118s
+  sys         0m11.221s
+
+A large part of the overhead that is optimized is, I believe,
+regex match using [[ string =~ REGEX ]],
+but it may help with other portions of the code as well.
+I hadn't [seen it] mentioned that this optimization helped
+with Bash, but I had seen it helped with "grep,"
+so why not try?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<a name="OPTIMES">
+</a>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="optimizations_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Certain operators, notably <a href="./moreadv.html#EXPRREF">expr</a>, are very inefficient
+          and might be replaced by <a href="./dblparens.html">double
+          parentheses</a> arithmetic expansion.
+          See <a href="./contributed-scripts.html#TESTEXECTIME">Example A-59</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">Math tests
+
+math via $(( ))
+real          0m0.294s
+user          0m0.288s
+sys           0m0.008s
+
+math via expr:
+real          1m17.879s   # Much slower!
+user          0m3.600s
+sys           0m8.765s
+
+math via let:
+real          0m0.364s
+user          0m0.372s
+sys           0m0.000s</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a href="./tests.html#IFTHEN">Condition testing</a>
+            constructs in scripts deserve close scrutiny. Substitute
+	    <a href="./testbranch.html#CASEESAC1">case</a> for <a href="./tests.html#IFTHEN">if-then</a> constructs and combine tests
+	    when possible, to minimize script execution time. Again,
+	    refer to <a href="./contributed-scripts.html#TESTEXECTIME">Example A-59</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">Test using "case" construct:
+real          0m0.329s
+user          0m0.320s
+sys           0m0.000s
+
+
+Test with if [], no quotes:
+real          0m0.438s
+user          0m0.432s
+sys           0m0.008s
+
+
+Test with if [], quotes:
+real          0m0.476s
+user          0m0.452s
+sys           0m0.024s
+
+
+Test with if [], using -eq:
+real          0m0.457s
+user          0m0.456s
+sys           0m0.000s</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="ASSOCARRTST">
+</a>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="optimizations_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Erik Brandsberg recommends using <a href="./bashver4.html#ASSOCARR">associative arrays</a> in preference to
+	  conventional numeric-indexed arrays in most cases. When
+	  overwriting values in a numeric array, there is a significant
+	  performance penalty vs. associative arrays. Running a test
+	  script confirms this. See <a href="./contributed-scripts.html#ASSOCARRTEST">Example A-60</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">Assignment tests
+
+Assigning a simple variable
+real          0m0.418s
+user          0m0.416s
+sys           0m0.004s
+
+Assigning a numeric index array entry
+real          0m0.582s
+user          0m0.564s
+sys           0m0.016s
+
+Overwriting a numeric index array entry
+real          0m21.931s
+user          0m21.913s
+sys           0m0.016s
+
+Linear reading of numeric index array
+real          0m0.422s
+user          0m0.416s
+sys           0m0.004s
+
+Assigning an associative array entry
+real          0m1.800s
+user          0m1.796s
+sys           0m0.004s
+
+Overwriting an associative array entry
+real          0m1.798s
+user          0m1.784s
+sys           0m0.012s
+
+Linear reading an associative array entry
+real          0m0.420s
+user          0m0.420s
+sys           0m0.000s
+
+Assigning a random number to a simple variable
+real          0m0.402s
+user          0m0.388s
+sys           0m0.016s
+
+Assigning a sparse numeric index array entry randomly into 64k cells
+real          0m12.678s
+user          0m12.649s
+sys           0m0.028s
+
+Reading sparse numeric index array entry
+real          0m0.087s
+user          0m0.084s
+sys           0m0.000s
+
+Assigning a sparse associative array entry randomly into 64k cells
+real          0m0.698s
+user          0m0.696s
+sys           0m0.004s
+
+Reading sparse associative index array entry
+real          0m0.083s
+user          0m0.084s
+sys           0m0.000s</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use the <a href="./timedate.html#TIMREF">time</a> and <a href="./x9644.html#TIMESREF">times</a> tools to profile
+	  computation-intensive commands. Consider rewriting time-critical
+	  code sections in C, or even in assembler.</p>
+<p>Try to minimize file I/O. Bash is not particularly
+	   efficient at handling files, so consider using
+	   more appropriate tools for this within the script,
+	   such as <a href="./awk.html#AWKREF">awk</a> or <a href="./wrapper.html#PERLREF">Perl</a>.</p>
+<p>Write your scripts in a modular and coherent form,
+	   <a name="AEN20452" href="#FTN.AEN20452">
+<span class="footnote">[1]</span>
+</a>
+	   so they can be reorganized and tightened up as necessary. Some
+	   of the optimization techniques applicable to high-level
+	   languages may work for scripts, but others, such as
+	   <i class="FIRSTTERM">loop unrolling</i>, are mostly
+	   irrelevant. Above all, use common sense.</p>
+<p>For an excellent demonstration of how optimization can
+	   dramatically reduce the  execution time of a script, see <a href="./mathc.html#MONTHLYPMT">Example 16-47</a>.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN20452" href="./optimizations.html#AEN20452">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>This usually means liberal use of
+	   <a href="./functions.html#FUNCTIONREF">functions</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./colorizing.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./assortedtips.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">
+<span class="QUOTE">"Colorizing"</span> Scripts</td>
+<td align="center" valign="top" width="34%">
+<a href="./miscellany.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Assorted Tips</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

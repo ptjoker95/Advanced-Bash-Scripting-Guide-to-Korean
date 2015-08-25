@@ -1,0 +1,781 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Other Comparison Operators</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Tests" href="./tests.html">
+<link rel="PREVIOUS" title="File test operators" href="./fto.html">
+<link rel="NEXT" title="Nested if/then Condition Tests" href="./nestedifthen.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./fto.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 7. Tests</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./nestedifthen.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="COMPARISON-OPS">
+</a>7.3. Other Comparison Operators</h1>
+<p>A <i class="FIRSTTERM">binary</i> comparison operator
+	  compares two variables or quantities. <em>Note
+	  that integer and string comparison use a different set of
+	  operators.</em>
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="ICOMPARISON1">
+</a>integer comparison</b>
+</p>
+<dl>
+<dt>
+<a name="EQUALREF">
+</a>
+<span class="TOKEN">-eq</span>
+</dt>
+<dd>
+<p>is equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -eq "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="NEQUALREF">
+</a>
+<span class="TOKEN">-ne</span>
+</dt>
+<dd>
+<p>is not equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -ne "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="GT0REF">
+</a>
+<span class="TOKEN">-gt</span>
+</dt>
+<dd>
+<p>is greater than</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -gt "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="GE0REF">
+</a>
+<span class="TOKEN">-ge</span>
+</dt>
+<dd>
+<p>is greater than or equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -ge "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="LT0REF">
+</a>
+<span class="TOKEN">-lt</span>
+</dt>
+<dd>
+<p>is less than</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -lt "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="LE0REF">
+</a>
+<span class="TOKEN">-le</span>
+</dt>
+<dd>
+<p>is less than or equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" -le "$b" ]</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="INTLT">
+</a>
+<span class="TOKEN">&lt;</span>
+</dt>
+<dd>
+<p>is less than (within <a href="./dblparens.html">double
+	      parentheses</a>)</p>
+<p>
+<tt class="USERINPUT">
+<b>(("$a" &lt; "$b"))</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="LTEQ">
+</a>
+<span class="TOKEN">&lt;=</span>
+</dt>
+<dd>
+<p>is less than or equal to (within double parentheses)</p>
+<p>
+<tt class="USERINPUT">
+<b>(("$a" &lt;= "$b"))</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="INTGT">
+</a>
+<span class="TOKEN">&gt;</span>
+</dt>
+<dd>
+<p>is greater than (within double parentheses)</p>
+<p>
+<tt class="USERINPUT">
+<b>(("$a" &gt; "$b"))</b>
+</tt>
+</p>
+</dd>
+<dt>
+<a name="GTEQ">
+</a>
+<span class="TOKEN">&gt;=</span>
+</dt>
+<dd>
+<p>is greater than or equal to (within double parentheses)</p>
+<p>
+<tt class="USERINPUT">
+<b>(("$a" &gt;= "$b"))</b>
+</tt>
+</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="SCOMPARISON1">
+</a>string comparison</b>
+</p>
+<dl>
+<dt>
+<span class="TOKEN">=</span>
+</dt>
+<dd>
+<p>
+<a name="EQUALSIGNREF">
+</a>
+</p>
+<p>is equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" = "$b" ]</b>
+</tt>
+</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="comparison-ops_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Note the <a href="./special-chars.html#WHITESPACEREF">whitespace</a>
+              framing the <b class="COMMAND">=</b>.</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a"="$b" ]</b>
+</tt> is
+              <em>not</em> equivalent to the
+              above.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="SCOMPARISON2">
+</a>
+<span class="TOKEN">==</span>
+</dt>
+<dd>
+<p>is equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" == "$b" ]</b>
+</tt>
+</p>
+<p>This is a synonym for <span class="TOKEN">=</span>.</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="comparison-ops_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>	      The <span class="TOKEN">==</span> comparison operator behaves differently
+	      within a <a href="./testconstructs.html#DBLBRACKETS">double-brackets</a>
+	      test than within single brackets.
+              <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">[[ $a == z* ]]   # True if $a starts with an "z" (pattern matching).
+[[ $a == "z*" ]] # True if $a is equal to z* (literal matching).
+
+[ $a == z* ]     # File globbing and word splitting take place.
+[ "$a" == "z*" ] # True if $a is equal to z* (literal matching).
+
+# Thanks, Stéphane Chazelas</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+              </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="NOTEQUAL">
+</a>
+<span class="TOKEN">!=</span>
+</dt>
+<dd>
+<p>is not equal to</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" != "$b" ]</b>
+</tt>
+</p>
+<p>This operator uses pattern matching within a <a href="./testconstructs.html#DBLBRACKETS">[[ ... ]]</a> construct.</p>
+</dd>
+<dt>
+<a name="LTREF">
+</a>
+<span class="TOKEN">&lt;</span>
+</dt>
+<dd>
+<p>is less than, in <a href="./special-chars.html#ASCIIDEF">ASCII</a> alphabetical
+		    order</p>
+<p>
+<tt class="USERINPUT">
+<b>if [[ "$a" &lt; "$b" ]]</b>
+</tt>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" \&lt; "$b" ]</b>
+</tt>
+</p>
+<p>Note that the <span class="QUOTE">"&lt;"</span> needs to be
+	      <a href="./escapingsection.html#ESCP">escaped</a> within a
+	      <tt class="USERINPUT">
+<b>[  ]</b>
+</tt> construct.</p>
+</dd>
+<dt>
+<a name="GTREF">
+</a>
+<span class="TOKEN">&gt;</span>
+</dt>
+<dd>
+<p>is greater than, in ASCII alphabetical order</p>
+<p>
+<tt class="USERINPUT">
+<b>if [[ "$a" &gt; "$b" ]]</b>
+</tt>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>if [ "$a" \&gt; "$b" ]</b>
+</tt>
+</p>
+<p>Note that the <span class="QUOTE">"&gt;"</span> needs to be
+	      escaped within a <tt class="USERINPUT">
+<b>[  ]</b>
+</tt> construct.</p>
+<p>See <a href="./arrays.html#BUBBLE">Example 27-11</a> for an application of this
+	      comparison operator.</p>
+</dd>
+<dt>
+<a name="STRINGNULL">
+</a>
+<span class="TOKEN">-z</span>
+</dt>
+<dd>
+<p>string is <i class="FIRSTTERM">null</i>,
+	        that is, has zero length</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"> String=''   # Zero-length ("null") string variable.
+
+if [ -z "$String" ]
+then
+  echo "\$String is null."
+else
+  echo "\$String is NOT null."
+fi     # $String is null.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<a name="STRINGNOTNULL">
+</a>
+<span class="TOKEN">-n</span>
+</dt>
+<dd>
+<p>string is not <i class="FIRSTTERM">null.</i>
+</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="comparison-ops_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <tt class="USERINPUT">
+<b>-n</b>
+</tt> test
+		requires that the string be quoted within the
+		test brackets. Using an unquoted string with
+		<i class="FIRSTTERM">! -z</i>, or even just the
+		unquoted string alone within test brackets (see <a href="./comparison-ops.html#STRTEST">Example 7-6</a>) normally works, however, this is
+		an unsafe practice. <em>Always</em> quote
+		a tested string.
+		  <a name="AEN3669" href="#FTN.AEN3669">
+<span class="footnote">[1]</span>
+</a>
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<div class="EXAMPLE">
+<a name="EX13">
+</a>
+<p>
+<b>Example 7-5. Arithmetic and string comparisons</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+a=4
+b=5
+
+#  Here "a" and "b" can be treated either as integers or strings.
+#  There is some blurring between the arithmetic and string comparisons,
+#+ since Bash variables are not strongly typed.
+
+#  Bash permits integer operations and comparisons on variables
+#+ whose value consists of all-integer characters.
+#  Caution advised, however.
+
+echo
+
+if [ "$a" -ne "$b" ]
+then
+  echo "$a is not equal to $b"
+  echo "(arithmetic comparison)"
+fi
+
+echo
+
+if [ "$a" != "$b" ]
+then
+  echo "$a is not equal to $b."
+  echo "(string comparison)"
+  #     "4"  != "5"
+  # ASCII 52 != ASCII 53
+fi
+
+# In this particular instance, both "-ne" and "!=" work.
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="STRTEST">
+</a>
+<p>
+<b>Example 7-6. Testing whether a string is <i class="FIRSTTERM">null</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+#  str-test.sh: Testing null strings and unquoted strings,
+#+ but not strings and sealing wax, not to mention cabbages and kings . . .
+
+# Using   if [ ... ]
+
+# If a string has not been initialized, it has no defined value.
+# This state is called "null" (not the same as zero!).
+
+if [ -n $string1 ]    # string1 has not been declared or initialized.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Wrong result.
+# Shows $string1 as not null, although it was not initialized.
+
+echo
+
+# Let's try it again.
+
+if [ -n "$string1" ]  # This time, $string1 is quoted.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Quote strings within test brackets!
+
+echo
+
+if [ $string1 ]       # This time, $string1 stands naked.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # This works fine.
+# The [ ... ] test operator alone detects whether the string is null.
+# However it is good practice to quote it (if [ "$string1" ]).
+#
+# As Stephane Chazelas points out,
+#    if [ $string1 ]    has one argument, "]"
+#    if [ "$string1" ]  has two arguments, the empty "$string1" and "]" 
+
+
+echo
+
+
+string1=initialized
+
+if [ $string1 ]       # Again, $string1 stands unquoted.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Again, gives correct result.
+# Still, it is better to quote it ("$string1"), because . . .
+
+
+string1="a = b"
+
+if [ $string1 ]       # Again, $string1 stands unquoted.
+then
+  echo "String \"string1\" is not null."
+else  
+  echo "String \"string1\" is null."
+fi                    # Not quoting "$string1" now gives wrong result!
+
+exit 0   # Thank you, also, Florian Wisser, for the "heads-up".</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX14">
+</a>
+<p>
+<b>Example 7-7. <i class="FIRSTTERM">zmore</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# zmore
+
+# View gzipped files with 'more' filter.
+
+E_NOARGS=85
+E_NOTFOUND=86
+E_NOTGZIP=87
+
+if [ $# -eq 0 ] # same effect as:  if [ -z "$1" ]
+# $1 can exist, but be empty:  zmore "" arg2 arg3
+then
+  echo "Usage: `basename $0` filename" &gt;&amp;2
+  # Error message to stderr.
+  exit $E_NOARGS
+  # Returns 85 as exit status of script (error code).
+fi  
+
+filename=$1
+
+if [ ! -f "$filename" ]   # Quoting $filename allows for possible spaces.
+then
+  echo "File $filename not found!" &gt;&amp;2   # Error message to stderr.
+  exit $E_NOTFOUND
+fi  
+
+if [ ${filename##*.} != "gz" ]
+# Using bracket in variable substitution.
+then
+  echo "File $1 is not a gzipped file!"
+  exit $E_NOTGZIP
+fi  
+
+zcat $1 | more
+
+# Uses the 'more' filter.
+# May substitute 'less' if desired.
+
+exit $?   # Script returns exit status of pipe.
+#  Actually "exit $?" is unnecessary, as the script will, in any case,
+#+ return the exit status of the last command executed.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="CCOMPARISON1">
+</a>compound comparison</b>
+</p>
+<dl>
+<dt>
+<a name="COMPOUNDAND">
+</a>
+<span class="TOKEN">-a</span>
+</dt>
+<dd>
+<p>logical and</p>
+<p>
+<tt class="REPLACEABLE">
+<i>exp1 -a exp2</i>
+</tt> returns true if
+		<em>both</em> exp1 and exp2 are true.</p>
+</dd>
+<dt>
+<a name="COMPOUNDOR">
+</a>
+<span class="TOKEN">-o</span>
+</dt>
+<dd>
+<p>logical or </p>
+<p>
+<tt class="REPLACEABLE">
+<i>exp1 -o exp2</i>
+</tt> returns
+		true if either exp1 <em>or</em> exp2 is
+		true.</p>
+</dd>
+</dl>
+</div>
+<p>         These are similar to the Bash comparison operators
+	 <b class="COMMAND">&amp;&amp;</b> and <b class="COMMAND">||</b>, used
+	 within <a href="./testconstructs.html#DBLBRACKETS">double brackets</a>.
+	   <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">[[ condition1 &amp;&amp; condition2 ]]</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+       </p>
+<p>	 The <b class="COMMAND">-o</b> and <b class="COMMAND">-a</b> operators
+	 work with the <a href="./testconstructs.html#TTESTREF">test</a> command or
+	 occur within single test brackets.
+         <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ "$expr1" -a "$expr2" ]
+then
+  echo "Both expr1 and expr2 are true."
+else
+  echo "Either expr1 or expr2 is false."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	   </p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="comparison-ops_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>But, as <em>rihad</em> points out:
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">[ 1 -eq 1 ] &amp;&amp; [ -n "`echo true 1&gt;&amp;2`" ]   # true
+[ 1 -eq 2 ] &amp;&amp; [ -n "`echo true 1&gt;&amp;2`" ]   # (no output)
+# ^^^^^^^ False condition. So far, everything as expected.
+
+# However ...
+[ 1 -eq 2 -a -n "`echo true 1&gt;&amp;2`" ]       # true
+# ^^^^^^^ False condition. So, why "true" output?
+
+# Is it because both condition clauses within brackets evaluate?
+[[ 1 -eq 2 &amp;&amp; -n "`echo true 1&gt;&amp;2`" ]]     # (no output)
+# No, that's not it.
+
+# Apparently &amp;&amp; and || "short-circuit" while -a and -o do not.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	   </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Refer to <a href="./ops.html#ANDOR">Example 8-3</a>, <a href="./arrays.html#TWODIM">Example 27-17</a>,
+	 and <a href="./contributed-scripts.html#WHX">Example A-29</a> to see compound comparison operators
+	 in action.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN3669" href="./comparison-ops.html#AEN3669">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>As S.C. points out, in a compound test,
+		    even quoting the string variable might not
+		    suffice. <tt class="USERINPUT">
+<b>[ -n "$string" -o "$a" = "$b" ]</b>
+</tt>
+		    may cause an error with some versions of Bash if
+		    <tt class="VARNAME">$string</tt> is empty. The safe way
+		    is to append an extra character to possibly empty variables,
+		    <tt class="USERINPUT">
+<b>[ "x$string" != x -o "x$a" = "x$b" ]</b>
+</tt>
+		    (the <span class="QUOTE">"x's"</span> cancel out).</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./fto.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./nestedifthen.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">File test operators</td>
+<td align="center" valign="top" width="34%">
+<a href="./tests.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Nested <tt class="REPLACEABLE">
+<i>if/then</i>
+</tt> Condition Tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

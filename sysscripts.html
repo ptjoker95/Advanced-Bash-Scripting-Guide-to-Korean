@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Analyzing a System Script</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="System and Administrative Commands" href="./system.html">
+<link rel="PREVIOUS" title="System and Administrative Commands" href="./system.html">
+<link rel="NEXT" title="Advanced Topics" href="./part5.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./system.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 17. System and Administrative Commands</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./part5.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="SYSSCRIPTS">
+</a>17.1. Analyzing a System Script</h1>
+<p>
+<a name="KILLALL2REF">
+</a>
+</p>
+<p>Using our knowledge of administrative commands, let us examine a system
+	script. One of the shortest and simplest to understand scripts is
+	<span class="QUOTE">"killall,"</span>
+	   <a name="AEN17079" href="#FTN.AEN17079">
+<span class="footnote">[1]</span>
+</a>
+	used to suspend running processes at system shutdown.</p>
+<div class="EXAMPLE">
+<a name="EX55">
+</a>
+<p>
+<b>Example 17-12. <i class="FIRSTTERM">killall</i>, from <tt class="FILENAME">/etc/rc.d/init.d</tt>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/sh
+
+# --&gt; Comments added by the author of this document marked by "# --&gt;".
+
+# --&gt; This is part of the 'rc' script package
+# --&gt; by Miquel van Smoorenburg, &lt;miquels@drinkel.nl.mugnet.org&gt;.
+
+# --&gt; This particular script seems to be Red Hat / FC specific
+# --&gt; (may not be present in other distributions).
+
+#  Bring down all unneeded services that are still running
+#+ (there shouldn't be any, so this is just a sanity check)
+
+for i in /var/lock/subsys/*; do
+        # --&gt; Standard for/in loop, but since "do" is on same line,
+        # --&gt; it is necessary to add ";".
+        # Check if the script is there.
+        [ ! -f $i ] &amp;&amp; continue
+        # --&gt; This is a clever use of an "and list", equivalent to:
+        # --&gt; if [ ! -f "$i" ]; then continue
+
+        # Get the subsystem name.
+        subsys=${i#/var/lock/subsys/}
+        # --&gt; Match variable name, which, in this case, is the file name.
+        # --&gt; This is the exact equivalent of subsys=`basename $i`.
+	
+        # --&gt;  It gets it from the lock file name
+        # --&gt;+ (if there is a lock file,
+        # --&gt;+ that's proof the process has been running).
+        # --&gt;  See the "lockfile" entry, above.
+
+
+        # Bring the subsystem down.
+        if [ -f /etc/rc.d/init.d/$subsys.init ]; then
+           /etc/rc.d/init.d/$subsys.init stop
+        else
+           /etc/rc.d/init.d/$subsys stop
+        # --&gt;  Suspend running jobs and daemons.
+        # --&gt;  Note that "stop" is a positional parameter,
+        # --&gt;+ not a shell builtin.
+        fi
+done</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>That wasn't so bad. Aside from a little fancy footwork with variable
+	matching, there is no new material there.</p>
+<div class="FORMALPARA">
+<p>
+<b>Exercise 1. </b>In <tt class="FILENAME">/etc/rc.d/init.d</tt>,
+	  analyze the <b class="COMMAND">halt</b> script. It is a bit longer
+	  than <b class="COMMAND">killall</b>, but similar in concept. Make
+	  a copy of this script somewhere in your home directory and
+	  experiment with it (do <em>not</em> run it as
+	  <i class="FIRSTTERM">root</i>). Do a simulated run
+	  with the <tt class="OPTION">-vn</tt> flags (<tt class="USERINPUT">
+<b>sh
+	  -vn scriptname</b>
+</tt>). Add extensive
+	  comments. Change the	commands to <a href="./internal.html#ECHOREF">echos</a>.</p>
+</div>
+<div class="FORMALPARA">
+<p>
+<b>Exercise 2. </b>Look at some of the more complex scripts in
+	<tt class="FILENAME">/etc/rc.d/init.d</tt>.
+	Try to understand at least portions of them. Follow
+	the above procedure to analyze them. For some
+	additional insight, you might also examine the
+	file <tt class="FILENAME">sysvinitfiles</tt> in <tt class="FILENAME">/usr/share/doc/initscripts-?.??</tt>,
+	which is part of the <span class="QUOTE">"initscripts"</span>
+	documentation.</p>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN17079" href="./sysscripts.html#AEN17079">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>The <i class="FIRSTTERM">killall</i> system
+	   script should not be confused with the <a href="./x9644.html#KILLALLREF">killall</a> command in <tt class="FILENAME">/usr/bin</tt>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./system.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./part5.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">System and Administrative Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./system.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Advanced Topics</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

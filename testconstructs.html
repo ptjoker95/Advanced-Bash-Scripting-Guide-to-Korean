@@ -1,0 +1,913 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Test Constructs</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Tests" href="./tests.html">
+<link rel="PREVIOUS" title="Tests" href="./tests.html">
+<link rel="NEXT" title="File test operators" href="./fto.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./tests.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 7. Tests</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./fto.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="TESTCONSTRUCTS">
+</a>7.1. Test Constructs</h1>
+<p>
+<a name="TESTCONSTRUCTS1">
+</a>
+</p>
+<p>
+</p>
+<ul>
+<li>
+<p>An <b class="COMMAND">if/then</b> construct tests whether the
+	  <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of a list
+	  of commands is <span class="RETURNVALUE">0</span> (since 0 means
+	  <span class="QUOTE">"success"</span> by UNIX convention), and if so, executes
+	  one or more commands.</p>
+</li>
+<li>
+<p>There exists a dedicated command called <b class="COMMAND">	[</b> (<a href="./special-chars.html#LEFTBRACKET">left bracket</a>
+	special character). It is a synonym for <b class="COMMAND">test</b>,
+	and a <a href="./internal.html#BUILTINREF">builtin</a> for efficiency
+	reasons. This command considers its arguments as comparison
+	expressions or file tests and returns an exit status corresponding
+	to the result of the comparison (0 for true, 1 for false).</p>
+</li>
+<li>
+<p>With version 2.02, Bash introduced the <a href="./testconstructs.html#DBLBRACKETS">[[ ... ]]</a> <i class="FIRSTTERM">extended
+	  test command</i>, which performs comparisons
+	  in a manner more familiar to programmers from other
+	  languages. Note that <b class="COMMAND">[[</b> is a <a href="./internal.html#KEYWORDREF">keyword</a>, not a command.</p>
+<p>Bash sees <tt class="USERINPUT">
+<b>[[ $a -lt $b ]]</b>
+</tt> as a
+	  single element, which returns an exit status.</p>
+</li>
+<li>
+<p>
+<a name="DBLPARENSTST">
+</a>
+</p>
+<p>The <a href="./dblparens.html">(( ... ))</a> and <a href="./internal.html#LETREF">let ...</a> constructs return an
+          <a href="./exit-status.html#EXITSTATUSREF">exit status</a>,
+	  <em>according to whether the arithmetic expressions they
+	  evaluate expand to a non-zero value</em>. These
+	  <a href="./arithexp.html#ARITHEXPREF">arithmetic-expansion</a>
+	  constructs may therefore be used to perform <a href="./comparison-ops.html#ICOMPARISON1">arithmetic comparisons</a>.</p>
+<p>        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">(( 0 &amp;&amp; 1 ))                 # Logical AND
+echo $?     # 1     ***
+# And so ...
+let "num = (( 0 &amp;&amp; 1 ))"
+echo $num   # 0
+# But ...
+let "num = (( 0 &amp;&amp; 1 ))"
+echo $?     # 1     ***
+
+
+(( 200 || 11 ))              # Logical OR
+echo $?     # 0     ***
+# ...
+let "num = (( 200 || 11 ))"
+echo $num   # 1
+let "num = (( 200 || 11 ))"
+echo $?     # 0     ***
+
+
+(( 200 | 11 ))               # Bitwise OR
+echo $?                      # 0     ***
+# ...
+let "num = (( 200 | 11 ))"
+echo $num                    # 203
+let "num = (( 200 | 11 ))"
+echo $?                      # 0     ***
+
+# The "let" construct returns the same exit status
+#+ as the double-parentheses arithmetic expansion.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>	    
+	  </p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="testconstructs_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="ARXS">
+</a>Again, note that the
+	  <i class="FIRSTTERM">exit status</i> of an arithmetic expression
+	  is <em>not</em> an error value.
+	  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">var=-2 &amp;&amp; (( var+=2 ))
+echo $?                   # 1
+
+var=-2 &amp;&amp; (( var+=2 )) &amp;&amp; echo $var
+                          # Will not echo $var!</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+<a name="IFGREPREF">
+</a>
+</p>
+<p>An <b class="COMMAND">if</b> can test any command, not just
+	    conditions enclosed within brackets.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if cmp a b &amp;&gt; /dev/null  # Suppress output.
+then echo "Files a and b are identical."
+else echo "Files a and b differ."
+fi
+
+# The very useful "if-grep" construct:
+# ----------------------------------- 
+if grep -q Bash file
+  then echo "File contains at least one occurrence of Bash."
+fi
+
+word=Linux
+letter_sequence=inu
+if echo "$word" | grep -q "$letter_sequence"
+# The "-q" option to grep suppresses output.
+then
+  echo "$letter_sequence found in $word"
+else
+  echo "$letter_sequence not found in $word"
+fi
+
+
+if COMMAND_WHOSE_EXIT_STATUS_IS_0_UNLESS_ERROR_OCCURRED
+  then echo "Command succeeded."
+  else echo "Command failed."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+</li>
+<li>
+<p>
+<em>These last two examples
+	  courtesy of Stéphane Chazelas.</em>
+</p>
+</li>
+</ul>
+<div class="EXAMPLE">
+<a name="EX10">
+</a>
+<p>
+<b>Example 7-1. What is truth?</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#  Tip:
+#  If you're unsure how a certain condition might evaluate,
+#+ test it in an if-test.
+
+echo
+
+echo "Testing \"0\""
+if [ 0 ]      # zero
+then
+  echo "0 is true."
+else          # Or else ...
+  echo "0 is false."
+fi            # 0 is true.
+
+echo
+
+echo "Testing \"1\""
+if [ 1 ]      # one
+then
+  echo "1 is true."
+else
+  echo "1 is false."
+fi            # 1 is true.
+
+echo
+
+echo "Testing \"-1\""
+if [ -1 ]     # minus one
+then
+  echo "-1 is true."
+else
+  echo "-1 is false."
+fi            # -1 is true.
+
+echo
+
+echo "Testing \"NULL\""
+if [ ]        # NULL (empty condition)
+then
+  echo "NULL is true."
+else
+  echo "NULL is false."
+fi            # NULL is false.
+
+echo
+
+echo "Testing \"xyz\""
+if [ xyz ]    # string
+then
+  echo "Random string is true."
+else
+  echo "Random string is false."
+fi            # Random string is true.
+
+echo
+
+echo "Testing \"\$xyz\""
+if [ $xyz ]   # Tests if $xyz is null, but...
+              # it's only an uninitialized variable.
+then
+  echo "Uninitialized variable is true."
+else
+  echo "Uninitialized variable is false."
+fi            # Uninitialized variable is false.
+
+echo
+
+echo "Testing \"-n \$xyz\""
+if [ -n "$xyz" ]            # More pedantically correct.
+then
+  echo "Uninitialized variable is true."
+else
+  echo "Uninitialized variable is false."
+fi            # Uninitialized variable is false.
+
+echo
+
+
+xyz=          # Initialized, but set to null value.
+
+echo "Testing \"-n \$xyz\""
+if [ -n "$xyz" ]
+then
+  echo "Null variable is true."
+else
+  echo "Null variable is false."
+fi            # Null variable is false.
+
+
+echo
+
+
+# When is "false" true?
+
+echo "Testing \"false\""
+if [ "false" ]              #  It seems that "false" is just a string ...
+then
+  echo "\"false\" is true." #+ and it tests true.
+else
+  echo "\"false\" is false."
+fi            # "false" is true.
+
+echo
+
+echo "Testing \"\$false\""  # Again, uninitialized variable.
+if [ "$false" ]
+then
+  echo "\"\$false\" is true."
+else
+  echo "\"\$false\" is false."
+fi            # "$false" is false.
+              # Now, we get the expected result.
+
+#  What would happen if we tested the uninitialized variable "$true"?
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="FORMALPARA">
+<p>
+<b>Exercise. </b>Explain the behavior of <a href="./testconstructs.html#EX10">Example 7-1</a>, above.</p>
+</div>
+<p>
+<a name="ELSEREF">
+</a>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ condition-true ]
+then
+   command 1
+   command 2
+   ...
+else  # Or else ...
+      # Adds default code block executing if original condition tests false.
+   command 3
+   command 4
+   ...
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="testconstructs_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>When <i class="FIRSTTERM">if</i> and <i class="FIRSTTERM">then</i>
+	are on same line in a condition test, a semicolon must
+	terminate the <i class="FIRSTTERM">if</i> statement.  Both
+	<i class="FIRSTTERM">if</i> and <i class="FIRSTTERM">then</i>
+	are <a href="./internal.html#KEYWORDREF">keywords</a>.  Keywords (or
+	commands) begin statements, and before a new statement on the
+	same line begins, the old one must terminate.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ -x "$filename" ]; then</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="ELIFREF1">
+</a>Else if and elif</b>
+</p>
+<dl>
+<dt>
+<span class="TOKEN">elif</span>
+</dt>
+<dd>
+<p>
+<tt class="USERINPUT">
+<b>elif</b>
+</tt> is a contraction
+	      for <i class="FIRSTTERM">else if</i>. The effect is to nest an
+	      inner <span class="TOKEN">if/then</span> construct within an outer
+	      one.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ condition1 ]
+then
+   command1
+   command2
+   command3
+elif [ condition2 ]
+# Same as else if
+then
+   command4
+   command5
+else
+   default-command
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</dd>
+</dl>
+</div>
+<p>      
+      
+      
+      
+      
+      
+	<a name="IFREF2">
+</a>
+	The <tt class="USERINPUT">
+<b>if test condition-true</b>
+</tt> construct is the
+	exact equivalent of <tt class="USERINPUT">
+<b>if [ condition-true ]</b>
+</tt>.
+	As it happens, the left bracket, <b class="COMMAND">[</b> , is a
+	<i class="FIRSTTERM">token</i>
+
+	<a name="AEN3140" href="#FTN.AEN3140">
+<span class="footnote">[1]</span>
+</a>
+
+	which invokes the <b class="COMMAND">test</b> command.  The closing
+	right bracket, <b class="COMMAND">]</b> , in an if/test should not
+	therefore be strictly necessary, however newer versions of Bash
+	require it.</p>
+<p>
+<a name="TTESTREF">
+</a>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="testconstructs_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <b class="COMMAND">test</b> command is a Bash <a href="./internal.html#BUILTINREF">builtin</a> which tests file
+	  types and compares strings. Therefore, in a Bash script,
+	  <b class="COMMAND">test</b> does <em>not</em> call
+	  the external <tt class="FILENAME">/usr/bin/test</tt> binary,
+	  which is part of the <i class="FIRSTTERM">sh-utils</i>
+	  package. Likewise, <b class="COMMAND">[</b> does not call
+	  <tt class="FILENAME">/usr/bin/[</tt>, which is linked to
+	  <tt class="FILENAME">/usr/bin/test</tt>.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>type test</b>
+</tt>
+<tt class="COMPUTEROUTPUT">test is a shell builtin</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>type '['</b>
+</tt>
+<tt class="COMPUTEROUTPUT">[ is a shell builtin</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>type '[['</b>
+</tt>
+<tt class="COMPUTEROUTPUT">[[ is a shell keyword</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>type ']]'</b>
+</tt>
+<tt class="COMPUTEROUTPUT">]] is a shell keyword</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>type ']'</b>
+</tt>
+<tt class="COMPUTEROUTPUT">bash: type: ]: not found</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>
+<a name="USRBINTEST">
+</a>
+</p>
+<p>If, for some reason, you wish to use
+	  <tt class="FILENAME">/usr/bin/test</tt> in a Bash script,
+	  then specify it by full pathname.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX11">
+</a>
+<p>
+<b>Example 7-2. Equivalence of <i class="FIRSTTERM">test</i>,
+	  <tt class="FILENAME">/usr/bin/test</tt>, <span class="TOKEN">[ ]</span>,
+	  and <tt class="FILENAME">/usr/bin/[</tt>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+echo
+
+if test -z "$1"
+then
+  echo "No command-line arguments."
+else
+  echo "First command-line argument is $1."
+fi
+
+echo
+
+if /usr/bin/test -z "$1"      # Equivalent to "test" builtin.
+#  ^^^^^^^^^^^^^              # Specifying full pathname.
+then
+  echo "No command-line arguments."
+else
+  echo "First command-line argument is $1."
+fi
+
+echo
+
+if [ -z "$1" ]                # Functionally identical to above code blocks.
+#   if [ -z "$1"                should work, but...
+#+  Bash responds to a missing close-bracket with an error message.
+then
+  echo "No command-line arguments."
+else
+  echo "First command-line argument is $1."
+fi
+
+echo
+
+
+if /usr/bin/[ -z "$1" ]       # Again, functionally identical to above.
+# if /usr/bin/[ -z "$1"       # Works, but gives an error message.
+#                             # Note:
+#                               This has been fixed in Bash, version 3.x.
+then
+  echo "No command-line arguments."
+else
+  echo "First command-line argument is $1."
+fi
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN3206">
+</a>
+<p>
+</p>
+<p>
+<a name="DBLBRACKETS">
+</a>The <span class="TOKEN">[[  ]]</span> construct
+	is the more versatile Bash version of <span class="TOKEN">[	]</span>. This
+	is the <i class="FIRSTTERM">extended test command</i>, adopted from
+	<i class="FIRSTTERM">ksh88</i>.</p>
+<p>*  *  *</p>
+<p>No filename expansion or word splitting takes place
+	between <span class="TOKEN">[[</span> and <span class="TOKEN">]]</span>, but there is
+	parameter expansion and command substitution.
+
+	<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">file=/etc/passwd
+
+if [[ -e $file ]]
+then
+  echo "Password file exists."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>Using the <b class="COMMAND">[[ ... ]]</b> test construct,
+	rather than <b class="COMMAND">[ ... ]</b> can prevent many
+	logic errors in scripts. For example, the <span class="TOKEN">&amp;&amp;</span>,
+	<span class="TOKEN">||</span>, <span class="TOKEN">&lt;</span>, and <span class="TOKEN">&gt;</span>
+	operators work within a <span class="TOKEN">[[  ]]</span> test, despite
+	giving an error within a <span class="TOKEN">[  ]</span> construct.</p>
+<p>
+<a name="DBLBRAEV">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">Arithmetic evaluation</i> of octal /
+        hexadecimal constants takes place automatically within a
+	<span class="TOKEN">[[ ... ]]</span> construct.
+	<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># [[ Octal and hexadecimal evaluation ]]
+# Thank you, Moritz Gronbach, for pointing this out.
+
+
+decimal=15
+octal=017   # = 15 (decimal)
+hex=0x0f    # = 15 (decimal)
+
+if [ "$decimal" -eq "$octal" ]
+then
+  echo "$decimal equals $octal"
+else
+  echo "$decimal is not equal to $octal"       # 15 is not equal to 017
+fi      # Doesn't evaluate within [ single brackets ]!
+
+
+if [[ "$decimal" -eq "$octal" ]]
+then
+  echo "$decimal equals $octal"                # 15 equals 017
+else
+  echo "$decimal is not equal to $octal"
+fi      # Evaluates within [[ double brackets ]]!
+
+if [[ "$decimal" -eq "$hex" ]]
+then
+  echo "$decimal equals $hex"                  # 15 equals 0x0f
+else
+  echo "$decimal is not equal to $hex"
+fi      # [[ $hexadecimal ]] also evaluates!</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="testconstructs_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Following an <b class="COMMAND">if</b>, neither the
+        <b class="COMMAND">test</b> command nor the test brackets ( [ ] or [[ ]] )
+	are strictly necessary.
+
+	<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">dir=/home/bozo
+
+if cd "$dir" 2&gt;/dev/null; then   # "2&gt;/dev/null" hides error message.
+  echo "Now in $dir."
+else
+  echo "Can't change to $dir."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+
+        The "if COMMAND" construct returns the exit status of COMMAND.</p>
+<p>Similarly, a condition within test brackets may stand alone
+	  without an <b class="COMMAND">if</b>, when used in combination
+	  with a <a href="./list-cons.html#LISTCONSREF">list construct</a>.
+
+	  <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">var1=20
+var2=22
+[ "$var1" -ne "$var2" ] &amp;&amp; echo "$var1 is not equal to $var2"
+
+home=/home/bozo
+[ -d "$home" ] || echo "$home directory does not exist."</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="DBLPRX">
+</a>The <a href="./dblparens.html">(( ))
+	construct</a> expands and evaluates an arithmetic
+	expression. If the expression evaluates as zero, it returns
+	an <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of
+	<span class="RETURNVALUE">1</span>, or <span class="QUOTE">"false"</span>. A non-zero
+	expression returns an exit status of <span class="RETURNVALUE">0</span>,
+	or <span class="QUOTE">"true"</span>. This is in marked contrast to using
+	the <b class="COMMAND">test</b> and <span class="TOKEN">[ ]</span> constructs
+	previously discussed.</p>
+<div class="EXAMPLE">
+<a name="ARITHTESTS">
+</a>
+<p>
+<b>Example 7-3. Arithmetic Tests using <span class="TOKEN">(( ))</span>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# arith-tests.sh
+# Arithmetic tests.
+
+# The (( ... )) construct evaluates and tests numerical expressions.
+# Exit status opposite from [ ... ] construct!
+
+(( 0 ))
+echo "Exit status of \"(( 0 ))\" is $?."         # 1
+
+(( 1 ))
+echo "Exit status of \"(( 1 ))\" is $?."         # 0
+
+(( 5 &gt; 4 ))                                      # true
+echo "Exit status of \"(( 5 &gt; 4 ))\" is $?."     # 0
+
+(( 5 &gt; 9 ))                                      # false
+echo "Exit status of \"(( 5 &gt; 9 ))\" is $?."     # 1
+
+(( 5 == 5 ))                                     # true
+echo "Exit status of \"(( 5 == 5 ))\" is $?."    # 0
+# (( 5 = 5 ))  gives an error message.
+
+(( 5 - 5 ))                                      # 0
+echo "Exit status of \"(( 5 - 5 ))\" is $?."     # 1
+
+(( 5 / 4 ))                                      # Division o.k.
+echo "Exit status of \"(( 5 / 4 ))\" is $?."     # 0
+
+(( 1 / 2 ))                                      # Division result &lt; 1.
+echo "Exit status of \"(( 1 / 2 ))\" is $?."     # Rounded off to 0.
+                                                 # 1
+
+(( 1 / 0 )) 2&gt;/dev/null                          # Illegal division by 0.
+#           ^^^^^^^^^^^
+echo "Exit status of \"(( 1 / 0 ))\" is $?."     # 1
+
+# What effect does the "2&gt;/dev/null" have?
+# What would happen if it were removed?
+# Try removing it, then rerunning the script.
+
+# ======================================= #
+
+# (( ... )) also useful in an if-then test.
+
+var1=5
+var2=4
+
+if (( var1 &gt; var2 ))
+then #^      ^      Note: Not $var1, $var2. Why?
+  echo "$var1 is greater than $var2"
+fi     # 5 is greater than 4
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN3140" href="./testconstructs.html#AEN3140">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<a name="TOKENREF">
+</a>A
+	<i class="FIRSTTERM">token</i> is a symbol or short
+	string with a special meaning attached to it (a <a href="./x17129.html#METAMEANINGREF">meta-meaning</a>). In Bash,
+	certain tokens, such as <b class="COMMAND">[</b> and <a href="./special-chars.html#DOTREF">. (dot-command)</a>, may expand to
+	<i class="FIRSTTERM">keywords</i> and commands.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./tests.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./fto.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Tests</td>
+<td align="center" valign="top" width="34%">
+<a href="./tests.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">File test operators</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

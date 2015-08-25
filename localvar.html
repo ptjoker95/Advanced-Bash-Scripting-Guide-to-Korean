@@ -1,0 +1,640 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Local Variables</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Functions" href="./functions.html">
+<link rel="PREVIOUS" title="Complex Functions and Function Complexities" href="./complexfunct.html">
+<link rel="NEXT" title="Recursion Without Local Variables" href="./recurnolocvar.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./complexfunct.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 24. Functions</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./recurnolocvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="LOCALVAR">
+</a>24.2. Local Variables</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="LOCALREF1">
+</a>What makes a variable
+        <i class="FIRSTTERM">local</i>?</b>
+</p>
+<dl>
+<dt>local variables</dt>
+<dd>
+<p>A variable declared as <i class="FIRSTTERM">local</i>
+	      is one that is visible only within the <a href="./special-chars.html#CODEBLOCKREF">block of code</a> in which it
+	      appears. It has local <a href="./subshells.html#SCOPEREF">scope</a>.
+	      In a function, a <i class="FIRSTTERM">local variable</i> has
+	      meaning only within that function block.
+
+	      <a name="AEN18568" href="#FTN.AEN18568">
+<span class="footnote">[1]</span>
+</a>
+      </p>
+<div class="EXAMPLE">
+<a name="EX62">
+</a>
+<p>
+<b>Example 24-12. Local variable visibility</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# ex62.sh: Global and local variables inside a function.
+
+func ()
+{
+  local loc_var=23       # Declared as local variable.
+  echo                   # Uses the 'local' builtin.
+  echo "\"loc_var\" in function = $loc_var"
+  global_var=999         # Not declared as local.
+                         # Therefore, defaults to global. 
+  echo "\"global_var\" in function = $global_var"
+}  
+
+func
+
+# Now, to see if local variable "loc_var" exists outside the function.
+
+echo
+echo "\"loc_var\" outside function = $loc_var"
+                                      # $loc_var outside function = 
+                                      # No, $loc_var not visible globally.
+echo "\"global_var\" outside function = $global_var"
+                                      # $global_var outside function = 999
+                                      # $global_var is visible globally.
+echo				      
+
+exit 0
+#  In contrast to C, a Bash variable declared inside a function
+#+ is local ONLY if declared as such.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="localvar_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Before a function is called, <em>all</em>
+	      variables declared within the function are invisible outside
+	      the body of the function, not just those explicitly declared
+	      as <i class="FIRSTTERM">local</i>.
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+func ()
+{
+global_var=37    #  Visible only within the function block
+                 #+ before the function has been called. 
+}                #  END OF FUNCTION
+
+echo "global_var = $global_var"  # global_var =
+                                 #  Function "func" has not yet been called,
+                                 #+ so $global_var is not visible here.
+
+func
+echo "global_var = $global_var"  # global_var = 37
+                                 # Has been set by function call.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="localvar_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="EXITVALANOMALY01">
+</a>
+</p>
+<p>As Evgeniy Ivanov points out, when declaring and
+              setting a local variable in a single command, apparently the
+              order of operations is to <em>first set the variable,
+              and only afterwards restrict it to local scope</em>.
+              This is reflected in the <a href="./exit-status.html#EXITSTATUSREF">return value</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+echo "==OUTSIDE Function (global)=="
+t=$(exit 1)
+echo $?      # 1
+             # As expected.
+echo
+
+function0 ()
+{
+
+echo "==INSIDE Function=="
+echo "Global"
+t0=$(exit 1)
+echo $?      # 1
+             # As expected.
+
+echo
+echo "Local declared &amp; assigned in same command."
+local t1=$(exit 1)
+echo $?      # 0
+             # Unexpected!
+#  Apparently, the variable assignment takes place before
+#+ the local declaration.
+#+ The return value is for the latter.
+
+echo
+echo "Local declared, then assigned (separate commands)."
+local t2
+t2=$(exit 1)
+echo $?      # 1
+             # As expected.
+
+}
+
+function0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<div class="SECT2">
+<h2 class="SECT2">
+<a name="LOCVARRECUR">
+</a>24.2.1. Local variables and recursion.</h2>
+<p>
+<a name="RECURSIONREF0">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN18598">
+</a>
+<p>
+</p>
+<p>
+<a name="RECURSIONREF">
+</a>
+</p>
+<p>
+<i class="FIRSTTERM">Recursion</i> is an interesting
+		and sometimes useful form of
+		<i class="FIRSTTERM">self-reference</i>.	<a href="./biblio.html#MAYERREF">Herbert Mayer</a> defines it
+		as <span class="QUOTE">". . . expressing an algorithm by using a
+		simpler version of that same algorithm . . ."</span>
+</p>
+<p>Consider a definition defined in terms of itself,
+		  <a name="AEN18607" href="#FTN.AEN18607">
+<span class="footnote">[2]</span>
+</a>
+		an expression implicit in its own expression,
+		  <a name="AEN18610" href="#FTN.AEN18610">
+<span class="footnote">[3]</span>
+</a>
+		<em>a snake swallowing its own
+		tail</em>,
+		  <a name="AEN18614" href="#FTN.AEN18614">
+<span class="footnote">[4]</span>
+</a>
+		or . . . a function that calls itself.
+		  <a name="AEN18617" href="#FTN.AEN18617">
+<span class="footnote">[5]</span>
+</a>
+		</p>
+<p>
+<a name="RECURSIONDEMO0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="RECURSIONDEMO">
+</a>
+<p>
+<b>Example 24-13. Demonstration of a simple recursive function</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# recursion-demo.sh
+# Demonstration of recursion.
+
+RECURSIONS=9   # How many times to recurse.
+r_count=0      # Must be global. Why?
+
+recurse ()
+{
+  var="$1"
+
+  while [ "$var" -ge 0 ]
+  do
+    echo "Recursion count = "$r_count"  +-+  \$var = "$var""
+    (( var-- )); (( r_count++ ))
+    recurse "$var"  #  Function calls itself (recurses)
+  done              #+ until what condition is met?
+}
+
+recurse $RECURSIONS
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="RECURSIONDEMO02">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="RECURSIONDEMO2">
+</a>
+<p>
+<b>Example 24-14. Another simple demonstration</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# recursion-def.sh
+# A script that defines "recursion" in a rather graphic way.
+
+RECURSIONS=10
+r_count=0
+sp=" "
+
+define_recursion ()
+{
+  ((r_count++))
+  sp="$sp"" "
+  echo -n "$sp"
+  echo "\"The act of recurring ... \""   # Per 1913 Webster's dictionary.
+
+  while [ $r_count -le $RECURSIONS ]
+  do
+    define_recursion
+  done
+}
+
+echo
+echo "Recursion: "
+define_recursion
+echo
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Local variables are a useful tool for writing recursive
+	      code, but this practice generally involves a great deal of
+	      computational overhead and is definitely
+	      <em>not</em> recommended in a shell script.
+
+	         <a name="AEN18632" href="#FTN.AEN18632">
+<span class="footnote">[6]</span>
+</a>
+	      
+	      </p>
+<p>
+<a name="FACTORIALREF">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="EX63">
+</a>
+<p>
+<b>Example 24-15. Recursion, using a local variable</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#               factorial
+#               ---------
+
+
+# Does bash permit recursion?
+# Well, yes, but...
+# It's so slow that you gotta have rocks in your head to try it.
+
+
+MAX_ARG=5
+E_WRONG_ARGS=85
+E_RANGE_ERR=86
+
+
+if [ -z "$1" ]
+then
+  echo "Usage: `basename $0` number"
+  exit $E_WRONG_ARGS
+fi
+
+if [ "$1" -gt $MAX_ARG ]
+then
+  echo "Out of range ($MAX_ARG is maximum)."
+  #  Let's get real now.
+  #  If you want greater range than this,
+  #+ rewrite it in a Real Programming Language.
+  exit $E_RANGE_ERR
+fi  
+
+fact ()
+{
+  local number=$1
+  #  Variable "number" must be declared as local,
+  #+ otherwise this doesn't work.
+  if [ "$number" -eq 0 ]
+  then
+    factorial=1    # Factorial of 0 = 1.
+  else
+    let "decrnum = number - 1"
+    fact $decrnum  # Recursive function call (the function calls itself).
+    let "factorial = $number * $?"
+  fi
+
+  return $factorial
+}
+
+fact $1
+echo "Factorial of $1 is $?."
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Also see <a href="./contributed-scripts.html#PRIMES">Example A-15</a> for an example of
+	      recursion in a script. Be aware that recursion is
+	      resource-intensive and executes slowly, and is therefore
+	      generally not appropriate in a script.</p>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18568" href="./localvar.html#AEN18568">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>However, as Thomas Braunberger points out, a local
+                variable declared in a function <em>is also visible
+                to functions called by the parent
+                function.</em>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+function1 ()
+{
+  local func1var=20
+
+  echo "Within function1, \$func1var = $func1var."
+
+  function2
+}
+
+function2 ()
+{
+  echo "Within function2, \$func1var = $func1var."
+}
+
+function1
+
+exit 0
+
+
+# Output of the script:
+
+# Within function1, $func1var = 20.
+# Within function2, $func1var = 20.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>This is documented in the Bash manual:</p>
+<p>
+<span class="QUOTE">"Local can only be used within a function;
+                it makes the variable name have a visible scope
+                restricted to that function <em>and its
+			children</em>."</span> [emphasis added]
+                <em>The ABS Guide author considers this behavior
+                to be a bug.</em>
+</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18607" href="./localvar.html#AEN18607">
+<span class="footnote">[2]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Otherwise known as
+		  <i class="FIRSTTERM">redundancy</i>.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18610" href="./localvar.html#AEN18610">
+<span class="footnote">[3]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Otherwise known as
+		  <i class="FIRSTTERM">tautology</i>.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18614" href="./localvar.html#AEN18614">
+<span class="footnote">[4]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Otherwise known as a
+		  <i class="FIRSTTERM">metaphor</i>.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18617" href="./localvar.html#AEN18617">
+<span class="footnote">[5]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Otherwise known as a
+		  <i class="FIRSTTERM">recursive function</i>.</p>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN18632" href="./localvar.html#AEN18632">
+<span class="footnote">[6]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>Too many levels of recursion may crash a
+		   script with a segfault.
+		   <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#  Warning: Running this script could possibly lock up your system!
+#  If you're lucky, it will segfault before using up all available memory.
+
+recursive_function ()		   
+{
+echo "$1"     # Makes the function do something, and hastens the segfault.
+(( $1 &lt; $2 )) &amp;&amp; recursive_function $(( $1 + 1 )) $2;
+#  As long as 1st parameter is less than 2nd,
+#+ increment 1st and recurse.
+}
+
+recursive_function 1 50000  # Recurse 50,000 levels!
+#  Most likely segfaults (depending on stack size, set by ulimit -m).
+
+#  Recursion this deep might cause even a C program to segfault,
+#+ by using up all the memory allotted to the stack.
+
+
+echo "This will probably not print."
+exit 0  # This script will not exit normally.
+
+#  Thanks, Stéphane Chazelas.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./complexfunct.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./recurnolocvar.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Complex Functions and Function Complexities</td>
+<td align="center" valign="top" width="34%">
+<a href="./functions.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Recursion Without Local Variables</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

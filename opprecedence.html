@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Operator Precedence</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Operations and Related Topics" href="./operations.html">
+<link rel="PREVIOUS" title="The Double-Parentheses Construct" href="./dblparens.html">
+<link rel="NEXT" title="Beyond the Basics" href="./part3.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./dblparens.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 8. Operations and Related Topics</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./part3.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="OPPRECEDENCE">
+</a>8.4. Operator Precedence</h1>
+<p>
+<a name="OPPRECEDENCE1">
+</a>
+</p>
+<p>        In a script, operations execute in order of
+        <i class="FIRSTTERM">precedence</i>: the higher precedence operations
+	execute <em>before</em> the lower precedence ones.
+	  <a name="AEN4290" href="#FTN.AEN4290">
+<span class="footnote">[1]</span>
+</a>
+      </p>
+<div class="TABLE">
+<a name="AEN4294">
+</a>
+<p>
+<b>Table 8-1. Operator Precedence</b>
+</p>
+<table class="CALSTABLE" border="1">
+<thead>
+<tr>
+<th align="LEFT" valign="TOP">Operator</th>
+<th align="LEFT" valign="TOP">Meaning</th>
+<th align="LEFT" valign="TOP">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">
+</tt>
+</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">
+<b class="COMMAND">HIGHEST PRECEDENCE</b>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">var++ var--</tt>
+</td>
+<td align="LEFT" valign="TOP">post-increment, post-decrement</td>
+<td align="LEFT" valign="TOP">
+<a href="./assortedtips.html#CSTYLE">C-style</a> operators</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">++var --var</tt>
+</td>
+<td align="LEFT" valign="TOP">pre-increment, pre-decrement</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">! ~</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./special-chars.html#NOTREF">negation</a>
+</td>
+<td align="LEFT" valign="TOP">logical / bitwise, inverts sense of following
+	        operator</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">**</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#EXPONENTIATIONREF">exponentiation</a>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#AROPS1">arithmetic
+	        operation</a>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">* / %</tt>
+</td>
+<td align="LEFT" valign="TOP">multiplication, division, modulo</td>
+<td align="LEFT" valign="TOP">arithmetic operation</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">+ -</tt>
+</td>
+<td align="LEFT" valign="TOP">addition, subtraction</td>
+<td align="LEFT" valign="TOP">arithmetic operation</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">&lt;&lt; &gt;&gt;</tt>
+</td>
+<td align="LEFT" valign="TOP">left, right shift</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#BITWSOPS1">bitwise</a>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-z -n</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<i class="FIRSTTERM">unary</i> comparison</td>
+<td align="LEFT" valign="TOP">string is/is-not <a href="./comparison-ops.html#STRINGNULL">null</a>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-e -f -t -x, etc.</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<i class="FIRSTTERM">unary</i> comparison</td>
+<td align="LEFT" valign="TOP">
+<a href="./fto.html">file-test</a>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">&lt; -lt &gt; -gt &lt;= -le &gt;= -ge</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<i class="FIRSTTERM">compound</i> comparison</td>
+<td align="LEFT" valign="TOP">string and integer</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-nt -ot -ef</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<i class="FIRSTTERM">compound</i> comparison</td>
+<td align="LEFT" valign="TOP">file-test</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">== -eq <a href="./comparison-ops.html#NOTEQUAL">!=</a>
+	       -ne</tt>
+</td>
+<td align="LEFT" valign="TOP">equality / inequality</td>
+<td align="LEFT" valign="TOP">test operators, string and integer</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">&amp;</tt>
+</td>
+<td align="LEFT" valign="TOP">AND</td>
+<td align="LEFT" valign="TOP">bitwise</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">^</tt>
+</td>
+<td align="LEFT" valign="TOP">XOR</td>
+<td align="LEFT" valign="TOP">
+<i class="FIRSTTERM">exclusive</i> OR, bitwise</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">|</tt>
+</td>
+<td align="LEFT" valign="TOP">OR</td>
+<td align="LEFT" valign="TOP">bitwise</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">&amp;&amp; -a</tt>
+</td>
+<td align="LEFT" valign="TOP">AND</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#LOGOPS1">logical</a>,
+	        <i class="FIRSTTERM">compound</i>
+	        comparison</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">|| -o</tt>
+</td>
+<td align="LEFT" valign="TOP">OR</td>
+<td align="LEFT" valign="TOP">logical, <i class="FIRSTTERM">compound</i>
+	        comparison</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">?:</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./special-chars.html#CSTRINARY">trinary
+	        operator</a>
+</td>
+<td align="LEFT" valign="TOP">C-style</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">=</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./varassignment.html#EQREF">assignment</a>
+</td>
+<td align="LEFT" valign="TOP">(do not confuse with equality
+	        <i class="FIRSTTERM">test</i>)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">*= /= %= += -= &lt;&lt;= &gt;&gt;= &amp;=</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#ARITHOPSCOMB">combination
+	        assignment</a>
+</td>
+<td align="LEFT" valign="TOP">times-equal, divide-equal, mod-equal, etc.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">,</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./ops.html#COMMAOP">comma</a>
+</td>
+<td align="LEFT" valign="TOP">links a sequence of operations</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">
+</tt>
+</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">
+<b class="COMMAND">LOWEST PRECEDENCE</b>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In practice, all you really need to remember is the
+      following:</p>
+<p>
+</p>
+<ul>
+<li>
+<p>The <span class="QUOTE">"My Dear Aunt Sally"</span> mantra (<em>multiply,
+	  divide, add, subtract</em>) for the familiar <a href="./ops.html#AROPS1">arithmetic operations</a>.</p>
+</li>
+<li>
+<p>The <i class="FIRSTTERM">compound</i> logical operators,
+	  <b class="COMMAND">&amp;&amp;</b>, <b class="COMMAND">||</b>, <b class="COMMAND">-a</b>,
+	  and <b class="COMMAND">-o</b> have low precedence.</p>
+</li>
+<li>
+<p>The order of evaluation of equal-precedence operators is
+	  usually <i class="FIRSTTERM">left-to-right</i>.</p>
+</li>
+</ul>
+<p>Now, let's utilize our knowledge of operator precedence to
+	  analyze a couple of lines from the
+	  <tt class="FILENAME">/etc/init.d/functions file</tt>, as found in
+	  the <i class="FIRSTTERM">Fedora Core</i> Linux distro.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">while [ -n "$remaining" -a "$retry" -gt 0 ]; do
+
+# This looks rather daunting at first glance.
+
+
+# Separate the conditions:
+while [ -n "$remaining" -a "$retry" -gt 0 ]; do
+#       --condition 1-- ^^ --condition 2-
+
+#  If variable "$remaining" is not zero length
+#+      AND (-a)
+#+ variable "$retry" is greater-than zero
+#+ then
+#+ the [ expresion-within-condition-brackets ] returns success (0)
+#+ and the while-loop executes an iteration.
+#  ==============================================================
+#  Evaluate "condition 1" and "condition 2" ***before***
+#+ ANDing them. Why? Because the AND (-a) has a lower precedence
+#+ than the -n and -gt operators,
+#+ and therefore gets evaluated *last*.
+
+#################################################################
+
+if [ -f /etc/sysconfig/i18n -a -z "${NOLOCALE:-}" ] ; then
+
+
+# Again, separate the conditions:
+if [ -f /etc/sysconfig/i18n -a -z "${NOLOCALE:-}" ] ; then
+#    --condition 1--------- ^^ --condition 2-----
+
+#  If file "/etc/sysconfig/i18n" exists
+#+      AND (-a)
+#+ variable $NOLOCALE is zero length
+#+ then
+#+ the [ test-expresion-within-condition-brackets ] returns success (0)
+#+ and the commands following execute.
+#
+#  As before, the AND (-a) gets evaluated *last*
+#+ because it has the lowest precedence of the operators within
+#+ the test brackets.
+#  ==============================================================
+#  Note:
+#  ${NOLOCALE:-} is a parameter expansion that seems redundant.
+#  But, if $NOLOCALE has not been declared, it gets set to *null*,
+#+ in effect declaring it.
+#  This makes a difference in some contexts.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="opprecedence_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>To avoid confusion or error in a complex sequence of test
+        operators, break up the sequence into bracketed sections.
+      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ "$v1" -gt "$v2"  -o  "$v1" -lt "$v2"  -a  -e "$filename" ]
+# Unclear what's going on here...
+
+if [[ "$v1" -gt "$v2" ]] || [[ "$v1" -lt "$v2" ]] &amp;&amp; [[ -e "$filename" ]]
+# Much better -- the condition tests are grouped in logical sections.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN4290" href="./opprecedence.html#AEN4290">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>
+<i class="FIRSTTERM">Precedence</i>, in this context,
+	    has approximately the same meaning as
+	    <i class="FIRSTTERM">priority</i>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./dblparens.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./part3.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">The Double-Parentheses Construct</td>
+<td align="center" valign="top" width="34%">
+<a href="./operations.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Beyond the Basics</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

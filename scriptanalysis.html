@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Analyzing Scripts</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Exercises" href="./exercises.html">
+<link rel="PREVIOUS" title="Exercises" href="./exercises.html">
+<link rel="NEXT" title="Writing Scripts" href="./writingscripts.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./exercises.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Appendix O. Exercises</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./writingscripts.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="SCRIPTANALYSIS">
+</a>O.1. Analyzing Scripts</h1>
+<p>Examine the following script. Run it, then explain what it
+        does.  Annotate the script and rewrite it in a more compact and
+        elegant manner.</p>
+<p>       <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+MAX=10000
+
+
+  for((nr=1; nr&lt;$MAX; nr++))
+  do
+
+    let "t1 = nr % 5"
+    if [ "$t1" -ne 3 ]
+    then
+      continue
+    fi
+
+    let "t2 = nr % 7"
+    if [ "$t2" -ne 4 ]
+    then
+      continue
+    fi
+
+    let "t3 = nr % 9"
+    if [ "$t3" -ne 5 ]
+    then
+      continue
+    fi
+
+  break   # What happens when you comment out this line? Why?
+
+  done
+
+  echo "Number = $nr"
+
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+       </p>
+<p>---</p>
+<p>Explain what the following script does. It is really just
+        a parameterized command-line pipe.</p>
+<p>        <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+DIRNAME=/usr/bin
+FILETYPE="shell script"
+LOGFILE=logfile
+
+file "$DIRNAME"/* | fgrep "$FILETYPE" | tee $LOGFILE | wc -l
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>---</p>
+<p>Examine and explain the following script. For hints, you
+        might refer to the listings for <a href="./moreadv.html#FINDREF">find</a> and <a href="./system.html#STATREF">stat</a>.</p>
+<p>        <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+# Author:  Nathan Coulter
+# This code is released to the public domain.
+# The author gave permission to use this code snippet in the ABS Guide.
+
+find -maxdepth 1 -type f -printf '%f\000'  | {
+   while read -d $'\000'; do
+      mv "$REPLY" "$(date -d "$(stat -c '%y' "$REPLY") " '+%Y%m%d%H%M%S'
+      )-$REPLY"
+   done
+}
+
+# Warning: Test-drive this script in a "scratch" directory.
+# It will somehow affect all the files there.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+<p>---</p>
+<p>A reader sent in the following code snippet.</p>
+<p>         <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">while read LINE
+do
+  echo $LINE
+done &lt; `tail -f /var/log/messages`</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	 </p>
+<p>He wished to write a script tracking changes to the system log
+	   file, <tt class="FILENAME">/var/log/messages</tt>. Unfortunately,
+	   the above code block hangs and does nothing
+	   useful. Why? Fix this so it does work. (Hint:
+	   rather than <a href="./redircb.html#REDIRREF">redirecting the
+	   <tt class="FILENAME">stdin</tt> of the loop</a>, try a <a href="./special-chars.html#PIPEREF">pipe</a>.)</p>
+<p>---</p>
+<p>Analyze the following <span class="QUOTE">"one-liner"</span> (here
+        split into two lines for clarity) contributed by Rory
+        Winston:</p>
+<p>      <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">export SUM=0; for f in $(find src -name "*.java");
+do export SUM=$(($SUM + $(wc -l $f | awk '{ print $1 }'))); done; echo $SUM</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	 </p>
+<p>Hint: First, break the script up into bite-sized
+	sections. Then, carefully examine its use of <a href="./dblparens.html">double-parentheses</a> arithmetic,
+	the <a href="./internal.html#EXPORTREF">export</a> command,
+	the <a href="./moreadv.html#FINDREF">find</a> command, the
+	<a href="./textproc.html#WCREF">wc</a> command, and <a href="./awk.html#AWKREF">awk</a>.</p>
+<p>---</p>
+<p>Analyze <a href="./contributed-scripts.html#LIFESLOW">Example A-10</a>, and reorganize it in a
+	simplified and more logical style. See how many of the variables
+	can be eliminated, and try to optimize the script to speed up
+	its execution time.</p>
+<p>Alter the script so that it accepts any ordinary ASCII
+	text file as input for its initial <span class="QUOTE">"generation"</span>. The
+	script will read the first <tt class="PARAMETER">
+<i>$ROW*$COL</i>
+</tt>
+	characters, and set the occurrences of vowels as
+	<span class="QUOTE">"living"</span> cells. Hint: be sure to translate the
+	spaces in the input file to underscore characters.</p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./exercises.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./writingscripts.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Exercises</td>
+<td align="center" valign="top" width="34%">
+<a href="./exercises.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Writing Scripts</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

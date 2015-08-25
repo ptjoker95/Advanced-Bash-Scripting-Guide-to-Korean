@@ -1,0 +1,1138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Writing Scripts</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Exercises" href="./exercises.html">
+<link rel="PREVIOUS" title="Analyzing Scripts" href="./scriptanalysis.html">
+<link rel="NEXT" title="Revision History" href="./revisionhistory.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./scriptanalysis.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Appendix O. Exercises</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./revisionhistory.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="WRITINGSCRIPTS">
+</a>O.2. Writing Scripts</h1>
+<p>
+<a name="WRITINGSCRIPTS1">
+</a>
+</p>
+<p>Write a script to carry out each of the following tasks.</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="EXEASY1">
+</a>EASY</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">Self-reproducing Script</b>
+</dt>
+<dd>
+<p>Write a script that backs itself up, that is, copies
+	      itself to a file named <tt class="FILENAME">backup.sh</tt>.</p>
+<p>Hint: Use the <a href="./basic.html#CATREF">cat</a> command
+	      and the appropriate <a href="./othertypesv.html#SCRNAMEPARAM">positional
+	      parameter</a>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Home Directory Listing</b>
+</dt>
+<dd>
+<p>Perform a recursive directory listing on the user's home
+	      directory and save the information to a file. Compress
+	      the file, have the script prompt the user to insert
+	      a USB flash drive, then press <b class="KEYCAP">ENTER</b>.
+              Finally, save the file to the flash drive after making
+              certain the flash drive has properly mounted by parsing
+              the output of <a href="./system.html#DFREF">df</a>. Note that
+              the flash drive must be <i class="FIRSTTERM">unmounted</i>
+              before it is removed.</p>
+</dd>
+<dt>
+<b class="COMMAND">Converting  <a href="./loops1.html#FORLOOPREF1">for</a>
+	    loops to <a href="./loops1.html#WHILELOOPREF">while</a> and <a href="./loops1.html#UNTILLOOPREF">until</a> loops</b>
+</dt>
+<dd>
+<p>Convert the <i class="FIRSTTERM">for loops</i> in <a href="./loops1.html#EX22">Example 11-1</a> to <i class="FIRSTTERM">while
+	      loops</i>. Hint: store the data in an <a href="./arrays.html#ARRAYREF">array</a> and step through the array
+	      elements.</p>
+<p>Having already done the <span class="QUOTE">"heavy lifting,"</span>
+	      now convert the loops in the example to <i class="FIRSTTERM"> until
+	      loops</i>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Changing the line spacing of a text file</b>
+</dt>
+<dd>
+<p>Write a script that reads each line of a target file, then
+	      writes the line back to <tt class="FILENAME">stdout</tt>, but with
+	      an extra blank line following. This has the effect of
+	      <em>double-spacing</em> the file.</p>
+<p>Include all necessary code to check whether the script
+	      gets the necessary command-line argument (a filename),
+	      and whether the specified file exists.</p>
+<p>When the script runs correctly, modify it to
+	      <em>triple-space</em> the target file.</p>
+<p>Finally, write a script to remove all blank lines from
+	      the target file, <em>single-spacing</em> it.</p>
+</dd>
+<dt>
+<b class="COMMAND">Backwards Listing</b>
+</dt>
+<dd>
+<p>Write a script that echoes itself to
+	      <tt class="FILENAME">stdout</tt>, but
+	      <em>backwards</em>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Automatically Decompressing Files</b>
+</dt>
+<dd>
+<p>Given a list of filenames as input, this script
+	      queries each target file (parsing the output of the
+	      <a href="./filearchiv.html#FILEREF">file</a> command) for
+	      the type of compression used on it. Then the script
+	      automatically invokes the appropriate decompression command
+	      (<b class="COMMAND">gunzip</b>, <b class="COMMAND">bunzip2</b>,
+	      <b class="COMMAND">unzip</b>, <b class="COMMAND">uncompress</b>,
+	      or whatever). If a target file is not compressed, the
+	      script emits a warning message, but takes no other action
+	      on that particular file.</p>
+</dd>
+<dt>
+<b class="COMMAND">Unique System ID</b>
+</dt>
+<dd>
+<p>Generate a <span class="QUOTE">"unique"</span> 6-digit hexadecimal
+	      identifier for your computer. Do <em>not</em>
+	      use the flawed <a href="./system.html#HOSTIDREF">hostid</a>
+	      command. Hint: <b class="COMMAND">
+<a href="./filearchiv.html#MD5SUMREF">md5sum</a>
+	      <a href="./files.html#DATAFILESREF1">
+<tt class="FILENAME">/etc/passwd</tt>
+</a>
+</b>,
+	      then select the first 6 digits of output.</p>
+</dd>
+<dt>
+<b class="COMMAND">Backup</b>
+</dt>
+<dd>
+<p>Archive as a <span class="QUOTE">"tarball"</span>
+	      (<tt class="FILENAME">*.tar.gz</tt> file) all the files
+	      in your home directory tree
+	      (<tt class="FILENAME">/home/your-name</tt>) that have
+	      been modified in the last 24 hours. Hint: use <a href="./moreadv.html#FINDREF">find</a>.</p>
+<p>Optional: you may use this as the basis of a
+              <i class="FIRSTTERM">backup</i> script.</p>
+</dd>
+<dt>
+<b class="COMMAND">Checking whether a process is still running</b>
+</dt>
+<dd>
+<p>Given a <a href="./special-chars.html#PROCESSIDREF">process ID</a>
+	      (<i class="FIRSTTERM">PID</i>) as an argument, this script
+	      will check, at user-specified intervals, whether
+	      the given process is still running. You may use
+	      the <a href="./system.html#PPSSREF">ps</a> and <a href="./timedate.html#SLEEPREF">sleep</a> commands.</p>
+</dd>
+<dt>
+<b class="COMMAND">Primes</b>
+</dt>
+<dd>
+<p>Print (to <tt class="FILENAME">stdout</tt>) all
+		      prime numbers between 60000 and 63000. The output
+		      should be nicely formatted in columns (hint:
+		      use <a href="./internal.html#PRINTFREF">printf</a>).</p>
+</dd>
+<dt>
+<b class="COMMAND">Lottery Numbers</b>
+</dt>
+<dd>
+<p>One type of lottery involves picking five
+	      different numbers, in the range of 1 - 50. Write a
+	      script that generates five pseudorandom numbers in this
+	      range, <em>with no duplicates</em>. The
+	      script will give the option of echoing the numbers to
+	      <tt class="FILENAME">stdout</tt> or saving them to a file,
+	      along with the date and time the particular number set
+	      was generated. (If your script consistently generates
+	      <em>winning</em> lottery numbers, then you
+	      can retire on the proceeds and leave shell scripting to
+	      those of us who have to work for a living.)</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="EXMEDIUM1">
+</a>INTERMEDIATE</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">Integer or String</b>
+</dt>
+<dd>
+<p>Write a script <a href="./functions.html#FUNCTIONREF">function</a>
+	      that determines if an argument passed to it is an integer
+	      or a string. The function will return TRUE (0) if
+	      passed an integer, and FALSE (1) if passed a string.</p>
+<p>Hint: What does the following expression return
+	      when <tt class="VARNAME">$1</tt> is <em>not</em>
+	      an integer?</p>
+<p>
+<tt class="VARNAME">expr $1 + 0</tt>
+</p>
+</dd>
+<dt>
+<b class="COMMAND">
+<a href="./special-chars.html#ASCIIDEF">ASCII</a>
+              to Integer</b>
+</dt>
+<dd>
+<p>The <i class="FIRSTTERM">atoi</i> function in
+                <b class="COMMAND">C</b> converts a string character to
+                an integer. Write a shell script function that performs
+		the same operation. Likewise, write a shell script function
+		that does the inverse, mirroring the <b class="COMMAND">C</b>
+		<i class="FIRSTTERM">itoa</i> function which converts an
+		integer into an ASCII character.</p>
+</dd>
+<dt>
+<b class="COMMAND">Managing Disk Space</b>
+</dt>
+<dd>
+<p>List, one at a time, all files larger than 100K in
+	      the <tt class="FILENAME">/home/username</tt>
+	      directory tree. Give the user the option to delete or
+	      compress the file, then proceed to show the next one. Write
+	      to a logfile the names of all deleted files and the
+	      deletion times.</p>
+</dd>
+<dt>
+<b class="COMMAND">Banner</b>
+</dt>
+<dd>
+<p>Simulate the functionality of the deprecated <a href="./extmisc.html#BANNERREF">banner</a> command in a script.</p>
+</dd>
+<dt>
+<b class="COMMAND">Removing Inactive Accounts</b>
+</dt>
+<dd>
+<p>Inactive accounts on a network server waste disk space and may
+	      become a security risk. Write an administrative script
+	      (to be invoked by <i class="FIRSTTERM">root</i> or the <a href="./system.html#CRONREF">cron daemon</a>) that checks
+	      for and deletes user accounts that have not been accessed
+	      within the last 90 days.</p>
+</dd>
+<dt>
+<b class="COMMAND">Enforcing Disk Quotas</b>
+</dt>
+<dd>
+<p>Write a script for a multi-user system that checks users'
+	      disk usage. If a user surpasses a preset limit
+	      (500 MB, for example) in her <tt class="FILENAME">/home/username</tt>
+	      directory, then the script automatically sends her a
+	      <span class="QUOTE">"pigout"</span> warning e-mail.</p>
+<p>The
+	      script will use the <a href="./system.html#DUREF">du</a>
+	      and <a href="./communications.html#COMMMAIL1">mail</a> commands. As
+	      an option, it will allow setting and enforcing quotas
+	      using the <a href="./system.html#QUOTAREF">quota</a> and <a href="./system.html#SETQUOTAREF">setquota</a> commands.</p>
+</dd>
+<dt>
+<b class="COMMAND">Logged in User Information</b>
+</dt>
+<dd>
+<p>For all logged in users, show their real names and the time
+              and date of their last login.</p>
+<p>Hint: use <a href="./system.html#WHOREF">who</a>,
+	      <a href="./system.html#LASTLOGREF">lastlog</a>,
+	      and parse <a href="./files.html#DATAFILESREF1">
+<tt class="FILENAME">/etc/passwd</tt>
+</a>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Safe Delete</b>
+</dt>
+<dd>
+<p>Implement, as a script, a <span class="QUOTE">"safe"</span> delete
+	      command, <tt class="FILENAME">sdel.sh</tt>. Filenames passed as
+	      command-line arguments to this script are not deleted,
+	      but instead <a href="./filearchiv.html#GZIPREF">gzipped</a>
+	      if not already compressed (use <a href="./filearchiv.html#FILEREF">file</a> to check), then moved
+	      to a <tt class="FILENAME">~/TRASH</tt>
+	      directory. Upon invocation, the script checks the <tt class="FILENAME">~/TRASH</tt> directory for files
+	      older than 48 hours and <a href="./basic.html#RMREF">permanently
+	      deletes</a> them. (An better alternative might be to
+	      have a second script handle this, periodically invoked
+	      by the <a href="./system.html#CRONREF">cron daemon</a>.)</p>
+<p>
+<em>Extra credit:</em> Write the script
+	      so it can handle files and directories <a href="./basic.html#RMRECURS">recursively</a>. This would give it
+	      the capability of <span class="QUOTE">"safely deleting"</span> entire
+	      directory structures.</p>
+</dd>
+<dt>
+<b class="COMMAND">Making Change</b>
+</dt>
+<dd>
+<p>What is the most efficient way to make change for $1.68,
+	      using only coins in common circulations (up to 25c)? It's
+	      6 quarters, 1 dime, a nickel, and three cents.</p>
+<p>Given any arbitrary command-line input in dollars and
+	      cents ($*.??), calculate the change, using the minimum
+	      number of coins. If your home country is not the United
+	      States, you may use your local currency units instead. The
+	      script will need to parse the command-line input, then
+	      change it to multiples of the smallest monetary unit (cents
+	      or whatever). Hint: look at <a href="./complexfunct.html#EX61">Example 24-8</a>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Quadratic Equations</b>
+</dt>
+<dd>
+<p>Solve a <i class="FIRSTTERM">quadratic</i> equation of the form
+	      <tt class="PARAMETER">
+<i>Ax^2 + Bx + C = 0</i>
+</tt>. Have a script take
+	      as arguments the coefficients, <tt class="USERINPUT">
+<b>A</b>
+</tt>,
+	      <tt class="USERINPUT">
+<b>B</b>
+</tt>, and <tt class="USERINPUT">
+<b>C</b>
+</tt>,
+	      and return the solutions to five decimal places.</p>
+<p>Hint: pipe the coefficients to <a href="./mathc.html#BCREF">bc</a>, using the well-known formula,
+	      <tt class="PARAMETER">
+<i>x = ( -B +/- sqrt( B^2 - 4AC ) ) / 2A</i>
+</tt>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Table of Logarithms</b>
+</dt>
+<dd>
+<p>Using the <a href="./mathc.html#BCREF">bc</a> and <a href="./internal.html#PRINTFREF">printf</a> commands, print out a
+	      nicely-formatted table of eight-place natural logarithms
+	      in the interval between 0.00 and 100.00, in steps of
+	      .01.</p>
+<p>Hint: <i class="FIRSTTERM">bc</i> requires the
+	      <tt class="OPTION">-l</tt> option to load the math library.</p>
+</dd>
+<dt>
+<b class="COMMAND">Unicode Table</b>
+</dt>
+<dd>
+<p>Using <a href="./asciitable.html#ASCIISH">Example T-1</a> as a template,
+                 write a script that prints to a file a complete
+                 <a href="./bashver4.html#UNICODEREF">Unicode</a> table.</p>
+<p>Hint: Use the <tt class="OPTION">-e</tt> option to
+		 <a href="./internal.html#ECHOREF">echo</a>:
+		 <b class="COMMAND">echo -e '\uXXXX'</b>, where
+		 <tt class="REPLACEABLE">
+<i>XXXX</i>
+</tt>
+		 is the Unicode numerical character designation.
+		 This requires <a href="./bashver4.html#BASH42">version 4.2</a>
+		 or later of Bash.</p>
+</dd>
+<dt>
+<b class="COMMAND">Sum of Matching Numbers</b>
+</dt>
+<dd>
+<p>Find the sum of all five-digit numbers (in the range
+	      10000 - 99999) containing <em>exactly two</em>
+	      out of the following set of digits: { 4, 5, 6 }. These may
+	      repeat within the same number, and if so, they count once
+	      for each occurrence.</p>
+<p>Some examples of <i class="FIRSTTERM">matching numbers</i> are
+	      42057, 74638, and 89515.</p>
+</dd>
+<dt>
+<b class="COMMAND">Lucky Numbers</b>
+</dt>
+<dd>
+<p>A <i class="FIRSTTERM">lucky number</i> is one whose
+	      individual digits add up to 7, in successive additions. For
+	      example, 62431 is a <i class="FIRSTTERM">lucky number</i>
+	      (6 + 2 + 4 + 3 + 1 = 16, 1 + 6 = 7). Find all the
+	      <i class="FIRSTTERM">lucky numbers</i> between 1000 and
+	      10000.</p>
+</dd>
+<dt>
+<b class="COMMAND">Craps</b>
+</dt>
+<dd>
+<p>Borrowing the ASCII graphics from <a href="./contributed-scripts.html#PETALS">Example A-40</a>,
+	      write a script that plays the well-known gambling game of
+	      <i class="FIRSTTERM">craps</i>. The script will accept bets
+	      from one or more players, roll the dice, and keep track of
+	      wins and losses, as well as of each player's bankroll.</p>
+</dd>
+<dt>
+<b class="COMMAND">Tic-tac-toe</b>
+</dt>
+<dd>
+<p>Write a script that plays the child's game of
+	      <i class="FIRSTTERM">tic-tac-toe</i> against a human
+	      player. The script will let the human choose whether
+	      to take the first move. The script will follow
+	      an optimal strategy, and therefore never lose. To simplify
+	      matters, you may use ASCII graphics:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   o | x |
+   ----------
+     | x |
+   ----------
+     | o |
+     
+   Your move, human (row, column)?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+<dt>
+<b class="COMMAND">Alphabetizing a String</b>
+</dt>
+<dd>
+<p>Alphabetize (in ASCII order) an arbitrary string
+	      read from the command-line.</p>
+</dd>
+<dt>
+<b class="COMMAND">Parsing</b>
+</dt>
+<dd>
+<p>Parse <a href="./files.html#DATAFILESREF1">
+<tt class="FILENAME">/etc/passwd</tt>
+</a>,
+	    and output its contents in nice, easy-to-read tabular
+	    form.</p>
+</dd>
+<dt>
+<b class="COMMAND">Logging Logins</b>
+</dt>
+<dd>
+<p>Parse <tt class="FILENAME">/var/log/messages</tt> to
+	      produce a nicely formatted file of user logins and login
+	      times. The script may need to run as
+	      <i class="FIRSTTERM">root</i>. (Hint: Search for the string
+	      <span class="QUOTE">"LOGIN."</span>)</p>
+</dd>
+<dt>
+<b class="COMMAND">Pretty-Printing a Data File</b>
+</dt>
+<dd>
+<p>Certain database and spreadsheet packages use
+	    save-files with the fields separated by commas, commonly
+	    referred to as <i class="FIRSTTERM">comma-separated values</i>
+	    or CSVs. Other applications often need to parse these
+	    files.</p>
+<p>Given a data file with comma-separated
+	    <a href="./special-chars.html#FIELDREF">fields</a>, of the form:
+	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">Jones,Bill,235 S. Williams St.,Denver,CO,80221,(303) 244-7989
+Smith,Tom,404 Polk Ave.,Los Angeles,CA,90003,(213) 879-5612
+...</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      Reformat the data and print it out to
+	      <tt class="FILENAME">stdout</tt> in labeled, evenly-spaced columns.</p>
+</dd>
+<dt>
+<b class="COMMAND">Justification</b>
+</dt>
+<dd>
+<p>Given ASCII text input either from
+	      <tt class="FILENAME">stdin</tt> or a file, adjust
+	      the word spacing to right-justify each line to a
+	      user-specified line-width, then send the output to
+	      <tt class="FILENAME">stdout</tt>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Mailing List</b>
+</dt>
+<dd>
+<p>Using the <a href="./communications.html#COMMMAIL1">mail</a> command,
+	      write a script that manages a simple mailing list. The
+	      script automatically e-mails the monthly company newsletter,
+	      read from a specified text file, and sends it to all the
+	      addresses on the mailing list, which the script reads from
+	      another specified file.</p>
+</dd>
+<dt>
+<b class="COMMAND">Generating Passwords</b>
+</dt>
+<dd>
+<p>Generate pseudorandom 8-character passwords, using
+	      characters in the ranges [0-9], [A-Z], [a-z]. Each password
+	      must contain at least two digits.</p>
+</dd>
+<dt>
+<b class="COMMAND">Monitoring a User</b>
+</dt>
+<dd>
+<p>You suspect that one particular user on the network
+	      has been abusing her privileges and possibly attempting to
+	      hack the system. Write a script to automatically monitor
+	      and log her activities when she's signed on. The log file
+	      will save entries for the previous week, and delete those
+	      entries more than seven days old.</p>
+<p>You may use <a href="./system.html#LASTREF">last</a>,
+             <a href="./system.html#LASTLOGREF">lastlog</a>, and <a href="./system.html#LASTCOMMREF">lastcomm</a> to aid your
+             surveillance of the suspected fiend.</p>
+</dd>
+<dt>
+<b class="COMMAND">Checking for Broken Links</b>
+</dt>
+<dd>
+<p>Using <a href="./communications.html#LYNXREF">lynx</a> with the
+	      <tt class="OPTION">-traversal</tt> option, write a script that
+	      checks a Web site for broken links.</p>
+</dd>
+</dl>
+</div>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="EXDIFFICULT1">
+</a>DIFFICULT</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">Testing Passwords</b>
+</dt>
+<dd>
+<p>Write a script to check and validate passwords. The object
+	      is to flag <span class="QUOTE">"weak"</span> or easily guessed password
+	      candidates.</p>
+<p>A trial password will be input to the script as a
+	       command-line parameter. To be considered acceptable,
+	       a password must meet the following minimum qualifications:
+
+            </p>
+<p>
+</p>
+<ul>
+<li>
+<p>Minimum length of 8 characters</p>
+</li>
+<li>
+<p>Must contain at least one numeric character</p>
+</li>
+<li>
+<p>Must contain at least one of the following
+		  non-alphabetic characters: <span class="TOKEN">@</span>,
+		  <span class="TOKEN">#</span>, <span class="TOKEN">$</span>, <span class="TOKEN">%</span>,
+		  <span class="TOKEN">&amp;</span>, <span class="TOKEN">*</span>, <span class="TOKEN">+</span>,
+		  <span class="TOKEN">-</span>, <span class="TOKEN">=</span>
+</p>
+</li>
+</ul>
+<p>
+</p>
+<p>Optional:
+
+            </p>
+<p>
+</p>
+<ul>
+<li>
+<p>Do a dictionary check on every sequence of at least
+		  four consecutive alphabetic characters in the password under
+		  test. This will eliminate passwords containing embedded
+		  <span class="QUOTE">"words"</span> found in a standard dictionary.</p>
+</li>
+<li>
+<p>Enable the script to check all the passwords on your
+		  system. These do not reside in
+		  <a href="./files.html#DATAFILESREF1">
+<tt class="FILENAME">/etc/passwd</tt>
+</a>.</p>
+</li>
+</ul>
+<p>
+</p>
+<p>This exercise tests mastery of <a href="./regexp.html#REGEXREF">Regular Expressions</a>.</p>
+</dd>
+<dt>
+<b class="COMMAND">Cross Reference</b>
+</dt>
+<dd>
+<p>Write a script that generates a
+	      <i class="FIRSTTERM">cross-reference</i>
+	      (<i class="FIRSTTERM">concordance</i>) on a target file.
+	      The output will be a listing of all word occurrences in
+	      the target file, along with the line numbers in which
+	      each word occurs. Traditionally, <i class="FIRSTTERM">linked
+	      list</i> constructs would be used in such
+	      applications. Therefore, you should investigate <a href="./arrays.html#ARRAYREF">arrays</a> in the course of
+	      this exercise. <a href="./textproc.html#WF">Example 16-12</a> is probably
+	      <em>not</em> a good place to start.</p>
+</dd>
+<dt>
+<a name="NEWTONSQRT">
+</a>
+<b class="COMMAND">Square Root</b>
+</dt>
+<dd>
+<p>Write a script to calculate square roots of numbers
+              using <i class="FIRSTTERM">Newton's Method</i>.</p>
+<p>The algorithm for this, expressed as a snippet of Bash
+              <a href="./assortedtips.html#PSEUDOCODEREF">pseudo-code</a> is:</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#  (Isaac) Newton's Method for speedy extraction
+#+ of square roots.
+
+guess = $argument
+#  $argument is the number to find the square root of.
+#  $guess is each successive calculated "guess" -- or trial solution --
+#+ of the square root.
+#  Our first "guess" at a square root is the argument itself.
+
+oldguess = 0
+# $oldguess is the previous $guess.
+
+tolerance = .000001
+# To how close a tolerance we wish to calculate.
+
+loopcnt = 0
+# Let's keep track of how many times through the loop.
+# Some arguments will require more loop iterations than others.
+
+
+while [ ABS( $guess $oldguess ) -gt $tolerance ]
+#       ^^^^^^^^^^^^^^^^^^^^^^^ Fix up syntax, of course.
+
+#      "ABS" is a (floating point) function to find the absolute value
+#+      of the difference between the two terms.
+#             So, as long as difference between current and previous
+#+            trial solution (guess) exceeds the tolerance, keep looping.
+
+do
+   oldguess = $guess  # Update $oldguess to previous $guess.
+
+#  =======================================================
+   guess = ( $oldguess + ( $argument / $oldguess ) ) / 2.0
+#        = 1/2 ( ($oldguess **2 + $argument) / $oldguess )
+#  equivalent to:
+#        = 1/2 ( $oldguess + $argument / $oldguess )
+#  that is, "averaging out" the trial solution and
+#+ the proportion of argument deviation
+#+ (in effect, splitting the error in half).
+#  This converges on an accurate solution
+#+ with surprisingly few loop iterations . . .
+#+ for arguments &gt; $tolerance, of course.
+#  =======================================================
+
+   (( loopcnt++ ))     # Update loop counter.
+done</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>It's a simple enough recipe, and
+              <em>seems</em> at first glance easy enough to
+              convert into a working Bash script. The problem, though,
+              is that Bash has <a href="./ops.html#NOFLOATINGPOINT">no native
+              support for floating point numbers</a>. So, the script
+              writer needs to use <a href="./mathc.html#BCREF">bc</a> or
+              possibly <a href="./awk.html#AWKREF">awk</a> to convert the
+              numbers and do the calculations. It could get rather messy
+              . . .</p>
+</dd>
+<dt>
+<b class="COMMAND">Logging File Accesses</b>
+</dt>
+<dd>
+<p>Log all accesses to the files in <tt class="FILENAME">/etc</tt> during the course of
+	      a single day. This information should include the filename,
+	      user name, and access time. If any alterations to the
+	      files take place, that will be flagged. Write this data
+	      as tabular (tab-separated) formatted records in a logfile.</p>
+</dd>
+<dt>
+<b class="COMMAND">Monitoring Processes</b>
+</dt>
+<dd>
+<p>Write a script to continually monitor all running
+	      processes and to keep track of how many child processes each
+	      parent spawns. If a process spawns more than five children,
+	      then the script sends an e-mail to the system administrator
+	      (or <i class="FIRSTTERM">root</i>) with all relevant
+	      information, including the time, PID of the parent, PIDs
+	      of the children, etc. The script appends a report to a log
+	      file every ten minutes.  </p>
+</dd>
+<dt>
+<b class="COMMAND">Strip Comments</b>
+</dt>
+<dd>
+<p>Strip all comments from a shell script whose name
+              is specified on the command-line. Note that the initial
+              <a href="./sha-bang.html#SHABANGREF">#! line</a> must not be
+              stripped out.</p>
+</dd>
+<dt>
+<b class="COMMAND">Strip HTML Tags</b>
+</dt>
+<dd>
+<p>Strip all the HTML tags from a specified HTML file, then
+	      reformat it into lines between 60 and 75 characters
+	      in length. Reset paragraph and block spacing, as
+	      appropriate, and convert HTML tables to their approximate
+	      text equivalent.</p>
+</dd>
+<dt>
+<b class="COMMAND">XML Conversion</b>
+</dt>
+<dd>
+<p>Convert an XML file to both HTML and text format.</p>
+<p>Optional: A script that converts Docbook/SGML to XML.</p>
+</dd>
+<dt>
+<a name="CSPAMMERS">
+</a>
+<b class="COMMAND">Chasing Spammers</b>
+</dt>
+<dd>
+<p> Write a script that analyzes a spam e-mail by doing
+	      DNS lookups on the IP addresses in the headers to identify
+	      the relay hosts as well as the originating ISP. The
+	      script will forward the unaltered spam message to the
+	      responsible ISPs. Of course, it will be necessary to
+	      filter out <em>your own ISP's IP address</em>,
+	      so you don't end up complaining about yourself.</p>
+<p>As necessary, use the appropriate <a href="./communications.html#COMMUNINFO1">network analysis commands</a>.</p>
+<p>For some ideas, see <a href="./communications.html#ISSPAMMER">Example 16-41</a> and <a href="./contributed-scripts.html#ISSPAMMER2">Example A-28</a>.</p>
+<p>Optional: Write a script that searches through a list of
+	      e-mail messages and deletes the spam according to specified
+	      filters.</p>
+</dd>
+<dt>
+<b class="COMMAND">Creating man pages</b>
+</dt>
+<dd>
+<p>Write a script that automates the process of creating
+	      <a href="./basic.html#MANREF">man pages</a>.</p>
+<p>Given a text file which contains information to be
+	      formatted into a <i class="FIRSTTERM">man page</i>, the
+	      script will read the file, then invoke the appropriate
+	      <a href="./textproc.html#GROFFREF">groff</a> commands to
+	      output the corresponding <i class="FIRSTTERM">man page</i>
+	      to <tt class="FILENAME">stdout</tt>. The text file contains
+	      blocks of information under the standard <i class="FIRSTTERM">man
+	      page</i> headings, i.e., NAME, SYNOPSIS,
+	      DESCRIPTION, etc.</p>
+<p>
+<a href="./contributed-scripts.html#MANED">Example A-39</a> is an instructive first step.</p>
+</dd>
+<dt>
+<b class="COMMAND">Hex Dump</b>
+</dt>
+<dd>
+<p>Do a hex(adecimal) dump on a binary file
+	      specified as an argument to the script. The output should
+	      be in neat tabular <a href="./special-chars.html#FIELDREF">fields</a>,
+	      with the first field showing the address, each of the
+	      next 8 fields a 4-byte hex number, and the final field
+	      the ASCII equivalent of the previous 8 fields.</p>
+<p>The obvious followup to this is to extend the hex
+	      dump script into a disassembler. Using a lookup table,
+	      or some other clever gimmick, convert the hex values into
+	      80x86 op codes.</p>
+</dd>
+<dt>
+<b class="COMMAND">Emulating a Shift Register</b>
+</dt>
+<dd>
+<p>Using <a href="./arrays.html#STACKEX">Example 27-15</a> as an inspiration,
+	      write a script that emulates a 64-bit shift register as
+	      an <a href="./arrays.html#ARRAYREF">array</a>. Implement
+	      functions to <i class="FIRSTTERM">load</i> the register,
+	      <i class="FIRSTTERM">shift left</i>, <i class="FIRSTTERM">shift
+	      right</i>, and <i class="FIRSTTERM">rotate</i>
+	      it. Finally, write a function that interprets the register
+	      contents as eight 8-bit ASCII characters.</p>
+</dd>
+<dt>
+<b class="COMMAND">Calculating Determinants</b>
+</dt>
+<dd>
+<p>Write a script that calculates
+	      determinants
+	        <a name="AEN25254" href="#FTN.AEN25254">
+<span class="footnote">[1]</span>
+</a>
+		
+		by <a href="./localvar.html#RECURSIONREF0">recursively</a> expanding the
+	      <i class="FIRSTTERM">minors</i>. Use a 4 x 4 determinant as
+	      a test case.</p>
+</dd>
+<dt>
+<b class="COMMAND">Hidden Words</b>
+</dt>
+<dd>
+<p>Write a <span class="QUOTE">"word-find"</span> puzzle generator,
+	      a script that hides 10 input words in a 10 x 10 array
+	      of random letters. The words may be hidden across, down,
+	      or diagonally.</p>
+<p>Optional: Write a script that <em>solves</em>
+	      word-find puzzles. To keep this from becoming too difficult,
+	      the solution script will find only horizontal and vertical
+	      words. (Hint: Treat each row and column as a string, and
+	      search for substrings.)</p>
+</dd>
+<dt>
+<b class="COMMAND">Anagramming</b>
+</dt>
+<dd>
+<p> Anagram 4-letter input. For example, the
+	      anagrams of <em>word</em> are:
+	      <em>do or rod row word</em>. You may use
+	      <tt class="FILENAME">/usr/share/dict/linux.words</tt> as the
+	      reference list.</p>
+</dd>
+<dt>
+<b class="COMMAND">Word Ladders</b>
+</dt>
+<dd>
+<p>A <span class="QUOTE">"word ladder"</span> is a sequence of words,
+              with each successive word in the sequence differing from
+              the previous one by a single letter.</p>
+<p>For example, to <span class="QUOTE">"ladder"</span> from
+              <em>mark</em> to
+              <em>vase</em>:</p>
+<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">mark --&gt; park --&gt; part --&gt; past --&gt; vast --&gt; vase
+         ^           ^       ^      ^           ^</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+            </p>
+<p>Write a script that solves word ladder puzzles. Given
+	      a starting and an ending word, the script will list all
+	      intermediate steps in the <span class="QUOTE">"ladder."</span> Note
+	      that <em>all</em> words in the sequence must
+	      be legitimate dictionary words.</p>
+</dd>
+<dt>
+<b class="COMMAND">Fog Index</b>
+</dt>
+<dd>
+<p>The <span class="QUOTE">"fog index"</span> of a passage of text
+	      estimates its reading difficulty, as a number corresponding
+	      roughly to a school grade level. For example, a passage
+	      with a fog index of 12 should be comprehensible to anyone
+	      with 12 years of schooling.</p>
+<p>The Gunning version of the fog index uses the following
+	      algorithm.</p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>Choose a section of the text at least
+                 100 words in length.</p>
+</li>
+<li>
+<p>Count the number of sentences (a portion of
+                 a sentence truncated by the boundary of the text section
+                 counts as one).</p>
+</li>
+<li>
+<p>Find the average number of words per
+                   sentence.</p>
+<p>AVE_WDS_SEN = TOTAL_WORDS / SENTENCES</p>
+</li>
+<li>
+<p>Count the number of <span class="QUOTE">"difficult"</span>
+		   words in the segment -- those containing at least
+		   3 syllables. Divide this quantity by total words to
+		   get the proportion of difficult words.</p>
+<p>PRO_DIFF_WORDS = LONG_WORDS / TOTAL_WORDS</p>
+</li>
+<li>
+<p>The Gunning fog index is the sum of the above two
+                   quantities, multiplied by 0.4, then rounded to the
+                   nearest integer.</p>
+<p>G_FOG_INDEX = int ( 0.4 * ( AVE_WDS_SEN  + PRO_DIFF_WORDS ) )</p>
+</li>
+</ol>
+<p>Step 4 is by far the most difficult portion of the
+	      exercise. There exist various algorithms for estimating
+	      the syllable count of a word. A rule-of-thumb formula
+	      might consider the number of letters in a word and the
+	      vowel-consonant mix.</p>
+<p>A strict interpretation of the Gunning fog index does
+	      not count compound words and proper nouns as
+	      <span class="QUOTE">"difficult"</span> words, but this would enormously
+	      complicate the script.</p>
+</dd>
+<dt>
+<b class="COMMAND">Calculating PI using Buffon's Needle</b>
+</dt>
+<dd>
+<p>The Eighteenth Century French mathematician de Buffon
+	      came up with a novel experiment. Repeatedly drop a needle
+	      of length <tt class="REPLACEABLE">
+<i>n</i>
+</tt> onto a wooden floor
+	      composed of long and narrow parallel boards. The cracks
+	      separating the equal-width floorboards are a fixed distance
+	      <tt class="REPLACEABLE">
+<i>d</i>
+</tt> apart. Keep track of the
+	      total drops and the number of times the needle intersects
+	      a crack on the floor. The ratio of these two quantities
+	      turns out to be a fractional multiple of PI.</p>
+<p>In the spirit of <a href="./mathc.html#CANNON">Example 16-50</a>, write a
+	      script that runs a Monte Carlo simulation of
+	      <i class="FIRSTTERM">Buffon's Needle</i>. To simplify matters,
+	      set the needle length equal to the distance between the
+	      cracks, <tt class="PARAMETER">
+<i>n = d</i>
+</tt>.</p>
+<p>Hint: there are actually two critical variables:
+              the distance from the center of the needle to the nearest
+              crack, and the inclination angle of the needle to that crack.
+	      You may use <a href="./mathc.html#BCREF">bc</a> to handle
+	      the calculations.</p>
+</dd>
+<dt>
+<b class="COMMAND">Playfair Cipher</b>
+</dt>
+<dd>
+<p>Implement the Playfair (Wheatstone) Cipher in a
+	      script.</p>
+<p>The Playfair Cipher encrypts text by substitution
+	      of <i class="FIRSTTERM">digrams</i> (2-letter groupings).
+	      It is traditional to use a 5 x 5 letter scrambled-alphabet
+	      <i class="FIRSTTERM">key square</i> for the encryption and
+	      decryption.</p>
+<p>	     <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">   C O D E S
+   A B F G H
+   I K L M N
+   P Q R T U
+   V W X Y Z
+
+Each letter of the alphabet appears once, except "I" also represents
+"J". The arbitrarily chosen key word, "CODES" comes first, then all
+the rest of the alphabet, in order from left to right, skipping letters
+already used.
+
+To encrypt, separate the plaintext message into digrams (2-letter
+groups). If a group has two identical letters, delete the second, and
+form a new group. If there is a single letter left over at the end,
+insert a "null" character, typically an "X."
+
+THIS IS A TOP SECRET MESSAGE
+
+TH IS IS AT OP SE CR ET ME SA GE
+
+
+
+For each digram, there are three possibilities.
+-----------------------------------------------
+
+1) Both letters will be on the same row of the key square:
+   For each letter, substitute the one immediately to the right, in that
+   row. If necessary, wrap around left to the beginning of the row.
+
+or
+
+2) Both letters will be in the same column of the key square:
+   For each letter, substitute the one immediately below it, in that
+   row. If necessary, wrap around to the top of the column.
+
+or
+
+3) Both letters will form the corners of a rectangle within the key square:
+   For each letter, substitute the one on the other corner the rectangle
+   which lies on the same row.
+
+
+The "TH" digram falls under case #3.
+G H
+M N
+T U           (Rectangle with "T" and "H" at corners)
+
+T --&gt; U
+H --&gt; G
+
+
+The "SE" digram falls under case #1.
+C O D E S     (Row containing "S" and "E")
+
+S --&gt; C  (wraps around left to beginning of row)
+E --&gt; S
+
+=========================================================================
+
+To decrypt encrypted text, reverse the above procedure under cases #1
+and #2 (move in opposite direction for substitution). Under case #3,
+just take the remaining two corners of the rectangle.
+
+
+Helen Fouche Gaines' classic work, ELEMENTARY CRYPTANALYSIS (1939), gives a
+fairly detailed description of the Playfair Cipher and its solution methods.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+             </p>
+<p>This script will have three main sections</p>
+<p>
+</p>
+<ol type="I">
+<li>
+<p>Generating the <i class="FIRSTTERM">key square</i>,
+	         based on a user-input keyword.</p>
+</li>
+<li>
+<p>Encrypting a <i class="FIRSTTERM">plaintext</i>
+	         message.</p>
+</li>
+<li>
+<p>Decrypting encrypted
+	         text.</p>
+</li>
+</ol>
+<p>The script will make extensive use of <a href="./arrays.html#ARRAYREF">arrays</a> and <a href="./functions.html#FUNCTIONREF">functions</a>.
+               You may use <a href="./contributed-scripts.html#GRONSFELD">Example A-56</a> as an
+               inspiration.</p>
+</dd>
+</dl>
+</div>
+<p>--</p>
+<p>Please do not send the author your solutions to these
+            exercises. There are more appropriate ways to impress him with
+            your cleverness, such as submitting bugfixes and suggestions
+            for improving the book.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN25254" href="./writingscripts.html#AEN25254">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>For all you clever types who failed intermediate algebra,
+                a <i class="FIRSTTERM">determinant</i> is a numerical value
+		associated with a multidimensional
+		<i class="FIRSTTERM">matrix</i> (<a href="./arrays.html#ARRAYREF">array</a> of numbers).
+		  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">For the simple case of a 2 x 2 determinant:
+
+  |a  b|
+  |b  a|
+
+The solution is a*a - b*b, where "a" and "b" represent numbers.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+                </p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./scriptanalysis.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./revisionhistory.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Analyzing Scripts</td>
+<td align="center" valign="top" width="34%">
+<a href="./exercises.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Revision History</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

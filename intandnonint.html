@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Interactive and non-interactive shells and scripts</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Miscellany" href="./miscellany.html">
+<link rel="PREVIOUS" title="Miscellany" href="./miscellany.html">
+<link rel="NEXT" title="Shell Wrappers" href="./wrapper.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./miscellany.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 36. Miscellany</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./wrapper.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="INTANDNONINT">
+</a>36.1. Interactive and non-interactive shells and scripts</h1>
+<p>An <i class="FIRSTTERM">interactive</i> shell reads
+	   commands from user input on a <tt class="FILENAME">tty</tt>. Among
+	   other things, such a shell reads startup files on activation,
+	   displays a prompt, and enables job control by default. The
+	   user can <i class="FIRSTTERM">interact</i> with the shell.</p>
+<p>A shell running a script is always a non-interactive
+	   shell. All the same, the script can still access its
+	   <tt class="FILENAME">tty</tt>. It is even possible to emulate an
+	   interactive shell in a script.
+
+	   <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+MY_PROMPT='$ '
+while :
+do
+  echo -n "$MY_PROMPT"
+  read line
+  eval "$line"
+  done
+
+exit 0
+
+# This example script, and much of the above explanation supplied by
+# Stéphane Chazelas (thanks again).</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>Let us consider an <i class="FIRSTTERM">interactive</i>
+	   script to be one that requires input from the user, usually
+	   with <a href="./internal.html#READREF">read</a> statements (see <a href="./internal.html#EX36">Example 15-3</a>). <span class="QUOTE">"Real life"</span> is actually a
+	   bit messier than that. For now, assume an interactive script
+	   is bound to a tty, a script that a user has invoked from the
+	   console or an <i class="FIRSTTERM">xterm</i>.</p>
+<p>Init and startup scripts are necessarily non-interactive,
+	   since they must run without human intervention. Many
+	   administrative and system maintenance scripts are likewise
+	   non-interactive.  Unvarying repetitive tasks cry out for
+	   automation by non-interactive scripts.</p>
+<p>Non-interactive scripts can run in the background, but
+	   interactive ones hang, waiting for input that never comes.
+	   Handle that difficulty by having an <b class="COMMAND">expect</b>
+	   script or embedded <a href="./here-docs.html#HEREDOCREF">here
+	   document</a> feed input to an interactive script running
+	   as a background job.  In the simplest case, redirect a
+	   file to supply input to a <b class="COMMAND">read</b> statement
+	   (<b class="COMMAND">read variable &lt;file</b>).  These particular
+	   workarounds make possible general purpose scripts that run
+	   in either interactive or non-interactive modes.</p>
+<p>If a script needs to test whether it is running in an
+	   interactive shell, it is simply a matter of finding
+	   whether the <i class="FIRSTTERM">prompt</i> variable, <a href="./internalvariables.html#PS1REF">$PS1</a> is set. (If the user is being
+	   prompted for input, then the script needs to display a
+	   prompt.)</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">if [ -z $PS1 ] # no prompt?
+### if [ -v PS1 ]   # On Bash 4.2+ ...
+then
+  # non-interactive
+  ...
+else
+  # interactive
+  ...
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="IITEST">
+</a>Alternatively, the script can test
+	   for the presence of option <span class="QUOTE">"i"</span> in the <a href="./internalvariables.html#FLPREF">$-</a> flag.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">case $- in
+*i*)    # interactive shell
+;;
+*)      # non-interactive shell
+;;
+# (Courtesy of "UNIX F.A.Q.," 1993)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="II2TEST">
+</a>However, John Lange describes
+             an alternative method, using the <a href="./fto.html#TERMTEST">
+<span class="TOKEN">-t</span>
+	     <i class="FIRSTTERM">test</i> operator</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Test for a terminal!
+
+fd=0   # stdin
+
+#  As we recall, the -t test option checks whether the stdin, [ -t 0 ],
+#+ or stdout, [ -t 1 ], in a given script is running in a terminal.
+if [ -t "$fd" ]
+then
+  echo interactive
+else
+  echo non-interactive
+fi
+
+
+#  But, as John points out:
+#    if [ -t 0 ] works ... when you're logged in locally
+#    but fails when you invoke the command remotely via ssh.
+#    So for a true test you also have to test for a socket.
+
+if [[ -t "$fd" || -p /dev/stdin ]]
+then
+  echo interactive
+else
+  echo non-interactive
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="intandnonint_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Scripts may be forced to run in interactive
+	   mode with the <span class="TOKEN">-i</span> option or with a
+	   <tt class="USERINPUT">
+<b>#!/bin/bash -i</b>
+</tt> header. Be aware that
+	   this can cause erratic script behavior or show error messages
+	   even when no error is present.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./miscellany.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./wrapper.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Miscellany</td>
+<td align="center" valign="top" width="34%">
+<a href="./miscellany.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Shell Wrappers</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>History Commands</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Localization" href="./localization.html">
+<link rel="NEXT" title="Sample .bashrc  and
+	    .bash_profile Files" href="./sample-bashrc.html">
+</head>
+<body class="APPENDIX" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./localization.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./sample-bashrc.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="APPENDIX">
+<h1>
+<a name="HISTCOMMANDS">
+</a>Appendix L. History Commands</h1>
+<p>The Bash shell provides command-line tools for editing and
+       manipulating a user's <i class="FIRSTTERM">command history</i>. This
+       is primarily a convenience, a means of saving keystrokes.</p>
+<p>Bash history commands:
+       </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<b class="COMMAND">history</b>
+</p>
+</li>
+<li>
+<p>
+<b class="COMMAND">fc</b>
+</p>
+</li>
+</ol>
+     <p>
+</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>history</b>
+</tt>
+<tt class="COMPUTEROUTPUT">   1  mount /mnt/cdrom
+    2  cd /mnt/cdrom
+    3  ls
+     ...</tt>
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	    </p>
+<p>Internal variables associated with Bash history commands:
+       </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>$HISTCMD</p>
+</li>
+<li>
+<p>$HISTCONTROL</p>
+</li>
+<li>
+<p>$HISTIGNORE</p>
+</li>
+<li>
+<p>$HISTFILE</p>
+</li>
+<li>
+<p>$HISTFILESIZE</p>
+</li>
+<li>
+<p>$HISTSIZE</p>
+</li>
+<li>
+<p>$HISTTIMEFORMAT (Bash, ver. 3.0 or later)</p>
+</li>
+<li>
+<p>!!</p>
+</li>
+<li>
+<p>!$</p>
+</li>
+<li>
+<p>!#</p>
+</li>
+<li>
+<p>!N</p>
+</li>
+<li>
+<p>!-N</p>
+</li>
+<li>
+<p>!STRING</p>
+</li>
+<li>
+<p>!?STRING?</p>
+</li>
+<li>
+<p>^STRING^string^</p>
+</li>
+</ol>
+     <p>
+</p>
+<p>Unfortunately, the Bash history tools find no use in
+       scripting.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# history.sh
+# A (vain) attempt to use the 'history' command in a script.
+
+history                      # No output.
+
+var=$(history); echo "$var"  # $var is empty.
+
+#  History commands are, by default, disabled within a script.
+#  However, as dhw points out,
+#+ set -o history
+#+ enables the history mechanism.
+
+set -o history
+var=$(history); echo "$var"   # 1  var=$(history)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+     </p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>./history.sh</b>
+</tt>
+<tt class="COMPUTEROUTPUT">(no output)</tt>	      
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>The <a href="http://samrowe.com/wordpress/advancing-in-the-bash-shell/" target="_top">Advancing
+	    in the Bash Shell</a> site gives a good introduction to
+	    the use of history commands in Bash.</p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./localization.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./sample-bashrc.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Localization</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Sample <tt class="FILENAME">.bashrc</tt>  and
+	    <tt class="FILENAME">.bash_profile</tt> Files</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

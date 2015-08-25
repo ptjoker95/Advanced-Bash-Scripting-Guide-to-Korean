@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Numerical Constants</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Operations and Related Topics" href="./operations.html">
+<link rel="PREVIOUS" title="Operators" href="./ops.html">
+<link rel="NEXT" title="The Double-Parentheses Construct" href="./dblparens.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./ops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 8. Operations and Related Topics</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./dblparens.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="NUMERICAL-CONSTANTS">
+</a>8.2. Numerical Constants</h1>
+<p>
+<a name="NUMCONSTANTS">
+</a>A shell script interprets a number
+	as decimal (base 10), unless that number has a
+	special prefix or notation. A number preceded by a
+	<tt class="REPLACEABLE">
+<i>0</i>
+</tt> is <tt class="REPLACEABLE">
+<i>octal</i>
+</tt>
+	(base 8). A number preceded by <tt class="REPLACEABLE">
+<i>0x</i>
+</tt>
+	is <tt class="REPLACEABLE">
+<i>hexadecimal</i>
+</tt> (base 16). A number
+	with an embedded <tt class="REPLACEABLE">
+<i>#</i>
+</tt> evaluates as
+	<tt class="REPLACEABLE">
+<i>BASE#NUMBER</i>
+</tt> (with range and notational
+	restrictions).</p>
+<div class="EXAMPLE">
+<a name="NUMBERS">
+</a>
+<p>
+<b>Example 8-4. Representation of numerical constants</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# numbers.sh: Representation of numbers in different bases.
+
+# Decimal: the default
+let "dec = 32"
+echo "decimal number = $dec"             # 32
+# Nothing out of the ordinary here.
+
+
+# Octal: numbers preceded by '0' (zero)
+let "oct = 032"
+echo "octal number = $oct"               # 26
+# Expresses result in decimal.
+# --------- ------ -- -------
+
+
+# Hexadecimal: numbers preceded by '0x' or '0X'
+let "hex = 0x32"
+echo "hexadecimal number = $hex"         # 50
+
+echo $((0x9abc))                         # 39612
+#     ^^      ^^   double-parentheses arithmetic expansion/evaluation
+# Expresses result in decimal.
+
+
+
+# Other bases: BASE#NUMBER
+# BASE between 2 and 64.
+# NUMBER must use symbols within the BASE range, see below.
+
+
+let "bin = 2#111100111001101"
+echo "binary number = $bin"              # 31181
+
+let "b32 = 32#77"
+echo "base-32 number = $b32"             # 231
+
+let "b64 = 64#@_"
+echo "base-64 number = $b64"             # 4031
+# This notation only works for a limited range (2 - 64) of ASCII characters.
+# 10 digits + 26 lowercase characters + 26 uppercase characters + @ + _
+
+
+echo
+
+echo $((36#zz)) $((2#10101010)) $((16#AF16)) $((53#1aA))
+                                         # 1295 170 44822 3375
+
+
+#  Important note:
+#  --------------
+#  Using a digit out of range of the specified base notation
+#+ gives an error message.
+
+let "bad_oct = 081"
+# (Partial) error message output:
+#  bad_oct = 081: value too great for base (error token is "081")
+#              Octal numbers use only digits in the range 0 - 7.
+
+exit $?   # Exit value = 1 (error)
+
+# Thanks, Rich Bartell and Stephane Chazelas, for clarification.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./ops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./dblparens.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Operators</td>
+<td align="center" valign="top" width="34%">
+<a href="./operations.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">The Double-Parentheses Construct</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

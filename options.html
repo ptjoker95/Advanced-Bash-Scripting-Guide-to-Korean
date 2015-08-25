@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Options</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="Debugging" href="./debugging.html">
+<link rel="NEXT" title="Gotchas" href="./gotchas.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./debugging.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./gotchas.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="OPTIONS">
+</a>Chapter 33. Options</h1>
+<p>
+<a name="OPTIONSREF">
+</a>
+</p>
+<p>Options are settings that change shell and/or script
+        behavior.</p>
+<p>The <a href="./internal.html#SETREF">set</a> command
+	enables options within a script. At the point in the script
+	where you want the options to take effect, use <b class="COMMAND">set
+	-o option-name</b> or, in short form, <b class="COMMAND">set
+	-option-abbrev</b>. These two forms are equivalent.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">      #!/bin/bash
+
+      set -o verbose
+      # Echoes all commands before executing.
+      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">      #!/bin/bash
+
+      set -v
+      # Exact same effect as above.
+      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="options_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>To <i class="FIRSTTERM">disable</i> an option within a script,
+	use <b class="COMMAND">set +o option-name</b> or <b class="COMMAND">set
+	+option-abbrev</b>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">      #!/bin/bash
+
+      set -o verbose
+      # Command echoing on.
+      command
+      ...
+      command
+
+      set +o verbose
+      # Command echoing off.
+      command
+      # Not echoed.
+
+
+      set -v
+      # Command echoing on.
+      command
+      ...
+      command
+
+      set +v
+      # Command echoing off.
+      command
+
+      exit 0
+      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>An alternate method of enabling options in a script is
+	to specify them immediately following the
+	<tt class="REPLACEABLE">
+<i>#!</i>
+</tt> script header.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">      #!/bin/bash -x
+      #
+      # Body of script follows.
+      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a name="INVOCATIONOPTIONSREF">
+</a>
+</p>
+<p>It is also possible to enable script options from the command
+	line. Some options that will not work with
+	<b class="COMMAND">set</b> are available this way. Among these
+	are <tt class="REPLACEABLE">
+<i>-i</i>
+</tt>, force script to run
+	interactive.</p>
+<p>
+<tt class="USERINPUT">
+<b>bash -v script-name</b>
+</tt>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>bash -o verbose script-name</b>
+</tt>
+</p>
+<p>The following is a listing of some useful options. They may be
+	specified in either abbreviated form (preceded by a single dash)
+	or by complete name (preceded by a <em>double</em>
+	dash or by <tt class="OPTION">-o</tt>).</p>
+<p>
+<a name="OPTIONSTABLE">
+</a>
+</p>
+<div class="TABLE">
+<a name="AEN19601">
+</a>
+<p>
+<b>Table 33-1. Bash options</b>
+</p>
+<table class="CALSTABLE" border="1">
+<thead>
+<tr>
+<th align="LEFT" valign="TOP">Abbreviation</th>
+<th align="LEFT" valign="TOP">Name</th>
+<th align="LEFT" valign="TOP">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-B</tt>
+</td>
+<td align="LEFT" valign="TOP">brace expansion</td>
+<td align="LEFT" valign="TOP">
+<em>Enable</em>
+                 <a href="./special-chars.html#BRACEEXPREF">brace
+                 expansion</a> (default setting =
+		 <em>on</em>)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">+B</tt>
+</td>
+<td align="LEFT" valign="TOP">brace expansion</td>
+<td align="LEFT" valign="TOP">
+<em>Disable</em>
+                 brace expansion</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<a name="NOCLOBBERREF">
+</a>
+<tt class="OPTION">-C</tt>
+</td>
+<td align="LEFT" valign="TOP">noclobber</td>
+<td align="LEFT" valign="TOP">Prevent overwriting of files by redirection (may be
+		overridden by <span class="TOKEN">&gt;|</span>)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-D</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">List double-quoted strings prefixed by <span class="TOKEN">$</span>,
+	      but do not execute commands in script</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-a</tt>
+</td>
+<td align="LEFT" valign="TOP">allexport</td>
+<td align="LEFT" valign="TOP">Export all defined variables</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-b</tt>
+</td>
+<td align="LEFT" valign="TOP">notify</td>
+<td align="LEFT" valign="TOP">Notify when jobs running in background terminate (not of
+	        much use in a script)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-c ...</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">Read commands from <b class="COMMAND">...</b>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">checkjobs</tt>
+</td>
+<td align="LEFT" valign="TOP">&nbsp;</td>
+<td align="LEFT" valign="TOP">Informs user of any open <a href="./x9644.html#JOBSREF">jobs</a> upon shell exit.
+              Introduced in <a href="./bashver4.html#BASH4REF">version 4</a>
+	      of Bash, and still <span class="QUOTE">"experimental."</span>
+              <em>Usage:</em> shopt -s checkjobs
+	      (<em>Caution:</em> may hang!)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-e</tt>
+</td>
+<td align="LEFT" valign="TOP">errexit</td>
+<td align="LEFT" valign="TOP">Abort script at first error, when a command
+		exits with non-zero status (except in <a href="./loops1.html#UNTILLOOPREF">until</a> or <a href="./loops1.html#WHILELOOPREF">while loops</a>, <a href="./testconstructs.html#TESTCONSTRUCTS1">if-tests</a>, <a href="./list-cons.html#LCONS1">list constructs</a>)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-f</tt>
+</td>
+<td align="LEFT" valign="TOP">noglob</td>
+<td align="LEFT" valign="TOP">Filename expansion (globbing) disabled</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">globstar</tt>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="./bashver4.html#GLOBSTARREF">
+<i class="FIRSTTERM">globbing</i>
+	        star-match</a>
+</td>
+<td align="LEFT" valign="TOP">Enables the <span class="TOKEN">**</span> <a href="./globbingref.html">globbing</a> operator
+               (<a href="./bashver4.html#BASH4REF">version 4+</a> of Bash).
+               <em>Usage:</em> shopt -s globstar</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-i</tt>
+</td>
+<td align="LEFT" valign="TOP">interactive</td>
+<td align="LEFT" valign="TOP">Script runs in <i class="FIRSTTERM">interactive</i> mode</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-n</tt>
+</td>
+<td align="LEFT" valign="TOP">noexec</td>
+<td align="LEFT" valign="TOP">Read commands in script, but do not execute them (syntax check)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-o Option-Name</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">Invoke the <i class="FIRSTTERM">Option-Name</i>
+	        option</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-o posix</tt>
+</td>
+<td align="LEFT" valign="TOP">POSIX</td>
+<td align="LEFT" valign="TOP">Change the behavior of Bash, or invoked script, to
+		conform to <a href="./sha-bang.html#POSIX2REF">POSIX</a>
+		standard.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-o pipefail</tt>
+</td>
+<td align="LEFT" valign="TOP">pipe failure</td>
+<td align="LEFT" valign="TOP">Causes a pipeline to return the <a href="./exit-status.html#EXITSTATUSREF">exit status</a> of
+	      the last command in the pipe that returned a non-zero
+	      return value.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-p</tt>
+</td>
+<td align="LEFT" valign="TOP">privileged</td>
+<td align="LEFT" valign="TOP">Script runs as <span class="QUOTE">"suid"</span> (caution!)</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-r</tt>
+</td>
+<td align="LEFT" valign="TOP">restricted</td>
+<td align="LEFT" valign="TOP">Script runs in <i class="FIRSTTERM">restricted</i>
+	      mode (see <a href="./restricted-sh.html">Chapter 22</a>).</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-s</tt>
+</td>
+<td align="LEFT" valign="TOP">stdin</td>
+<td align="LEFT" valign="TOP">Read commands from <tt class="FILENAME">stdin</tt>
+</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-t</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">Exit after first command</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-u</tt>
+</td>
+<td align="LEFT" valign="TOP">nounset</td>
+<td align="LEFT" valign="TOP">Attempt to use undefined variable
+		outputs error message, and forces an exit</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-v</tt>
+</td>
+<td align="LEFT" valign="TOP">verbose</td>
+<td align="LEFT" valign="TOP">Print each command to <tt class="FILENAME">stdout</tt> before executing it</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-x</tt>
+</td>
+<td align="LEFT" valign="TOP">xtrace</td>
+<td align="LEFT" valign="TOP">Similar to <tt class="OPTION">-v</tt>, but expands commands</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">-</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">End of options flag. All other arguments
+		are <a href="./internalvariables.html#POSPARAMREF">positional
+		parameters</a>.</td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP">
+<tt class="OPTION">--</tt>
+</td>
+<td align="LEFT" valign="TOP">(none)</td>
+<td align="LEFT" valign="TOP">Unset positional parameters.
+		If arguments given (<tt class="PARAMETER">
+<i>-- arg1 arg2</i>
+</tt>),
+		positional parameters set to arguments.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./debugging.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./gotchas.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Debugging</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Gotchas</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,9 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Contributed Scripts</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"><link rel="HOME" title="Advanced Bash-Scripting Guide" href="http://www.tldp.org/LDP/abs/html/index.html"><link rel="PREVIOUS" title="Bibliography" href="http://www.tldp.org/LDP/abs/html/biblio.html"><link rel="NEXT" title="Reference Cards" href="http://www.tldp.org/LDP/abs/html/refcards.html"></head><body class="APPENDIX" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084"><div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false"></div><div class="NAVHEADER"><table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><th colspan="3" align="center">Advanced Bash-Scripting Guide: </th></tr><tr><td align="left" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/biblio.html" accesskey="P">Prev</a></td><td align="center" valign="bottom" width="80%"></td><td align="right" valign="bottom" width="10%"><a href="http://www.tldp.org/LDP/abs/html/refcards.html" accesskey="N">Next</a></td></tr></tbody></table><hr align="LEFT" width="100%"></div><div class="APPENDIX"><h1><a name="CONTRIBUTED-SCRIPTS"></a>Appendix A. Contributed Scripts</h1><p>These scripts, while not fitting into the text of this document, do
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Contributed Scripts</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Bibliography" href="./biblio.html">
+<link rel="NEXT" title="Reference Cards" href="./refcards.html">
+</head>
+<body class="APPENDIX" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./biblio.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./refcards.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="APPENDIX">
+<h1>
+<a name="CONTRIBUTED-SCRIPTS">
+</a>Appendix A. Contributed Scripts</h1>
+<p>These scripts, while not fitting into the text of this document, do
     illustrate some interesting shell programming techniques. Some are useful,
-    too. Have fun analyzing and running them.</p><div class="EXAMPLE"><a name="MAILFORMAT"></a><p><b>Example A-1. <i class="FIRSTTERM">mailformat</i>: Formatting an e-mail
-      message</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+    too. Have fun analyzing and running them.</p>
+<div class="EXAMPLE">
+<a name="MAILFORMAT">
+</a>
+<p>
+<b>Example A-1. <i class="FIRSTTERM">mailformat</i>: Formatting an e-mail
+      message</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # mail-format.sh (ver. 1.1): Format e-mail messages.
 
 # Gets rid of carets, tabs, and also folds excessively long lines.
@@ -54,8 +101,27 @@ sed "$sedscript" $1 | fold -s --width=$MAXWIDTH
 #+ scripting language provide an alternative to the bloated executables
 #+ of a clunky operating system.
 
-exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="RN"></a><p><b>Example A-2. <i class="FIRSTTERM">rn</i>: A simple-minded file renaming
-      utility</b></p><p>This script is a modification of <a href="http://www.tldp.org/LDP/abs/html/textproc.html#LOWERCASE">Example 16-22</a>.</p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="RN">
+</a>
+<p>
+<b>Example A-2. <i class="FIRSTTERM">rn</i>: A simple-minded file renaming
+      utility</b>
+</p>
+<p>This script is a modification of <a href="./textproc.html#LOWERCASE">Example 16-22</a>.</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # rn.sh
 
 # Very simpleminded filename "rename" utility (based on "lowercase.sh").
@@ -102,8 +168,27 @@ exit $?
 # Exercises:
 # ---------
 # What types of files will this not work on?
-# How can this be fixed?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="BLANKRENAME"></a><p><b>Example A-3. <i class="FIRSTTERM">blank-rename</i>: Renames filenames containing
-        blanks</b></p><p>This is an even simpler-minded version of previous script.</p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+# How can this be fixed?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="BLANKRENAME">
+</a>
+<p>
+<b>Example A-3. <i class="FIRSTTERM">blank-rename</i>: Renames filenames containing
+        blanks</b>
+</p>
+<p>This is an even simpler-minded version of previous script.</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # blank-rename.sh
 #
 # Substitutes underscores for blanks in all the filenames in a directory.
@@ -131,8 +216,26 @@ else
  echo "$number files renamed."
 fi 
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="ENCRYPTEDPW"></a><p><b>Example A-4. <i class="FIRSTTERM">encryptedpw</i>: Uploading to an ftp site,
-      using a locally encrypted password</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ENCRYPTEDPW">
+</a>
+<p>
+<b>Example A-4. <i class="FIRSTTERM">encryptedpw</i>: Uploading to an ftp site,
+      using a locally encrypted password</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Example "ex72.sh" modified to use encrypted password.
 
@@ -177,7 +280,25 @@ End-Of-Session
 # -n option to "ftp" disables auto-logon.
 # Note that "bell" rings 'bell' after each file transfer.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="COPYCD"></a><p><b>Example A-5. <i class="FIRSTTERM">copy-cd</i>: Copying a data CD</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="COPYCD">
+</a>
+<p>
+<b>Example A-5. <i class="FIRSTTERM">copy-cd</i>: Copying a data CD</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # copy-cd.sh: copying a data CD
 
 CDROM=/dev/cdrom                           # CD ROM device
@@ -229,7 +350,25 @@ echo
 # Exercise:
 # Change the above "case" statement to also accept "yes" and "Yes" as input.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="COLLATZ"></a><p><b>Example A-6. Collatz series</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="COLLATZ">
+</a>
+<p>
+<b>Example A-6. Collatz series</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # collatz.sh
 
 #  The notorious "hailstone" or Collatz series.
@@ -297,8 +436,30 @@ echo
 #+ see _Computers, Pattern, Chaos, and Beauty_, by Pickover, p. 185 ff.,
 #+ as listed in the bibliography.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="DAYSBETWEEN0"></a></p><div class="EXAMPLE"><a name="DAYSBETWEEN"></a><p><b>Example A-7. <i class="FIRSTTERM">days-between</i>: Days between two
-        dates</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="DAYSBETWEEN0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="DAYSBETWEEN">
+</a>
+<p>
+<b>Example A-7. <i class="FIRSTTERM">days-between</i>: Days between two
+        dates</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # days-between.sh:    Number of days between two dates.
 # Usage: ./days-between.sh [M]M/[D]D/YYYY [M]M/[D]D/YYYY
 #
@@ -452,7 +613,26 @@ exit 0
 
 #  Compare this script with
 #+ the implementation of Gauss' Formula in a C program at
-#+    http://buschencrew.hypermart.net/software/datedif</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="MAKEDICT"></a><p><b>Example A-8. Making a <i class="FIRSTTERM">dictionary</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+    http://buschencrew.hypermart.net/software/datedif</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="MAKEDICT">
+</a>
+<p>
+<b>Example A-8. Making a <i class="FIRSTTERM">dictionary</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # makedict.sh  [make dictionary]
 
 # Modification of /usr/sbin/mkdict (/usr/sbin/cracklib-forman) script.
@@ -493,7 +673,29 @@ cat $* |                            #  Dump specified files to stdout.
         grep -v '^#' |              #  Delete lines starting with #.
         grep -v '^$'                #  Delete blank lines.
 
-exit $?</pre></font></td></tr></tbody></table></div><p><a name="SOUNDEX0"></a></p><div class="EXAMPLE"><a name="SOUNDEX"></a><p><b>Example A-9. Soundex conversion</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="SOUNDEX0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="SOUNDEX">
+</a>
+<p>
+<b>Example A-9. Soundex conversion</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # soundex.sh: Calculate "soundex" code for names
 
 # =======================================================
@@ -649,7 +851,30 @@ echo
 # --------
 # Simplify the "Exception Patch" section of this script.
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="LIFEREF"></a></p><div class="EXAMPLE"><a name="LIFESLOW"></a><p><b>Example A-10. <i class="FIRSTTERM">Game of Life</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="LIFEREF">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="LIFESLOW">
+</a>
+<p>
+<b>Example A-10. <i class="FIRSTTERM">Game of Life</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # life.sh: "Life in the Slow Lane"
 # Author: Mendel Cooper
 # License: GPL3
@@ -1036,7 +1261,26 @@ exit 0   # CEOF:EOF
 #+          in the script for an altered grid size.
 #
 # Exercise: Optimize this script.
-#           It has redundant code.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="GEN0DATA"></a><p><b>Example A-11. Data file for <i class="FIRSTTERM">Game of Life</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># gen0
+#           It has redundant code.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="GEN0DATA">
+</a>
+<p>
+<b>Example A-11. Data file for <i class="FIRSTTERM">Game of Life</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># gen0
 #
 # This is an example "generation 0" start-up file for "life.sh".
 # --------------------------------------------------------------
@@ -1055,12 +1299,32 @@ ____._____
 ____._____
 ___...____
 __.._..___
-_..___..__</pre></font></td></tr></tbody></table></div><p>+++</p><p>The following script is by Mark Moraes of the University
+_..___..__</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>+++</p>
+<p>The following script is by Mark Moraes of the University
     of Toronto. See the file <tt class="FILENAME">Moraes-COPYRIGHT</tt>
     for permissions and restrictions. This file is included in the
-    combined <a href="http://www.tldp.org/LDP/abs/html/mirrorsites.html#WHERE_TARBALL">HTML/source tarball</a>
-    of the <em>ABS Guide</em>.</p><div class="EXAMPLE"><a name="BEHEAD"></a><p><b>Example A-12. <i class="FIRSTTERM">behead</i>: Removing mail and news
-      message headers</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/sh
+    combined <a href="./mirrorsites.html#WHERE_TARBALL">HTML/source tarball</a>
+    of the <em>ABS Guide</em>.</p>
+<div class="EXAMPLE">
+<a name="BEHEAD">
+</a>
+<p>
+<b>Example A-12. <i class="FIRSTTERM">behead</i>: Removing mail and news
+      message headers</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/sh
 #  Strips off the header from a mail/News message i.e. till the first
 #+ empty line.
 #  Author: Mark Moraes, University of Toronto
@@ -1109,10 +1373,34 @@ exit
  *    ever read sources, credits must appear in the documentation.
  *
  * 4. This notice may not be removed or altered.
- */</pre></font></td></tr></tbody></table></div><p>+</p><p>Antek Sawicki contributed the following script, which makes very
+ */</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>+</p>
+<p>Antek Sawicki contributed the following script, which makes very
       clever use of the parameter substitution operators discussed in
-      <a href="http://www.tldp.org/LDP/abs/html/parameter-substitution.html">Section 10.2</a>.</p><p><a name="PW0"></a></p><div class="EXAMPLE"><a name="PW"></a><p><b>Example A-13. <i class="FIRSTTERM">password</i>: Generating random
-      8-character passwords</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+      <a href="./parameter-substitution.html">Section 10.2</a>.</p>
+<p>
+<a name="PW0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="PW">
+</a>
+<p>
+<b>Example A-13. <i class="FIRSTTERM">password</i>: Generating random
+      8-character passwords</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #
 #
 #  Random password generator for Bash 2.x +
@@ -1159,10 +1447,33 @@ done
 
 echo "$PASS"      # ==&gt; Or, redirect to a file, as desired.
 
-exit 0</pre></font></td></tr></tbody></table></div><p>+</p><p><a name="ZFIFO"></a>James R. Van Zandt contributed this script
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>+</p>
+<p>
+<a name="ZFIFO">
+</a>James R. Van Zandt contributed this script
       which uses named pipes and, in his words, <span class="QUOTE">"really exercises
-      quoting and escaping."</span></p><div class="EXAMPLE"><a name="FIFO"></a><p><b>Example A-14. <i class="FIRSTTERM">fifo</i>: Making daily backups, using
-      named pipes</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+      quoting and escaping."</span>
+</p>
+<div class="EXAMPLE">
+<a name="FIFO">
+</a>
+<p>
+<b>Example A-14. <i class="FIRSTTERM">fifo</i>: Making daily backups, using
+      named pipes</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ==&gt; Script by James R. Van Zandt, and used here with his permission.
 
 # ==&gt; Comments added by author of this document.
@@ -1195,8 +1506,36 @@ exit 0</pre></font></td></tr></tbody></table></div><p>+</p><p><a name="ZFIFO"></
   # ==&gt;  How could that be done?
 
 
-  exit 0</pre></font></td></tr></tbody></table></div><p>+</p><p><a name="PRIMES1"></a></p><p>Stéphane Chazelas used the following script to
-      demonstrate generating prime numbers without arrays.</p><p><a name="PRIMES00"></a></p><div class="EXAMPLE"><a name="PRIMES"></a><p><b>Example A-15. Generating prime numbers using the modulo operator</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+  exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>+</p>
+<p>
+<a name="PRIMES1">
+</a>
+</p>
+<p>Stéphane Chazelas used the following script to
+      demonstrate generating prime numbers without arrays.</p>
+<p>
+<a name="PRIMES00">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="PRIMES">
+</a>
+<p>
+<b>Example A-15. Generating prime numbers using the modulo operator</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # primes.sh: Generate prime numbers, without using arrays.
 # Script contributed by Stephane Chazelas.
 
@@ -1244,8 +1583,28 @@ exit $?
 #+ with the Sieve of Eratosthenes (ex68.sh).
 
 
-#  Exercise: Rewrite this script without recursion.</pre></font></td></tr></tbody></table></div><p>+</p><p>Rick Boivie's revision of Jordi Sanfeliu's
-      <em>tree</em> script.</p><div class="EXAMPLE"><a name="TREE"></a><p><b>Example A-16. <i class="FIRSTTERM">tree</i>: Displaying a directory tree</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  Exercise: Rewrite this script without recursion.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>+</p>
+<p>Rick Boivie's revision of Jordi Sanfeliu's
+      <em>tree</em> script.</p>
+<div class="EXAMPLE">
+<a name="TREE">
+</a>
+<p>
+<b>Example A-16. <i class="FIRSTTERM">tree</i>: Displaying a directory tree</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # tree.sh
 
 #  Written by Rick Boivie.
@@ -1306,8 +1665,27 @@ numdirs=0
 search 0
 echo "Total directories = $numdirs"
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Patsie's version of a directory <i class="FIRSTTERM">tree</i>
-      script.</p><div class="EXAMPLE"><a name="TREE2"></a><p><b>Example A-17. <i class="FIRSTTERM">tree2</i>: Alternate directory tree script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Patsie's version of a directory <i class="FIRSTTERM">tree</i>
+      script.</p>
+<div class="EXAMPLE">
+<a name="TREE2">
+</a>
+<p>
+<b>Example A-17. <i class="FIRSTTERM">tree2</i>: Alternate directory tree script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # tree2.sh
 
 # Lightly modified/reformatted by ABS Guide author.
@@ -1411,11 +1789,30 @@ tree 0 "" 0 "$rootdir"
 rm "$TMP" 2&gt;/dev/null
      # Clean up TMP file.
 
-exit $?</pre></font></td></tr></tbody></table></div><p>Noah Friedman permitted use of his <em>string
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Noah Friedman permitted use of his <em>string
       function</em> script. It essentially reproduces some
       of the <i class="FIRSTTERM">C</i>-library string manipulation
-      functions.</p><div class="EXAMPLE"><a name="STRING"></a><p><b>Example A-18. <i class="FIRSTTERM">string functions</i>: C-style string
-      functions</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+      functions.</p>
+<div class="EXAMPLE">
+<a name="STRING">
+</a>
+<p>
+<b>Example A-18. <i class="FIRSTTERM">string functions</i>: C-style string
+      functions</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # string.bash --- bash emulation of string(3) library routines
 # Author: Noah Friedman &lt;friedman@prep.ai.mit.edu&gt;
@@ -1685,8 +2082,27 @@ echo
 # Add code to test all the other string functions above.
 
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Michael Zick's complex array example uses the <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#MD5SUMREF">md5sum</a> check sum command to encode directory
-      information.</p><div class="EXAMPLE"><a name="DIRECTORYINFO"></a><p><b>Example A-19. Directory information</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Michael Zick's complex array example uses the <a href="./filearchiv.html#MD5SUMREF">md5sum</a> check sum command to encode directory
+      information.</p>
+<div class="EXAMPLE">
+<a name="DIRECTORYINFO">
+</a>
+<p>
+<b>Example A-19. Directory information</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # directory-info.sh
 # Parses and lists directory information.
 
@@ -2233,9 +2649,29 @@ declare -a FILE_LOC
 LocateFile ${PWD} FILE_LOC
 ListArray FILE_LOC
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Stéphane Chazelas demonstrates object-oriented programming in a
-      Bash script.</p><p>Mariusz Gniazdowski contributed a <a href="http://www.tldp.org/LDP/abs/html/internal.html#HASHREF">hash</a>
-      library for use in scripts.</p><div class="EXAMPLE"><a name="HASHLIB"></a><p><b>Example A-20. Library of hash functions</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Hash:
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Stéphane Chazelas demonstrates object-oriented programming in a
+      Bash script.</p>
+<p>Mariusz Gniazdowski contributed a <a href="./internal.html#HASHREF">hash</a>
+      library for use in scripts.</p>
+<div class="EXAMPLE">
+<a name="HASHLIB">
+</a>
+<p>
+<b>Example A-20. Library of hash functions</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Hash:
 # Hash function library
 # Author: Mariusz Gniazdowski &lt;mariusz.gn-at-gmail.com&gt;
 # Date: 2005-04-07
@@ -2416,7 +2852,26 @@ IFS="$oldIFS"
 }
 
 #  NOTE: In lines 103 and 116, ampersand changed.
-#  But, it doesn't matter, because these are comment lines anyhow.</pre></font></td></tr></tbody></table></div><p>Here is an example script using the foregoing hash library.</p><div class="EXAMPLE"><a name="HASHEXAMPLE"></a><p><b>Example A-21. Colorizing text using hash functions</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  But, it doesn't matter, because these are comment lines anyhow.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here is an example script using the foregoing hash library.</p>
+<div class="EXAMPLE">
+<a name="HASHEXAMPLE">
+</a>
+<p>
+<b>Example A-21. Colorizing text using hash functions</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # hash-example.sh: Colorizing text.
 # Author: Mariusz Gniazdowski &lt;mariusz.gn-at-gmail.com&gt;
 
@@ -2474,8 +2929,29 @@ exit $?
 
 #  On some terminals, the "light" colors print in bold,
 #  and end up looking darker than the normal ones.
-#  Why is this?</pre></font></td></tr></tbody></table></div><p><a name="HASHEX2_0"></a>An example illustrating the mechanics
-      of hashing, but from a different point of view.</p><div class="EXAMPLE"><a name="HASHEX2"></a><p><b>Example A-22. More on hash functions</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  Why is this?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HASHEX2_0">
+</a>An example illustrating the mechanics
+      of hashing, but from a different point of view.</p>
+<div class="EXAMPLE">
+<a name="HASHEX2">
+</a>
+<p>
+<b>Example A-22. More on hash functions</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # $Id: ha.sh,v 1.2 2005/04/21 23:24:26 oliver Exp $
 # Copyright 2005 Oliver Beckstein
 # Released under the GNU Public License
@@ -2618,8 +3094,28 @@ exit 0
 # Exercise:
 # --------
 
-# Add error checks to the functions.</pre></font></td></tr></tbody></table></div><p>Now for a script that installs and mounts
-      those cute USB keychain solid-state <span class="QUOTE">"hard drives."</span></p><div class="EXAMPLE"><a name="USBINST"></a><p><b>Example A-23. Mounting USB keychain storage devices</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Add error checks to the functions.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Now for a script that installs and mounts
+      those cute USB keychain solid-state <span class="QUOTE">"hard drives."</span>
+</p>
+<div class="EXAMPLE">
+<a name="USBINST">
+</a>
+<p>
+<b>Example A-23. Mounting USB keychain storage devices</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ==&gt; usb.sh
 # ==&gt; Script for mounting and installing pen/keychain USB storage devices.
 # ==&gt; Runs as root at system startup (see below).
@@ -2760,7 +3256,26 @@ elif [ "${ACTION}" = "remove" ]; then
     fi
 fi
 
-exit 0</pre></font></td></tr></tbody></table></div><p>Converting a text file to HTML format.</p><div class="EXAMPLE"><a name="TOHTML"></a><p><b>Example A-24. Converting to HTML</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Converting a text file to HTML format.</p>
+<div class="EXAMPLE">
+<a name="TOHTML">
+</a>
+<p>
+<b>Example A-24. Converting to HTML</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # tohtml.sh [v. 0.2.01, reldate: 04/13/12, a teeny bit less buggy]
 
 # Convert a text file to HTML format.
@@ -2900,8 +3415,27 @@ exit $?
 #  ---------
 #  1) Fixup: Check for closing underscore before a comma or period.
 #  2) Add a test for the presence of a closing underscore
-#+    in phrases to be italicized.</pre></font></td></tr></tbody></table></div><p>Here is something to warm the hearts of webmasters and mistresses:
-      a script that saves weblogs.</p><div class="EXAMPLE"><a name="ARCHIVWEBLOGS"></a><p><b>Example A-25. Preserving weblogs</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+    in phrases to be italicized.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here is something to warm the hearts of webmasters and mistresses:
+      a script that saves weblogs.</p>
+<div class="EXAMPLE">
+<a name="ARCHIVWEBLOGS">
+</a>
+<p>
+<b>Example A-25. Preserving weblogs</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # archiveweblogs.sh v1.0
 
 # Troy Engel &lt;tengel@fluid.com&gt;
@@ -2966,8 +3500,29 @@ for logday in $LOG_DAYS; do
   done
 done
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="PROTECTLITERAL0"></a>How to keep the shell from
-      expanding and reinterpreting text strings.</p><div class="EXAMPLE"><a name="PROTECTLITERAL"></a><p><b>Example A-26. Protecting literal strings</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="PROTECTLITERAL0">
+</a>How to keep the shell from
+      expanding and reinterpreting text strings.</p>
+<div class="EXAMPLE">
+<a name="PROTECTLITERAL">
+</a>
+<p>
+<b>Example A-26. Protecting literal strings</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # protect_literal.sh
 
 # set -vx
@@ -3114,9 +3669,30 @@ echo
 # _Protect_Literal_String_Test
 # # # Remove the above "# " to disable this code. # # #
 
-exit 0</pre></font></td></tr></tbody></table></div><p><a name="UNPROTECTLITERAL0"></a>But, what if you
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="UNPROTECTLITERAL0">
+</a>But, what if you
       <em>want</em> the shell to expand
-      and reinterpret strings?</p><div class="EXAMPLE"><a name="UNPROTECTLITERAL"></a><p><b>Example A-27. Unprotecting literal strings</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+      and reinterpret strings?</p>
+<div class="EXAMPLE">
+<a name="UNPROTECTLITERAL">
+</a>
+<p>
+<b>Example A-27. Unprotecting literal strings</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # unprotect_literal.sh
 
 # set -vx
@@ -3238,7 +3814,30 @@ echo $newestVar
 # _UnProtect_Literal_String_Test
 # # # Remove the above "# " to disable this code. # # #
 
-exit 0</pre></font></td></tr></tbody></table></div><p>This interesting script helps hunt down spammers.</p><p><a name="ISSPAMMER2_0"></a></p><div class="EXAMPLE"><a name="ISSPAMMER2"></a><p><b>Example A-28. Spammer Identification</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This interesting script helps hunt down spammers.</p>
+<p>
+<a name="ISSPAMMER2_0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="ISSPAMMER2">
+</a>
+<p>
+<b>Example A-28. Spammer Identification</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # $Id: is_spammer.bash,v 1.12.2.11 2004/10/01 21:42:33 mszick Exp $
 # Above line is RCS info.
@@ -5411,7 +6010,30 @@ Additional Note
 
 Michael Zick points out that there is a "makeviz.bash" interactive
 Web site at rediris.es. Can't give the full URL, since this is not
-a publically accessible site.</pre></font></td></tr></tbody></table></div><p>Another anti-spam script.</p><p><a name="WHX0"></a></p><div class="EXAMPLE"><a name="WHX"></a><p><b>Example A-29. Spammer Hunt</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+a publically accessible site.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Another anti-spam script.</p>
+<p>
+<a name="WHX0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="WHX">
+</a>
+<p>
+<b>Example A-29. Spammer Hunt</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # whx.sh: "whois" spammer lookup
 # Author: Walter Dnes
 # Slight revisions (first section) by ABS Guide author.
@@ -5690,7 +6312,27 @@ exit 0
 #@  Sure, the script can be cleaned up some, and it's still a bit buggy,
 #@+ (exercise for reader), but all the same, it's a nice piece of coding
 #@+ by Walter Dnes.
-#@  Thank you!</pre></font></td></tr></tbody></table></div><p><span class="QUOTE">"Little Monster's"</span> front end to <a href="http://www.tldp.org/LDP/abs/html/communications.html#WGETREF">wget</a>.</p><div class="EXAMPLE"><a name="WGETTER2"></a><p><b>Example A-30. Making <i class="FIRSTTERM">wget</i> easier to use</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#@  Thank you!</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<span class="QUOTE">"Little Monster's"</span> front end to <a href="./communications.html#WGETREF">wget</a>.</p>
+<div class="EXAMPLE">
+<a name="WGETTER2">
+</a>
+<p>
+<b>Example A-30. Making <i class="FIRSTTERM">wget</i> easier to use</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # wgetter2.bash
 
 # Author: Little Monster [monster@monstruum.co.uk]
@@ -6174,7 +6816,25 @@ savePath/site-list-${today}"
 done
 
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="BASHPODDER"></a><p><b>Example A-31. A <i class="FIRSTTERM">podcasting</i> script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="BASHPODDER">
+</a>
+<p>
+<b>Example A-31. A <i class="FIRSTTERM">podcasting</i> script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 #  bashpodder.sh:
 #  By Linc 10/1/2004
@@ -6253,7 +6913,25 @@ see Phil Salkie's article,
 "Internet Radio to Podcast with Shell Tools"
 in the September, 2005 issue of LINUX JOURNAL,
 http://www.linuxjournal.com/article/8171
-#################################################</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="NIGHTLYBACKUP"></a><p><b>Example A-32. Nightly backup to a firewire HD</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#################################################</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="NIGHTLYBACKUP">
+</a>
+<p>
+<b>Example A-32. Nightly backup to a firewire HD</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # nightly-backup.sh
 # http://www.richardneill.org/source.php#nightly-backup-rsync
 # Copyright (c) 2005 Richard Neill &lt;backup@richardneill.org&gt;.
@@ -6616,7 +7294,25 @@ fi
 
 # Should have already exited if backup worked.
 echo 'BACKUP FAILED! Is this just a dry run? Is the disk full?) '
-exit $E_BACKUP</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="CDLL"></a><p><b>Example A-33. An expanded <i class="FIRSTTERM">cd</i> command</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">###########################################################################
+exit $E_BACKUP</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="CDLL">
+</a>
+<p>
+<b>Example A-33. An expanded <i class="FIRSTTERM">cd</i> command</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">###########################################################################
 #
 #       cdll
 #       by Phil Braham
@@ -7382,7 +8078,25 @@ Configuration
 
 Version: 1.2.1 Date: 24-MAY-2003
 
-DOCUMENTATION</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="SOUNDCARDON"></a><p><b>Example A-34. A soundcard setup script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+DOCUMENTATION</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="SOUNDCARDON">
+</a>
+<p>
+<b>Example A-34. A soundcard setup script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # soundcard-on.sh
 
 #  Script author: Mkarcher
@@ -7487,7 +8201,29 @@ modprobe --ignore-install snd-cs4236 port=$port cport=$cport\
 fm_port=$oplport irq=$irq dma1=$dma1 dma2=$dma2 isapnp=0 index=0
 # See the modprobe manpage.
 
-exit $?</pre></font></td></tr></tbody></table></div><p><a name="FINDSPLIT0"></a></p><div class="EXAMPLE"><a name="FINDSPLIT"></a><p><b>Example A-35. Locating split paragraphs in a text file</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="FINDSPLIT0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="FINDSPLIT">
+</a>
+<p>
+<b>Example A-35. Locating split paragraphs in a text file</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # find-splitpara.sh
 #  Finds split paragraphs in a text file,
 #+ and tags the line numbers.
@@ -7552,7 +8288,29 @@ yields:
 
 
 There will be additional output for all the other split paragraphs
-in the target file.</pre></font></td></tr></tbody></table></div><p><a name="INSERTIONSORT0"></a></p><div class="EXAMPLE"><a name="INSERTIONSORT"></a><p><b>Example A-36. Insertion sort</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+in the target file.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="INSERTIONSORT0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="INSERTIONSORT">
+</a>
+<p>
+<b>Example A-36. Insertion sort</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # insertion-sort.bash: Insertion sort implementation in Bash
 #                      Heavy use of Bash array features:
 #+                     (string) slicing, merging, etc
@@ -7616,7 +8374,25 @@ echo
 echo  "------"
 echo $'Result:\n'${list[@]}
 
-exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="STDDEV"></a><p><b>Example A-37. Standard Deviation</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="STDDEV">
+</a>
+<p>
+<b>Example A-37. Standard Deviation</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # sd.sh: Standard Deviation
 
 #  The Standard Deviation indicates how consistent a set of data is.
@@ -7732,8 +8508,26 @@ exit
 # Number of data points in "sample1.dat" = 5
 # Arithmetic mean (average) = 18.756000000
 # Standard Deviation = .235338054
-# ++++++++++++++++++++++++++++++++++++++++ #</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="PADSW"></a><p><b>Example A-38. A <i class="FIRSTTERM">pad</i> file generator for shareware
-        authors</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# ++++++++++++++++++++++++++++++++++++++++ #</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="PADSW">
+</a>
+<p>
+<b>Example A-38. A <i class="FIRSTTERM">pad</i> file generator for shareware
+        authors</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # pad.sh
 
 #######################################################
@@ -7975,7 +8769,25 @@ clear
 echo "Done."; echo; echo
 echo "Save file is:  \""$savefile"\""
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="MANED"></a><p><b>Example A-39. A <i class="FIRSTTERM">man page</i> editor</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="MANED">
+</a>
+<p>
+<b>Example A-39. A <i class="FIRSTTERM">man page</i> editor</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # maned.sh
 # A rudimentary man page editor
 
@@ -8122,7 +8934,25 @@ end    # ... exit not needed.
 #  This script is not nearly as elaborate as the
 #+ full-featured "manedit" package
 #+ http://freshmeat.net/projects/manedit/
-#+ but it's much easier to use.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="PETALS"></a><p><b>Example A-40. Petals Around the Rose</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash -i
+#+ but it's much easier to use.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="PETALS">
+</a>
+<p>
+<b>Example A-40. Petals Around the Rose</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash -i
 # petals.sh
 
 #########################################################################
@@ -8315,7 +9145,25 @@ exit $?
 # 1) http://en.wikipedia.org/wiki/Petals_Around_the_Rose
 #    (Wikipedia entry.)
 # 2) http://www.borrett.id.au/computing/petals-bg.htm
-#    (How Bill Gates coped with the Petals Around the Rose challenge.)</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="QKY"></a><p><b>Example A-41. Quacky: a Perquackey-type word game</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#    (How Bill Gates coped with the Petals Around the Rose challenge.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="QKY">
+</a>
+<p>
+<b>Example A-41. Quacky: a Perquackey-type word game</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # qky.sh
 
 ##############################################################
@@ -8780,7 +9628,25 @@ exit $?
 # 7) Fix bugs!!!
 
 # For more info, reference:
-# http://bash.deta.in/qky.README.html</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="NIM"></a><p><b>Example A-42. Nim</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# http://bash.deta.in/qky.README.html</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="NIM">
+</a>
+<p>
+<b>Example A-42. Nim</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # nim.sh: Game of Nim
 
 # Author: Mendel Cooper
@@ -9054,7 +9920,25 @@ done
 #+ Last Year at Marienbad.
 #
 #  In 1978, Leo Christopherson wrote an animated version of Nim,
-#+ Android Nim, for the TRS-80 Model I.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="STOPWATCH"></a><p><b>Example A-43. A command-line stopwatch</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/sh
+#+ Android Nim, for the TRS-80 Model I.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="STOPWATCH">
+</a>
+<p>
+<b>Example A-43. A command-line stopwatch</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/sh
 # sw.sh
 # A command-line Stopwatch
 
@@ -9183,7 +10067,25 @@ while true; do
     fi
 done
 
-exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="HOMEWORK"></a><p><b>Example A-44. An all-purpose shell scripting homework assignment solution</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="HOMEWORK">
+</a>
+<p>
+<b>Example A-44. An all-purpose shell scripting homework assignment solution</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  homework.sh: All-purpose homework assignment solution.
 #  Author: M. Leo Cooper
 #  If you substitute your own name as author, then it is plagiarism,
@@ -9278,7 +10180,29 @@ exit $E_LZY
 #  A typical example of an obfuscated script that is difficult
 #+ to understand, and frustrating to maintain.
 #  In your career as a sysadmin, you'll run into these critters
-#+ all too often.</pre></font></td></tr></tbody></table></div><p><a name="KTOUR0"></a></p><div class="EXAMPLE"><a name="KTOUR"></a><p><b>Example A-45. The Knight's Tour</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+ all too often.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="KTOUR0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="KTOUR">
+</a>
+<p>
+<b>Example A-45. The Knight's Tour</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # ktour.sh
 
 # author: mendel cooper
@@ -9887,7 +10811,25 @@ exit 0   # return 0;
 #    Must figure out why standard algorithm fails for startpos=37 ...
 #+   but _not_ on any other, including symmetrical startpos=26.
 #    Possibly, when calculating possible moves, counts the move back
-#+   to the originating square. If so, it might be a relatively easy fix.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="MSQUARE"></a><p><b>Example A-46. Magic Squares</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+   to the originating square. If so, it might be a relatively easy fix.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="MSQUARE">
+</a>
+<p>
+<b>Example A-46. Magic Squares</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # msquare.sh
 # Magic Square generator (odd-order squares only!)
 
@@ -9998,7 +10940,25 @@ exit $?
 # 3) Add appropriate functions for generating magic squares
 #    with an *even* number of rows/columns.
 #    This is non-trivial(!).
-#    See the URL for Kwon Young Shin, above, for help.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="FIFTEEN"></a><p><b>Example A-47. Fifteen Puzzle</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#    See the URL for Kwon Young Shin, above, for help.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="FIFTEEN">
+</a>
+<p>
+<b>Example A-47. Fifteen Puzzle</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # fifteen.sh
 
 # Classic "Fifteen Puzzle"
@@ -10170,8 +11130,31 @@ exit 0
 #  Exercise:
 #  --------
 #  Rewrite the script to display the letters A - O,
-#+ rather than the numbers 1 - 15.</pre></font></td></tr></tbody></table></div><p><a name="HANOI2REF"></a></p><div class="EXAMPLE"><a name="HANOI2"></a><p><b>Example A-48. <i class="FIRSTTERM">The Towers of Hanoi, graphic
-	        version</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+#+ rather than the numbers 1 - 15.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HANOI2REF">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="HANOI2">
+</a>
+<p>
+<b>Example A-48. <i class="FIRSTTERM">The Towers of Hanoi, graphic
+	        version</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # The Towers Of Hanoi
 # Original script (hanoi.bash) copyright (C) 2000 Amit Singh.
 # All Rights Reserved.
@@ -10378,8 +11361,31 @@ esac
 exit $E_NOEXIT   # Shouldn't exit here.
 
 # Note:
-# Redirect script output to a file, otherwise it scrolls off display.</pre></font></td></tr></tbody></table></div><p><a name="HANOI2AREF"></a></p><div class="EXAMPLE"><a name="HANOI2A"></a><p><b>Example A-49. <i class="FIRSTTERM">The Towers of Hanoi, alternate graphic
-	        version</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#! /bin/bash
+# Redirect script output to a file, otherwise it scrolls off display.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="HANOI2AREF">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="HANOI2A">
+</a>
+<p>
+<b>Example A-49. <i class="FIRSTTERM">The Towers of Hanoi, alternate graphic
+	        version</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
 # The Towers Of Hanoi
 # Original script (hanoi.bash) copyright (C) 2000 Amit Singh.
 # All Rights Reserved.
@@ -10594,8 +11600,26 @@ exit $E_NOEXIT   # Shouldn't exit here.
 #  --------
 #  There is a minor bug in the script that causes the display of
 #+ the next-to-last move to be skipped.
-#+ Fix this.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="USEGETOPT"></a><p><b>Example A-50. An alternate version of the
-      <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html#GETOPTSIMPLE">getopt-simple.sh</a> script</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+ Fix this.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="USEGETOPT">
+</a>
+<p>
+<b>Example A-50. An alternate version of the
+      <a href="./string-manipulation.html#GETOPTSIMPLE">getopt-simple.sh</a> script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # UseGetOpt.sh
 
 # Author: Peggy Russell &lt;prusselltechgroup@gmail.com&gt;
@@ -10717,8 +11741,27 @@ UseGetOpt -adltf myfile  anotherfile
 echo;echo "Test 4 - Long Options"
 UseGetOpt --aoption --debug --log --test --file myfile anotherfile
 
-exit</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="USEGETOPT2"></a><p><b>Example A-51. The version of the
-      <i class="FIRSTTERM">UseGetOpt.sh</i> example used in the <a href="http://www.tldp.org/LDP/abs/html/tabexpansion.html">Tab Expansion appendix</a></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="USEGETOPT2">
+</a>
+<p>
+<b>Example A-51. The version of the
+      <i class="FIRSTTERM">UseGetOpt.sh</i> example used in the <a href="./tabexpansion.html">Tab Expansion appendix</a>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 #  UseGetOpt-2.sh
 #  Modified version of the script for illustrating tab-expansion
@@ -10811,7 +11854,25 @@ DoSomething () {
   
 #  }
 
-exit</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="SHOWALLC"></a><p><b>Example A-52. Cycling through all the possible color backgrounds</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="SHOWALLC">
+</a>
+<p>
+<b>Example A-52. Cycling through all the possible color backgrounds</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # show-all-colors.sh
 # Displays all 256 possible background colors, using ANSI escape sequences.
@@ -10861,7 +11922,25 @@ do {
 }
 done
 
-echo</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="SAMORSE"></a><p><b>Example A-53. Morse Code Practice</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+echo</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="SAMORSE">
+</a>
+<p>
+<b>Example A-53. Morse Code Practice</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # sam.sh, v. .01a
 # Still Another Morse (code training script)
 # With profuse apologies to Sam (F.B.) Morse.
@@ -11017,7 +12096,25 @@ exit 0
 #  ---------
 #  1) Have the script accept either lowercase or uppercase words
 #+    as arguments. Hint: Use 'tr' . . .
-#  2) Have the script optionally accept input from a text file.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="BASE64"></a><p><b>Example A-54. Base64 encoding/decoding</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  2) Have the script optionally accept input from a text file.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="BASE64">
+</a>
+<p>
+<b>Example A-54. Base64 encoding/decoding</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # base64.sh: Bash implementation of Base64 encoding and decoding.
 #
 # Copyright (c) 2011 vladz &lt;vladz@devzero.fr&gt;
@@ -11036,7 +12133,7 @@ exit 0
 # Reference:
 #
 #    [1]  RFC4648 - "The Base16, Base32, and Base64 Data Encodings"
-#         http://tools.ietf.org/html/rfc4648#section-5
+#         ./rfc4648#section-5
 
 
 # The base64_charset[] array contains entire base64 charset,
@@ -11142,8 +12239,27 @@ else
 
   echo
 
-fi</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="SEDAPPEND"></a><p><b>Example A-55. Inserting text in a file using
-       <i class="FIRSTTERM">sed</i></b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="SEDAPPEND">
+</a>
+<p>
+<b>Example A-55. Inserting text in a file using
+       <i class="FIRSTTERM">sed</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  Prepends a string at a specified line
 #+ in files with names ending in "sample"
 #+ in the current working directory.
@@ -11179,7 +12295,25 @@ exit 0
 
 # Exercise:
 # Add error checking to this script.
-# It needs it badly.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="GRONSFELD"></a><p><b>Example A-56. The Gronsfeld Cipher</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# It needs it badly.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="GRONSFELD">
+</a>
+<p>
+<b>Example A-56. The Gronsfeld Cipher</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # gronsfeld.bash
 
 # License: GPL3
@@ -11325,7 +12459,25 @@ exit $?    # } End-of-script
 #+  a fairly secure password not susceptible to a dictionary attack.
 #   Or, you could use your own name (surely that's easy to remember!).
 #   For example, Bozo Bozeman encrypts to hfnbttdppkt29379.
-#   **************************************************************   #</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="BINGO"></a><p><b>Example A-57. Bingo Number Generator</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#   **************************************************************   #</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="BINGO">
+</a>
+<p>
+<b>Example A-57. Bingo Number Generator</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # bingo.sh
 # Bingo number generator
 # Reldate 20Aug12, License: Public Domain
@@ -11450,8 +12602,29 @@ exit 0
 
 # Certainly, this script could stand some improvement.
 #See also the author's Instructable:
-#www.instructables.com/id/Binguino-An-Arduino-based-Bingo-Number-Generato/</pre></font></td></tr></tbody></table></div><p><a name="BASICSREV0"></a>To end this section, a review of the
-      basics . . . and more.</p><div class="EXAMPLE"><a name="BASICSREVIEWED"></a><p><b>Example A-58. Basics Reviewed</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#www.instructables.com/id/Binguino-An-Arduino-based-Bingo-Number-Generato/</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="BASICSREV0">
+</a>To end this section, a review of the
+      basics . . . and more.</p>
+<div class="EXAMPLE">
+<a name="BASICSREVIEWED">
+</a>
+<p>
+<b>Example A-58. Basics Reviewed</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # basics-reviewed.bash
 
 # File extension == *.bash == specific to Bash
@@ -12490,7 +13663,25 @@ echo ${sparseZ[@]//*/$(_GenFunc)}
 # Perhaps it will be implemented in a future version of Bash.
 
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="TESTEXECTIME"></a><p><b>Example A-59. Testing execution times of various commands</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="TESTEXECTIME">
+</a>
+<p>
+<b>Example A-59. Testing execution times of various commands</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  test-execution-time.sh
 #  Example by Erik Brandsberg, for testing execution time
 #+ of certain operations.
@@ -12558,8 +13749,26 @@ do
   fi
 done
 
-exit $?</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="ASSOCARRTEST"></a><p><b>Example A-60. Associative arrays vs. conventional arrays (execution
-	    times)</b></p><table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ASSOCARRTEST">
+</a>
+<p>
+<b>Example A-60. Associative arrays vs. conventional arrays (execution
+	    times)</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  assoc-arr-test.sh
 #  Benchmark test script to compare execution times of
 #  numeric-indexed array vs. associative array.
@@ -12658,4 +13867,36 @@ time for value in "${array4[@]}"; do
         simple=$value
 done
 
-exit $?</pre></font></td></tr></tbody></table></div></div><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/biblio.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/refcards.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Bibliography</td><td align="center" valign="top" width="34%">&nbsp;</td><td align="right" valign="top" width="33%">Reference Cards</td></tr></tbody></table></div></body></html>
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./biblio.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./refcards.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Bibliography</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Reference Cards</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

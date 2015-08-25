@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Nested if/then Condition Tests</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Tests" href="./tests.html">
+<link rel="PREVIOUS" title="Other Comparison Operators" href="./comparison-ops.html">
+<link rel="NEXT" title="Testing Your Knowledge of Tests" href="./testtest.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./comparison-ops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 7. Tests</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./testtest.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="NESTEDIFTHEN">
+</a>7.4. Nested <tt class="REPLACEABLE">
+<i>if/then</i>
+</tt> Condition Tests</h1>
+<p>Condition tests using the <tt class="REPLACEABLE">
+<i>if/then</i>
+</tt>
+	 construct may be nested. The net result is equivalent to using the
+	 <a href="./ops.html#LOGOPS1">
+<i class="FIRSTTERM">&amp;&amp;</i>
+</a> compound
+	 comparison operator.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">a=3
+
+if [ "$a" -gt 0 ]
+then
+  if [ "$a" -lt 5 ]
+  then
+    echo "The value of \"a\" lies somewhere between 0 and 5."
+  fi
+fi
+
+# Same result as:
+
+if [ "$a" -gt 0 ] &amp;&amp; [ "$a" -lt 5 ]
+then
+  echo "The value of \"a\" lies somewhere between 0 and 5."
+fi</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>
+<a href="./bashver2.html#CARDS">Example 37-4</a> and <a href="./system.html#BACKLIGHT">Example 17-11</a>
+         demonstrate nested <tt class="REPLACEABLE">
+<i>if/then</i>
+</tt> condition
+         tests.</p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./comparison-ops.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./testtest.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Other Comparison Operators</td>
+<td align="center" valign="top" width="34%">
+<a href="./tests.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Testing Your Knowledge of Tests</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

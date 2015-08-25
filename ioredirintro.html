@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>A Detailed Introduction to I/O and I/O Redirection</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="PREVIOUS" title="Exit Codes With Special Meanings" href="./exitcodes.html">
+<link rel="NEXT" title="Command-Line Options" href="./command-line-options.html">
+</head>
+<body class="APPENDIX" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./exitcodes.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./command-line-options.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="APPENDIX">
+<h1>
+<a name="IOREDIRINTRO">
+</a>Appendix F. A Detailed Introduction to I/O and I/O Redirection</h1>
+<p>
+<em>written by Stéphane Chazelas, and revised
+        by the document author</em>
+</p>
+<p>
+<a name="STDINOUTDEF">
+</a>
+</p>
+<p>A command expects the first three <a href="./io-redirection.html#FDREF">file
+        descriptors</a> to be available. The first, <i class="FIRSTTERM">fd
+        0</i> (standard input, <tt class="FILENAME">stdin</tt>),
+        is for reading. The other two (<i class="FIRSTTERM">fd 1</i>,
+        <tt class="FILENAME">stdout</tt> and <i class="FIRSTTERM">fd 2</i>,
+        <tt class="FILENAME">stderr</tt>) are for writing.</p>
+<p>There is a <tt class="FILENAME">stdin</tt>, <tt class="FILENAME">stdout</tt>,
+        and a <tt class="FILENAME">stderr</tt> associated with each command.
+        <tt class="USERINPUT">
+<b>ls 2&gt;&amp;1</b>
+</tt> means temporarily connecting the
+        <tt class="FILENAME">stderr</tt> of the <b class="COMMAND">ls</b> command to the
+        same <span class="QUOTE">"resource"</span> as the shell's
+        <tt class="FILENAME">stdout</tt>.</p>
+<p>By convention, a command reads its input from fd 0
+        (<tt class="FILENAME">stdin</tt>), prints normal output to fd
+        1 (<tt class="FILENAME">stdout</tt>), and error ouput to fd 2
+        (<tt class="FILENAME">stderr</tt>). If one of those three fd's is
+        not open, you may encounter problems:</p>
+<table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>cat /etc/passwd &gt;&amp;-</b>
+</tt>
+<tt class="COMPUTEROUTPUT">cat: standard output: Bad file descriptor</tt>
+      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+<p>For example, when <b class="COMMAND">xterm</b> runs, it first
+        initializes itself.  Before running the user's shell,
+        <b class="COMMAND">xterm</b> opens the terminal device
+        (/dev/pts/&lt;n&gt; or something similar) three times.</p>
+<p>At this point, Bash inherits these three file descriptors,
+        and each command (child process) run by Bash inherits
+        them in turn, except when you redirect the command.  <a href="./io-redirection.html#IOREDIRREF">Redirection</a> means reassigning
+        one of the file descriptors to another file (or a pipe, or
+        anything permissible). File descriptors may be reassigned
+        locally (for a command, a command group, a <a href="./subshells.html#SUBSHELLSREF">subshell</a>, a <a href="./redircb.html#REDIRREF">while or if or case or for loop</a>...),
+        or globally, for the remainder of the shell (using <a href="./internal.html#EXECREF">exec</a>).</p>
+<p>
+<tt class="USERINPUT">
+<b>ls &gt; /dev/null</b>
+</tt> means
+        running <b class="COMMAND">ls</b> with its fd 1 connected to
+        <tt class="FILENAME">/dev/null</tt>.</p>
+<p>      <table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>lsof -a -p $$ -d0,1,2</b>
+</tt>
+<tt class="COMPUTEROUTPUT">COMMAND PID     USER   FD   TYPE DEVICE SIZE NODE NAME
+ bash    363 bozo        0u   CHR  136,1         3 /dev/pts/1
+ bash    363 bozo        1u   CHR  136,1         3 /dev/pts/1
+ bash    363 bozo        2u   CHR  136,1         3 /dev/pts/1</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>exec 2&gt; /dev/null</b>
+</tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>lsof -a -p $$ -d0,1,2</b>
+</tt>
+<tt class="COMPUTEROUTPUT">COMMAND PID     USER   FD   TYPE DEVICE SIZE NODE NAME
+ bash    371 bozo        0u   CHR  136,1         3 /dev/pts/1
+ bash    371 bozo        1u   CHR  136,1         3 /dev/pts/1
+ bash    371 bozo        2w   CHR    1,3       120 /dev/null</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>bash -c 'lsof -a -p $$ -d0,1,2' | cat</b>
+</tt>
+<tt class="COMPUTEROUTPUT">COMMAND PID USER   FD   TYPE DEVICE SIZE NODE NAME
+ lsof    379 root    0u   CHR  136,1         3 /dev/pts/1
+ lsof    379 root    1w  FIFO    0,0      7118 pipe
+ lsof    379 root    2u   CHR  136,1         3 /dev/pts/1</tt>
+
+
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>echo "$(bash -c 'lsof -a -p $$ -d0,1,2' 2&gt;&amp;1)"</b>
+</tt>
+<tt class="COMPUTEROUTPUT">COMMAND PID USER   FD   TYPE DEVICE SIZE NODE NAME
+ lsof    426 root    0u   CHR  136,1         3 /dev/pts/1
+ lsof    426 root    1w  FIFO    0,0      7520 pipe
+ lsof    426 root    2w  FIFO    0,0      7520 pipe</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>This works for different types of redirection.</p>
+<p>
+<tt class="USERINPUT">
+<b>Exercise:</b>
+</tt> Analyze the following script.
+
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /usr/bin/env bash
+
+mkfifo /tmp/fifo1 /tmp/fifo2
+while read a; do echo "FIFO1: $a"; done &lt; /tmp/fifo1 &amp; exec 7&gt; /tmp/fifo1
+exec 8&gt; &gt;(while read a; do echo "FD8: $a, to fd7"; done &gt;&amp;7)
+
+exec 3&gt;&amp;1
+(
+ (
+  (
+   while read a; do echo "FIFO2: $a"; done &lt; /tmp/fifo2 | tee /dev/stderr \
+   | tee /dev/fd/4 | tee /dev/fd/5 | tee /dev/fd/6 &gt;&amp;7 &amp; exec 3&gt; /tmp/fifo2
+
+   echo 1st, to stdout
+   sleep 1
+   echo 2nd, to stderr &gt;&amp;2
+   sleep 1
+   echo 3rd, to fd 3 &gt;&amp;3
+   sleep 1
+   echo 4th, to fd 4 &gt;&amp;4
+   sleep 1
+   echo 5th, to fd 5 &gt;&amp;5
+   sleep 1
+   echo 6th, through a pipe | sed 's/.*/PIPE: &amp;, to fd 5/' &gt;&amp;5
+   sleep 1
+   echo 7th, to fd 6 &gt;&amp;6
+   sleep 1
+   echo 8th, to fd 7 &gt;&amp;7
+   sleep 1
+   echo 9th, to fd 8 &gt;&amp;8
+
+  ) 4&gt;&amp;1 &gt;&amp;3 3&gt;&amp;- | while read a; do echo "FD4: $a"; done 1&gt;&amp;3 5&gt;&amp;- 6&gt;&amp;-
+ ) 5&gt;&amp;1 &gt;&amp;3 | while read a; do echo "FD5: $a"; done 1&gt;&amp;3 6&gt;&amp;-
+) 6&gt;&amp;1 &gt;&amp;3 | while read a; do echo "FD6: $a"; done 3&gt;&amp;-
+
+rm -f /tmp/fifo1 /tmp/fifo2
+
+
+# For each command and subshell, figure out which fd points to what.
+# Good luck!
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+      </p>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./exitcodes.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./command-line-options.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Exit Codes With Special Meanings</td>
+<td align="center" valign="top" width="34%">&nbsp;</td>
+<td align="right" valign="top" width="33%">Command-Line Options</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

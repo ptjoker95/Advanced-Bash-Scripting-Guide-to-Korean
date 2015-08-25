@@ -1,0 +1,1177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Debugging</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Advanced Topics" href="./part5.html">
+<link rel="PREVIOUS" title="Of Zeros and Nulls" href="./zeros.html">
+<link rel="NEXT" title="Options" href="./options.html">
+</head>
+<body class="CHAPTER" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index:9999; border: 1px solid #4AAEDE;fetching=false">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./zeros.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">
+</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./options.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="CHAPTER">
+<h1>
+<a name="DEBUGGING">
+</a>Chapter 32. Debugging</h1>
+<table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td width="45%">&nbsp;</td>
+<td align="LEFT" valign="TOP" width="45%">
+<i>
+<p>
+<i>Debugging is twice as hard as writing the code in the first
+        place. Therefore, if you write the code as cleverly as possible,
+        you are, by definition, not smart enough to debug it.</i>
+</p>
+<p>
+<i>--Brian Kernighan</i>
+</p>
+</i>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The Bash shell contains no built-in debugger, and only bare-bones
+	debugging-specific commands and constructs. Syntax errors or
+	outright typos in the script generate cryptic error messages that
+	are often of no help in debugging a non-functional script.</p>
+<div class="EXAMPLE">
+<a name="EX74">
+</a>
+<p>
+<b>Example 32-1. A buggy script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# ex74.sh
+
+# This is a buggy script.
+# Where, oh where is the error?
+
+a=37
+
+if [$a -gt 27 ]
+then
+  echo $a
+fi  
+
+exit $?   # 0! Why?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Output from script:
+	<table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">./ex74.sh: [37: command not found</tt>
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+        What's wrong with the above script? Hint: after the
+        <i class="FIRSTTERM">if</i>.</p>
+<div class="EXAMPLE">
+<a name="MISSINGKEYWORD">
+</a>
+<p>
+<b>Example 32-2. Missing <a href="./internal.html#KEYWORDREF">keyword</a>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# missing-keyword.sh
+# What error message will this script generate? And why?
+
+for a in 1 2 3
+do
+  echo "$a"
+# done     # Required keyword 'done' commented out in line 8.
+
+exit 0     # Will not exit here!
+
+# === #
+
+# From command line, after script terminates:
+  echo $?    # 2</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Output from script:
+	<table bgcolor="#E0E0E0" border="1" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="COMPUTEROUTPUT">missing-keyword.sh: line 10: syntax error: unexpected end of file</tt>
+	</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	Note that the error message does <em>not</em> necessarily
+	reference the line in which the error occurs, but the line where the
+	Bash interpreter finally becomes aware of the error.
+	</p>
+<p>Error messages may disregard comment lines in a script when
+        reporting the line number of a syntax error.</p>
+<p>What if the script executes, but does not work as expected? This is the
+	all too familiar logic error.</p>
+<div class="EXAMPLE">
+<a name="EX75">
+</a>
+<p>
+<b>Example 32-3. <i class="FIRSTTERM">test24</i>: another buggy script</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+#  This script is supposed to delete all filenames in current directory
+#+ containing embedded spaces.
+#  It doesn't work.
+#  Why not?
+
+
+badname=`ls | grep ' '`
+
+# Try this:
+# echo "$badname"
+
+rm "$badname"
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Try to find out what's wrong with <a href="./debugging.html#EX75">Example 32-3</a>
+	by uncommenting the <tt class="USERINPUT">
+<b>echo "$badname"</b>
+</tt> line. Echo
+	statements are useful for seeing whether what you expect is
+	actually what you get.</p>
+<p>In this particular case, <tt class="USERINPUT">
+<b>rm "$badname"</b>
+</tt>
+	will not give the desired results because
+	<tt class="VARNAME">$badname</tt> should not be quoted. Placing it
+	in quotes ensures that <b class="COMMAND">rm</b> has only one
+	argument (it will match only one filename). A partial fix
+	is to remove to quotes from <tt class="VARNAME">$badname</tt> and
+	to reset <tt class="VARNAME">$IFS</tt> to contain only a newline,
+	<tt class="USERINPUT">
+<b>IFS=$'\n'</b>
+</tt>. However, there are simpler
+	ways of going about it.
+	<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Correct methods of deleting filenames containing spaces.
+rm *\ *
+rm *" "*
+rm *' '*
+# Thank you. S.C.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	
+	</p>
+<p>Summarizing the symptoms of a buggy script,
+	</p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>It bombs with a <span class="QUOTE">"<span class="ERRORNAME">syntax error</span>"</span> message, or</p>
+</li>
+<li>
+<p>It runs, but does not work as expected 
+	      (<span class="ERRORNAME">logic error</span>).</p>
+</li>
+<li>
+<p>It runs, works as expected, but has nasty side effects
+	      (<span class="ERRORNAME">logic bomb</span>).</p>
+</li>
+</ol>
+      <p>
+</p>
+<p>
+<a name="DEBUGTOOLS">
+</a>
+</p>
+<p>Tools for debugging non-working scripts include
+	</p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>Inserting <a href="./internal.html#ECHOREF">echo</a>
+	      statements at critical points in the script to trace the
+	      variables, and otherwise give a snapshot of what is going
+	      on.</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="debugging_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Even better is an <b class="COMMAND">echo</b> that echoes
+	      only when <i class="FIRSTTERM">debug</i> is on.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">### debecho (debug-echo), by Stefano Falsetto ###
+### Will echo passed parameters only if DEBUG is set to a value. ###
+debecho () {
+  if [ ! -z "$DEBUG" ]; then
+     echo "$1" &gt;&amp;2
+     #         ^^^ to stderr
+  fi
+}
+
+DEBUG=on
+Whatever=whatnot
+debecho $Whatever   # whatnot
+
+DEBUG=
+Whatever=notwhat
+debecho $Whatever   # (Will not echo.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>Using the <a href="./extmisc.html#TEEREF">tee</a> filter
+	      to check processes or data flows at critical points.</p>
+</li>
+<li>
+<p>Setting option flags <tt class="OPTION">-n -v -x</tt>
+</p>
+<p>
+<tt class="USERINPUT">
+<b>sh -n scriptname</b>
+</tt> checks for
+	      syntax errors without actually running the script. This is
+	      the equivalent of inserting <tt class="USERINPUT">
+<b>set -n</b>
+</tt> or
+	      <tt class="USERINPUT">
+<b>set -o noexec</b>
+</tt> into the script. Note
+	      that certain types of syntax errors can slip past this
+	      check.</p>
+<p>
+<tt class="USERINPUT">
+<b>sh -v scriptname</b>
+</tt> echoes each
+	      command before executing it. This is the equivalent of
+	      inserting <tt class="USERINPUT">
+<b>set -v</b>
+</tt> or <tt class="USERINPUT">
+<b>set
+	      -o verbose</b>
+</tt> in the script.</p>
+<p>The <tt class="OPTION">-n</tt> and <tt class="OPTION">-v</tt>
+	      flags work well together. <tt class="USERINPUT">
+<b>sh -nv
+	      scriptname</b>
+</tt> gives a verbose syntax check.</p>
+<p>
+<tt class="USERINPUT">
+<b>sh -x scriptname</b>
+</tt> echoes the result each
+	      command, but in an abbreviated manner. This is the equivalent of
+	      inserting <tt class="USERINPUT">
+<b>set -x</b>
+</tt> or 
+	      <tt class="USERINPUT">
+<b>set -o xtrace</b>
+</tt> in the script.</p>
+<p>
+<a name="UNDVARERR">
+</a>
+</p>
+<p>Inserting <tt class="USERINPUT">
+<b>set -u</b>
+</tt> or 
+		<tt class="USERINPUT">
+<b>set -o nounset</b>
+</tt> in the script runs it, but
+		gives an <span class="ERRORNAME">unbound variable</span> error message
+		and aborts the script.
+		<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">set -u   # Or   set -o nounset
+
+# Setting a variable to null will not trigger the error/abort.
+# unset_var=
+
+echo $unset_var   # Unset (and undeclared) variable.
+
+echo "Should not echo!"
+
+# sh t2.sh
+# t2.sh: line 6: unset_var: unbound variable</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</li>
+<li>
+<p>Using an <span class="QUOTE">"assert"</span> function to test a
+	      variable or condition at critical points in a script. (This is
+	      an idea borrowed from C.)</p>
+<div class="EXAMPLE">
+<a name="ASSERT">
+</a>
+<p>
+<b>Example 32-4. Testing a condition with an
+	      <i class="FIRSTTERM">assert</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# assert.sh
+
+#######################################################################
+assert ()                 #  If condition false,
+{                         #+ exit from script
+                          #+ with appropriate error message.
+  E_PARAM_ERR=98
+  E_ASSERT_FAILED=99
+
+
+  if [ -z "$2" ]          #  Not enough parameters passed
+  then                    #+ to assert() function.
+    return $E_PARAM_ERR   #  No damage done.
+  fi
+
+  lineno=$2
+
+  if [ ! $1 ] 
+  then
+    echo "Assertion failed:  \"$1\""
+    echo "File \"$0\", line $lineno"    # Give name of file and line number.
+    exit $E_ASSERT_FAILED
+  # else
+  #   return
+  #   and continue executing the script.
+  fi  
+} # Insert a similar assert() function into a script you need to debug.    
+#######################################################################
+
+
+a=5
+b=4
+condition="$a -lt $b"     #  Error message and exit from script.
+                          #  Try setting "condition" to something else
+                          #+ and see what happens.
+
+assert "$condition" $LINENO
+# The remainder of the script executes only if the "assert" does not fail.
+
+
+# Some commands.
+# Some more commands . . .
+echo "This statement echoes only if the \"assert\" does not fail."
+# . . .
+# More commands . . .
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>Using the <a href="./internalvariables.html#LINENOREF">$LINENO</a>
+	      variable and the <a href="./internal.html#CALLERREF">caller</a>
+	      builtin.</p>
+</li>
+<li>
+<p>
+<a name="DEBUGTRAP">
+</a>Trapping at exit.</p>
+<p>The <a href="./internal.html#EXITREF">exit</a> command in a script
+	      triggers a signal <span class="RETURNVALUE">0</span>, terminating
+	      the process, that is, the script itself.
+
+	      <a name="AEN19460" href="#FTN.AEN19460">
+<span class="footnote">[1]</span>
+</a>
+
+	      It is often useful to trap the
+	      <i class="FIRSTTERM">exit</i>, forcing a <span class="QUOTE">"printout"</span>
+	      of variables, for example. The <i class="FIRSTTERM">trap</i>
+	      must be the first command in the script.</p>
+</li>
+</ol>
+      <p>
+</p>
+<p>
+</p>
+<div class="VARIABLELIST">
+<p>
+<b>
+<a name="TRAPREF1">
+</a>Trapping signals</b>
+</p>
+<dl>
+<dt>
+<b class="COMMAND">trap</b>
+</dt>
+<dd>
+<p>Specifies an action on receipt of a
+	        signal; also useful for debugging.</p>
+<p>
+<a name="SIGNALD">
+</a>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN19477">
+</a>
+<p>
+</p>
+<p>A <i class="FIRSTTERM">signal</i> is a message
+		sent to a process, either by the kernel or another
+		process, telling it to take some specified action
+		(usually to terminate).  For example, hitting a
+		<a href="./special-chars.html#CTLCREF">Control-C</a>
+		sends a user interrupt, an INT signal, to a running
+		program.</p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<em>A simple instance:</em>
+		  <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">trap '' 2
+# Ignore interrupt 2 (Control-C), with no action specified. 
+
+trap 'echo "Control-C disabled."' 2
+# Message when Control-C pressed.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</dd>
+</dl>
+</div>
+<div class="EXAMPLE">
+<a name="EX76">
+</a>
+<p>
+<b>Example 32-5. Trapping at exit</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# Hunting variables with a trap.
+
+trap 'echo Variable Listing --- a = $a  b = $b' EXIT
+#  EXIT is the name of the signal generated upon exit from a script.
+#
+#  The command specified by the "trap" doesn't execute until
+#+ the appropriate signal is sent.
+
+echo "This prints before the \"trap\" --"
+echo "even though the script sees the \"trap\" first."
+echo
+
+a=39
+
+b=36
+
+exit 0
+#  Note that commenting out the 'exit' command makes no difference,
+#+ since the script exits in any case after running out of commands.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="ONLINE">
+</a>
+<p>
+<b>Example 32-6. Cleaning up after <b class="KEYCAP">Control-C</b>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# logon.sh: A quick 'n dirty script to check whether you are on-line yet.
+
+umask 177  # Make sure temp files are not world readable.
+
+
+TRUE=1
+LOGFILE=/var/log/messages
+#  Note that $LOGFILE must be readable
+#+ (as root, chmod 644 /var/log/messages).
+TEMPFILE=temp.$$
+#  Create a "unique" temp file name, using process id of the script.
+#     Using 'mktemp' is an alternative.
+#     For example:
+#     TEMPFILE=`mktemp temp.XXXXXX`
+KEYWORD=address
+#  At logon, the line "remote IP address xxx.xxx.xxx.xxx"
+#                      appended to /var/log/messages.
+ONLINE=22
+USER_INTERRUPT=13
+CHECK_LINES=100
+#  How many lines in log file to check.
+
+trap 'rm -f $TEMPFILE; exit $USER_INTERRUPT' TERM INT
+#  Cleans up the temp file if script interrupted by control-c.
+
+echo
+
+while [ $TRUE ]  #Endless loop.
+do
+  tail -n $CHECK_LINES $LOGFILE&gt; $TEMPFILE
+  #  Saves last 100 lines of system log file as temp file.
+  #  Necessary, since newer kernels generate many log messages at log on.
+  search=`grep $KEYWORD $TEMPFILE`
+  #  Checks for presence of the "IP address" phrase,
+  #+ indicating a successful logon.
+
+  if [ ! -z "$search" ] #  Quotes necessary because of possible spaces.
+  then
+     echo "On-line"
+     rm -f $TEMPFILE    #  Clean up temp file.
+     exit $ONLINE
+  else
+     echo -n "."        #  The -n option to echo suppresses newline,
+                        #+ so you get continuous rows of dots.
+  fi
+
+  sleep 1  
+done  
+
+
+#  Note: if you change the KEYWORD variable to "Exit",
+#+ this script can be used while on-line
+#+ to check for an unexpected logoff.
+
+# Exercise: Change the script, per the above note,
+#           and prettify it.
+
+exit 0
+
+
+# Nick Drage suggests an alternate method:
+
+while true
+  do ifconfig ppp0 | grep UP 1&gt; /dev/null &amp;&amp; echo "connected" &amp;&amp; exit 0
+  echo -n "."   # Prints dots (.....) until connected.
+  sleep 2
+done
+
+# Problem: Hitting Control-C to terminate this process may be insufficient.
+#+         (Dots may keep on echoing.)
+# Exercise: Fix this.
+
+
+
+# Stephane Chazelas has yet another alternative:
+
+CHECK_INTERVAL=1
+
+while ! tail -n 1 "$LOGFILE" | grep -q "$KEYWORD"
+do echo -n .
+   sleep $CHECK_INTERVAL
+done
+echo "On-line"
+
+# Exercise: Discuss the relative strengths and weaknesses
+#           of each of these various approaches.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="PROGRESSBAR2">
+</a>
+<p>
+<b>Example 32-7. A Simple Implementation of a Progress Bar</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#! /bin/bash
+# progress-bar2.sh
+# Author: Graham Ewart (with reformatting by ABS Guide author).
+# Used in ABS Guide with permission (thanks!).
+
+# Invoke this script with bash. It doesn't work with sh.
+
+interval=1
+long_interval=10
+
+{
+     trap "exit" SIGUSR1
+     sleep $interval; sleep $interval
+     while true
+     do
+       echo -n '.'     # Use dots.
+       sleep $interval
+     done; } &amp;         # Start a progress bar as a background process.
+
+pid=$!
+trap "echo !; kill -USR1 $pid; wait $pid"  EXIT        # To handle ^C.
+
+echo -n 'Long-running process '
+sleep $long_interval
+echo ' Finished!'
+
+kill -USR1 $pid
+wait $pid              # Stop the progress bar.
+trap EXIT
+
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="debugging_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <tt class="OPTION">DEBUG</tt> argument to
+	<b class="COMMAND">trap</b> causes a specified action to execute
+	after every command in a script. This permits tracing variables,
+	for example.
+
+      </p>
+<div class="EXAMPLE">
+<a name="VARTRACE">
+</a>
+<p>
+<b>Example 32-8. Tracing a variable</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+trap 'echo "VARIABLE-TRACE&gt; \$variable = \"$variable\""' DEBUG
+# Echoes the value of $variable after every command.
+
+variable=29; line=$LINENO
+
+echo "  Just initialized \$variable to $variable in line number $line."
+
+let "variable *= 3"; line=$LINENO
+echo "  Just multiplied \$variable by 3 in line number $line."
+
+exit 0
+
+#  The "trap 'command1 . . . command2 . . .' DEBUG" construct is
+#+ more appropriate in the context of a complex script,
+#+ where inserting multiple "echo $variable" statements might be
+#+ awkward and time-consuming.
+
+# Thanks, Stephane Chazelas for the pointer.
+
+
+Output of script:
+
+VARIABLE-TRACE&gt; $variable = ""
+VARIABLE-TRACE&gt; $variable = "29"
+  Just initialized $variable to 29.
+VARIABLE-TRACE&gt; $variable = "29"
+VARIABLE-TRACE&gt; $variable = "87"
+  Just multiplied $variable by 3.
+VARIABLE-TRACE&gt; $variable = "87"</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      <p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Of course, the <b class="COMMAND">trap</b> command has other uses
+        aside from debugging, such as disabling certain keystrokes within a
+	script (see <a href="./contributed-scripts.html#STOPWATCH">Example A-43</a>).</p>
+<div class="EXAMPLE">
+<a name="MULTIPLEPROC">
+</a>
+<p>
+<b>Example 32-9. Running multiple processes (on an SMP box)</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# parent.sh
+# Running multiple processes on an SMP box.
+# Author: Tedman Eng
+
+#  This is the first of two scripts,
+#+ both of which must be present in the current working directory.
+
+
+
+
+LIMIT=$1         # Total number of process to start
+NUMPROC=4        # Number of concurrent threads (forks?)
+PROCID=1         # Starting Process ID
+echo "My PID is $$"
+
+function start_thread() {
+        if [ $PROCID -le $LIMIT ] ; then
+                ./child.sh $PROCID&amp;
+                let "PROCID++"
+        else
+           echo "Limit reached."
+           wait
+           exit
+        fi
+}
+
+while [ "$NUMPROC" -gt 0 ]; do
+        start_thread;
+        let "NUMPROC--"
+done
+
+
+while true
+do
+
+trap "start_thread" SIGRTMIN
+
+done
+
+exit 0
+
+
+
+# ======== Second script follows ========
+
+
+#!/bin/bash
+# child.sh
+# Running multiple processes on an SMP box.
+# This script is called by parent.sh.
+# Author: Tedman Eng
+
+temp=$RANDOM
+index=$1
+shift
+let "temp %= 5"
+let "temp += 4"
+echo "Starting $index  Time:$temp" "$@"
+sleep ${temp}
+echo "Ending $index"
+kill -s SIGRTMIN $PPID
+
+exit 0
+
+
+# ======================= SCRIPT AUTHOR'S NOTES ======================= #
+#  It's not completely bug free.
+#  I ran it with limit = 500 and after the first few hundred iterations,
+#+ one of the concurrent threads disappeared!
+#  Not sure if this is collisions from trap signals or something else.
+#  Once the trap is received, there's a brief moment while executing the
+#+ trap handler but before the next trap is set.  During this time, it may
+#+ be possible to miss a trap signal, thus miss spawning a child process.
+
+#  No doubt someone may spot the bug and will be writing 
+#+ . . . in the future.
+
+
+
+# ===================================================================== #
+
+
+
+# ----------------------------------------------------------------------#
+
+
+
+#################################################################
+# The following is the original script written by Vernia Damiano.
+# Unfortunately, it doesn't work properly.
+#################################################################
+
+#!/bin/bash
+
+#  Must call script with at least one integer parameter
+#+ (number of concurrent processes).
+#  All other parameters are passed through to the processes started.
+
+
+INDICE=8        # Total number of process to start
+TEMPO=5         # Maximum sleep time per process
+E_BADARGS=65    # No arg(s) passed to script.
+
+if [ $# -eq 0 ] # Check for at least one argument passed to script.
+then
+  echo "Usage: `basename $0` number_of_processes [passed params]"
+  exit $E_BADARGS
+fi
+
+NUMPROC=$1              # Number of concurrent process
+shift
+PARAMETRI=( "$@" )      # Parameters of each process
+
+function avvia() {
+         local temp
+         local index
+         temp=$RANDOM
+         index=$1
+         shift
+         let "temp %= $TEMPO"
+         let "temp += 1"
+         echo "Starting $index Time:$temp" "$@"
+         sleep ${temp}
+         echo "Ending $index"
+         kill -s SIGRTMIN $$
+}
+
+function parti() {
+         if [ $INDICE -gt 0 ] ; then
+              avvia $INDICE "${PARAMETRI[@]}" &amp;
+                let "INDICE--"
+         else
+                trap : SIGRTMIN
+         fi
+}
+
+trap parti SIGRTMIN
+
+while [ "$NUMPROC" -gt 0 ]; do
+         parti;
+         let "NUMPROC--"
+done
+
+wait
+trap - SIGRTMIN
+
+exit $?
+
+: &lt;&lt;SCRIPT_AUTHOR_COMMENTS
+I had the need to run a program, with specified options, on a number of
+different files, using a SMP machine. So I thought [I'd] keep running
+a specified number of processes and start a new one each time . . . one
+of these terminates.
+
+The "wait" instruction does not help, since it waits for a given process
+or *all* process started in background. So I wrote [this] bash script
+that can do the job, using the "trap" instruction.
+  --Vernia Damiano
+SCRIPT_AUTHOR_COMMENTS</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="100%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="debugging_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<tt class="USERINPUT">
+<b>trap '' SIGNAL</b>
+</tt> (two adjacent
+	apostrophes) disables SIGNAL for the remainder of the
+	script. <tt class="USERINPUT">
+<b>trap SIGNAL</b>
+</tt> restores
+	the functioning of SIGNAL once more. This is useful to
+	protect a critical portion of a script from an undesirable
+	interrupt.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">	trap '' 2  # Signal 2 is Control-C, now disabled.
+	command
+	command
+	command
+	trap 2     # Reenables Control-C
+	</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<table class="SIDEBAR" border="1" cellpadding="5">
+<tbody>
+<tr>
+<td>
+<div class="SIDEBAR">
+<a name="AEN19513">
+</a>
+<p>
+</p>
+<p>
+<a href="./bashver3.html#BASH3REF">Version 3</a> of Bash adds the
+	  following <a href="./internalvariables.html#INTERNALVARIABLES1">internal
+	  variables</a> for use by the debugger.
+
+       </p>
+<p>
+</p>
+<ol type="1">
+<li>
+<p>
+<tt class="VARNAME">$BASH_ARGC</tt>
+</p>
+<p>Number of command-line arguments passed to script,
+	     similar to <a href="./internalvariables.html#CLACOUNTREF">
+<tt class="VARNAME">$#</tt>
+</a>.</p>
+</li>
+<li>
+<p>
+<tt class="VARNAME">$BASH_ARGV</tt>
+</p>
+<p>Final command-line parameter passed to script, equivalent
+	     <a href="./othertypesv.html#LASTARGREF">
+<tt class="VARNAME">${!#}</tt>
+</a>.</p>
+</li>
+<li>
+<p>
+<tt class="VARNAME">$BASH_COMMAND</tt>
+</p>
+<p>Command currently executing.</p>
+</li>
+<li>
+<p>
+<tt class="VARNAME">$BASH_EXECUTION_STRING</tt>
+</p>
+<p>The <i class="FIRSTTERM">option string</i> following the
+	     <tt class="OPTION">-c</tt> <a href="./bash-options.html#CLOPTS">option</a>
+	     to Bash.</p>
+</li>
+<li>
+<p>
+<tt class="VARNAME">$BASH_LINENO</tt>
+</p>
+<p>In a <a href="./functions.html#FUNCTIONREF">function</a>,
+	     indicates the line number of the function call.</p>
+</li>
+<li>
+<p>
+<tt class="VARNAME">$BASH_REMATCH</tt>
+</p>
+<p>Array variable associated with <b class="COMMAND">=~</b>
+	   <a href="./bashver3.html#REGEXMATCHREF">conditional regex
+	   matching</a>.</p>
+</li>
+<li>
+<p>
+<a name="BASHSOURCEREF">
+</a>
+</p>
+<p>
+<tt class="VARNAME">$BASH_SOURCE</tt>
+</p>
+<p>This is the name of the script, usually the same as
+	     <a href="./othertypesv.html#ARG0">$0</a>.</p>
+</li>
+<li>
+<p>	 <a href="./internalvariables.html#BASHSUBSHELLREF">
+<tt class="VARNAME">$BASH_SUBSHELL</tt>
+</a>
+</p>
+</li>
+</ol>
+<p>
+</p>
+<p>
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN19460" href="./debugging.html#AEN19460">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>By convention, <tt class="REPLACEABLE">
+<i>signal
+		0</i>
+</tt> is assigned to <a href="./exit-status.html#EXITCOMMANDREF">exit</a>.  </p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./zeros.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./options.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Of Zeros and Nulls</td>
+<td align="center" valign="top" width="34%">
+<a href="./part5.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Options</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
