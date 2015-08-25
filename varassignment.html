@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Variable Assignment</title>
+<meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
+<link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
+<link rel="UP" title="Introduction to Variables and Parameters" href="./variables.html">
+<link rel="PREVIOUS" title="Variable Substitution" href="./varsubn.html">
+<link rel="NEXT" title="Bash Variables Are Untyped" href="./untyped.html">
+</head>
+<body class="SECT1" bgcolor="#FFFFFF" alink="#0000FF" link="#0000FF" text="#000000" vlink="#840084">
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="NAVHEADER">
+<table summary="Header navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="10%">
+<a href="./varsubn.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="bottom" width="80%">Chapter 4. Introduction to Variables and Parameters</td>
+<td align="right" valign="bottom" width="10%">
+<a href="./untyped.html" accesskey="N">Next</a>
+</td>
+</tr>
+</tbody>
+</table>
+<hr align="LEFT" width="100%">
+</div>
+<div class="SECT1">
+<h1 class="SECT1">
+<a name="VARASSIGNMENT">
+</a>4.2. Variable Assignment</h1>
+<p>
+</p>
+<div class="VARIABLELIST">
+<dl>
+<dt>
+<a name="EQREF">
+</a>
+<span class="TOKEN">=</span>
+</dt>
+<dd>
+<p>the assignment operator (<em>no space before
+	    and after</em>)</p>
+<div class="CAUTION">
+<p>
+</p>
+<table class="CAUTION" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="varassignment_files/caution.gif" alt="Caution" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Do not confuse this with <a href="./comparison-ops.html#EQUALSIGNREF">=</a> and
+	      <a href="./comparison-ops.html#EQUALREF">-eq</a>, which
+	      <a href="./tests.html#IFTHEN">test</a>,
+	      rather than assign!</p>
+<p>Note that <span class="TOKEN">=</span> can be either
+	      an <i class="FIRSTTERM">assignment</i> or a
+	      <i class="FIRSTTERM">test</i> operator, depending on
+	      context.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="EX15_0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="EX15">
+</a>
+<p>
+<b>Example 4-2. Plain Variable Assignment</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+# Naked variables
+
+echo
+
+# When is a variable "naked", i.e., lacking the '$' in front?
+# When it is being assigned, rather than referenced.
+
+# Assignment
+a=879
+echo "The value of \"a\" is $a."
+
+# Assignment using 'let'
+let a=16+5
+echo "The value of \"a\" is now $a."
+
+echo
+
+# In a 'for' loop (really, a type of disguised assignment):
+echo -n "Values of \"a\" in the loop are: "
+for a in 7 8 9 11
+do
+  echo -n "$a "
+done
+
+echo
+echo
+
+# In a 'read' statement (also a type of assignment):
+echo -n "Enter \"a\" "
+read a
+echo "The value of \"a\" is now $a."
+
+echo
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="EX16_0">
+</a>
+</p>
+<div class="EXAMPLE">
+<a name="EX16">
+</a>
+<p>
+<b>Example 4-3. Variable Assignment, plain and fancy</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
+
+a=23              # Simple case
+echo $a
+b=$a
+echo $b
+
+# Now, getting a little bit fancier (command substitution).
+
+a=`echo Hello!`   # Assigns result of 'echo' command to 'a' ...
+echo $a
+#  Note that including an exclamation mark (!) within a
+#+ command substitution construct will not work from the command-line,
+#+ since this triggers the Bash "history mechanism."
+#  Inside a script, however, the history functions are disabled by default.
+
+a=`ls -l`         # Assigns result of 'ls -l' command to 'a'
+echo $a           # Unquoted, however, it removes tabs and newlines.
+echo
+echo "$a"         # The quoted variable preserves whitespace.
+                  # (See the chapter on "Quoting.")
+
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="COMMANDSUBREF0">
+</a>
+</p>
+<p>Variable assignment using the <i class="FIRSTTERM">$(...)</i>
+	      mechanism (a newer method than <a href="./commandsub.html#BACKQUOTESREF">backquotes</a>). This is
+	      likewise a form of <a href="./commandsub.html#COMMANDSUBREF">command
+	      substitution</a>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># From /etc/rc.d/rc.local
+R=$(cat /etc/redhat-release)
+arch=$(uname -m)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./varsubn.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./untyped.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Variable Substitution</td>
+<td align="center" valign="top" width="34%">
+<a href="./variables.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Bash Variables Are Untyped</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
