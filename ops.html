@@ -173,19 +173,17 @@ echo "z = $z"   # z = 125</pre>
 <span class="TOKEN">%</span>
 </dt>
 <dd>
-<p>modulo, or mod (returns the
-	    <i class="FIRSTTERM">remainder</i> of an integer division
-	    operation)</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>modulo, 또는 mod (정수 나누기의 
+<i class="FIRSTTERM">나머지</i>)
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>expr 5 % 3</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>expr 5 % 3</b></tt>
 <tt class="COMPUTEROUTPUT">2</tt>
 	      </pre>
 </font>
@@ -193,19 +191,21 @@ echo "z = $z"   # z = 125</pre>
 </tr>
 </tbody>
 </table>
-	      <em>5/3 = 1, with remainder 2</em>
-	    </p>
-<p>This operator finds use in, among other things,
-	    generating numbers within a specific range (see <a href="./randomvar.html#EX21">Example 9-11</a> and <a href="./randomvar.html#RANDOMTEST">Example 9-15</a>) and
-	    formatting program output (see <a href="./arrays.html#QFUNCTION">Example 27-16</a> and
-	    <a href="./contributed-scripts.html#COLLATZ">Example A-6</a>). It can even be used to generate
-	    prime numbers, (see <a href="./contributed-scripts.html#PRIMES">Example A-15</a>). Modulo turns
-	    up surprisingly often in numerical recipes.</p>
+<em>5/3 = 1, 나머지 2</em>
+</p>
+<p>이 연산자는 지정된 범위 내에 있는 숫자를 만들어 낼 때 ( 
+<a href="./randomvar.html#EX21">예제 9-11</a> 와 
+<a href="./randomvar.html#RANDOMTEST">예제 9-15</a>), 프로그램 출력을 정형화할 때 (
+<a href="./arrays.html#QFUNCTION">예제 27-16</a> 와 
+<a href="./contributed-scripts.html#COLLATZ">예제 A-6</a>) 사용됩니다. 소수를 만들 때에도 
+사용될 수 있습니다, (
+<a href="./contributed-scripts.html#PRIMES">예제 A-15</a>). Modulo 는 수학적 비책에도 놀랍도록 
+자주 나타납니다.</p>
 <div class="EXAMPLE">
 <a name="GCD">
 </a>
 <p>
-<b>Example 8-1. Greatest common divisor</b>
+<b>Example 8-1. 최대 공약수</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
