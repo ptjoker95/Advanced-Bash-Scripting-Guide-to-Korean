@@ -34,14 +34,14 @@
 <div class="SECT1">
 <h1 class="SECT1">
 <a name="ESCAPINGSECTION">
-</a>5.2. Escaping</h1>
+</a>5.2. 이스케이프하기(Escaping)</h1>
 <p>
 <a name="ESCP">
 </a>
-<i class="FIRSTTERM">Escaping</i> is a method
-	of quoting single characters. The <span class="TOKEN">escape</span>
-	(<span class="TOKEN">\</span>) preceding a character tells the shell to
-	interpret that character literally.</p>
+<i class="FIRSTTERM">이스케이프하기</i> 는 한 문자를 인용하기 위한 방법입니다. 문자 앞에 있는 
+<span class="TOKEN">이스케이프</span> (
+<span class="TOKEN">\</span>) 는 그 문자를 문자적 의미 자체로 사용하라고 쉘에게 전달합니다.
+</p>
 <div class="CAUTION">
 <p>
 </p>
@@ -52,9 +52,10 @@
 <img src="escapingsection_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>With certain commands and utilities, such as <a href="./internal.html#ECHOREF">echo</a> and <a href="./sedawk.html#SEDREF">sed</a>, escaping a character may have the
-	opposite effect - it can toggle on a special meaning for that
-	character.</p>
+<p>
+<a href="./internal.html#ECHOREF">echo</a> 나 
+<a href="./sedawk.html#SEDREF">sed</a> 와 같은, 특정 명령어들과 유틸리티들에 전혀 다른 
+결과 - 그 문자에 특별한 의미가 부여되거나해서 - 를 가져올 수 있습니다.</p>
 </td>
 </tr>
 </tbody>
@@ -66,12 +67,13 @@
 <p>
 <b>
 <a name="SPM">
-</a>Special meanings of certain
-	escaped characters</b>
+</a>이스케이프 된 문자 중에서 특별한 의미를 가진 것들
+</b>
 </p>
 <dl>
-<dt>used with <b class="COMMAND">echo</b> and
-	<b class="COMMAND">sed</b>
+<dt>
+<b class="COMMAND">echo</b> 와 
+<b class="COMMAND">sed</b> 에서 사용되는 
 </dt>
 <dd>
 <p>
@@ -81,37 +83,38 @@
 <span class="TOKEN">\n</span>
 </dt>
 <dd>
-<p>means newline</p>
+<p>새 줄을 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\r</span>
 </dt>
 <dd>
-<p>means return</p>
+<p>리턴을 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\t</span>
 </dt>
 <dd>
-<p>means tab</p>
+<p>탭을 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\v</span>
 </dt>
 <dd>
-<p> means vertical tab</p>
+<p>수직 탭을 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\b</span>
 </dt>
 <dd>
-<p>means backspace</p>
+<p>백스페이스를 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\a</span>
 </dt>
 <dd>
-<p>means <i class="FIRSTTERM">alert</i> (beep or flash)</p>
+<p>
+<i class="FIRSTTERM">경고</i> (삐 소리나 불빛) 을 의미합니다</p>
 </dd>
 <dt>
 <span class="TOKEN">\0xx</span>
@@ -119,14 +122,15 @@
 <dd>
 <p>
 <a name="OCTALREF">
-</a>translates to the
-              octal <a href="./special-chars.html#ASCIIDEF">ASCII</a>
-              equivalent of <tt class="REPLACEABLE">
-<i>0nn</i>
-</tt>, where
-              <tt class="REPLACEABLE">
+</a>
+<tt class="REPLACEABLE">
 <i>nn</i>
-</tt> is a string of digits</p>
+</tt> 이 숫자 문자열일 때, 
+<tt class="REPLACEABLE">
+<i>0nn</i>
+</tt> 에 해당하는 8진법 
+<a href="./special-chars.html#ASCIIDEF">ASCII</a> 문자로 바꿉니다
+</p>
 <div class="IMPORTANT">
 <p>
 </p>
@@ -141,13 +145,15 @@
 <a name="STRQ">
 </a>
 </p>
-<p>The <tt class="USERINPUT">
+<p>
+<tt class="USERINPUT">
 <b>$' ... '</b>
-</tt>
-             <a href="./quoting.html#QUOTINGREF">quoted</a> string-expansion
-              construct is a mechanism that uses escaped octal or hex values
-	      to assign ASCII characters to variables, e.g.,
-	      <b class="COMMAND">quote=$'\042'</b>.</p>
+</tt> 와 같이 
+<a href="./quoting.html#QUOTINGREF">인용된</a> 문자열 확장 구조는 이스케이프된 8진법 이나 
+16진법 값을 ASCII 문자로 변수에 할당할 때 사용됩니다, 즉, 
+<b class="COMMAND">quote=$'\042'
+</b>.
+</p>
 </td>
 </tr>
 </tbody>
@@ -503,7 +509,7 @@ cat &lt;&lt;EOF
 \\z                     
 EOF                   # \z
 
-# These examples supplied by St�phane Chazelas.</pre>
+# These examples supplied by St?phane Chazelas.</pre>
 </font>
 </td>
 </tr>
@@ -563,8 +569,8 @@ echo "$variable"        # \\
 </tbody>
 </table>
 </div>
-<p>Escaping a space can prevent word splitting in a command's argument list.
-        <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>빈 공간을 이스케이프 해주는 것은 명령어 인수 리스트에서 단어가 분리되는 것을 막아줍니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -591,11 +597,12 @@ ls -l /usr/X11R6/bin/xsetroot\ /sbin/dump\ $file_list
 <a name="ESCNEWLINE">
 </a>
 </p>
-<p>The <span class="TOKEN">escape</span> also provides a means of writing a
-	multi-line command. Normally, each separate line constitutes
-	a different command, but an <span class="TOKEN">escape</span> at the end
-	of a line <em>escapes the newline character</em>,
-	and the command sequence continues on to the next line.</p>
+<p>
+<span class="TOKEN">이스케이프</span> 는 여러 줄로 명령문을 쓸 수 있도록 해줍니다. 일반적으로, 
+각 라인은 다른 명령어로 구성됩니다, 하지만 줄의 끝에 
+<span class="TOKEN">이스케이프</span> 를 해주면 
+<em>새 줄 문자를 이스케이프</em> 시키게 되고, 명령어는 다음 줄로 연결됩니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -611,7 +618,7 @@ ls -l /usr/X11R6/bin/xsetroot\ /sbin/dump\ $file_list
 tar cf - -C /source/directory . |
 tar xpvf - -C /dest/directory
 # See note below.
-# (Thanks, St�phane Chazelas.)</pre>
+# (Thanks, St?phane Chazelas.)</pre>
 </font>
 </td>
 </tr>
@@ -629,11 +636,11 @@ tar xpvf - -C /dest/directory
 <img src="escapingsection_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>If a script line ends with a <span class="TOKEN">|</span>, a pipe
-	  character, then a <span class="TOKEN">\</span>, an escape, is not strictly
-	  necessary. It is, however, good programming practice to always
-	  escape the end of a line of code that continues to the
-	  following line.</p>
+<p>만일 스크립트의 줄 끝이 
+<span class="TOKEN">|</span>, 파이프 문자로 끝나게 되면, 굳이 필요하지는 않지만, 
+<span class="TOKEN">\</span>, 이스케이프를 붙여주십시요. 명령어가 다음 줄로 연결되게 될 때 
+코드의 마지막 줄에 이스케이프를 붙이는 것은 좋은 프로그래밍 습관이 될 것입니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -678,7 +685,7 @@ bar'     # Escape character \ taken literally because of strong quoting.
 #foo\
 #bar
 
-# Examples suggested by St�phane Chazelas.</pre>
+# Examples suggested by St?phane Chazelas.</pre>
 </font>
 </td>
 </tr>

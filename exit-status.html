@@ -56,60 +56,50 @@
 </table>
 <p>
 <a name="EXITCOMMANDREF">
-</a>The 
-	<b class="COMMAND">	  
-	  
-	  exit
-	</b> 
-	command terminates a script, just as in a <b class="COMMAND">C</b>
-	program. It can also return a value, which is available to the
-	script's parent process.</p>
+</a>
+<b class="COMMAND">exit	</b> 명령어는, 
+<b class="COMMAND">C</b> 프로그램처럼 스크립트를 종료합니다. 그리고 스크립트의 부모 
+프로세스에 값을 전달할 수도 있습니다.</p>
 <p>
 <a name="EXITSTATUSREF">
-</a>Every command returns an 
-	<i class="FIRSTTERM">	  
-	  exit status
-	</i> 
-	(sometimes referred to as a 
-	<i class="FIRSTTERM">	  
-	  return status
-	</i> or <i class="FIRSTTERM">exit code</i>).
-	<a name="EXITSUCCESS">
-</a>
-	A successful command returns a <span class="RETURNVALUE">0</span>, while
-	an unsuccessful one returns a <span class="RETURNVALUE">non-zero</span>
-	value that usually can be interpreted as an <i class="FIRSTTERM">error
-	code</i>. Well-behaved UNIX commands, programs, and
-	utilities return a <span class="RETURNVALUE">0</span> exit code upon
-	successful completion, though there are some exceptions.</p>
+</a>모든 명령어는 
+<i class="FIRSTTERM">종료 상태 (exit status)</i> (때로는 
+<i class="FIRSTTERM">리턴 상태 (return status)</i> 나 
+<i class="FIRSTTERM">종료 코드 (exit code)</i> 로 불려지는) 를 반환합니다. 
+<a name="EXITSUCCESS"></a>명령어가 제대로 수행되면 
+<span class="RETURNVALUE">0</span> 값을, 제대로 수행되지 않으면 
+<span class="RETURNVALUE">0이 아닌</span>, 일반적으로는 
+<i class="FIRSTTERM">에러 코드 (error code)</i> 로 해석되는, 값을 반환합니다. 몇몇 
+예외가 있긴 하지만, 잘 동작하는 UNIX 명령어들, 프로그램들, 그리고 유틸리티들은 
+성공했을 때 
+<span class="RETURNVALUE">0</span> 종료 코드를 반환합니다.
+</p>
 <p>
 <a name="FUNCTXSTR">
 </a>
 </p>
-<p>Likewise, <a href="./functions.html#FUNCTIONREF">functions</a>
-	within a script and the script itself return an exit
-	status. The last command executed in the function or
-	script determines the exit status. Within a script, an
-	<tt class="USERINPUT">
+<p>비슷하게, 스크립트안에 있는 
+<a href="./functions.html#FUNCTIONREF">함수들</a> 과 스크립트 자체도 종료 상태를 
+반환합니다. 함수나 스크립트 안에서 실행된 마지막 명령어가 종료 상태를 결정하게 됩니다. 
+스크립트 안에서, 
+<tt class="USERINPUT">
 <b>exit <tt class="REPLACEABLE">
 <i>nnn</i>
 </tt>
 </b>
-</tt>
-	command may be used to deliver an
-	<span class="RETURNVALUE">
+</tt> 명령어는 쉘에 
+<span class="RETURNVALUE">
 <tt class="REPLACEABLE">
 <i>nnn</i>
 </tt>
-</span>
-	exit status to the shell
-	(<span class="RETURNVALUE">
+</span> 종료 상태를 전달하는 데에 사용될 수도 있습니다 (
+<span class="RETURNVALUE">
 <tt class="REPLACEABLE">
 <i>nnn</i>
 </tt>
-</span>
-	must be an integer in the <span class="RETURNVALUE">0</span> -
-	<span class="RETURNVALUE">255</span> range).</p>
+</span> 은 
+<span class="RETURNVALUE">0</span> - 
+<span class="RETURNVALUE">255</span> 범위에 있는 정수이어야 합니다).</p>
 <div class="NOTE">
 <p>
 </p>
@@ -120,10 +110,9 @@
 <img src="exit-status_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>When a script ends with an <b class="COMMAND">exit</b> that has
-	no parameter, the exit status of the script is the exit status
-	of the last command executed in the script (previous to the
-	<b class="COMMAND">exit</b>).</p>
+<p>스크립트가 매개변수 없는 
+<b class="COMMAND">exit</b> 로 끝나게 되면, 스크립트의 종료 상태는 스크립트에서 
+실행된 마지막 명령어 (<b class="COMMAND">exit</b> 의 바로 앞)의 종료 상태가 됩니다 .</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -147,9 +136,10 @@ exit</pre>
 </tbody>
 </table>
 </p>
-<p>The equivalent of a bare <b class="COMMAND">exit</b> is
-        <b class="COMMAND">exit $?</b> or even just omitting the
-	<b class="COMMAND">exit</b>.</p>
+<p>
+<b class="COMMAND">exit</b> 가 단독으로 쓰이는 것은 
+<b class="COMMAND">exit $?</b> 나 혹은 
+<b class="COMMAND">exit</b> 가 생략된 것과 동일합니다.</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -203,32 +193,34 @@ COMMAND_LAST
 <a name="EXSREF">
 </a>
 </p>
-<p>	<tt class="VARNAME">	    $?</tt> reads the exit status of the last
-	    command executed. After a function returns,
-	    <tt class="VARNAME">$?</tt> gives the exit status of the last
-	    command executed in the function. This is Bash's way of giving
-	    functions a <span class="QUOTE">"return value."</span>
-	    
-	      <a name="AEN2981" href="#FTN.AEN2981">
+<p>
+<tt class="VARNAME">$?</tt> 는 마지막으로 실행된 명령어의 종료 상태를 읽어들입니다. 
+함수가 리턴된 후, 
+<tt class="VARNAME">$?</tt> 는 함수에서 마지막으로 실행된 명령어의 종료 상태를 알려줍니다. 
+Bash에서는 이렇게 함수에 
+<span class="QUOTE">"리턴 값"</span> 을 전달합니다.
+<a name="AEN2981" href="#FTN.AEN2981">
 <span class="footnote">[1]</span>
 </a>
-      </p>
+</p>
 <p>
 <a name="PIPEEX">
-</a>Following the execution of a <a href="./special-chars.html#PIPEREF">pipe</a>, a <tt class="VARNAME">$?</tt>
-        gives the exit status of the last command executed.</p>
-<p>After a script terminates, a <tt class="VARNAME">$?</tt> from the
-	    command-line gives the exit status of the script, that is, the
-	    last command executed in the script, which is, by convention,
-	    <tt class="USERINPUT">
+</a>
+<a href="./special-chars.html#PIPEREF">파이프</a> 실행 시에는, 
+<tt class="VARNAME">$?</tt> 는 마지막으로 실행된 명령어의 종료 상태를 알려줍니다.
+</p>
+<p>스크립트가 종료된 후에, 
+<tt class="VARNAME">$?</tt> 는 명령어 라인에서 스크립트의 종료 상태, 스크립트에서 
+실행된 마지막 명령어, 를 알려줍니다, 관행적으로, 성공했을 때에는 
+<tt class="USERINPUT">
 <b>0</b>
-</tt> on success or an integer in the
-	    range <span class="RETURNVALUE">1 - 255</span> on error.</p>
+</tt>, 에러가 났을 경우에는 <span class="RETURNVALUE">1 - 255</span> 범위의 정수를 알려줍니다.
+</p>
 <div class="EXAMPLE">
 <a name="EX5">
 </a>
 <p>
-<b>Example 6-1. exit / exit status</b>
+<b>예제 6-1. exit / exit status</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -258,8 +250,10 @@ exit 113   # Will return 113 to shell.
 </table>
 </div>
 <p>
-<a href="./internalvariables.html#XSTATVARREF">$?</a> is especially useful
-        for testing the result of a command in a script (see <a href="./filearchiv.html#FILECOMP">Example 16-35</a> and <a href="./textproc.html#LOOKUP">Example 16-20</a>).</p>
+<a href="./internalvariables.html#XSTATVARREF">$?</a> 는 특히 스크립트에 있는 
+명령어의 결과를 테스팅할 때 유용합니다 (
+<a href="./filearchiv.html#FILECOMP">예제 16-35</a> 와 
+<a href="./textproc.html#LOOKUP">예제 16-20</a> 를 참고하십시요).</p>
 <div class="NOTE">
 <p>
 </p>
@@ -270,17 +264,17 @@ exit 113   # Will return 113 to shell.
 <img src="exit-status_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The <a href="./special-chars.html#NOTREF">!</a>, the <i class="FIRSTTERM">logical
-	not</i> qualifier, reverses the outcome of a test or
-	command, and this affects its <a href="./exit-status.html#EXITSTATUSREF">exit
-	status</a>.
-
-	</p>
+<p>
+<a href="./special-chars.html#NOTREF">!</a>, 
+<i class="FIRSTTERM">논리적 부정자</i> 는, 테스트나 명령어의 결과를 반대로 만듭니다, 
+그리고 이것은 
+<a href="./exit-status.html#EXITSTATUSREF">종료 상태</a> 에도 영향을 미칩니다.
+</p>
 <div class="EXAMPLE">
 <a name="NEGCOND">
 </a>
 <p>
-<b>Example 6-2. Negating a condition using <span class="TOKEN">!</span>
+<b>예제 6-2. Negating a condition using <span class="TOKEN">!</span>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -315,7 +309,7 @@ echo $?                # 0
 # Only the exit status changes.
 # =========================================================== #
 
-# Thanks, St�phane Chazelas and Kristopher Newsome.</pre>
+# Thanks, St?phane Chazelas and Kristopher Newsome.</pre>
 </font>
 </td>
 </tr>
@@ -340,8 +334,9 @@ echo $?                # 0
 <img src="exit-status_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Certain exit status codes have <a href="./exitcodes.html#EXITCODESREF">reserved meanings</a> and should not
-	be user-specified in a script.	</p>
+<p>특정 종료 상태 코드는 
+<a href="./exitcodes.html#EXITCODESREF">지정된 의미</a> 가 있으며, 스크립트 내에서 사용자가 
+임의로 바꾸어서는 안됩니다.</p>
 </td>
 </tr>
 </tbody>

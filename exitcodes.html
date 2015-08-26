@@ -43,15 +43,15 @@
 <a name="AEN23549">
 </a>
 <p>
-<b>Table E-1. <i class="FIRSTTERM">Reserved</i> Exit Codes</b>
+<b>Table E-1. <i class="FIRSTTERM">지정된</i> 종료 코드들</b>
 </p>
 <table class="CALSTABLE" border="1">
 <thead>
 <tr>
-<th align="LEFT" valign="TOP">Exit Code Number</th>
-<th align="LEFT" valign="TOP">Meaning</th>
-<th align="LEFT" valign="TOP">Example</th>
-<th align="LEFT" valign="TOP">Comments</th>
+<th align="LEFT" valign="TOP">종료 코드 숫자</th>
+<th align="LEFT" valign="TOP">의미</th>
+<th align="LEFT" valign="TOP">예</th>
+<th align="LEFT" valign="TOP">주석</th>
 </tr>
 </thead>
 <tbody>
@@ -59,127 +59,127 @@
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">1</tt>
 </td>
-<td align="LEFT" valign="TOP">Catchall for general errors</td>
+<td align="LEFT" valign="TOP">일반적인 에러들</td>
 <td align="LEFT" valign="TOP">let "var1 = 1/0"</td>
-<td align="LEFT" valign="TOP">Miscellaneous errors, such as <span class="QUOTE">"divide by
-	        zero"</span> and other impermissible operations</td>
+<td align="LEFT" valign="TOP">
+<span class="QUOTE">"0 으로 나누기"</span> 와 다른 허용되지 않는 동작들과 같은, 
+잡다한 에러들</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">2</tt>
 </td>
-<td align="LEFT" valign="TOP">Misuse of shell builtins (according to Bash documentation)</td>
+<td align="LEFT" valign="TOP">쉘 내부 명령어의 잘못된 사용 (Bash 문서에 따름)</td>
 <td align="LEFT" valign="TOP">empty_function() {}</td>
 <td align="LEFT" valign="TOP">
-<a href="./debugging.html#MISSINGKEYWORD">Missing keyword</a>
-              or command, or permission problem (and <a href="./filearchiv.html#DIFFERR2">
-<i class="FIRSTTERM">diff</i> return code
-	      on a failed binary file comparison</a>).</td>
+<a href="./debugging.html#MISSINGKEYWORD">키워드가 빠지</a> 거나 명령어, 혹은 파일접근권한
+문제 (그리고 
+<a href="./filearchiv.html#DIFFERR2">잘못된 바이너리 파일 비교에 쓰인 
+<i class="FIRSTTERM">diff</i> 의 리턴 코드</a>).</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">126</tt>
 </td>
-<td align="LEFT" valign="TOP">Command invoked cannot execute</td>
+<td align="LEFT" valign="TOP">요청된 명령어를 실행할 수 없음</td>
 <td align="LEFT" valign="TOP">/dev/null</td>
-<td align="LEFT" valign="TOP">Permission problem or command is not an executable</td>
+<td align="LEFT" valign="TOP">파일접근권한 문제 혹은 명령어를 실행할 수 없음</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">127</tt>
 </td>
 <td align="LEFT" valign="TOP">
-<span class="QUOTE">"command not found"</span>
+<span class="QUOTE">"명령어를 찾을 수 없음"</span>
 </td>
 <td align="LEFT" valign="TOP">illegal_command</td>
-<td align="LEFT" valign="TOP">Possible problem with <tt class="VARNAME">$PATH</tt> or a typo</td>
+<td align="LEFT" valign="TOP">경로 
+<tt class="VARNAME">$PATH</tt> 문제거나 오타</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">128</tt>
 </td>
-<td align="LEFT" valign="TOP">Invalid argument to <a href="./exit-status.html#EXITCOMMANDREF">exit</a>
+<td align="LEFT" valign="TOP">
+<a href="./exit-status.html#EXITCOMMANDREF">exit</a> 에 잘못된 인수가 쓰임
 </td>
 <td align="LEFT" valign="TOP">exit 3.14159</td>
 <td align="LEFT" valign="TOP">
-<b class="COMMAND">exit</b> takes only integer args in the
-		range <span class="RETURNVALUE">0 - 255</span> (see
-		first footnote)</td>
+<b class="COMMAND">exit</b> 에는 
+<span class="RETURNVALUE">0 - 255</span> 범위의 정수만 사용할 수 있음 (첫번째 각주를 참고)
+</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">128+n</tt>
 </td>
-<td align="LEFT" valign="TOP">Fatal error signal <span class="QUOTE">"n"</span>
+<td align="LEFT" valign="TOP">
+<span class="QUOTE">"n"</span> 의 심각한 에러
 </td>
 <td align="LEFT" valign="TOP">
 <i class="FIRSTTERM">kill -9</i> <tt class="VARNAME">$PPID</tt> of script</td>
 <td align="LEFT" valign="TOP">
 <tt class="USERINPUT">
 <b>$?</b>
-</tt> returns
-	      <span class="ERRORCODE">137</span> (128 + 9)</td>
+</tt> 가 
+<span class="ERRORCODE">137</span> (128 + 9) 을 리턴함</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">130</tt>
 </td>
-<td align="LEFT" valign="TOP">Script terminated by Control-C</td>
+<td align="LEFT" valign="TOP">스크립트가 Control-C 로 종료됨</td>
 <td align="LEFT" valign="TOP">
 <em>Ctl-C</em>
 </td>
-<td align="LEFT" valign="TOP">Control-C is fatal error signal
-	      <span class="ERRORCODE">2</span>, (130 = 128 + 2, see above)</td>
+<td align="LEFT" valign="TOP">Control-C 는 
+<span class="ERRORCODE">2</span> 의 심각한 에러 시그널을 가짐, (130 = 128 + 2, 위 참조)</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">255*</tt>
 </td>
-<td align="LEFT" valign="TOP">Exit status out of range</td>
+<td align="LEFT" valign="TOP">종료 상태가 범위를 벗어남</td>
 <td align="LEFT" valign="TOP">exit <span class="RETURNVALUE">-1</span>
 </td>
 <td align="LEFT" valign="TOP">
-<b class="COMMAND">exit</b> takes only integer args in the
-	        range <span class="ERRORCODE">0 - 255</span>
+<b class="COMMAND">exit</b> 는 
+<span class="ERRORCODE">0 - 255</span> 범위 내의 정수만을 인수로 가질 수 있음
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>According to the above table, exit codes <span class="ERRORCODE">1 - 2,
-        126 - 165, and 255</span>
-
-	<a name="AEN23629" href="#FTN.AEN23629">
+<p>위의 표에 따르면, 
+<span class="ERRORCODE">1 - 2, 126 - 165, and 255</span>
+<a name="AEN23629" href="#FTN.AEN23629">
 <span class="footnote">[1]</span>
-</a>
-
-	have special meanings, and should therefore be avoided for
-	user-specified exit parameters. Ending a script with <i class="FIRSTTERM">exit
-	127</i> would certainly cause confusion when troubleshooting
-	(is the error code a <span class="QUOTE">"command not found"</span> or a
-	user-defined one?). However, many scripts use an <i class="FIRSTTERM">exit
-	1</i> as a general bailout-upon-error. Since exit code
-	<span class="ERRORCODE">1</span> signifies so many possible errors,
-	it is not particularly useful in debugging.</p>
+</a> 종료 코드는 특별한 뜻을 가지고 있고, 사용자가 지정한 종료 매개변수로 사용해서는 
+안됩니다. 
+<i class="FIRSTTERM">종료 코드 127</i> 
+를 가진 스크립트는 문제가 생겼을 때 분명 혼동을 일으킬 것입니다 (
+<span class="QUOTE">"명령어를 찾을 수 없음"</span> 인지? 사용자가 지정한 것인지?). 
+하지만, 많은 스크립트들은 일반적인 에러를 위해 
+<i class="FIRSTTERM">종료 코드 1</i> 을 사용합니다. 종료 코드 
+<span class="ERRORCODE">1</span> 은 너무 많은 에러를 의미하기 때문에, 디버깅에 그다지 
+유용하지는 않습니다.
+</p>
 <p>
 <a name="SYSEXITSREF">
 </a>
 </p>
-<p>There has been an attempt to systematize exit status numbers
-	(see <tt class="FILENAME">/usr/include/sysexits.h</tt>),
-	but this is intended for C and C++ programmers. A similar
-	standard for scripting might be appropriate. The author of
-	this document proposes restricting user-defined exit codes to
-	the range <span class="RETURNVALUE">64 - 113</span> (in addition to
-	<span class="RETURNVALUE">0</span>, for success), to conform with
-	the C/C++ standard. This would allot 50 valid codes, and make
-	troubleshooting scripts more straightforward.
-	  <a name="AEN23647" href="#FTN.AEN23647">
+<p>종료 상태 숫자를 시스템화하려는 시도가 있었지만 (
+<tt class="FILENAME">/usr/include/sysexits.h</tt> 를 참고하십시요), 이는 C, C++ 프로그래머들을 
+위한 것이었습니다. 스크립트를 위한 비슷한 표준이 필요할 수도 있을 것입니다. 이 문서의 제작자는 
+사용자 지정 종료 코드는 
+<span class="RETURNVALUE">64 - 113</span> 로 제한하고 (성공시를 위한 
+<span class="RETURNVALUE">0</span> 를 포함해서), C/C++ 표준을 준수하는 것을 제안합니다. 이는 
+50개의 유용한 코드들을 할당하고, 문제가 생긴 스크립트들을 보다 직접적으로 다룰 것입니다. 
+<a name="AEN23647" href="#FTN.AEN23647">
 <span class="footnote">[2]</span>
 </a>
-	All user-defined exit codes in the accompanying examples to
-	this document conform to this standard, except where overriding
-	circumstances exist, as in <a href="./internalvariables.html#TMDIN">Example 9-2</a>.</p>
+<a href="./internalvariables.html#TMDIN">예제 9-2</a> 오버라이딩 환경 벗어나기를 제외하고, 
+이 문서에 있는 예제들에 있는 사용자 정의 종료 코드들은 이 표준을 따르고 있습니다.</p>
 <div class="NOTE">
 <p>
 </p>
@@ -190,12 +190,13 @@
 <img src="exitcodes_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Issuing a <a href="./internalvariables.html#XSTATVARREF">$?</a> from
-	the command-line after a shell script exits gives
-	results consistent with the table above only from the
-	Bash or <i class="FIRSTTERM">sh</i> prompt. Running the
-	<i class="FIRSTTERM">C-shell</i> or <i class="FIRSTTERM">tcsh</i>
-	may give different values in some cases.</p>
+<p>쉘 스크립트가 종료된 뒤 명령어 줄에서 
+<a href="./internalvariables.html#XSTATVARREF">$?</a> 로 나오는 결과는 위의 표에서 설명한 
+것과 일치하지만 이것은 Bash 나 
+<i class="FIRSTTERM">sh</i> 에서만 적용됩니다. 
+<i class="FIRSTTERM">C-shell</i> 이나 
+<i class="FIRSTTERM">tcsh</i> 의 경우에는 몇몇 경우에 다른 결과값이 나옵니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -214,13 +215,12 @@
 <td align="LEFT" valign="TOP" width="95%">
 <p>
 <a name="EXCOOR">
-</a>Out of range exit values
-	  can result in unexpected exit codes. An exit value
-	  greater than <span class="ERRORCODE">255</span> returns an
-	  exit code <a href="./ops.html#MODULOREF">modulo</a>
-	  <span class="ERRORCODE">256</span>. For example, <i class="FIRSTTERM">exit
-	  3809</i> gives an exit code of <span class="ERRORCODE">225</span>
-	  (3809 % 256 = 225).</p>
+</a>종료값의 범위를 벗어나는 값은 기대하지 않은 종료 코드가 반환될 수 있습니다. 
+<span class="ERRORCODE">255</span> 보다 큰 종료값은 종료 코드로 
+<a href="./ops.html#MODULOREF">나머지</a> 를 반환합니다. 예를 들어, 
+<i class="FIRSTTERM">exit 3809</i> 는 종료 코드로 
+<span class="ERRORCODE">225</span> (3809 % 256 = 225) 를 반환합니다.
+</p>
 </td>
 </tr>
 <tr>
