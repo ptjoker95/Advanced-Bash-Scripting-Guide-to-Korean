@@ -50,30 +50,29 @@
 <b class="COMMAND">ls</b>
 </dt>
 <dd>
-<p>The basic file <span class="QUOTE">"list"</span> command. It is all too easy
-	      to underestimate the power of this humble command. For
-	      example, using the <tt class="OPTION">-R</tt>, recursive option,
-	      <b class="COMMAND">ls</b> provides a tree-like listing of
-	      a directory structure. Other useful options are
-	      <tt class="OPTION">-S</tt>, sort listing by file size,
-	      <tt class="OPTION">-t</tt>, sort by file modification time,
-	      <tt class="OPTION">-v</tt>, sort by (numerical) version numbers
-	      embedded in the filenames,
-                <a name="AEN10025" href="#FTN.AEN10025">
+<p>파일 
+<span class="QUOTE">"목록"</span> 을 보여주는 기본 명령어입니다. 너무 간단해서 
+이 초라해보이는 명령어의 능력이 과소평가되기 쉽습니다. 예를 들어, 
+<tt class="OPTION">-R</tt>, 순환 옵션, 을 사용하면, 
+<b class="COMMAND">ls</b> 디렉토리 구조를 트리같은 형태로 보여줍니다. 다른 유용한 옵션들로는 
+<tt class="OPTION">-S</tt>, 파일 크기로 정렬해 줌, 
+<tt class="OPTION">-t</tt>, 변경 시간으로 정렬해 줌, 
+<tt class="OPTION">-v</tt>, 파일이름 안에 포함되어 있는 (숫자로 된) 버전으로 정렬해 줌, 
+<a name="AEN10025" href="#FTN.AEN10025">
 <span class="footnote">[1]</span>
 </a>
-	      <tt class="OPTION">-b</tt>, show escape characters, and
-	      <tt class="OPTION">-i</tt>, show file inodes (see <a href="./moreadv.html#IDELETE">Example 16-4</a>).</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tt class="OPTION">-b</tt>, 이스케이프 문자를 보여줌, 그리고 
+<tt class="OPTION">-i</tt>, 파일의 inodes (
+<a href="./moreadv.html#IDELETE">예제 16-4</a> 참조) 를 보여줌, 이 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -l</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l</b></tt>
 <tt class="COMPUTEROUTPUT">-rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter10.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter11.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:44 chapter12.txt
@@ -84,10 +83,7 @@
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Preface.txt</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -lv</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -lv</b></tt>
 <tt class="COMPUTEROUTPUT"> total 0
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Chapter_headings.txt
  -rw-rw-r-- 1 bozo bozo 0 Sep 14 18:49 Preface.txt
@@ -114,26 +110,20 @@
 <img src="basic_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>	      The <i class="FIRSTTERM">ls</i> command returns a
-	      non-zero <a href="./exit-status.html#EXITSTATUSREF">exit status</a> when
-	      attempting to list a non-existent file.
-	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<i class="FIRSTTERM">ls</i> 명령어는 존재하지 않는 파일을 리스트하려고 하면 0이 아닌 
+<a href="./exit-status.html#EXITSTATUSREF">종료 상태 (exit status)</a> 를 리턴합니다.
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls abc</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls abc</b></tt>
 <tt class="COMPUTEROUTPUT">ls: abc: No such file or directory</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo $?</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $?</b></tt>
 <tt class="COMPUTEROUTPUT">2</tt>
 </pre>
 </font>
@@ -141,7 +131,7 @@
 </tr>
 </tbody>
 </table>
-	    </p>
+</p>
 </td>
 </tr>
 </tbody>
@@ -303,39 +293,33 @@ tr a-z A-Z &lt; filename   #  Same effect, but starts one less process,
 <b class="COMMAND">rev</b>
 </dt>
 <dd>
-<p>reverses each line of a file, and outputs to
-	      <tt class="FILENAME">stdout</tt>.  This does not have the same effect
-	      as <b class="COMMAND">tac</b>, as it preserves the order of
-	      the lines, but flips each one around (mirror image).</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>파일의 각 라인을 뒤집어서, 
+<tt class="FILENAME">표준 출력 (stdout)</tt> 으로 출력합니다. 이것은 
+<b class="COMMAND">tac</b> 과 같은 효과가 아닙니다, 줄의 순서는 그대로지만, 
+앞뒤를 뒤집습니다 (거울 이미지)
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat file1.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat file1.txt</b></tt>
 <tt class="COMPUTEROUTPUT">This is line 1.
  This is line 2.</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>tac file1.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>tac file1.txt</b></tt>
 <tt class="COMPUTEROUTPUT">This is line 2.
  This is line 1.</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>rev file1.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>rev file1.txt</b></tt>
 <tt class="COMPUTEROUTPUT">.1 enil si sihT
  .2 enil si sihT</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
