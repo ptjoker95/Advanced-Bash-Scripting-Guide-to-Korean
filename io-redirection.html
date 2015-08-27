@@ -54,37 +54,38 @@
 <a name="IOREDIRREF">
 </a>
 </p>
-<p>There are always three default <i class="FIRSTTERM">files</i>
-         <a name="AEN17884" href="#FTN.AEN17884">
+<p>항상 기본적으로 
+<tt class="FILENAME">표준입력 (stdin)</tt> (키보드),
+<tt class="FILENAME">표준출력 (stdout)</tt> (스크린), 그리고 
+<tt class="FILENAME">표준에러 (stderr)</tt> (스크린에 나타날 에러메세지) 
+<i class="FIRSTTERM">파일들</i> 을 
+<a name="AEN17884" href="#FTN.AEN17884">
 <span class="footnote">[1]</span>
-</a>
-	open, <tt class="FILENAME">stdin</tt> (the keyboard),
-	<tt class="FILENAME">stdout</tt> (the screen), and
-	<tt class="FILENAME">stderr</tt> (error messages output to the
-	screen).  These, and any other open files, can be redirected.
-	Redirection simply means capturing output from a file, command,
-	program, script, or even code block within a script (see <a href="./special-chars.html#EX8">Example 3-1</a> and <a href="./special-chars.html#RPMCHECK">Example 3-2</a>) and sending it as
-	input to another file, command, program, or script.</p>
+</a>을 열어놓습니다. 이것들과 열려있는 어떤 파일이라도 재지향될 수 있습니다. 
+재지향이란 간단히 말해서 파일, 명령어, 프로그램, 스크립트, 심지어는 스크립트 속의 
+코드 블럭 (
+<a href="./special-chars.html#EX8">예제 3-1</a> 와 
+<a href="./special-chars.html#RPMCHECK">예제 3-2</a> 를 참고하세요) 의 출력을 잡아내어 
+다른 파일, 명령어, 프로그램, 혹은 스크립트의 입력으로 보내는 것을 말합니다.
+</p>
 <p>
 <a name="FDREF">
-</a>Each open file gets assigned a file descriptor.	
-
-               <a name="AEN17894" href="#FTN.AEN17894">
+</a>열려있는 각각의 파일은 파일 디스크립터 (file descriptor) 를 할당받습니다.
+<a name="AEN17894" href="#FTN.AEN17894">
 <span class="footnote">[2]</span>
-</a>
-
-	The file descriptors for <tt class="FILENAME">stdin</tt>,
-	<tt class="FILENAME">stdout</tt>, and <tt class="FILENAME">stderr</tt> are
-	0, 1, and 2, respectively.  For opening additional files, there
-	remain descriptors 3 to 9. It is sometimes useful to assign one of
-	these additional file descriptors to <tt class="FILENAME">stdin</tt>,
-	<tt class="FILENAME">stdout</tt>, or <tt class="FILENAME">stderr</tt>
-	as a temporary duplicate link.
-	       <a name="AEN17906" href="#FTN.AEN17906">
+</a> 
+<tt class="FILENAME">표준입력</tt>, 
+<tt class="FILENAME">표준출력</tt>, 그리고 
+<tt class="FILENAME">표준에러</tt> 의 파일 디스크립터는 각각 0,1, 그리고 2입니다. 
+추가로 열리는 파일을 위해선, 3부터 9까지의 파일 디스크립터가 남겨져있습니다. 종종 
+임시 중복 링크로서 추가 파일 디스크립터를 
+<tt class="FILENAME">표준입력</tt>, 
+<tt class="FILENAME">표준출력</tt>, 또는 
+<tt class="FILENAME">표준에러</tt> 에 할당하는 것은 유용합니다.
+<a name="AEN17906" href="#FTN.AEN17906">
 <span class="footnote">[3]</span>
-</a>
-	This simplifies restoration to normal after complex redirection
-	and reshuffling (see <a href="./x17974.html#REDIR1">Example 20-1</a>).</p>
+</a> 이 방법은 복잡한 재지향과 섞기를 한 후에 간단하게 원래대로 되돌려 줍니다. (
+<a href="./x17974.html#REDIR1">예제 20-1</a> 을 참고하세요).</p>
 <p>
 <a name="IOREDIRECTIONREF">
 </a>
@@ -245,11 +246,8 @@
 </tr>
 </tbody>
 </table>
-<p>Multiple instances of input and output redirection
-        and/or pipes can be combined in a single command
-        line.
-
-       <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>여러개의 입출력 재지향과 파이프를 하나의 명령 줄에서 같이 쓸 수 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -264,10 +262,10 @@ command1 | command2 | command3 &gt; output-file</pre>
 </tr>
 </tbody>
 </table>
-        See <a href="./filearchiv.html#DERPM">Example 16-31</a> and <a href="./contributed-scripts.html#FIFO">Example A-14</a>.</p>
-<p>Multiple output streams may be redirected to one file.
-
-         <table bgcolor="#E0E0E0" border="0" width="100%">
+<a href="./filearchiv.html#DERPM">예제 16-31</a> 와 
+<a href="./contributed-scripts.html#FIFO">예제 A-14</a> 를 참고하십시요.</p>
+<p>여러개의 출력 스트림을 한 파일로 재지향할 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -297,37 +295,45 @@ ls -yz 2&gt;&amp;1 &gt;&gt; command.log
 <p>
 <b>
 <a name="CFD">
-</a>Closing File Descriptors</b>
+</a>파일 디스크립터 닫기</b>
 </p>
 <dl>
 <dt>
 <span class="TOKEN">n&lt;&amp;-</span>
 </dt>
 <dd>
-<p>Close input file descriptor
-	    <tt class="REPLACEABLE">
+<p>
+<tt class="REPLACEABLE">
 <i>n</i>
-</tt>.</p>
+</tt>번 입력 파일 디스크립터를 닫아 줍니다.</p>
 </dd>
 <dt>
 <span class="TOKEN">0&lt;&amp;-</span>, <span class="TOKEN">&lt;&amp;-</span>
 </dt>
 <dd>
-<p>Close <tt class="FILENAME">stdin</tt>.</p>
+<p>
+<tt class="FILENAME">표준입력
+</tt> 을 닫아 줍니다.
+</p>
 </dd>
 <dt>
 <span class="TOKEN">n&gt;&amp;-</span>
 </dt>
 <dd>
-<p>Close output file descriptor <tt class="REPLACEABLE">
+<p>
+<tt class="REPLACEABLE">
 <i>n</i>
-</tt>.</p>
+</tt> 번 출력 파일 디스크립터를 닫아 줍니다.
+</p>
 </dd>
 <dt>
 <span class="TOKEN">1&gt;&amp;-</span>, <span class="TOKEN">&gt;&amp;-</span>
 </dt>
 <dd>
-<p>Close <tt class="FILENAME">stdout</tt>.</p>
+<p>
+<tt class="FILENAME">표준출력
+</tt> 을 닫아 줍니다.
+</p>
 </dd>
 </dl>
 </div>
@@ -335,9 +341,9 @@ ls -yz 2&gt;&amp;1 &gt;&gt; command.log
 <a name="FDREF2">
 </a>
 </p>
-<p>Child processes inherit open file descriptors. This is
-          why pipes work. To prevent an fd from being inherited, close it.
-	    <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>자식 프로세스는 열려있는 파일 디스크립터를 상속받습니다. 이 방법으로 파이프는 
+작동하게 됩니다. 파일 디스크립터가 상속되는 것을 막으려면, 디스크립터를 닫습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -356,8 +362,9 @@ exec 3&gt;&amp;-                              # Now close it for the remainder o
 </tbody>
 </table>
         </p>
-<p>For a more detailed introduction to I/O redirection see
-	  <a href="./ioredirintro.html">Appendix F</a>.</p>
+<p>입출력 재지향에 관한 더 자세한 소개는 
+<a href="./ioredirintro.html">부록 F</a> 에 있습니다.
+</p>
 </div>
 <h3 class="FOOTNOTES">Notes</h3>
 <table class="FOOTNOTES" border="0" width="100%">
@@ -369,10 +376,10 @@ exec 3&gt;&amp;-                              # Now close it for the remainder o
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>By convention in UNIX and Linux, data streams
-	 and peripherals (<a href="./devref1.html#DEVFILEREF">device files</a>)
-	 are treated as files, in a fashion analogous to ordinary
-	 files.</p>
+<p>UNIX 와 리눅스의 규칙상, 자료 흐름과 주변 기기 
+(<a href="./devref1.html#DEVFILEREF">device files</a>) 는, 일반적인 파일과 비슷하게 
+파일처럼 다뤄집니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -384,13 +391,12 @@ exec 3&gt;&amp;-                              # Now close it for the remainder o
 <td align="LEFT" valign="TOP" width="95%">
 <p>
 <a name="FDREF1">
-</a>A <i class="FIRSTTERM">file
-		 descriptor</i> is simply a number that
-		 the operating system assigns to an open file
-		 to keep track of it.  Consider it a simplified
-		 type of file pointer. It is analogous
-		 to a <i class="FIRSTTERM">file handle</i> in
-		 <b class="COMMAND">C</b>.</p>
+</a>
+<i class="FIRSTTERM">파일 디스크립터
+</i> 는 운영체제가 계속 추적할 수 있도록 열려있는 파일에 할당해 주는 간단한 숫자입니다. 
+파일 포인터의 단순한 형태라고 보면 됩니다. <b class="COMMAND">C</b> 에서의 
+<i class="FIRSTTERM">파일 핸들 (file handle)</i>  과 유사한 개념입니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -400,13 +406,15 @@ exec 3&gt;&amp;-                              # Now close it for the remainder o
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>Using <tt class="REPLACEABLE">
-<i>file
-	       descriptor 5</i>
-</tt> might cause problems.
-	       When Bash creates a child process, as with <a href="./internal.html#EXECREF">exec</a>, the child inherits
-	       fd 5 (see Chet Ramey's archived e-mail, <a href="http://groups.google.com/group/gnu.bash.bug/browse_thread/thread/13955daafded3b5c/18c17050087f9f37" target="_top">	       SUBJECT: RE:  File descriptor 5 is held open</a>).
-	       Best leave this particular fd alone.</p>
+<p>
+<tt class="REPLACEABLE">
+<i>파일 디스크립터 5</i>
+</tt> 를 사용하는 것은 문제를 일으킬 수 있습니다. Bash가 
+<a href="./internal.html#EXECREF">exec</a> 으로 자식 프로세스를 만들 때, 자식 
+프로세스는 파일 디스크립터 5 (Chet Ramey 의 이메일 기록 
+<a href="http://groups.google.com/group/gnu.bash.bug/browse_thread/thread/13955daafded3b5c/18c17050087f9f37" target="_top">	       SUBJECT: RE:  File descriptor 5 is held open</a> 을 
+참고하십시요) 을 상속받습니다. 이 특별한 파일 디스크립터는 건드리지 않는 게 좋습니다.
+</p>
 </td>
 </tr>
 </tbody>

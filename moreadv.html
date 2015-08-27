@@ -34,33 +34,93 @@
 </div>
 <div class="SECT1">
 <h1 class="SECT1">
-<a name="MOREADV"></a>16.2. Complex Commands
+<a name="MOREADV">
+</a>16.2. Complex Commands
 </h1>
-<p></p>
+<p>
+</p>
 <div class="VARIABLELIST">
-<p><b><a name="CCLISTING1"></a>Commands for more advanced users</b></p>
+<p>
+<b>
+<a name="CCLISTING1">
+</a>Commands for more advanced users</b>
+</p>
 <dl>
 <dt>
-<a name="FINDREF"></a>
+<a name="FINDREF">
+</a>
 <b class="COMMAND">find</b>
 </dt>
-<dd><p><a name="FINDREF0"></a></p>
-<p>-exec <tt class="REPLACEABLE"><i>COMMAND</i></tt> \;</p><p>Carries out <tt class="REPLACEABLE"><i>COMMAND</i></tt> on
-	      each file that <b class="COMMAND">find</b> matches.  The
-	      command sequence terminates with <span class="TOKEN">;</span> (the
-	      <span class="QUOTE">";"</span> is <a href="http://www.tldp.org/LDP/abs/html/escapingsection.html#ESCP">escaped</a> to
-	      make certain the shell passes it to <b class="COMMAND">find</b>
-	      literally, without interpreting it as a special character).</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>find ~/ -name '*.txt'</b></tt>
+<dd>
+<p>
+<a name="FINDREF0">
+</a>
+</p>
+<p>-exec <tt class="REPLACEABLE">
+<i>COMMAND</i>
+</tt> \;</p>
+<p>
+<b class="COMMAND">find</b> 가 찾아낸 각각의 파일에 대해 
+<tt class="REPLACEABLE">
+<i>COMMAND</i>
+</tt> 를 실행합니다. 명령어 배열은 
+<span class="TOKEN">;</span> 로 끝나야 됩니다 (
+<span class="QUOTE">";"</span> 은 쉘이 특수문자로서 해석하지 않고 
+<b class="COMMAND">find</b> 에 그대로 넘길 수 있도록 
+<a href="./escapingsection.html#ESCP">이스케이프</a> 시킵니다).
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>find ~/ -name '*.txt'</b></tt>
 <tt class="COMPUTEROUTPUT">/home/bozo/.kde/share/apps/karm/karmdata.txt
  /home/bozo/misc/irmeyc.txt
  /home/bozo/test-scripts/1.txt</tt>
-	      </pre></font></td></tr></tbody></table>
-	  </p><p><a name="CURLYBRACKETSREF"></a></p><p>If <tt class="REPLACEABLE"><i>COMMAND</i></tt> contains
-	      <span class="TOKEN">{}</span>, then <b class="COMMAND">find</b>
-	      substitutes the full path name of the selected file for
-	      <span class="QUOTE">"{}"</span>.</p><p>          <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">find ~/ -name 'core*' -exec rm {} \;
-# Removes all core dump files from user's home directory.</pre></font></td></tr></tbody></table>
-	  </p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">find /home/bozo/projects -mtime -1
+
+</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>
+<a name="CURLYBRACKETSREF">
+</a>
+</p>
+<p>만일 
+<tt class="REPLACEABLE">
+<i>COMMAND</i>
+</tt> 에 
+<span class="TOKEN">{}</span> 가 포함되어 있으면, 
+<b class="COMMAND">find</b> 는 
+<span class="QUOTE">"{}"</span> 를 선택된 파일의 완전한 경로명으로 바꿔줍니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">find ~/ -name 'core*' -exec rm {} \;
+# Removes all core dump files from user's home directory.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	  </p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">find /home/bozo/projects -mtime -1
 #                               ^   Note minus sign!
 #  Lists all files in /home/bozo/projects directory tree
 #+ that were modified within the last day (current_day - 1).
@@ -85,8 +145,20 @@ find "$DIR" -type f -atime +5 -exec rm {} \;
 #  d = directory
 #  l = symbolic link, etc.
 #
-#  (The 'find' manpage and info page have complete option listings.)</pre></font></td></tr></tbody></table>
-          </p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">find /etc -exec grep '[0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*' {} \;
+#  (The 'find' manpage and info page have complete option listings.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+          </p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">find /etc -exec grep '[0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*[.][0-9][0-9]*' {} \;
 
 # Finds all IP addresses (xxx.xxx.xxx.xxx) in /etc directory files.
 # There a few extraneous hits. Can they be filtered out?
@@ -99,9 +171,47 @@ find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' \
 #  [:digit:] is one of the character classes
 #+ introduced with the POSIX 1003.2 standard. 
 
-# Thanks, Stéphane Chazelas. </pre></font></td></tr></tbody></table></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <tt class="OPTION">-exec</tt> option to
-	      <b class="COMMAND">find</b> should not be confused with the <a href="http://www.tldp.org/LDP/abs/html/internal.html#EXECREF">exec</a> shell builtin.</p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX57"></a><p><b>Example 16-3. <i class="FIRSTTERM">Badname</i>, eliminate file names
-		in current directory containing bad characters and <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#WHITESPACEREF">whitespace</a>.</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Thanks, Stéphane Chazelas. </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<b class="COMMAND">find</b> 의 
+<tt class="OPTION">-exec</tt> 옵션을 
+<a href="./internal.html#EXECREF">exec
+</a> 쉘 내부명령어와 헷갈리지 마십시요.
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX57">
+</a>
+<p>
+<b>예제 16-3. <i class="FIRSTTERM">Badname</i>, eliminate file names
+		in current directory containing bad characters and <a href="./special-chars.html#WHITESPACEREF">whitespace</a>.</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # badname.sh
 # Delete filenames in current directory containing bad characters.
 
@@ -131,8 +241,26 @@ find . -name '*[+{;"\\=?~()&lt;&gt;&amp;*|$ ]*' -maxdepth 0 \
 #  The "-maxdepth 0" option ensures that _find_ will not search
 #+ subdirectories below $PWD.
 
-# (Thanks, S.C.)</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="IDELETE"></a><p><b>Example 16-4. Deleting a file by its <i class="FIRSTTERM">inode</i>
-	        number</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# (Thanks, S.C.)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="IDELETE">
+</a>
+<p>
+<b>예제 16-4. Deleting a file by its <i class="FIRSTTERM">inode</i>
+	        number</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # idelete.sh: Deleting a file by its inode number.
 
 #  This is useful when a filename starts with an illegal character,
@@ -177,8 +305,25 @@ find . -inum $inum -exec rm {} \;
 #+       for text output by "find."
 echo "File "\"$1"\" deleted!"
 
-exit 0</pre></font></td></tr></tbody></table></div><p>The <b class="COMMAND">find</b> command also works
-	      without the <tt class="OPTION">-exec</tt> option.</p><p>	    <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<b class="COMMAND">find
+</b> 명령어는 
+<tt class="OPTION">-exec</tt> 옵션 없이도 잘 작동합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 #  Find suid root files.
 #  A strange suid file might indicate a security hole,
 #+ or even a system intrusion.
@@ -191,74 +336,251 @@ permissions="+4000"  # suid root (dangerous!)
 for file in $( find "$directory" -perm "$permissions" )
 do
   ls -ltF --author "$file"
-done</pre></font></td></tr></tbody></table>
-	    </p><p>See <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#EX48">Example 16-30</a>, <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#EX58">Example 3-4</a>,
-	      and <a href="http://www.tldp.org/LDP/abs/html/loops1.html#FINDSTRING">Example 11-10</a> for scripts using
-	      <b class="COMMAND">find</b>. Its <a href="http://www.tldp.org/LDP/abs/html/basic.html#MANREF">manpage</a> provides more detail
-	      on this complex and powerful command.</p></dd><dt><a name="XARGSREF"></a><b class="COMMAND">xargs</b></dt><dd><p>A filter for feeding arguments to a command, and also
+done</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>스크립트에서의 
+<b class="COMMAND">find</b> 사용은 
+<a href="./filearchiv.html#EX48">예제 16-30</a>, 
+<a href="./special-chars.html#EX58">예제 3-4</a>, 그리고 
+<a href="./loops1.html#FINDSTRING">예제 11-10</a> 을 참고하십시요. 
+<a href="./basic.html#MANREF">manpage</a> 은 이 명령어를 복잡하고 강력하게 사용할 수 
+있게 도와줍니다.
+</p>
+</dd>
+<dt>
+<a name="XARGSREF">
+</a>
+<b class="COMMAND">xargs</b>
+</dt>
+<dd>
+<p>A filter for feeding arguments to a command, and also
 	      a tool for assembling the commands themselves. It breaks
 	      a data stream into small enough chunks for filters and
 	      commands to process.  Consider it as a powerful replacement
-	      for <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#BACKQUOTESREF">backquotes</a>.
-	      In situations where <a href="http://www.tldp.org/LDP/abs/html/commandsub.html#COMMANDSUBREF">command
+	      for <a href="./commandsub.html#BACKQUOTESREF">backquotes</a>.
+	      In situations where <a href="./commandsub.html#COMMANDSUBREF">command
 	      substitution</a> fails with a <span class="ERRORNAME">too
 	      many arguments</span> error,
 	      substituting <b class="COMMAND">xargs</b> often
 	      works.
-	        <a name="AEN10465" href="#FTN.AEN10465"><span class="footnote">[1]</span></a>
+	        <a name="AEN10465" href="#FTN.AEN10465">
+<span class="footnote">[1]</span>
+</a>
 	      Normally, <b class="COMMAND">xargs</b> reads from
 	      <tt class="FILENAME">stdin</tt> or from a pipe, but it can also
-	      be given the output of a file.</p><p>The default command for <b class="COMMAND">xargs</b> is
-	      <a href="http://www.tldp.org/LDP/abs/html/internal.html#ECHOREF">echo</a>. This means that input
+	      be given the output of a file.</p>
+<p>The default command for <b class="COMMAND">xargs</b> is
+	      <a href="./internal.html#ECHOREF">echo</a>. This means that input
 	      piped to <b class="COMMAND">xargs</b> may have linefeeds and
-	      other whitespace characters stripped out.</p><p>	      <table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l</b></tt>
+	      other whitespace characters stripped out.</p>
+<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -l</b>
+</tt>
 <tt class="COMPUTEROUTPUT">total 0
  -rw-rw-r--    1 bozo  bozo         0 Jan 29 23:58 file1
  -rw-rw-r--    1 bozo  bozo         0 Jan 29 23:58 file2</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l | xargs</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>ls -l | xargs</b>
+</tt>
 <tt class="COMPUTEROUTPUT">total 0 -rw-rw-r-- 1 bozo bozo 0 Jan 29 23:58 file1 -rw-rw-r-- 1 bozo bozo 0 Jan...</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>find ~/mail -type f | xargs grep "Linux"</b></tt>
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>find ~/mail -type f | xargs grep "Linux"</b>
+</tt>
 <tt class="COMPUTEROUTPUT">./misc:User-Agent: slrn/0.9.8.1 (Linux)
  ./sent-mail-jul-2005: hosted by the Linux Documentation Project.
  ./sent-mail-jul-2005: (Linux Documentation Project Site, rtf version)
  ./sent-mail-jul-2005: Subject: Criticism of Bozo's Windows/Linux article
  ./sent-mail-jul-2005: while mentioning that the Linux ext2/ext3 filesystem
  . . .</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p><p><tt class="USERINPUT"><b>ls | xargs -p -l gzip</b></tt> <a href="http://www.tldp.org/LDP/abs/html/filearchiv.html#GZIPREF">gzips</a> every file in current
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+<p>
+<tt class="USERINPUT">
+<b>ls | xargs -p -l gzip</b>
+</tt> <a href="./filearchiv.html#GZIPREF">gzips</a> every file in current
 	      directory, one at a time, prompting before each
-	      operation.</p><p><a name="XARGSONEATATIME"></a></p><div class="NOTE"><p></p><table class="NOTE" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/note.gif" alt="Note" hspace="5"></td><td align="LEFT" valign="TOP"><p>Note that <i class="FIRSTTERM">xargs</i> processes the
+	      operation.</p>
+<p>
+<a name="XARGSONEATATIME">
+</a>
+</p>
+<div class="NOTE">
+<p>
+</p>
+<table class="NOTE" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/note.gif" alt="Note" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Note that <i class="FIRSTTERM">xargs</i> processes the
 	      arguments passed to it sequentially, <em>one at
-	      a time</em>.</p><p><table bgcolor="#E0E0E0" border="1" width="90%"><tbody><tr><td><font color="#000000"><pre class="SCREEN"><tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>find /usr/bin | xargs file</b></tt>
+	      a time</em>.</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="SCREEN">
+<tt class="PROMPT">bash$ </tt>
+<tt class="USERINPUT">
+<b>find /usr/bin | xargs file</b>
+</tt>
 <tt class="COMPUTEROUTPUT">/usr/bin:          directory
  /usr/bin/foomatic-ppd-options:          perl script text executable
  . . .</tt>
-	      </pre></font></td></tr></tbody></table>
-	      </p></td></tr></tbody></table></div><p><a name="XARGSLIMARGS"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>An interesting <i class="FIRSTTERM">xargs</i>
-	      option is <tt class="OPTION">-n <tt class="REPLACEABLE"><i>NN</i></tt></tt>,
-	      which limits to <tt class="REPLACEABLE"><i>NN</i></tt> the number
-	      of arguments passed.</p><p><tt class="USERINPUT"><b>ls | xargs -n 8 echo</b></tt> lists the files in the
-	      current directory in <tt class="LITERAL">8</tt> columns.</p></td></tr></tbody></table></div><p><a name="XARGSWS"></a></p><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p>Another useful option is
-	      <tt class="OPTION">-0</tt>, in combination with <tt class="USERINPUT"><b>find
-	      -print0</b></tt> or <tt class="USERINPUT"><b>grep -lZ</b></tt>. This
+	      </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+	      </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="XARGSLIMARGS">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>An interesting <i class="FIRSTTERM">xargs</i>
+	      option is <tt class="OPTION">-n <tt class="REPLACEABLE">
+<i>NN</i>
+</tt>
+</tt>,
+	      which limits to <tt class="REPLACEABLE">
+<i>NN</i>
+</tt> the number
+	      of arguments passed.</p>
+<p>
+<tt class="USERINPUT">
+<b>ls | xargs -n 8 echo</b>
+</tt> lists the files in the
+	      current directory in <tt class="LITERAL">8</tt> columns.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="XARGSWS">
+</a>
+</p>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>Another useful option is
+	      <tt class="OPTION">-0</tt>, in combination with <tt class="USERINPUT">
+<b>find
+	      -print0</b>
+</tt> or <tt class="USERINPUT">
+<b>grep -lZ</b>
+</tt>. This
 	      allows handling arguments containing whitespace or
-	      quotes.</p><p>	    <tt class="USERINPUT"><b>find / -type f -print0 | xargs -0 grep -liwZ GUI | xargs -0 rm -f</b></tt>
-	    </p><p>	    <tt class="USERINPUT"><b>grep -rliwZ GUI / | xargs -0 rm -f</b></tt>
-	    </p><p>Either of the above will remove any file containing <span class="QUOTE">"GUI"</span>.
-	      <em>(Thanks, S.C.)</em></p><p>Or:
-	      <table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">cat /proc/"$pid"/"$OPTION" | xargs -0 echo
+	      quotes.</p>
+<p>	    <tt class="USERINPUT">
+<b>find / -type f -print0 | xargs -0 grep -liwZ GUI | xargs -0 rm -f</b>
+</tt>
+	    </p>
+<p>	    <tt class="USERINPUT">
+<b>grep -rliwZ GUI / | xargs -0 rm -f</b>
+</tt>
+	    </p>
+<p>Either of the above will remove any file containing <span class="QUOTE">"GUI"</span>.
+	      <em>(Thanks, S.C.)</em>
+</p>
+<p>Or:
+	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">cat /proc/"$pid"/"$OPTION" | xargs -0 echo
 #  Formats output:         ^^^^^^^^^^^^^^^
 #  From Han Holl's fixup of "get-commandline.sh"
-#+ script in "/dev and /proc" chapter.</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div><div class="TIP"><p></p><table class="TIP" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/tip.gif" alt="Tip" hspace="5"></td><td align="LEFT" valign="TOP"><p><a name="XARGSMULTIPROCESS"></a></p><p>The <tt class="OPTION">-P</tt> option to
+#+ script in "/dev and /proc" chapter.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="TIP">
+<p>
+</p>
+<table class="TIP" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/tip.gif" alt="Tip" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>
+<a name="XARGSMULTIPROCESS">
+</a>
+</p>
+<p>The <tt class="OPTION">-P</tt> option to
 		      <i class="FIRSTTERM">xargs</i> permits running
 		      processes in parallel. This speeds up execution
-		      in a machine with a multicore CPU.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+		      in a machine with a multicore CPU.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 ls *gif | xargs -t -n1 -P2 gif2png
 # Converts all the gif images in current directory to png.
@@ -269,7 +591,30 @@ ls *gif | xargs -t -n1 -P2 gif2png
 # -n1   At most 1 argument per command line.
 # -P2   Run up to 2 processes simultaneously.
 
-# Thank you, Roberto Polli, for the inspiration.</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div><div class="EXAMPLE"><a name="EX41"></a><p><b>Example 16-5. Logfile: Using <i class="FIRSTTERM">xargs</i> to monitor system log</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+# Thank you, Roberto Polli, for the inspiration.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="EX41">
+</a>
+<p>
+<b>예제 16-5. Logfile: Using <i class="FIRSTTERM">xargs</i> to monitor system log</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Generates a log file in current directory
 # from the tail end of /var/log/messages.
@@ -304,9 +649,34 @@ exit 0
 #  --------
 #  Modify this script to track changes in /var/log/messages at intervals
 #+ of 20 minutes.
-#  Hint: Use the "watch" command. </pre></font></td></tr></tbody></table></div><p><a name="XARGSCURLYREF"></a></p><p><a href="http://www.tldp.org/LDP/abs/html/moreadv.html#CURLYBRACKETSREF">As in
-	      <b class="COMMAND">find</b></a>, a curly bracket
-	      pair serves as a placeholder for replacement text.</p><div class="EXAMPLE"><a name="EX42"></a><p><b>Example 16-6. Copying files in current directory to another</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#  Hint: Use the "watch" command. </pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<a name="XARGSCURLYREF">
+</a>
+</p>
+<p>
+<a href="./moreadv.html#CURLYBRACKETSREF">As in
+	      <b class="COMMAND">find</b>
+</a>, a curly bracket
+	      pair serves as a placeholder for replacement text.</p>
+<div class="EXAMPLE">
+<a name="EX42">
+</a>
+<p>
+<b>예제 16-6. Copying files in current directory to another</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # copydir.sh
 
 #  Copy (verbose) all files in current directory ($PWD)
@@ -335,7 +705,25 @@ ls . | xargs -i -t cp ./{} $1
 #+   cp * $1
 #+ unless any of the filenames has embedded "whitespace" characters.
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="KILLBYNAME"></a><p><b>Example 16-7. Killing processes by name</b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="KILLBYNAME">
+</a>
+<p>
+<b>예제 16-7. Killing processes by name</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # kill-byname.sh: Killing processes by name.
 # Compare this script with kill-process.sh.
 
@@ -374,8 +762,27 @@ ps ax | grep "$PROCESS_NAME" | awk '{print $1}' | xargs -i kill {} 2&amp;&gt;/de
 exit $?
 
 #  The "killall" command has the same effect as this script,
-#+ but using it is not quite as educational.</pre></font></td></tr></tbody></table></div><div class="EXAMPLE"><a name="WF2"></a><p><b>Example 16-8. Word frequency analysis using
-	      <i class="FIRSTTERM">xargs</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+#+ but using it is not quite as educational.</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="EXAMPLE">
+<a name="WF2">
+</a>
+<p>
+<b>예제 16-8. Word frequency analysis using
+	      <i class="FIRSTTERM">xargs</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 # wf2.sh: Crude word frequency analysis on a text file.
 
 # Uses 'xargs' to decompose lines of text into single words.
@@ -419,14 +826,27 @@ sort | uniq -c | sort -nr
 #  This does the same job as the "wf.sh" example,
 #+ but a bit more ponderously, and it runs more slowly (why?).
 
-exit $?</pre></font></td></tr></tbody></table></div></dd>
-<dt><a name="EXPRREF"></a>
-<tt class="USERINPUT"><b>expr</b></tt>
+exit $?</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt>
+<a name="EXPRREF">
+</a>
+<tt class="USERINPUT">
+<b>expr</b>
+</tt>
 </dt>
-<dd><p>다목적 표현 연산자: 주어진 연산자로 매개변수를 
+<dd>
+<p>다목적 표현 연산자: 주어진 연산자로 매개변수를 
 연결하거나 계산합니다 (매개변수는 공란으로 구분되어야 함). 
 연산자는 산술연산, 비교, 문자열이나 논리연산일 수 있습니다.</p>
-<p></p>
+<p>
+</p>
 <div class="VARIABLELIST">
 <dl>
 <dt>
@@ -435,14 +855,17 @@ exit $?</pre></font></td></tr></tbody></table></div></dd>
 </tt>
 </dt>
 <dd>
-<p><tt class="LITERAL">8</tt> 반환</p>
+<p>
+<tt class="LITERAL">8</tt> 반환</p>
 </dd>
 <dt>
 <tt class="USERINPUT">
 <b>expr 5 % 3</b>
 </tt>
 </dt>
-<dd><p>2 반환</p></dd>
+<dd>
+<p>2 반환</p>
+</dd>
 <dt>
 <tt class="USERINPUT">
 <b>expr 1 / 0</b>
@@ -450,7 +873,8 @@ exit $?</pre></font></td></tr></tbody></table></div></dd>
 </dt>
 <dd>
 <p>오류 메세지 반환, 
-<span class="ERRORCODE">expr: division by zero</span></p>
+<span class="ERRORCODE">expr: division by zero</span>
+</p>
 <p>Illegal arithmetic operations not allowed.</p>
 </dd>
 <dt>
@@ -458,8 +882,10 @@ exit $?</pre></font></td></tr></tbody></table></div></dd>
 <b>expr 5 \* 3</b>
 </tt>
 </dt>
-<dd><p>15 반환</p>
-<p><b class="COMMAND">expr</b> 로 곱하기 연산자를 사용할 
+<dd>
+<p>15 반환</p>
+<p>
+<b class="COMMAND">expr</b> 로 곱하기 연산자를 사용할 
 때에는 역슬래쉬와 함께 써야 합니다.</p>
 </dd>
 <dt>
@@ -467,25 +893,47 @@ exit $?</pre></font></td></tr></tbody></table></div></dd>
 <b>y=`expr $y + 1`</b>
 </tt>
 </dt>
-<dd><p><tt class="USERINPUT"><b>let y=y+1</b></tt> 나 
-<tt class="USERINPUT"><b>y=$(($y+1))</b></tt> 와 같이 
+<dd>
+<p>
+<tt class="USERINPUT">
+<b>let y=y+1</b>
+</tt> 나 
+<tt class="USERINPUT">
+<b>y=$(($y+1))</b>
+</tt> 와 같이 
 변수값을 증가시킵니다. 
 <a href="./arithexp.html#ARITHEXPREF">arithmetic expansion</a> 
 에서 예를 확인할 수 있습니다.
 </p>
 </dd>
 <dt>
-<a name="EXPEXTRSUB"></a>
-<tt class="USERINPUT"><b>z=`expr substr 
-$string $position $length`</b></tt>
+<a name="EXPEXTRSUB">
+</a>
+<tt class="USERINPUT">
+<b>z=`expr substr 
+$string $position $length`</b>
+</tt>
 </dt>
 <dd>
-<p><code>$position</code> 에서 시작해서, 길이 <code>$length</code> 
+<p>
+<code>$position</code> 에서 시작해서, 길이 <code>$length</code> 
 만큼의 문자열을 추출해냅니다.</p>
 </dd>
 </dl>
 </div>
-<div class="EXAMPLE"><a name="EX45"></a><p><b>Example 16-9. Using <i class="FIRSTTERM">expr</i></b></p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+<div class="EXAMPLE">
+<a name="EX45">
+</a>
+<p>
+<b>예제 16-9. Using <i class="FIRSTTERM">expr</i>
+</b>
+</p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 # Demonstrating some of the uses of 'expr'
 # =======================================
@@ -588,12 +1036,40 @@ echo "The digits at the beginning of \"$a\" are \"$b\"."
 
 echo
 
-exit 0</pre></font></td></tr></tbody></table></div><div class="IMPORTANT"><p></p><table class="IMPORTANT" border="0" width="90%"><tbody><tr><td align="CENTER" valign="TOP" width="25"><img src="moreadv_files/important.gif" alt="Important" hspace="5"></td><td align="LEFT" valign="TOP"><p>The <a href="http://www.tldp.org/LDP/abs/html/special-chars.html#NULLREF">:
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="IMPORTANT">
+<p>
+</p>
+<table class="IMPORTANT" border="0" width="90%">
+<tbody>
+<tr>
+<td align="CENTER" valign="TOP" width="25">
+<img src="moreadv_files/important.gif" alt="Important" hspace="5">
+</td>
+<td align="LEFT" valign="TOP">
+<p>The <a href="./special-chars.html#NULLREF">:
 	      (<i class="FIRSTTERM">null</i>)</a> operator
 	      can substitute for <b class="COMMAND">match</b>. For example,
-	      <tt class="USERINPUT"><b>b=`expr $a : [0-9]*`</b></tt> is the
-	      exact equivalent of <tt class="USERINPUT"><b>b=`expr match $a
-	      [0-9]*`</b></tt> in the above listing.</p><p><table bgcolor="#E0E0E0" border="0" width="90%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING">#!/bin/bash
+	      <tt class="USERINPUT">
+<b>b=`expr $a : [0-9]*`</b>
+</tt> is the
+	      exact equivalent of <tt class="USERINPUT">
+<b>b=`expr match $a
+	      [0-9]*`</b>
+</tt> in the above listing.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING">#!/bin/bash
 
 echo
 echo "String operations using \"expr \$string : \" construct"
@@ -635,28 +1111,99 @@ echo "The last 7 characters of \"$a\" are `expr "$a" : '.*\(.......\)'`."
 
 echo
 
-exit 0</pre></font></td></tr></tbody></table></p></td></tr></tbody></table></div></dd></dl></div><p>The above script illustrates how
+exit 0</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+<p>The above script illustrates how
 	      <b class="COMMAND">expr</b> uses the <i class="FIRSTTERM">escaped
 	      parentheses -- \( ... \) --</i> grouping operator
-	      in tandem with <a href="http://www.tldp.org/LDP/abs/html/regexp.html#REGEXREF">regular
+	      in tandem with <a href="./regexp.html#REGEXREF">regular
 	      expression</a> parsing to match a substring.
 	      Here is a another example, this time from <span class="QUOTE">"real
 	      life."</span>
 
-	        <table bgcolor="#E0E0E0" border="0" width="100%"><tbody><tr><td><font color="#000000"><pre class="PROGRAMLISTING"># Strip the whitespace from the beginning and end.
+	        <table bgcolor="#E0E0E0" border="0" width="100%">
+<tbody>
+<tr>
+<td>
+<font color="#000000">
+<pre class="PROGRAMLISTING"># Strip the whitespace from the beginning and end.
 LRFDATE=`expr "$LRFDATE" : '[[:space:]]*\(.*\)[[:space:]]*$'`
 
 #  From Peter Knowles' "booklistgen.sh" script
 #+ for converting files to Sony Librie/PRS-50X format.
-#  (http://booklistgensh.peterknowles.com)</pre></font></td></tr></tbody></table>
+#  (http://booklistgensh.peterknowles.com)</pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
 
-	      </p><p><a href="http://www.tldp.org/LDP/abs/html/wrapper.html#PERLREF">Perl</a>,
-	      <a href="http://www.tldp.org/LDP/abs/html/sedawk.html#SEDREF">sed</a>, and <a href="http://www.tldp.org/LDP/abs/html/awk.html#AWKREF">awk</a> have far superior string
+	      </p>
+<p>
+<a href="./wrapper.html#PERLREF">Perl</a>,
+	      <a href="./sedawk.html#SEDREF">sed</a>, and <a href="./awk.html#AWKREF">awk</a> have far superior string
 	      parsing facilities. A short <b class="COMMAND">sed</b> or
 	      <b class="COMMAND">awk</b> <span class="QUOTE">"subroutine"</span> within
-	      a script (see <a href="http://www.tldp.org/LDP/abs/html/wrapper.html">Section 36.2</a>) is an attractive
-	      alternative to <b class="COMMAND">expr</b>.</p><p>See <a href="http://www.tldp.org/LDP/abs/html/string-manipulation.html">Section 10.1</a> for more on
-              using <b class="COMMAND">expr</b> in string operations.</p></div><h3 class="FOOTNOTES">Notes</h3><table class="FOOTNOTES" border="0" width="100%"><tbody><tr><td align="LEFT" valign="TOP" width="5%"><a name="FTN.AEN10465" href="http://www.tldp.org/LDP/abs/html/moreadv.html#AEN10465"><span class="footnote">[1]</span></a></td><td align="LEFT" valign="TOP" width="95%"><p>And even when <i class="FIRSTTERM">xargs</i> is
+	      a script (see <a href="./wrapper.html">Section 36.2</a>) is an attractive
+	      alternative to <b class="COMMAND">expr</b>.</p>
+<p>See <a href="./string-manipulation.html">Section 10.1</a> for more on
+              using <b class="COMMAND">expr</b> in string operations.</p>
+</div>
+<h3 class="FOOTNOTES">Notes</h3>
+<table class="FOOTNOTES" border="0" width="100%">
+<tbody>
+<tr>
+<td align="LEFT" valign="TOP" width="5%">
+<a name="FTN.AEN10465" href="./moreadv.html#AEN10465">
+<span class="footnote">[1]</span>
+</a>
+</td>
+<td align="LEFT" valign="TOP" width="95%">
+<p>And even when <i class="FIRSTTERM">xargs</i> is
 		not strictly necessary, it can speed up execution of a command
-		involving <a href="http://www.tldp.org/LDP/abs/html/timedate.html#BATCHPROCREF">batch-processing</a> of multiple
-		files.</p></td></tr></tbody></table><div class="NAVFOOTER"><hr align="LEFT" width="100%"><table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/basic.html" accesskey="P">Prev</a></td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/index.html" accesskey="H">Home</a></td><td align="right" valign="top" width="33%"><a href="http://www.tldp.org/LDP/abs/html/timedate.html" accesskey="N">Next</a></td></tr><tr><td align="left" valign="top" width="33%">Basic Commands</td><td align="center" valign="top" width="34%"><a href="http://www.tldp.org/LDP/abs/html/external.html" accesskey="U">Up</a></td><td align="right" valign="top" width="33%">Time / Date Commands</td></tr></tbody></table></div></body></html>
+		involving <a href="./timedate.html#BATCHPROCREF">batch-processing</a> of multiple
+		files.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="NAVFOOTER">
+<hr align="LEFT" width="100%">
+<table summary="Footer navigation table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td align="left" valign="top" width="33%">
+<a href="./basic.html" accesskey="P">Prev</a>
+</td>
+<td align="center" valign="top" width="34%">
+<a href="./index.html" accesskey="H">Home</a>
+</td>
+<td align="right" valign="top" width="33%">
+<a href="./timedate.html" accesskey="N">Next</a>
+</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="33%">Basic Commands</td>
+<td align="center" valign="top" width="34%">
+<a href="./external.html" accesskey="U">Up</a>
+</td>
+<td align="right" valign="top" width="33%">Time / Date Commands</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
