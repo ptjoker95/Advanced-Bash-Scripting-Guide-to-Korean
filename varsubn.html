@@ -20,11 +20,11 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./variables.html" accesskey="P">Prev</a>
+<a href="./variables.html" accesskey="P">이전</a>
 </td>
-<td align="center" valign="bottom" width="80%">Chapter 4. Introduction to Variables and Parameters</td>
+<td align="center" valign="bottom" width="80%">4장. 변수와 매개변수 소개</td>
 <td align="right" valign="bottom" width="10%">
-<a href="./varassignment.html" accesskey="N">Next</a>
+<a href="./varassignment.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -34,11 +34,11 @@
 <div class="SECT1">
 <h1 class="SECT1">
 <a name="VARSUBN">
-</a>4.1. Variable Substitution</h1>
-<p>The <i class="FIRSTTERM">name</i> of a variable is a placeholder
-	for its <i class="FIRSTTERM">value</i>, the data it holds.
-	Referencing (retrieving) its value is called
-	<i class="FIRSTTERM">variable substitution</i>.</p>
+</a>4.1. 변수 치환</h1>
+<p>변수의 
+<i class="FIRSTTERM">이름</i> 은, 자료가 담겨져 있는, 자신의
+<i class="FIRSTTERM">값</i> 을 담는 그릇입니다. 그 값은 참조 (검색) 하는 것을 
+<i class="FIRSTTERM">변수 치환 (variable substitution)</i> 이라고 합니다.</p>
 <p>
 </p>
 <div class="VARIABLELIST">
@@ -51,46 +51,34 @@
 <a name="VARNAMEVAL">
 </a>
 </p>
-<p>Let us carefully distinguish between the
-		<i class="FIRSTTERM">name</i> of a variable
-		and its <i class="FIRSTTERM">value</i>. If
-		<tt class="USERINPUT">
+<p>변수의 
+<i class="FIRSTTERM">이름</i> 과 그 
+<i class="FIRSTTERM">값</i> 을 조심스럽게 구분해봅시다. 만일 
+<tt class="USERINPUT">
 <b>variable1</b>
-</tt> is the name of a
-		variable, then <tt class="USERINPUT">
+</tt> 이 변수의 이름이라면, 
+<tt class="USERINPUT">
 <b>$variable1</b>
-</tt>
-		is a reference to its <i class="FIRSTTERM">value</i>,
-		the data item it contains.
-		
-		  <a name="AEN2258" href="#FTN.AEN2258">
+</tt> 은 그것의 
+<i class="FIRSTTERM">값</i>, 담고 있는 자료, 의 참조입니다.
+<a name="AEN2258" href="#FTN.AEN2258">
 <span class="footnote">[1]</span>
 </a>
-
-
-		</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>variable1=23</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>variable1=23</b></tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo variable1</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo variable1</b></tt>
 <tt class="COMPUTEROUTPUT">variable1</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo $variable1</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $variable1</b></tt>
 <tt class="COMPUTEROUTPUT">23</tt>
 </pre>
 </font>
