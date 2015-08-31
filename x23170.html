@@ -22,7 +22,8 @@
 <td align="left" valign="bottom" width="10%">
 <a href="./sedawk.html" accesskey="P">Prev</a>
 </td>
-<td align="center" valign="bottom" width="80%">Appendix C. A Sed and Awk Micro-Primer</td>
+<td align="center" valign="bottom" width="80%">부록 C. Sed 와 Awk 에 대한 간단한 입문서
+</td>
 <td align="right" valign="bottom" width="10%">
 <a href="./awk.html" accesskey="N">Next</a>
 </td>
@@ -36,39 +37,39 @@
 <a name="AEN23170">
 </a>C.1. Sed</h1>
 <p>
-<i class="FIRSTTERM">Sed</i> is a non-interactive
-          <a name="AEN23174" href="#FTN.AEN23174">
+<i class="FIRSTTERM">Sed</i> 는 비대화형 (non-interactive)
+<a name="AEN23174" href="#FTN.AEN23174">
 <span class="footnote">[1]</span>
-</a>
-	<b class="COMMAND">s</b>tream <b class="COMMAND">ed</b>itor. It
-	receives text input, whether from <tt class="FILENAME">stdin</tt>
-	or from a file, performs certain operations on specified lines
-	of the input, one line at a time, then outputs the result to
-	<tt class="FILENAME">stdout</tt> or to a file.  Within a shell script,
-	<i class="FIRSTTERM">sed</i> is usually one of several tool
-	components in a pipe.</p>
+</a> 모드의 줄 단위 편집기 (
+<b class="COMMAND">s</b>tream 
+<b class="COMMAND">ed</b>itor) 입니다. 
+<tt class="FILENAME">표준입력</tt> 이나 파일로부터 텍스트 입력을 받아, 입력된 줄 중 
+특정 줄, 한번에 한 줄, 에 어떤 동작을 해서, 
+<tt class="FILENAME">표준출력</tt> 이나 파일에 결과물을 출력합니다. 쉘 스크립트에서 
+<i class="FIRSTTERM">sed</i> 는 파이프에서 쓰이는 몇몇 도구 중에 하나입니다.
+</p>
 <p>
-<i class="FIRSTTERM">Sed</i> determines which lines of
-        its input that it will operate on from the <i class="FIRSTTERM">address
-        range</i> passed to it.
-	  <a name="AEN23185" href="#FTN.AEN23185">
+<i class="FIRSTTERM">Sed</i> 는 전달받은 
+<i class="FIRSTTERM">주소 범위</i> 로부터 입력의 어떤 줄에 동작할 것인지 결정합니다. 
+<a name="AEN23185" href="#FTN.AEN23185">
 <span class="footnote">[2]</span>
-</a>
-	Specify this address range either by line number or by a
-	pattern to match. For example, <tt class="REPLACEABLE">
+</a>이 주소는 줄의 숫자나 맞는 패턴에 의해서 결정되어집니다. 예를 들어, 
+<tt class="REPLACEABLE">
 <i>3d</i>
-</tt>
-	signals <i class="FIRSTTERM">sed</i> to delete line 3 of the
-	input, and <tt class="REPLACEABLE">
+</tt> 는 
+<i class="FIRSTTERM">sed</i> 가 입력의 3번째 줄을 지우라는 신호이고, 
+<tt class="REPLACEABLE">
 <i>/Windows/d</i>
-</tt> tells sed
-	that you want every line of the input containing a match to
-	<span class="QUOTE">"Windows"</span> deleted.</p>
-<p>Of all the operations in the <i class="FIRSTTERM">sed</i>
-	toolkit, we will focus primarily on the three most commonly
-	used ones. These are <b class="COMMAND">p</b>rinting (to
-	<tt class="FILENAME">stdout</tt>), <b class="COMMAND">d</b>eletion,
-	and <b class="COMMAND">s</b>ubstitution.</p>
+</tt> 는 입력에서 
+<span class="QUOTE">"Windows"</span> 를 포함하는 모든 줄을 지우라는 신호입니다.
+</p>
+<p>
+<i class="FIRSTTERM">sed</i> 의 도구 중에 일반적으로 가장 많이 사용되는 것은 다음과 
+같습니다. 출력 (
+<b class="COMMAND">p</b>rinting) (
+<tt class="FILENAME">표준출력</tt> 으로), 삭제 (
+<b class="COMMAND">d</b>eletion), 그리고 치환 (
+<b class="COMMAND">s</b>ubstitution).</p>
 <p>
 <a name="SEDBASICTABLE">
 </a>
@@ -77,79 +78,81 @@
 <a name="AEN23200">
 </a>
 <p>
-<b>Table C-1. Basic sed operators</b>
+<b>표 C-1. 기본 sed 연산자</b>
 </p>
 <table class="CALSTABLE" border="1">
 <thead>
 <tr>
-<th align="LEFT" valign="TOP">Operator</th>
-<th align="LEFT" valign="TOP">Name</th>
-<th align="LEFT" valign="TOP">Effect</th>
+<th align="LEFT" valign="TOP">연산자</th>
+<th align="LEFT" valign="TOP">이름</th>
+<th align="LEFT" valign="TOP">효과</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="LEFT" valign="TOP">
-<tt class="OPTION">[address-range]/p</tt>
+<tt class="OPTION">[주소-범위]/p</tt>
 </td>
 <td align="LEFT" valign="TOP">print</td>
-<td align="LEFT" valign="TOP">Print [specified address range]</td>
+<td align="LEFT" valign="TOP">[주어진 주소 범위] 출력</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
-<tt class="OPTION">[address-range]/d</tt>
+<tt class="OPTION">[주소-범위]/d</tt>
 </td>
 <td align="LEFT" valign="TOP">delete</td>
-<td align="LEFT" valign="TOP">Delete [specified address range]</td>
+<td align="LEFT" valign="TOP">[주어진 주서 범위] 삭제</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/pattern1/pattern2/</tt>
 </td>
 <td align="LEFT" valign="TOP">substitute</td>
-<td align="LEFT" valign="TOP">Substitute pattern2 for first instance of pattern1 in a line</td>
+<td align="LEFT" valign="TOP">한 줄에서 처음 나타나는 pattern1 을 pattern2로 치환</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
-<tt class="OPTION">[address-range]/s/pattern1/pattern2/</tt>
+<tt class="OPTION">[주소-범위]/s/pattern1/pattern2/</tt>
 </td>
 <td align="LEFT" valign="TOP">substitute</td>
-<td align="LEFT" valign="TOP">Substitute pattern2 for first instance of pattern1 in a
-	      line, over <tt class="REPLACEABLE">
-<i>address-range</i>
-</tt>
-</td>
+<td align="LEFT" valign="TOP">
+<tt class="REPLACEABLE">
+<i>주소-범위</i>
+</tt> 에 대해서 줄 안에 있는 첫번째 pattern1 을 pattern2 로 치환</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
-<tt class="OPTION">[address-range]/y/pattern1/pattern2/</tt>
+<tt class="OPTION">[주소-범위]/y/pattern1/pattern2/</tt>
 </td>
 <td align="LEFT" valign="TOP">transform</td>
-<td align="LEFT" valign="TOP">replace any character in pattern1 with the
-	        corresponding character in pattern2, over
-	      <tt class="REPLACEABLE">
-<i>address-range</i>
-</tt> (equivalent of
-	        <b class="COMMAND">tr</b>)</td>
+<td align="LEFT" valign="TOP">
+<tt class="REPLACEABLE">
+<i>주소-범위</i>
+</tt> 에 대해서, pattern1 에 있는 아무 문자를 pattern2 에 있는 대응하는 문자로 
+교체함 (
+<b class="COMMAND">tr</b> 과 동일)
+</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
-<tt class="OPTION">[address] i pattern Filename</tt>
+<tt class="OPTION">[주소] i pattern Filename</tt>
 </td>
 <td align="LEFT" valign="TOP">insert</td>
-<td align="LEFT" valign="TOP">Insert pattern at address indicated in file Filename.
-                     Usually used with <tt class="OPTION">-i</tt>
-                     <tt class="REPLACEABLE">
-<i>in-place</i>
-</tt> option.</td>
+<td align="LEFT" valign="TOP">Filename 의 파일에 지정된 주소에 패턴을 입력하기. 
+일반적으로 
+<tt class="OPTION">-i</tt>
+<tt class="REPLACEABLE"><i>in-place</i>
+</tt> 옵션과 함께 사용됨.
+</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">g</tt>
 </td>
 <td align="LEFT" valign="TOP">global</td>
-<td align="LEFT" valign="TOP">Operate on <em>every</em> pattern match
-	        within each matched line of input</td>
+<td align="LEFT" valign="TOP">입력된 줄에서 일치하는 각 줄에 발생하는 
+<em>모든</em> 패턴에 대해 동작함
+</td>
 </tr>
 </tbody>
 </table>

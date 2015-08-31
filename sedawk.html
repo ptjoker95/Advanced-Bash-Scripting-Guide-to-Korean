@@ -34,11 +34,11 @@
 <div class="APPENDIX">
 <h1>
 <a name="SEDAWK">
-</a>Appendix C. A Sed and Awk Micro-Primer</h1>
+</a>부록 C. Sed 와 Awk 초급</h1>
 <div class="TOC">
 <dl>
 <dt>
-<b>Table of Contents</b>
+<b>목차</b>
 </dt>
 <dt>C.1. <a href="./x23170.html">Sed</a>
 </dt>
@@ -50,25 +50,27 @@
 <a name="SEDREF">
 </a>
 </p>
-<p>This is a very brief introduction to the <b class="COMMAND">sed</b>
-	and <b class="COMMAND">awk</b> text processing utilities. We will
-	deal with only a few basic commands here, but that will suffice
-	for understanding simple sed and awk constructs within shell
-	scripts.</p>
+<p>다음은 텍스트 프로세싱 유틸리티인 
+<b class="COMMAND">sed</b> 와 
+<b class="COMMAND">awk</b> 의 매우 간단한 소개입니다. 여기서는 몇몇 기본적인 
+명령어들만 다를 것이나, 쉘 스크립트 내에서 Sed 와 Awk 를 간단히 다루기에는 
+충분할 것입니다.
+</p>
 <p>
-<b class="COMMAND">sed</b>: a non-interactive
-         text file editor</p>
+<b class="COMMAND">sed</b>: 비대화형 (a non-interactive) 모드의 텍스트 파일 에디터
+</p>
 <p>
-<b class="COMMAND">awk</b>: a field-oriented pattern processing
-         language with a <b class="COMMAND">C</b>-style syntax</p>
-<p>For all their differences, the two utilities share a similar
-	 invocation syntax, use <a href="./regexp.html#REGEXREF">regular
-	 expressions </a>, read input by default
-	 from <tt class="FILENAME">stdin</tt>, and output to
-	 <tt class="FILENAME">stdout</tt>. These are well-behaved UNIX tools,
-	 and they work together well. The output from one can be piped
-	 to the other, and their combined capabilities give shell scripts
-	 some of the power of <a href="./wrapper.html#PERLREF">Perl</a>.</p>
+<b class="COMMAND">awk</b>: 
+<b class="COMMAND">C</b> 형태의 문법을 갖는 필드 단위의 패턴 (field-oriented pattern) 
+처리 언어
+</p>
+<p>이런 차이점에도 불구하고 이 둘은 비슷한 실행 문법을 갖는데, 
+<a href="./regexp.html#REGEXREF">정규표현식</a> 을 쓰고, 
+<tt class="FILENAME">기본입력</tt> 으로부터 입력을 받고, 
+<tt class="FILENAME">기본출력</tt> 으로 출력을 합니다. 이것들은 잘 작동하는 UNIX 도구이며, 
+서로같이도 잘 써집니다. 하나의 출력은 다른 쪽에 파이프될 수있고, 이것을 잘 쓰면 스크립트를 
+<a href="./wrapper.html#PERLREF">Perl</a> 의 능력과 거의 비슷한 수준으로 끌어올릴 수 있습니다.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -79,11 +81,11 @@
 <img src="sedawk_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>One important difference between the utilities is
-	 that while shell scripts can easily pass arguments to sed, it
-	 is more cumbersome for awk (see <a href="./wrapper.html#COLTOTALER">Example 36-5</a>
-	 and <a href="./ivr.html#COLTOTALER2">Example 28-2</a>).
-	 </p>
+<p>한가지 중요한 차이점은 쉘 스크립트는 Sed에 쉽게 인수를 넘겨줄 수 있지만, Awk에는 좀 
+까다롭다는 것입니다. (
+<a href="./wrapper.html#COLTOTALER">예제 36-5</a>
+와 <a href="./ivr.html#COLTOTALER2">예제 28-2</a> 를 참고하십시요).
+</p>
 </td>
 </tr>
 </tbody>

@@ -6,7 +6,6 @@
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" 
 href="./index.html">
-
 <link rel="UP" title="Regular Expressions" 
 href="./regexp.html">
 <link rel="PREVIOUS" title="Regular Expressions" 
@@ -14,47 +13,36 @@ href="./regexp.html">
 <link rel="NEXT" title="Globbing" 
 href="./globbingref.html">
 </head>
-
-<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" 
-text="#000000" vlink="#840084">
-
+<body class="SECT1" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" text="#000000" vlink="#840084">
 <div id="dic_bubble" class="selection_bubble fontSize13 noSelect" 
 style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: 
 hidden;">
 </div>
-
 <div class="NAVHEADER">
-
 <table summary="Header navigation table" border="0" cellpadding="0" 
 cellspacing="0" width="100%">
 <tbody>
 <tr>
 <th colspan="3" align="center">Advanced Bash-Scripting Guide: </th>
 </tr>
-
 <tr>
 <td align="left" valign="bottom" width="10%">
 <a href="./regexp.html" accesskey="P">이전</a>
 </td>
-
-<td align="center" valign="bottom" width="80%">Chapter 18. Regular 
-Expressions</td>
-
+<td align="center" valign="bottom" width="80%">18장. 정규 표현식들
+</td>
 <td align="right" valign="bottom" width="10%">
 <a href="./globbingref.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
 </table>
-
 <hr align="LEFT" width="100%">
 </div>
-
 <div class="SECT1">
 <h1 class="SECT1">
 <a name="AEN17129">
 </a>18.1. 정규표현식 요약</h1>
-
 <p>정규표현식은 문자열 양식을 의미합니다. 이 양식은 <i class="FIRSTTERM">메타 
 문자</i> 라는 방식으로 문자가 가진 의미와는 다른 뜻을 가지고 문자열 양식을 표현합니다. 
 예를 들어 따옴표는 사람의 대화를 언급하거나, <i class="FIRSTTERM">인용</i>, 혹은 
@@ -144,106 +132,115 @@ Expressions</td>
 <li>
 <p>
 <a name="CARETREF">
-</a>The caret -- <span class="TOKEN">^</span>
-	      -- matches the beginning of a line, but sometimes, depending
-	      on context, negates the meaning of a set of characters in
-	      an RE.</p>
+</a>캐럿 -- 
+<span class="TOKEN">^</span> -- 은 줄의 시작을 나타냅니다, 하지만 가끔 문맥에 따라서는 
+정규 표현식에서 문자 집합의 의미를 반대로 해석해 줍니다.
+</p>
 </li>
 <li>
 <p>
 <a name="DOLLARSIGNREF">
 </a>
 </p>
-<p>The dollar sign -- <span class="TOKEN">$</span> -- at the end of an
-	      RE matches the end of a line.</p>
+<p>달러 사인 -- 
+<span class="TOKEN">$</span> -- 정규 표현식의 마지막에 쓰이며 줄의 끝을 나타냅니다.
+</p>
 <p>
-<span class="QUOTE">"XXX$"</span> matches <span class="TOKEN">XXX</span> at the
-	      end of a line.</p>
+<span class="QUOTE">"XXX$"</span> 는 줄의 끝에 
+<span class="TOKEN">XXX</span> 가 있는지 확인합니다.
+</p>
 <p>
-<span class="QUOTE">"^$"</span> matches blank lines.</p>
+<span class="QUOTE">"^$"</span> 는 빈 줄인지 확인합니다.
+</p>
 </li>
 <li>
 <p>
 <a name="BRACKETSREF">
 </a>
 </p>
-<p>Brackets -- <span class="TOKEN">[...]</span> -- enclose a set of characters
-	      to match in a single RE.</p>
+<p>대괄호 -- 
+<span class="TOKEN">[...]</span> -- 단일 정규 표현식에서 그 안에 있는 문자들의 집합을 
+확인합니다.
+</p>
 <p>
-<span class="QUOTE">"[xyz]"</span> matches any one of the characters
-	      <tt class="REPLACEABLE">
+<span class="QUOTE">"[xyz]"</span> 는 
+<tt class="REPLACEABLE">
 <i>x</i>
 </tt>, <tt class="REPLACEABLE">
 <i>y</i>
 </tt>,
-	      or <tt class="REPLACEABLE">
+나 
+<tt class="REPLACEABLE">
 <i>z</i>
-</tt>.</p>
+</tt> 중 하나만 맞는지 확인합니다.</p>
 <p>
-<span class="QUOTE">"[c-n]"</span> matches any one of the
-	      characters in the range <tt class="REPLACEABLE">
+<span class="QUOTE">"[c-n]"</span> 는 
+<tt class="REPLACEABLE">
 <i>c</i>
 </tt>
-	      to <tt class="REPLACEABLE">
+에서 <tt class="REPLACEABLE">
 <i>n</i>
-</tt>.</p>
+</tt> 까지의 범위내에 있는 하나의 아무 문자만 맞는지 확인합니다.</p>
 <p>
-<span class="QUOTE">"[B-Pk-y]"</span> matches any one of the
-	      characters in the ranges <tt class="REPLACEABLE">
+<span class="QUOTE">"[B-Pk-y]"</span> 는 
+<tt class="REPLACEABLE">
 <i>B</i>
 </tt>
-	      to <tt class="REPLACEABLE">
+에서 <tt class="REPLACEABLE">
 <i>P</i>
-</tt>
-	      and <tt class="REPLACEABLE">
+</tt> 까지, 
+그리고 <tt class="REPLACEABLE">
 <i>k</i>
-</tt> to
-	      <tt class="REPLACEABLE">
+</tt> 에서 
+<tt class="REPLACEABLE">
 <i>y</i>
-</tt>.</p>
+</tt> 까지의 범위내에 있는 하나의 아무 문자만 맞는지 확인합니다.
+</p>
 <p>
-<span class="QUOTE">"[a-z0-9]"</span> matches any single lowercase
-	      letter or any digit.</p>
+<span class="QUOTE">"[a-z0-9]"</span> 는 소문자와 아무 숫자가 맞는지 확인합니다.
+</p>
 <p>
-<span class="QUOTE">"[^b-d]"</span> matches any character
-	      <em>except</em> those in
-	      the range <tt class="REPLACEABLE">
+<span class="QUOTE">"[^b-d]"</span> 는 
+<tt class="REPLACEABLE">
 <i>b</i>
-</tt> to
-	      <tt class="REPLACEABLE">
+</tt> 에서 
+<tt class="REPLACEABLE">
 <i>d</i>
-</tt>. This is an instance of
-	      <span class="TOKEN">^</span> negating or inverting the meaning
-	      of the following RE (taking on a role similar to
-	      <span class="TOKEN">!</span> in a different context).</p>
-<p>Combined sequences of bracketed characters match  
-	      common word patterns. <span class="QUOTE">"[Yy][Ee][Ss]"</span> matches
-	      <tt class="REPLACEABLE">
+</tt> 까지의 범위내에 있는 문자를 <em>제외한</em> 아무 문자인지 확인합니다. 
+이것은 <span class="TOKEN">^</span> 의 뒤에 나오는 의미의 부정적 혹은 반대되는 것의 사용예입니다. 
+(다른 문맥에서 <span class="TOKEN">!</span> 와 비슷한 역할을 합니다).</p>
+<p>연속된 대괄호 조합으로 일반적인 단어 패턴을 확인할 수 있습니다. 
+<span class="QUOTE">"[Yy][Ee][Ss]"</span> 는 
+<tt class="REPLACEABLE">
 <i>yes</i>
 </tt>, <tt class="REPLACEABLE">
 <i>Yes</i>
 </tt>,
-	      <tt class="REPLACEABLE">
+<tt class="REPLACEABLE">
 <i>YES</i>
 </tt>, <tt class="REPLACEABLE">
 <i>yEs</i>
-</tt>,
-	      and so forth.
-	      <span class="QUOTE">"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]"</span>
-	      matches any Social Security number.</p>
+</tt>, 와 기타등등과 맞는지 확인해줍니다.
+<span class="QUOTE">"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]"</span>
+는 사회보장번호와 맞는지 확인해줍니다.</p>
 </li>
 <li>
 <p>
 <a name="REGEXBS">
 </a>
 </p>
-<p>The backslash -- <span class="TOKEN">\</span> -- <a href="./escapingsection.html#ESCP">escapes</a> a special character, which
-              means that character gets interpreted literally (and is
-              therefore no longer <i class="FIRSTTERM">special</i>).</p>
-<p>A <span class="QUOTE">"\$"</span> reverts back to its
-	       literal meaning of <span class="QUOTE">"$"</span>, rather than its
-	       RE meaning of end-of-line. Likewise a <span class="QUOTE">"\\"</span>
-	       has the literal meaning of <span class="QUOTE">"\"</span>.</p>
+<p>역슬래쉬 -- 
+<span class="TOKEN">\
+</span> -- 는 특수문자를 
+<a href="./escapingsection.html#ESCP">이스케이프</a> , 즉 문자그대로 사용되게 해줍니다 
+(그리고 더이상 
+<i class="FIRSTTERM">특별한</i> 의미를 가지지 않습니다).</p>
+<p>
+<span class="QUOTE">"\$"</span> 는 
+<span class="QUOTE">"$"</span> 를, 정규표현식에서의 문자열의 끝이라는 의미가 아닌, 
+본래의 의미로 되돌려줍니다. 비슷하게 
+<span class="QUOTE">"\\"</span> 는 그냥 
+<span class="QUOTE">"\"</span> 문자 그 자체를 나타냅니다.</p>
 </li>
 <li>
 <p>
@@ -251,44 +248,38 @@ Expressions</td>
 </a>
 </p>
 <p>
-<a href="./escapingsection.html#ESCP">Escaped</a> <span class="QUOTE">"angle
-	      brackets"</span> -- <span class="TOKEN">\&lt;...\&gt;</span> -- mark word
-	      boundaries.</p>
-<p>The angle brackets must be escaped, since otherwise
-	      they have only their literal character meaning.</p>
+<a href="./escapingsection.html#ESCP">이스케이프</a> 된 
+<span class="QUOTE">"꺾인 괄호"</span> -- 
+<span class="TOKEN">\&lt;...\&gt;</span> -- 는 단어의 경계를 확인해줍니다.
+</p>
+<p>꺾인 괄호는 이스케이프되어야 합니다, 그렇지 않으면 문자 그대로의 의미만을 가집니다.
+</p>
 <p>
-<span class="QUOTE">"\&lt;the\&gt;"</span> matches the word
-	      <span class="QUOTE">"the,"</span> but not the words <span class="QUOTE">"them,"</span>
-	      <span class="QUOTE">"there,"</span> <span class="QUOTE">"other,"</span> etc.</p>
+<span class="QUOTE">"\&lt;the\&gt;"</span> 는 
+<span class="QUOTE">"them"</span>, 
+<span class="QUOTE">"there"</span>, 
+<span class="QUOTE">"other"</span> 등등 이 아닌, 
+<span class="QUOTE">"the"</span> 를 확인해줍니다.</p>
 <p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat textfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat textfile</b></tt>
 <tt class="COMPUTEROUTPUT">This is line 1, of which there is only one instance.
  This is the only instance of line 2.
  This is line 3, another line.
  This is line 4.</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep 'the' textfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep 'the' textfile</b></tt>
 <tt class="COMPUTEROUTPUT">This is line 1, of which there is only one instance.
  This is the only instance of line 2.
  This is line 3, another line.</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep '\&lt;the\&gt;' textfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '\&lt;the\&gt;' textfile</b></tt>
 <tt class="COMPUTEROUTPUT">This is the only instance of line 2.</tt>
 	      </pre>
 </font>
@@ -341,10 +332,7 @@ This line contains no numbers at all.       # No match.</pre>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep "1133*" tstfile</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep "1133*" tstfile</b></tt>
 <tt class="COMPUTEROUTPUT">Run   grep "1133*"  on this file.           # Match.
  This line contains the number 113.          # Match.
  This line contains the number 1133.         # Match.
@@ -371,9 +359,10 @@ This line contains no numbers at all.       # No match.</pre>
 <p>
 <b>
 <a name="EXTREGEX">
-</a>Extended REs. </b>Additional metacharacters added to the basic set. Used
-		in <a href="./textproc.html#EGREPREF">egrep</a>,
-		<a href="./awk.html#AWKREF">awk</a>, and <a href="./wrapper.html#PERLREF">Perl</a>.</p>
+</a>확장된 정규표현식. </b>기본 규칙에 메타 문자들을 더함.
+<a href="./textproc.html#EGREPREF">egrep</a>,
+<a href="./awk.html#AWKREF">awk</a>, 그리고 
+<a href="./wrapper.html#PERLREF">Perl</a> 에서 사용됩니다.</p>
 </div>
 </li>
 <li>
@@ -381,18 +370,22 @@ This line contains no numbers at all.       # No match.</pre>
 <a name="QUEXREGEX">
 </a>
 </p>
-<p>The question mark -- <span class="TOKEN">?</span> -- matches zero or
-	      one of the previous RE. It is generally used for matching
-	      single characters.</p>
+<p>물음표 -- 
+<span class="TOKEN">?</span> -- 앞에 나오는 정규표현식의 0개나 한개 이상의 것과 일치하는지 
+확인해줍니다. 보통 한개의 문자와 확인할 때 사용됩니다.
+</p>
 </li>
 <li>
 <p>
 <a name="PLUSREF">
 </a>
 </p>
-<p>The plus -- <span class="TOKEN">+</span> -- matches one or more of the
-	    previous RE. It serves a role similar to the <span class="TOKEN">*</span>, but
-	    does <em>not</em> match zero occurrences.</p>
+<p>더하기 -- 
+<span class="TOKEN">+</span> -- 앞에 나오는 정규표현식의 한개 이상의 것과 일치하는지 
+확인해줍니다. 
+<span class="TOKEN">*</span> 과 비슷하게 작동하지만, 하나도 없는 것을 확인해주지는 
+<em>않습니다</em>.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -421,16 +414,17 @@ echo a111b | gawk '/a1+b/'
 </li>
 <li>
 <p>
-<a href="./escapingsection.html#ESCP">Escaped</a> <span class="QUOTE">"curly
-	      brackets"</span> -- <span class="TOKEN">\{ \}</span> -- indicate the number
-	      of occurrences of a preceding RE to match.</p>
-<p>It is necessary to escape the curly brackets since
-	      they have only their literal character meaning
-	      otherwise. This usage is technically not part of the basic
-	      RE set.</p>
+<a href="./escapingsection.html#ESCP">이스케이프</a> 된 
+<span class="QUOTE">"중괄호</span> -- 
+<span class="TOKEN">\{ \}</span> -- 바로 앞에 나온 정규표현식으 빈도수를 나타냅니다.
+</p>
+<p>중괄호는 그 자체로 다른 의미를 가지고 있기 때문에 이스케이프를 꼭 해줘야합니다. 
+기술적으로 기본 정규표현식 중의 하나는 아닙니다.
+</p>
 <p>
-<span class="QUOTE">"[0-9]\{5\}"</span> matches exactly five digits
-	      (characters in the range of 0 to 9).</p>
+<span class="QUOTE">"[0-9]\{5\}"</span> 는 정확히 다섯자리 숫자 (0부터 9까지 범위내의 
+문자) 를 나타냅니다 
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -441,36 +435,37 @@ echo a111b | gawk '/a1+b/'
 <img src="x17129_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Curly brackets are not available as an RE in the
-	      <span class="QUOTE">"classic"</span> (non-POSIX compliant) version
-	      of <a href="./awk.html#AWKREF">awk</a>.
-	      <a name="GNUGAWK">
-</a>However, the GNU extended version
-	      of <i class="FIRSTTERM">awk</i>, <b class="COMMAND">gawk</b>,
-	      has the <tt class="OPTION">--re-interval</tt> option that permits
-	      them (without being escaped).</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>중괄호는 
+<a href="./awk.html#AWKREF">awk</a> 의 
+<span class="QUOTE">"전통적인"</span> (POSIX를 따르지 않는) 버전에서는 
+사용가능하지 않습니다. 
+<a name="GNUGAWK">
+</a>하지만, 
+<i class="FIRSTTERM">awk</i> 의 GNU 확장 버전인, 
+<b class="COMMAND">gawk</b> 에서는 
+<tt class="OPTION">--re-interval</tt> 옵션으로 (이스케이프 없이) 사용할 수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo 2222 | gawk --re-interval '/2{3}/'</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo 2222 | gawk --re-interval '/2{3}/'</b></tt>
 <tt class="COMPUTEROUTPUT">2222</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
+</p>
 <p>
-<b class="COMMAND">Perl</b> and some
-	      <b class="COMMAND">egrep</b> versions do not require escaping
-	      the curly brackets.</p>
+<b class="COMMAND">Perl</b> 과 어떤 
+<b class="COMMAND">egrep</b> 버전에서는 중괄호를 이스케이프 시킬 필요없습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -482,32 +477,40 @@ echo a111b | gawk '/a1+b/'
 <a name="PARENGRPS">
 </a>
 </p>
-<p>Parentheses -- <b class="COMMAND">( )</b> -- enclose a group of
-	      REs. They are useful with the following
-	      <span class="QUOTE">"<span class="TOKEN">|</span>"</span> operator and in <a href="./string-manipulation.html#EXPRPAREN">substring extraction</a> using <a href="./moreadv.html#EXPRREF">expr</a>.</p>
+<p>소괄호 -- 
+<b class="COMMAND">( )</b> -- 정규표현식의 묶음을 둘러쌉니다. 
+<span class="QUOTE">"
+<span class="TOKEN">|
+</span>"
+</span> 연산자와 함께 쓰거나 
+<a href="./moreadv.html#EXPRREF">expr</a> 를 사용한 
+<a href="./string-manipulation.html#EXPRPAREN">부분문자열 확장</a> 안에서 쓰면 유용합니다.
+</p>
 </li>
 <li>
-<p>The -- <b class="COMMAND">|</b> -- <span class="QUOTE">"or"</span> RE operator
-	      matches any of a set of alternate characters.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<span class="QUOTE">"또는"</span>
+-- <b class="COMMAND">|</b> --  정규표현식은 가능한 문자들 중 어떤 것과도 일치하는지 
+확인합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>egrep 're(a|e)d' misc.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>egrep 're(a|e)d' misc.txt</b></tt>
 <tt class="COMPUTEROUTPUT">People who read seem to be better informed than those who do not.
  The clarinet produces sound by the vibration of its reed.</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	      </p>
+</p>
 </li>
 </ul>
 <div class="NOTE">
@@ -520,10 +523,12 @@ echo a111b | gawk '/a1+b/'
 <img src="x17129_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Some versions of <b class="COMMAND">sed</b>,
-	      <b class="COMMAND">ed</b>, and <b class="COMMAND">ex</b> support
-	      escaped versions of the extended Regular Expressions
-	      described above, as do the GNU utilities.</p>
+<p>어떤 
+<b class="COMMAND">sed</b>,
+<b class="COMMAND">ed</b>, 그리고 
+<b class="COMMAND">ex</b> 버전에서는 GNU 유틸리티와 같이, 위에 나온 확장된 정규표현식의 
+이스케이프된 버전을 지원합니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -537,90 +542,87 @@ echo a111b | gawk '/a1+b/'
 <p>
 <b>
 <a name="POSIXREF">
-</a>POSIX Character Classes. </b>
+</a>POSIX 문자 분류.</b>
 <tt class="USERINPUT">
 <b>[:class:]</b>
 </tt>
 </p>
 </div>
-<p>This is an alternate method of specifying a range of
-	      characters to match.</p>
+<p>는 일치하는 문자의 번위를 지정하는 다른 방법입니다.
+</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:alnum:]</b>
-</tt> matches alphabetic or
-	      numeric characters. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> 알파벳이나 숫자와 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>A-Za-z0-9</b>
-</tt>.</p>
+</tt> 과 같습니다.</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:alpha:]</b>
-</tt> matches alphabetic
-	      characters. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> 알파벳과 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>A-Za-z</b>
-</tt>.</p>
+</tt> 과 같습니다.</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:blank:]</b>
-</tt> matches a space or a
-	      tab.</p>
+</tt> 빈칸이나 탭과 일치함을 나타냅니다.
+</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:cntrl:]</b>
-</tt> matches control
-	      characters.</p>
+</tt> 제어 문자들과 일치함을 나타냅니다.
+</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:digit:]</b>
-</tt> matches (decimal)
-	      digits. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> (십진) 숫자들과 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>0-9</b>
-</tt>.</p>
+</tt> 과 같습니다.</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:graph:]</b>
-</tt> (graphic printable
-		    characters). Matches characters in the range of <a href="./special-chars.html#ASCIIDEF">ASCII</a> 33 - 126. This is
-		    the same as <tt class="USERINPUT">
+</tt> (출력 가능한 그래픽 문자들). 
+<a href="./special-chars.html#ASCIIDEF">ASCII</a> 33 - 126 의 범위 안에 있는 문자들과 
+일치함을 나타냅니다. 이것은 빈칸 문자가 포함되지 않는다는 것을 제외하면 아래의 
+<tt class="USERINPUT">
 <b>[:print:]</b>
-</tt>, below,
-		    but excluding the space character.</p>
+</tt> 와 같습니다.
+</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:lower:]</b>
-</tt> matches lowercase
-	      alphabetic characters. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> 소문자 알파벳과 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>a-z</b>
-</tt>.</p>
+</tt> 와 같습니다.</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:print:]</b>
-</tt> (printable
-	      characters). Matches characters in the range of ASCII 32 -
-	      126. This is the same as <tt class="USERINPUT">
+</tt> (출력 가능한 문자들). ASCII 32 - 126 범위의 문자와 일치함을 나타냅니다. 이것은 
+빈칸을 포함한다는 것으르 제외하면, 위에서 설명한 
+<tt class="USERINPUT">
 <b>[:graph:]</b>
-</tt>,
-	      above, but adding the space character.</p>
+</tt> 와 같습니다.
+</p>
 </li>
 <li>
 <p>
@@ -628,29 +630,26 @@ echo a111b | gawk '/a1+b/'
 </a>
 <tt class="USERINPUT">
 <b>[:space:]</b>
-</tt>
-	      matches whitespace characters (space and horizontal
-	      tab).</p>
+</tt> 공백 (스페이스와 수직 탭) 과 일치함을 나타냅니다.
+</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:upper:]</b>
-</tt> matches uppercase
-	      alphabetic characters. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> 대문자 알파벳과 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>A-Z</b>
-</tt>.</p>
+</tt> 와 같습니다.</p>
 </li>
 <li>
 <p>
 <tt class="USERINPUT">
 <b>[:xdigit:]</b>
-</tt> matches hexadecimal
-	      digits. This is equivalent to
-	      <tt class="USERINPUT">
+</tt> 16진수와 일치함을 나타냅니다. 이것은 
+<tt class="USERINPUT">
 <b>0-9A-Fa-f</b>
-</tt>.</p>
+</tt> 와 같습니다.</p>
 <div class="IMPORTANT">
 <p>
 </p>
@@ -661,32 +660,31 @@ echo a111b | gawk '/a1+b/'
 <img src="x17129_files/important.gif" alt="Important" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>POSIX character classes generally require quoting
-	      or <a href="./testconstructs.html#DBLBRACKETS">double brackets</a>
-	      ([[ ]]).</p>
+<p>POSIX 문자 분류는 일반적으로 인용부호나 
+<a href="./testconstructs.html#DBLBRACKETS">이중 대괄호</a> ([[ ]]) 를 해줘야 합니다.
+</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep [[:digit:]] test.file</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep [[:digit:]] test.file</b></tt>
 <tt class="COMPUTEROUTPUT">abc=723</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -704,44 +702,48 @@ then       #  POSIX char class
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>These character classes may even be used with <a href="./globbingref.html">globbing</a>, to a limited
-	      extent.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>이 문자 분류들은 제한된 확장 형태로 
+<a href="./globbingref.html">globbing</a> 할 때에도 쓰일 수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -l ?[[:digit:]][[:digit:]]?</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l ?[[:digit:]][[:digit:]]?</b></tt>
 <tt class="COMPUTEROUTPUT">-rw-rw-r--    1 bozo  bozo         0 Aug 21 14:47 a33b</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>POSIX character classes are used in
-	      <a href="./textproc.html#EX49">Example 16-21</a> and <a href="./textproc.html#LOWERCASE">Example 16-22</a>.</p>
+</p>
+<p>POSIX 문자 분류는 
+<a href="./textproc.html#EX49">예제 16-21</a> 와 
+<a href="./textproc.html#LOWERCASE">예제 16-22</a> 에도 쓰였습니다.</p>
 </li>
 </ul>
-<p>
-<a href="./sedawk.html#SEDREF">Sed</a>, <a href="./awk.html#AWKREF">awk</a>, and <a href="./wrapper.html#PERLREF">Perl</a>, used as filters in scripts, take
-	  REs as arguments when "sifting" or transforming files or I/O
-	  streams. See <a href="./contributed-scripts.html#BEHEAD">Example A-12</a> and <a href="./contributed-scripts.html#TREE">Example A-16</a>
-	  for illustrations of this.</p>
-<p>The standard reference on this complex topic is Friedl's
-	  <i class="CITETITLE">Mastering Regular
-	  Expressions</i>. <i class="CITETITLE">Sed &amp;
-	  Awk</i>, by Dougherty and Robbins, also gives a very
-	  lucid treatment of REs. See the <a href="./biblio.html">
+<p>스크립트에서 필터로 쓰이는, 
+<a href="./sedawk.html#SEDREF">Sed</a>, 
+<a href="./awk.html#AWKREF">awk</a>, 그리고 
+<a href="./wrapper.html#PERLREF">Perl</a> 는 파일이나 입출력 흐름을 "걸러내"거나, 
+변화시킬 때 정규표현식을 인자로서 사용합니다. 이해를 위해서는 
+<a href="./contributed-scripts.html#BEHEAD">예제 A-12</a> 그리고 
+<a href="./contributed-scripts.html#TREE">에제 A-16</a> 를 참고하십시요.
+</p>
+<p>이 복잡한 주제를 위한 일반적인 레퍼런스로는 
+<i class="CITETITLE">Mastering Regular Expressions</i> 가 있습니다. 
+<i class="CITETITLE">Sed &amp; Awk</i>, by Dougherty and Robbins 도 
+정규표현식에 관한 명쾌한 답을 줄 것입니다. 이 책들에 관한 더 많은 정보는 
+<a href="./biblio.html">
 <i>Bibliography</i>
-</a> for
-	  more information on these books.</p>
+</a> 를 참고하십시요.
+</p>
 </div>
 <h3 class="FOOTNOTES">Notes</h3>
 <table class="FOOTNOTES" border="0" width="100%">
