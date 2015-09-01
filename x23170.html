@@ -93,28 +93,28 @@
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">[주소-범위]/p</tt>
 </td>
-<td align="LEFT" valign="TOP">print</td>
+<td align="LEFT" valign="TOP">출력 (print)</td>
 <td align="LEFT" valign="TOP">[주어진 주소 범위] 출력</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">[주소-범위]/d</tt>
 </td>
-<td align="LEFT" valign="TOP">delete</td>
+<td align="LEFT" valign="TOP">삭제 (delete)</td>
 <td align="LEFT" valign="TOP">[주어진 주서 범위] 삭제</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/pattern1/pattern2/</tt>
 </td>
-<td align="LEFT" valign="TOP">substitute</td>
+<td align="LEFT" valign="TOP">치환 (substitute)</td>
 <td align="LEFT" valign="TOP">한 줄에서 처음 나타나는 pattern1 을 pattern2로 치환</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">[주소-범위]/s/pattern1/pattern2/</tt>
 </td>
-<td align="LEFT" valign="TOP">substitute</td>
+<td align="LEFT" valign="TOP">치환 (substitute)</td>
 <td align="LEFT" valign="TOP">
 <tt class="REPLACEABLE">
 <i>주소-범위</i>
@@ -124,7 +124,7 @@
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">[주소-범위]/y/pattern1/pattern2/</tt>
 </td>
-<td align="LEFT" valign="TOP">transform</td>
+<td align="LEFT" valign="TOP">교체 (transform)</td>
 <td align="LEFT" valign="TOP">
 <tt class="REPLACEABLE">
 <i>주소-범위</i>
@@ -137,7 +137,7 @@
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">[주소] i pattern Filename</tt>
 </td>
-<td align="LEFT" valign="TOP">insert</td>
+<td align="LEFT" valign="TOP">삽입 (insert)</td>
 <td align="LEFT" valign="TOP">Filename 의 파일에 지정된 주소에 패턴을 입력하기. 
 일반적으로 
 <tt class="OPTION">-i</tt>
@@ -149,7 +149,7 @@
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">g</tt>
 </td>
-<td align="LEFT" valign="TOP">global</td>
+<td align="LEFT" valign="TOP">전역 (global)</td>
 <td align="LEFT" valign="TOP">입력된 줄에서 일치하는 각 줄에 발생하는 
 <em>모든</em> 패턴에 대해 동작함
 </td>
@@ -167,18 +167,21 @@
 <img src="x23170_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Unless the <tt class="OPTION">g</tt>
-	(<i class="FIRSTTERM">global</i>) operator is appended to a
-	<i class="FIRSTTERM">substitute</i> command, the substitution
-	operates only on the <em>first</em> instance of a
-	pattern match within each line.</p>
+<p>
+<i class="FIRSTTERM">치환 (substitute)</i> 명령어에 
+<tt class="OPTION">g</tt>
+(<i class="FIRSTTERM">전역</i>) 연산자가 없으면, 치환 연산은 
+각 라인에서 패턴에 맞는 
+<em>첫번째</em> 부분만 치환됩니다.
+</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>From the command-line and in a shell script, a sed operation may
-       require quoting and certain options.</p>
+<p>명령어 라인과 쉘 스크립트에서 sed 를 쓸 때에는 인용과 몇가지 옵션이 필요할 수도 
+있습니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -199,8 +202,9 @@
 </tbody>
 </table>
 </p>
-<p>In certain cases, a <i class="FIRSTTERM">sed</i> editing command will
-         not work with single quotes.</p>
+<p>어떤 경우에는 
+<i class="FIRSTTERM">sed</i> 편집 명령어는 단일 인용부호로는 작동 안 할 수도 있습니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -231,10 +235,9 @@ pattern=BEGIN
 </td>
 <td align="LEFT" valign="TOP">
 <p>
-<i class="FIRSTTERM">Sed</i> uses the <tt class="OPTION">-e</tt>
-	 option to specify that the following string is an instruction
-	 or set of instructions. If there is only a single instruction
-	 contained in the string, then this may be omitted.</p>
+<i class="FIRSTTERM">Sed</i> 는 뒤따라오는 문자열이 지시 혹은 지시 묶음임을 지정할 때에 
+<tt class="OPTION">-e</tt> 를 사용합니다. 문자열에 하나의 지시만 있다면, 생략될 수도 있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -264,7 +267,7 @@ pattern=BEGIN
 <a name="AEN23271">
 </a>
 <p>
-<b>Table C-2. Examples of sed operators</b>
+<b>표 C-2. sed 연산 예제</b>
 </p>
 <table class="CALSTABLE" border="1">
 <thead>
@@ -278,127 +281,127 @@ pattern=BEGIN
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">8d</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete 8th line of input.</td>
+<td align="LEFT" valign="TOP">입력의 8번째 줄 지우기.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">/^$/d</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete all blank lines.</td>
+<td align="LEFT" valign="TOP">빈 줄 지우기.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">1,/^$/d</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete from beginning of input up to, and including
-	        first blank line.</td>
+<td align="LEFT" valign="TOP">입력의 첫줄부터 처음 나타나는 빈 줄까지 지우기.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">/Jones/p</tt>
 </td>
-<td align="LEFT" valign="TOP">Print only lines containing <span class="QUOTE">"Jones"</span> (with
-	        <span class="TOKEN">-n</span> option).</td>
+<td align="LEFT" valign="TOP">
+<span class="QUOTE">"Jones"</span> 을 포함하는 줄만 출력 (
+<span class="TOKEN">-n</span> 옵션을 사용해서).</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/Windows/Linux/</tt>
 </td>
-<td align="LEFT" valign="TOP">Substitute <span class="QUOTE">"Linux"</span> for first instance
-	        of <span class="QUOTE">"Windows"</span> found in each input line.</td>
+<td align="LEFT" valign="TOP">입력된 각각의 줄에서 첫번째 
+<span class="QUOTE">"Windows"</span> 를 
+<span class="QUOTE">"Linux"</span> 로 치환함.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/BSOD/stability/g</tt>
 </td>
-<td align="LEFT" valign="TOP">Substitute <span class="QUOTE">"stability"</span> for every instance
-	        of <span class="QUOTE">"BSOD"</span> found in each input line.</td>
+<td align="LEFT" valign="TOP">입력된 각각의 줄에서 모든 
+<span class="QUOTE">"BSOD"</span> 를 
+<span class="QUOTE">"stability"</span> 로 치환함.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/ *$//</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete all spaces at the end of every line.</td>
+<td align="LEFT" valign="TOP">모든 줄의 끝에 있는 모든 빈칸을 삭제함.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/00*/0/g</tt>
 </td>
-<td align="LEFT" valign="TOP">Compress all consecutive sequences of zeroes into
-	        a single zero.</td>
+<td align="LEFT" valign="TOP">연속된 0 을 하나의 0 으로 압축합니다.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">echo "Working on it." | sed -e '1i How far are you along?'</tt>
 </td>
-<td align="LEFT" valign="TOP">Prints "How far are you along?" as first line,
-                    "Working on it" as second.</td>
+<td align="LEFT" valign="TOP">첫번째 줄에 "How far are you along?" 라고 출력하고, 
+두번째 줄에 "Working on it" 이라고 출력합니다.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">5i 'Linux is great.' file.txt</tt>
 </td>
-<td align="LEFT" valign="TOP">Inserts 'Linux is great.' at line 5 of the file
-	      file.txt.</td>
+<td align="LEFT" valign="TOP">file.txt 파일의 5번째 줄에 'Linux is great.' 이라고 
+삽입합니다.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">/GUI/d</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete all lines containing <span class="QUOTE">"GUI"</span>.</td>
+<td align="LEFT" valign="TOP">
+<span class="QUOTE">"GUI"</span> 가 포함되어 있는 모든 줄을 지웁니다.</td>
 </tr>
 <tr>
 <td align="LEFT" valign="TOP">
 <tt class="OPTION">s/GUI//g</tt>
 </td>
-<td align="LEFT" valign="TOP">Delete all instances of <span class="QUOTE">"GUI"</span>, leaving the 
-	        remainder of each line intact.</td>
+<td align="LEFT" valign="TOP">모든 
+<span class="QUOTE">"GUI"</span> 만 지우고, 나머지는 그대로 둡니다.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Substituting a zero-length string for another is equivalent
-       to deleting that string within a line of input. This leaves the
-       remainder of the line intact. Applying <tt class="USERINPUT">
-<b>s/GUI//</b>
-</tt>   
-       to the line
-       <table bgcolor="#E0E0E0" border="1" width="100%">
+<p>어떤 문자열을 길이가 0인 문자열로 치환하는 것은 그 줄에서 그 문자열을 지우는 
+것과 같습니다. 이렇게 하면 그 줄의 나머지 부분을 그대로 두게 됩니다. 
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
-<font color="#000000">
-<pre class="SCREEN">
+<font color="#000000"><pre class="SCREEN"><tt class="USERINPUT"><b>The most 
+important parts of any application are its GUI and sound effects</b>
+</tt></pre>
+</font>
+</td>
+</tr>
+</tbody>
+</table>
+에 
 <tt class="USERINPUT">
-<b>The most important parts of any application are its GUI and sound effects</b>
-</tt>
-</pre>
-</font>
-</td>
-</tr>
-</tbody>
-</table>
-       results in
-       <table bgcolor="#E0E0E0" border="1" width="100%">
+<b>s/GUI//</b>
+</tt> 를 하게 되면, 
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="COMPUTEROUTPUT">The most important parts of any application are its  and sound effects</tt>
+<tt class="COMPUTEROUTPUT">The most important parts of any application are 
+its  and sound effects</tt>
 </pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
+라는 결과를 얻게 됩니다.
 </p>
-<p>A backslash forces the <b class="COMMAND">sed</b> replacement
-       command to continue on to the next line. This has the effect of
-       using the <i class="FIRSTTERM">newline</i> at the end of the first
-       line as the <i class="FIRSTTERM">replacement string</i>.
-
-       <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>역슬래쉬는 
+<b class="COMMAND">sed</b> 교체 명령어가 다음 줄에 계속되도록 만듭니다. 
+이것은 첫번째 줄의 끝의 
+<i class="FIRSTTERM">새줄</i> 을 
+<i class="FIRSTTERM">교체 문자열</i> 로 사용하는 효과를 갖습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -409,14 +412,12 @@ pattern=BEGIN
 </td>
 </tr>
 </tbody>
-</table>
-
-       This substitution replaces line-beginning spaces with a
-       newline. The net result is to replace paragraph indents with a
-       blank line between paragraphs.</p>
-<p>An address range followed by one or more operations may require
-       open and closed curly brackets, with appropriate newlines. 
-       <table bgcolor="#E0E0E0" border="0" width="100%">
+</table>이 치환은 라인이 시작하는 곳에 있는 빈칸을 새줄로 바꿉니다. 연결된 
+결과는 단락사이에 단락 구분을 빈칸으로 바꿉니다.
+</p>
+<p>하나나 그 이상의 연산자들이 뒤에 오는 주소 범위는, 적당한 새줄이 들어간, 
+중괄호가 필요할 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -428,10 +429,9 @@ pattern=BEGIN
 </td>
 </tr>
 </tbody>
-</table>
-       This deletes only the first of each set of consecutive blank
-       lines. That might be useful for single-spacing a text file,
-       but retaining the blank line(s) between paragraphs.</p>
+</table> 위 표현은 연속된 빈 줄의 각각의 맨 앞만 지웁니다. 이것은 한줄 띄기로 
+되어있는 텍스트에 유용할 수 있습니다, 하지만 문단 사이의 빈 줄은 남겨놓습니다.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -442,11 +442,15 @@ pattern=BEGIN
 <img src="x23170_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The usual delimiter that <i class="FIRSTTERM">sed</i> uses is
-      <span class="TOKEN">/</span>. However, <em>sed</em> allows other
-      delimiters, such as <span class="TOKEN">%</span>. This is useful when
-      <span class="TOKEN">/</span> is part of a replacement string, as in a file pathname.
-      See <a href="./loops1.html#FINDSTRING">Example 11-10</a> and <a href="./filearchiv.html#STRIPC">Example 16-32</a>.</p>
+<p>
+<i class="FIRSTTERM">sed</i> 가 주로 사용하는 분리자는 
+<span class="TOKEN">/</span> 입니다. 하지만, 
+<em>sed</em> 는 
+<span class="TOKEN">%</span> 와 같은 다른 분리자를 사용할 수도 있습니다. 이것은 
+교체하고자 하는 문자열에 
+<span class="TOKEN">/</span> 이 들어있을 때 유용합니다. 
+<a href="./loops1.html#FINDSTRING">예제 11-10</a> 와 
+<a href="./filearchiv.html#STRIPC">Example 16-32</a> 를 참고하십시요.</p>
 </td>
 </tr>
 </tbody>
@@ -466,17 +470,17 @@ pattern=BEGIN
 <img src="x23170_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>A quick way to double-space a text file is <tt class="USERINPUT">
-<b>sed G
-       filename</b>
-</tt>.</p>
+<p>텍스트에 두줄을 넣는 빠른 방법은 
+<tt class="USERINPUT">
+<b>sed G filename</b> 
+</tt>입니다.</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>For illustrative examples of sed within shell scripts, see:
-       </p>
+<p>쉘 스크립트에서 sed 의 자세한 사용예는 다음을 참고하십시요:
+</p>
 <p>
 </p>
 <ol type="1">
@@ -598,11 +602,12 @@ pattern=BEGIN
 </ol>
      <p>
 </p>
-<p>For a more extensive treatment of <i class="FIRSTTERM">sed</i>,
-        refer to the <a href="./biblio.html#DGSEDREF">pertinent references</a>
-        in the <a href="./biblio.html">
+<p>
+<i class="FIRSTTERM">sed</i> 의 좀더 확장된 사용법은, 
+<a href="./biblio.html">
 <i>Bibliography</i>
-</a>.</p>
+</a> 에 있는 
+<a href="./biblio.html#DGSEDREF">pertinent references</a> 를 참고하십시요.</p>
 </div>
 <h3 class="FOOTNOTES">Notes</h3>
 <table class="FOOTNOTES" border="0" width="100%">
@@ -615,8 +620,8 @@ pattern=BEGIN
 </td>
 <td align="LEFT" valign="TOP" width="95%">
 <p>
-<i class="FIRSTTERM">Sed</i> executes without
-          user intervention.</p>
+<i class="FIRSTTERM">Sed</i> 는 사용자의 개입없이 작동합니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -626,8 +631,9 @@ pattern=BEGIN
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>If no address range is specified, the default
-	  is <em>all</em> lines.</p>
+<p>주소 범위가 지정되지 않으면, 
+<em>모든</em> 줄들이 기본값입니다.
+</p>
 </td>
 </tr>
 </tbody>
