@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>Operators</title>
+<title>연산자들</title>
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
 <link rel="UP" title="Operations and Related Topics" href="./operations.html">
@@ -20,11 +20,11 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./operations.html" accesskey="P">Prev</a>
+<a href="./operations.html" accesskey="P">이전</a>
 </td>
-<td align="center" valign="bottom" width="80%">Chapter 8. Operations and Related Topics</td>
+<td align="center" valign="bottom" width="80%">8장. 연산자와 관련된 주제들</td>
 <td align="right" valign="bottom" width="10%">
-<a href="./numerical-constants.html" accesskey="N">Next</a>
+<a href="./numerical-constants.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -34,35 +34,35 @@
 <div class="SECT1">
 <h1 class="SECT1">
 <a name="OPS">
-</a>8.1. Operators</h1>
+</a>8.1. 연산자들</h1>
 <p>
 </p>
 <div class="VARIABLELIST">
 <p>
 <b>
 <a name="ASNOP1">
-</a>assignment</b>
+</a>할당</b>
 </p>
 <dl>
 <dt>
 <tt class="REPLACEABLE">
-<i>variable assignment</i>
+<i>변수 할당</i>
 </tt>
 </dt>
 <dd>
-<p>Initializing or changing the value of a variable</p>
+<p>변수값을 초기화하거나 값을 변경하기</p>
 </dd>
 <dt>=</dt>
 <dd>
-<p>All-purpose assignment operator, which works for both
-	    arithmetic and string assignments.</p>
-<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>산술식과 문자열 할당을 해주는 다기능 할당 연산자.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="PROGRAMLISTING">var=27
-category=minerals  # No spaces allowed after the "=".</pre>
+category=minerals  # "=" 다음에 빈칸이 들어가면 안됩니다.</pre>
 </font>
 </td>
 </tr>
@@ -79,15 +79,17 @@ category=minerals  # No spaces allowed after the "=".</pre>
 <img src="ops_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Do not confuse the <span class="QUOTE">"="</span> assignment
-	      operator with the <a href="./comparison-ops.html#EQUALSIGNREF">= test
-	      operator</a>.</p>
-<p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<span class="QUOTE">"="</span> 할당 연산자와 
+<a href="./comparison-ops.html#EQUALSIGNREF">= 테스트 연산자</a> 를 헷갈리면 
+안됩니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
-<pre class="PROGRAMLISTING">#   =  as a test operator
+<pre class="PROGRAMLISTING"># 아래의  = 는 테스트 연산자입니다.
 
 if [ "$string1" = "$string2" ]
 then
@@ -117,32 +119,32 @@ fi
 <p>
 <b>
 <a name="AROPS1">
-</a>arithmetic operators</b>
+</a>산술 연산자들</b>
 </p>
 <dl>
 <dt>
 <span class="TOKEN">+</span>
 </dt>
 <dd>
-<p>plus</p>
+<p>더하기</p>
 </dd>
 <dt>
 <span class="TOKEN">-</span>
 </dt>
 <dd>
-<p>minus</p>
+<p>빼기</p>
 </dd>
 <dt>
 <span class="TOKEN">*</span>
 </dt>
 <dd>
-<p>multiplication</p>
+<p>곱하기</p>
 </dd>
 <dt>
 <span class="TOKEN">/</span>
 </dt>
 <dd>
-<p>division</p>
+<p>나누기</p>
 </dd>
 <dt>
 <a name="EXPONENTIATIONREF">
@@ -150,8 +152,9 @@ fi
 <span class="TOKEN">**</span>
 </dt>
 <dd>
-<p>exponentiation</p>
-<p>	    <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>누승</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -205,7 +208,7 @@ echo "z = $z"   # z = 125</pre>
 <a name="GCD">
 </a>
 <p>
-<b>Example 8-1. 최대 공약수</b>
+<b>예제 8-1. 최대 공약수</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -289,71 +292,68 @@ exit 0</pre>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">plus-equal</i> (increment variable
-            by a constant)
-
-            <a name="AEN3907" href="#FTN.AEN3907">
+<i class="FIRSTTERM">더하고-할당</i> (상수값만큼 증가)
+<a name="AEN3907" href="#FTN.AEN3907">
 <span class="footnote">[1]</span>
 </a>
 
-	    </p>
+</p>
 <p>
 <tt class="USERINPUT">
 <b>let "var += 5"</b>
-</tt> results in
-	      <tt class="PARAMETER">
+</tt> 은
+<tt class="PARAMETER">
 <i>var</i>
-</tt> being incremented by
-	      <tt class="LITERAL">5</tt>.</p>
+</tt> 를 
+<tt class="LITERAL">5</tt> 만큼 증가시킵니다.</p>
 </dd>
 <dt>
 <span class="TOKEN">-=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">minus-equal</i> (decrement
-	    variable by a constant)</p>
+<i class="FIRSTTERM">빼고-할당</i> (상수값만큼 감소)</p>
 </dd>
 <dt>
 <span class="TOKEN">*=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">times-equal</i> (multiply
-	    variable by a constant)</p>
+<i class="FIRSTTERM">곱하고-할당</i> (상수값만큼 곱)</p>
 <p>
 <tt class="USERINPUT">
 <b>let "var *= 4"</b>
-</tt> results in <tt class="PARAMETER">
+</tt> 는 
+<tt class="PARAMETER">
 <i>var</i>
-</tt>
-	    being multiplied by <tt class="LITERAL">4</tt>.</p>
+</tt> 를 
+<tt class="LITERAL">4</tt> 만큼 곱합니다.</p>
 </dd>
 <dt>
 <span class="TOKEN">/=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">slash-equal</i> (divide
-	    variable by a constant)</p>
+<i class="FIRSTTERM">나누고-할당</i> (상수값만큼 나눔)</p>
 </dd>
 <dt>
 <span class="TOKEN">%=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">mod-equal</i>
-	    (<i class="FIRSTTERM">remainder</i>
-	    of dividing variable by a constant)</p>
+<i class="FIRSTTERM">나머지-할당</i> (상수값으로 나눈 
+<i class="FIRSTTERM">나머지</i>)</p>
 <p>
-<em>Arithmetic operators often occur in an
-        <a href="./moreadv.html#EXPRREF">expr</a> or <a href="./internal.html#LETREF">let</a> expression.</em>
+<em>산술 연산자들은 
+<a href="./moreadv.html#EXPRREF">expr</a> 나 
+<a href="./internal.html#LETREF">let</a> 표현식에서 종종 나타납니다.
+</em>
 </p>
 <div class="EXAMPLE">
 <a name="ARITHOPS">
 </a>
 <p>
-<b>Example 8-2. Using Arithmetic Operations</b>
+<b>예제 8-2. 산술 연산자 사용하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -435,11 +435,12 @@ exit 0</pre>
 <img src="ops_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Integer variables in older versions of Bash were signed
-	<i class="FIRSTTERM">long</i> (32-bit) integers, in the range of
-	-2147483648 to 2147483647. An operation that took a variable
-	outside these limits gave an erroneous result.</p>
-<p>	  <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>구 버전 Bash 에서는 정수값 변수를 
+<i class="FIRSTTERM">long</i> (32-bit) 정수, -2147483648 부터 2147483647 까지의 범위, 
+에 할당했습니다. 이 범위를 벗어난 변수로 연산을 하게 되면 잘못된 결과를 줍니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -460,8 +461,8 @@ echo "a = $a"        # a = -2147483648
 </tr>
 </tbody>
 </table>
-	</p>
-<p>As of version &gt;= 2.05b, Bash supports 64-bit integers.</p>
+</p>
+<p>2.05b 버전 이상부턴, Bash 는 64-bit 정수를 지원합니다.</p>
 </td>
 </tr>
 </tbody>
@@ -481,9 +482,10 @@ echo "a = $a"        # a = -2147483648
 <a name="NOFLOATINGPOINT">
 </a>
 </p>
-<p>Bash does not understand floating point arithmetic. It
-        treats numbers containing a decimal point as strings.</p>
-<p>        <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>Bash 는 소수점 계산을 이해하지 못합니다. 소수는 문자열로 취급합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -500,9 +502,10 @@ echo "b = $b"       # b=1</pre>
 </tr>
 </tbody>
 </table>
-      </p>
-<p>Use <a href="./mathc.html#BCREF">bc</a> in scripts that that need floating
-	point calculations or math library functions.</p>
+</p>
+<p>스크립트에서 부동소수점 계산이나 수학 라이브러리 함수를 사용해야할 필요가 있으면 
+<a href="./mathc.html#BCREF">bc</a> 를 사용하십시요.
+</p>
 </td>
 </tr>
 </tbody>
@@ -510,15 +513,16 @@ echo "b = $b"       # b=1</pre>
 </div>
 <div class="FORMALPARA">
 <p>
-<b>bitwise operators. </b>The bitwise operators seldom make an appearance in shell scripts.
-	Their chief use seems to be manipulating and testing values read
-	from ports or <a href="./devref1.html#SOCKETREF">sockets</a>. <span class="QUOTE">"Bit
-	flipping"</span> is more relevant to compiled languages, such
-	as C and C++, which provide direct access to system
-	hardware. However, see <em>vladz's</em>
-	ingenious use of bitwise operators in his
-	<i class="FIRSTTERM">base64.sh</i> (<a href="./contributed-scripts.html#BASE64">Example A-54</a>)
-	script. </p>
+<b>비트 연산자.</b> 비트 연산자는 쉘 스크립트에서 자주 쓰이지 않습니다. 이런 연산자들은 
+주로 포트나 
+<a href="./devref1.html#SOCKETREF">소켓</a> 에서 읽은 값을 조작하고 테스트하는데 쓰입니다. 
+<span class="QUOTE">"비트 조작 (Bit flipping)"</span> 은, C 와 C++, 같은 시스템 하드웨어에 
+직접 접속할 수 있는 컴파일 언어에 더 적합합니다. 하지만 
+<em>vladz's</em> 의 
+<i class="FIRSTTERM">base64.sh</i> (
+<a href="./contributed-scripts.html#BASE64">예제 A-54</a>) 에서 독창적인 비트 조작 
+스크립트를 볼 수 있습니다.
+</p>
 </div>
 <p>
 </p>
@@ -526,89 +530,94 @@ echo "b = $b"       # b=1</pre>
 <p>
 <b>
 <a name="BITWSOPS1">
-</a>bitwise operators</b>
+</a>비트 연산자들</b>
 </p>
 <dl>
 <dt>
 <span class="TOKEN">&lt;&lt;</span>
 </dt>
 <dd>
-<p>bitwise left shift (multiplies by <tt class="LITERAL">2</tt>
-	      for each shift position)</p>
+<p>비트 왼쪽 이동 (이동 한번당 
+<tt class="LITERAL">2</tt> 로 곱하는 것과 동일함)
+</p>
 </dd>
 <dt>
 <span class="TOKEN">&lt;&lt;=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">left-shift-equal</i>
+<i class="FIRSTTERM">왼쪽 이동-할당-왼쪽 이동</i>
 </p>
 <p>
 <tt class="USERINPUT">
 <b>let "var &lt;&lt;= 2"</b>
-</tt> results in <tt class="PARAMETER">
+</tt> 는 
+<tt class="PARAMETER">
 <i>var</i>
-</tt>
-	    left-shifted <tt class="LITERAL">2</tt> bits (multiplied by <tt class="LITERAL">4</tt>)</p>
+</tt> 를 
+<tt class="LITERAL">2</tt> bit 만큼 왼쪽 이동합니다. (
+<tt class="LITERAL">4</tt> 로 곱하는 것과 동일함)</p>
 </dd>
 <dt>
 <span class="TOKEN">&gt;&gt;</span>
 </dt>
 <dd>
-<p>bitwise right shift (divides by <tt class="LITERAL">2</tt>
-	      for each shift position)</p>
+<p>비트 오른쪽 이동 (이동 한번당 
+<tt class="LITERAL">2</tt> 로 나누는 것과 동일함)
+</p>
 </dd>
 <dt>
 <span class="TOKEN">&gt;&gt;=</span>
 </dt>
 <dd>
 <p>
-<i class="FIRSTTERM">right-shift-equal</i>
-	    (inverse of <span class="TOKEN">&lt;&lt;=</span>)</p>
+<i class="FIRSTTERM">오른쪽 이동-할당-오른쪽 이동</i> (
+<span class="TOKEN">&lt;&lt;=</span> 의 반대)
+</p>
 </dd>
 <dt>
 <span class="TOKEN">&amp;</span>
 </dt>
 <dd>
-<p>bitwise AND</p>
+<p>비트 AND</p>
 </dd>
 <dt>
 <span class="TOKEN">&amp;=</span>
 </dt>
 <dd>
-<p>bitwise <i class="FIRSTTERM">AND-equal</i>
+<p>비트 <i class="FIRSTTERM">AND-할당</i>
 </p>
 </dd>
 <dt>
 <span class="TOKEN">|</span>
 </dt>
 <dd>
-<p>bitwise OR</p>
+<p>비트 OR</p>
 </dd>
 <dt>
 <span class="TOKEN">|=</span>
 </dt>
 <dd>
-<p>bitwise <i class="FIRSTTERM">OR-equal</i>
+<p>비트 <i class="FIRSTTERM">OR-할당</i>
 </p>
 </dd>
 <dt>
 <span class="TOKEN">~</span>
 </dt>
 <dd>
-<p>bitwise NOT</p>
+<p>비트 NOT</p>
 </dd>
 <dt>
 <span class="TOKEN">^</span>
 </dt>
 <dd>
-<p>bitwise XOR</p>
+<p>비트 XOR</p>
 </dd>
 <dt>
 <span class="TOKEN">^=</span>
 </dt>
 <dd>
-<p>bitwise <i class="FIRSTTERM">XOR-equal</i>
+<p>비트 <i class="FIRSTTERM">XOR-할당</i>
 </p>
 </dd>
 </dl>
@@ -619,7 +628,7 @@ echo "b = $b"       # b=1</pre>
 <p>
 <b>
 <a name="LOGOPS1">
-</a>logical (boolean) operators</b>
+</a>논리 연산자들 (boolean)</b>
 </p>
 <dl>
 <dt>
@@ -678,9 +687,9 @@ if [[ $condition1 &amp;&amp; $condition2 ]]    # Also works.
 </td>
 <td align="LEFT" valign="TOP">
 <p>
-<span class="TOKEN">&amp;&amp;</span> may also be used, depending on context,
-	    in an <a href="./list-cons.html#LISTCONSREF">and list</a>
-	    to concatenate commands.</p>
+<span class="TOKEN">&amp;&amp;</span> 는 상황에 따라 명령어들을 연결해 주는 
+<a href="./list-cons.html#LISTCONSREF">and 리스트</a> 로도 쓰일 수 있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -723,9 +732,9 @@ if [[ $condition1 || $condition2 ]]    # Also works.
 <img src="ops_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Bash tests the <a href="./exit-status.html#EXITSTATUSREF">exit
-	    status</a> of each statement linked with a logical
-	    operator.</p>
+<p>Bash 는 논리 연산자로 연결된 각 문장의 
+<a href="./exit-status.html#EXITSTATUSREF">종료 상태</a> 를 확인합니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -735,7 +744,7 @@ if [[ $condition1 || $condition2 ]]    # Also works.
 <a name="ANDOR">
 </a>
 <p>
-<b>Example 8-3. Compound Condition Tests Using &amp;&amp; and ||</b>
+<b>예제 8-3. Compound Condition Tests Using &amp;&amp; and ||</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -810,26 +819,26 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>The <span class="TOKEN">&amp;&amp;</span> and <span class="TOKEN">||</span> operators also
-	      find use in an arithmetic context.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<span class="TOKEN">&amp;&amp;</span> 와 
+<span class="TOKEN">||</span> 연산자들은 산술식에서도 쓰일 수 있습니다.</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo $(( 1 &amp;&amp; 2 )) $((3 &amp;&amp; 0)) $((4 || 0)) $((0 || 0))</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $(( 1 &amp;&amp; 2 )) $((3 &amp;&amp; 0)) $((4 || 0)) $((0 || 0))</b></tt>
 <tt class="COMPUTEROUTPUT">1 0 1 0</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
+</p>
 </dd>
 </dl>
 </div>
@@ -839,7 +848,7 @@ exit 0</pre>
 <p>
 <b>
 <a name="MISCOP1">
-</a>miscellaneous operators</b>
+</a>기타 연산자들</b>
 </p>
 <dl>
 <dt>
@@ -848,16 +857,17 @@ exit 0</pre>
 <span class="TOKEN">,</span>
 </dt>
 <dd>
-<p>Comma operator</p>
-<p>The <b class="COMMAND">comma operator</b> chains together
-	      two or more arithmetic operations. All the operations are
-	      evaluated (with possible <i class="FIRSTTERM">side
-	      effects</i>.
-	        <a name="AEN4242" href="#FTN.AEN4242">
+<p>콤마 연산자</p>
+<p>
+<b class="COMMAND">콤마 연산자</b> 는 둘 이상의 산술 연산들을 하나로 묶습니다. 
+모든 연산자들은 실행될 때
+<i class="FIRSTTERM">부수 효과</i> 를 가져올 수 있습니다.
+<a name="AEN4242" href="#FTN.AEN4242">
 <span class="footnote">[2]</span>
 </a>
-             </p>
-<p>	     <table bgcolor="#E0E0E0" border="0" width="90%">
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -874,7 +884,9 @@ echo "t2 = $t2    a = $a"         # t2 = 5    a = 9</pre>
 </tbody>
 </table>
 	     </p>
-<p>The comma operator finds use mainly in <a href="./loops1.html#FORLOOPREF1">for loops</a>. See <a href="./loops1.html#FORLOOPC">Example 11-13</a>.</p>
+<p>콤마 연산자는 주로 
+<a href="./loops1.html#FORLOOPREF1">for 반복문</a> 에서 쓰입니다. 
+<a href="./loops1.html#FORLOOPC">예제 11-13</a> 을 참고하세요.</p>
 </dd>
 </dl>
 </div>
@@ -889,11 +901,13 @@ echo "t2 = $t2    a = $a"         # t2 = 5    a = 9</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>In a different context, <b class="COMMAND">+=</b> can
-              serve as a <i class="FIRSTTERM">string concatenation</i>
-              operator. This can be useful for <a href="./bashver3.html#PATHAPPEND">modifying <i class="FIRSTTERM">environmental
-              variables</i>
-</a>.</p>
+<p>다른 곳에서는, 
+<b class="COMMAND">+=</b> 는 
+<i class="FIRSTTERM">문자열 연결</i> 연산자로 사용될 수 있습니다. 이 방법은 
+<a href="./bashver3.html#PATHAPPEND">
+<i class="FIRSTTERM">매개 변수</i> 수정
+</a> 에 유용할 수 있습니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -904,9 +918,9 @@ echo "t2 = $t2    a = $a"         # t2 = 5    a = 9</pre>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
 <p>
-<i class="FIRSTTERM">Side effects</i>
-		are, of course, unintended -- and usually undesirable --
-		consequences.</p>
+<i class="FIRSTTERM">부수 효과</i> 는 물론 의도하지 않은 -- 그리고 일반적으로 원치않은 
+결과를 가져옵니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -917,19 +931,19 @@ echo "t2 = $t2    a = $a"         # t2 = 5    a = 9</pre>
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./operations.html" accesskey="P">Prev</a>
+<a href="./operations.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./numerical-constants.html" accesskey="N">Next</a>
+<a href="./numerical-constants.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Operations and Related Topics</td>
 <td align="center" valign="top" width="34%">
-<a href="./operations.html" accesskey="U">Up</a>
+<a href="./operations.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">Numerical Constants</td>
 </tr>
