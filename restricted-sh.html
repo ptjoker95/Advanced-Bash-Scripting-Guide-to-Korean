@@ -20,12 +20,12 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./subshells.html" accesskey="P">Prev</a>
+<a href="./subshells.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">
 </td>
 <td align="right" valign="bottom" width="10%">
-<a href="./process-sub.html" accesskey="N">Next</a>
+<a href="./process-sub.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -35,7 +35,7 @@
 <div class="CHAPTER">
 <h1>
 <a name="RESTRICTED-SH">
-</a>Chapter 22. Restricted Shells</h1>
+</a>22장. 제한된 쉘</h1>
 <p>
 <a name="RESTRICTEDSHREF">
 </a>
@@ -46,8 +46,8 @@
 <p>
 <b>
 <a name="DISABLEDCOMMREF">
-</a>Disabled commands in restricted
-	  shells</b>
+</a>제한된 쉘에서 사용할 수 없는 명령어들
+</b>
 </p>
 <dl>
 <dt>
@@ -55,71 +55,77 @@
 <dd>
 <div class="FORMALPARA">
 <p>
-<b> . </b>Running a script or portion of a script in
-        <i class="FIRSTTERM">restricted mode</i> disables certain commands
-        that would otherwise be available. This is a security measure
-        intended to limit the privileges of the script user and to
-        minimize possible damage from running the script.</p>
+<b> . </b>
+<i class="FIRSTTERM">제한된 모드</i> 에서 스크립트나 스크립트의 일부를 실행하는 것은 
+다른 상황에서는 실행가능한 몇몇 명령어를 사용할 수 없게 합니다. 이는 스크립트 
+사용자의 권한을 제한하고, 스크립트를 실행시킴으로 일어날 수 있는 손상을 최소화하기 
+위한 보안 목적 때문입니다.
+</p>
 </div>
 </dd>
 </dl>
 </div>
-<p>The following commands and actions are disabled:</p>
+<p>다음의 명령어들과 동작들은 사용불가합니다:</p>
 <p>
 </p>
 <ul>
 <li>
-<p>Using <tt class="REPLACEABLE">
+<p>
+<tt class="REPLACEABLE">
 <i>cd</i>
-</tt> to change the working
-	  directory.</p>
+</tt> 를 사용해서 작업 디렉토리 바꾸기.
+</p>
 </li>
 <li>
-<p>Changing the values of the
-	  <tt class="REPLACEABLE">
+<p>
+<tt class="REPLACEABLE">
 <i>$PATH</i>
-</tt>,
-	  <tt class="REPLACEABLE">
+</tt>, 
+<tt class="REPLACEABLE">
 <i>$SHELL</i>
-</tt>,
-	  <tt class="REPLACEABLE">
+</tt>, 
+<tt class="REPLACEABLE">
 <i>$BASH_ENV</i>
-</tt>,
-	  or <tt class="REPLACEABLE">
+</tt>, 또는 
+<tt class="REPLACEABLE">
 <i>$ENV</i>
-</tt> <a href="./othertypesv.html#ENVREF">environmental variables</a>.</p>
+</tt> 
+<a href="./othertypesv.html#ENVREF">환경 변수들</a> 값 바꾸기.
+</p>
 </li>
 <li>
-<p>Reading or changing the <tt class="REPLACEABLE">
+<p>
+<tt class="REPLACEABLE">
 <i>$SHELLOPTS</i>
-</tt>,
-	  shell environmental options.</p>
+</tt>, 쉘 환경 옵션의 값을 읽거나 바꾸기.
+</p>
 </li>
 <li>
-<p>Output redirection.</p>
+<p>출력 재지향.</p>
 </li>
 <li>
-<p>Invoking commands containing one or more
-	  <span class="TOKEN">/</span>'s.</p>
+<p>하나 이상의 
+<span class="TOKEN">/</span>'s 를 가지고 있는 명령어 실행하기.</p>
 </li>
 <li>
-<p>Invoking <a href="./internal.html#EXECREF">exec</a> to substitute
-	  a different process for the shell.</p>
+<p>쉘에서 다른 프로세스로 옮겨가기 위해서 
+<a href="./internal.html#EXECREF">exec</a> 호출하기.
+</p>
 </li>
 <li>
-<p>Various other commands that would enable monkeying
-	  with or attempting to subvert the script for an unintended
-	  purpose.</p>
+<p>불순한 목적으로 장난을 칠 수 있거나 스크립트를 뒤집어 엎을 수 있는 
+다양한 명령어들.
+</p>
 </li>
 <li>
-<p>Getting out of restricted mode within the script.</p>
+<p>스크립트에서 제한 모드를 빠져나가기.</p>
 </li>
 </ul>
 <div class="EXAMPLE">
 <a name="RESTRICTED">
 </a>
 <p>
-<b>Example 22-1. Running a script in restricted mode</b>
+<b>예제 22-1. 제한 모드에서 스크립트 실행하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -186,19 +192,19 @@ exit 0</pre>
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./subshells.html" accesskey="P">Prev</a>
+<a href="./subshells.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./process-sub.html" accesskey="N">Next</a>
+<a href="./process-sub.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Subshells</td>
 <td align="center" valign="top" width="34%">
-<a href="./part5.html" accesskey="U">Up</a>
+<a href="./part5.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">Process Substitution</td>
 </tr>

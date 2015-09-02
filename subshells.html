@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>Subshells</title>
+<title>하위 쉘</title>
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
 <link rel="UP" title="Advanced Topics" href="./part5.html">
@@ -20,12 +20,12 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./redirapps.html" accesskey="P">Prev</a>
+<a href="./redirapps.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">
 </td>
 <td align="right" valign="bottom" width="10%">
-<a href="./restricted-sh.html" accesskey="N">Next</a>
+<a href="./restricted-sh.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -35,13 +35,13 @@
 <div class="CHAPTER">
 <h1>
 <a name="SUBSHELLS">
-</a>Chapter 21. Subshells</h1>
+</a>21장. 하위 쉘</h1>
 <p>
 <a name="SUBSHELLSREF">
 </a>
 </p>
-<p>Running a shell script launches a new process, a
-        <i class="FIRSTTERM">subshell</i>.</p>
+<p>실행 중인 쉘 스크립트가 개시한 새로운 프로세스, 
+<i class="FIRSTTERM">하위 쉘</i> 이라고 합니다.</p>
 <table class="SIDEBAR" border="1" cellpadding="5">
 <tbody>
 <tr>
@@ -53,11 +53,12 @@
 </p>
 <p>
 <tt class="USERINPUT">
-<b>Definition:</b>
+<b>정의:</b>
 </tt>
-          A <i class="FIRSTTERM">subshell</i> is a
-          <a href="./othertypesv.html#CHILDREF2">child process</a> launched by a
-          shell (or <i class="FIRSTTERM">shell script</i>).</p>
+<i class="FIRSTTERM">하위 쉘</i> 은 쉘 (혹은 
+<i class="FIRSTTERM">쉘 스크립트</i>) 에 의해서 개시되는 
+<a href="./othertypesv.html#CHILDREF2">자식 프로세스</a> 입니다.
+</p>
 <p>
 </p>
 </div>
@@ -65,18 +66,21 @@
 </tr>
 </tbody>
 </table>
-<p>A subshell is a separate instance of the command processor
-        -- the <i class="FIRSTTERM">shell</i> that gives you the prompt at
-        the console or in an <i class="FIRSTTERM">xterm</i> window. Just
-        as your commands are interpreted at the command-line prompt,
-        similarly does a script <a href="./timedate.html#BATCHPROCREF">batch-process</a> a list of
-        commands. Each shell script running is, in effect, a subprocess
-        (<i class="FIRSTTERM">child process</i>) of the <a href="./internal.html#FORKREF">parent</a> shell.</p>
-<p>A shell script can itself launch subprocesses. These
-	<i class="FIRSTTERM">subshells</i> let the script do
-	parallel processing, in effect executing multiple subtasks
-	simultaneously.</p>
-<p>      <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>하위 쉘은 명령어 프로세서 -- 콘솔이나 
+<i class="FIRSTTERM">xterm</i> 에서 프롬프트로 주어진 
+<i class="FIRSTTERM">쉘</i>, 의 분리된 단계입니다. 명령줄 프롬프트에서 
+명령어가 실행되듯이, 명령어 리스트인 스크립트 
+<a href="./timedate.html#BATCHPROCREF">배치-프로세스</a> 도 비슷하게 실행됩니다. 사실, 
+각 쉘 스크립트는 
+<a href="./internal.html#FORKREF">부모</a> 쉘의 하위 프로세스 (
+<i class="FIRSTTERM">자식 프로세스</i>) 입니다.
+</p>
+<p>쉘 스크립트는 자신이 하위 프로세스가 될 수 있습니다. 이 
+<i class="FIRSTTERM">하위 쉘</i> 은 스크립트가 병렬 동작을 하도록 합나다, 결과적으로 
+여러 하위 작업을 동시에 처리하게 됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -121,50 +125,51 @@ but is shown here for illustrative purposes.</pre>
 </tr>
 </tbody>
 </table>
-      </p>
-<p>In general, an <a href="./external.html#EXTERNALREF">external
-	command</a> in a script <a href="./internal.html#FORKREF">forks
-	off</a> a subprocess,
-           <a name="AEN18102" href="#FTN.AEN18102">
-<span class="footnote">[1]</span>
-</a>
-        whereas a Bash <a href="./internal.html#BUILTINREF">builtin</a>
-        does not. For this reason, builtins execute more quickly
-        and use fewer system resources than their external command
-        equivalents.</p>
+</p>
+<p>일반적으로 스크립트에 있는 
+<a href="./external.html#EXTERNALREF">외부 명령어</a> 는 하위 프로세스로 
+<a href="./internal.html#FORKREF">갈립니다</a>, 
+<a name="AEN18102" href="#FTN.AEN18102">
+<span class="footnote">[1]</span> 
+</a>반면에 Bash 
+<a href="./internal.html#BUILTINREF">내부 명령어</a> 는 그렇지 않습니다. 이런 
+이유로, 내부 명령어는 비슷한 외부 명령어보다 더 빠르고, 더 적은 시스템 자원을 
+사용합니다.
+</p>
 <p>
 </p>
 <div class="VARIABLELIST">
 <p>
 <b>
 <a name="SUBSHELLPARENS1">
-</a>Command List within
-	Parentheses</b>
+</a>괄호로 묶인 명령어 리스트
+</b>
 </p>
 <dl>
 <dt>( command1; command2; command3; ... )</dt>
 <dd>
-<p>A command list embedded between
-	  <tt class="REPLACEABLE">
-<i>parentheses</i>
-</tt> runs as a
-	  subshell.</p>
+<p>
+<tt class="REPLACEABLE">
+<i>괄호</i>
+</tt> 사이에 놓인 명령어 리스트는 하위 쉘처럼 동작합니다.
+</p>
 </dd>
 </dl>
 </div>
 <p>
 <a name="PARVIS">
-</a>Variables in a subshell are
-        <em>not</em> visible outside the block of code
-        in the subshell. They are not accessible to the <a href="./internal.html#FORKREF">parent process</a>, to the shell
-        that launched the subshell. These are, in effect,
-        variables <a href="./localvar.html#LOCALREF">local</a> to the
-	<i class="FIRSTTERM">child process</i>.</p>
+</a>하위 쉘에 있는 변수들은 하위 쉘 안의 코드 블럭 밖에서는 볼 수 
+<em>없습니다</em>. 그 변수들은 
+<a href="./internal.html#FORKREF">부모 프로세스</a> 와 그 하위쉘에서 실행한 쉘에서 
+접근할 수 없습니다. 이것들은, 사실상, 
+<i class="FIRSTTERM">자식 프로세스</i> 의 
+<a href="./localvar.html#LOCALREF">지역</a> 변수입니다.
+</p>
 <div class="EXAMPLE">
 <a name="SUBSHELL">
 </a>
 <p>
-<b>Example 21-1. Variable scope in a subshell</b>
+<b>예제 21-1. 하위 쉘에서 변수 범위</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -246,8 +251,9 @@ exit 0
 </tbody>
 </table>
 </div>
-<p>See also <a href="./internalvariables.html#BASHPIDREF">$BASHPID</a> and
-        <a href="./gotchas.html#SUBPIT">Example 34-2</a>.</p>
+<p>
+<a href="./internalvariables.html#BASHPIDREF">$BASHPID</a> 와 
+<a href="./gotchas.html#SUBPIT">예제 34-2</a> 를 참고하십시요.</p>
 <table class="SIDEBAR" border="1" cellpadding="5">
 <tbody>
 <tr>
@@ -263,16 +269,14 @@ exit 0
 </p>
 <p>
 <tt class="USERINPUT">
-<b>Definition:</b>
-</tt> The
-	    <i class="FIRSTTERM">scope</i> of a variable is the
-	    context in which it has meaning, in which it has a
-	    <i class="FIRSTTERM">value</i> that can be referenced. For
-	    example, the scope of a <a href="./localvar.html#LOCALREF1">local
-	    variable</a> lies only within the function,
-	    block of code, or subshell within which it is defined,
-	    while the scope of a <i class="FIRSTTERM">global</i> variable
-	    is the entire script in which it appears.</p>
+<b>정의:</b>
+</tt>변수의 
+<i class="FIRSTTERM">범위</i> 는 말그대로, 인용될 수 있는 
+<i class="FIRSTTERM">값</i> 을 가진다는 뜻입니다. 예를 들어 
+<a href="./localvar.html#LOCALREF1">지역 변수</a> 의 범위는 그것이 정의된 함수, 
+코드 블럭, 혹은 하위 쉘 안에만 한정됩니다, 반면 
+<i class="FIRSTTERM">전역</i> 변수의 범위는 그것이 나타나는 스크립트 전체입니다.
+</p>
 <p>
 </p>
 </div>
@@ -294,11 +298,12 @@ exit 0
 <img src="subshells_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>While the <a href="./internalvariables.html#BASHSUBSHELLREF">$BASH_SUBSHELL</a>
-	      internal variable indicates the nesting level of a
-	      subshell, the <a href="./internalvariables.html#SHLVLREF">$SHLVL</a>
-	      variable <em>shows no change</em> within
-	      a subshell.</p>
+<p>내부 변수 
+<a href="./internalvariables.html#BASHSUBSHELLREF">$BASH_SUBSHELL</a> 이 하위 쉘의 연결된 
+레벨을 알려주는 반면, 
+<a href="./internalvariables.html#SHLVLREF">$SHLVL</a> 변수는 하위 쉘 안에서는 
+<em>전혀 변하지 않습니다</em>
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -325,13 +330,12 @@ echo " \$SHLVL outside subshell = $SHLVL"       # 3
 </tbody>
 </table>
 </div>
-<p>Directory changes made in a subshell do not carry over to the
-        parent shell.</p>
+<p>하위 쉘에서의 디렉토리 변화는 부모 쉘에 영향을 미치지 않습니다.</p>
 <div class="EXAMPLE">
 <a name="ALLPROFS">
 </a>
 <p>
-<b>Example 21-2. List User Profiles</b>
+<b>예제 21-2. 사용자 프로필 리스트하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -363,9 +367,9 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>A subshell may be used to set up a <span class="QUOTE">"dedicated
-	      environment"</span> for a command group.
-	      <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>하위 쉘은 특정 명령어 그룹을 위해 
+<span class="QUOTE">"전용 환경"</span> 을 지정하는 데 사용될 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -390,14 +394,13 @@ COMMAND7</pre>
 </td>
 </tr>
 </tbody>
-</table>
-
-    As seen here, the <a href="./internal.html#EXITREF">exit</a>
-    command only terminates the subshell in which it is running,
-    <em>not</em> the parent shell or script.</p>
-<p>One application of such a <span class="QUOTE">"dedicated environment"</span>
-        is testing whether a variable is defined.
-              <table bgcolor="#E0E0E0" border="0" width="100%">
+</table> 위에서 볼 수 있는 것처럼, 
+<a href="./internal.html#EXITREF">exit</a> 명령어는 부모 쉘이나 스크립트가 
+<em>아닌</em> 동작하고 있는 하위 쉘만을 종료시킵니다. 
+</p>
+<p>변수가 정의되었는지 확인하는데 
+<span class="QUOTE">"전용 환경"</span> 을 응용해볼 수도 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -419,8 +422,8 @@ fi     #  Variable has been set in current script,
 </tbody>
 </table>
 </p>
-<p>Another application is checking for a lock file:
-	      <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>파일이 잠겨있는 지 확인하는데에도 응용할 수 있습니다:
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -433,7 +436,7 @@ else
 exit 65
 fi
 
-#  Code snippet by St�phane Chazelas,
+#  Code snippet by St?phane Chazelas,
 #+ with modifications by Paulo Marcel Coelho Aragao.</pre>
 </font>
 </td>
@@ -442,14 +445,14 @@ fi
 </table>
       </p>
 <p>+</p>
-<p>Processes may execute in parallel within different
-        subshells. This permits breaking a complex task into subcomponents
-        processed concurrently.</p>
+<p>프로세스를 다른 서브 쉘에서 병렬로 실행시킬 수도 있습니다. 이렇게 하면 복잡한 
+작업을 여러개로 나눠서 동시에 처리할 수 있습니다.
+</p>
 <div class="EXAMPLE">
 <a name="PARALLEL-PROCESSES">
 </a>
 <p>
-<b>Example 21-3. Running parallel processes in subshells</b>
+<b>예제 21-3. 하위 쉘에서 병렬 프로세스 실행하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -474,10 +477,12 @@ fi
 </tbody>
 </table>
 </div>
-<p>Redirecting I/O to a subshell uses the <span class="QUOTE">"|"</span> pipe
-	  operator, as in <tt class="USERINPUT">
+<p>하위 쉘에 입/출력을 재지향하려면 
+<tt class="USERINPUT">
 <b>ls -al | (command)</b>
-</tt>.</p>
+</tt> 와 같이 
+<span class="QUOTE">"|"</span> 파이프 연산자를 씁니다.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -488,8 +493,11 @@ fi
 <img src="subshells_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>A code block between <a href="./special-chars.html#CODEBLOCKREF">curly brackets</a> does
-	      <em>not</em> launch a subshell.</p>
+<p>
+<a href="./special-chars.html#CODEBLOCKREF">중괄호</a> 사이에 있는 코드 블럭은 하위 쉘을 
+실행시키지 
+<em>않습니다</em>.
+</p>
 <p>{ command1; command2; command3; . . . commandN; }</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -524,8 +532,11 @@ echo "$var1"   # 76</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>An external command invoked with an <a href="./internal.html#EXECREF">exec</a> does <em>not</em>
-             (usually) fork off a subprocess / subshell.</p>
+<p>
+<a href="./internal.html#EXECREF">exec</a> 로 실행된 외부 명령어는 
+(일반적으로) 하위 프로세스 / 하위 쉘을 나누지 
+<em>않습니다</em>.
+</p>
 </td>
 </tr>
 </tbody>
@@ -536,19 +547,19 @@ echo "$var1"   # 76</pre>
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./redirapps.html" accesskey="P">Prev</a>
+<a href="./redirapps.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./restricted-sh.html" accesskey="N">Next</a>
+<a href="./restricted-sh.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Applications</td>
 <td align="center" valign="top" width="34%">
-<a href="./part5.html" accesskey="U">Up</a>
+<a href="./part5.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">Restricted Shells</td>
 </tr>
