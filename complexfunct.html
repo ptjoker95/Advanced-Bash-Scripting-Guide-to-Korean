@@ -20,11 +20,11 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./functions.html" accesskey="P">Prev</a>
+<a href="./functions.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">Chapter 24. Functions</td>
 <td align="right" valign="bottom" width="10%">
-<a href="./localvar.html" accesskey="N">Next</a>
+<a href="./localvar.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -61,7 +61,7 @@
 <a name="EX60">
 </a>
 <p>
-<b>Example 24-2. Function Taking Parameters</b>
+<b>예제 24-2. Function Taking Parameters</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -144,7 +144,7 @@ exit 0</pre>
 </td>
 <td align="LEFT" valign="TOP">
 <p>The <a href="./othertypesv.html#SHIFTREF">shift</a>
-        command works on arguments passed to functions (see <a href="./assortedtips.html#MULTIPLICATION">Example 36-18</a>).</p>
+        command works on arguments passed to functions (see <a href="./assortedtips.html#MULTIPLICATION">예제 36-18</a>).</p>
 </td>
 </tr>
 </tbody>
@@ -156,7 +156,7 @@ exit 0</pre>
 <a name="FUNCCMDLINEARG">
 </a>
 <p>
-<b>Example 24-3. Functions and command-line args passed to the script</b>
+<b>예제 24-3. Functions and command-line args passed to the script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -207,14 +207,14 @@ exit 0</pre>
 </p>
 <p>
 <a href="./ivr.html#IVRREF">Indirect variable
-	    references</a> (see <a href="./bashver2.html#EX78">Example 37-2</a>) provide a clumsy
+	    references</a> (see <a href="./bashver2.html#EX78">예제 37-2</a>) provide a clumsy
 	    sort of mechanism for passing variable pointers to
 	    functions.</p>
 <div class="EXAMPLE">
 <a name="INDFUNC">
 </a>
 <p>
-<b>Example 24-4. Passing an indirect reference to a function</b>
+<b>예제 24-4. Passing an indirect reference to a function</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -257,7 +257,7 @@ exit 0</pre>
 <a name="DEREFERENCECL">
 </a>
 <p>
-<b>Example 24-5. Dereferencing a parameter passed to a function</b>
+<b>예제 24-5. Dereferencing a parameter passed to a function</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -296,7 +296,7 @@ exit 0</pre>
 <a name="REFPARAMS">
 </a>
 <p>
-<b>Example 24-6. Again, dereferencing a parameter passed to a function</b>
+<b>예제 24-6. Again, dereferencing a parameter passed to a function</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -305,7 +305,7 @@ exit 0</pre>
 <font color="#000000">
 <pre class="PROGRAMLISTING">#!/bin/bash
 # ref-params.sh: Dereferencing a parameter passed to a function.
-#                (Complex Example)
+#                (Complex 예제)
 
 ITERATIONS=3  # How many times to get input.
 icount=1
@@ -318,7 +318,7 @@ my_read () {
   local local_var
 
   echo -n "Enter a value "
-  eval 'echo -n "[$'$1'] "'  #  Previous value.
+  eval 'echo -n "[$'$1'] "'  #  이전ious value.
 # eval echo -n "[\$$1] "     #  Easier to understand,
                              #+ but loses trailing space in user prompt.
   read local_var
@@ -392,7 +392,7 @@ exit 0</pre>
 <a name="MAX">
 </a>
 <p>
-<b>Example 24-7. Maximum of two numbers</b>
+<b>예제 24-7. Maximum of two numbers</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -502,7 +502,7 @@ fi
 <a name="EX61">
 </a>
 <p>
-<b>Example 24-8. Converting numbers to Roman numerals</b>
+<b>예제 24-8. Converting numbers to Roman numerals</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -588,7 +588,7 @@ exit</pre>
 </tbody>
 </table>
 </div>
-<p>See also <a href="./testbranch.html#ISALPHA">Example 11-29</a>.</p>
+<p>See also <a href="./testbranch.html#ISALPHA">예제 11-29</a>.</p>
 <div class="IMPORTANT">
 <p>
 </p>
@@ -610,7 +610,7 @@ exit</pre>
 <a name="RETURNTEST">
 </a>
 <p>
-<b>Example 24-9. Testing large return values in a function</b>
+<b>예제 24-9. Testing large return values in a function</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -705,7 +705,7 @@ echo "return value = $Return_Val"    #25701</pre>
 <a name="MAX2">
 </a>
 <p>
-<b>Example 24-10. Comparing two large integers</b>
+<b>예제 24-10. Comparing two large integers</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -823,8 +823,8 @@ echo $days_in  # 30
 </tbody>
 </table>
 </p>
-<p>See also <a href="./contributed-scripts.html#DAYSBETWEEN">Example A-7</a>
-	      and <a href="./contributed-scripts.html#STDDEV">Example A-37</a>.</p>
+<p>See also <a href="./contributed-scripts.html#DAYSBETWEEN">예제 A-7</a>
+	      and <a href="./contributed-scripts.html#STDDEV">예제 A-37</a>.</p>
 <p>
 <tt class="USERINPUT">
 <b>Exercise:</b>
@@ -856,12 +856,12 @@ echo $days_in  # 30
 </dt>
 <dd>
 <p>A function is essentially a <a href="./special-chars.html#CODEBLOCKREF">code block</a>, which means its
-	      <tt class="FILENAME">stdin</tt> can be redirected (as in <a href="./special-chars.html#EX8">Example 3-1</a>).</p>
+	      <tt class="FILENAME">stdin</tt> can be redirected (as in <a href="./special-chars.html#EX8">예제 3-1</a>).</p>
 <div class="EXAMPLE">
 <a name="REALNAME">
 </a>
 <p>
-<b>Example 24-11. Real name from username</b>
+<b>예제 24-11. Real name from username</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1003,19 +1003,19 @@ Function ()  # This doesn't work.
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./functions.html" accesskey="P">Prev</a>
+<a href="./functions.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./localvar.html" accesskey="N">Next</a>
+<a href="./localvar.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Functions</td>
 <td align="center" valign="top" width="34%">
-<a href="./functions.html" accesskey="U">Up</a>
+<a href="./functions.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">Local Variables</td>
 </tr>

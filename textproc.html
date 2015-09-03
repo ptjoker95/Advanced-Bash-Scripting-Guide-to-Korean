@@ -20,11 +20,11 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./timedate.html" accesskey="P">Prev</a>
+<a href="./timedate.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
 <td align="right" valign="bottom" width="10%">
-<a href="./filearchiv.html" accesskey="N">Next</a>
+<a href="./filearchiv.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -57,8 +57,8 @@
 	      keys or character positions. Using the <tt class="OPTION">-m</tt>
 	      option, it merges presorted input files.	The <i class="FIRSTTERM">info
 	      page</i> lists its many capabilities and options. See
-	      <a href="./loops1.html#FINDSTRING">Example 11-10</a>, <a href="./loops1.html#SYMLINKS">Example 11-11</a>,
-	      and <a href="./contributed-scripts.html#MAKEDICT">Example A-8</a>.</p>
+	      <a href="./loops1.html#FINDSTRING">예제 11-10</a>, <a href="./loops1.html#SYMLINKS">예제 11-11</a>,
+	      and <a href="./contributed-scripts.html#MAKEDICT">예제 A-8</a>.</p>
 </dd>
 <dt>
 <a name="TSORTREF">
@@ -161,7 +161,7 @@
 <a name="WF">
 </a>
 <p>
-<b>Example 16-12. Word Frequency Analysis</b>
+<b>예제 16-12. Word Frequency Analysis</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -575,7 +575,7 @@ done
 <a name="SCRIPTDETECTOR">
 </a>
 <p>
-<b>Example 16-13. Which files are scripts?</b>
+<b>예제 16-13. Which files are scripts?</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -623,7 +623,7 @@ exit 0
 <a name="RND">
 </a>
 <p>
-<b>Example 16-14. Generating 10-digit random numbers</b>
+<b>예제 16-14. Generating 10-digit random numbers</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -719,7 +719,7 @@ exit</pre>
 </table>
 </div>	    
 
-	      See also <a href="./filearchiv.html#EX52">Example 16-39</a>.<p>
+	      See also <a href="./filearchiv.html#EX52">예제 16-39</a>.<p>
 </p>
 </dd>
 <dt>
@@ -738,7 +738,7 @@ exit</pre>
 <a name="EX12">
 </a>
 <p>
-<b>Example 16-15. Using <i class="FIRSTTERM">tail</i> to monitor the system log</b>
+<b>예제 16-15. Using <i class="FIRSTTERM">tail</i> to monitor the system log</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -825,8 +825,8 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>See also <a href="./moreadv.html#EX41">Example 16-5</a>, <a href="./filearchiv.html#EX52">Example 16-39</a> and
-		<a href="./debugging.html#ONLINE">Example 32-6</a>.</p>
+<p>See also <a href="./moreadv.html#EX41">예제 16-5</a>, <a href="./filearchiv.html#EX52">예제 16-39</a> and
+		<a href="./debugging.html#ONLINE">예제 32-6</a>.</p>
 </dd>
 <dt>
 <a name="GREPREF">
@@ -834,62 +834,61 @@ exit 0</pre>
 <b class="COMMAND">grep</b>
 </dt>
 <dd>
-<p>A multi-purpose file search tool that uses
-	      <a href="./regexp.html#REGEXREF">Regular Expressions</a>.
-	      It was originally a command/filter in the
-	      venerable <b class="COMMAND">ed</b> line editor:
-	      <tt class="USERINPUT">
+<p>
+<a href="./regexp.html#REGEXREF">정규 표현식</a> 을 사용하는 다목적 파일 찾기 
+도구. 이 명령어는 오래된 
+<b class="COMMAND">ed</b> 줄 편집기에서 비롯되었습니다:
+<tt class="USERINPUT">
 <b>g/re/p</b>
-</tt> -- <i class="FIRSTTERM">global -
-	      regular expression - print</i>.</p>
+</tt> -- 
+<i class="FIRSTTERM">global - regular expression - print</i>.
+</p>
 <p>
 </p>
 <p>
 <b class="COMMAND">grep</b>   <tt class="REPLACEABLE">
+<i>pattern</i> 
+</tt>[<tt class="REPLACEABLE"><i>file</i></tt>...]</p>
+목표 파일(들)에서 
+<tt class="REPLACEABLE">
 <i>pattern</i>
-</tt>  [<tt class="REPLACEABLE">
-<i>file</i>
-</tt>...]</p>Search the target file(s) for
-	      occurrences of <tt class="REPLACEABLE">
+</tt> 
+을 찾습니다, 
+<tt class="REPLACEABLE">
 <i>pattern</i>
-</tt>, where
-	      <tt class="REPLACEABLE">
-<i>pattern</i>
-</tt> may be literal text
-	      or a Regular Expression.<p>
+</tt> 은 문자열이나 정규 표현식이 될 수 있습니다.<p>
 </p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep '[rst]ystem.$' osinfo.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '[rst]ystem.$' osinfo.txt</b></tt>
 <tt class="COMPUTEROUTPUT">The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>If no target file(s) specified, <b class="COMMAND">grep</b>
-	      works as a filter on <tt class="FILENAME">stdout</tt>, as in
-	      a <a href="./special-chars.html#PIPEREF">pipe</a>.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>만일 목표 파일(들)이 지정되지 않으면, 
+<b class="COMMAND">grep</b> 은 
+<a href="./special-chars.html#PIPEREF">pipe</a> 와 같이, 
+<tt class="FILENAME">표준 출력</tt> 에 필터처럼 작동합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ps ax | grep clock</b>
-</tt>
-<tt class="COMPUTEROUTPUT">765 tty1     S      0:00 xclock
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ps ax | grep clock</b></tt>
+<tt class="COMPUTEROUTPUT"> 765 tty1     S      0:00 xclock
  901 pts/1    S      0:00 grep clock</tt>
 	      </pre>
 </font>
@@ -897,40 +896,47 @@ exit 0</pre>
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>The <tt class="OPTION">-i</tt> option causes a case-insensitive
-	      search.</p>
-<p>The <tt class="OPTION">-w</tt> option matches only whole
-	      words.</p>
-<p>The <tt class="OPTION">-l</tt> option lists only the files in which
-	      matches were found, but not the matching lines.</p>
-<p>The <tt class="OPTION">-r</tt> (recursive) option searches files in
-	      the current working directory and all subdirectories below
-	      it.</p>
-<p>The <tt class="OPTION">-n</tt> option lists the matching lines,
-	      together with line numbers.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+</p>
+<p>
+<tt class="OPTION">-i</tt> 옵션은, 대소문자 구분없이 찾습니다.
+</p>
+<p>
+<tt class="OPTION">-w</tt> 옵션은, 전체 단어가 맞는 것만 찾습니다.
+</p>
+<p>
+<tt class="OPTION">-l</tt> 옵션은, 일치하는 것을 찾은 파일만 보여줍니다, 그 줄은 
+보여주지 않습니다.
+</p>
+<p>
+<tt class="OPTION">-r</tt> (재귀) 옵션은, 현재 작업 디렉토리와 그 하위 디렉토리에서 
+전부 찾습니다.
+</p>
+<p>
+<tt class="OPTION">-n</tt> 옵션은, 일치하는 줄과 그 줄번호를 같이 보여줍니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep -n Linux osinfo.txt</b>
-</tt>
-<tt class="COMPUTEROUTPUT">2:This is a file containing information about Linux.
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep -n Linux osinfo.txt</b></tt>
+<tt class="COMPUTEROUTPUT"> 2:This is a file containing information about Linux.
  6:The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>The <tt class="OPTION">-v</tt> (or <tt class="OPTION">--invert-match</tt>)
-	      option <i class="FIRSTTERM">filters out</i> matches.
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+</p>
+<p>
+<tt class="OPTION">-v</tt> (또는 
+<tt class="OPTION">--invert-match</tt>) 옵션은 일치하는 것을 
+<i class="FIRSTTERM">걸러내</i> 줍니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -945,11 +951,11 @@ exit 0</pre>
 </tbody>
 </table>
 </p>
-<p>The <tt class="OPTION">-c</tt> (<tt class="OPTION">--count</tt>)
-	      option gives a numerical count of matches, rather than
-	      actually listing the matches.
-
-	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>
+<tt class="OPTION">-c</tt> (
+<tt class="OPTION">--count</tt>) 옵션은 일치하는 줄을 보여주는 것이 아닌, 
+일치하는 빈도를 알려줍니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -979,20 +985,23 @@ printf 'a b\nc  d\n\n\n\n\n\000\n\000e\000\000\nf' | grep -c '$'    # 9
 </tbody>
 </table>
             </p>
-<p>The <tt class="OPTION">--color</tt> (or <tt class="OPTION">--colour</tt>)
-	      option marks the matching string in color (on the console
-	      or in an <i class="FIRSTTERM">xterm</i> window). Since
-	      <i class="FIRSTTERM">grep</i> prints out each entire line
-	      containing the matching pattern, this lets you see exactly
-	      <em>what</em> is being matched. See also
-	      the <tt class="OPTION">-o</tt> option, which shows only the
-	      matching portion of the line(s).</p>
+<p>
+<tt class="OPTION">--color</tt> (또는 
+<tt class="OPTION">--colour</tt>) 옵션은 일치하는 문자열을 (콘솔이나 
+<i class="FIRSTTERM">xterm</i> 창에서) 색깔로 표시합니다. 
+<i class="FIRSTTERM">grep</i> 은 패턴이 일치하는 모든 줄을 각각 출력하기 때문에, 
+이 옵션을 쓰면 정확히 
+<em>무엇이</em> 일치하는 지 볼 수 있습니다. 줄(들)에서 일치하는 부분만 따로 
+보여주는 
+<tt class="OPTION">-o</tt> 옵션도 참고하십시요.
+</p>
 <div class="EXAMPLE">
 <a name="FROMSH">
 </a>
 <p>
-<b>Example 16-16. Printing out the <i class="FIRSTTERM">From</i> lines in
-	        stored e-mail messages</b>
+<b>예제 16-16. 저장된 이메일 메세지에서 
+<i class="FIRSTTERM">From</i> 을 포함한 줄만 출력하기
+</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1120,14 +1129,14 @@ fi</pre>
 </table>
             </p>
 <p>
-<a href="./debugging.html#ONLINE">Example 32-6</a> demonstrates how to use
+<a href="./debugging.html#ONLINE">예제 32-6</a> demonstrates how to use
 	      <b class="COMMAND">grep</b> to search for a word pattern in
 	      a system logfile.</p>
 <div class="EXAMPLE">
 <a name="GRP">
 </a>
 <p>
-<b>Example 16-17. Emulating <i class="FIRSTTERM">grep</i> in a script</b>
+<b>예제 16-17. Emulating <i class="FIRSTTERM">grep</i> in a script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1237,7 +1246,7 @@ Here is some text.</pre>
 <a name="CWSOLVER">
 </a>
 <p>
-<b>Example 16-18. Crossword puzzle solver</b>
+<b>예제 16-18. Crossword puzzle solver</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1378,7 +1387,7 @@ workingmen</pre>
 <a name="DICTLOOKUP">
 </a>
 <p>
-<b>Example 16-19. Looking up definitions in <i class="CITETITLE">Webster's 1913 Dictionary</i>
+<b>예제 16-19. Looking up definitions in <i class="CITETITLE">Webster's 1913 Dictionary</i>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -1424,7 +1433,7 @@ then
   echo "Note: Word to look up must start with capital letter,"
   echo "with the rest of the word in lowercase."
   echo "--------------------------------------------"
-  echo "Examples: Abandon, Dictionary, Marking, etc."
+  echo "예제s: Abandon, Dictionary, Marking, etc."
   exit $E_BADARGS
 fi
 
@@ -1487,7 +1496,7 @@ exit $?
 <img src="textproc_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>See also <a href="./contributed-scripts.html#QKY">Example A-41</a> for an example
+<p>See also <a href="./contributed-scripts.html#QKY">예제 A-41</a> for an example
 	      of speedy <i class="FIRSTTERM">fgrep</i> lookup on a large
 	      text file.</p>
 </td>
@@ -1558,7 +1567,7 @@ exit $?
 <a name="LOOKUP">
 </a>
 <p>
-<b>Example 16-20. Checking words in a list for validity</b>
+<b>예제 16-20. Checking words in a list for validity</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1755,7 +1764,7 @@ exit 0</pre>
 </tbody>
 </table>
 	    </p>
-<p>See also <a href="./filearchiv.html#EX52">Example 16-39</a> and <a href="./redircb.html#REDIR4">Example 20-8</a>.</p>
+<p>See also <a href="./filearchiv.html#EX52">예제 16-39</a> and <a href="./redircb.html#REDIR4">예제 20-8</a>.</p>
 <p>Certain commands include some of the
 	      functionality of <b class="COMMAND">wc</b> as options.
 	      
@@ -1916,7 +1925,7 @@ tr -d 0-9 &lt;filename
 <a name="EX49">
 </a>
 <p>
-<b>Example 16-21. <i class="FIRSTTERM">toupper</i>: Transforms a file
+<b>예제 16-21. <i class="FIRSTTERM">toupper</i>: Transforms a file
 	      to all uppercase.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -1961,7 +1970,7 @@ exit 0
 <a name="LOWERCASE">
 </a>
 <p>
-<b>Example 16-22. <i class="FIRSTTERM">lowercase</i>: Changes all
+<b>예제 16-22. <i class="FIRSTTERM">lowercase</i>: Changes all
 	      filenames in working directory to lowercase.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -2026,7 +2035,7 @@ exit $?</pre>
 <a name="DU">
 </a>
 <p>
-<b>Example 16-23. <i class="FIRSTTERM">du</i>: DOS to UNIX text file conversion.</b>
+<b>예제 16-23. <i class="FIRSTTERM">du</i>: DOS to UNIX text file conversion.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2072,7 +2081,7 @@ exit 0
 <a name="ROT13">
 </a>
 <p>
-<b>Example 16-24. <i class="FIRSTTERM">rot13</i>: ultra-weak encryption.</b>
+<b>예제 16-24. <i class="FIRSTTERM">rot13</i>: ultra-weak encryption.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2103,7 +2112,7 @@ exit 0</pre>
 <a name="CRYPTOQUOTE">
 </a>
 <p>
-<b>Example 16-25. Generating <span class="QUOTE">"Crypto-Quote"</span> Puzzles</b>
+<b>예제 16-25. Generating <span class="QUOTE">"Crypto-Quote"</span> Puzzles</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2222,7 +2231,7 @@ echo $x | tr "a-z" 'oh, turtleneck Phrase Jar!'
 <dd>
 <p>A filter that wraps lines of input to a specified width.
 	      This is especially useful with the <tt class="OPTION">-s</tt>
-	      option, which breaks lines at word spaces (see <a href="./textproc.html#EX50">Example 16-26</a> and <a href="./contributed-scripts.html#MAILFORMAT">Example A-1</a>).</p>
+	      option, which breaks lines at word spaces (see <a href="./textproc.html#EX50">예제 16-26</a> and <a href="./contributed-scripts.html#MAILFORMAT">예제 A-1</a>).</p>
 </dd>
 <dt>
 <a name="FMTREF">
@@ -2237,7 +2246,7 @@ echo $x | tr "a-z" 'oh, turtleneck Phrase Jar!'
 <a name="EX50">
 </a>
 <p>
-<b>Example 16-26. Formatted file listing.</b>
+<b>예제 16-26. Formatted file listing.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2262,7 +2271,7 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>See also <a href="./moreadv.html#EX41">Example 16-5</a>.</p>
+<p>See also <a href="./moreadv.html#EX41">예제 16-5</a>.</p>
 <div class="TIP">
 <p>
 </p>
@@ -2308,7 +2317,7 @@ exit 0</pre>
 <a name="COL">
 </a>
 <p>
-<b>Example 16-27. Using <i class="FIRSTTERM">column</i> to format a directory
+<b>예제 16-27. Using <i class="FIRSTTERM">column</i> to format a directory
 	        listing</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -2396,7 +2405,7 @@ exit 0</pre>
 <a name="LNUM">
 </a>
 <p>
-<b>Example 16-28. <i class="FIRSTTERM">nl</i>: A self-numbering script.</b>
+<b>예제 16-28. <i class="FIRSTTERM">nl</i>: A self-numbering script.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2616,7 +2625,7 @@ function write_utf8_string {
 <a name="MANVIEW">
 </a>
 <p>
-<b>Example 16-29. <i class="FIRSTTERM">manview</i>: Viewing formatted manpages</b>
+<b>예제 16-29. <i class="FIRSTTERM">manview</i>: Viewing formatted manpages</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -2658,7 +2667,7 @@ exit $?   # See also the "maned.sh" script.</pre>
 </tbody>
 </table>
 </div>
-<p>See also <a href="./contributed-scripts.html#MANED">Example A-39</a>.</p>
+<p>See also <a href="./contributed-scripts.html#MANED">예제 A-39</a>.</p>
 </dd>
 <dt>
 <a name="LEXREF">
@@ -2711,19 +2720,19 @@ exit $?   # See also the "maned.sh" script.</pre>
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./timedate.html" accesskey="P">Prev</a>
+<a href="./timedate.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./filearchiv.html" accesskey="N">Next</a>
+<a href="./filearchiv.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Time / Date Commands</td>
 <td align="center" valign="top" width="34%">
-<a href="./external.html" accesskey="U">Up</a>
+<a href="./external.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">File and Archiving Commands</td>
 </tr>

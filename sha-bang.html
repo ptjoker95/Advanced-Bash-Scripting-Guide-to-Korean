@@ -20,12 +20,12 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./why-shell.html" accesskey="P">Prev</a>
+<a href="./why-shell.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">
 </td>
 <td align="right" valign="bottom" width="10%">
-<a href="./invoking.html" accesskey="N">Next</a>
+<a href="./invoking.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -72,9 +72,9 @@
 <a name="EX1">
 </a>
 <p>
-<b>Example 2-1. 
+<b>예제 2-1. 
 <i class="FIRSTTERM">cleanup</i>: /var/log 에 있는 로그 파일들을 청소하는 스크립트
- </b>
+</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -105,7 +105,7 @@ echo "Log files cleaned up."</pre>
 <a name="EX1A">
 </a>
 <p>
-<b>Example 2-2. <i class="FIRSTTERM">cleanup</i>: An improved clean-up
+<b>예제 2-2. <i class="FIRSTTERM">cleanup</i>: An improved clean-up
       script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -140,14 +140,15 @@ exit #  The right and proper method of "exiting" from a script.
 </tbody>
 </table>
 </div>
-<p>Now <em>that's</em> beginning to look like a real
-      script. But we can go even farther . . .</p>
+<p>
+<em>이제야</em> 진짜 스크립트를 시작한 것 같습니다. 하지만 더 앞으로 나아갈 수도 있습니다 . . .
+</p>
 <div class="EXAMPLE">
 <a name="EX2">
 </a>
 <p>
-<b>Example 2-3. <i class="FIRSTTERM">cleanup</i>: An enhanced
-      and generalized version of above scripts.</b>
+<b>예제 2-3. 
+<i class="FIRSTTERM">마무리</i>: 위의 스크립트의 진보하고 일반화된 버전.</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -245,51 +246,41 @@ exit 0
 </tbody>
 </table>
 </div>
-<p>Since you may not wish to wipe out the entire system log,
-      this version of the script keeps the last section of the message
-      log intact. You will constantly discover ways of fine-tuning
-      previously written scripts for increased effectiveness.</p>
+<p>전체 시스템 로그를 지우고 싶지 않다면, 이 버전의 스크립트에서는 메세지 로그의 
+마지막 부분을 그대로 놔둡니다. 더 높은 효율을 위해 이전에 쓰인 스크립트를 더 좋게 
+튜닝하는 법을 찾을 수 있습니다.
+</p>
 <p>
 <a name="SHABANGREF">
 </a>* * *</p>
 <p>
 <a name="MAGNUMREF">
-</a>The
-      <i class="FIRSTTERM"> sha-bang</i>
-      (<span class="TOKEN">	 #!</span>)
-
-	  <a name="AEN205" href="#FTN.AEN205">
+</a>
+<i class="FIRSTTERM">sha-bang</i> (
+<span class="TOKEN">#!</span>) 
+<a name="AEN205" href="#FTN.AEN205">
 <span class="footnote">[1]</span>
-</a>
-
-      at the head of a script tells your system that this file is a set
-      of commands to be fed to the command interpreter indicated. The
-      <span class="TOKEN">#!</span> is actually a two-byte
-
-        <a name="AEN214" href="#FTN.AEN214">
+</a>은 스크립트의 제일 앞에서 이 파일이 어떤 명령어 해석기의 명령어 집합인지를 
+시스템에게 알려주는 역할을 합니다. 
+<span class="TOKEN">#!</span> 는 두 바이트
+<a name="AEN214" href="#FTN.AEN214">
 <span class="footnote">[2]</span>
-</a>
-
-	
-	<i class="FIRSTTERM">magic number</i>, a special marker that
-	designates a file type, or in this case an executable shell
-	script (type <tt class="USERINPUT">
+</a> 의 
+<i class="FIRSTTERM">매직 넘버 (magic number)</i> 로서, 파일 형식을 지정하거나, 
+ 이 경우에는 실행가능한 스크립트라는 것을 나타내는 특별한 표시자입니다. (이 
+흥미로운 주제에 관해선  
+<tt class="USERINPUT">
 <b>man magic</b>
-</tt> for more
-	details on this fascinating topic). Immediately following
-	the <i class="FIRSTTERM">sha-bang</i> is a <i class="FIRSTTERM">path
-	name</i>. This is the path to the program that interprets
-	the commands in the script, whether it be a shell, a programming
-	language, or a utility. This command interpreter then executes
-	the commands in the script, starting at the top (the line
-	following the <i class="FIRSTTERM">sha-bang</i> line), and ignoring
-	comments.
-
-	  <a name="AEN226" href="#FTN.AEN226">
+</tt> 을 하면 더 자세하게 알 수 있습니다). 
+<i class="FIRSTTERM">#!</i> 뒤에 나오는 것은 
+<i class="FIRSTTERM">경로명</i> 입니다. 이것은 스크립트에 들어있는 명령어, 쉘, 
+프로그래밍 언어, 혹은 유틸리티, 의 위치를 나타냅니다. 이 명령어 해석기는 맨 위 
+(<i class="FIRSTTERM">#!</i> 줄 다음에 나오는 줄) 에서 시작해서 스크립트에 있는 
+명령어들을 실행하고, 주석을 무시합니다.
+<a name="AEN226" href="#FTN.AEN226">
 <span class="footnote">[3]</span>
 </a>
-
-	</p>
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -308,52 +299,47 @@ exit 0
 </tbody>
 </table>
 </p>
-<p>Each of the above script header lines calls a different command
-      interpreter, be it <tt class="FILENAME">/bin/sh</tt>, the default shell
-      (<b class="COMMAND">bash</b> in a Linux system) or otherwise.
-
-        <a name="AEN242" href="#FTN.AEN242">
+<p>위 스크립트 헤드의 각 라인들은 다른 명령어 해석기, 
+<tt class="FILENAME">/bin/sh</tt> 라면, 기본 쉘 (리눅스 시스템에서는 
+<b class="COMMAND">bash</b>), 혹은 다른 것들을 호출하고 있습니다.
+<a name="AEN242" href="#FTN.AEN242">
 <span class="footnote">[4]</span>
-</a>
-
-      Using <tt class="USERINPUT">
+</a>UNIX의 대부분의 상업용 변경제품에서의 기본 Bourne 쉘인 
+<tt class="USERINPUT">
 <b>#!/bin/sh</b>
-</tt>, the default Bourne shell
-      in most commercial variants of UNIX, makes the script <a href="./portabilityissues.html">portable</a> to non-Linux machines,
-      though you <a href="./gotchas.html#BINSH">sacrifice Bash-specific
-      features</a>.  The script will, however, conform to the
-      <span class="ACRONYM">POSIX</span>
-
-	 <a name="AEN256" href="#FTN.AEN256">
+</tt> 을 쓰면 비록 
+<a href="./gotchas.html#BINSH">Bash 의 특별한 기능을 희생</a> 하더라도, 리눅스가 아닌 
+다른 머신에 스크립트를 
+<a href="./portabilityissues.html">이식</a> 할 수 있습니다. 하지만 스크립트는 
+<span class="ACRONYM">POSIX</span>
+<a name="AEN256" href="#FTN.AEN256">
 <span class="footnote">[5]</span>
 </a>
-
-      <b class="COMMAND">sh</b> standard.</p>
-<p>Note that the path given at the <span class="QUOTE">"sha-bang"</span> must
-      be correct, otherwise an error message -- usually <span class="QUOTE">"Command
-      not found."</span> -- will be the only result of running the
-      script.
-        <a name="AEN269" href="#FTN.AEN269">
+<b class="COMMAND">sh</b> 의 표준을 따라야 합니다.
+</p>
+<p>
+<span class="QUOTE">"#!"</span> 에 주어진 경로명은 정확해야 합니다, 그렇지 않으면 
+스크립트를 실행해봐야 에러 메세지 -- 주로 
+<span class="QUOTE">"Command not found."</span> -- 만 나오게 될 것입니다.
+<a name="AEN269" href="#FTN.AEN269">
 <span class="footnote">[6]</span>
 </a>
-      
-      </p>
-<p>
-<span class="TOKEN">#!</span> can be omitted if the script consists only
-      of a set of generic system commands, using no internal
-      shell directives.  The second example, above, requires the
-      initial <span class="TOKEN">#!</span>, since the variable assignment line,
-      <tt class="USERINPUT">
+</p>
+<p> 만일 스크립트가, 쉘 내부 지시자들을 사용하지 않고, 일반적인 시스템 명령어들만 
+이루어져있다면, 
+<span class="TOKEN">#!</span> 는 생략할 수 있습니다. 위의 두번째 예제에서는, 
+<tt class="USERINPUT">
 <b>lines=50</b>
-</tt>, uses a shell-specific construct.
-	<a name="AEN279" href="#FTN.AEN279">
+</tt> 라는 쉘 전용 생성자를 써서 변수에 값을 넣고 있기 때문에 
+<span class="TOKEN">#!</span> 로 초기화해줘야 합니다. 
+<a name="AEN279" href="#FTN.AEN279">
 <span class="footnote">[7]</span>
 </a>
-      Note again that <tt class="USERINPUT">
+<tt class="USERINPUT">
 <b>#!/bin/sh</b>
-</tt> invokes the default
-      shell interpreter, which defaults to <tt class="FILENAME">/bin/bash</tt>
-      on a Linux machine.</p>
+</tt> 는 기본 쉘 해석기, 리눅스 머신에서는 
+<tt class="FILENAME">/bin/bash</tt> 가 기본임, 를 실행한다는 것에 주의하십시요.
+</p>
 <div class="TIP">
 <p>
 </p>
@@ -364,13 +350,10 @@ exit 0
 <img src="sha-bang_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>This tutorial encourages a modular approach
-	to constructing a script. Make note of and collect
-	<span class="QUOTE">"boilerplate"</span> code snippets that might be useful
-	in future scripts. Eventually you will build quite an extensive
-	library of nifty routines. As an example, the following script
-	prolog tests whether the script has been invoked with the correct
-	number of parameters.</p>
+<p>이 튜토리얼에서는 스크립트를 만들 때 모듈화하는 것을 권장합니다. 나중에 유용해보이는 
+<span class="QUOTE">"자주 등장"</span> 하는 코드 조각들을 모으고 적어두십시요. 예를 들어, 
+다음의 스크립트 도입부는 스크립트가 적합한 수의 매개변수로 실행되었는 지를 확인합니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -393,12 +376,12 @@ fi</pre>
 </tbody>
 </table>
       </p>
-<p>Many times, you will write a script that carries out one
-        particular task. The first script in this chapter is an
-        example. Later, it might occur to you to generalize
-        the script to do other, similar tasks. Replacing the literal
-        (<span class="QUOTE">"hard-wired"</span>) constants by variables is a step in
-        that direction, as is replacing repetitive code blocks by <a href="./functions.html#FUNCTIONREF">functions</a>.</p>
+<p>대부분의 경우, 특정한 목적을 수행하기 위해 스크립트를 짤 것입니다. 이 장의 첫번째 
+스크립트가 그 예입니다. 이후에는, 비슷한 다른 작업을 하기 위해 스크립트를 일반화해야할 
+수 있습니다. 변수로 (
+<span class="QUOTE">"굳게 이어진"</span>) 상수를 대신하는 것은, 반복되는 코드 블럭을 
+<a href="./functions.html#FUNCTIONREF">functions</a> 로 대신하는 것처럼, 그 첫걸음이 될 
+것입니다.</p>
 </td>
 </tr>
 </tbody>
@@ -415,11 +398,13 @@ fi</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>More commonly seen in the literature as
-	  <i class="FIRSTTERM">she-bang</i> or <i class="FIRSTTERM">sh-bang</i>.
-	  This derives from the concatenation of the tokens
-	  <i class="FIRSTTERM">sharp</i> (<span class="TOKEN">#</span>) and
-	  <i class="FIRSTTERM">bang</i> (<span class="TOKEN">!</span>).</p>
+<p>문헌에서는 주로 
+<i class="FIRSTTERM">she-bang</i> 이나 
+<i class="FIRSTTERM">sh-bang</i> 으로 쓰여집니다. 이는 
+<i class="FIRSTTERM">sharp</i> (
+<span class="TOKEN">#</span>) 과 
+<i class="FIRSTTERM">bang</i> (
+<span class="TOKEN">!</span>) 의 앞글자를 묶은 데에서 비롯되었습니다.</p>
 </td>
 </tr>
 <tr>
@@ -429,12 +414,14 @@ fi</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>Some flavors of UNIX (those based on 4.2 BSD)
-          allegedly take a four-byte magic number, requiring
-          a blank after the <span class="TOKEN">!</span> --
-	  <tt class="USERINPUT">
+<p>어떤 UNIX (4.2 BSD 기반) 추종자들의 주장에 따르면, 
+<span class="TOKEN">!</span> 뒤에 빈칸을 넣은 --
+<tt class="USERINPUT">
 <b>#! /bin/sh</b>
-</tt>. <a href="http://www.in-ulm.de/%7Emascheck/various/shebang/#details" target="_top">	  According to Sven Mascheck</a> this is probably a myth.</p>
+</tt> 4 바이트 매직 넘버를 사용해야한다고 합니다. 
+<a href="http://www.in-ulm.de/%7Emascheck/various/shebang/#details" target="_top">Sven 
+Mascheck에 따르면</a>, 이것은 신화에 가깝습니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -444,18 +431,19 @@ fi</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>The <span class="TOKEN">#!</span> line in a shell script
-	      will be the first thing the command interpreter
-	      (<b class="COMMAND">sh</b> or <b class="COMMAND">bash</b>)
-	      sees. Since this line begins with a <span class="TOKEN">#</span>,
-	      it will be correctly interpreted as a comment when the
-	      command interpreter finally executes the script. The
-	      line has already served its purpose - calling the command
-	      interpreter.</p>
-<p>If, in fact, the script includes an
-	      <em>extra</em> <span class="TOKEN">#!</span> line, then
-	      <b class="COMMAND">bash</b> will interpret it as a comment.
-	        <table bgcolor="#E0E0E0" border="0" width="100%">
+<p>쉘 스크립트에 있는 
+<span class="TOKEN">#!</span> 줄은 명령어 해석기 (
+<b class="COMMAND">sh</b> 나 
+<b class="COMMAND">bash</b>) 가 읽는 첫번째 것이 될 것입니다. 이 줄은 
+<span class="TOKEN">#</span> 로 시작하기 때문에, 명령어 해석기로 이 스크립트를 
+실행하면 주석으로 해석될 것입니다. 이 줄은 명령어 해석기를 호출함으로서 자신의 
+목적을 달성한 것입니다.
+</p>
+<p>사실, 만일 스크립트가 
+<em>여분</em> 의 
+<span class="TOKEN">#!</span> 줄을 가지고 있다면, 
+<b class="COMMAND">bash</b> 는 그것을 주석으로 해석할 것입니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -485,7 +473,7 @@ echo $a  # Value of $a stays at 1.</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>This allows some cute tricks.</p>
+<p>이것으로 다음과 같은 다음과 같이 재미있는 트릭을 쓸 수도 있습니다.</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -510,13 +498,16 @@ exit $WHATEVER  # Doesn't matter. The script will not exit here.
 </tbody>
 </table>
 </p>
-<p>Also, try starting a <tt class="FILENAME">README</tt> file with a
-        <tt class="USERINPUT">
+<p>
+<tt class="USERINPUT">
 <b>#!/bin/more</b>
-</tt>, and making it executable.
-        The result is a self-listing documentation file. (A <a href="./here-docs.html#HEREDOCREF">here document</a> using
-	<a href="./basic.html#CATREF">cat</a> is possibly a better alternative
-	-- see <a href="./here-docs.html#EX71">Example 19-3</a>).</p>
+</tt> 로 
+<tt class="FILENAME">README</tt> 을 시작하고, 실행가능하도록 만들어보십시요. 
+그 결과 스스로 리스트되는 문서 파일을 만들 수 있습니다(
+<a href="./basic.html#CATREF">cat</a> 를 쓰는 
+<a href="./here-docs.html#HEREDOCREF">here document</a> 가 더 좋은 대안이 될 수 있습니다 
+<a href="./here-docs.html#EX71">예제 19-3</a> 를 참고하십시요 ).
+</p>
 </td>
 </tr>
 <tr>
@@ -530,11 +521,12 @@ exit $WHATEVER  # Doesn't matter. The script will not exit here.
 <a name="POSIX2REF">
 </a>
 <strong>P</strong>ortable
-	 <strong>O</strong>perating
-	 <strong>S</strong>ystem <em>I</em>nterface, an attempt to
-	 standardize UNI<strong>X</strong>-like
-	 OSes. The POSIX specifications are listed on the <a href="http://www.opengroup.org/onlinepubs/007904975/toc.htm" target="_top">Open
-	 Group site</a>.</p>
+<strong>O</strong>perating
+<strong>S</strong>ystem 
+<strong>I</strong>nterface, UNI
+<strong>X</strong> 와 같은 OS 의 표준화를 위한 시도. POSIX 규격은 
+<a href="http://www.opengroup.org/onlinepubs/007904975/toc.htm" target="_top">Open 
+Group site</a> 에 올려져있습니다.</p>
 </td>
 </tr>
 <tr>
@@ -544,11 +536,11 @@ exit $WHATEVER  # Doesn't matter. The script will not exit here.
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>To avoid this possibility, a script may begin
-	  with a <a href="./system.html#ENVV2REF">#!/bin/env bash</a>
-	  <i class="FIRSTTERM">sha-bang</i> line. This may be
-	  useful on UNIX machines where <i class="FIRSTTERM">bash</i>
-	  is not located in <tt class="FILENAME">/bin</tt>
+<p>이런 것을 피하기 위해, 스크립트를 
+<a href="./system.html#ENVV2REF">#!/bin/env bash</a> 
+<i class="FIRSTTERM">sha-bang</i> 라인으로 시작할 수도 있습니다. 이것은 
+<i class="FIRSTTERM">bash</i> 가 
+<tt class="FILENAME">/bin</tt> 에 설치되어 있지 않은 UNIX 머신들에 유용합니다.
 </p>
 </td>
 </tr>
@@ -559,12 +551,13 @@ exit $WHATEVER  # Doesn't matter. The script will not exit here.
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>If <i class="FIRSTTERM">Bash</i> is your default
-	shell, then the <span class="TOKEN">#!</span> isn't necessary at the
-	beginning of a script.	However, if launching a script from
-	a different shell, such as <i class="FIRSTTERM">tcsh</i>,
-	then you <em>will</em> need the
-	<span class="TOKEN">#!</span>.</p>
+<p>만일 
+<i class="FIRSTTERM">Bash</i> 가 기본 쉘이라면, 
+<span class="TOKEN">#!</span> 는 스크립트 시작에 필요하지 않습니다. 하지만, 
+<i class="FIRSTTERM">tcsh</i> 과 같은 다른 쉘에서 스크립트를 실행하려면, 
+<span class="TOKEN">#!</span> 가 필요
+<em>할 것입니다</em>.
+</p>
 </td>
 </tr>
 </tbody>
@@ -575,19 +568,19 @@ exit $WHATEVER  # Doesn't matter. The script will not exit here.
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./why-shell.html" accesskey="P">Prev</a>
+<a href="./why-shell.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./invoking.html" accesskey="N">Next</a>
+<a href="./invoking.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Shell Programming!</td>
 <td align="center" valign="top" width="34%">
-<a href="./part1.html" accesskey="U">Up</a>
+<a href="./part1.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">Invoking the script</td>
 </tr>

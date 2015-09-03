@@ -19,12 +19,12 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./biblio.html" accesskey="P">Prev</a>
+<a href="./biblio.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">
 </td>
 <td align="right" valign="bottom" width="10%">
-<a href="./refcards.html" accesskey="N">Next</a>
+<a href="./refcards.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -42,7 +42,7 @@
 <a name="MAILFORMAT">
 </a>
 <p>
-<b>Example A-1. <i class="FIRSTTERM">mailformat</i>: Formatting an e-mail
+<b>예제 A-1. <i class="FIRSTTERM">mailformat</i>: Formatting an e-mail
       message</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -112,10 +112,10 @@ exit $?</pre>
 <a name="RN">
 </a>
 <p>
-<b>Example A-2. <i class="FIRSTTERM">rn</i>: A simple-minded file renaming
+<b>예제 A-2. <i class="FIRSTTERM">rn</i>: A simple-minded file renaming
       utility</b>
 </p>
-<p>This script is a modification of <a href="./textproc.html#LOWERCASE">Example 16-22</a>.</p>
+<p>This script is a modification of <a href="./textproc.html#LOWERCASE">예제 16-22</a>.</p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
@@ -179,7 +179,7 @@ exit $?
 <a name="BLANKRENAME">
 </a>
 <p>
-<b>Example A-3. <i class="FIRSTTERM">blank-rename</i>: Renames filenames containing
+<b>예제 A-3. <i class="FIRSTTERM">blank-rename</i>: Renames filenames containing
         blanks</b>
 </p>
 <p>This is an even simpler-minded version of previous script.</p>
@@ -227,7 +227,7 @@ exit 0</pre>
 <a name="ENCRYPTEDPW">
 </a>
 <p>
-<b>Example A-4. <i class="FIRSTTERM">encryptedpw</i>: Uploading to an ftp site,
+<b>예제 A-4. <i class="FIRSTTERM">encryptedpw</i>: 위loading to an ftp site,
       using a locally encrypted password</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -237,7 +237,7 @@ exit 0</pre>
 <font color="#000000">
 <pre class="PROGRAMLISTING">#!/bin/bash
 
-# Example "ex72.sh" modified to use encrypted password.
+# 예제 "ex72.sh" modified to use encrypted password.
 
 #  Note that this is still rather insecure,
 #+ since the decrypted password is sent in the clear.
@@ -291,7 +291,7 @@ exit 0</pre>
 <a name="COPYCD">
 </a>
 <p>
-<b>Example A-5. <i class="FIRSTTERM">copy-cd</i>: Copying a data CD</b>
+<b>예제 A-5. <i class="FIRSTTERM">copy-cd</i>: Copying a data CD</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -361,7 +361,7 @@ exit 0</pre>
 <a name="COLLATZ">
 </a>
 <p>
-<b>Example A-6. Collatz series</b>
+<b>예제 A-6. Collatz series</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -451,7 +451,7 @@ exit 0</pre>
 <a name="DAYSBETWEEN">
 </a>
 <p>
-<b>Example A-7. <i class="FIRSTTERM">days-between</i>: Days between two
+<b>예제 A-7. <i class="FIRSTTERM">days-between</i>: Days between two
         dates</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -624,7 +624,7 @@ exit 0
 <a name="MAKEDICT">
 </a>
 <p>
-<b>Example A-8. Making a <i class="FIRSTTERM">dictionary</i>
+<b>예제 A-8. Making a <i class="FIRSTTERM">dictionary</i>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -688,7 +688,7 @@ exit $?</pre>
 <a name="SOUNDEX">
 </a>
 <p>
-<b>Example A-9. Soundex conversion</b>
+<b>예제 A-9. Soundex conversion</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -773,7 +773,7 @@ name=$( echo $input_name | tr A-Z a-z )
 char_pos=0                     # Initialize character position. 
 prefix0=${name:$char_pos:1}
 prefix=`echo $prefix0 | tr a-z A-Z`
-                               # Uppercase 1st letter of soundex.
+                               # 위percase 1st letter of soundex.
 
 let "char_pos += 1"            # Bump character position to 2nd letter of name.
 name1=${name:$char_pos}
@@ -829,7 +829,7 @@ echo
 #+ followed by a calculated three-number code.
 #  Similar sounding names should have almost the same soundex codes.
 
-#   Examples:
+#   예제s:
 #   Smith and Smythe both have a "S-530" soundex.
 #   Harrison = H-625
 #   Hargison = H-622
@@ -866,7 +866,7 @@ exit 0</pre>
 <a name="LIFESLOW">
 </a>
 <p>
-<b>Example A-10. <i class="FIRSTTERM">Game of Life</i>
+<b>예제 A-10. <i class="FIRSTTERM">Game of Life</i>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1138,7 +1138,7 @@ GetCount ()             # Count live cells in passed cell's neighborhood.
   
 }
 
-next_gen ()               # Update generation array.
+next_gen ()               # 위date generation array.
 {
 
 local array
@@ -1220,7 +1220,7 @@ echo
 
 # ------- Display second generation. -------
 Cur=`echo ${initial[@]}`
-next_gen "$Cur"          # Update &amp; display.
+next_gen "$Cur"          # 위date &amp; display.
 sleep $DELAY
 # ------------------------------------------
 
@@ -1272,7 +1272,7 @@ exit 0   # CEOF:EOF
 <a name="GEN0DATA">
 </a>
 <p>
-<b>Example A-11. Data file for <i class="FIRSTTERM">Game of Life</i>
+<b>예제 A-11. Data file for <i class="FIRSTTERM">Game of Life</i>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1316,7 +1316,7 @@ _..___..__</pre>
 <a name="BEHEAD">
 </a>
 <p>
-<b>Example A-12. <i class="FIRSTTERM">behead</i>: Removing mail and news
+<b>예제 A-12. <i class="FIRSTTERM">behead</i>: Removing mail and news
       message headers</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1392,7 +1392,7 @@ exit
 <a name="PW">
 </a>
 <p>
-<b>Example A-13. <i class="FIRSTTERM">password</i>: Generating random
+<b>예제 A-13. <i class="FIRSTTERM">password</i>: Generating random
       8-character passwords</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1465,7 +1465,7 @@ exit 0</pre>
 <a name="FIFO">
 </a>
 <p>
-<b>Example A-14. <i class="FIRSTTERM">fifo</i>: Making daily backups, using
+<b>예제 A-14. <i class="FIRSTTERM">fifo</i>: Making daily backups, using
       named pipes</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1528,7 +1528,7 @@ exit 0</pre>
 <a name="PRIMES">
 </a>
 <p>
-<b>Example A-15. Generating prime numbers using the modulo operator</b>
+<b>예제 A-15. Generating prime numbers using the modulo operator</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -1549,7 +1549,7 @@ LIMIT=1000                    # Primes, 2 ... 1000.
 Primes()
 {
  (( n = $1 + 1 ))             # Bump to next integer.
- shift                        # Next parameter in list.
+ shift                        # 다음 parameter in list.
 #  echo "_n=$n i=$i_"
  
  if (( n == LIMIT ))
@@ -1597,7 +1597,7 @@ exit $?
 <a name="TREE">
 </a>
 <p>
-<b>Example A-16. <i class="FIRSTTERM">tree</i>: Displaying a directory tree</b>
+<b>예제 A-16. <i class="FIRSTTERM">tree</i>: Displaying a directory tree</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -1678,7 +1678,7 @@ exit 0</pre>
 <a name="TREE2">
 </a>
 <p>
-<b>Example A-17. <i class="FIRSTTERM">tree2</i>: Alternate directory tree script</b>
+<b>예제 A-17. <i class="FIRSTTERM">tree2</i>: Alternate directory tree script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -1804,7 +1804,7 @@ exit $?</pre>
 <a name="STRING">
 </a>
 <p>
-<b>Example A-18. <i class="FIRSTTERM">string functions</i>: C-style string
+<b>예제 A-18. <i class="FIRSTTERM">string functions</i>: C-style string
       functions</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1831,7 +1831,7 @@ exit $?</pre>
 #
 # Strcat appends the value of variable s2 to variable s1. 
 #
-# Example:
+# 예제:
 #    a="foo"
 #    b="bar"
 #    strcat a b
@@ -1859,7 +1859,7 @@ function strcat ()
 # of variable s2.  It copies fewer if the value of variabl s2 is shorter
 # than n characters.  Echoes result on stdout.
 #
-# Example:
+# 예제:
 #    a=foo
 #    b=barbaz
 #    strncat a b 3
@@ -2095,7 +2095,7 @@ exit 0</pre>
 <a name="DIRECTORYINFO">
 </a>
 <p>
-<b>Example A-19. Directory information</b>
+<b>예제 A-19. Directory information</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -2286,7 +2286,7 @@ Index-Array-Name[Line-Number * 2] : The "inode" field element.
 NOTE: This distance may be either +11 or +12 elements.
 Index-Array-Name[(Line-Number * 2) + 1] : The "pathname" element.
 NOTE: This distance may be a variable number of elements.
-Next line index pair for Line-Number+1.
+다음 line index pair for Line-Number+1.
 IndexListDoc
 
 
@@ -2664,7 +2664,7 @@ exit 0</pre>
 <a name="HASHLIB">
 </a>
 <p>
-<b>Example A-20. Library of hash functions</b>
+<b>예제 A-20. Library of hash functions</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -2864,7 +2864,7 @@ IFS="$oldIFS"
 <a name="HASHEXAMPLE">
 </a>
 <p>
-<b>Example A-21. Colorizing text using hash functions</b>
+<b>예제 A-21. Colorizing text using hash functions</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -2944,7 +2944,7 @@ exit $?
 <a name="HASHEX2">
 </a>
 <p>
-<b>Example A-22. More on hash functions</b>
+<b>예제 A-22. More on hash functions</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3108,7 +3108,7 @@ exit 0
 <a name="USBINST">
 </a>
 <p>
-<b>Example A-23. Mounting USB keychain storage devices</b>
+<b>예제 A-23. Mounting USB keychain storage devices</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3268,7 +3268,7 @@ exit 0</pre>
 <a name="TOHTML">
 </a>
 <p>
-<b>Example A-24. Converting to HTML</b>
+<b>예제 A-24. Converting to HTML</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3428,7 +3428,7 @@ exit $?
 <a name="ARCHIVWEBLOGS">
 </a>
 <p>
-<b>Example A-25. Preserving weblogs</b>
+<b>예제 A-25. Preserving weblogs</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3515,7 +3515,7 @@ exit 0</pre>
 <a name="PROTECTLITERAL">
 </a>
 <p>
-<b>Example A-26. Protecting literal strings</b>
+<b>예제 A-26. Protecting literal strings</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3685,7 +3685,7 @@ exit 0</pre>
 <a name="UNPROTECTLITERAL">
 </a>
 <p>
-<b>Example A-27. Unprotecting literal strings</b>
+<b>예제 A-27. Unprotecting literal strings</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3830,7 +3830,7 @@ exit 0</pre>
 <a name="ISSPAMMER2">
 </a>
 <p>
-<b>Example A-28. Spammer Identification</b>
+<b>예제 A-28. Spammer Identification</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -3863,7 +3863,7 @@ exit 0</pre>
 
 Impatient?
     Application code: goto "# # # Hunt the Spammer' program code # # #"
-    Example output: ":&lt;&lt;-'_is_spammer_outputs_'"
+    예제 output: ":&lt;&lt;-'_is_spammer_outputs_'"
     How to use: Enter script name without arguments.
                 Or goto "Quickstart" at end of script.
 
@@ -5266,7 +5266,7 @@ detail_each_name() {
         IFS=${WSP_IFS}
     fi
 
-    # Update list known_pair (Address and Name).
+    # 위date list known_pair (Address and Name).
     unique_lines _den_pair _den_pair
     edit_exact known_pair _den_pair
     if [ ${#_den_pair[@]} -gt 0 ]  # Anything new?
@@ -5276,7 +5276,7 @@ detail_each_name() {
         IFS=${WSP_IFS}
     fi
 
-    # Update list of reverse pairs.
+    # 위date list of reverse pairs.
     unique_lines _den_rev _den_rev
     edit_exact reverse_pair _den_rev
     if [ ${#_den_rev[@]} -gt 0 ]   # Anything new?
@@ -5692,7 +5692,7 @@ echo
 
 
 ##############################
-# Example output from script #
+# 예제 output from script #
 ##############################
 :&lt;&lt;-'_is_spammer_outputs_'
 
@@ -6026,7 +6026,7 @@ a publically accessible site.</pre>
 <a name="WHX">
 </a>
 <p>
-<b>Example A-29. Spammer Hunt</b>
+<b>예제 A-29. Spammer Hunt</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -6325,7 +6325,7 @@ exit 0
 <a name="WGETTER2">
 </a>
 <p>
-<b>Example A-30. Making <i class="FIRSTTERM">wget</i> easier to use</b>
+<b>예제 A-30. Making <i class="FIRSTTERM">wget</i> easier to use</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -6827,7 +6827,7 @@ exit 0</pre>
 <a name="BASHPODDER">
 </a>
 <p>
-<b>Example A-31. A <i class="FIRSTTERM">podcasting</i> script</b>
+<b>예제 A-31. A <i class="FIRSTTERM">podcasting</i> script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -6924,7 +6924,7 @@ http://www.linuxjournal.com/article/8171
 <a name="NIGHTLYBACKUP">
 </a>
 <p>
-<b>Example A-32. Nightly backup to a firewire HD</b>
+<b>예제 A-32. Nightly backup to a firewire HD</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -7305,7 +7305,7 @@ exit $E_BACKUP</pre>
 <a name="CDLL">
 </a>
 <p>
-<b>Example A-33. An expanded <i class="FIRSTTERM">cd</i> command</b>
+<b>예제 A-33. An expanded <i class="FIRSTTERM">cd</i> command</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -7338,7 +7338,7 @@ exit $E_BACKUP</pre>
 #
 #               . cdll              #  Set up the cd command
 #       alias cd='cd_new'           #  Replace the cd command
-#               cd -U               #  Upload pre-assigned entries for
+#               cd -U               #  위load pre-assigned entries for
 #                                   #+ the stack and special entries
 #               cd -D               #  Set non-default mode
 #               alias @="cd_new @"  #  Allow @ to be used to get history
@@ -7384,7 +7384,7 @@ cd_hm ()
                               and put current dir on special entry &lt;n&gt;*
     -a&lt;n&gt;       Alternative suggested directory. See note below.
     -f [&lt;file&gt;] File entries to &lt;file&gt;.
-    -u [&lt;file&gt;] Update entries from &lt;file&gt;.
+    -u [&lt;file&gt;] 위date entries from &lt;file&gt;.
                 If no filename supplied then default file
                 (${CDPath}${2:-"$CDFile"}) is used
                 -F and -U are silent versions
@@ -7880,7 +7880,7 @@ Thus the script looks something like this:
     . /usr/bin/cdll         # Initialise cdll
     alias cd='cd_new'       # Replace the built in cd command
     alias @='cd_new @'      # Allow @ at the prompt to display history
-    cd -U                   # Upload directories
+    cd -U                   # 위load directories
     cd -D                   # Set default action to non-posix
     ######################################################################
 
@@ -7923,7 +7923,7 @@ cd [dir] [0-9] [@[s|h] [-g &lt;dir&gt;] [-d] [-D] [-r&lt;n&gt;]
                               and put current dir on special entry &lt;n&gt;
     -a&lt;n&gt;       Alternative suggested directory. See note below.
     -f [&lt;file&gt;] File entries to &lt;file&gt;.
-    -u [&lt;file&gt;] Update entries from &lt;file&gt;.
+    -u [&lt;file&gt;] 위date entries from &lt;file&gt;.
                 If no filename supplied then default file (~/cdfile) is used
                 -F and -U are silent versions
     -v          Print version number
@@ -7932,7 +7932,7 @@ cd [dir] [0-9] [@[s|h] [-g &lt;dir&gt;] [-d] [-D] [-r&lt;n&gt;]
 
 
 
-Examples
+예제s
 ========
 
 These examples assume non-default mode is set (that is, cd with no
@@ -8089,7 +8089,7 @@ DOCUMENTATION</pre>
 <a name="SOUNDCARDON">
 </a>
 <p>
-<b>Example A-34. A soundcard setup script</b>
+<b>예제 A-34. A soundcard setup script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -8216,7 +8216,7 @@ exit $?</pre>
 <a name="FINDSPLIT">
 </a>
 <p>
-<b>Example A-35. Locating split paragraphs in a text file</b>
+<b>예제 A-35. Locating split paragraphs in a text file</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -8303,7 +8303,7 @@ in the target file.</pre>
 <a name="INSERTIONSORT">
 </a>
 <p>
-<b>Example A-36. Insertion sort</b>
+<b>예제 A-36. Insertion sort</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -8385,7 +8385,7 @@ exit $?</pre>
 <a name="STDDEV">
 </a>
 <p>
-<b>Example A-37. Standard Deviation</b>
+<b>예제 A-37. Standard Deviation</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -8519,7 +8519,7 @@ exit
 <a name="PADSW">
 </a>
 <p>
-<b>Example A-38. A <i class="FIRSTTERM">pad</i> file generator for shareware
+<b>예제 A-38. A <i class="FIRSTTERM">pad</i> file generator for shareware
         authors</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -8678,7 +8678,7 @@ fill_in Program_Release_Year
 fill_in Program_Cost_Dollars
 fill_in Program_Cost_Other
 fill_in Program_Type "[Shareware/Freeware/GPL]"
-fill_in Program_Release_Status "[Beta, Major Upgrade, etc.]"
+fill_in Program_Release_Status "[Beta, Major 위grade, etc.]"
 fill_in Program_Install_Support
 fill_in Program_OS_Support "[Win9x/Win2k/Linux/etc.]"
 fill_in Program_Language "[English/Spanish/etc.]"
@@ -8690,7 +8690,7 @@ echo "FILE INFO"
 FILEINFO_HDR="File_Info"
 echo "&lt;$FILEINFO_HDR&gt;" &gt;&gt;$savefile
 fill_in Filename_Versioned
-fill_in Filename_Previous
+fill_in Filename_이전ious
 fill_in Filename_Generic
 fill_in Filename_Long
 fill_in File_Size_Bytes
@@ -8780,7 +8780,7 @@ exit 0</pre>
 <a name="MANED">
 </a>
 <p>
-<b>Example A-39. A <i class="FIRSTTERM">man page</i> editor</b>
+<b>예제 A-39. A <i class="FIRSTTERM">man page</i> editor</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -8945,7 +8945,7 @@ end    # ... exit not needed.
 <a name="PETALS">
 </a>
 <p>
-<b>Example A-40. Petals Around the Rose</b>
+<b>예제 A-40. Petals Around the Rose</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -9156,7 +9156,7 @@ exit $?
 <a name="QKY">
 </a>
 <p>
-<b>Example A-41. Quacky: a Perquackey-type word game</b>
+<b>예제 A-41. Quacky: a Perquackey-type word game</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -9562,7 +9562,7 @@ play ()
   while [ "$word" ]   #  If player just hits return (null word),
   do                  #+ then game ends.
     echo "$word: "${Status[@]}""
-    echo -n "Last score: [${Score[0]}]   TOTAL score: [${Score[1]}]:     Next word: "
+    echo -n "Last score: [${Score[0]}]   TOTAL score: [${Score[1]}]:     다음 word: "
     total=${Score[1]}
     word=$(get_word)
     check_word "$word"
@@ -9639,7 +9639,7 @@ exit $?
 <a name="NIM">
 </a>
 <p>
-<b>Example A-42. Nim</b>
+<b>예제 A-42. Nim</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -9931,7 +9931,7 @@ done
 <a name="STOPWATCH">
 </a>
 <p>
-<b>Example A-43. A command-line stopwatch</b>
+<b>예제 A-43. A command-line stopwatch</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -10063,7 +10063,7 @@ while true; do
     else                # eof = split
         [ ! "$start" ] &amp;&amp; continue
         total
-        lap "$laptime"  # Update laptotal.
+        lap "$laptime"  # 위date laptotal.
     fi
 done
 
@@ -10078,7 +10078,7 @@ exit $?</pre>
 <a name="HOMEWORK">
 </a>
 <p>
-<b>Example A-44. An all-purpose shell scripting homework assignment solution</b>
+<b>예제 A-44. An all-purpose shell scripting homework assignment solution</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -10195,7 +10195,7 @@ exit $E_LZY
 <a name="KTOUR">
 </a>
 <p>
-<b>Example A-45. The Knight's Tour</b>
+<b>예제 A-45. The Knight's Tour</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -10237,7 +10237,7 @@ exit $E_LZY
 #                                                                 #
 # "stupid" as second parameter sets the stupid strategy.          #
 #                                                                 #
-#  Examples:                                                      #
+#  예제s:                                                      #
 #  ktour.sh 23          starts on square #23 (h3)                 #
 #  ktour.sh g6 stupid   starts on square #46,                     #
 #                       using "stupid" (non-Warnsdorff) strategy. #
@@ -10556,7 +10556,7 @@ do_move ()      # Move the knight!
   fi
 
   board[square]=$movenum
-  currpos=$square       # Update current position.
+  currpos=$square       # 위date current position.
   ((valid_moves++));    # moves[0]=$valid_moves
   aapos=$(to_algebraic $square)
   echo -n "$aapos "
@@ -10583,7 +10583,7 @@ do_move_stupid()   #  Dingbat algorithm,
     then   # Add conditions to above if-test to improve algorithm.
       (( ++movenum ))
       board[squareloc]=$movenum
-      currpos=$squareloc     # Update current position.
+      currpos=$squareloc     # 위date current position.
       ((valid_moves++));     # moves[0]=$valid_moves
       aapos=$(to_algebraic $squareloc)
       echo -n "$aapos "
@@ -10625,7 +10625,7 @@ decide_move ()         #  Which move will we make?
       
       if [ $mpm -lt $lmin ]  # If less than previous minimum ...
       then #     ^^
-        lmin=$mpm            # Update minimum.
+        lmin=$mpm            # 위date minimum.
         iex=$mov             # Save index.
       fi
 
@@ -10802,7 +10802,7 @@ exit 0   # return 0;
 # 1) Extend this example to a 10 x 10 board or larger.
 # 2) Improve the "stupid strategy" by modifying the
 #    do_move_stupid function.
-#    Hint: Prevent straying into corner squares in early moves
+#    Hint: 이전ent straying into corner squares in early moves
 #          (the exact opposite of Warnsdorff's algorithm!).
 # 3) This script could stand considerable improvement and
 #    streamlining, especially in the poorly-written
@@ -10822,7 +10822,7 @@ exit 0   # return 0;
 <a name="MSQUARE">
 </a>
 <p>
-<b>Example A-46. Magic Squares</b>
+<b>예제 A-46. Magic Squares</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -10951,7 +10951,7 @@ exit $?
 <a name="FIFTEEN">
 </a>
 <p>
-<b>Example A-47. Fifteen Puzzle</b>
+<b>예제 A-47. Fifteen Puzzle</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -11145,7 +11145,7 @@ exit 0
 <a name="HANOI2">
 </a>
 <p>
-<b>Example A-48. <i class="FIRSTTERM">The Towers of Hanoi, graphic
+<b>예제 A-48. <i class="FIRSTTERM">The Towers of Hanoi, graphic
 	        version</i>
 </b>
 </p>
@@ -11304,7 +11304,7 @@ dohanoi() {   # Recursive function.
 	  echo "+  Position after move $Moves"
         fi
         ((Moves++))
-        echo -n "   Next move will be:  "
+        echo -n "   다음 move will be:  "
         echo $2 "--&gt;" $3
           display $2 $3
         dohanoi "$(($1-1))" $4 $3 $2
@@ -11376,7 +11376,7 @@ exit $E_NOEXIT   # Shouldn't exit here.
 <a name="HANOI2A">
 </a>
 <p>
-<b>Example A-49. <i class="FIRSTTERM">The Towers of Hanoi, alternate graphic
+<b>예제 A-49. <i class="FIRSTTERM">The Towers of Hanoi, alternate graphic
 	        version</i>
 </b>
 </p>
@@ -11536,7 +11536,7 @@ dohanoi() {   # Recursive function.
 	  echo; echo "+  Position after move $Moves"
         fi
         ((Moves++))
-        echo -n "   Next move will be:  "
+        echo -n "   다음 move will be:  "
         echo $2 "--&gt;" $3
         display $2 $3
         dohanoi "$(($1-1))" $4 $3 $2
@@ -11611,7 +11611,7 @@ exit $E_NOEXIT   # Shouldn't exit here.
 <a name="USEGETOPT">
 </a>
 <p>
-<b>Example A-50. An alternate version of the
+<b>예제 A-50. An alternate version of the
       <a href="./string-manipulation.html#GETOPTSIMPLE">getopt-simple.sh</a> script</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -11752,7 +11752,7 @@ exit</pre>
 <a name="USEGETOPT2">
 </a>
 <p>
-<b>Example A-51. The version of the
+<b>예제 A-51. The version of the
       <i class="FIRSTTERM">UseGetOpt.sh</i> example used in the <a href="./tabexpansion.html">Tab Expansion appendix</a>
 </b>
 </p>
@@ -11865,7 +11865,7 @@ exit</pre>
 <a name="SHOWALLC">
 </a>
 <p>
-<b>Example A-52. Cycling through all the possible color backgrounds</b>
+<b>예제 A-52. Cycling through all the possible color backgrounds</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -11933,7 +11933,7 @@ echo</pre>
 <a name="SAMORSE">
 </a>
 <p>
-<b>Example A-53. Morse Code Practice</b>
+<b>예제 A-53. Morse Code Practice</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -12107,7 +12107,7 @@ exit 0
 <a name="BASE64">
 </a>
 <p>
-<b>Example A-54. Base64 encoding/decoding</b>
+<b>예제 A-54. Base64 encoding/decoding</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -12250,7 +12250,7 @@ fi</pre>
 <a name="SEDAPPEND">
 </a>
 <p>
-<b>Example A-55. Inserting text in a file using
+<b>예제 A-55. Inserting text in a file using
        <i class="FIRSTTERM">sed</i>
 </b>
 </p>
@@ -12306,7 +12306,7 @@ exit 0
 <a name="GRONSFELD">
 </a>
 <p>
-<b>Example A-56. The Gronsfeld Cipher</b>
+<b>예제 A-56. The Gronsfeld Cipher</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -12470,7 +12470,7 @@ exit $?    # } End-of-script
 <a name="BINGO">
 </a>
 <p>
-<b>Example A-57. Bingo Number Generator</b>
+<b>예제 A-57. Bingo Number Generator</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -12617,7 +12617,7 @@ exit 0
 <a name="BASICSREVIEWED">
 </a>
 <p>
-<b>Example A-58. Basics Reviewed</b>
+<b>예제 A-58. Basics Reviewed</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -13674,7 +13674,7 @@ exit 0</pre>
 <a name="TESTEXECTIME">
 </a>
 <p>
-<b>Example A-59. Testing execution times of various commands</b>
+<b>예제 A-59. Testing execution times of various commands</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -13683,7 +13683,7 @@ exit 0</pre>
 <font color="#000000">
 <pre class="PROGRAMLISTING">#!/bin/bash
 #  test-execution-time.sh
-#  Example by Erik Brandsberg, for testing execution time
+#  예제 by Erik Brandsberg, for testing execution time
 #+ of certain operations.
 #  Referenced in the "Optimizations" section of "Miscellany" chapter.
 
@@ -13760,7 +13760,7 @@ exit $?</pre>
 <a name="ASSOCARRTEST">
 </a>
 <p>
-<b>Example A-60. Associative arrays vs. conventional arrays (execution
+<b>예제 A-60. Associative arrays vs. conventional arrays (execution
 	    times)</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -13881,13 +13881,13 @@ exit $?</pre>
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./biblio.html" accesskey="P">Prev</a>
+<a href="./biblio.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./refcards.html" accesskey="N">Next</a>
+<a href="./refcards.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>

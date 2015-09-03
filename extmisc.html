@@ -20,11 +20,11 @@
 </tr>
 <tr>
 <td align="left" valign="bottom" width="10%">
-<a href="./mathc.html" accesskey="P">Prev</a>
+<a href="./mathc.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="bottom" width="80%">Chapter 16. External Filters, Programs and Commands</td>
 <td align="right" valign="bottom" width="10%">
-<a href="./system.html" accesskey="N">Next</a>
+<a href="./system.html" accesskey="N">다음</a>
 </td>
 </tr>
 </tbody>
@@ -95,7 +95,7 @@
 <a name="EX53">
 </a>
 <p>
-<b>Example 16-54. Using <i class="FIRSTTERM">seq</i> to generate loop
+<b>예제 16-54. Using <i class="FIRSTTERM">seq</i> to generate loop
 	      arguments</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -114,7 +114,7 @@ for a in `seq 80`  # or   for a in $( seq 80 )
 do
   echo -n "$a "
 done      # 1 2 3 4 5 ... 80
-# Example of using the output of a command to generate 
+# 예제 of using the output of a command to generate 
 # the [list] in a "for" loop.
 
 echo; echo
@@ -190,7 +190,7 @@ done</pre>
 <a name="LETTERCOUNT">
 </a>
 <p>
-<b>Example 16-55. Letter Count"</b>
+<b>예제 16-55. Letter Count"</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -215,7 +215,7 @@ show_help(){
 	   echo
            echo Usage: `basename $0` file letters  
            echo Note: `basename $0` arguments are case sensitive.
-           echo Example: `basename $0` foobar.txt G n U L i N U x.
+           echo 예제: `basename $0` foobar.txt G n U L i N U x.
 	   echo
 }
 
@@ -323,7 +323,7 @@ exit $?
 <a name="EX33A">
 </a>
 <p>
-<b>Example 16-56. Using <i class="FIRSTTERM">getopt</i> to parse command-line
+<b>예제 16-56. Using <i class="FIRSTTERM">getopt</i> to parse command-line
 	        options</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -414,7 +414,7 @@ eval set -- "$args"</pre>
 </tbody>
 </table>
 </div>
-<p>See <a href="./string-manipulation.html#GETOPTSIMPLE">Example 10-5</a> for a simplified emulation
+<p>See <a href="./string-manipulation.html#GETOPTSIMPLE">예제 10-5</a> for a simplified emulation
 	      of <b class="COMMAND">getopt</b>.</p>
 </dd>
 <dt>
@@ -756,7 +756,7 @@ eval set -- "$args"</pre>
 </a>
 
 	      Typically, one process writes to the FIFO, and the other
-	      reads from it. See <a href="./contributed-scripts.html#FIFO">Example A-14</a>.</p>
+	      reads from it. See <a href="./contributed-scripts.html#FIFO">예제 A-14</a>.</p>
 <p>	      <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
@@ -986,7 +986,7 @@ exit $?</pre>
 <a name="DDKEYPRESS">
 </a>
 <p>
-<b>Example 16-59. Capturing Keystrokes</b>
+<b>예제 16-59. Capturing Keystrokes</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1084,7 +1084,7 @@ exit 0</pre>
 <a name="RPSDCARD">
 </a>
 <p>
-<b>Example 16-60. Preparing a bootable SD card for the
+<b>예제 16-60. Preparing a bootable SD card for the
 		    <em>Raspberry Pi</em>
 </b>
 </p>
@@ -1162,7 +1162,7 @@ exit $?
 <p>
 <b class="COMMAND">dd</b> 로 임시 스왑 파일 초기화 (
 <a href="./zeros.html#EX73">예제 31-2</a>) 와 램디스크(
-<a href="./zeros.html#RAMDISK">Example 31-3</a>) 초기화 어플리케이션을 
+<a href="./zeros.html#RAMDISK">예제 31-3</a>) 초기화 어플리케이션을 
 만들 수도 있습니다. 권장하지는 않지만, 전체 하드디스크 파티션의 하위 레벨 복사도 
 할 수 있습니다.
 </p>
@@ -1176,7 +1176,7 @@ exit $?
 <a name="BLOTOUT">
 </a>
 <p>
-<b>Example 16-61. Securely deleting a file</b>
+<b>예제 16-61. Securely deleting a file</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1315,7 +1315,7 @@ exit 0
 </tbody>
 </table>
 	  </p>
-<p>See also <a href="./randomvar.html#SEEDINGRANDOM">Example 9-16</a> and <a href="./contributed-scripts.html#INSERTIONSORT">Example A-36</a>.</p>
+<p>See also <a href="./randomvar.html#SEEDINGRANDOM">예제 9-16</a> and <a href="./contributed-scripts.html#INSERTIONSORT">예제 A-36</a>.</p>
 </dd>
 <dt>
 <a name="HEXDUMPREF">
@@ -1423,7 +1423,7 @@ random001=`md5sum $0 | awk '{print $1}'`
 <a name="TEMPFILENAME">
 </a>
 <p>
-<b>Example 16-62. Filename generator</b>
+<b>예제 16-62. Filename generator</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1479,7 +1479,7 @@ exit 0</pre>
 <a name="UNITCONVERSION">
 </a>
 <p>
-<b>Example 16-63. Converting meters to miles</b>
+<b>예제 16-63. Converting meters to miles</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -1549,7 +1549,7 @@ exit 0
 <a name="M4">
 </a>
 <p>
-<b>Example 16-64. Using <i class="FIRSTTERM">m4</i>
+<b>예제 16-64. Using <i class="FIRSTTERM">m4</i>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -1824,19 +1824,19 @@ cat $file_encrypted | dd conv=swab,ascii &gt; $file_plaintext
 <tbody>
 <tr>
 <td align="left" valign="top" width="33%">
-<a href="./mathc.html" accesskey="P">Prev</a>
+<a href="./mathc.html" accesskey="P">이전</a>
 </td>
 <td align="center" valign="top" width="34%">
-<a href="./index.html" accesskey="H">Home</a>
+<a href="./index.html" accesskey="H">처음</a>
 </td>
 <td align="right" valign="top" width="33%">
-<a href="./system.html" accesskey="N">Next</a>
+<a href="./system.html" accesskey="N">다음</a>
 </td>
 </tr>
 <tr>
 <td align="left" valign="top" width="33%">Math Commands</td>
 <td align="center" valign="top" width="34%">
-<a href="./external.html" accesskey="U">Up</a>
+<a href="./external.html" accesskey="U">위</a>
 </td>
 <td align="right" valign="top" width="33%">System and Administrative Commands</td>
 </tr>
