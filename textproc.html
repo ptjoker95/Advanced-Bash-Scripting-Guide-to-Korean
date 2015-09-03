@@ -849,7 +849,7 @@ exit 0</pre>
 <b class="COMMAND">grep</b>   <tt class="REPLACEABLE">
 <i>pattern</i> 
 </tt>[<tt class="REPLACEABLE"><i>file</i></tt>...]</p>
-목표 파일(들)에서 
+대상 파일(들)에서 
 <tt class="REPLACEABLE">
 <i>pattern</i>
 </tt> 
@@ -875,7 +875,7 @@ exit 0</pre>
 </tbody>
 </table>
 </p>
-<p>만일 목표 파일(들)이 지정되지 않으면, 
+<p>만일 대상 파일(들)이 지정되지 않으면, 
 <b class="COMMAND">grep</b> 은 
 <a href="./special-chars.html#PIPEREF">pipe</a> 와 같이, 
 <tt class="FILENAME">표준 출력</tt> 에 필터처럼 작동합니다.
@@ -1039,19 +1039,17 @@ exit $?
 </tbody>
 </table>
 </div>
-<p>When invoked with more than one target file given,
-	      <b class="COMMAND">grep</b> specifies which file contains
-	      matches.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>하나 이상의 대상 파일이 주어진 상태에서 실행되면, 
+<b class="COMMAND">grep</b> 은 일치하는 것을 포함한 파일을 적시합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep Linux osinfo.txt misc.txt</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep Linux osinfo.txt misc.txt</b></tt>
 <tt class="COMPUTEROUTPUT">osinfo.txt:This is a file containing information about Linux.
  osinfo.txt:The GPL governs the distribution of the Linux operating system.
  misc.txt:The Linux operating system is steadily gaining in popularity.</tt>
@@ -1072,39 +1070,39 @@ exit $?
 <img src="textproc_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>To force <b class="COMMAND">grep</b> to show the filename
-	      when searching only one target file, simply give
-	      <tt class="FILENAME">/dev/null</tt> as the second file.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>하나의 파일에서 
+<b class="COMMAND">grep</b> 을 사용하면서 파일명을 보여주고 싶으면, 두번째 파일로 
+<tt class="FILENAME">/dev/null</tt> 을 주면 됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep Linux osinfo.txt /dev/null</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep Linux osinfo.txt /dev/null</b></tt>
 <tt class="COMPUTEROUTPUT">osinfo.txt:This is a file containing information about Linux.
  osinfo.txt:The GPL governs the distribution of the Linux operating system.</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
+</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>If there is a successful match, <b class="COMMAND">grep</b>
-	      returns an <a href="./exit-status.html#EXITSTATUSREF">exit status</a>
-	      of 0, which makes it useful in a condition test in a
-	      script, especially in combination with the <tt class="OPTION">-q</tt>
-	      option to suppress output.
-	        <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>일치하는 패턴이 있으면, 
+<b class="COMMAND">grep</b> 은 
+<a href="./exit-status.html#EXITSTATUSREF">종료 상태</a> 로 0 을 리턴하고, 이는 
+스크립트에서 조건부 분기를 유용하게 해줍니다, 특히 출력을 안보여주는 
+<tt class="OPTION">-q</tt> 옵션과 함께 쓰면 더 편합니다.
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
