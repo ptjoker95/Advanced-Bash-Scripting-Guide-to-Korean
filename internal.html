@@ -198,9 +198,10 @@ echo "This line uses the \"echo\" builtin."
 <b class="COMMAND">echo</b>
 </dt>
 <dd>
-<p>prints (to <tt class="FILENAME">stdout</tt>) an expression
-	      or variable (see <a href="./varsubn.html#EX9">예제 4-1</a>). 
-	      <table bgcolor="#E0E0E0" border="0" width="90%">
+<p>표현식이나 변수를 (
+<tt class="FILENAME">표준출력</tt> 으로) 출력합니다 (
+<a href="./varsubn.html#EX9">예제 4-1</a> 을 참고하세요).
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -213,12 +214,14 @@ echo $a</pre>
 </tbody>
 </table>
 </p>
-<p>An <b class="COMMAND">echo</b> requires the
-	      <tt class="OPTION">-e</tt> option to print escaped characters. See
-	      <a href="./escapingsection.html#ESCAPED">예제 5-2</a>.</p>
-<p>Normally, each <b class="COMMAND">echo</b> command prints
-	      a terminal newline, but the <tt class="OPTION">-n</tt> option
-	      suppresses this.</p>
+<p>이스케이프된 문자들을 출력하기 위해서는 
+<b class="COMMAND">echo</b> 에 
+<tt class="OPTION">-e</tt> 옵션을 해줘야합니다. 
+<a href="./escapingsection.html#ESCAPED">예제 5-2</a> 을 참고하세요.</p>
+<p>일반적으로 
+<b class="COMMAND">echo</b> 명령어는 터미널에서 새줄로 넘어가지만, 
+<tt class="OPTION">-n</tt> 옵션을 쓰면 새줄로 넘어가지 않습니다.
+</p>
 <p>
 <a name="ECHOGREPREF">
 </a>
@@ -233,8 +236,10 @@ echo $a</pre>
 <img src="internal_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>An <b class="COMMAND">echo</b> can be used to feed a
-	      sequence of commands down a pipe.</p>
+<p>
+<b class="COMMAND">echo</b> 는 파이프를 통해서 명령어 연결을 채우는 데 사용될 
+수도 있습니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -270,70 +275,70 @@ fi</pre>
 <img src="internal_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>An <b class="COMMAND">echo</b>, in combination with
-	      <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>
-	      can set a variable.</p>
+<p>
+<a href="./commandsub.html#COMMANDSUBREF">명령어 치환</a> 과 조합해서 
+<b class="COMMAND">echo</b> 를 변수값을 지정하는 데 쓸 수도 있습니다.
+</p>
 <p>
 <tt class="USERINPUT">
 <b>a=`echo
 	      "HELLO" | tr A-Z a-z`</b>
 </tt>
 </p>
-<p>See also <a href="./textproc.html#LOWERCASE">예제 16-22</a>, <a href="./moreadv.html#EX57">예제 16-3</a>, <a href="./mathc.html#MONTHLYPMT">예제 16-47</a>, and <a href="./mathc.html#BASE">예제 16-48</a>.</p>
+<p>
+<a href="./textproc.html#LOWERCASE">예제 16-22</a>, 
+<a href="./moreadv.html#EX57">예제 16-3</a>, 
+<a href="./mathc.html#MONTHLYPMT">예제 16-47</a>, 그리고 
+<a href="./mathc.html#BASE">예제 16-48</a> 를 참고하십시요.</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Be aware that <b class="COMMAND">echo `command`</b>
-	      deletes any linefeeds that the output
-	      of <tt class="REPLACEABLE">
-<i>command</i>
-</tt>
-	      generates.</p>
-<p>The <a href="./internalvariables.html#IFSREF">$IFS</a> (internal field
-	      separator) variable normally contains
-	      <span class="TOKEN">\n</span> (linefeed) as one of its set of
-	      <a href="./special-chars.html#WHITESPACEREF">whitespace</a>
-	      characters. Bash therefore splits the output of
-	      <tt class="REPLACEABLE">
-<i>command</i>
-</tt> at linefeeds
-	      into arguments to <b class="COMMAND">echo</b>.  Then
-	      <b class="COMMAND">echo</b> outputs these arguments,
-	      separated by spaces.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>
+<b class="COMMAND">echo `명령어`</b> 는 
+<tt class="REPLACEABLE">
+<i>명령어</i>
+</tt> 가 만들어내는 출력물의 줄바꿈을 지울 수 있음에 주의하십시요.
+</p>
+<p>
+<a href="./internalvariables.html#IFSREF">$IFS</a> (내부 필드 분리자) 변수는 
+일반적으로 
+<span class="TOKEN">\n</span> (줄바꿈문자) 를
+<a href="./special-chars.html#WHITESPACEREF">공백</a> 문자 중 하나로 가지고 있습니다. 
+Bash 는 줄바꿈이 있는 
+<tt class="REPLACEABLE">
+<i>명령어</i>
+</tt> 의 출력을 
+<b class="COMMAND">echo</b> 에 인수로 넘깁니다. 그럼 
+<b class="COMMAND">echo</b> 는 이 인수들을 공백으로 나누어서 출력하게 됩니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -l /usr/share/apps/kjezz/sounds</b>
-</tt>
-<tt class="COMPUTEROUTPUT">-rw-r--r--    1 root     root         1407 Nov  7  2000 reflect.au
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l /usr/share/apps/kjezz/sounds</b></tt>
+<tt class="COMPUTEROUTPUT"> -rw-r--r--    1 root     root         1407 Nov  7  2000 reflect.au
  -rw-r--r--    1 root     root          362 Nov  7  2000 seconds.au</tt>
 
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo `ls -l /usr/share/apps/kjezz/sounds`</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo `ls -l /usr/share/apps/kjezz/sounds`</b></tt>
 <tt class="COMPUTEROUTPUT">total 40 -rw-r--r-- 1 root root 716 Nov 7 2000 reflect.au -rw-r--r-- 1 root root ...</tt>
-	      </pre>
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	    </p>
-<p>              So, how can we embed a linefeed within an
-	      <a href="./internal.html#ECHOREF">echoed</a> character string?
-
-	     <table bgcolor="#E0E0E0" border="0" width="90%">
+</p>
+<p>그럼, 문자열을 
+<a href="./internal.html#ECHOREF">echo</a> 할 때에 줄넘기기를 어떻게 넣어야 할까요?
+<table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
 <tr>
 <td>
@@ -403,20 +408,18 @@ echo $string1
 <img src="internal_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>This command is a shell builtin, and not the same as
-	      <tt class="FILENAME">/bin/echo</tt>, although its behavior is
-	      similar.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
+<p>이 명령어는 쉘 내부명령어이고, 
+<tt class="FILENAME">/bin/echo</tt> 와 비슷하게 동작하더라도 같지는 않습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>type -a echo</b>
-</tt>
-<tt class="COMPUTEROUTPUT">echo is a shell builtin
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>type -a echo</b></tt>
+<tt class="COMPUTEROUTPUT"> echo is a shell builtin
  echo is /bin/echo</tt>
 	      </pre>
 </font>

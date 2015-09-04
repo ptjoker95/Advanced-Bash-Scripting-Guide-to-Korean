@@ -35,15 +35,15 @@
 <div class="CHAPTER">
 <h1>
 <a name="QUOTING">
-</a>Chapter 5. Quoting</h1>
+</a>5장. 인용</h1>
 <div class="TOC">
 <dl>
 <dt>
-<b>Table of Contents</b>
+<b>목차</b>
 </dt>
-<dt>5.1. <a href="./quotingvar.html">Quoting Variables</a>
+<dt>5.1. <a href="./quotingvar.html">인용 변수들</a>
 </dt>
-<dt>5.2. <a href="./escapingsection.html">Escaping</a>
+<dt>5.2. <a href="./escapingsection.html">이스케이프</a>
 </dt>
 </dl>
 </div>
@@ -51,33 +51,30 @@
 <a name="QUOTINGREF">
 </a>
 </p>
-<p>Quoting means just that, bracketing a string in quotes. This
-	has the effect of protecting <a href="./special-chars.html#SCHARLIST1">special
-	characters</a> in the string from reinterpretation
-	or expansion by the shell or shell script. (A character
-	is <span class="QUOTE">"special"</span> if it has an interpretation
-	other than its literal meaning. For example, the <a href="./special-chars.html#ASTERISKREF">asterisk *</a> represents
-	a <i class="FIRSTTERM">wild card</i> character in 
-	<a href="./globbingref.html">globbing</a> and <a href="./regexp.html#REGEXREF">Regular Expressions</a>).</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<p>인용은 말그대로, 문자열을 인용부호로 감싸는 것을 의미합니다. 인용은 문자열 안에 
+<a href="./special-chars.html#SCHARLIST1">특수 문자들</a> 이 있을 때 쉘이나 쉘 
+스크립트가 따로 해석하는 것을 막아주는 효과가 있습니다. (문자가 원래 의미이외의 다른 
+의미로 해석될 때 
+<span class="QUOTE">"특별"</span> 하다고 합니다. 예를 들어, 
+<a href="./special-chars.html#ASTERISKREF">별표 *</a> 는 
+<a href="./globbingref.html">globbing</a> 이나 
+<a href="./regexp.html#REGEXREF">정규 표현식</a> 에서 
+<i class="FIRSTTERM">wild card</i> 문자를 의미합니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -l [Vv]*</b>
-</tt>
-<tt class="COMPUTEROUTPUT">-rw-rw-r--    1 bozo  bozo       324 Apr  2 15:05 VIEWDATA.BAT
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l [Vv]*</b></tt>
+<tt class="COMPUTEROUTPUT"> -rw-rw-r--    1 bozo  bozo       324 Apr  2 15:05 VIEWDATA.BAT
  -rw-rw-r--    1 bozo  bozo       507 May  4 14:25 vartrace.sh
  -rw-rw-r--    1 bozo  bozo       539 Apr 14 17:11 viewdata.sh</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>ls -l '[Vv]*'</b>
-</tt>
-<tt class="COMPUTEROUTPUT">ls: [Vv]*: No such file or directory</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>ls -l '[Vv]*'</b></tt>
+<tt class="COMPUTEROUTPUT"> ls: [Vv]*: No such file or directory</tt>
 </pre>
 </font>
 </td>
@@ -98,11 +95,12 @@
 </a>
 <p>
 </p>
-<p>In everyday speech or writing, when we
-      <span class="QUOTE">"quote"</span> a phrase, we set it apart and give it special
-      meaning. In a Bash script, when we <i class="FIRSTTERM">quote</i> a
-      string, we set it apart and protect its <i class="FIRSTTERM">literal</i>
-      meaning.</p>
+<p>연설이나 글을 쓸 때, 문장을 
+<span class="QUOTE">"인용"</span> 한다는 것은 구분하고 특별한 의미를 주게 됩니다. 
+Bash 스크립트에서 문자열을 
+<i class="FIRSTTERM">인용</i> 하는 것은 구분하고 
+<i class="FIRSTTERM">원래</i> 의 의미를 갖게 합니다.
+</p>
 <p>
 </p>
 </div>
@@ -110,21 +108,19 @@
 </tr>
 </tbody>
 </table>
-<p>Certain programs and utilities reinterpret or expand
-	special characters in a quoted string. An important use of
-	quoting is protecting a command-line parameter from the shell,
-	but still letting the calling program expand it.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+<p>특정 프로그램과 유틸리티들은 인용된 문자열에 있는 특수 문자들을 
+재해석하고나 확장합니다. 인용의 중요한 사용처는 쉘로부터 명령어 줄 매개변수를 
+해석하지 않고 프로그램이 해석해서 확장하도록 해줍니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep '[Ff]irst' *.txt</b>
-</tt>
-<tt class="COMPUTEROUTPUT">file1.txt:This is the first line of file1.txt.
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep '[Ff]irst' *.txt</b></tt>
+<tt class="COMPUTEROUTPUT"> file1.txt:This is the first line of file1.txt.
  file2.txt:This is the First line of file2.txt.</tt>
 </pre>
 </font>
@@ -132,34 +128,31 @@
 </tr>
 </tbody>
 </table>
-	      </p>
-<p>Note that the unquoted <tt class="USERINPUT">
-<b>grep [Ff]irst *.txt</b>
-</tt>
-	  works under the Bash shell.
-	    <a name="AEN2609" href="#FTN.AEN2609">
+</p>
+<p>Bash 쉘에서는 인용부호 없는 
+<tt class="USERINPUT">
+<b>grep [Ff]irst *.txt</b> 
+</tt>도 작동합니다.
+<a name="AEN2609" href="#FTN.AEN2609">
 <span class="footnote">[1]</span>
 </a>
-	  </p>
-<p>Quoting can also suppress <a href="./internal.html#ECHOREF">echo's</a>
-        <span class="QUOTE">"appetite"</span> for newlines.</p>
-<p>	      <table bgcolor="#E0E0E0" border="1" width="100%">
+</p>
+<p>인용은 
+<a href="./internal.html#ECHOREF">echo</a> 가 새줄을 
+<span class="QUOTE">"먹어치우려는"</span> 것을 막아줍니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo $(ls -l)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo $(ls -l)</b></tt>
 <tt class="COMPUTEROUTPUT">total 8 -rw-rw-r-- 1 bo bo 13 Aug 21 12:57 t.sh -rw-rw-r-- 1 bo bo 78 Aug 21 12:57 u.sh</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo "$(ls -l)"</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo "$(ls -l)"</b></tt>
 <tt class="COMPUTEROUTPUT">total 8
  -rw-rw-r--  1 bo bo  13 Aug 21 12:57 t.sh
  -rw-rw-r--  1 bo bo  78 Aug 21 12:57 u.sh</tt>
@@ -181,10 +174,10 @@
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>Unless there is a file named
-	    <tt class="FILENAME">first</tt> in the current working directory. Yet
-	    another reason to <i class="FIRSTTERM">quote</i>. (Thank you, Harald
-	    Koenig, for pointing this out.</p>
+<p>현재 작업 디렉토리에 
+<tt class="FILENAME">first</tt> 란 이름을 가진 파일이 없다면. 
+<i class="FIRSTTERM">인용</i> 을 쓸 또다른 이유가 됩니다. (이 점을 지적해 준, 
+Harald Koenig, 감사합니다.</p>
 </td>
 </tr>
 </tbody>
