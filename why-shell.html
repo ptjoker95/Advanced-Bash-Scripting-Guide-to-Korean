@@ -35,7 +35,7 @@
 <div class="CHAPTER">
 <h1>
 <a name="WHY-SHELL">
-</a>Chapter 1. Shell Programming!</h1>
+</a>1장. 쉘 프로그래밍!</h1>
 <table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
 <tbody>
 <tr>
@@ -55,67 +55,62 @@
 </tr>
 </tbody>
 </table>
-<p>A working knowledge of shell scripting is essential to anyone
-      wishing to become reasonably proficient at system administration,
-      even if they do not anticipate ever having to actually write a
-      script. Consider that as a Linux machine boots up, it executes the
-      shell scripts in <tt class="FILENAME">/etc/rc.d</tt>
-      to restore the system configuration and set up services. A detailed
-      understanding of these startup scripts is important for analyzing
-      the behavior of a system, and possibly modifying it.</p>
-<p>The craft of scripting is not hard to master,
-      since scripts can be built in bite-sized sections and there
-      is only a fairly small set of shell-specific operators and options
-
-      <a name="AEN62" href="#FTN.AEN62">
+<p>쉘 스크립트의 동작에 관해 이해하는 것은 실력있는 시스템관리자가 되고 싶어하는 
+이들에게는 필수입니다, 비록 실제로 스크립트를 작성하지 않더라도요. 리눅스 머신이 
+부팅될 때를 생각해봅시다, 시스템 설정 정보를 읽고 서비스를 구동하기 위해서 
+<tt class="FILENAME">/etc/rc.d</tt> 에 있는 쉴 스크립트를 구동합니다. 이런 
+시작 스크립트를 꼼꼼히 이해하는 것은 시스템의 동작을 분석하기위해서, 그리고 
+수정하기 위해서 중요합니다.
+</p>
+<p>스크립트 만들기를 정복하는 것은 어렵지 않습니다, 왜냐하면, 스크립트는 비트 사이즈 
+섹션으로 만들 수 있고 배워야할 쉘 특유의 연산자와 옵션
+<a name="AEN62" href="#FTN.AEN62">
 <span class="footnote">[1]</span>
-</a>
-
-      to learn. The syntax is simple -- even austere -- similar to
-      that of invoking and chaining together utilities at the command
-      line, and there are only a few <span class="QUOTE">"rules"</span> governing
-      their use. Most short scripts work right the first time, and
-      debugging even the longer ones is straightforward.</p>
-<p>	    <a name="AEN67">
+</a> 들의 양은 적기 때문입니다. 쉘 문법은 간단합니다 -- 심지어 짧기까지 -- 명령어 
+줄에서 쓰는 유틸리티들을 한데 묶고 실행시키는 것과 유사합니다, 그리고 그 사용방법에는 
+단지 몇가지의 
+<span class="QUOTE">"규칙들"</span> 만이 있을 뿐입니다. 대부분의 짧은 스크립트는 바로 
+잘 구동하며, 심지어 긴 것들도 디버깅이 쉽습니다.
+</p>
+<p>
+<a name="AEN67">
 </a>
 </p>
 <blockquote class="BLOCKQUOTE">
-<p class="LITERALLAYOUT">&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;the&nbsp;early&nbsp;days&nbsp;of&nbsp;personal&nbsp;computing,&nbsp;the&nbsp;BASIC&nbsp;language&nbsp;enabled<br>
-&nbsp;&nbsp;&nbsp;&nbsp;anyone&nbsp;reasonably&nbsp;computer&nbsp;proficient&nbsp;to&nbsp;write&nbsp;programs&nbsp;on&nbsp;an&nbsp;early<br>
-&nbsp;&nbsp;&nbsp;&nbsp;generation&nbsp;of&nbsp;microcomputers.&nbsp;Decades&nbsp;later,&nbsp;the&nbsp;Bash&nbsp;scripting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;enables&nbsp;anyone&nbsp;with&nbsp;a&nbsp;rudimentary&nbsp;knowledge&nbsp;of&nbsp;Linux&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;UNIX&nbsp;to&nbsp;do&nbsp;the&nbsp;same&nbsp;on&nbsp;modern&nbsp;machines.<br>
+<p class="LITERALLAYOUT">   개인 컴퓨터의 초창기에는, BASIC 언어는 누구라도 편하게 초기 마이크로<br>
+컴퓨터에 프로그램을 작성해서 사용할 수 있었습니다. 수십년이 흐른 지금, <br>
+Bash 스크립트 언어는 리눅스나 UNIX에 관해 기초적인 지식만 있으면 <br>
+누구라도 최신 머신에서 같은 것을 할 수 있습니다. 
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;now&nbsp;have&nbsp;miniaturized&nbsp;single-board&nbsp;computers&nbsp;with&nbsp;amazing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;capabilities,&nbsp;such&nbsp;as&nbsp;the&nbsp;<a href="http://www.raspberrypi.org/" target="_top">Raspberry Pi</a>.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Bash&nbsp;scripting&nbsp;provides&nbsp;a&nbsp;way&nbsp;to&nbsp;explore&nbsp;the&nbsp;capabilities&nbsp;of&nbsp;these<br>
-&nbsp;&nbsp;&nbsp;&nbsp;fascinating&nbsp;devices.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-</blockquote>
-    <p>
+<br>
+지금은 <a href="http://www.raspberrypi.org/" target="_top">Raspberry Pi</a> 와 같은 놀라운 능력을 가진 단일 보드 컴퓨터도 가질 <br>
+수 있습니다.<br>
+Bash 스크립트는 이런 멋진 기계들의 능력을 활용할 방법을 제공할 것입니다.
 </p>
-<p>A shell script is a quick-and-dirty method of prototyping
-      a complex application. Getting even a limited subset of
-      the functionality to work in a script is often a useful
-      first stage in project development. In this way, the structure
-      of the application can be tested and tinkered with, and the
-      major pitfalls found before proceeding to the final coding
-      in <i class="FIRSTTERM">C</i>, <i class="FIRSTTERM">C++</i>,
-      <i class="FIRSTTERM">Java</i>, <a href="./wrapper.html#PERLREF">Perl</a>,
-      or <i class="FIRSTTERM">Python</i>.</p>
-<p>Shell scripting hearkens back to the classic UNIX philosophy
-      of breaking complex projects into simpler subtasks, of chaining
-      together components and utilities. Many consider this a better,
-      or at least more esthetically pleasing approach to problem solving
-      than using one of the new generation of high-powered all-in-one
-      languages, such as <i class="FIRSTTERM">Perl</i>, which attempt to
-      be all things to all people, but at the cost of forcing you to
-      alter your thinking processes to fit the tool.</p>
-<p>According to <a href="./biblio.html#MAYERREF">Herbert Mayer</a>,
-      <span class="QUOTE">"a useful language needs arrays, pointers,
-	and a generic mechanism for building data structures."</span>
-	By these criteria, shell scripting falls somewhat short of being
-	<span class="QUOTE">"useful."</span> Or, perhaps not. . . .</p>
+</blockquote>
+<p>
+</p>
+<p>쉘 스크립트로 복잡한 응용프로그램의 프로토 타입을 빠르고 쉽게 만들 수 있습니다. 
+스크립트가 제한된 기능 조차도 프로젝트의 첫번째 단계에서는 매우 유용합니다. 이 방법으로, 
+<i class="FIRSTTERM">C</i>, 
+<i class="FIRSTTERM">C++</i>, 
+<i class="FIRSTTERM">Java</i>, 
+<a href="./wrapper.html#PERLREF">Perl</a>, 또는 
+<i class="FIRSTTERM">Python</i> 으로 마지막 코딩을 진행하기 전에 응용프로그램의 구조를 
+테스트하고, 수선하고, 그 안에 있는 중요한 위험을 찾아낼 수 있습니다.</p>
+<p>쉘 스크립트는 복잡한 프로젝트를 간단한 하위 작업들로 나누고, 구성품들과 유틸리티들을 
+한데 묶는다는 전통적인 UNIX 철학을 따릅니다. 많은 이들이 이 편이 좋다고 여기고 있으며, 
+혹은 최소한, 
+<i class="FIRSTTERM">Perl</i> 과 같이 모든 사람들이 모든 것을 해야하도록 하며, 사용자의 
+사고방식을 도구에 맞추도록 하는 비용을 지불해야하는 고사양의 다기능 언어 중에 하나를 
+사용해서 문제를 풀려고 하는 것보다는 편한 거라고 생각합니다.
+</p>
+<p>
+<a href="./biblio.html#MAYERREF">Herbert Mayer</a> 에 따르면, 
+<span class="QUOTE">"유용한 언어에는 배열, 포인터, 그리고 데이터 구조를 만들 일반적인 
+메커니즘이 필요하다"</span> 고 합니다. 이 조건에, 쉘 스크립트는 
+<span class="QUOTE">"유용하다"</span> 라는 최소한의 조건에 맞아떨어집니다. 아니면 말구요t. . . .
+</p>
 <table class="SIDEBAR" border="1" cellpadding="5">
 <tbody>
 <tr>
@@ -125,33 +120,30 @@
 </a>
 <p>
 </p>
-<p>When not to use shell scripts
-
-      </p>
+<p>쉘 스크립트를 사용하지 말아야 할 때
+</p>
 <p>
 </p>
 <ul>
 <li>
-<p>Resource-intensive tasks, especially where speed is
-	    a factor (sorting, hashing, recursion
-
-            <a name="AEN87" href="#FTN.AEN87">
+<p>리소스에 민감한 작업들, 특히 속도가 중요할 때 (정렬, 해쉬, 재귀
+<a name="AEN87" href="#FTN.AEN87">
 <span class="footnote">[2]</span>
 </a>
-	    
-	    ...)</p>
+...)</p>
 </li>
 <li>
-<p>Procedures involving heavy-duty math operations,
-	    especially floating point arithmetic, arbitrary
-	    precision calculations, or complex numbers (use
-	    <i class="FIRSTTERM">C++</i> or <i class="FIRSTTERM">FORTRAN</i>
-	    instead)</p>
+<p>매우 복잡한 수학 연산을 해야할 때, 특히 부동소수점 연산, 임의의 정밀도 연산, 
+또는 복소수 ( 대신 
+<i class="FIRSTTERM">C++</i> 이나 
+<i class="FIRSTTERM">FORTRAN</i> 을 쓰세요
+)</p>
 </li>
 <li>
-<p>Cross-platform portability required (use
-	    <i class="FIRSTTERM">C</i> or <i class="FIRSTTERM">Java</i>
-	    instead)</p>
+<p>플랫폼간 이식성이 필요할 때 (use
+<i class="FIRSTTERM">C</i> 이나 
+<i class="FIRSTTERM">Java</i> 를 대신쓰세요
+)</p>
 </li>
 <li>
 <p>Complex applications, where structured programming is

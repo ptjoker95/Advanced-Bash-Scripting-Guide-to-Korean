@@ -35,19 +35,20 @@
 <div class="CHAPTER">
 <h1>
 <a name="INTERNAL">
-</a>Chapter 15. Internal Commands and Builtins</h1>
+</a>15장. 내부 명령어들</h1>
 <p>
 <a name="BUILTINREF">
-</a>A <i class="FIRSTTERM">builtin</i>
-	is a <b class="COMMAND">command</b> contained within the Bash tool
-	set, literally <i class="FIRSTTERM">built in</i>. This is either
-	for performance reasons -- builtins execute faster than external
-	commands, which usually require <i class="FIRSTTERM">forking off</i>
-	  <a name="AEN8607" href="#FTN.AEN8607">
-<span class="footnote">[1]</span>
 </a>
-	a separate process -- or because a particular builtin needs
-	direct access to the shell internals.</p>
+<i class="FIRSTTERM">내부 명령(builtin)</i> 은 Bash 도구 모음에 포함된 
+<b class="COMMAND">명령어</b> 로 말 그대로 
+<i class="FIRSTTERM">붙박이(built in)</i> 입니다. 이것들은 성능상의 이유 -- 
+내부 명령은, 몇개로 
+<i class="FIRSTTERM">찢어놔야 되는</i> 
+<a name="AEN8607" href="#FTN.AEN8607">
+<span class="footnote">[1]</span>
+</a> 외부 명령어들보다 빠릅니다 -- 혹은 몇몇 특정한 내부 명령은 쉘 내부에서 
+직접 접속해야할 필요가 있기 때문입니다.
+</p>
 <p>
 <a name="FORKREF">
 </a>
@@ -63,29 +64,28 @@
 </p>
 <p>
 <a name="PARENTREF">
-</a>When a command or
-		   the shell itself initiates (or
-		   <i class="FIRSTTERM">spawns</i>) a new
-		   subprocess to carry out a task, this is called
-		   <i class="FIRSTTERM">forking</i>. This new process
-		   is the <i class="FIRSTTERM">child</i>, and the process
-		   that <i class="FIRSTTERM">forked</i> it off is the
-		   <i class="FIRSTTERM">parent</i>. While the <i class="FIRSTTERM">child
-		   process</i> is doing its work, the
-		   <i class="FIRSTTERM">parent process</i> is still
-		   executing.</p>
-<p>Note that while a <i class="FIRSTTERM">parent
-		   process</i> gets the <i class="FIRSTTERM">process
-		   ID</i> of the <i class="FIRSTTERM">child
-		   process</i>, and can thus pass arguments to it,
-		   <em>the reverse is not true</em>. <a href="./gotchas.html#PARCHILDPROBREF">This can create problems
-		   that are subtle and hard to track down.</a>
+</a>명령어나 쉘 자체가 특정 업무를 위해 새 하위 프로세스를 초기화 (혹은 
+<i class="FIRSTTERM">만들어내거나</i>) 할 때, 이를 
+<i class="FIRSTTERM">포킹(forking)</i> 라고 합니다. 이 새로운 프로세스를 
+<i class="FIRSTTERM">자식(child)</i>이라고 하고, 그 프로세스를 
+<i class="FIRSTTERM">포킹한</i> 프로세스를 
+<i class="FIRSTTERM">부모</i> 라고 합니다. 
+<i class="FIRSTTERM">자식 프로세스</i> 가 작업을 하는 동안, 
+<i class="FIRSTTERM">부모 프로세스</i> 는 계속 실행중입니다.
+</p>
+<p>
+<i class="FIRSTTERM">부모 프로세스</i> 가 
+<i class="FIRSTTERM">자식 프로세스</i> 의 
+<i class="FIRSTTERM">프로세스 ID</i> 를 가지고, 인수를 넘길 수 있는데 반해, 
+<em>그 반대는 안됨</em>을 주의하십시요. 
+<a href="./gotchas.html#PARCHILDPROBREF">이 점이 미묘하고 추적하기 힘든 문제를 
+만들 수도 있습니다.</a>
 </p>
 <div class="EXAMPLE">
 <a name="SPAWNSCR">
 </a>
 <p>
-<b>예제 15-1. A script that spawns multiple instances of itself</b>
+<b>예제 15-1. 자기 자신의 복수의 인스턴스를 만들어내는 스크립트</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
