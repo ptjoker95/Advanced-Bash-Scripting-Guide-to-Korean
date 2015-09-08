@@ -494,13 +494,14 @@ exit 0
 </table>
 </div>
 <p>
-<a href="./commandsub.html#COMMANDSUBREF">Command substitution</a> can
-        construct the individual elements of an array.</p>
+<a href="./commandsub.html#COMMANDSUBREF">명령어 치환</a> 은 배열의 개별적인 
+요소들을 구성할 수 있습니다.
+</p>
 <div class="EXAMPLE">
 <a name="SCRIPTARRAY">
 </a>
 <p>
-<b>예제 27-5. Loading the contents of a script into an array</b>
+<b>예제 27-5. 스크립트의 내용을 배열로 읽어들이기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -542,10 +543,12 @@ exit 0
 </tbody>
 </table>
 </div>
-<p>In an array context, some Bash <a href="./internal.html#BUILTINREF">builtins</a> have a slightly
-	altered meaning. <a name="ARRAYUNSET">
-</a>For example, <a href="./internal.html#UNSETREF">unset</a> deletes array elements, or even
-	an entire array.</p>
+<p>배열 내용에서, 어떤 Bash 
+<a href="./internal.html#BUILTINREF">내부 명령</a> 은 조금 다른 의미를 갖습니다. 
+<a name="ARRAYUNSET"></a>예를 들어, 
+<a href="./internal.html#UNSETREF">unset</a> 은 배열의 요소를 지우거나, 배열 전체를 
+지웁니다.
+</p>
 <p>
 <a name="ARRAYSPECIALPROPS">
 </a>
@@ -554,7 +557,7 @@ exit 0
 <a name="EX67">
 </a>
 <p>
-<b>예제 27-6. Some special properties of arrays</b>
+<b>예제 27-6. 배열의 특성들</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -634,16 +637,15 @@ exit 0</pre>
 <a name="ARRAYNUMELEMENTS">
 </a>
 </p>
-<p>As seen in the previous example, either
-	<b class="COMMAND">${array_name[@]}</b> or
-	<b class="COMMAND">${array_name[*]}</b> refers to
-	<em>all</em> the elements of the array.
-	Similarly, to get a count of the number of elements in an
-	array, use either <b class="COMMAND">${#array_name[@]}</b>
-	or <b class="COMMAND">${#array_name[*]}</b>.
-	<b class="COMMAND">${#array_name}</b> is the length (number of
-	characters) of <b class="COMMAND">${array_name[0]}</b>, the first
-	element of the array.</p>
+<p>앞의 예에서 볼 수 있듯이, 
+<b class="COMMAND">${array_name[@]}</b> 나
+<b class="COMMAND">${array_name[*]}</b> 는 배열의 
+<em>모든</em> 요소를 의미합니다. 비슷하게 배열에 있는 요소의 갯수는 
+<b class="COMMAND">${#array_name[@]}</b> 나 
+<b class="COMMAND">${#array_name[*]}</b> 를 이용해서 얻을 수 있습니다. 
+<b class="COMMAND">${#array_name}</b> 는 
+<b class="COMMAND">${array_name[0]}</b> ,즉 배열의 첫번째 요소의 길이 (문자의 갯수) 입니다.
+</p>
 <p>
 <a name="EMPTYARRAY0">
 </a>
@@ -652,7 +654,7 @@ exit 0</pre>
 <a name="EMPTYARRAY">
 </a>
 <p>
-<b>예제 27-7. Of empty arrays and empty elements</b>
+<b>예제 27-7. 빈 배열과 빈 요소</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -822,10 +824,12 @@ exit</pre>
 </tbody>
 </table>
 </div>
-<p>The relationship of <b class="COMMAND">${array_name[@]}</b>
-	and <b class="COMMAND">${array_name[*]}</b> is analogous to that
-	between <a href="./internalvariables.html#APPREF">$@ and $*</a>. This powerful
-	array notation has a number of uses.</p>
+<p>
+<b class="COMMAND">${array_name[@]}</b> 과 
+<b class="COMMAND">${array_name[*]}</b> 는 
+<a href="./internalvariables.html#APPREF">$@ and $*</a> 의 관계와 비슷합니다. 배열의 사용법은 
+수없이 많습니다.
+</p>
 <p>
 <a name="COPYARRAY0">
 </a>
@@ -866,7 +870,7 @@ array[${#array[*]}]="new element"
 </tr>
 </tbody>
 </table>
-      </p>
+</p>
 <p>
 <a name="ARRAYINITCS">
 </a>
@@ -881,11 +885,13 @@ array[${#array[*]}]="new element"
 <img src="arrays_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>The <b class="COMMAND">array=( element1 element2 ... elementN )</b>
-	initialization operation, with the help of <a href="./commandsub.html#COMMANDSUBREF">command substitution</a>, makes it
-	possible to load the contents of a text file into an array.</p>
+<p>
+<a href="./commandsub.html#COMMANDSUBREF">명령어 치환</a> 을 이용해 
+<b class="COMMAND">array=( element1 element2 ... elementN )</b> 로 배열을 초기화하면, 문서파일의 
+내용을 배열로 읽어올 수 있습니다.
+</p>
 <p>  	
-      <table bgcolor="#E0E0E0" border="0" width="100%">
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -929,7 +935,7 @@ echo $element_count          # 8</pre>
 </tbody>
 </table>
 </div>
-<p>Clever scripting makes it possible to add array operations.</p>
+<p>스크립트를 잘 쓰면 더 많은 배열 연산을 할 수도 있습니다.</p>
 <p>
 <a name="ARRAYASSIGN0">
 </a>
@@ -938,7 +944,7 @@ echo $element_count          # 8</pre>
 <a name="ARRAYASSIGN">
 </a>
 <p>
-<b>예제 27-8. Initializing arrays</b>
+<b>예제 27-8. 배열 초기화하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -1049,9 +1055,10 @@ exit 0</pre>
 <img src="arrays_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Adding a superfluous <b class="COMMAND">declare -a</b>
-	statement to an array declaration may speed up execution of
-	subsequent operations on the array.</p>
+<p>배열 정의를 위해 
+<b class="COMMAND">declare -a</b> 구문을 사용하는 것은 배열 뒤에 오는 동작의 
+실행 속도를 높힐 수 있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -1065,7 +1072,7 @@ exit 0</pre>
 <a name="COPYARRAY">
 </a>
 <p>
-<b>예제 27-9. Copying and concatenating arrays</b>
+<b>예제 27-9. 배열 복사와 덧붙이기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
