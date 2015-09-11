@@ -1122,25 +1122,24 @@ setserial /dev/$DEVICE irq 0 ; setserial /dev/$DEVICE irq $IRQ</pre>
 <b class="COMMAND">wall</b>
 </dt>
 <dd>
-<p>This is an acronym for <span class="QUOTE">"<a href="./communications.html#WRITEREF">write</a> all,"</span> i.e., sending
-	      a message to all users at every terminal logged into the
-	      network. It is primarily a system administrator's tool,
-	      useful, for example, when warning everyone that the
-	      system will shortly go down due to a problem (see <a href="./here-docs.html#EX70">예제 19-1</a>).</p>
+<p>이 명령어는
+<span class="QUOTE">"<a href="./communications.html#WRITEREF">write</a> all,"</span> 즉, 
+네트워크에 로그인되어 있는 모든 터미널의 모든 사용자에게 메세지를 보냅니다. 주로 시스템 
+관리자가 쓰는 도구로, 예를 들어 시스템에 문제가 생겨 잠깐 시스템을 꺼야할 때 모든 사람에게 
+경고하거나 할 때 유용합니다. (
+<a href="./here-docs.html#EX70">예제 19-1</a> 을 참고하십시요).</p>
 <p>	      <table bgcolor="#E0E0E0" border="1" width="90%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>wall System going down for maintenance in 5 minutes!</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>wall System going down for maintenance in 5 minutes!</b></tt>
 <tt class="COMPUTEROUTPUT">Broadcast message from bozo (pts/1) Sun Jul  8 13:53:27 2001...
 
  System going down for maintenance in 5 minutes!</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
@@ -1157,10 +1156,10 @@ setserial /dev/$DEVICE irq 0 ; setserial /dev/$DEVICE irq $IRQ</pre>
 <img src="system_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>If write access to a particular terminal has been
-	      disabled with <b class="COMMAND">mesg</b>, then
-	      <b class="COMMAND">wall</b> cannot send a message to
-	      that terminal.</p>
+<p>어떤 터미널이 
+<b class="COMMAND">mesg</b> 로 쓰기 금지가 되어 있으면, 
+<b class="COMMAND">wall</b> 은 그 터미널에 메세지를 보낼 수 없습니다.
+</p>
 </td>
 </tr>
 </tbody>

@@ -1352,15 +1352,15 @@ workingmen</pre>
 </tr>
 </tbody>
 </table>
-	      </p>
+</p>
 <p>
 <a name="FGREPREF">
 </a>
 <b class="COMMAND">fgrep</b> --
-	      <i class="FIRSTTERM">fast grep</i> -- is the same as
-	      <b class="COMMAND">grep -F</b>. It does a literal string search
-	      (no <a href="./regexp.html#REGEXREF">Regular Expressions</a>),
-	      which generally speeds things up a bit.</p>
+<i class="FIRSTTERM">빠른 (fast) grep</i> -- 은 
+<b class="COMMAND">grep -F</b> 과 같습니다. 문자 그대로를 찾기 때문에  
+(<a href="./regexp.html#REGEXREF">정규 표현식</a> 이 아님), 속도가 약간 빠릅니다.
+</p>
 <div class="NOTE">
 <p>
 </p>
@@ -1371,11 +1371,13 @@ workingmen</pre>
 <img src="textproc_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>On some Linux distros, <b class="COMMAND">egrep</b> and
-	      <b class="COMMAND">fgrep</b> are symbolic links to, or aliases for
-	      <b class="COMMAND">grep</b>, but invoked with the
-	      <tt class="OPTION">-E</tt> and <tt class="OPTION">-F</tt> options,
-	      respectively.</p>
+<p>어떤 리눅스 배포판에서는, 
+<b class="COMMAND">egrep</b> 과 
+<b class="COMMAND">fgrep</b> 은 각각 
+<tt class="OPTION">-E</tt> 과 
+<tt class="OPTION">-F</tt> 옵션으로 호출한 
+<b class="COMMAND">grep</b> 입니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -1385,7 +1387,8 @@ workingmen</pre>
 <a name="DICTLOOKUP">
 </a>
 <p>
-<b>예제 16-19. Looking up definitions in <i class="CITETITLE">Webster's 1913 Dictionary</i>
+<b>예제 16-19. 
+<i class="CITETITLE">Webster's 1913 사전</i> 에서 정의 찾기
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
@@ -1431,7 +1434,7 @@ then
   echo "Note: Word to look up must start with capital letter,"
   echo "with the rest of the word in lowercase."
   echo "--------------------------------------------"
-  echo "예제s: Abandon, Dictionary, Marking, etc."
+  echo "Examples: Abandon, Dictionary, Marking, etc."
   exit $E_BADARGS
 fi
 
@@ -1494,9 +1497,10 @@ exit $?
 <img src="textproc_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>See also <a href="./contributed-scripts.html#QKY">예제 A-41</a> for an example
-	      of speedy <i class="FIRSTTERM">fgrep</i> lookup on a large
-	      text file.</p>
+<p>큰 문서 파일에서의 
+<i class="FIRSTTERM">fgrep</i> 의 사용예는 
+<a href="./contributed-scripts.html#QKY">예제 A-41</a> 를 참고하십시요.
+</p>
 </td>
 </tr>
 </tbody>
