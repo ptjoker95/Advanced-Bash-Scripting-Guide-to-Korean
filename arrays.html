@@ -1757,8 +1757,7 @@ exit $?</pre>
 <a href="./contributed-scripts.html#PRIMES">예제 A-15</a> 와 
 <a href="./mathc.html#PRIMES2">예제 16-46</a> 을 통해 비교해보십시요.</p>
 <p>--</p>
-<p>Arrays lend themselves, to some extent, to emulating data
-        structures for which Bash has no native support.</p>
+<p>배열을 좀 확장하면, Bash가 제공하지 않는 자료 구조도 흉내낼 수 있습니다.</p>
 <p>
 <a name="STACKEX0">
 </a>
@@ -1900,15 +1899,16 @@ exit 0
 </table>
 </div>
 <p>--</p>
-<p>Fancy manipulation of array <span class="QUOTE">"subscripts"</span> may require
-        intermediate variables. For projects involving this, again consider
-	using a more powerful programming language, such as Perl or C.</p>
+<p>중간 변수를 쓰면 배열의 
+<span class="QUOTE">"첨자(subscripts)"</span> 를 능숙하게 조작할 수 있습니다. 
+다시 말하지만, 이런 일이 필요한 프로젝트들은 Perl 이나 C 처럼 더 강력한 프로그래밍 
+언어의 사용을 고려해 보기 바랍니다.</p>
 <div class="EXAMPLE">
 <a name="QFUNCTION">
 </a>
 <p>
-<b>예제 27-16. Complex array application:
-             <em>Exploring a weird mathematical series</em>
+<b>예제 27-16. 복잡한 배열의 응용:
+<em>기묘한 수학 급수 탐색</em>
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -1986,13 +1986,12 @@ exit 0
 <a name="ARRAYMULTIDIM">
 </a>
 </p>
-<p>Bash supports only one-dimensional arrays, though a little
-        trickery permits simulating multi-dimensional ones.</p>
+<p>Bash 는 1차 배열만 지원하지만, 약간의 기술만 쓰면 다차원 배열을 흉내낼 수도 있습니다.</p>
 <div class="EXAMPLE">
 <a name="TWODIM">
 </a>
 <p>
-<b>예제 27-17. Simulating a two-dimensional array, then tilting it</b>
+<b>예제 27-17. 2차원 배열을 흉내낸 다음, 기울이기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
