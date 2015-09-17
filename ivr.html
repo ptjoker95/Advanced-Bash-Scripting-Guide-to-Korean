@@ -35,29 +35,32 @@
 <div class="CHAPTER">
 <h1>
 <a name="IVR">
-</a>Chapter 28. Indirect References</h1>
+</a>28장. 간접 참조</h1>
 <p>
 <a name="IVRREF">
 </a>
 </p>
-<p>We have seen that <a href="./varsubn.html">referencing
-        a variable</a>, <tt class="VARNAME">$var</tt>, fetches its
-        <i class="FIRSTTERM">value</i>. <a name="EVALINDREF">
-</a>But,
-        what about the <em>value of a value</em>? What
-        about <tt class="VARNAME">$$var</tt>?</p>
-<p>The actual notation is
-	<tt class="REPLACEABLE">
+<p>
+<tt class="VARNAME">$var</tt> 이 
+<a href="./varsubn.html">변수를 참조</a> 해서 
+<i class="FIRSTTERM">값</i> 을 가져온다는 것은 이미 알고 있습니다. 
+<a name="EVALINDREF">
+</a>그럼 
+<em>값의 값</em> 은 어떻게 될까요? 
+<tt class="VARNAME">$$var</tt> 는 어떻게 될까요?
+</p>
+<p>실제 표기는 
+<tt class="REPLACEABLE">
 <i>\$$var</i>
-</tt>, usually preceded by
-	an <a href="./internal.html#EVALREF">eval</a> (and sometimes an
-	<a href="./internal.html#ECHOREF">echo</a>). This is called an
-	<i class="FIRSTTERM">indirect reference</i>.</p>
+</tt>, 이고 일반적으로 앞에 
+<a href="./internal.html#EVALREF">eval</a> (그리고 때때로 
+<a href="./internal.html#ECHOREF">echo</a>) 가 붙습니다. 이것을 
+<i class="FIRSTTERM">간접 참조</i> 라고 합니다.</p>
 <div class="EXAMPLE">
 <a name="INDREF">
 </a>
 <p>
-<b>예제 28-1. Indirect Variable References</b>
+<b>예제 28-1. 간접 변수 참조</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -162,14 +165,15 @@ exit 0</pre>
 </a>
 <p>
 </p>
-<p>Indirect referencing in Bash
-        is a multi-step process. First, take the name of a variable:
-	<tt class="VARNAME">varname</tt>. Then, reference it:
-	<tt class="VARNAME">$varname</tt>. Then, reference the reference:
-	<tt class="VARNAME">$$varname</tt>. Then, <i class="FIRSTTERM">escape</i>
-	the first <span class="TOKEN">$</span>: <tt class="VARNAME">\$$varname</tt>.
-	Finally, force a reevaluation of the expression and assign it:
-	<b class="COMMAND">eval newvar=\$$varname</b>.</p>
+<p>Bash 에서의 간접 참조는 여러 단계를 거칩니다. 우선 변수의 이름: 
+<tt class="VARNAME">varname</tt> 을 씁니다. 그리고, 그 변수를 참조합니다:
+<tt class="VARNAME">$varname</tt>. 다음엔 참조를 참조합니다:
+<tt class="VARNAME">$$varname</tt>. 첫번째 
+<span class="TOKEN">$</span> 를 
+<i class="FIRSTTERM">escape</i> 합니다:
+<tt class="VARNAME">\$$varname</tt>. 
+ 마지막으로 표현식을 재실행하고 할당합니다:
+<b class="COMMAND">eval newvar=\$$varname</b>.</p>
 <p>
 </p>
 </div>
