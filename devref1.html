@@ -22,7 +22,9 @@
 <td align="left" valign="bottom" width="10%">
 <a href="./devproc.html" accesskey="P">이전</a>
 </td>
-<td align="center" valign="bottom" width="80%">Chapter 29. <tt class="FILENAME">/dev</tt> and <tt class="FILENAME">/proc</tt>
+<td align="center" valign="bottom" width="80%">29장. 
+<tt class="FILENAME">/dev</tt> 와  
+<tt class="FILENAME">/proc</tt>
 </td>
 <td align="right" valign="bottom" width="10%">
 <a href="./procref1.html" accesskey="N">다음</a>
@@ -39,18 +41,17 @@
 </h1>
 <p>
 <a name="DEVFILEREF">
-</a>The <tt class="FILENAME">/dev</tt> directory contains entries for
-	the <i class="FIRSTTERM">physical devices</i> that may or may not
-	be present in the hardware.
-
-	   <a name="AEN19045" href="#FTN.AEN19045">
+</a>
+<tt class="FILENAME">/dev</tt> 디렉토리는 하드웨어에 있거나 혹은 있지 않더라도 
+<i class="FIRSTTERM">물리적 디바이스</i> 를 위한 목록을 가지고 있습니다.
+<a name="AEN19045" href="#FTN.AEN19045">
 <span class="footnote">[1]</span>
 </a>
-	
-	Appropriately enough, these are called <i class="FIRSTTERM">device
-	files</i>.
-	As an example, the hard drive partitions containing
-	the mounted filesystem(s) have entries in <tt class="FILENAME">/dev</tt>, as <a href="./system.html#DFREF">df</a> shows.</p>
+이것들을 
+<i class="FIRSTTERM">디바이스 파일</i> 이라고 말해도 충분히 적절할 것입니다. 
+예를 들어 마운트된 파일으로서 하드드라이브 파티션들은 
+<tt class="FILENAME">/dev</tt> 에 목록으로 되어 있으며, 
+<a href="./system.html#DFREF">df</a> 로는 아래와 같이 볼 수 있습니다.</p>
 <p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
@@ -58,62 +59,62 @@
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>df</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>df</b></tt>
 <tt class="COMPUTEROUTPUT">Filesystem           1k-blocks      Used Available Use%
  Mounted on
  /dev/hda6               495876    222748    247527  48% /
  /dev/hda1                50755      3887     44248   9% /boot
  /dev/hda8               367013     13262    334803   4% /home
  /dev/hda5              1714416   1123624    503704  70% /usr</tt>
-	      </pre>
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-        </p>
+</p>
 <p>
 <a name="LOOPBACKREF">
-</a>Among other things, the <tt class="FILENAME">/dev</tt> directory
-	contains <i class="FIRSTTERM">loopback</i> devices, such as
-	<tt class="FILENAME">/dev/loop0</tt>. A loopback device is a gimmick
-	that allows an ordinary file to be accessed as if it were a
-	block device.
-
-	  <a name="AEN19065" href="#FTN.AEN19065">
+</a>다른 것들 사이에, 
+<tt class="FILENAME">/dev</tt> 디렉토리는,  
+<tt class="FILENAME">/dev/loop0</tt> 와 같이, 
+<i class="FIRSTTERM">루프백</i> 디바이스를 포함하고 있습니다. 루프백 디바이스는 
+일반적인 파일을 블럭 디바이스처럼 접근할 수 있게하는 일종의 속임수입니다.
+<a name="AEN19065" href="#FTN.AEN19065">
 <span class="footnote">[2]</span>
 </a>
-
-	This permits mounting an entire filesystem within a
-	single large file. See <a href="./system.html#CREATEFS">예제 17-8</a> and <a href="./system.html#ISOMOUNTREF">예제 17-7</a>.</p>
-<p>A few of the pseudo-devices in <tt class="FILENAME">/dev</tt>
-	 have other specialized uses, such as <a href="./zeros.html#ZEROSREF">
+이 루프백 디바이스는 파일 시스템 전체를 하나의 큰 파일로 마운트할 수 있게 해줍니다. 
+<a href="./system.html#CREATEFS">예제 17-8</a> 와 
+<a href="./system.html#ISOMOUNTREF">예제 17-7</a> 를 참고하세요.
+</p>
+<p>
+<tt class="FILENAME">/dev</tt> 에 있는 몇몇 가짜 디바이스들, 즉, 
+<a href="./zeros.html#ZEROSREF">
 <tt class="FILENAME">/dev/null</tt>
-</a>, <a href="./zeros.html#ZEROSREF1">
+</a>, 
+<a href="./zeros.html#ZEROSREF1">
 <tt class="FILENAME">/dev/zero</tt>
-</a>, <a href="./randomvar.html#URANDOMREF">
+</a>, 
+<a href="./randomvar.html#URANDOMREF">
 <tt class="FILENAME">/dev/urandom</tt>
 </a>,
-	 <tt class="FILENAME">/dev/sda1</tt> (hard drive partition),
-	 <tt class="FILENAME">/dev/udp</tt> (<i class="FIRSTTERM">User
-	 Datagram Packet</i> port), and <a href="./devref1.html#DEVTCP">
+<tt class="FILENAME">/dev/sda1</tt> (하드 드라이브 파티션),
+<tt class="FILENAME">/dev/udp</tt> (
+<i class="FIRSTTERM">사용자 데이터그램 패킷</i> 포트), 그리고 
+<a href="./devref1.html#DEVTCP">
 <tt class="FILENAME">/dev/tcp</tt>
-</a>.</p>
-<p>For instance:</p>
-<p>To manually <a href="./system.html#MOUNTREF">mount</a>
-         a USB flash drive, append the following line to
-         <a href="./system.html#FSTABREF">
+</a> 와 같은 것들은 특수한 사용처가 있습니다.
+</p>
+<p>예를 들어:</p>
+<p>USB 플래쉬 드라이브를 수동으로 
+<a href="./system.html#MOUNTREF">마운트</a> 하려면, 
+<a href="./system.html#FSTABREF">
 <tt class="FILENAME">/etc/fstab</tt>
-</a>.
-
-	      <a name="AEN19093" href="#FTN.AEN19093">
+</a> 에 다음 줄을 추가합니다.
+<a name="AEN19093" href="#FTN.AEN19093">
 <span class="footnote">[3]</span>
 </a>
-
-	   <table bgcolor="#E0E0E0" border="0" width="100%">
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -124,10 +125,9 @@
 </tr>
 </tbody>
 </table>
-
-         (See also <a href="./contributed-scripts.html#USBINST">예제 A-23</a>.)</p>
-<p>Checking whether a disk is in the CD-burner
-         (soft-linked to <tt class="FILENAME">/dev/hdc</tt>):
+(<a href="./contributed-scripts.html#USBINST">예제 A-23</a> 를 참고하세요.)</p>
+<p>CD 라이터에 디스크가 있는지 확인하기 
+(<tt class="FILENAME">/dev/hdc</tt> 에 소프트 링크):
 
 	 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -163,10 +163,11 @@
 <a name="SOCKETREF">
 </a>
 </p>
-<p>When executing a command on a
-         <tt class="FILENAME">/dev/tcp/$host/$port</tt> pseudo-device file, Bash
-	 opens a TCP connection to the associated
-	 <i class="FIRSTTERM">socket</i>.</p>
+<p>
+<tt class="FILENAME">/dev/tcp/$host/$port</tt> 가짜 디바이스 파일에 명령어를 
+실행하면, Bash 는 연결된 
+<i class="FIRSTTERM">소켓</i> 에 TCP 연결을 합니다.
+</p>
 <table class="SIDEBAR" border="1" cellpadding="5">
 <tbody>
 <tr>
@@ -176,15 +177,14 @@
 </a>
 <p>
 </p>
-<p>A <i class="FIRSTTERM">socket</i> is a
-	      communications node associated with a specific I/O
-	      port. (This is analogous to a <i class="FIRSTTERM">hardware
-	      socket</i>, or <i class="FIRSTTERM">receptacle</i>,
-	      for a connecting cable.) It permits data transfer between
-	      hardware devices on the same machine, between machines
-	      on the same network, between machines across different
-	      networks, and, of course, between machines at different
-	      locations on the Internet.</p>
+<p>
+<i class="FIRSTTERM">소켓</i> 은 특정된 I/O 포트에 연결된 통신 노드입니다. 
+(이것은 케이블로 연결된 
+<i class="FIRSTTERM">하드웨어 소켓</i>, 이나 
+<i class="FIRSTTERM">저장소</i> 와 유사합니다.) 이것은 같은 기계에 있는 하드웨어 
+디바이스 사이, 같은 네트워크에 있는 기계 사이, 다른 네트워크에 있는 기계 사이, 그리고, 
+물론 인터넷에 있는 다른 곳에 있는 기계 사이에의 자료 전송을 가능하게 합니다.
+</p>
 <p>
 </p>
 </div>
@@ -194,28 +194,26 @@
 </table>
 <p>
 <a name="NPREF">
-</a>The following examples assume an active Internet
-         connection.</p>
-<p>Getting the time from <tt class="FILENAME">nist.gov</tt>:</p>
+</a>다음 예들은 인터넷 연결이 되어 있다고 가정하고 있습니다.</p>
+<p>
+<tt class="FILENAME">nist.gov</tt> 에서 시간 받아오기:</p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat &lt;/dev/tcp/time.nist.gov/13</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat &lt;/dev/tcp/time.nist.gov/13</b></tt>
 <tt class="COMPUTEROUTPUT">53082 04-03-18 04:26:54 68 0 0 502.3 UTC(NIST) *</tt>
-	      </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-<p>[Mark contributed this example.]</p>
-<p>Generalizing the above into a script:</p>
+<p>[Mark 가 이 예제에 도움을 주셨습니다.]</p>
+<p>위의 예를 스크립트로 일반화하기:</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -240,32 +238,24 @@ echo "UTC Time = "$UTC""</pre>
 </p>
 <p>
 <a name="NW001">
-</a>Downloading a URL:</p>
+</a>URL 다운로드하기:</p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>exec 5&lt;&gt;/dev/tcp/www.net.cn/80</b>
-</tt>
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo -e "GET / HTTP/1.0\n" &gt;&amp;5</b>
-</tt>
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat &lt;&amp;5</b>
-</tt>
-	      </pre>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>exec 5&lt;&gt;/dev/tcp/www.net.cn/80</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo -e "GET / HTTP/1.0\n" &gt;&amp;5</b></tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat &lt;&amp;5</b></tt>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-<p>[Thanks, Mark and Mihai Maties.]</p>
+<p>[Mark 와 Mihai Maties 에게 감사드립니다.]</p>
 <div class="EXAMPLE">
 <a name="DEVTCP">
 </a>
