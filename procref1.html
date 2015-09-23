@@ -41,20 +41,20 @@
 <a name="PROCREF2">
 </a>
 </p>
-<p>The <tt class="FILENAME">/proc</tt> directory
-	is actually a pseudo-filesystem.  The files in <tt class="FILENAME">/proc</tt> mirror currently running
-	system and kernel <a href="./special-chars.html#PROCESSREF">processes</a>
-	and contain information and statistics about them.</p>
-<p>         <table bgcolor="#E0E0E0" border="1" width="100%">
+<p>
+<tt class="FILENAME">/proc</tt> 디렉토리는 실제로는 가짜 파일 시스템입니다. 
+<tt class="FILENAME">/proc</tt> 에 있는 파일들은 현재 실행 중인 시스템과 커널 
+<a href="./special-chars.html#PROCESSREF">프로세스</a> 와 그것들에 대한 정보와 통계를 
+가지고 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/devices</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/devices</b></tt>
 <tt class="COMPUTEROUTPUT">Character devices:
    1 mem
    2 pty
@@ -79,10 +79,7 @@
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/interrupts</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/interrupts</b></tt>
 <tt class="COMPUTEROUTPUT">           CPU0       
    0:      84505          XT-PIC  timer
    1:       3375          XT-PIC  keyboard
@@ -95,10 +92,7 @@
  ERR:          0</tt>
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/partitions</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/partitions</b></tt>
 <tt class="COMPUTEROUTPUT">major minor  #blocks  name     rio rmerge rsect ruse wio wmerge wsect wuse running use aveq
 
     3     0    3007872 hda 4472 22260 114520 94240 3551 18703 50384 549710 0 111550 644030
@@ -109,26 +103,17 @@
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/loadavg</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/loadavg</b></tt>
 <tt class="COMPUTEROUTPUT">0.13 0.42 0.27 2/44 1119</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/apm</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/apm</b></tt>
 <tt class="COMPUTEROUTPUT">1.16 1.2 0x03 0x01 0xff 0x80 -1% -1 ?</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>cat /proc/acpi/battery/BAT0/info</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>cat /proc/acpi/battery/BAT0/info</b></tt>
 <tt class="COMPUTEROUTPUT">present:                 yes
  design capacity:         43200 mWh
  last full capacity:      36640 mWh
@@ -145,23 +130,20 @@
  
  
  
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>fgrep Mem /proc/meminfo</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>fgrep Mem /proc/meminfo</b></tt>
 <tt class="COMPUTEROUTPUT">MemTotal:       515216 kB
  MemFree:        266248 kB</tt>
-         </pre>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-      </p>
-<p>Shell scripts may extract data from certain of the files in
-         <tt class="FILENAME">/proc</tt>.
-
-	   <a name="AEN19180" href="#FTN.AEN19180">
+</p>
+<p>쉘 스크립트는 
+<tt class="FILENAME">/proc</tt> 에 있는 몇몇 파일로부터 자료를 추출해 낼 수 있습니다.
+<a name="AEN19180" href="#FTN.AEN19180">
 <span class="footnote">[1]</span>
 </a>
 </p>
@@ -293,26 +275,28 @@ fi</pre>
 <img src="procref1_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>It is even possible to control certain peripherals with commands
-	  sent to the <tt class="FILENAME">/proc</tt> directory.
-
-          <table bgcolor="#E0E0E0" border="1" width="100%">
+<p>
+<tt class="FILENAME">/proc</tt> 디렉토리에 명령어를 보냄으로 주변장치를 조종할 수도 
+있습니다.
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
-<pre class="SCREEN">	  <tt class="PROMPT">root# </tt>
-<b class="COMMAND">echo on &gt; /proc/acpi/ibm/light</b>
-          </pre>
+<pre class="SCREEN">
+<tt class="PROMPT">root# </tt><b class="COMMAND">echo on &gt; /proc/acpi/ibm/light</b>
+
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-
-	  This turns on the <em>Thinklight</em> in certain models
-	  of IBM/Lenovo Thinkpads. (May not work on all Linux distros.)</p>
-<p>Of course, caution is advised when writing to <tt class="FILENAME">/proc</tt>.</p>
+위의 예는 IBM/Lenovo Thinkpad 의 특정 모델의 
+<em>Thinklight</em> 를 켭니다. (모든 리눅스 배포판에서 작동하지는 않을 수 있습니다.)
+</p>
+<p>물론, 
+<tt class="FILENAME">/proc</tt> 에 무언가를 쓸 때에는 조심해야합니다.</p>
 </td>
 </tr>
 </tbody>
@@ -322,24 +306,23 @@ fi</pre>
 <a name="PROCRUNNING">
 </a>
 </p>
-<p>The <tt class="FILENAME">/proc</tt> directory
-	   contains subdirectories with unusual numerical
-	   names.  Every one of these names maps to the <a href="./internalvariables.html#PPIDREF">process ID</a> of a currently running
-	   process.  Within each of these subdirectories, there are
-	   a number of files that hold useful information about the
-	   corresponding process.  The <tt class="FILENAME">stat</tt> and
-	   <tt class="FILENAME">status</tt> files keep running statistics
-	   on the process, the <tt class="FILENAME">cmdline</tt> file holds
-	   the command-line arguments the process was invoked with, and
-	   the <tt class="FILENAME">exe</tt> file is a symbolic link to the
-	   complete path name of the invoking process. There are a few
-	   more such files, but these seem to be the most interesting
-	   from a scripting standpoint.</p>
+<p>
+<tt class="FILENAME">/proc</tt> 디렉토리는 평범하지 않은 숫자로 된 하위 디렉토리를 
+가지고 있습니다. 이 이름들은 현재 실행되고 있는 프로세스의 
+<a href="./internalvariables.html#PPIDREF">프로세스 ID</a> 에 매핑되어 있습니다. 
+이 하위 디렉토리 안에는, 각 프로세스에 해당하는 유용한 정보를 가진 수 많은 파일이 있습니다. 
+<tt class="FILENAME">stat</tt> 과 
+<tt class="FILENAME">status</tt> 파일은 프로세스의 실시간 통계를, 
+<tt class="FILENAME">cmdline</tt> 파일은 프로세스가 불려진 명령어 라인 인수를, 그리고 
+<tt class="FILENAME">exe</tt> 파일은 실행중인 프로세스의 완전한 경로명을 심볼릭 링크하고 
+있습니다. 이외에도 몇가지 파일들이 더 있지만, 스크립트의 관점에서는 이것들이 가장 흥미있는 
+파일들입니다.
+</p>
 <div class="EXAMPLE">
 <a name="PIDID">
 </a>
 <p>
-<b>예제 29-3. Finding the process associated with a PID</b>
+<b>예제 29-3. PID 와 관계있는 프로세스 찾기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -441,7 +424,7 @@ exit 0</pre>
 <a name="CONSTAT">
 </a>
 <p>
-<b>예제 29-4. On-line connect status</b>
+<b>예제 29-4. 온라인 연결 상태</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -456,7 +439,7 @@ exit 0</pre>
 PROCNAME=pppd        # ppp daemon
 PROCFILENAME=status  # Where to look.
 NOTCONNECTED=85
-INTERVAL=2           # 위date every 2 seconds.
+INTERVAL=2           # Update every 2 seconds.
 
 pidno=$( ps ax | grep -v "ps ax" | grep -v grep | grep $PROCNAME |
 awk '{ print $1 }' )
@@ -528,9 +511,11 @@ exit 0
 <img src="procref1_files/warning.gif" alt="Warning" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>In general, it is dangerous to
-	 <em>write</em> to the files in <tt class="FILENAME">/proc</tt>, as this can corrupt the
-	 filesystem or crash the machine.</p>
+<p>일반적으로, 
+<tt class="FILENAME">/proc</tt> 에 있는 파일에 무언가를 
+<em>쓰는</em> 것은 위험합니다, 이것은 파일 시스템을 파괴하거나 기기를 부술 수 
+있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -547,13 +532,13 @@ exit 0
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>Certain system commands, such as
-	     <a href="./system.html#PROCINFOREF">procinfo</a>,
-	     <a href="./system.html#FREEREF">free</a>,
-	     <a href="./system.html#VMSTATREF">vmstat</a>,
-	     <a href="./system.html#LSDEVREF">lsdev</a>,
-	     and <a href="./system.html#UPTIMEREF">uptime</a>
-	     do this as well.</p>
+<p>
+<a href="./system.html#PROCINFOREF">procinfo</a>,
+<a href="./system.html#FREEREF">free</a>,
+<a href="./system.html#VMSTATREF">vmstat</a>,
+<a href="./system.html#LSDEVREF">lsdev</a>, 그리고 
+<a href="./system.html#UPTIMEREF">uptime</a> 와 같은 특정 시스템 명령어는 이런 작업에 
+적절합니다.</p>
 </td>
 </tr>
 </tbody>
