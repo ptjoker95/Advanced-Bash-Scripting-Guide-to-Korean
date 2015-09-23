@@ -260,8 +260,8 @@ echo "UTC Time = "$UTC""</pre>
 <a name="DEVTCP">
 </a>
 <p>
-<b>예제 29-1. Using <tt class="FILENAME">/dev/tcp</tt> for
-	      troubleshooting</b>
+<b>예제 29-1. 문제 해결을 위해 
+<tt class="FILENAME">/dev/tcp</tt> 사용하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -314,7 +314,7 @@ exit $MYEXIT</pre>
 <a name="MUSICSCR">
 </a>
 <p>
-<b>예제 29-2. Playing music</b>
+<b>예제 29-2. 음악 연주하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -378,14 +378,16 @@ exit      # A "bonny" example of an elegant shell script!</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>The entries in <tt class="FILENAME">/dev</tt>
-	     provide mount points for physical and virtual devices. These
-	     entries use very little drive space.</p>
-<p>Some devices, such as <tt class="FILENAME">/dev/null</tt>,
-	   <tt class="FILENAME">/dev/zero</tt>,
-	   and <tt class="FILENAME">/dev/urandom</tt> are virtual. They
-	   are not actual physical devices and exist only in
-	   software.</p>
+<p>
+<tt class="FILENAME">/dev</tt> 에 있는 것들은 물리적 그리고 가상의 기기에의 마운트 지점을 
+제공합니다. 이 것들은 디스크 공간을 매우 작게 차지합니다.
+</p>
+<p>
+<tt class="FILENAME">/dev/null</tt>, 
+<tt class="FILENAME">/dev/zero</tt>, 그리고 
+<tt class="FILENAME">/dev/urandom</tt> 들은 가상의 기기입니다. 이것들은 
+실제 물리적 기기가 아니고, 소트프웨어 적으로만 존재합니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -397,15 +399,15 @@ exit      # A "bonny" example of an elegant shell script!</pre>
 <td align="LEFT" valign="TOP" width="95%">
 <p>
 <a name="BLOCKDEVREF">
-</a>A <i class="FIRSTTERM">block
-	    device</i> reads and/or writes data in chunks,
-	    or <i class="FIRSTTERM">blocks</i>, in contrast to a <a name="CHARDEVREF">
 </a>
-<i class="FIRSTTERM">character device</i>,
-	    which acesses data in <i class="FIRSTTERM">character</i>
-	    units. 예제s of block devices are hard drives, CDROM
-	    drives, and flash drives. 예제s of character devices are
-	    keyboards, modems, sound cards.</p>
+<i class="FIRSTTERM">블럭 디바이스</i> 는 데이터를 한 뭉치 혹은 
+<i class="FIRSTTERM">블럭</i> 단위로 읽거나 쓰는데 반해, 
+<a name="CHARDEVREF"></a>
+<i class="FIRSTTERM">문자 디바이스</i> 는 
+<i class="FIRSTTERM">문자</i> 단위로 데이터에 접근합니다. 블럭 디바이스의 예는 
+하드 드라이브, CDROM 드라이브, 그리고 플래쉬 드라이브입니다. 문자 디바이스의 예는 
+키보드, 모뎀, 사운드 카드입니다.
+</p>
 </td>
 </tr>
 <tr>
@@ -415,16 +417,16 @@ exit      # A "bonny" example of an elegant shell script!</pre>
 </a>
 </td>
 <td align="LEFT" valign="TOP" width="95%">
-<p>Of course, the mount point
-	        <tt class="FILENAME">/mnt/flashdrive</tt> must exist. If not,
-		then, as <i class="FIRSTTERM">root</i>, <b class="COMMAND">mkdir
-		/mnt/flashdrive</b>.</p>
-<p>To actually mount the drive, use the following command:
-	       <b class="COMMAND">mount /mnt/flashdrive</b>
+<p>물론 
+<tt class="FILENAME">/mnt/flashdrive</tt> 의 마운트 포인트가 있어야 합니다. 그렇지 않으면, 
+<i class="FIRSTTERM">관리자 권한</i> 으로, 
+<b class="COMMAND">mkdir /mnt/flashdrive</b> 을 하십시요.</p>
+<p>실제로 드라이브를 마운트 하기 위해선, 다음의 명령어를 사용하십시요: 
+<b class="COMMAND">mount /mnt/flashdrive</b>
 </p>
-<p>Newer Linux distros automount flash drives in the
-	       <tt class="FILENAME">/media</tt>
-	       directory without user intervention.</p>
+<p>새 리눅스 배포판은 사용자가 하지 않아도 플래쉬 드라이브를 
+<tt class="FILENAME">/media</tt> 디렉토리에 자동으로 마운트합니다.
+</p>
 </td>
 </tr>
 </tbody>
