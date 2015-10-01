@@ -35,7 +35,7 @@
 <div class="CHAPTER">
 <h1>
 <a name="NETWORKPROGRAMMING">
-</a>Chapter 30. Network Programming</h1>
+</a>30장. 네트워크 프로그래밍</h1>
 <table class="EPIGRAPH" border="0" cellpadding="0" cellspacing="0" width="100%">
 <tbody>
 <tr>
@@ -43,8 +43,8 @@
 <td align="LEFT" valign="TOP" width="45%">
 <i>
 <p>
-<i>The Net's a cross between an elephant and a white
-	      elephant sale: it never forgets, and it's always crap.</i>
+<i>The Net's a cross between an elephant and a white elephant sale: it never forgets, 
+and it's always crap.</i>
 </p>
 <p>
 <i>--Nemo</i>
@@ -54,20 +54,20 @@
 </tr>
 </tbody>
 </table>
-<p>A Linux system has quite a number of tools for accessing,
-      manipulating, and troubleshooting network connections. We can
-      incorporate some of these tools into scripts -- scripts that
-      expand our knowledge of networking, useful scripts that can
-      facilitate the administration of a network.</p>
+<p>리눅스 시스템은 네트워크 연결에 접속하고, 연결을 조작하고, 문제를 해결하는데 
+사용하는 수많은 도구를 가지고 있습니다. 사용자는 이런 도구들 몇몇을 스크립트 -- 
+네트워크에 대한 우리의 지식을 넓혀주고, 네트워크 관리를 쉽게 해주는 스크립트를 작성할 
+수 있습니다.
+</p>
 <p>
 <a name="CGISCRIPT">
-</a>Here is a simple CGI
-      script that demonstrates connecting to a remote server.</p>
+</a>다음 예는 원격 서버에 연결하는 간단한 CGI 스크립트입니다.
+</p>
 <div class="EXAMPLE">
 <a name="TESTCGI">
 </a>
 <p>
-<b>예제 30-1. Print the server environment</b>
+<b>예제 30-1. 서버 환경 프린트하기</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -145,8 +145,7 @@ _test_CGI_</pre>
 </tbody>
 </table>
 </div>
-<p>For security purposes, it may be helpful to identify the IP
-      addresses a computer is accessing.</p>
+<p>보안을 위해, 접속하고 있는 컴퓨터의 IP 주소를 확인하면 도움이 될 것입니다.</p>
 <p>
 <a name="IPTABLES02">
 </a>
@@ -155,7 +154,7 @@ _test_CGI_</pre>
 <a name="IPADDRESSES">
 </a>
 <p>
-<b>예제 30-2. IP addresses</b>
+<b>예제 30-2. IP 주소</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -206,8 +205,7 @@ lsof "$lsof_args" | grep $connection_type | grep -v "$no_match" |
 </tbody>
 </table>
 </div>
-<p>More examples of network programming:
-       </p>
+<p>네트워크 프로그래밍에 관한 예들</p>
 <p>
 </p>
 <ol type="1">
