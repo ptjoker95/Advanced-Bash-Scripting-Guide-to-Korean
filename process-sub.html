@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>Process Substitution</title>
+<title>프로세스 치환</title>
 <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7">
 <link rel="HOME" title="Advanced Bash-Scripting Guide" href="./index.html">
 <link rel="UP" title="Advanced Topics" href="./part5.html">
@@ -35,47 +35,48 @@
 <div class="CHAPTER">
 <h1>
 <a name="PROCESS-SUB">
-</a>Chapter 23. Process Substitution</h1>
+</a>23장. 프로세스 치환</h1>
 <p>
 <a name="PROCESSSUBREF">
-</a>
-<a href="./special-chars.html#PIPEREF">Piping</a> the <tt class="FILENAME">stdout</tt>
-	of a command into the <tt class="FILENAME">stdin</tt> of another
-	is a powerful technique.  But, what if you need to pipe the
-	<tt class="FILENAME">stdout</tt> of <em>multiple</em>
-	commands? This is where <tt class="REPLACEABLE">
-<i>process
-	substitution</i>
-</tt> comes in.</p>
+</a>명령어의 
+<tt class="FILENAME">표준 출력</tt> 을 다른 명령어의 
+<tt class="FILENAME">표준 입력</tt> 으로 
+<a href="./special-chars.html#PIPEREF">파이프 (Piping)</a> 하는 것은 강력한 기술입니다. 하지만, 
+<em>여러</em> 명령어의 
+<tt class="FILENAME">표준 출력</tt> 을 파이프해야한다면? 이럴 때
+<tt class="REPLACEABLE">
+<i>프로세스 치환</i>
+</tt> 을 사용합니다.
+</p>
 <p>
-<i class="FIRSTTERM">Process substitution</i> feeds the
-        output of a <a href="./special-chars.html#PROCESSREF">process</a> (or
-        processes) into the <tt class="FILENAME">stdin</tt> of another
-        process.</p>
+<i class="FIRSTTERM">프로세스 치환</i> 은 
+<a href="./special-chars.html#PROCESSREF">프로세스</a> (혹은 여러 프로세스) 의 출력을 
+다른 프로세스의 
+<tt class="FILENAME">표준 입력</tt> 으로 집어넣습니다.
+</p>
 <p>
 </p>
 <div class="VARIABLELIST">
 <p>
 <b>
 <a name="COMMANDSPARENS1">
-</a>Template</b>
+</a>원형</b>
 </p>
 <dl>
-<dt>Command list enclosed within parentheses</dt>
+<dt>소괄호 안에 들어간 명령어 리스트</dt>
 <dd>
 <p>
-<b class="COMMAND">&gt;(command_list)</b>
+<b class="COMMAND">&gt;(명령어 리스트)</b>
 </p>
 <p>
-<b class="COMMAND">&lt;(command_list)</b>
+<b class="COMMAND">&lt;(명령어 리스트)</b>
 </p>
-<p>Process substitution uses
-	    <tt class="FILENAME">/dev/fd/&lt;n&gt;</tt> files to send the
-	    results of the process(es) within parentheses to another process.
-	      <a name="AEN18244" href="#FTN.AEN18244">
+<p>프로세스 치환은 소괄호 안에 있는 프로세스들의 결과를 다른 프로세스에 전달하기 위해 
+<tt class="FILENAME">/dev/fd/&lt;n&gt;</tt> 파일을 사용합니다.
+<a name="AEN18244" href="#FTN.AEN18244">
 <span class="footnote">[1]</span>
 </a>
-	  </p>
+</p>
 <div class="CAUTION">
 <p>
 </p>
@@ -86,9 +87,11 @@
 <img src="process-sub_files/caution.gif" alt="Caution" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>There is <em>no</em> space between the
-            the <span class="QUOTE">"&lt;"</span> or <span class="QUOTE">"&gt;"</span> and the parentheses.
-            Space there would give an error message.</p>
+<p>
+<span class="QUOTE">"&lt;"</span> 나 
+<span class="QUOTE">"&gt;"</span> 그리고 소괄호 사이에는 빈칸이 
+<em>없습니다</em>. 빈칸은 에러를 낼 수 있습니다.
+</p>
 </td>
 </tr>
 </tbody>
@@ -103,42 +106,24 @@
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo &gt;(true)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo &gt;(true)</b></tt>
 <tt class="COMPUTEROUTPUT">/dev/fd/63</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo &lt;(true)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo &lt;(true)</b></tt>
 <tt class="COMPUTEROUTPUT">/dev/fd/63</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>echo &gt;(true) &lt;(true)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>echo &gt;(true) &lt;(true)</b></tt>
 <tt class="COMPUTEROUTPUT">/dev/fd/63 /dev/fd/62</tt>
 
 
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>wc &lt;(cat /usr/share/dict/linux.words)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>wc &lt;(cat /usr/share/dict/linux.words)</b></tt>
 <tt class="COMPUTEROUTPUT"> 483523  483523 4992010 /dev/fd/63</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>grep script /usr/share/dict/linux.words | wc</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>grep script /usr/share/dict/linux.words | wc</b></tt>
 <tt class="COMPUTEROUTPUT">    262     262    3601</tt>
 
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>wc &lt;(grep script /usr/share/dict/linux.words)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>wc &lt;(grep script /usr/share/dict/linux.words)</b></tt>
 <tt class="COMPUTEROUTPUT">    262     262    3601 /dev/fd/63</tt>
 	      </pre>
 </font>
@@ -157,34 +142,34 @@
 <img src="process-sub_files/note.gif" alt="Note" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>	  Bash creates a pipe with two <a href="./io-redirection.html#FDREF">file
-	  descriptors</a>, <tt class="FILENAME">--fIn</tt> and
-	  <tt class="FILENAME">fOut--</tt>.	The <tt class="FILENAME">stdin</tt>
-	  of <a href="./internal.html#TRUEREF">true</a> connects
-	  to <tt class="FILENAME">fOut</tt> (dup2(fOut, 0)),
-	  then Bash passes a <tt class="FILENAME">/dev/fd/fIn</tt>
-	  argument to <b class="COMMAND">echo</b>. On systems lacking
-	  <tt class="FILENAME">/dev/fd/&lt;n&gt;</tt> files, Bash may use
-	  temporary files. (Thanks, S.C.)
-          </p>
+<p>Bash 는 두 개의 
+<a href="./io-redirection.html#FDREF">파일 디스크립터</a>, 
+<tt class="FILENAME">--fIn</tt> 와 
+<tt class="FILENAME">fOut--</tt> 를 가지고 파이프를 만듭니다. 
+<a href="./internal.html#TRUEREF">true</a> 의 
+<tt class="FILENAME">표준 입력</tt> 이 
+<tt class="FILENAME">fOut</tt> (dup2(fOut, 0)) 에 연결되게되면, 
+Bash 는 
+<tt class="FILENAME">/dev/fd/fIn</tt> 인수를 
+<b class="COMMAND">echo</b> 에 넘겨줍니다. 시스템 상에 
+<tt class="FILENAME">/dev/fd/&lt;n&gt;</tt> 파일이 부족하면, Bash는 임시 파일들을 
+사용할 수도 있습니다. (S.C. 에게 감사드립니다.)
+</p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Process substitution can compare the output of two
-	       different commands, or even the output of different options
-	       to the same command.</p>
+<p>프로세스 치환은 두개의 다른 명령어의 출력을 비교할 수도 있고, 심지어 같은 명령어의 다른 
+옵션의 출력도 비교할 수 있습니다.
+</p>
 <table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
-<tt class="PROMPT">bash$ </tt>
-<tt class="USERINPUT">
-<b>comm &lt;(ls -l) &lt;(ls -al)</b>
-</tt>
+<tt class="PROMPT">bash$ </tt><tt class="USERINPUT"><b>comm &lt;(ls -l) &lt;(ls -al)</b></tt>
 <tt class="COMPUTEROUTPUT">total 12
 -rw-rw-r--    1 bozo bozo       78 Mar 10 12:58 File0
 -rw-rw-r--    1 bozo bozo       42 Mar 10 12:58 File2
@@ -205,10 +190,11 @@
 <a name="PCC2DIR">
 </a>
 </p>
-<p>	        Process substitution can compare the contents
-		of two directories -- to see which filenames are in one,
-		but not the other.</p>
-<p>		<table bgcolor="#E0E0E0" border="0" width="100%">
+<p>프로세스 치환으로 두 디렉토리의 내용 -- 어떤 파일명이 한쪽에는 있고, 다른 쪽에는 없는지를 비교할 
+수 있습니다.
+</p>
+<p>
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -219,8 +205,8 @@
 </tr>
 </tbody>
 </table>
-              </p>
-<p>Some other usages and uses of process substitution:</p>
+</p>
+<p>프로세스 치환의 다른 사용예들:</p>
 <p>
 <a name="PSFDSTDIN">
 </a>
@@ -305,7 +291,7 @@ tar cf /dev/fd/4 $directory_name 4&gt;&amp;1 &gt;&amp;3 3&gt;&amp;- | bzip2 -c &
 exec 3&gt;&amp;-
 
 
-# Thanks, St�phane Chazelas</pre>
+# Thanks, St?phane Chazelas</pre>
 </font>
 </td>
 </tr>
@@ -314,12 +300,12 @@ exec 3&gt;&amp;-
 </p>
 <p>
 <a name="GOODREAD0">
-</a>Here is a method of circumventing the
-       problem of an <a href="./gotchas.html#BADREAD0">
-<i class="FIRSTTERM">echo</i>
-       piped to a <i class="FIRSTTERM">while-read loop</i>
-</a> running
-       in a subshell.</p>
+</a>하위 쉘에서 동작하는 
+<a href="./gotchas.html#BADREAD0">
+<i class="FIRSTTERM">while-read 루프</i> 에 
+<i class="FIRSTTERM">echo</i> 를 파이프 
+</a> 되는 문제를 우회하는 방법입니다.
+</p>
 <div class="EXAMPLE">
 <a name="WRPS">
 </a>
@@ -472,7 +458,7 @@ done &lt; &lt;(route -n)
 # 127.0.0.0 0.0.0.0 255.0.0.0 U 0 0 0 lo
 # --------------------------------------------------------------#
 
-#  As St�phane Chazelas points out,
+#  As St?phane Chazelas points out,
 #+ an easier-to-understand equivalent is:
 route -n |
   while read des what mask iface; do   # Variables set from output of pipe.
