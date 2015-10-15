@@ -34,10 +34,10 @@
 <div class="SECT1">
 <h1 class="SECT1">
 <a name="COMPLEXFUNCT">
-</a>24.1. Complex Functions and Function Complexities</h1>
-<p>Functions may process arguments passed to them and return
-	an <a href="./exit-status.html#EXITSTATUSREF">exit status</a> to the script
-	for further processing.</p>
+</a>24.1. 복잡한 함수와 함수의 복잡성</h1>
+<p>함수는 전달받은 인수를 처리하고 앞으로 처리될 스크립트에 
+<a href="./exit-status.html#EXITSTATUSREF">종료 상태</a> 를 리턴할 수 있습니다.
+</p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
@@ -53,15 +53,16 @@
 <a name="PASSEDARGS">
 </a>
 </p>
-<p>The function refers to the passed arguments by position (as if they were
-	<a href="./internalvariables.html#POSPARAMREF">positional parameters</a>),
-	that is, <tt class="VARNAME">$1</tt>, <tt class="VARNAME">$2</tt>, and
-	so forth.</p>
+<p>함수는 넘겨받은 인수를 위치로 참조합니다 (마치 
+<a href="./internalvariables.html#POSPARAMREF">위치 매개변수</a> 처럼), 즉, 
+<tt class="VARNAME">$1</tt>, 
+<tt class="VARNAME">$2</tt> 과 같이 참조합니다.
+</p>
 <div class="EXAMPLE">
 <a name="EX60">
 </a>
 <p>
-<b>예제 24-2. Function Taking Parameters</b>
+<b>예제 24-2. 매개 변수를 사용하는 함수</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
