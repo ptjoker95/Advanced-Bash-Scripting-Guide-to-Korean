@@ -91,8 +91,8 @@ exit $?   # 0! Why?</pre>
 </tbody>
 </table>
 </div>
-<p>Output from script:
-	<table bgcolor="#E0E0E0" border="1" width="100%">
+<p>스크립트 출력:
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
@@ -105,13 +105,14 @@ exit $?   # 0! Why?</pre>
 </tr>
 </tbody>
 </table>
-        What's wrong with the above script? Hint: after the
-        <i class="FIRSTTERM">if</i>.</p>
+스크립트의 무엇이 잘못된 걸까요? 힌트: 
+<i class="FIRSTTERM">if</i> 다음을 잘 살펴보세요.</p>
 <div class="EXAMPLE">
 <a name="MISSINGKEYWORD">
 </a>
 <p>
-<b>예제 32-2. Missing <a href="./internal.html#KEYWORDREF">keyword</a>
+<b>예제 32-2. 
+<a href="./internal.html#KEYWORDREF">키워드</a> 빠트리기
 </b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
@@ -140,33 +141,32 @@ exit 0     # Will not exit here!
 </tbody>
 </table>
 </div>
-<p>Output from script:
-	<table bgcolor="#E0E0E0" border="1" width="100%">
+<p>스크립트 출력:
+<table bgcolor="#E0E0E0" border="1" width="100%">
 <tbody>
 <tr>
 <td>
 <font color="#000000">
 <pre class="SCREEN">
 <tt class="COMPUTEROUTPUT">missing-keyword.sh: line 10: syntax error: unexpected end of file</tt>
-	</pre>
+</pre>
 </font>
 </td>
 </tr>
 </tbody>
 </table>
-	Note that the error message does <em>not</em> necessarily
-	reference the line in which the error occurs, but the line where the
-	Bash interpreter finally becomes aware of the error.
-	</p>
-<p>Error messages may disregard comment lines in a script when
-        reporting the line number of a syntax error.</p>
-<p>What if the script executes, but does not work as expected? This is the
-	all too familiar logic error.</p>
+에러 메세지가 에러가 일어난 곳을 언급하는 게 
+<em>아닌</em>, Bash 인터프리터가 에러를 감지하게 된 줄을 알려주는 것을 알 수 있습니다.
+</p>
+<p>에러 메세지는 구문 에러의 줄을 리포트할 때 주석줄을 무시할 수도 있습니다.
+</p>
+<p>스크립트가 실행될 때 원하는 대로 작동하지 않는다면? 로직 에러일 가능성이 큽니다.
+</p>
 <div class="EXAMPLE">
 <a name="EX75">
 </a>
 <p>
-<b>예제 32-3. <i class="FIRSTTERM">test24</i>: another buggy script</b>
+<b>예제 32-3. <i class="FIRSTTERM">test24</i>: 다른 스크립트 버그</b>
 </p>
 <table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
@@ -195,26 +195,27 @@ exit 0</pre>
 </tbody>
 </table>
 </div>
-<p>Try to find out what's wrong with <a href="./debugging.html#EX75">예제 32-3</a>
-	by uncommenting the <tt class="USERINPUT">
+<p>
+<a href="./debugging.html#EX75">예제 32-3</a> 에서 
+<tt class="USERINPUT">
 <b>echo "$badname"</b>
-</tt> line. Echo
-	statements are useful for seeing whether what you expect is
-	actually what you get.</p>
-<p>In this particular case, <tt class="USERINPUT">
+</tt> 를 이용해서 무엇이 잘못되었는지 알아보십시요. Echo 명령어는 원하는대로 이루어지는 지 
+확인하는 데 유용합니다.
+</p>
+<p>이 경우에, 
+<tt class="USERINPUT">
 <b>rm "$badname"</b>
-</tt>
-	will not give the desired results because
-	<tt class="VARNAME">$badname</tt> should not be quoted. Placing it
-	in quotes ensures that <b class="COMMAND">rm</b> has only one
-	argument (it will match only one filename). A partial fix
-	is to remove to quotes from <tt class="VARNAME">$badname</tt> and
-	to reset <tt class="VARNAME">$IFS</tt> to contain only a newline,
-	<tt class="USERINPUT">
+</tt> 는 
+<tt class="VARNAME">$badname</tt> 가 인용되었기 때문에 원하는 결과를 얻지 못합니다. 
+인용문 안에 두게 되면 
+<b class="COMMAND">rm</b> 는 단지 하나의 인수만 가지게 됩니다 (하나의 파일명에만 적용됩니다). 
+불완전한 수정은 
+<tt class="VARNAME">$badname</tt> 에서 인용문을 제거하고, 
+<tt class="VARNAME">$IFS</tt> 에 새줄, 
+<tt class="USERINPUT">
 <b>IFS=$'\n'</b>
-</tt>. However, there are simpler
-	ways of going about it.
-	<table bgcolor="#E0E0E0" border="0" width="100%">
+</tt> 만 가지게 리셋하면 됩니다. 하지만, 이를 위해서 더 쉬운 방법이 있습니다.
+<table bgcolor="#E0E0E0" border="0" width="100%">
 <tbody>
 <tr>
 <td>
@@ -229,41 +230,46 @@ rm *' '*
 </tr>
 </tbody>
 </table>
-	
-	</p>
-<p>Summarizing the symptoms of a buggy script,
-	</p>
+</p>
+<p>버그가 있는 스크립트의 징후를 요약하자면, 
+</p>
 <p>
 </p>
 <ol type="1">
 <li>
-<p>It bombs with a <span class="QUOTE">"<span class="ERRORNAME">syntax error</span>"</span> message, or</p>
+<p>
+<span class="QUOTE">"
+<span class="ERRORNAME">구문 에러 (syntax error)
+</span>"
+</span> 메세지로 정지하거나, 
+</p>
 </li>
 <li>
-<p>It runs, but does not work as expected 
-	      (<span class="ERRORNAME">logic error</span>).</p>
+<p>실행은 되지만, 원하는 대로 작동하지 않음 (
+<span class="ERRORNAME">로직 에러(logic error)
+</span>).
+</p>
 </li>
 <li>
-<p>It runs, works as expected, but has nasty side effects
-	      (<span class="ERRORNAME">logic bomb</span>).</p>
+<p>작동하고, 원하는 대로 작동하지만, 불규칙한 부작용을 가지고 있음 (
+<span class="ERRORNAME">로직 정지(logic bomb)</span>).</p>
 </li>
 </ol>
-      <p>
+<p>
 </p>
 <p>
 <a name="DEBUGTOOLS">
 </a>
 </p>
-<p>Tools for debugging non-working scripts include
-	</p>
+<p>작동하지 않는 스크립트를 디버깅하는 방법에는 
+</p>
 <p>
 </p>
 <ol type="1">
 <li>
-<p>Inserting <a href="./internal.html#ECHOREF">echo</a>
-	      statements at critical points in the script to trace the
-	      variables, and otherwise give a snapshot of what is going
-	      on.</p>
+<p>스크립트 안에 적절한 곳에 변수를 추적하거나 어떻게 진행되는지 확인해주는 
+<a href="./internal.html#ECHOREF">echo</a> 명령어를 넣는다.
+</p>
 <div class="TIP">
 <p>
 </p>
@@ -274,8 +280,10 @@ rm *' '*
 <img src="debugging_files/tip.gif" alt="Tip" hspace="5">
 </td>
 <td align="LEFT" valign="TOP">
-<p>Even better is an <b class="COMMAND">echo</b> that echoes
-	      only when <i class="FIRSTTERM">debug</i> is on.</p>
+<p>
+<i class="FIRSTTERM">debug</i> 가 켜져있을 때에만 출력하는 
+<b class="COMMAND">echo</b> 가 더 낫습니다.
+</p>
 <p>
 <table bgcolor="#E0E0E0" border="0" width="90%">
 <tbody>
@@ -311,41 +319,42 @@ debecho $Whatever   # (Will not echo.)</pre>
 </div>
 </li>
 <li>
-<p>Using the <a href="./extmisc.html#TEEREF">tee</a> filter
-	      to check processes or data flows at critical points.</p>
+<p>특정한 장소에 프로세스나 자료를 체크하기 위한 
+<a href="./extmisc.html#TEEREF">tee</a> 필터를 사용한다.
+</p>
 </li>
 <li>
-<p>Setting option flags <tt class="OPTION">-n -v -x</tt>
+<p>옵션으로 
+<tt class="OPTION">-n -v -x</tt> 를 설정합니다.
 </p>
 <p>
 <tt class="USERINPUT">
 <b>sh -n scriptname</b>
-</tt> checks for
-	      syntax errors without actually running the script. This is
-	      the equivalent of inserting <tt class="USERINPUT">
+</tt> 는 실제로 스크립트를 실행하지 않은 상태에서 구문 에러를 체크합니다. 이것은 스크립트에 
+<tt class="USERINPUT">
 <b>set -n</b>
-</tt> or
-	      <tt class="USERINPUT">
+</tt> 나
+<tt class="USERINPUT">
 <b>set -o noexec</b>
-</tt> into the script. Note
-	      that certain types of syntax errors can slip past this
-	      check.</p>
+</tt> 를 넣는 것과 같습니다. 어떤 종류의 구문 에러는 이런 체크를 비켜간다는 것에 유의하십시요.
+</p>
 <p>
 <tt class="USERINPUT">
 <b>sh -v scriptname</b>
-</tt> echoes each
-	      command before executing it. This is the equivalent of
-	      inserting <tt class="USERINPUT">
+</tt> 는 각 명령어를 실행하기 전에 명령어를 출력합니다. 이것은 스크립트에 
+<tt class="USERINPUT">
 <b>set -v</b>
-</tt> or <tt class="USERINPUT">
-<b>set
-	      -o verbose</b>
-</tt> in the script.</p>
-<p>The <tt class="OPTION">-n</tt> and <tt class="OPTION">-v</tt>
-	      flags work well together. <tt class="USERINPUT">
-<b>sh -nv
-	      scriptname</b>
-</tt> gives a verbose syntax check.</p>
+</tt> 나 
+<tt class="USERINPUT">
+<b>set -o verbose</b>
+</tt> 를 넣는 것과 같습니다.
+</p>
+<p>
+<tt class="OPTION">-n</tt> 과 
+<tt class="OPTION">-v</tt> 옵션은 같이 잘 쓰입니다. 
+<tt class="USERINPUT">
+<b>sh -nv scriptname</b>
+</tt> 는 광범위한 문법 체크를 해줍니다.</p>
 <p>
 <tt class="USERINPUT">
 <b>sh -x scriptname</b>
